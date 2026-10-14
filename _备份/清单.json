@@ -1,0 +1,146 @@
+{
+  "format_version": 1,
+  "repository": "wqhqq1/dutucijp-vibecoding-final",
+  "backup_kind": "planning-phase",
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "captured_at": "2026-10-14T10:26:29.191630+08:00",
+  "local_head": "933ecb754a2bdca3c3236173b8a10c8a089a5205",
+  "local_commit_count": 2,
+  "application_tests_executed": 0,
+  "screenshots_collected": 0,
+  "source_files": [
+    {
+      "path": ".gitignore",
+      "git_blob_sha": "9a1f00f0c5f1f33c837e748ce973aa469aebabfb",
+      "sha256": "fc64ce22c592a19c3093dc2e2d32cc5270af61b49a5179b2dde024153d82db07",
+      "bytes": 714,
+      "tracked": true
+    },
+    {
+      "path": "AGENTS.md",
+      "git_blob_sha": "e52a4b488bc62bea87aae8ca6d71b00c6e1a2fde",
+      "sha256": "d9a39bfef7bc23ab441262722c2d59d83a058077f1cfb5ede7cfbf8af78ea206",
+      "bytes": 2507,
+      "tracked": true
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha": "72b3cf2f88232ee159984d181be85fee7b594228",
+      "sha256": "689d6fb9b3eb45d28f4046c9aaf8db43b9937de85950000352fbb45756531067",
+      "bytes": 3218,
+      "tracked": true
+    },
+    {
+      "path": "决定记录.md",
+      "git_blob_sha": "cbc4daefeb0d6333e4433e9fc2d8a1b53c9374bd",
+      "sha256": "5320da2b67e7cdf8bd8aa68b965665f5fe12545ccbd389e2026f707d1b874f79",
+      "bytes": 3727,
+      "tracked": true
+    },
+    {
+      "path": "四段式任务草稿.md",
+      "git_blob_sha": "ca490dceeb56928539fc03a2a1f5ec4579d14f02",
+      "sha256": "073bcc771f1a2af2c0c74fc45ccd5b1979926c7c5ba79e42f553f6e9dbc4c36a",
+      "bytes": 1119,
+      "tracked": true
+    },
+    {
+      "path": "怎么做.md",
+      "git_blob_sha": "898f25770fa20afb657e3c9651c0ff42a4eeb595",
+      "sha256": "3f066cf31c7638a3a09cc75319bc2c5d6e5a12aef5593348d34417f9898864cc",
+      "bytes": 8963,
+      "tracked": true
+    },
+    {
+      "path": "怎么算做对.md",
+      "git_blob_sha": "0a70f8fbb1a5925694333964f3e3792a9f9772e9",
+      "sha256": "5d876fa2ca99780b2c058dfaa1f551b7f99a91445c232c553c9907a590cc99d5",
+      "bytes": 7095,
+      "tracked": true
+    },
+    {
+      "path": "执行计划.md",
+      "git_blob_sha": "903170e8e3a300b955e4435b973f02232491e3fe",
+      "sha256": "c2d7ad9112543632b2a1e48fd01f08f745aedd12de8cb75e8b89d82e8f7b08b9",
+      "bytes": 12701,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-14/今天做了什么.md",
+      "git_blob_sha": "f25f31ef8346fc8b4f6eb67fca7cf181bac58020",
+      "sha256": "593b5791d6ded22928a30aa8820067caddb8d59006076da88f8fc68dffd30342",
+      "bytes": 896,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-14/截图/待采集.md",
+      "git_blob_sha": "cd9d331ce94ddb80f2f881d8ed2bf5ac42b5212e",
+      "sha256": "691a891dbbba231cc19f940292f6b941008825bc128b8f64597cce103e4b55cb",
+      "bytes": 429,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-14/环境版本核查.txt",
+      "git_blob_sha": "37ee185c341e8de108727506f4fb19c5559133c9",
+      "sha256": "4680680cfb79c44d9ffe0ddf5091ed67500857abd5b5176fb7c487e5c385e8cc",
+      "bytes": 276,
+      "tracked": true
+    },
+    {
+      "path": "要做什么.md",
+      "git_blob_sha": "ae72a508b1a07fc450a76bd0da8d9104212a522d",
+      "sha256": "7458e71cb360575883bff40356b01d5e8a5469515a5a4dad6f420e8606542bcf",
+      "bytes": 8516,
+      "tracked": true
+    },
+    {
+      "path": "规划校验记录.md",
+      "git_blob_sha": "9db1aa609d7dcc2a6ed2bad4713a612ab6cb8ffd",
+      "sha256": "9d93b947f27ad14e13d650ca1698611bec500889ef1ca43e2c20550602704330",
+      "bytes": 782,
+      "tracked": true
+    },
+    {
+      "path": "课程完成核对表.md",
+      "git_blob_sha": "c767273e69630f73a01c9339ed0cb813fa87fddf",
+      "sha256": "46bc426051f29ecc9ec438aa39d4756c17eec988017d5f1d731a8526a0bde0f5",
+      "bytes": 3566,
+      "tracked": true
+    },
+    {
+      "path": "资料/官方数据只读核查.md",
+      "git_blob_sha": "3d9f0ffad3fda0a46270823b6c5346fae254b797",
+      "sha256": "2d0572d2f20c083d4359e106af4735113030a49ceff729eb3cc9cd449e2f94ac",
+      "bytes": 1829,
+      "tracked": true
+    },
+    {
+      "path": "选题自查表.md",
+      "git_blob_sha": "a97adac1509434626050f7a7fc7270ac9c0cb8a5",
+      "sha256": "aac87d2e44257f8e6c3018d0b41e98de86f6a201748ac28aa12b7112fe234945",
+      "bytes": 2074,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-14/提交记录.txt",
+      "git_blob_sha": "81347b7e660526c3fc0041a3d03af7d1310675bf",
+      "sha256": "731524293a537377a8902db988275dad2719b8d89b251f87dba1305759e80967",
+      "bytes": 193,
+      "tracked": false
+    }
+  ],
+  "bundle": {
+    "path": "_备份/项目存档.bundle",
+    "bytes": 35063,
+    "sha256": "7c7e7f0a95231c5eb0026a4457bda2ae8c2869462d5a6589dc6ecb0b17e1860b",
+    "git_blob_sha": "b60fea46354c2d71867502d5b75ceaf91546daa6",
+    "history": "complete local Git history"
+  },
+  "excludes": [
+    "official raw data",
+    "runtime database and credentials",
+    "dependency caches",
+    "original course files"
+  ]
+}

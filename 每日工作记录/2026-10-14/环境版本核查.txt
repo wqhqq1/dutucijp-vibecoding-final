@@ -1,0 +1,15 @@
+命令：Node
+v24.18.0
+命令：npm
+11.16.0
+命令：Python
+Python 3.12.10
+命令：Git
+git version 2.55.0.windows.3
+命令：Codex
+codex-cli 0.162.0-alpha.17.2
+命令：VSCode
+1.140.0
+07f806f999227108933c2e30515b26eecc1fda74
+x64
+Go：未在PATH中发现，仍待安装验证

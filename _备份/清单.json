@@ -1,27 +1,42 @@
 {
-  "format_version": 1,
+  "format_version": 2,
   "repository": "wqhqq1/dutucijp-vibecoding-final",
-  "backup_kind": "guidance-daily-prompts",
-  "date": "2026-10-14",
+  "backup_kind": "guidance-materials-v1.2-adoption",
+  "date": "2026-10-15",
   "timezone": "Asia/Shanghai",
-  "captured_at": "2026-10-14T12:45:51.541119+08:00",
-  "local_head": "abd56b00ca9ae558fd96f5e5effcc9969af4d3b9",
-  "local_commit_count": 6,
-  "application_tests_executed": 0,
-  "screenshots_collected": 2,
-  "screenshots_kind": "real GitHub material pages; not original chat window",
-  "student_review_confirmed": true,
-  "four_part_task_sent": false,
-  "four_part_task_scheduled": "2026-10-15",
-  "day_task_status": "complete",
-  "specification": {
-    "FR": 18,
-    "TC": 48,
-    "R": 8,
-    "CR": 6,
-    "NR": 4,
-    "NFR": 4,
-    "documentation_static_check": "passed"
+  "captured_at": "2026-10-15T07:41:51.849052+08:00",
+  "local_head": "0980fb71b21943f2299ebcee47e5f1bf32716a55",
+  "local_commit_count": 7,
+  "guidance_request_status": "complete",
+  "execution_day_task_status": "not assessed; no execution handoff received",
+  "application_tests_executed_in_this_guidance_task": 0,
+  "new_screenshots_in_this_guidance_task": 0,
+  "existing_screenshots_in_project": 2,
+  "course_requirements_version": "v1.2",
+  "original_daily_tasks_retained": true,
+  "plan_static_check": {
+    "kind": "materials_plan_static_check",
+    "status": "passed",
+    "comparison_date": "2026-10-15",
+    "daily_draft_byte_unchanged": true,
+    "daily_draft_sha256": "454c093ba562de8d5b25b1c75dfa0ab8c40d17db5215d7393c1b794d6a7a2074",
+    "daily_stage_and_freeze_sections_unchanged": true,
+    "three_spec_files_unchanged": [
+      "要做什么.md",
+      "怎么做.md",
+      "怎么算做对.md"
+    ],
+    "application_tests_executed_in_this_guidance_task": 0,
+    "new_screenshots_in_this_guidance_task": 0,
+    "execution_day_task_status": "not assessed; no execution handoff received"
+  },
+  "reserved_days": [
+    "2026-10-22",
+    "2026-11-17"
+  ],
+  "predeadline_freeze_dates": {
+    "midterm": "2026-10-21",
+    "final": "2026-11-16"
   },
   "source_files": [
     {
@@ -33,23 +48,23 @@
     },
     {
       "path": "AGENTS.md",
-      "git_blob_sha": "efb4e2cef8b12c1127cea322a5f4b6f1e6ddf3c3",
-      "sha256": "9e78d3091de16ebfac1e8c6afbbbc134f30d1c703ff6cb7dc83f7ae48412865d",
-      "bytes": 4185,
+      "git_blob_sha": "dbae9f4c298995e06d6b9a5754e936456c350534",
+      "sha256": "71dd16a4d3a8a3121d81569cd3c38a27464f25bc7dc6cb5cb69b890799e34057",
+      "bytes": 5219,
       "tracked": true
     },
     {
       "path": "README.md",
-      "git_blob_sha": "5f6e0dd62f4a7d265036b8c8face35508c7031de",
-      "sha256": "c66219c822e168c9088da9071829775e199b1132a5c2ec0d55d26f9fab5881c9",
-      "bytes": 4455,
+      "git_blob_sha": "3cf7ea542599892e4918deef13001e6bd9013295",
+      "sha256": "554d34b48d49aef0f42b7729bb54227ac15c3b124dd99765d38a38a2c2103786",
+      "bytes": 4879,
       "tracked": true
     },
     {
       "path": "决定记录.md",
-      "git_blob_sha": "71d6a7f1bef8cfbe0fa88ebe6ff6f9efd3de2f27",
-      "sha256": "235bb7c5b6ab052cd414281cdcfc762064fa4a39bfdfbdbc32287b25271bfa3d",
-      "bytes": 7560,
+      "git_blob_sha": "69dbc528511ce084b113905757d166ff9ebf34a6",
+      "sha256": "fca409ffaba959b7e2b7f6e788328c41fea21bf3ba90a2dbd514ccb768865bbc",
+      "bytes": 9028,
       "tracked": true
     },
     {
@@ -75,16 +90,23 @@
     },
     {
       "path": "执行交接说明.md",
-      "git_blob_sha": "6652340ed62e39b6f048e907a6ba7e941112eb7e",
-      "sha256": "8e92dac2cd0de59ee6f51acce808cac10d0aba0b76d92967a6238ffc4f0fd932",
-      "bytes": 8012,
+      "git_blob_sha": "bc5c3563d4fa86454c5d53003fee34e70e3e4fd1",
+      "sha256": "524b8c33c4b4669ab9b1e6e87dff0175b224ae668db25346c4e257ce3e0aa392",
+      "bytes": 8637,
       "tracked": true
     },
     {
       "path": "执行计划.md",
-      "git_blob_sha": "32c7010096a26a55f408d8c85fae7338db829793",
-      "sha256": "7f8da96cedb477e36a09035d27090bdcc28214f90e447fb2ce8ee61a027f8875",
-      "bytes": 17359,
+      "git_blob_sha": "05d57d381bf97ec6a0fb1d24067ed8be651210c6",
+      "sha256": "f55760cd9066ea806da5cc6817b0d3692d5cc7a5248c577a6105f616950e9270",
+      "bytes": 21210,
+      "tracked": true
+    },
+    {
+      "path": "提交索引.md",
+      "git_blob_sha": "ab7f9bfa4f40cd554f3c8a0ce55921a08f927be2",
+      "sha256": "c37d02f8ff60575c518ee54ee14ee28be7dbcd463910a2d9f0ea7bd417aa784a",
+      "bytes": 3756,
       "tracked": true
     },
     {
@@ -130,6 +152,13 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-15/今天做了什么.md",
+      "git_blob_sha": "132b31c5913126c52a3269ce957f36ef6df9b698",
+      "sha256": "26a03df7bb1a71b129e648267dbafef83f0a2b1d9371e34ec9fdb1adfe2c9887",
+      "bytes": 1370,
+      "tracked": true
+    },
+    {
       "path": "要做什么.md",
       "git_blob_sha": "edaa1d2703f173925bc56160ebb66c732043a9f0",
       "sha256": "41b7971f836057928767a83a18447cf236636dce7698340aaa5cf55852eac32b",
@@ -138,16 +167,16 @@
     },
     {
       "path": "规划校验记录.md",
-      "git_blob_sha": "a5bb1e7f5061e0fa09714b1f07779f04592a6cab",
-      "sha256": "efe5c7d07b66fa9ea639cd9232ba01de7ee40355e2f0a368275b243de7e09e07",
-      "bytes": 2022,
+      "git_blob_sha": "547db312731b6fe2396032a6d9e495f90a4ceb19",
+      "sha256": "65493e69b16f38aaf61003d178c076accaf93510ca6973e86818ec92d2ba1359",
+      "bytes": 3302,
       "tracked": true
     },
     {
       "path": "课程完成核对表.md",
-      "git_blob_sha": "ed668f63fda9fcc308ec9e0bdb2ce813f3a951dd",
-      "sha256": "06e732113c25e43d0b23f8732cbb2f9989a41c8bad5990a3f75ae9ca85333181",
-      "bytes": 4795,
+      "git_blob_sha": "d7ab1858e631481941753b3249bc4eebcd9730b9",
+      "sha256": "66db8767fc694327d8acb2d307dc0e1eb2aa1a6a2be88a7dca07991d411ddfc2",
+      "bytes": 6568,
       "tracked": true
     },
     {
@@ -155,6 +184,13 @@
       "git_blob_sha": "3d9f0ffad3fda0a46270823b6c5346fae254b797",
       "sha256": "2d0572d2f20c083d4359e106af4735113030a49ceff729eb3cc9cd449e2f94ac",
       "bytes": 1829,
+      "tracked": true
+    },
+    {
+      "path": "资料/新版材料对照与采纳.md",
+      "git_blob_sha": "31ead837583e88cdce450766e3f5c3968bf6e0f0",
+      "sha256": "f845c8b1b09f00fad60e2d69f144715269aa434b9116ca122b274c45569cd294",
+      "bytes": 9559,
       "tracked": true
     },
     {
@@ -184,37 +220,29 @@
       "sha256": "357fde847ffad51a1f4a7a83d3a6c24e01764487adbebba63acfa8b7c471d9bd",
       "bytes": 627,
       "tracked": false
+    },
+    {
+      "path": "每日工作记录/2026-10-15/提交记录.txt",
+      "git_blob_sha": "1b690dc78aed6dc47be09b2abfb0908371e8113f",
+      "sha256": "aab1d087978093d332ddc3e8b2545c6f90f898b89ddf873ce562181ddc76e19b",
+      "bytes": 111,
+      "tracked": false
     }
   ],
   "bundle": {
     "path": "_备份/项目存档.bundle",
-    "bytes": 314947,
-    "sha256": "35f93b5d69c54217b3134044e411a441665894f97810ec2412fe9ba1d08ceae3",
-    "git_blob_sha": "43155b1f3976d14f522b1244ba3bae088399010b",
+    "bytes": 328713,
+    "sha256": "feeacae06dcfe92c0b10c4cf8d3fec71cc916575b3aadca4634527dfa0f22e08",
+    "git_blob_sha": "d604ebcede70c4515e64a116a085cabe467a83a6",
     "history": "complete local Git history"
   },
   "excludes": [
+    "teacher source materials and attachment",
     "official raw data",
     "runtime database and credentials",
     "dependency caches",
-    "original course files"
+    "ignored audit scratch files"
   ],
-  "draft_task_days": 32,
-  "draft_calendar_days": 34,
-  "reserved_days": [
-    "2026-10-22",
-    "2026-11-17"
-  ],
-  "predeadline_freeze_dates": {
-    "midterm": "2026-10-21",
-    "final": "2026-11-16"
-  },
-  "reserved_days_have_no_execution_task": true,
-  "draft_first_date": "2026-10-15",
-  "draft_last_date": "2026-11-16",
-  "draft_calendar_last_date": "2026-11-17",
-  "draft_structure_check": "passed",
-  "draft_tasks_executed": 0,
   "conversation_roles": {
     "guidance": "current thread",
     "implementation": "separate user-created execution thread",

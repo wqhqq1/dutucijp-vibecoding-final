@@ -1,0 +1,4 @@
+{
+ "description":"Review and trust this project Hook before use. The policy only reads the proposed command and returns deny for destructive operations.",
+ "hooks":{"PreToolUse":[{"matcher":"Bash","hooks":[{"type":"command","command":"python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/pre_tool_use_policy.py\"","command_windows":"powershell.exe -NoProfile -NonInteractive -Command \"& (Join-Path $env:LOCALAPPDATA 'dutucijp-vibecoding-final/tools/python/Scripts/python.exe') (Join-Path (git rev-parse --show-toplevel).Trim() '.codex/hooks/pre_tool_use_policy.py')\"","timeout":5,"statusMessage":"Checking destructive command policy"}]}]}
+}

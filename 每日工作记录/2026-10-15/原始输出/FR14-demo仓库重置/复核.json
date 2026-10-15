@@ -1,0 +1,24 @@
+{
+  "accounts": [
+    {
+      "id": "admin",
+      "role": "admin",
+      "state": "complete",
+      "version": 4
+    },
+    {
+      "id": "finance",
+      "role": "finance",
+      "state": "complete",
+      "version": 4
+    },
+    {
+      "id": "warehouse",
+      "role": "warehouse",
+      "state": "new",
+      "version": 5
+    }
+  ],
+  "warehouse_bootstrap_count": 1,
+  "warehouse_session_count": 0
+}

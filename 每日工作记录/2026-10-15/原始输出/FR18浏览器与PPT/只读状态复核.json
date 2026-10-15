@@ -1,0 +1,74 @@
+{
+  "recorded_at": "2026-10-15T23:20:07.963686+08:00",
+  "accounts": [
+    {
+      "id": "admin",
+      "role": "admin",
+      "state": "complete",
+      "version": 4,
+      "passkey_count": 1,
+      "has_totp": false
+    },
+    {
+      "id": "finance",
+      "role": "finance",
+      "state": "complete",
+      "version": 4,
+      "passkey_count": 1,
+      "has_totp": false
+    },
+    {
+      "id": "warehouse",
+      "role": "warehouse",
+      "state": "complete",
+      "version": 8,
+      "passkey_count": 1,
+      "has_totp": false
+    }
+  ],
+  "case_states": {
+    "closed": 2,
+    "pending": 4989
+  },
+  "business_actions_this_capture": [
+    {
+      "id": 4,
+      "case_id": "51173ffb45052a80129194e5eac9ff1cf42a16cacb143dd4fd64745a756dacef",
+      "actor": "finance",
+      "action": "assign",
+      "occurred_at": "2026-10-15T23:04:07.6183645+08:00"
+    },
+    {
+      "id": 5,
+      "case_id": "51173ffb45052a80129194e5eac9ff1cf42a16cacb143dd4fd64745a756dacef",
+      "actor": "warehouse",
+      "action": "start",
+      "occurred_at": "2026-10-15T23:06:28.2987446+08:00"
+    },
+    {
+      "id": 6,
+      "case_id": "51173ffb45052a80129194e5eac9ff1cf42a16cacb143dd4fd64745a756dacef",
+      "actor": "warehouse",
+      "action": "close",
+      "occurred_at": "2026-10-15T23:07:07.8467786+08:00"
+    }
+  ],
+  "passkey_login_events": [
+    {
+      "actor": "finance",
+      "method": "passkey",
+      "occurred_at": "2026-10-15T23:00:37.8893134+08:00"
+    },
+    {
+      "actor": "warehouse",
+      "method": "passkey",
+      "occurred_at": "2026-10-15T23:06:03.5191307+08:00"
+    },
+    {
+      "actor": "admin",
+      "method": "passkey",
+      "occurred_at": "2026-10-15T23:08:58.860369+08:00"
+    }
+  ],
+  "no_secrets_selected": true
+}

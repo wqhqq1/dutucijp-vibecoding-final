@@ -1,0 +1,88 @@
+{
+  "actual_time": "2026-10-15T22:20:08.410885+08:00",
+  "code_commit": "452224cecc1c5ae3e8b4a375ae92a7b86af32908",
+  "final_runs": {
+    "PS51": {
+      "actual_time": "2026-10-15T22:17:16.7205299+08:00",
+      "powershell_version": "5.1.26100.9596",
+      "go_exit": 0,
+      "python_exit": 0,
+      "go_top_level_passed": 71,
+      "go_top_level_failed": 0,
+      "go_top_level_skipped": 0,
+      "python_tests_ran": "13",
+      "go_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS51最终复验\\go.jsonl",
+      "go_stderr": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS51最终复验\\go.stderr.txt",
+      "python_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS51最终复验\\python.txt",
+      "python_stdout": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS51最终复验\\python.stdout.txt"
+    },
+    "PS7": {
+      "actual_time": "2026-10-15T22:17:16.7351556+08:00",
+      "powershell_version": "7.6.5",
+      "go_exit": 0,
+      "python_exit": 0,
+      "go_top_level_passed": 71,
+      "go_top_level_failed": 0,
+      "go_top_level_skipped": 0,
+      "python_tests_ran": "13",
+      "go_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS7最终复验\\go.jsonl",
+      "go_stderr": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS7最终复验\\go.stderr.txt",
+      "python_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS7最终复验\\python.txt",
+      "python_stdout": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR18-PowerShell兼容\\PS7最终复验\\python.stdout.txt"
+    }
+  },
+  "probe_runs": {
+    "PS51": {
+      "actual_time": "2026-10-15T22:16:37.1751446+08:00",
+      "powershell_version": "5.1.26100.9596",
+      "fixture": "Explicit subprocess probe only; exit7 is an expected runner counterexample, not a failing project test",
+      "results": [
+        {
+          "expected_exit": 0,
+          "actual_exit": 0,
+          "stdout_bytes": 147456,
+          "stderr_bytes": 147456,
+          "unicode_preserved": true,
+          "passed": true
+        },
+        {
+          "expected_exit": 7,
+          "actual_exit": 7,
+          "stdout_bytes": 147456,
+          "stderr_bytes": 147456,
+          "unicode_preserved": true,
+          "passed": true
+        }
+      ]
+    },
+    "PS7": {
+      "actual_time": "2026-10-15T22:16:37.0833838+08:00",
+      "powershell_version": "7.6.5",
+      "fixture": "Explicit subprocess probe only; exit7 is an expected runner counterexample, not a failing project test",
+      "results": [
+        {
+          "expected_exit": 0,
+          "actual_exit": 0,
+          "stdout_bytes": 147456,
+          "stderr_bytes": 147456,
+          "unicode_preserved": true,
+          "passed": true
+        },
+        {
+          "expected_exit": 7,
+          "actual_exit": 7,
+          "stdout_bytes": 147456,
+          "stderr_bytes": 147456,
+          "unicode_preserved": true,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "test.ps1": "a1da5b6e1641d0b75d1793c8423de8cfd9200ad93d056f33793a12c8d303b026",
+    "tools/invoke-test-process.ps1": "0bdb65ac0edeabd5aaa61b04fe589a28077b38d9a07ed95fa4b0dd2ffee744e9",
+    "tests/test_native_runner.ps1": "004244d1dbc3c29288bbaaf52c3ccb076c06a5d982377c16dfab0887ba7c21b6"
+  },
+  "scope": "Compatibility fix only; PS51/PS7 same 71 Go + 13 Python, not 168 distinct cases. Baseline and first wrapper failure preserved; no performance remeasurement or human pass claimed."
+}

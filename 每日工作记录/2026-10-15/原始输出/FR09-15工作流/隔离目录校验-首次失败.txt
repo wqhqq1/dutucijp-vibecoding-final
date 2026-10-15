@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\wqhqq\OneDrive\docs\大学\library-based-software-programming\软件编程大作业\退货对账与差异处理系统\tools\copy_workflow_db.py", line 89, in <module>
+    main()
+  File "C:\Users\wqhqq\OneDrive\docs\大学\library-based-software-programming\软件编程大作业\退货对账与差异处理系统\tools\copy_workflow_db.py", line 46, in main
+    relative = destination.relative_to(allowed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wqhqq\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 682, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\workflow-20261015-160219-65006c0d\\workflow.sqlite' is not in the subpath of 'C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification'

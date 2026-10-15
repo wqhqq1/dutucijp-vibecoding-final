@@ -1,0 +1,78 @@
+{
+  "recorded_at": "2026-10-15T16:10:12.372651+08:00",
+  "code_head": "2a78681f488d50cf3ed4e9d8273753bd5b6e2f16",
+  "commands": [
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+      "argv": [
+        "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/tools/go/bin/go.exe",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "output": "首次Go测试.jsonl",
+      "exit": null,
+      "note": "Tool yielded before exit was retained; final JSONL contains all package pass events. Final regression below has actual exit status."
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+      "argv": [
+        "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/tools/go/bin/go.exe",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "output": "验证入口Go测试.jsonl",
+      "exit": 0
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+      "argv": [
+        "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/tools/go/bin/go.exe",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "output": "门禁Go测试.jsonl",
+      "exit": 0
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+      "powershell_command": "./verify-workflow.ps1 -SourceDatabase \"C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/data-20261015-084454-88b71af8/verification.sqlite\"",
+      "output": "官方副本演示-首次失败.txt",
+      "diagnostic": "隔离目录校验-首次失败.txt",
+      "exit": 1
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+      "powershell_command": "./verify-workflow.ps1 -SourceDatabase \"C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/data-20261015-084454-88b71af8/verification.sqlite\"",
+      "output": "官方副本演示-修复复验.txt",
+      "exit": 0
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+      "powershell_command": "./test.ps1 -OutputDir '每日工作记录/2026-10-15/原始输出/FR09-15工作流/最终全量测试'",
+      "output": "最终测试命令.txt",
+      "exit": 0
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+      "argv": [
+        "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/tools/go/bin/go.exe",
+        "vet",
+        "./..."
+      ],
+      "output": "Go静态检查.txt",
+      "exit": 0
+    },
+    {
+      "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+      "method": "System.Management.Automation.Language.Parser.ParseFile on all root/tools ps1 files",
+      "output": "静态检查汇总.json",
+      "errors": 0
+    }
+  ]
+}

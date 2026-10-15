@@ -1,0 +1,271 @@
+{
+  "recorded_at": "2026-10-15T23:20:07.963686+08:00",
+  "images": [
+    {
+      "file": "01-财务差异总览.jpg",
+      "bytes": 66136,
+      "sha256": "de303b40aed0c8a74a33fb22ffb634e347346f8de805c998dd8f0e5444d8bbaf",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:02:56.113763+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "02-官方首年度行数守恒.jpg",
+      "bytes": 66550,
+      "sha256": "1ed3721c127e472a5227999ecdf45423aaeeed60c031745f6ccc07f86d30f99e",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:03:03.302674+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "03-本人已关闭案例与审计.jpg",
+      "bytes": 74743,
+      "sha256": "2da5859af84574ccd1d7ce23d3b0752437bd35d155c87827401131f9407c4480",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:03:12.502072+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "04-重复派单拒绝.jpg",
+      "bytes": 75101,
+      "sha256": "0dd7ab7b2b788f8e7e03d64579f98a710b1e417c304194cb3b27ee21e9e90347",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:03:20.301076+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "05-两条真实候选与原始证据.jpg",
+      "bytes": 77227,
+      "sha256": "da508e5875febcaac48f74f47321ec70797a4f0f2ec3f74ee7a156ac30083652",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:03:49.874229+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "06-财务派单待处理.jpg",
+      "bytes": 81650,
+      "sha256": "7303220e1b56735bbaf36f70dca7eb7b32a2287dac867ab60ed4031be14e943e",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:04:21.720846+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "07-待处理重复派单拒绝.jpg",
+      "bytes": 81391,
+      "sha256": "296f887545cfc7b6de8874ee1122a4267161a169896c1c02c2e02738ca0534c4",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:04:22.039347+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "08-交易查询等待状态.jpg",
+      "bytes": 70491,
+      "sha256": "2f27f3953098bb1d0940b0fc96374f7807f07a829d9686d65634bad80dc75069",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:05:32.588656+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "query waiting state, not a successful query"
+    },
+    {
+      "file": "09-仓库Passkey登录及限定范围.jpg",
+      "bytes": 63070,
+      "sha256": "73ee3bf23b45648c0729cd7752504e751d2c8c27d08fddbf4675d3a06adee36a",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:06:23.426532+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "10-待处理只能开始不可跳级.jpg",
+      "bytes": 78470,
+      "sha256": "593ef267d93116b8e3b2ca8ef2001be28e2286e18f3be868441f1befcd635e61",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:06:23.750500+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "11-仓库开始处理.jpg",
+      "bytes": 72345,
+      "sha256": "badde5c62785554e70f24229f7df33a61b26bf0a162e2e4bcf846645d7377fbc",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:06:32.847605+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "12-处理中结论为空.jpg",
+      "bytes": 73267,
+      "sha256": "f5fe953f9e56eff9c407c06853f4dc33e3e193c9b515d50a2ff162e88f7c6977",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:06:51.415595+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "13-空结论服务端拒绝.jpg",
+      "bytes": 72821,
+      "sha256": "ae1c7e17928c48609e9a81c41759c949f850865cf1f1166cd8914c93a82d5499",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:07:07.759448+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "14-结论关闭与不可修改.jpg",
+      "bytes": 77843,
+      "sha256": "d88ce5243f3b1c95b2f4dc4da629c702ee212dc1f33ee1a0107fb7a2599ed0e7",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:07:15.803747+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "15-仓库仅本人两项差异.jpg",
+      "bytes": 57658,
+      "sha256": "a9a655fd8554d971a42a468da8818476d3df52c53af6a623a24bbe9ab844668c",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:07:16.134984+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "close-response transient statistics, not final counts; use 17 instead"
+    },
+    {
+      "file": "16-仓库越权导出拒绝.jpg",
+      "bytes": 13906,
+      "sha256": "4bbe5ce12d766944730d8130264d4603d14e4aed9843e933141cbc0d1802a91d",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:07:47.132514+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "17-仓库结案后限定视图.jpg",
+      "bytes": 59323,
+      "sha256": "c6c6b81f3185a63f04b07a7d64b0c00ce25216515b7fa9329e6fe644a0a5363a",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:07:47.199575+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "18-仓库访问未派本人证据拒绝.jpg",
+      "bytes": 14257,
+      "sha256": "83294c733c2064c5cad74134644cf897996d772e8f04be00a3288916d7aee204",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:08:29.260760+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "19-管理员Passkey登录与全局视图.jpg",
+      "bytes": 66343,
+      "sha256": "6fedccfd24f2096fbe13dedde6f9e60574029e5c9c89038104d72dfd3a253538",
+      "dimensions": [
+        1585,
+        814
+      ],
+      "saved_at_filesystem": "2026-10-15T23:09:21.670601+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "20-管理员客户筛选结果.jpg",
+      "bytes": 62752,
+      "sha256": "b3345724f4baa2c4c4d8e66b7e8b78eb7db271f8cdb41fc0d721ab3e77686534",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:10:18.569485+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "21-管理员数据任务入口.jpg",
+      "bytes": 38669,
+      "sha256": "78ba5489883b3863d7a6ba322aaa9c38d1e53d0b7a0528abbcbef148f86a482d",
+      "dimensions": [
+        1600,
+        822
+      ],
+      "saved_at_filesystem": "2026-10-15T23:10:55.262760+08:00",
+      "source": "Chrome extension actual viewport, unchanged",
+      "scope_note": "actual browser state"
+    },
+    {
+      "file": "22-本人WindowsPowerShell测试通过.png",
+      "bytes": 484995,
+      "sha256": "61207899a5e6da30702a0f55f58a877a5aeebea56057460bcf748b6db603687f",
+      "dimensions": [
+        3200,
+        2000
+      ],
+      "saved_at_filesystem": "2026-10-15T22:52:07.703491+08:00",
+      "source": "user-provided screenshot, copied unchanged",
+      "scope_note": "actual browser state"
+    }
+  ],
+  "count": 22,
+  "timestamps_note": "filesystem saved times; image22 original capture time is not independently available"
+}

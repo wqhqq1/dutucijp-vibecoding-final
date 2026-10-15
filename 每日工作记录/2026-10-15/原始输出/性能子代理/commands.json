@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "historical baseline",
+    "working_directory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "executable": "PowerShell script",
+    "script": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-source-20261015-163656\\source\\tools\\measure-performance.ps1",
+    "arguments": [
+      "-Measure",
+      "All",
+      "-SourceCommit",
+      "5df378c7897114c2fa91df4e08974b3eaebba232"
+    ],
+    "script_exit": -1,
+    "note": "Parent-authorized stop after completed second NFR02; all completed child processes exited 0; no third NFR02 or NFR03 result",
+    "outputs": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34"
+  },
+  {
+    "kind": "cache-only A/B",
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-cache64-ab-20261015-164222\\perfverify.exe",
+    "arguments": [
+      "--prepared",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR02-2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "--db",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-cache64-ab-20261015-164222\\isolated.sqlite",
+      "--mode",
+      "full"
+    ],
+    "exit": 0,
+    "output": "第一轮缓存AB/go.stdout.json"
+  },
+  {
+    "kind": "official benchmark diagnostic",
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+    "arguments": [
+      "-m",
+      "cProfile",
+      "-s",
+      "cumulative",
+      "tools/prepare.py",
+      "--scope",
+      "benchmark",
+      "--output",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-python-profile-20261015-164440\\prepared"
+    ],
+    "exit": 0,
+    "output": "官方benchmark-cProfile.txt",
+    "note": "Diagnostic profile, not an NFR result"
+  },
+  {
+    "kind": "round 2 store regression",
+    "working_directory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\go\\bin\\go.exe",
+    "arguments": [
+      "test",
+      "-count=1",
+      "-json",
+      "./internal/store"
+    ],
+    "exit": 0,
+    "passed_top_level": 28,
+    "failed_top_level": 0,
+    "skipped_top_level": 0,
+    "output": "第二轮必要回归/store.jsonl"
+  },
+  {
+    "kind": "round 2 Python regression",
+    "working_directory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+    "arguments": [
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit": 0,
+    "ran": 13,
+    "output": "第二轮必要回归/python.txt"
+  },
+  {
+    "kind": "current implementation measured",
+    "working_directory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "script": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\tools\\measure-performance.ps1",
+    "arguments": [
+      "-Measure",
+      "All",
+      "-OutputDir",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018"
+    ],
+    "script_exit": -1,
+    "note": "Parent-authorized stop after first NFR02 failed. Second auto-started but was interrupted, not counted",
+    "outputs": "第二轮当前实现"
+  },
+  {
+    "kind": "input-only template",
+    "working_directory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+    "arguments": [
+      "tools/prepare-performance-input.py",
+      "--source-db",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-1\\isolated.sqlite",
+      "--output-db",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-input-template-20261015-165942\\input-only.sqlite"
+    ],
+    "exit": 0,
+    "output": "纯输入模板回执.json",
+    "note": "Source only read through three input tables; preparation is not NFR03 timing"
+  }
+]

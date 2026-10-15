@@ -2,6 +2,7 @@ param([string]$OutputDir = '')
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'tools/execution-day.ps1')
 Assert-ExecutionDay
+. (Join-Path $PSScriptRoot 'tools/invoke-test-process.ps1')
 $runtimeRoot = Join-Path $env:LOCALAPPDATA 'dutucijp-vibecoding-final'
 $goExe = Join-Path $runtimeRoot 'tools/go/bin/go.exe'
 $pythonExe = Join-Path $runtimeRoot 'tools/python/Scripts/python.exe'
@@ -12,21 +13,23 @@ $OutputDir = (Resolve-Path -LiteralPath $OutputDir).Path
 Push-Location $PSScriptRoot
 try {
     $pythonOutput = Join-Path $OutputDir 'python.txt'
-    & $pythonExe -m unittest discover -s tests -p 'test_*.py' -v *> $pythonOutput
-    $pythonExit = $LASTEXITCODE
+    $pythonStdout = Join-Path $OutputDir 'python.stdout.txt'
+    $pythonExit = Invoke-TestProcess -FilePath $pythonExe -Arguments '-m unittest discover -s tests -p test_*.py -v' -WorkingDirectory $PSScriptRoot -StdoutPath $pythonStdout -StderrPath $pythonOutput
     $goOutput = Join-Path $OutputDir 'go.jsonl'
-    Push-Location (Join-Path $PSScriptRoot 'backend')
-    try { & $goExe test -count=1 -json ./... *> $goOutput; $goExit = $LASTEXITCODE } finally { Pop-Location }
-    $events = @(Get-Content -LiteralPath $goOutput | ForEach-Object { try { $_ | ConvertFrom-Json -ErrorAction Stop } catch { } })
+    $goStderr = Join-Path $OutputDir 'go.stderr.txt'
+    $goExit = Invoke-TestProcess -FilePath $goExe -Arguments 'test -count=1 -json ./...' -WorkingDirectory (Join-Path $PSScriptRoot 'backend') -StdoutPath $goOutput -StderrPath $goStderr
+    $events = @(Get-Content -LiteralPath $goOutput -Encoding UTF8 | ForEach-Object { try { $_ | ConvertFrom-Json -ErrorAction Stop } catch { } })
     $top = @($events | Where-Object { $_.Test -and $_.Test -notmatch '/' })
     $passed = @($top | Where-Object Action -EQ 'pass').Count
     $failed = @($top | Where-Object Action -EQ 'fail').Count
     $skipped = @($top | Where-Object Action -EQ 'skip').Count
-    $pythonText = Get-Content -LiteralPath $pythonOutput -Raw
+    $pythonText = Get-Content -LiteralPath $pythonOutput -Raw -Encoding UTF8
     $pythonCount = [regex]::Match($pythonText, 'Ran (\d+) tests? in').Groups[1].Value
-    $summary = [ordered]@{ actual_time=(Get-Date -Format o); go_exit=$goExit; python_exit=$pythonExit; go_top_level_passed=$passed; go_top_level_failed=$failed; go_top_level_skipped=$skipped; python_tests_ran=$pythonCount; go_output=$goOutput; python_output=$pythonOutput }
+    $summary = [ordered]@{ actual_time=(Get-Date -Format o); powershell_version=$PSVersionTable.PSVersion.ToString(); go_exit=$goExit; python_exit=$pythonExit; go_top_level_passed=$passed; go_top_level_failed=$failed; go_top_level_skipped=$skipped; python_tests_ran=$pythonCount; go_output=$goOutput; go_stderr=$goStderr; python_output=$pythonOutput; python_stdout=$pythonStdout }
     $summary | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $OutputDir 'summary.json') -Encoding utf8
-    Get-Content -LiteralPath $pythonOutput
+    Get-Content -LiteralPath $pythonOutput -Encoding UTF8
+    Get-Content -LiteralPath $pythonStdout -Encoding UTF8
+    Get-Content -LiteralPath $goStderr -Encoding UTF8
     $summary | ConvertTo-Json
     if ($pythonExit -ne 0 -or $goExit -ne 0 -or $failed -gt 0 -or $passed -eq 0) { throw 'Tests failed; see original output files' }
 } finally { Pop-Location }

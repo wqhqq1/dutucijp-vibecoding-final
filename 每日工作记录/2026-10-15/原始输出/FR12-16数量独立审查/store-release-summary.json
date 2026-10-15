@@ -1,0 +1,8 @@
+{
+  "actual_time": "2026-10-15T16:40:29.6871617+08:00",
+  "command": "go test -count=1 -json ./internal/store",
+  "exit": 0,
+  "passed": 27,
+  "failed": 0,
+  "skipped": 0
+}

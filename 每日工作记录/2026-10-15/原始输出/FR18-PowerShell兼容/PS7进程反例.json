@@ -1,0 +1,23 @@
+{
+  "actual_time": "2026-10-15T22:16:37.0833838+08:00",
+  "powershell_version": "7.6.5",
+  "fixture": "Explicit subprocess probe only; exit7 is an expected runner counterexample, not a failing project test",
+  "results": [
+    {
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout_bytes": 147456,
+      "stderr_bytes": 147456,
+      "unicode_preserved": true,
+      "passed": true
+    },
+    {
+      "expected_exit": 7,
+      "actual_exit": 7,
+      "stdout_bytes": 147456,
+      "stderr_bytes": 147456,
+      "unicode_preserved": true,
+      "passed": true
+    }
+  ]
+}

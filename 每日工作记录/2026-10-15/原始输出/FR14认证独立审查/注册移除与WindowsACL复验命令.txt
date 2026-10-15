@@ -1,0 +1,1 @@
+& "$env:LOCALAPPDATA/dutucijp-vibecoding-final/tools/go/bin/go.exe" test -json -count=1 -run "TestTC(38|44|48)" ./internal/auth

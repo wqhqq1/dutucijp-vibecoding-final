@@ -1,0 +1,8 @@
+Later receipt of actual tool output, 2026-10-15. Not a successful service launch.
+
+Attempt: builds/20261015-212155-1f188490/recon.exe serve with the existing demo business.sqlite and project root.
+Tool process exit: 1
+Actual stderr:
+listen tcp 127.0.0.1:8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+
+No retry or process termination followed. Actual HTTP and CIM checks confirm the prior recon-fixed.exe PID25644 still serves the login page. The latest full-build binary was not substituted. Port inventory had returned no listener; that inventory alone was insufficient and the mistaken exit inference was corrected.

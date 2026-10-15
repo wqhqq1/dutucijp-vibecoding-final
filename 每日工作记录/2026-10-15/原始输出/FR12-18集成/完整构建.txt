@@ -1,0 +1,26 @@
+
+added 55 packages, and audited 56 packages in 2s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> returns-reconciliation-ui@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.32 kB
+dist/assets/index-DviN2X_z.css    9.57 kB │ gzip:  2.95 kB
+dist/assets/index-glDENvNl.js   270.06 kB │ gzip: 85.79 kB
+
+✓ built in 114ms
+{
+  "actual_time": "2026-10-15T17:00:23.0461611+08:00",
+  "binary": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\20261015-170017-4cd5daea\\recon.exe",
+  "sha256": "cdbe67a5e1d22717e09dfe36e9d049e96f8418e83635d198a8bad47ddb372faa"
+}

@@ -12,6 +12,7 @@ import tempfile
 import time
 from collections import Counter, defaultdict
 from decimal import Decimal, InvalidOperation
+from functools import lru_cache
 from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -29,13 +30,24 @@ FIELDS = ('id', 'sheet_index', 'sheet', 'source_row', 'raw_json', 'invoice', 'st
 NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
 
 
+@lru_cache(maxsize=65536)
 def canonical(value):
     number = Decimal(value)
     if not number.is_finite():
         raise ValueError('nonfinite decimal')
     if not number:
         return '0'
-    return format(number, 'f').rstrip('0').rstrip('.') if '.' in format(number, 'f') else format(number, 'f')
+    formatted = format(number, 'f')
+    return formatted.rstrip('0').rstrip('.') if '.' in formatted else formatted
+
+
+@lru_cache(maxsize=65536)
+def source_time(value, epoch):
+    """Memoize the same Excel conversion; repeated invoice dates are frequent."""
+    rendered = from_excel(float(value), epoch).isoformat(timespec='microseconds')
+    if 'T' not in rendered:
+        raise ValueError('invalid date')
+    return rendered
 
 
 def integer(value):
@@ -146,10 +158,7 @@ def normalize(si, sheet, rn, raw, epoch):
             flags.append('missing_description')
         if not raw[4] or raw[4][0] != 'n':
             raise ValueError('invalid date type')
-        value = from_excel(float(raw[4][1]), epoch)
-        row['time'] = value.isoformat(timespec='microseconds')
-        if 'T' not in row['time']:
-            raise ValueError('invalid date')
+        row['time'] = source_time(raw[4][1], epoch)
         if not raw[5] or raw[5][0] != 'n':
             raise ValueError('invalid price type')
         row['price'] = canonical(raw[5][1])

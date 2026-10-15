@@ -1,0 +1,7 @@
+Tests failed; see original output files
+At C:\Users\wqhqq\OneDrive\docs\大学\library-based-software-programming\软件编程大作业\退货对账与差异处理系统\test.ps1:34 char:84
++ ... or $passed -eq 0) { throw 'Tests failed; see original output files' }
++                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Tests failed; see original output files:String) [], RuntimeException
+    + FullyQualifiedErrorId : Tests failed; see original output files
+ 

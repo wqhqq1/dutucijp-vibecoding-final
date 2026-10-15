@@ -1,0 +1,16 @@
+{
+  "actual_time": "2026-10-15T17:01:20.726310+08:00",
+  "database": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\demos\\demo-20261015-170120-d36101c6\\business.sqlite",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite",
+  "source_db_sha256": "750e576a93882c4dc7fbf0fb29c7c88fcfe77424542151265c426ae29af2cb88",
+  "source_database_unchanged": true,
+  "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+  "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+  "cleaning_version": "cr-1.0.1",
+  "rule_version": "conservative-1.0.0",
+  "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "notice": "Official transactions; new course runtime. Real passwords and factors must be configured by the user."
+}
+Initialization links saved privately: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\demos\demo-20261015-170120-d36101c6\private-auth\initialization-20261015-170127.424860500.json
+Start command: ./start.ps1 -Database "C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\demos\demo-20261015-170120-d36101c6\business.sqlite" -Binary "C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\builds\20261015-170017-4cd5daea\recon.exe"
+Open the private initialization links yourself. Real passwords, Passkeys, authenticator setup and recovery-code saving remain user actions.

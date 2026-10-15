@@ -1,0 +1,5 @@
+
+> returns-reconciliation-ui@0.1.0 build
+> tsc --noEmit && vite build
+
+src/main.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './style.css'.

@@ -1,0 +1,9 @@
+{"Time":"2026-10-15T16:55:57.4266465+08:00","Action":"start","Package":"returnsrecon/internal/auth"}
+{"Time":"2026-10-15T16:55:58.4502885+08:00","Action":"run","Package":"returnsrecon/internal/auth","Test":"TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess"}
+{"Time":"2026-10-15T16:55:58.4502885+08:00","Action":"output","Package":"returnsrecon/internal/auth","Test":"TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess","Output":"=== RUN   TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess\n","OutputType":"frame"}
+{"Time":"2026-10-15T16:55:58.4551011+08:00","Action":"output","Package":"returnsrecon/internal/auth","Test":"TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess","Output":"    security_windows_test.go:93: shared-directory precondition: ACL read error=\u003cnil\u003e, descriptor=D:PAI(A;OICI;FA;;;S-1-5-21-2927421702-3441912900-433302256-1001)(A;;FR;;;WD)(A;OICIIO;GR;;;WD)\n","OutputType":"error"}
+{"Time":"2026-10-15T16:55:58.4561752+08:00","Action":"output","Package":"returnsrecon/internal/auth","Test":"TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess","Output":"--- FAIL: TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-10-15T16:55:58.4561752+08:00","Action":"fail","Package":"returnsrecon/internal/auth","Test":"TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess","Elapsed":0.01}
+{"Time":"2026-10-15T16:55:58.4561752+08:00","Action":"output","Package":"returnsrecon/internal/auth","Output":"FAIL\n","OutputType":"frame"}
+{"Time":"2026-10-15T16:55:58.4585655+08:00","Action":"output","Package":"returnsrecon/internal/auth","Output":"FAIL\treturnsrecon/internal/auth\t1.032s\n","OutputType":"frame"}
+{"Time":"2026-10-15T16:55:58.4585655+08:00","Action":"fail","Package":"returnsrecon/internal/auth","Elapsed":1.032}

@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-10-15T23:20:07.963686+08:00",
+  "file": "C:\\Users\\wqhqq\\Downloads\\reconciliation.csv",
+  "bytes": 22006,
+  "sha256": "590cd3675a60918fc0945dae0d8035c026db468981ef0a484097bf5ebcc8b4eb",
+  "row_count": 54,
+  "header": [
+    "run_id",
+    "dataset_id",
+    "scope",
+    "source_hash",
+    "sheet",
+    "source_row",
+    "rule_version",
+    "cleaning_version",
+    "row_id",
+    "invoice",
+    "stock",
+    "description",
+    "quantity",
+    "source_time_without_timezone",
+    "exact_price",
+    "customer",
+    "country",
+    "kind",
+    "excluded",
+    "flags",
+    "basis"
+  ],
+  "all_customer_13526": true,
+  "scope": [
+    "year1"
+  ],
+  "run_id": [
+    "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad"
+  ],
+  "cleaning_version": [
+    "cr-1.0.1"
+  ],
+  "rule_version": [
+    "conservative-1.0.0"
+  ],
+  "result": "user confirmed download manager takeover; local CSV verified, not a software export failure",
+  "raw_csv_not_copied_to_repository": true
+}

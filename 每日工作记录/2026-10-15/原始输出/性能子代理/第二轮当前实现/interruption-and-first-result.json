@@ -1,0 +1,13 @@
+{
+  "actual_time": "2026-10-15T16:54:55.8669737+08:00",
+  "reason": "Stopped after completed first NFR02 trial on parent instruction; second trial had auto-started and is incomplete, not a result",
+  "first_nfr02_seconds": 198.8411738,
+  "first_prepare_seconds": 45.6142669,
+  "first_import_seconds": 139.020062,
+  "first_run_seconds": 14.0125245,
+  "first_peak": 1647988736.0,
+  "query_indexes": 4,
+  "sqlite_synchronous": 2,
+  "sqlite_cache_size": -65536,
+  "parameter_probe": 960
+}

@@ -85,7 +85,10 @@ func Open(path string) (*Store, error) {
 	if err = os.MkdirAll(filepath.Dir(absolute), 0700); err != nil {
 		return nil, err
 	}
-	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)")
+	// A bounded 64 MiB page cache per connection prevents million-row imports
+	// from repeatedly evicting B-tree pages. WAL and FULL synchronization retain
+	// the existing durability policy; the pool remains capped at four below.
+	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=cache_size(-65536)")
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +97,12 @@ func Open(path string) (*Store, error) {
 		db.Close()
 		return nil, err
 	}
-	return &Store{DB: db, path: absolute}, nil
+	s := &Store{DB: db, path: absolute}
+	if err = s.migrateWorkflow(context.Background()); err != nil {
+		db.Close()
+		return nil, err
+	}
+	return s, nil
 }
 func (s *Store) Close() error { return s.DB.Close() }
 
@@ -225,40 +233,57 @@ func (s *Store) importBatch(ctx context.Context, m Manifest, batch [][]string) e
 		return err
 	}
 	defer tx.Rollback()
-	source, err := tx.PrepareContext(ctx, "INSERT OR IGNORE INTO source_rows VALUES(?,?,?,?,?,?)")
-	if err != nil {
-		return err
-	}
-	defer source.Close()
-	normalized, err := tx.PrepareContext(ctx, "INSERT INTO normalized_rows(dataset_id,id,source_id,invoice,stock,description,quantity,source_time,price,customer,country,kind,excluded,flags,duplicate_of) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-	if err != nil {
-		return err
-	}
-	defer normalized.Close()
-	for _, v := range batch {
-		si, e := strconv.Atoi(v[1])
-		if e != nil {
-			return e
-		}
-		rn, e := strconv.Atoi(v[3])
-		if e != nil {
-			return e
-		}
-		q := int64(0)
-		if v[8] != "" {
-			q, e = strconv.ParseInt(v[8], 10, 64)
+	// Multi-row statements amortize the driver/SQLite VM boundary. Each has
+	// at most 64*15=960 parameters, below even SQLite's legacy 999 limit.
+	// All chunks of the existing <=1000-row batch still share one transaction.
+	const statementRows = 64
+	sourceStatements := make(map[int]*sql.Stmt)
+	normalizedStatements := make(map[int]*sql.Stmt)
+	for offset := 0; offset < len(batch); offset += statementRows {
+		chunk := batch[offset:min(offset+statementRows, len(batch))]
+		sourceValues := make([]any, 0, len(chunk)*6)
+		normalizedValues := make([]any, 0, len(chunk)*15)
+		for _, v := range chunk {
+			si, e := strconv.Atoi(v[1])
 			if e != nil {
 				return e
 			}
+			rn, e := strconv.Atoi(v[3])
+			if e != nil {
+				return e
+			}
+			q := int64(0)
+			if v[8] != "" {
+				q, e = strconv.ParseInt(v[8], 10, 64)
+				if e != nil {
+					return e
+				}
+			}
+			if v[0] != fmt.Sprintf("%d:%d", si, rn) || rn < 2 || si < 0 || si > 1 || !json.Valid([]byte(v[4])) {
+				return fmt.Errorf("invalid source location or raw fields")
+			}
+			sourceID := m.SourceHash + ":" + v[0]
+			sourceValues = append(sourceValues, sourceID, m.SourceHash, v[2], si, rn, v[4])
+			normalizedValues = append(normalizedValues, m.DatasetID, v[0], sourceID, v[5], v[6], v[7], q, v[9], v[10], v[11], v[12], v[13], v[14], v[15], v[16])
 		}
-		if v[0] != fmt.Sprintf("%d:%d", si, rn) || rn < 2 || si < 0 || si > 1 || !json.Valid([]byte(v[4])) {
-			return fmt.Errorf("invalid source location or raw fields")
+		if sourceStatements[len(chunk)] == nil {
+			sourceSQL := "INSERT OR IGNORE INTO source_rows VALUES" + strings.TrimSuffix(strings.Repeat("(?,?,?,?,?,?),", len(chunk)), ",")
+			sourceStatements[len(chunk)], err = tx.PrepareContext(ctx, sourceSQL)
+			if err != nil {
+				return err
+			}
+			defer sourceStatements[len(chunk)].Close()
+			normalizedSQL := "INSERT INTO normalized_rows(dataset_id,id,source_id,invoice,stock,description,quantity,source_time,price,customer,country,kind,excluded,flags,duplicate_of) VALUES" + strings.TrimSuffix(strings.Repeat("(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?),", len(chunk)), ",")
+			normalizedStatements[len(chunk)], err = tx.PrepareContext(ctx, normalizedSQL)
+			if err != nil {
+				return err
+			}
+			defer normalizedStatements[len(chunk)].Close()
 		}
-		sourceID := m.SourceHash + ":" + v[0]
-		if _, err = source.ExecContext(ctx, sourceID, m.SourceHash, v[2], si, rn, v[4]); err != nil {
+		if _, err = sourceStatements[len(chunk)].ExecContext(ctx, sourceValues...); err != nil {
 			return err
 		}
-		if _, err = normalized.ExecContext(ctx, m.DatasetID, v[0], sourceID, v[5], v[6], v[7], q, v[9], v[10], v[11], v[12], v[13], v[14], v[15], v[16]); err != nil {
+		if _, err = normalizedStatements[len(chunk)].ExecContext(ctx, normalizedValues...); err != nil {
 			return err
 		}
 	}

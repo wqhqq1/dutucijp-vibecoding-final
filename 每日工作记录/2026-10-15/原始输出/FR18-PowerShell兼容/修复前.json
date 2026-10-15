@@ -1,0 +1,8 @@
+{
+  "actual_time": "2026-10-15T22:14:34.7363679+08:00",
+  "shell": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "script_head": "bebe77fdea2dc1bdf2912a596e30ea7d28edfc94",
+  "exit_code": 1,
+  "output_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\ps51-before-evidence-20261015-221433",
+  "notice": "Actual unmodified test.ps1 under Windows PowerShell 5.1. No simulated failure."
+}

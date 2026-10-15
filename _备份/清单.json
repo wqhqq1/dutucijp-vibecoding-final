@@ -1,87 +1,87 @@
 {
-  "format_version": 2,
+  "format_version": 3,
   "repository": "wqhqq1/dutucijp-vibecoding-final",
-  "backup_kind": "merged-10-15-and-10-16-tasks-complete",
   "date": "2026-10-15",
+  "captured_at": "2026-10-15T23:31:52.743082+08:00",
   "timezone": "Asia/Shanghai",
-  "captured_at": "2026-10-15T08:54:31.770370+08:00",
-  "local_head": "7b3b350c7f70e170ed0a9757f0bec90b520018a3",
-  "local_commit_count": 20,
-  "planned_tasks_completed": [
-    "2026-10-15",
-    "2026-10-16"
+  "backup_kind": "workflow-browser-evidence-and-stage-report",
+  "local_head": "c39912cc80a93331464f41d9c34220c17cf75c43",
+  "local_commit_count": 37,
+  "actual_work_dates": [
+    "2026-10-14",
+    "2026-10-15"
   ],
-  "actual_completion_date": "2026-10-15",
-  "completed_task_count": 2,
-  "pending_task_count": 30,
+  "completed_task_count": 3,
+  "partially_completed_task_count": 3,
+  "pending_task_count": 26,
   "planned_task_count": 32,
   "reserved_day_count": 2,
-  "original_task_bodies_unchanged": true,
-  "daily_draft_sha256": "118b388a2e2ad0093f53626a7e19e6863070798d0aa17bf0ff0424409ada0b1f",
-  "course_requirements_version": "v1.2",
-  "verification": {
-    "actual_time": "2026-10-15T08:48:23.507633+08:00",
-    "status": "passed",
-    "planned_tasks_completed": [
-      "2026-10-15",
-      "2026-10-16"
-    ],
-    "actual_completion_date": "2026-10-15",
-    "cleaning_version": "cr-1.0.1",
-    "rule_version": "conservative-1.0.0",
-    "tests": {
-      "go_passed": 24,
-      "python_passed": 13,
-      "failed": 0,
-      "skipped": 0
-    },
-    "environment_verified": true,
-    "original_read_only_and_sha_unchanged": true,
-    "data_conservation": {
-      "benchmark": {
-        "raw": 10000,
-        "accepted": 9972,
-        "excluded": 28
-      },
-      "year1": {
-        "raw": 525461,
-        "accepted": 521770,
-        "excluded": 3691
-      }
-    },
-    "excluded_example": {
-      "row": 265,
-      "reason": "nonpositive_price",
-      "eight_fields_equal": true
-    },
-    "pairing": {
-      "matched": 5214,
-      "suspected": 2699,
-      "no_original": 2292,
-      "cases": 4991,
-      "coverage": "5214/10205 (51.092602%)"
-    },
-    "cases": {
-      "buy10_return4_remaining6": true,
-      "multiple_candidates_not_auto_matched": true,
-      "return3_remaining2_rejected": true
-    },
-    "idempotency_seven_tables_unchanged": true,
-    "raw_output_files_verified": 55,
-    "official_all_verified": false,
-    "formal_nfr_verified": false
-  },
-  "review_screenshots_added": 3,
-  "screenshots_collected_today": 5,
   "reserved_days": [
     "2026-10-22",
     "2026-11-17"
   ],
-  "predeadline_freeze_dates": {
-    "midterm": "2026-10-21",
-    "final": "2026-11-16"
+  "original_task_bodies_unchanged": true,
+  "course_requirements_version": "v1.2",
+  "software_overall_acceptance": "not passed",
+  "ppt": "paused by request; continue tomorrow; no authored PPT/PDF",
+  "formal_course_report": "not generated",
+  "verification": {
+    "status": "passed",
+    "raw_file_checks": 270,
+    "unique_verified_raw_files": 270,
+    "missing": [],
+    "hash_mismatch": [],
+    "browser_images_verified": 22,
+    "csv_rows_verified": 54,
+    "current_demo_cases": {
+      "pending": 4989,
+      "in_progress": 0,
+      "closed": 2
+    },
+    "tests": {
+      "go": 71,
+      "python": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nfr": {
+      "NFR-01": "passed floor",
+      "NFR-02": "failed 198.841174s >90s",
+      "NFR-03": "passed floor",
+      "NFR-04": "failed 228/300 requests; P95 about30s"
+    },
+    "ppt": "paused; no authored file",
+    "formal_course_report": "not generated"
   },
   "source_files": [
+    {
+      "path": ".agents/skills/run-app/SKILL.md",
+      "git_blob_sha": "0754f8a29e7fd485ad3edf9b24874d0c67663b50",
+      "sha256": "7322117470759ed978871d4e1efc758cabdf9be4452ace46244eeba02a1a2696",
+      "bytes": 2287,
+      "tracked": true
+    },
+    {
+      "path": ".codex/config.example.toml",
+      "git_blob_sha": "0582557dd498fe7c16718ad4d1a8da9f62e9f617",
+      "sha256": "a91da5e4bd42fd20395f4f05b43b5d9427705be23ab2f769845ea1ff9d77b27b",
+      "bytes": 180,
+      "tracked": true
+    },
+    {
+      "path": ".codex/hooks.json",
+      "git_blob_sha": "f8250131623b8eaf2dee06aa1d2c68d215b2e885",
+      "sha256": "1f08658c7ae29b0e61079e0fba948824fadf622c36dc06e26f0c9c30b1ef26e4",
+      "bytes": 646,
+      "tracked": true
+    },
+    {
+      "path": ".codex/hooks/pre_tool_use_policy.py",
+      "git_blob_sha": "ea59163a12b225b4f037e2b054caf84bd23f0e84",
+      "sha256": "80a84ee3384393a757376bc3d3b40b3206038aa3099ab70b5e1f3283ad119810",
+      "bytes": 1246,
+      "tracked": true
+    },
     {
       "path": ".gitattributes",
       "git_blob_sha": "9bc0106cf7af3c060f339528f707fd9072a3ab9e",
@@ -91,51 +91,142 @@
     },
     {
       "path": ".gitignore",
-      "git_blob_sha": "4e3be8817443a187116f80f1c8d6fe2acfe3f66a",
-      "sha256": "849c2ba359bb8ff96e0757cdd80dca8889d16f4391147dbea6e8978dbee075a0",
-      "bytes": 752,
+      "git_blob_sha": "56b5ad8dd4a601002302f981a614b102d856b063",
+      "sha256": "301af2c7c98628176a8a921b3e02b06de676a669bf091365599aa71323c4c481",
+      "bytes": 799,
       "tracked": true
     },
     {
       "path": "AGENTS.md",
-      "git_blob_sha": "bc1e2252f6e50d0dc9fbe4521da54fc93ae6019b",
-      "sha256": "67a8c396ce77e4ecce42f6ccc603757a7267b66bb0cde43df7cedf020171f012",
-      "bytes": 7014,
+      "git_blob_sha": "d5e95014efaffea27b43dadf8b1a808ed5e5d0d6",
+      "sha256": "ecd33716237a82ce131d9164b947331a17f6c80e3c963e4599645207146df5ab",
+      "bytes": 9313,
       "tracked": true
     },
     {
       "path": "README.md",
-      "git_blob_sha": "6ddb969e0e1806d0a423a0f0d69218f3f42e0011",
-      "sha256": "46dfba999661256cf26f1e08e1c42aa92f766ceb067139cbf9bf01245799909b",
-      "bytes": 6601,
+      "git_blob_sha": "5e535002d7ca87d9a80c93f772dfcbf0e13f341c",
+      "sha256": "a77d71acfd0d77b1bf8ec020f9acda5db4606dc302ea8a0fefb689be7621676b",
+      "bytes": 8547,
+      "tracked": true
+    },
+    {
+      "path": "backend/cmd/perfhttp/main.go",
+      "git_blob_sha": "21ef403b7c7d4866d1820a893c08fbcbf2595b2a",
+      "sha256": "3a8c016a46a9d42ac768c3b3b5b84df1254716e948a30f088400cf38008d29a5",
+      "bytes": 19010,
+      "tracked": true
+    },
+    {
+      "path": "backend/cmd/perfverify/main.go",
+      "git_blob_sha": "c88137b16fa966a864ac7d14adc2e591f15d23c7",
+      "sha256": "b9f8c64351d7074cda5353b28005f8e67398457aa9a2e149cd8b4a30b06119b9",
+      "bytes": 7812,
       "tracked": true
     },
     {
       "path": "backend/cmd/recon/main.go",
-      "git_blob_sha": "415b115bf065861f1c27fa1b6b8e1991938d6c3e",
-      "sha256": "8397e8ecf2e23f11f3f266219e33d7f7a09e13c43342685b509c7c2655ca2b8e",
-      "bytes": 2378,
+      "git_blob_sha": "c937233475ab4a50af494e25af0666a01f1228c1",
+      "sha256": "be4bf2ca07310985b0ac1ecb3de2ee312efc4957ee3f87a530571fea94988330",
+      "bytes": 3183,
       "tracked": true
     },
     {
       "path": "backend/cmd/recon/main_test.go",
-      "git_blob_sha": "6b726d1b86373dea505a7727146f0441c524fc92",
-      "sha256": "04db7dd0fbba013b70667a4aba166ea79d623ae0680583bb7920d5a4a3de3d33",
-      "bytes": 639,
+      "git_blob_sha": "78fe8f9395f00c059257a09b0ed519c3a9a02482",
+      "sha256": "2fac2dcd84c33a7733724b1c5724860cc462843978daa929eae346d7695acd1b",
+      "bytes": 3454,
+      "tracked": true
+    },
+    {
+      "path": "backend/cmd/recon/serve.go",
+      "git_blob_sha": "6606aec0b5ae851072a55399d69a915429924c06",
+      "sha256": "0c5b7a2b8c06e4ff2e900a350c2a53024d7d1d8ad8a06d806b22b9cbc7684031",
+      "bytes": 3973,
+      "tracked": true
+    },
+    {
+      "path": "backend/cmd/recon/workflow_verify.go",
+      "git_blob_sha": "ca7ac741b7ac0a5aa17b2b8ebd9af6eea50743b2",
+      "sha256": "7a981deeff10733d527cdf3c4c979695dafadd4434b51e84e11b00317b4d41cc",
+      "bytes": 2270,
+      "tracked": true
+    },
+    {
+      "path": "backend/cmd/resumeverify/main.go",
+      "git_blob_sha": "43bc71ab19bc1418d7666aeb3118402af68c66f4",
+      "sha256": "a35934fcb3dcdb94135524dbc92ec95567c2275a91d2799210d6a30930ff2a66",
+      "bytes": 4274,
       "tracked": true
     },
     {
       "path": "backend/go.mod",
-      "git_blob_sha": "93b63f7540ee0ecb026e2a78c95dedc3a882c0b7",
-      "sha256": "6882d9f7f28d4f361c17d4a4c6fddf8d241b3558d56d8d636a028a0ca4bfa47c",
-      "bytes": 585,
+      "git_blob_sha": "97f0d5cc78d3f5d9c8c77f23ecdc66843ca86783",
+      "sha256": "b5140749fea033122e6d00e6c1b28dbeabeefa816b46c86fb14dc0de2ea33061",
+      "bytes": 2469,
       "tracked": true
     },
     {
       "path": "backend/go.sum",
-      "git_blob_sha": "7be9f5b25633a478e736da42a1c43cedbb4223f5",
-      "sha256": "059fafd94b6de3e51a22d2c18e769d6207edb19e6bc21029e2287d111b3e1421",
-      "bytes": 4807,
+      "git_blob_sha": "78c80c1ade08a7c05cad26bdbb6c2666c747e383",
+      "sha256": "5d2c4086c55cc0607b7cc17b1c46d753d077254b365375cf0fe47fbfe3504b7f",
+      "bytes": 14122,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/auth.go",
+      "git_blob_sha": "8e496637691c79058978b01d674b45a46cda0edf",
+      "sha256": "c3a5aa0297fdbb0cc1ff62ac13e0342091cf5ccb652e2046e6b2ab825832f3bb",
+      "bytes": 19039,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/factors.go",
+      "git_blob_sha": "0c4c8f6995a789edf28d16a9488a896ab3927d4d",
+      "sha256": "0e65b47472deafea52cb2d0f936625089d1135e8efed94e06997ab7dc2e271c5",
+      "bytes": 10828,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/passkey.go",
+      "git_blob_sha": "886394f3cdec4a5aa7b7a3daa70c434e536a8cce",
+      "sha256": "4f402ce93b4d90241380c3e0bed6809d9f64b5265e85438b63387d0b0ce33369",
+      "bytes": 4979,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/private_other.go",
+      "git_blob_sha": "7a7041cb25190afb052b7c557a917d0d8926961a",
+      "sha256": "ab9c28cc9362ee2cca4eb574fd9d3ec43d07ba4d6d42cdb37be2d136896833a0",
+      "bytes": 192,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/private_windows.go",
+      "git_blob_sha": "dade1f02155797ca66cc9e354043833f9a5330da",
+      "sha256": "aaa7e5923dc934e50bc4486a6ab25f1e11f36e5699137534c1fd159d143a337f",
+      "bytes": 740,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/schema.sql",
+      "git_blob_sha": "62a717ae165441b01e6479304de4fa07b985fc1d",
+      "sha256": "05783a949d8fbf3670c5d4e3b283c8c6a28d6a40f534db5743633d6b2dfc8216",
+      "bytes": 1909,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/security_test.go",
+      "git_blob_sha": "07b83b7e451a926eb33118f13e1339a53aedd7ca",
+      "sha256": "6709813272bb911d3df06f896fdb3c37492cd1698c73ee45bbb998d6e4bc02f4",
+      "bytes": 40093,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/auth/security_windows_test.go",
+      "git_blob_sha": "ed8dd64ce1664138bf2f7e047ec141962ea2ff9c",
+      "sha256": "7287d5b2ca84c7b63bb016411a6d2bf51634a27b6d485971aa3ed5144abb41c2",
+      "bytes": 4231,
       "tracked": true
     },
     {
@@ -167,6 +258,13 @@
       "tracked": true
     },
     {
+      "path": "backend/internal/store/bulk_import_test.go",
+      "git_blob_sha": "8d342381847830e24017b7f0cda1ca08ef0eaf32",
+      "sha256": "1875a31ea0291a5b7e3ba9d85de554b82697fe8b0e14e6c850af14b41c6178c5",
+      "bytes": 1905,
+      "tracked": true
+    },
+    {
       "path": "backend/internal/store/evidence.go",
       "git_blob_sha": "2ce239d4df4e09570b72b00a8128a6306612f79f",
       "sha256": "dc030b73650c686c13d138861a2f4bb34c295eca49cbfbe18764dd17d98e6062",
@@ -174,17 +272,45 @@
       "tracked": true
     },
     {
+      "path": "backend/internal/store/manual.go",
+      "git_blob_sha": "da5194be409d7884cfe0d77153c710ed9c29fde5",
+      "sha256": "be6129c043606fedcfb4d8fbfa88456a1159659918d199522560e4280593ded7",
+      "bytes": 7562,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/store/manual_test.go",
+      "git_blob_sha": "ef647468b18f8defbfbf2386ba5a5145f0c2e792",
+      "sha256": "069e8c83869de7376aea76931c7203913258a134a9b079a8b919abb0bc5043db",
+      "bytes": 9901,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/store/query.go",
+      "git_blob_sha": "f2e342aa8d017a0220378a3f798672ace68ae5a3",
+      "sha256": "e68292b29f776ed14747ea46063de36e2068fe005996a0e943920874e8ccc99b",
+      "bytes": 18831,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/store/query_test.go",
+      "git_blob_sha": "c6ce219d84a0ccd019b71cff2a9c80e741cb6922",
+      "sha256": "3480fe6a4a805d8b20c794e087d788c09984ee44491b6c1d6667530307db07b7",
+      "bytes": 11159,
+      "tracked": true
+    },
+    {
       "path": "backend/internal/store/schema.sql",
-      "git_blob_sha": "43ac2228012e9fab008c72d5c9a149298a28dd19",
-      "sha256": "691e3b2bbf99491d100d7cb01aeef9a71cb9614866e990304ca0407bf4d5b411",
-      "bytes": 3784,
+      "git_blob_sha": "14bc457c68a60e75926896745f66f493e0b0599c",
+      "sha256": "0d9289e68e335cc774dffa0159265262fb1fdb966b02621e9d48b8bb57abc9a1",
+      "bytes": 4280,
       "tracked": true
     },
     {
       "path": "backend/internal/store/store.go",
-      "git_blob_sha": "3d2e9afc8299ef24616edf8d0cb5add6e2922be3",
-      "sha256": "7d679e2c43a41371e3b3d6bc100f1c96b968986d783155fcaff0a7cff191ff00",
-      "bytes": 15243,
+      "git_blob_sha": "fdbc76acd6e4282080a05f0023cb60da8ca07496",
+      "sha256": "961fcdf7d84e90e67ded97b9d4eb6cbb9112e81490ddb1c111b9f9ec0ccb84c7",
+      "bytes": 16699,
       "tracked": true
     },
     {
@@ -209,6 +335,125 @@
       "tracked": true
     },
     {
+      "path": "backend/internal/store/workflow.go",
+      "git_blob_sha": "3545a981e09a3274b8ab07523bfd64648bea152a",
+      "sha256": "8084bcc53a3acd29cb7239dea342efc2cb9af97efc4f16cb1cdfde5bad78311a",
+      "bytes": 11305,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/store/workflow_test.go",
+      "git_blob_sha": "422025fa98a08e33a290c2287242dc3e88754f40",
+      "sha256": "72e37f46be8264e3de04ecd4436b1d586401bc2f13cc9aa416bdd88c9f2c1c3d",
+      "bytes": 13501,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/store/workflow_verify.go",
+      "git_blob_sha": "13dd41bcdff42c27d71b17bd7f35448e7c57f794",
+      "sha256": "981982970d12e91693520df7407284461d6661e49673c953160c27d2aa4f8aa2",
+      "bytes": 8001,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/web/assets/placeholder.txt",
+      "git_blob_sha": "6ac765d522bf370d44e26d854e9a740aed45e3c6",
+      "sha256": "c78254423773e186cf157be05108f145d5a6af6de13ae117589070110055b0d9",
+      "bytes": 119,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/web/frontend_test.go",
+      "git_blob_sha": "159449d7ea12ebd5082c606b73068cff2295a4c7",
+      "sha256": "f9040bf0f6630450c3c8d1b14d7e39413ade40ed69f5c1722dd565946cb74dfe",
+      "bytes": 616,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/web/jobs.go",
+      "git_blob_sha": "87fe3b5026ec6f1287f467cd7a7f0cc3be225ad4",
+      "sha256": "fb18df1fa65f66f01b0afc7b5ca520dbfd4c670bbd3a4d378722b9929dbb5698",
+      "bytes": 5744,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/web/security_http_test.go",
+      "git_blob_sha": "b39eb3a14f06a39a9bb819beb6ff1553e1c94ad2",
+      "sha256": "ca02ab7f254a74897566d3f53605d571c58756767f1d1549981d92c61bdeb87e",
+      "bytes": 20332,
+      "tracked": true
+    },
+    {
+      "path": "backend/internal/web/server.go",
+      "git_blob_sha": "57d668ae90fc334c0876506780ffb7059673d230",
+      "sha256": "5cf0b3b5d98a9d6842ad3c14ae7bf3c204db01edae6df89cf1a8290428ff32d9",
+      "bytes": 16240,
+      "tracked": true
+    },
+    {
+      "path": "build.ps1",
+      "git_blob_sha": "8bb3505d26d7fa1a0128009e1d477be2abc0ca60",
+      "sha256": "7bcfc723571048b437dcba7e04a5d08aee6d3d6d91d09c360fb64bed695a38f4",
+      "bytes": 2446,
+      "tracked": true
+    },
+    {
+      "path": "frontend/index.html",
+      "git_blob_sha": "fb706a67cfe334f45e3f1d356cc0899a52d42ef4",
+      "sha256": "71ac2b404be2805b40d8b1e2985e09f9ce9a4a259ae7ef60ee19a9171fe7d868",
+      "bytes": 317,
+      "tracked": true
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "git_blob_sha": "f2a9f910be34a14862a8f7e4b5fa7a0dd2a159f2",
+      "sha256": "661a55714f7ec2fa3260ca70fb6bda9ec458e30a4696828ad35891f35c64bcfc",
+      "bytes": 47300,
+      "tracked": true
+    },
+    {
+      "path": "frontend/package.json",
+      "git_blob_sha": "d544fccc203b80b0d372180f6b7db614db77a8c8",
+      "sha256": "e8cd375970c4821099bbe2e6ffc3929f78ecdbdd027845cefa99c634a49e45b6",
+      "bytes": 437,
+      "tracked": true
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "git_blob_sha": "4446705a7442c442c516247cfe8adb7bfd2e1f26",
+      "sha256": "908b7ab12adabcc331a61911851969d07fb052d98e189d28fa00484a86c9d4fe",
+      "bytes": 26346,
+      "tracked": true
+    },
+    {
+      "path": "frontend/src/style.css",
+      "git_blob_sha": "60dfc767dd06a1ab62c8dabbc041598cae3af84b",
+      "sha256": "6c9cd7d7daef296c3679777d9e0acbcffbfe9f46c930eb7c80e37101bddeffeb",
+      "bytes": 9642,
+      "tracked": true
+    },
+    {
+      "path": "frontend/src/vite-env.d.ts",
+      "git_blob_sha": "11f02fe2a0061d6e6e1f271b21da95423b448b32",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "bytes": 38,
+      "tracked": true
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "git_blob_sha": "351710a834b8d73329c10677c8805d110fcf0100",
+      "sha256": "f0cb46c8dd34a05c182a1c67bea16fd72a87b580085986c4897b575ff88c8b71",
+      "bytes": 232,
+      "tracked": true
+    },
+    {
+      "path": "prepare-demo.ps1",
+      "git_blob_sha": "ffbda97770720be9d83c18fa58792c9750a9be51",
+      "sha256": "7e3b63d9fa316ef81cdbddbd1f5fe665fc0c8d2419cfe841366a4ce984df345a",
+      "bytes": 1344,
+      "tracked": true
+    },
+    {
       "path": "reproduce.ps1",
       "git_blob_sha": "6e7bf9433ace44f3344fc7e7af38b521db492c1c",
       "sha256": "bfcef5bbc5c7ec23937721774fd755473f494c47af8bae6ba465615100395696",
@@ -216,10 +461,17 @@
       "tracked": true
     },
     {
+      "path": "start.ps1",
+      "git_blob_sha": "f7d6f38961730c1ce763faf261e29494b2768275",
+      "sha256": "f9c2e70d600cb5608932ea55a46b8dcff42e51797354d34f27f350268704335b",
+      "bytes": 750,
+      "tracked": true
+    },
+    {
       "path": "test.ps1",
-      "git_blob_sha": "8838a86318fe296010548bc2fc5e6aef79de7952",
-      "sha256": "b96b2f801ac4b6ae4fa1f314ad510745fa8f61a8d5130b83c54455d0e0db6ea1",
-      "bytes": 2344,
+      "git_blob_sha": "adf5c165e262b2d96751c5179357da05f9738f1f",
+      "sha256": "a1da5b6e1641d0b75d1793c8423de8cfd9200ad93d056f33793a12c8d303b026",
+      "bytes": 2892,
       "tracked": true
     },
     {
@@ -227,6 +479,13 @@
       "git_blob_sha": "249d9f2f5617ec496fe269e8927aa881525cb3af",
       "sha256": "0b407e330ca996532776374ce9951e0d6de7ca78fa93e9abcbeb11bf43bce0d2",
       "bytes": 2327,
+      "tracked": true
+    },
+    {
+      "path": "tests/test_native_runner.ps1",
+      "git_blob_sha": "c2b1d66f6d658b79ed1bba6fc906c38179ed6a8b",
+      "sha256": "004244d1dbc3c29288bbaaf52c3ccb076c06a5d982377c16dfab0887ba7c21b6",
+      "bytes": 2665,
       "tracked": true
     },
     {
@@ -241,6 +500,20 @@
       "git_blob_sha": "7c65cba1a6fc3a30a0ca24c1e6fb23115210da27",
       "sha256": "5e5791527834bafdc6fee9b2fa2ef6ad79bb86134168baf90be90773a9bf3a73",
       "bytes": 2826,
+      "tracked": true
+    },
+    {
+      "path": "tools/build_midterm_report.py",
+      "git_blob_sha": "4fab22cb19c98f6175e95f455b6349ba51da6cbf",
+      "sha256": "011b09e96c0336f43123831b48cdd6d02f703f1a40464e7ad1a778aa8189c188",
+      "bytes": 15415,
+      "tracked": true
+    },
+    {
+      "path": "tools/copy_workflow_db.py",
+      "git_blob_sha": "4874fbd2c5b08df0580eb770cd3adf9b845ba3fc",
+      "sha256": "a306e147a1a580dca0f7582cd930c1562567eca7d9ea740900e039b6b1b312a5",
+      "bytes": 4773,
       "tracked": true
     },
     {
@@ -265,10 +538,45 @@
       "tracked": true
     },
     {
+      "path": "tools/invoke-test-process.ps1",
+      "git_blob_sha": "eae74ea9339ace30b9666a9424287ca3ada0e441",
+      "sha256": "0bdb65ac0edeabd5aaa61b04fe589a28077b38d9a07ed95fa4b0dd2ffee744e9",
+      "bytes": 1738,
+      "tracked": true
+    },
+    {
+      "path": "tools/measure-performance.ps1",
+      "git_blob_sha": "1ac4caea0ae032838f48db77aa8d03edbbed938c",
+      "sha256": "d44e4a94715efd965681f6241620611fc9965c20fad2042300ed519aab277f4c",
+      "bytes": 14046,
+      "tracked": true
+    },
+    {
+      "path": "tools/package_review.py",
+      "git_blob_sha": "5e5a3712e034d803978da85f9a65e7abed2d5cc5",
+      "sha256": "305d1ba1a8f4f36227ecca5ea866cca81057c648fba89792dfd76f2401ccd664",
+      "bytes": 7713,
+      "tracked": true
+    },
+    {
+      "path": "tools/prepare-performance-input.py",
+      "git_blob_sha": "ffceea1133687b8161fc0a8db779c779a5a179e4",
+      "sha256": "23b35593ae6bb523e898794329f63b35c25e86e6f23c54b393c530b826840482",
+      "bytes": 4844,
+      "tracked": true
+    },
+    {
       "path": "tools/prepare.py",
-      "git_blob_sha": "0336563764faf3860444a272a9d7e2650550da7b",
-      "sha256": "2597ad344860592c584e3a457cf4f9ac4dd89fe39cd00ca88aac24f715a1980c",
-      "bytes": 11701,
+      "git_blob_sha": "7a875d566b87f6121749a2b249b041ce7bc0bb59",
+      "sha256": "3c872e6853eef624a14768a9fa18bc7979e74e29827b9ba590b47563de21b193",
+      "bytes": 11934,
+      "tracked": true
+    },
+    {
+      "path": "tools/prepare_demo.py",
+      "git_blob_sha": "598a5b6f3551c15b23e763d0e1cba02aed1df91f",
+      "sha256": "77e1fcc061816d0b8544fc7679f8aaaa4dabeaeda61b5c08c4cc6a59c140d8f2",
+      "bytes": 2413,
       "tracked": true
     },
     {
@@ -293,31 +601,38 @@
       "tracked": true
     },
     {
+      "path": "verify-workflow.ps1",
+      "git_blob_sha": "c64ffd8a84b14d1a17fa74d42debd967f91ff52f",
+      "sha256": "d81055f31936a23101efac9bd291c93f7982531ef1b7c71a08bac28758ffa98b",
+      "bytes": 3194,
+      "tracked": true
+    },
+    {
       "path": "决定记录.md",
-      "git_blob_sha": "69dbc528511ce084b113905757d166ff9ebf34a6",
-      "sha256": "fca409ffaba959b7e2b7f6e788328c41fea21bf3ba90a2dbd514ccb768865bbc",
-      "bytes": 9028,
+      "git_blob_sha": "8470991e578d3989bcdbfe6a966056e0d028cc60",
+      "sha256": "0bf345d8c43faa70d3899654dde818943fd8a057e8c4513aee9c5347bc7855f7",
+      "bytes": 12338,
       "tracked": true
     },
     {
       "path": "四段式任务草稿.md",
-      "git_blob_sha": "dca783ed886443012ea110f46a1cb9d3009f5c54",
-      "sha256": "118b388a2e2ad0093f53626a7e19e6863070798d0aa17bf0ff0424409ada0b1f",
-      "bytes": 63920,
+      "git_blob_sha": "2538c02d1419730c0a24b159e36bf37f62d83331",
+      "sha256": "ac47edd44048fda695fefcfdf6142a0eafc2104644029c3a96ba8d6b9910d1a6",
+      "bytes": 64486,
       "tracked": true
     },
     {
       "path": "怎么做.md",
-      "git_blob_sha": "23916933b6a9c52a6a0d21d7528b137785cf00dd",
-      "sha256": "d34150b451b7269ae65fc9039a7333941b31c599701342e96928fb213f7adad1",
-      "bytes": 19972,
+      "git_blob_sha": "b6ef395ede3e9227b64ac733f7fde57bed6824f7",
+      "sha256": "b638b33af8d3c5ce122e7e0e9d179f01ebdda5142d764b81ef18b408e8673af4",
+      "bytes": 22576,
       "tracked": true
     },
     {
       "path": "怎么算做对.md",
-      "git_blob_sha": "7e4f87ff8f1d41f396377cccf7e8b4390f4d90a7",
-      "sha256": "076ab1ed6687b9d56d2b6a899457bfdd0cf7b156e0e8f22e66c0eb2f73f5801c",
-      "bytes": 12869,
+      "git_blob_sha": "cb5fb148471fb409eaf00f682e9bda70b69bbf72",
+      "sha256": "7670fa4a7a5cbc34f3c3c0473687457a540055c232c1eef097648459a20c0687",
+      "bytes": 14604,
       "tracked": true
     },
     {
@@ -329,16 +644,30 @@
     },
     {
       "path": "执行计划.md",
-      "git_blob_sha": "dc2388e3f6e0754ae676ee2ce2c663aef2f05aa8",
-      "sha256": "9d299c3876247b309cbbf6806c05ea693aba94878762ea00594b50fa19cd02da",
-      "bytes": 23202,
+      "git_blob_sha": "0abb790cab4bceb9e1719af139d48291634c1574",
+      "sha256": "45fb0d5ffd1d302ad4c29558c1c78c74768baa852a908fc3dc612840f24b7bbf",
+      "bytes": 24616,
       "tracked": true
     },
     {
       "path": "提交索引.md",
-      "git_blob_sha": "15dcac23c087ee082de69dcc8118b007478ef184",
-      "sha256": "0952c320b6a74a0ea9e818d5a547c2a7c4fa7accfb444b74c6e86793655ed414",
-      "bytes": 5404,
+      "git_blob_sha": "40405c4cd176ee768ac40598fcf504268d389eb9",
+      "sha256": "800f94e92973ae613796d9d4b7859e0c28956fadb8202f50790ffca656ec783f",
+      "bytes": 7196,
+      "tracked": true
+    },
+    {
+      "path": "本人验收步骤.md",
+      "git_blob_sha": "22ed4814c8f2860057b119790787db5bfb432e7e",
+      "sha256": "1d213f38464d36d21c244bd57f143466abec504fc2ecea0f6e96e0781c20e0eb",
+      "bytes": 5588,
+      "tracked": true
+    },
+    {
+      "path": "材料清单.md",
+      "git_blob_sha": "616b46757f64cd1d98020c4f4cf3812b57b4b331",
+      "sha256": "078a50143b1cc00abb7ff7a35fd39adca82aa9ccf7c74ff4e4777d170f84d38e",
+      "bytes": 2923,
       "tracked": true
     },
     {
@@ -385,9 +714,9 @@
     },
     {
       "path": "每日工作记录/2026-10-15/10-15与10-16任务执行合并报告.md",
-      "git_blob_sha": "f9adebb84660f7da28bd10edb7602c39361852d3",
-      "sha256": "2d852fd7d106e9164f6d0e4023f2c2d8d41d1da7e8847365f4239503b9c485ac",
-      "bytes": 3720,
+      "git_blob_sha": "24b82c04aeece4c5d6fcb59ecdbaa58df8a933ea",
+      "sha256": "5c58188ae58f177335152fc74c953941f700937b3d38d6de80547f538d7fc113",
+      "bytes": 7082,
       "tracked": true
     },
     {
@@ -405,10 +734,80 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-15/FR09-15原始输出校验.json",
+      "git_blob_sha": "2ede9e56c59422f33e206a52c60ffa47c49587ce",
+      "sha256": "7749a1af0191cd325fab54b00eb36a65831e8373b48b0a3381670bb7572dbbf6",
+      "bytes": 3889,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR09-15工作流记录.md",
+      "git_blob_sha": "831035820c617310a3e00b91f546c545b5a7e22a",
+      "sha256": "37734449fe2aa4bec4e0ea3700cbd1cb05bcbb2802d4fce9b560219e0c6a479b",
+      "bytes": 9327,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR12-16数量与状态独立审查.md",
+      "git_blob_sha": "d1f72054777df4e509668ba548c58c4525e8c26e",
+      "sha256": "e29504262d9145a2222f4c6a66d3bc079e1671cc6df340325f729d0eb03e5395",
+      "bytes": 8824,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR12-18原始输出校验.json",
+      "git_blob_sha": "f93ce8cb9a3199db3d8d56b3513ca69f304213c9",
+      "sha256": "4dd221ba9a1adc7c815741da68399848167e1a06914fbc61152556dd2b89782d",
+      "bytes": 35488,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR12-18执行记录.md",
+      "git_blob_sha": "9a7e013f8522688b4a4cd15b94c59b5c2ede1a09",
+      "sha256": "65e341ec0017ed11c834b4f3436c0e04ecb488d7fd10348711fd3bf504920285",
+      "bytes": 16034,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR14-demo仓库重置.md",
+      "git_blob_sha": "1ff0753d848e40769cd633ed4d2d7da0afd64dba",
+      "sha256": "26e2dc248230db1562e69b7e62ced079ff8abae3969758a3234627bca24ee40b",
+      "bytes": 2017,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR14安全独立审查.md",
+      "git_blob_sha": "9737c0fcd8aff96fdf4480a6882897fe4f462341",
+      "sha256": "4e9c2063f506e0cd15e63239568143348c590d94c5965c7328af43436359aa8b",
+      "bytes": 4431,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR14认证独立审查.md",
+      "git_blob_sha": "2e65d3af2f518e09cc30c254ba295b73517d0bc4",
+      "sha256": "0afe0a0523874809fc01acdb6804acd4879ce2b582e792eb9881e346f0b5015e",
+      "bytes": 10196,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR18-PowerShell兼容修复.md",
+      "git_blob_sha": "6cdba6048b776ca48258bd9171f5f8b2d340767a",
+      "sha256": "68f1b6d8eb09bb645510a304e53a329a22d00f0b99ecf452f5bff1a9fe28616c",
+      "bytes": 4029,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR18浏览器截图与PPT暂停.md",
+      "git_blob_sha": "a1bc4c181e476a5bbdef048e4c1f547095655df5",
+      "sha256": "79bd9924bfad3a15609a46f1eee794d4b1a2a63152165dd1def7f3356b62e92f",
+      "bytes": 4897,
+      "tracked": true
+    },
+    {
       "path": "每日工作记录/2026-10-15/今天做了什么.md",
-      "git_blob_sha": "2f48852049798b3435c70e43edf20f49fdc951b3",
-      "sha256": "ce2b31d22d11ce49a10a7fcdaa7931a3607dbed8889ab5994f2f1bcaf17bae17",
-      "bytes": 3455,
+      "git_blob_sha": "4bfbb11ed655f0c2524dab3134c9f28c821581dd",
+      "sha256": "c6fbc67100ea9f2504cb2f03770e52a2af8c705f5e68974be75d760998c10fd1",
+      "bytes": 4260,
       "tracked": true
     },
     {
@@ -598,6 +997,874 @@
       "git_blob_sha": "06cb29286be1c82457dede055978856a660e6074",
       "sha256": "3c6e39504fd8b5cf305871f262705bb5db08d34df504bdd506a65ce03df27e93",
       "bytes": 2239,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/Go静态检查.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/commands.json",
+      "git_blob_sha": "d8a3264f395b311d2c2aa40453faa4627e8257eb",
+      "sha256": "6fea44bf0a7f42a7fa451ca8166bccb136d46f6ac8f6e0fe97451e02469f9fb1",
+      "bytes": 3492,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/官方副本演示-修复复验.txt",
+      "git_blob_sha": "d0f3c67e4f12217c7b156db8efd3b94a2f307cdf",
+      "sha256": "a7cb65ce310f9f7e6c0b51dfbc89436487122198893e5ef0560100679a27dd4f",
+      "bytes": 1699,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/官方副本演示-首次失败.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/官方工作流.json",
+      "git_blob_sha": "430e348ac2094e4cb944e60a8b725588bef1c226",
+      "sha256": "6be3107669777d3578e1f117f5a5db651a1b490b944c577d7eb69041a7705acf",
+      "bytes": 23898,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/官方库只读备份.json",
+      "git_blob_sha": "e6dc5b085c3dd720707e13555915d1af268a2c65",
+      "sha256": "e607ec537d6f59be097a021a50a7eb7c7b9003558cb76fb88052cbfe5cfb334a",
+      "bytes": 2437,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/官方演示摘要.json",
+      "git_blob_sha": "ba2a34c9ae10563bfa9ca664aa67a60e7acf6424",
+      "sha256": "15986e629734cfe18928a6ce062399609bebfba23dc4c4a380f3d95f6469bfaa",
+      "bytes": 1174,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/收工核对.json",
+      "git_blob_sha": "d6ed0454c307d1affec76cb94f91f752a94cc7e7",
+      "sha256": "f66d2b8c6a787e4091773e3b1b62af3525858ed62946479a74e82e20ea8eb199",
+      "bytes": 746,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/最终全量测试/go.jsonl",
+      "git_blob_sha": "7de9773f920baf273b3720c9d85d5c887ec2a1c2",
+      "sha256": "32cdef65b15777b16e3320d354356e082d9f5d3932fb7cbf90e6a34b3765bab5",
+      "bytes": 63754,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/最终全量测试/python.txt",
+      "git_blob_sha": "0ed6bb436eb5355b25f0f9ac5f304b62a01d0a1b",
+      "sha256": "905560c45b02f25caf2771da17fea45453b8d3a3581a847e990dc21fee1c3a36",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/最终全量测试/summary.json",
+      "git_blob_sha": "c629ea854435789ad01d8cdd3fc543c0e57324cc",
+      "sha256": "a1f38b878000837c023a31747b4042248865da8c35b063eb792fa929d7da2adf",
+      "bytes": 718,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/最终测试命令.txt",
+      "git_blob_sha": "48776858a76e2929968c2a2f5944badc45ba4094",
+      "sha256": "3a82116bc5ab9963393191352b88c8bed2b52f9f5ffaf6113683e13dcf1bba03",
+      "bytes": 2658,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/门禁Go测试.jsonl",
+      "git_blob_sha": "b5e77e7c99711f3298621f6400f239bfb3159495",
+      "sha256": "2acdbb714c345b7dc5f7b826604aa080ca45604873ae8bc6dc57ad15925b0368",
+      "bytes": 63793,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/隔离目录校验-首次失败.txt",
+      "git_blob_sha": "d8754cda72928a29178baea9f5b1fafe3d85e1c9",
+      "sha256": "ae96ecc71a7dbe587da220ff488410b30963665501093492f027ab3ed4d9557f",
+      "bytes": 997,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/静态检查汇总.json",
+      "git_blob_sha": "8d69157ad6a5de162cd596717b56554951ce1c86",
+      "sha256": "c3af63fec4db6c3c9bd92fe1d9c12d382c32e640e75c021223103a613cae74ab",
+      "bytes": 1725,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/首次Go测试.jsonl",
+      "git_blob_sha": "076a3aa97c7cdfbca10238a8833aba7748450547",
+      "sha256": "1b131f9aee9b1f6bf54076d477a077696e31c3611dc8845bfb2314755619fb2a",
+      "bytes": 61197,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR09-15工作流/验证入口Go测试.jsonl",
+      "git_blob_sha": "21836ee363406a7a1d8d7a402afd72d4e916cf05",
+      "sha256": "38a69daca6074f95c35b027ac605918df74add989cfcc46a3acff13ce7e9eb66",
+      "bytes": 61193,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/sha256.json",
+      "git_blob_sha": "5d35966993a9711406f1a64886ea160e49c36a8f",
+      "sha256": "5b3c400ad2381790a774a55d74e530987a69829b59ffa4b0876f0ddd828d68d8",
+      "bytes": 5152,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final-command.txt",
+      "git_blob_sha": "41eaedce53c494f2c08c0fc61bcd466ded42c3b7",
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec",
+      "bytes": 56,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final-summary.json",
+      "git_blob_sha": "77b496e18646ee2091011dab798452e62ed23e8b",
+      "sha256": "d33681b5b4b40d1c5dbf62e3ea07585a30f26f90b46f032821b6b6dfe5e3364e",
+      "bytes": 181,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final.jsonl",
+      "git_blob_sha": "18783a2a8af0f55efa1e6504e2c3baad182632d0",
+      "sha256": "44f8f04a612c50217cd3e65ae3d350af939ad030dd30be9791cc02bfb63f79d1",
+      "bytes": 62183,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-command.txt",
+      "git_blob_sha": "41eaedce53c494f2c08c0fc61bcd466ded42c3b7",
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec",
+      "bytes": 56,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-summary.json",
+      "git_blob_sha": "420cca8ed1e056b9835e21da9be0e2093c9884a2",
+      "sha256": "daa7de5baf2d31b0d28c0c9dea726164b80beee6c02811d7961d736eaad783b5",
+      "bytes": 181,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-vet-command.txt",
+      "git_blob_sha": "98d8046eeb945a05d932c7b4148e7576a4d71fd8",
+      "sha256": "8791b983c6c476210af9fbbdf38ed2d63997eea68ed8b09a5df65a090194ed69",
+      "bytes": 40,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-vet.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release.jsonl",
+      "git_blob_sha": "3a0f3440a0ace9e9328a7cfb782233ab612aa894",
+      "sha256": "d659b77a03978b2672307ac4c10bb4141d1e0871f6ddd99568cbbde3b803afdf",
+      "bytes": 62190,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-command.txt",
+      "git_blob_sha": "41eaedce53c494f2c08c0fc61bcd466ded42c3b7",
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec",
+      "bytes": 56,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-summary.json",
+      "git_blob_sha": "2060dd206198381efa08bf2b8b5760133d47a52f",
+      "sha256": "06ae48e29d485fa5f34b750c1eb07a19bc81660df13923551c1c15cec60a4050",
+      "bytes": 181,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-vet-command.txt",
+      "git_blob_sha": "98d8046eeb945a05d932c7b4148e7576a4d71fd8",
+      "sha256": "8791b983c6c476210af9fbbdf38ed2d63997eea68ed8b09a5df65a090194ed69",
+      "bytes": 40,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-vet.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release.jsonl",
+      "git_blob_sha": "03c6f93e5ac08cf592c6ecadf1b733484903a208",
+      "sha256": "ff2fccb7391df77316c4e89c7bb2b7e8332fe67d1ef83fd94fa3a4108d5abf11",
+      "bytes": 62165,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/warehouse-before-fix-command.txt",
+      "git_blob_sha": "37b5946fde4d651a52fdab29802043d933333ace",
+      "sha256": "0552c5bff0a2940717e18571dfadb83cd77eb8b42afce8d57565c11a40e6dfc6",
+      "bytes": 73,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/warehouse-before-fix.jsonl",
+      "git_blob_sha": "52a832ea9ad9b22ce3be2ece608b907e80b1f402",
+      "sha256": "4c2de2195d8d91bf71f89106f617926f33ec9b19d3c18ee789e77b3e67f212e5",
+      "bytes": 2990,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18服务收尾/HTTP与CIM复核.json",
+      "git_blob_sha": "2b3ef8b114d2a5a2dc2788ad6e8bbb63f2d5139e",
+      "sha256": "23aa225138d7062425800a1cb45863d3d7847c5c0267040e76ab17f721e651a0",
+      "bytes": 1150,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18服务收尾/启动冲突原文.txt",
+      "git_blob_sha": "830bbf7e0685ece55f7f86adc9e1a3276bd3ebcc",
+      "sha256": "94dab2b0f85fa34d71f11f314158f97fdd916e1b21389ecc01af1fcbb66616fa",
+      "bytes": 677,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18服务收尾/校验.json",
+      "git_blob_sha": "8f5ca4415a54c7bdc9cac84d4ab67febab67381a",
+      "sha256": "acc2d84135a776625f5445a02002ff7bc16aa1f5c58b5f249ff91f98733008da",
+      "bytes": 466,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/Go依赖整理.txt",
+      "git_blob_sha": "70990c6c78a1d38bb1cd72a853f1c5164e6b8369",
+      "sha256": "0d6c2477629ce3b0ce30fc69e21f48c6f811e3cb8ad29cc8c8ed9c877806934c",
+      "bytes": 159,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/Hook只读策略检查.json",
+      "git_blob_sha": "c51161377d50ed0980e0142936a9b3ea444e5e8b",
+      "sha256": "f347063e659fff1baf3230be1276331f00a10f5a7feb578b3d21722b97a550a0",
+      "bytes": 654,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/PowerShell语法检查.json",
+      "git_blob_sha": "aaa85d2bdfc3cd280416627b6e1540db9b8401aa",
+      "sha256": "76bdc51fcfb0613b513922c5b7cf4c8601711c8881ad2ed984a025b94c5efc48",
+      "bytes": 121,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/bundle恢复.json",
+      "git_blob_sha": "2e2e533a698acdff858e82a756475799f7a393c6",
+      "sha256": "92308e08c6d64067d8226257e3854924852c735ed86f044757125de622856ec0",
+      "bytes": 591,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/commands.json",
+      "git_blob_sha": "898e33805052f386d0117bc08ea220c6be928a2c",
+      "sha256": "d797be18aee8006ba4ab97256138dd3e130f25d0545eb21f8151ca9d4976c16e",
+      "bytes": 2500,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/修复服务HTTP探针.json",
+      "git_blob_sha": "c4f84c6152749a5b18121745aa014137326a8e5e",
+      "sha256": "8c99df21b6123d129411b572157c39f2ad9ab540ce51c8b5322832e7f1343a4b",
+      "bytes": 246,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/修复服务启动.json",
+      "git_blob_sha": "890de6201f7c53a2b07982e2725dff4904159c0d",
+      "sha256": "70a3b67b38f2b1001fd094e0d2bb0271e59bc3343d1878213c18e827ac8f6135",
+      "bytes": 161,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/全包集成回归.jsonl",
+      "git_blob_sha": "7dc7b1c362a69eb1dcf96d54272ecd8c71cece9e",
+      "sha256": "f6a1d7f3576a622fc84a5bf014b9b9eb5948683d4fbddd94ce341f3198f2d19a",
+      "bytes": 157288,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/全包首次编译.txt",
+      "git_blob_sha": "f46d6103a67786be45104b0971cc707bce12b764",
+      "sha256": "5d868ddf0cf154a3989dfd476a06656245588560f45ba496535df8a71c0cd0cc",
+      "bytes": 382,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/制作工具前置.json",
+      "git_blob_sha": "496ff3ef221640c0eb8e329482055a76124fa394",
+      "sha256": "47de640892629843e69b536f7593ae6f2e7577e6694f21e0cef80fbe465ffa03",
+      "bytes": 664,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端构建依赖安装.txt",
+      "git_blob_sha": "cbd1a56febfc5754e50e8697beb3194bacb7d518",
+      "sha256": "dd4664453574796202dc8bc60805c02d925b0e619bc8e119b94e5d8dc6f4bdc1",
+      "bytes": 188,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端构建修复复验.txt",
+      "git_blob_sha": "462fb0159d16371b14bba640501743e5b3cc30a6",
+      "sha256": "e7c707db792fbcfb1bab220cb7a9200f4163d2c4625af647eed5e2596ca9e8e8",
+      "bytes": 433,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端运行依赖安装.txt",
+      "git_blob_sha": "2007b3aa28434f827d4a0c505c34d64c984b7550",
+      "sha256": "91957ff73bd9c1ec74b1f0a69f8cd5e40671c721e1b86f97dd56bbe1c43b9ebc",
+      "bytes": 456,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/完整构建.txt",
+      "git_blob_sha": "fcb0904f21f3687c01f6d779fd1ed201280589e7",
+      "sha256": "93b632215a5de52a2c2ac614f1ce09d6f87459dc6b3c29756ca2a54db37d1167",
+      "bytes": 843,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/应用启动.json",
+      "git_blob_sha": "aa23e61dfa1728c78334850c004187e406975714",
+      "sha256": "e8ac14ff4ba5feea670ee0b5c62abe67b77e515e95060d045557bbbf0ade6b07",
+      "bytes": 401,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/恢复副本复现命令.txt",
+      "git_blob_sha": "1880e4f7c9f057487c79e1bad715723fc25fc5fb",
+      "sha256": "7e6accecfc8f8965d51f3312bc70a4cf6b031195b1e5adc1a73f453039faeeeb",
+      "bytes": 998,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/恢复副本真实中断与重算.json",
+      "git_blob_sha": "42553821d2fb0e6084e6d599b8720477a5b89e36",
+      "sha256": "4c56740788efa8db46264bd755450f8d1662402cb23472177ffdd63da9b03458",
+      "bytes": 1469,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/构建留证包装问题.txt",
+      "git_blob_sha": "9248fe20bf41be2a64c5f99d293770f82233018c",
+      "sha256": "b73ce6a7b5266fa49701f925f7bc662c92a7d1d4846e48cc7506bde4b61ac6d6",
+      "bytes": 504,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/独立演示准备.txt",
+      "git_blob_sha": "4ecdcc052ad92b4c344d19d1e39fcfc738beb08a",
+      "sha256": "497dbae94df512e8489562a81940915ca2e837df25bf107c6457fbaa8f6fd5bd",
+      "bytes": 1616,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/真实分支试验.json",
+      "git_blob_sha": "bf0232fdf08550b1284c3f199a35a90abe6167ec",
+      "sha256": "cb98cbb8c452167a5e25a48fe1a3501a2a622ff57e6a3d637a9cee09d5e81062",
+      "bytes": 629,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/认证协议依赖安装.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/证据秘密边界检查.json",
+      "git_blob_sha": "41e064dcb532ac14ded44cde0659998cf0e97556",
+      "sha256": "de8d7a81038f37ffcf8af8a23e9833c94802e85d880aecb14bf888546cf8b07a",
+      "bytes": 485,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/go.jsonl",
+      "git_blob_sha": "d62842f32aabc97e43512a9d421e55cb8f4c163d",
+      "sha256": "301463a931bed5596c143c48d2b2bf6888358b8ebe010c66eb51067b45789a6d",
+      "bytes": 157625,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/python.txt",
+      "git_blob_sha": "7dcb322d68a56eed0fc945d52e1ce98489fb0b41",
+      "sha256": "5bd3ff9a4462222310052c63861f6700eb6b2dc9292b62257243589f1f90f202",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/summary.json",
+      "git_blob_sha": "70d4aa9046f3501681e1985590242383d84ac906",
+      "sha256": "e4d2c3952aafa15e655790adac74d2ed9ceb8cce9223c9e36539f4f0db204ce1",
+      "bytes": 712,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收命令.txt",
+      "git_blob_sha": "e0a0f265a44a55b7ddb17f6f7766d8a80f11f176",
+      "sha256": "c28842202e8923c80a58284500d8729161fc2ab0b521b7173fde2f3796d7a9c8",
+      "bytes": 2652,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件验收完整构建-复验.txt",
+      "git_blob_sha": "87f8d1c2fb970838a2031f7c7775246202f4b0bf",
+      "sha256": "e0c35e8d5cf82cba9d4d548fa5ba1c7cbaa6f152a98d236130bbfff495f222cf",
+      "bytes": 843,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR12-18集成/首次前端构建.txt",
+      "git_blob_sha": "9e0c7ae7e2e98965c19a3840f34547d658513aaf",
+      "sha256": "51992d43712fabead4dc4bde52e1143b379b311e3bf667ce4f36d98ac5ca487c",
+      "bytes": 190,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14-demo仓库重置/一次性执行命令.py",
+      "git_blob_sha": "8b3a3f96dafe4c718a99a9d3c0f7cea8c3cf83a3",
+      "sha256": "2aadb069631f28239f94c397e0a0b0523cfa3dd492842e13e468c7ce951dbd7d",
+      "bytes": 3313,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14-demo仓库重置/复核.json",
+      "git_blob_sha": "b7ebdc9c42ab4a6b1f61d94a329c8a0816e26733",
+      "sha256": "8aa3131f948de1205a0cd7736381997be55f09f1dc38aff232ee6d1b07885cb5",
+      "bytes": 429,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14-demo仓库重置/实际结果.json",
+      "git_blob_sha": "77d162a5dfd5c880bd0496d2cae8e96c7f61dfaf",
+      "sha256": "09b038c630d972b02560cbcf39d44be638dea8d5242189a8bce62be80270f5f0",
+      "bytes": 878,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/结果汇总.json",
+      "git_blob_sha": "4c725bab34e837f60c452ff7078a97fd5f920785",
+      "sha256": "f4b6918fafeb128eaba2b8ba3c4f1c19d762173f48163f727e877ea5d88d559a",
+      "bytes": 4006,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/范围与结果.md",
+      "git_blob_sha": "c6417a294ca1bf968f883269bada03d62bdd9f90",
+      "sha256": "c195a176cb216eb26efe765f13c4b2031edb677b2335af8b9f3902d1f526f34d",
+      "bytes": 2971,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/首次-go.jsonl",
+      "git_blob_sha": "f141759e36774d7bbde79849316246d503ad6064",
+      "sha256": "7ddd6cf976baac3336b1ad8cb92fab8707dd4779b173c968c1386f1f9896c967",
+      "bytes": 11573,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/首次命令.txt",
+      "git_blob_sha": "2862119cebd8ebb666ddf04466440347ff05cd9a",
+      "sha256": "6d155845aa9097585612b6b45d4541974a8b4fd79e4c0070351f50b78fbaa6c4",
+      "bytes": 102,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/ACL修复复验-go.jsonl",
+      "git_blob_sha": "5c0d39676e18a8d79a2c3b10e035b066d2e00672",
+      "sha256": "610b191172f6aaf980860da01c43c3ca509b2bb32555ea696278f2bf3be8bfd5",
+      "bytes": 37232,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/ACL修复复验命令.txt",
+      "git_blob_sha": "2354d0696c07ea8dd8dc3c12e30010a24ee0ece7",
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985",
+      "bytes": 103,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/WindowsACL夹具诊断-go.jsonl",
+      "git_blob_sha": "6047454894895e1c74bfd8d0bca539ca56bfe651",
+      "sha256": "590a794693235543540a45b5b918ad903d69b99551f2d482d5b1d350d302b73d",
+      "bytes": 1826,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/WindowsACL夹具诊断命令.txt",
+      "git_blob_sha": "e6681c4fc3a11618f2af01ec252faf7993790e6a",
+      "sha256": "543743d96870a0f32137f1e59a08bb7e847d49ca7d76bb984fb65c40206c31a9",
+      "bytes": 127,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/依赖补齐复验-go.jsonl",
+      "git_blob_sha": "9847866a8115bab32f4b8726c52838cd80304db1",
+      "sha256": "e1dd9cbf4e1ac3336251001845d27b9c2aaa0c2fa550510a076ecb2cb97cb0aa",
+      "bytes": 36163,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/依赖补齐复验命令.txt",
+      "git_blob_sha": "2354d0696c07ea8dd8dc3c12e30010a24ee0ece7",
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985",
+      "bytes": 103,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/恢复补发与跨账户复验-go.jsonl",
+      "git_blob_sha": "5358b9b499cde98a90bb7c076c719dc0e6314686",
+      "sha256": "ffccb113845109e558257228c2c15ceaed51cd09afb0f19f9f626312376ac00d",
+      "bytes": 37255,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/恢复补发与跨账户复验命令.txt",
+      "git_blob_sha": "2354d0696c07ea8dd8dc3c12e30010a24ee0ece7",
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985",
+      "bytes": 103,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL复验-go.jsonl",
+      "git_blob_sha": "a8d2e7ae1011594cf806451fd93f9755375ca269",
+      "sha256": "57493e1bf8d6e28eed8bffbe8817fb5be30b02a8af37889da59c192e36f6fa29",
+      "bytes": 20342,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL复验命令.txt",
+      "git_blob_sha": "c2a7ab88a594f31b5f6063c5aeec41b820b7dcb8",
+      "sha256": "04d51a03fdf49f815222a4b385bc3d2bfeed771fd535ed9f820ab8df8166a1ea",
+      "bytes": 127,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL最终复验-go.jsonl",
+      "git_blob_sha": "b9875ca3e1dc86bbf6b1833b011fc4d5a16cbb81",
+      "sha256": "3ccd6a8e18c7e06c44efa9914eba783cb4d967877708b2e0bbfe7dcba15d7629",
+      "bytes": 20423,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL最终复验命令.txt",
+      "git_blob_sha": "c2a7ab88a594f31b5f6063c5aeec41b820b7dcb8",
+      "sha256": "04d51a03fdf49f815222a4b385bc3d2bfeed771fd535ed9f820ab8df8166a1ea",
+      "bytes": 127,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/结果汇总.json",
+      "git_blob_sha": "527127c291997d48e2466d35f259bbc793edbbc3",
+      "sha256": "a75f2467e597af9e3146f375db6a27028896ab7afbc2e5e3377b8f36c74591a3",
+      "bytes": 6017,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/首次-go.jsonl",
+      "git_blob_sha": "bf3ef2264b2c12119346a349c42c20730f0fa47b",
+      "sha256": "47bbff5ce2433d499181a5bc6943046124bb0bc002d36856b1447caeb1a9c299",
+      "bytes": 6774,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/首次命令.txt",
+      "git_blob_sha": "2354d0696c07ea8dd8dc3c12e30010a24ee0ece7",
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985",
+      "bytes": 103,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51.stderr.txt",
+      "git_blob_sha": "c34b724a80f7c2be487d9f287be5258a94379a6e",
+      "sha256": "5664f92af6eeb44bbed1687819ca7417ddd0e595c5f3d13f4938c60a952c2e2e",
+      "bytes": 537,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51.stdout.txt",
+      "git_blob_sha": "5d89a5fba05be6def62917ee31ec8f949d162a82",
+      "sha256": "311390e4f9d8ff9dcce2406ed4a0f3ad9641318d9e5de6a0ae94ae11a62d4497",
+      "bytes": 3543,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51实测/go.jsonl",
+      "git_blob_sha": "499634a805ac75c4b882ae2740a474614136ff89",
+      "sha256": "47fd88018e3254947a566a2770861a6095c773272a84cb0a996def6f208ef072",
+      "bytes": 157413,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51实测/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51实测/python.stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51实测/python.txt",
+      "git_blob_sha": "2d9fa5de58b8afa667a86211dfd749b423f1cce1",
+      "sha256": "5d5b6445e9f9fe2aab1574c15f5e03f9138b95c6c7bacb6819631f69f5d35328",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51实测/summary.json",
+      "git_blob_sha": "091dd4884994b131ff6aef226aed704957dde885",
+      "sha256": "f7fac8a241b1297ebfb1152534c96f9e609286fef6d3f30872ba42d8cf04bfad",
+      "bytes": 1606,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终.stdout.txt",
+      "git_blob_sha": "3ddc4746599d395dc3f5f640ed238a7fa76af6bc",
+      "sha256": "3b5a70fdd8015606c4dee18a7f615de6eede92e3eb8ff62a527df55d366ac0c0",
+      "bytes": 3263,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终复验/go.jsonl",
+      "git_blob_sha": "936308a2e5840ab02d17f1e55574ddb961a36f68",
+      "sha256": "4e3ee0e1a700eeb2cbe6f2e4767a13c417eb1a66cfcc534bbf3c94dbab378677",
+      "bytes": 157411,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终复验/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终复验/python.stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终复验/python.txt",
+      "git_blob_sha": "4e8f8abe48228cd14938c5fb52d6e4f8a5900140",
+      "sha256": "5df9dbb3890c1a391b89325409d7b5f288234d6571429a3beda32b5fb68cab85",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51最终复验/summary.json",
+      "git_blob_sha": "8509e32be65fe91685355bf64dfd5e1c71d5d58a",
+      "sha256": "291caae7f12200740aac88f5e204249cc5d65a61ea320d3cb70037e4373b31e1",
+      "bytes": 1326,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51进程反例.json",
+      "git_blob_sha": "a73e8bf36958b35313953d53f818093a9d98d491",
+      "sha256": "e035a875b1235ef353dd0ed703b2340bf499d986ad6783e84677b6789f85d9b4",
+      "bytes": 935,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51进程反例.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS51进程反例.stdout.txt",
+      "git_blob_sha": "5a90b4b9d873d0879ca7ff019dff37c79bd3c4f6",
+      "sha256": "4113d8557856bdd0753fcb8cd31f653ba33dc41352d43b26ba287e70e728c0d9",
+      "bytes": 932,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7命令.txt",
+      "git_blob_sha": "249080ae0d8e9a5c995c89008681c291c2cd6d51",
+      "sha256": "a222e0240e1b98f2dbb9922aefe6d185a0a0e95a8ee8bb3c37e1ca2456e29e0d",
+      "bytes": 3250,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7实测/go.jsonl",
+      "git_blob_sha": "c73603da5028182b0c50ea18dc36cd69bfeb3a5a",
+      "sha256": "6cf6b0700cf2dec5fdae11d74b944dafb18a74e566978a72e55f59cefaa879e6",
+      "bytes": 157423,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7实测/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7实测/python.stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7实测/python.txt",
+      "git_blob_sha": "bc91ef8469c32fcb9ae24ca616228e6f81c6e4a8",
+      "sha256": "337a0f146a7b700b05034c3797cf3cea156e154edb06de32a355896d44990d2c",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7实测/summary.json",
+      "git_blob_sha": "1269a20993c63d959e06986f6b14efe98449619b",
+      "sha256": "b46e86982e8454aa7c4f6d36fa7e9688ff6eeaa8270733799fcbda1b0dc4770d",
+      "bytes": 1310,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终命令.txt",
+      "git_blob_sha": "b4e0acec871e4adc4ed66bcf95926cb3a5cc51cb",
+      "sha256": "2fc0336213b6786b47cd572f2648fb425bf9b573bbefcaa1a2897af8ee8efecb",
+      "bytes": 3214,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终复验/go.jsonl",
+      "git_blob_sha": "70ba07c80b4ed2b8a1a66edba4e483af19c3407a",
+      "sha256": "5eff66eb9e5f12651f7dfef7b48ad91d2ad0870a468618dbc65f428eec703dd4",
+      "bytes": 157420,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终复验/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终复验/python.stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终复验/python.txt",
+      "git_blob_sha": "9227c44d55b425e27a819a89451b1d41167ee5b3",
+      "sha256": "1b8aa7af701063d40514a1cf775515fb49a9210cfc976ec6087a4b3609c9a0eb",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7最终复验/summary.json",
+      "git_blob_sha": "abeb8ee8a555c008efd47df29f9e2c467f8c3596",
+      "sha256": "8446c1e7d03672db6c215df8dd055f8d5e879fbcead960107ff5bd3a555322fb",
+      "bytes": 1274,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/PS7进程反例.json",
+      "git_blob_sha": "2c5f35d1f985d2a9a42ceb5f2b566774a24dc7e6",
+      "sha256": "e143c62ec54b60204e400360bb08aa1f4b8fea22d1b1cf89596b995f21169e0b",
+      "bytes": 605,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/修复前.json",
+      "git_blob_sha": "a602c51f6c2e7228ee30c4c3ac8cc428aa817469",
+      "sha256": "5516981381af1711e365822ec0b9aea8d6ef84d5abcad479f44d4537847e2028",
+      "bytes": 452,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/修复前.stderr.txt",
+      "git_blob_sha": "4d49ced25065f8332b0bed6dd2e52ccccc1e70e7",
+      "sha256": "141514215c6e4f40971907edb6c5980da9e9369de812c5e64e0bb1b2e93d175d",
+      "bytes": 654,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/修复前.stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/校验.json",
+      "git_blob_sha": "da8c25d206edca4c32ce88817d7f0e3f03c65637",
+      "sha256": "de17793fc6885ce1d3827128b561cd26a1f36e5c22efa69a3b075512eb7817f1",
+      "bytes": 5039,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18-PowerShell兼容/结果汇总.json",
+      "git_blob_sha": "7ac2ca3ba55b9cc4c1fe95448d39223f0d630102",
+      "sha256": "f5315b38f4072acd063dd1d77c559147262e72531b7a65988542984ef0245bf5",
+      "bytes": 4708,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18浏览器与PPT/CSV实际文件核对.json",
+      "git_blob_sha": "249b27680b116daa10f93b2e579b8b45efb163ac",
+      "sha256": "42f1b214178f33240702bdef0ee5f4c959a30cdbd9b677728e00f0181a48b0c2",
+      "bytes": 1046,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18浏览器与PPT/只读状态复核.json",
+      "git_blob_sha": "068aa7126fb9bfcaf412b48ec62d5eb4f262bbe4",
+      "sha256": "6943ed78369158a92fa7eb72561fc7e25a646ed0d7929ab9236f6cde480f132f",
+      "bytes": 1823,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR18浏览器与PPT/截图校验.json",
+      "git_blob_sha": "ba49a2d3b3c70382ec051076bb551ea8cf9be09b",
+      "sha256": "1cfd95218a920c480b5e99eb0a83d24a69439d452ac0dca45d4d07ee20d8d195",
+      "bytes": 9319,
       "tracked": true
     },
     {
@@ -811,6 +2078,713 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.process.json",
+      "git_blob_sha": "0f505acedacacd786b8ab8640befc054a83fbcad",
+      "sha256": "4531b34166f83583f86be142f3dc803f2cbecdfe2c553a70589faab26611a27b",
+      "bytes": 1902,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.stdout.txt",
+      "git_blob_sha": "7f97d3f3de1649572e7a881c0afcfa1e6e8f627b",
+      "sha256": "1d6bb01cc3db6c37444f995ad17841527ffd9d8e75ff8c1afa586df3b76fd2de",
+      "bytes": 2546,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/trial.json",
+      "git_blob_sha": "3ad7dfb4fa8f69e0dd16ee222530eb4d0ca2ac65",
+      "sha256": "f2c0da3c7574557a0201ce02d48a1bf7387376fbee0ad4eca81a959faaac5a4e",
+      "bytes": 5278,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.process.json",
+      "git_blob_sha": "0cc8722db76a5f3a5e00c1e0abe229d904df21ec",
+      "sha256": "027d6784f9284f0633bb6b6d3db1f1fdaa2cb25f37e6eee298a9c1fc3de626c2",
+      "bytes": 1904,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.stdout.txt",
+      "git_blob_sha": "576bdabd66d4fe0a996517d409e4c06cf12e9ff1",
+      "sha256": "813259dbc20116d5066b8696af04befb0a2423b4cde091d8bee55f8fe0f9150e",
+      "bytes": 2545,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/trial.json",
+      "git_blob_sha": "ae0be4a5dae848b0e2af2a145c89a29b6326f5b1",
+      "sha256": "05aa370dad0204a61194d2f10abd4c234e4f107ca197f51d3339eb20176c6915",
+      "bytes": 5279,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.process.json",
+      "git_blob_sha": "4aa818230e427199a20d9f3aeff18ff7f9a1a505",
+      "sha256": "0ff2337941b3a44dfcc7c0b5f0b93dfe7a4dfb4a341b0c276afff6f5041f0eee",
+      "bytes": 1904,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.stdout.txt",
+      "git_blob_sha": "7f94c9d0313c4cd0eff4eefd84dbe62b9a55338b",
+      "sha256": "4f5e5330f3e3494ea9e93b6351df5ecd87a7800e579b3db472c15e480b48109b",
+      "bytes": 2546,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/trial.json",
+      "git_blob_sha": "d2f7d73f248364437e0648326020abb2497ed74a",
+      "sha256": "a16c90f5fb689b125f1a549521a0d136616d4129cfe78c58c291e29ee28e1db2",
+      "bytes": 5280,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/build.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/environment.json",
+      "git_blob_sha": "09e057335126df7c2ab0e2bae3022304f8bc0ee5",
+      "sha256": "2fba9cd4e6243e7514a943d317c6f8cc16be6f62bca92ccde3ba320229aaa001",
+      "bytes": 10500,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/summary.json",
+      "git_blob_sha": "74663658b71e0bfbeffa05923aacc5da08127884",
+      "sha256": "37db04e68612b73363856b38c713298c10af1d7a562bd1dc6b431842ff2bb382",
+      "bytes": 1617,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/trials.json",
+      "git_blob_sha": "f2ece1a9f4805d2dc60c8130f5e7cd575c25df2a",
+      "sha256": "4da78b1c09cc55c1fe0cf21dfc3021bf432ba90ddf44d5a54d4ed36ff28d7233",
+      "bytes": 16499,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-command.txt",
+      "git_blob_sha": "4d5f4d37967d1d442506bb3452a1f75983ca1d7a",
+      "sha256": "8680cf98a955bcaceff9ae30e30944cf39c7e450edd393df70170ec8ebb3c47b",
+      "bytes": 177,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-失败分析.json",
+      "git_blob_sha": "0dd6235903d27feb20e92ee733eb463f4faf436b",
+      "sha256": "7c15c85177304cf03ad426f445fde8e6b9b22c6e1478951ba46f75f74cfecbd9",
+      "bytes": 1133,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-逐请求.jsonl",
+      "git_blob_sha": "1e7f7dc51502a03d5b6cb5c4e061d4d1a56bc0dd",
+      "sha256": "d035e811a0690c762d39501dede64fadc1785ec2b896f367b3c99f9815797462",
+      "bytes": 101891,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/commands.json",
+      "git_blob_sha": "8e886c9ff277871e62507bbef0f65f6fb783d1ce",
+      "sha256": "a41fdf07885b79a66489e1f945ec856a7e10132a120c4c3bb3c509ca849f1d2b",
+      "bytes": 5002,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/官方all准备清单.json",
+      "git_blob_sha": "8623eb1f9d95e1e245c9efad86d1a08097959ead",
+      "sha256": "2d9f533c76f83476416e73e84be743e8ae0b062b74d0e54600aa6a253b1ef3a9",
+      "bytes": 1562,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/官方benchmark-cProfile.txt",
+      "git_blob_sha": "9831afe87cfcd08875d420062d92bac8e01bb08d",
+      "sha256": "28f055031e08128d654bb1cc78ba4090588b5c8d17e29536b04b1cda49453324",
+      "bytes": 149571,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/性能核查说明.md",
+      "git_blob_sha": "9f9763a3f9890d77b247a448ea756720f068d8e3",
+      "sha256": "d5b1a9fb10d1438e12f5780d19b09284c5ae9f6cfe8d66ac046031b8a03f518c",
+      "bytes": 7300,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.process.json",
+      "git_blob_sha": "377e884b1da89f0692b1f49c3333b74fd98b6a82",
+      "sha256": "bf83cbc655df531434c0f1270cd431888917e3e58948c38fbdba48b5dc5b914b",
+      "bytes": 1413,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.stdout.txt",
+      "git_blob_sha": "6cd30b01bd25f8695b5de4b2004f50533baba475",
+      "sha256": "f75a8e8e2eb16f181b0db83d8c9cc5b209dfc8ba92b8b77554c619be6a752fdc",
+      "bytes": 2093,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.process.json",
+      "git_blob_sha": "6563e7a6a578f7763e65eab410221b0c254b24bb",
+      "sha256": "c1241fb503d9557bc10e69bdd483fe1c11d8ab4fd8d17aa97c403352f075995a",
+      "bytes": 1427,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.stdout.txt",
+      "git_blob_sha": "3b984d6816ee819bb4f502f97fb78aeaaa0407f8",
+      "sha256": "2cc29221ce1836ad1eaf59bb7428ce6bb840cbeb83fa76ebb588a49e4c50a16b",
+      "bytes": 1493,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/trial.json",
+      "git_blob_sha": "ce3bebb5279e1fbc7bfdc5dbd6896157e62dd16f",
+      "sha256": "de5e05c892d15cab552936ffc6afef10cb088a29daf8ad1f6f980522ffaa98b3",
+      "bytes": 5736,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.process.json",
+      "git_blob_sha": "0b18bee64a087b7b459a1d5ba4dcd963eb50e44b",
+      "sha256": "fd6b80a1fda03c75416cfc1688d97a5437c061f49b2659f08d0b6618726ab9e2",
+      "bytes": 1413,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.stdout.txt",
+      "git_blob_sha": "2d2496297c7a89507be3d81c6c4e63043fe00374",
+      "sha256": "8f04df9d74901acd52b0e64a0abd39ecb0f801fbd1949e2b83be9ba08bbd82de",
+      "bytes": 2093,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.process.json",
+      "git_blob_sha": "2bfc88ccda0a0c42a784dce3f134be9cab68fa38",
+      "sha256": "48eea52a3dfe2b65014759e24dc9db87c05996ec7a2ea8f61a3d89acaec31544",
+      "bytes": 1427,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.stdout.txt",
+      "git_blob_sha": "347da26470704d337dfce8ad8374a26456198b32",
+      "sha256": "5f0e95d77a304e1246460ea5e152dc3a4a5886354bdff12955270ce34c7bfeb7",
+      "bytes": 1492,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/trial.json",
+      "git_blob_sha": "dfc3e13e19af30e01f8ec619f16d0e62a6246055",
+      "sha256": "6f4ed90fa0d63fbcbb8d4a112968d48fb554d4deb2c544921539d805e0f55d76",
+      "bytes": 5736,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.process.json",
+      "git_blob_sha": "ec1590e16d6d1144ba5b480aa6cd2ba900bb152f",
+      "sha256": "e38da676c510434f10c42d61754379613b5768a389faca61645a3711654dd66a",
+      "bytes": 1413,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.stdout.txt",
+      "git_blob_sha": "749f483949d3b18b20c4db271ca450d646af8b63",
+      "sha256": "ad971fe6ed45c453fc3035a578b20a4a4006050e736995d1d2b57dcf5dee30c6",
+      "bytes": 2093,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.process.json",
+      "git_blob_sha": "51becff8fa24fd02c9ee1ba3f0b4396300fe329a",
+      "sha256": "a12ff36c4bea20287fa9acee09c8ff832c40dff95fd865951362397db5071bf2",
+      "bytes": 1427,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.stdout.txt",
+      "git_blob_sha": "9ef3425a6c7dea2a06fc5634c5d5b288be2ed0db",
+      "sha256": "dcd8dcd78fc791405ce59616531b312b525c4922436371fb10b45adde3d02d31",
+      "bytes": 1492,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/trial.json",
+      "git_blob_sha": "5d9aa844d66fa3abb9d26e7bca345ac5f30d70c9",
+      "sha256": "20c1a1c88dc9a16e552c83cde06428c20e5042a7cd8c7c15077642fff2ebf1e0",
+      "bytes": 5736,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.process.json",
+      "git_blob_sha": "caaf2c311f0ed8544237be4e98ba1c3f69699a21",
+      "sha256": "ae7ea7e1a42acd17bab37997b0c6c4ddab4a754e71f08637ec77de028dac7815",
+      "bytes": 1416,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.stdout.txt",
+      "git_blob_sha": "0a8832366562a04f9c6c5f63502bd6d3f16d1024",
+      "sha256": "cb0a3331a4fa8f9f63fbd9dc1e3ef5ea0312a5308bcef62f6b5becbc147ee264",
+      "bytes": 2139,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.process.json",
+      "git_blob_sha": "39832277cf3097e9e4d94dd8cf241e057c7cc188",
+      "sha256": "4500b894d6e71d365dc581154b2500e35f8f9f4802fbccd00d483239831dd2ae",
+      "bytes": 1422,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.stdout.txt",
+      "git_blob_sha": "e8dbfb3e6caf648e5020aaa8cd2e2ccdf1a81681",
+      "sha256": "5fe24957ed166e28933400e723404fe90282a4d63536763c0fd464e1deb4025c",
+      "bytes": 2467,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/trial.json",
+      "git_blob_sha": "9f823c9a217f5606603cf07213f03eb21fdd5d81",
+      "sha256": "e5d9b9fa5e93aed380221d8ed5df4ad6b6d1c86963e4c411e79573600b048b87",
+      "bytes": 5782,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.process.json",
+      "git_blob_sha": "ac2e33d4d7f2b01a09583cd42804806e22123bb6",
+      "sha256": "efb3507dfa5da87fecfd99e6217aba2a189c459d80307af9b327694b93560533",
+      "bytes": 1416,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.stdout.txt",
+      "git_blob_sha": "cca6f36598ec5beb21544dd1b8faaa8a04a9e6b8",
+      "sha256": "26f390a2125740e2e7fee4840dfd45146ca062986c63f7498579eafb8f5335ed",
+      "bytes": 2140,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.process.json",
+      "git_blob_sha": "701825945a2c9382e734270a8f97f65c22b026b3",
+      "sha256": "dcda8d051d1def8a622f67a78143457f9a344dff05393dcb9f91fcf79b2f9f0d",
+      "bytes": 1422,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.stdout.txt",
+      "git_blob_sha": "52588fda75a7809552c2a4ee33b38eef4f7ac723",
+      "sha256": "1da26738456d32bc778250c012f37b9349b568f3f8c1c57e66f993f863d43781",
+      "bytes": 2467,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/trial.json",
+      "git_blob_sha": "d46515d3d13f7fe103c392c0706bdf8492d81038",
+      "sha256": "a04c0adfcdcdfa2d8156cb25343520c5cf2d40d198ad840d18a1bd914eb3a25e",
+      "bytes": 5783,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/environment.json",
+      "git_blob_sha": "8a71b4b9a021482482fd05feed047d25c659791a",
+      "sha256": "82fa771132ccba660aab4dc413d00dca97b70f3a770c4cc2c22604d5eafab3b1",
+      "bytes": 6038,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/trials.json",
+      "git_blob_sha": "ee99877398a421e112fbc844af853e1bbe47a3e1",
+      "sha256": "2ed4c34ba6ecceaba2cea2fc5ef579f50e45c2b16ada6236bd351ac45da8a6af",
+      "bytes": 29913,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/查询计划只读诊断.json",
+      "git_blob_sha": "b3f4ed464a3598d417fc58e01c23657fc9b0b879",
+      "sha256": "390b9f669c92698de7437f28f4254935f61d057c400dea8bd08b8b255b7955fc",
+      "bytes": 2556,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第一轮缓存AB/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第一轮缓存AB/go.stdout.json",
+      "git_blob_sha": "29982f974180e1659e951239fb0a31a8d5b75766",
+      "sha256": "3439d8cf1341fb08fb94105ef634cb50fa81c4f0dfd6f9120c9c39cf56d02528",
+      "bytes": 2134,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.process.json",
+      "git_blob_sha": "d4b16a4b04f6f09ff1fdf857bd7be486e0127ab0",
+      "sha256": "cef2e1af71808d4a955df3512afd00002c964287ee2fe19936a7c3227183d390",
+      "bytes": 1726,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.stdout.txt",
+      "git_blob_sha": "4954280fdbcbc7305db09c226f1ef261a408002e",
+      "sha256": "39a8325ab6f07ae3df44884b51bed7a9993e72a35989222f7781cb48a968a370",
+      "bytes": 2209,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.process.json",
+      "git_blob_sha": "48217cd170446a46cbf6e5744a427602836abf98",
+      "sha256": "7608caf14d883d22c043e75a0ed443957d68c5d61706219031d216fa3bd07ff2",
+      "bytes": 1915,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.stdout.txt",
+      "git_blob_sha": "96f13aaca6f75cce48e76280920fb100a4ce582f",
+      "sha256": "daffa81512dcda320b0cee3598621509a35b2f8a34706f46fe56cb56286e2e35",
+      "bytes": 1490,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/trial.json",
+      "git_blob_sha": "0a4e48807ee6425126bb7a94fa47208ea73cf6da",
+      "sha256": "0c5c8d0a8bcabe61027fcc70c1d48d43fc8990f7e6fcd48c5ec2859507bc0442",
+      "bytes": 6713,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.process.json",
+      "git_blob_sha": "437dc6c9f35747d81b233854c34087a7409393c4",
+      "sha256": "f7546e6736a90b6b70dea5dcd268a0a4b887ee7c0957850f89fa17982e1a9697",
+      "bytes": 1725,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.stdout.txt",
+      "git_blob_sha": "596cde096ae482257820a0b930b394769e2e159f",
+      "sha256": "027a6d879d315352976fb2b4275cefdf631964c6241dde512d0dc64d33f0e9c4",
+      "bytes": 2208,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.process.json",
+      "git_blob_sha": "b10d6cae07de1bb55f509ab845ff6d721df4126f",
+      "sha256": "cf00330cefc77914f998699387310db449c4da43cbf4e2345b564c9c8f465c46",
+      "bytes": 1914,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.stdout.txt",
+      "git_blob_sha": "45698a559cf731d2e3d6087907c276cafb2b18f5",
+      "sha256": "71d232f28f658e9f798b91dcee13e29cc3fad0be08e611ffc64a72bc1cba8c35",
+      "bytes": 1489,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/trial.json",
+      "git_blob_sha": "b091528d849f99502de1cb2954753ce32ff591c5",
+      "sha256": "462002ab25dc98954d5178e91cc6007ca4e46480e3f6a40f1975736ab4d2eb4b",
+      "bytes": 6710,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.process.json",
+      "git_blob_sha": "ad1c15865758c992405983d923e9122190496ec5",
+      "sha256": "06716037c5f073a1a2199f6eb67b0858dd370cb09ce9132b5c75e98173841d43",
+      "bytes": 1726,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.stdout.txt",
+      "git_blob_sha": "937c24cc9ddc44385b2fca423867ca1f65687e69",
+      "sha256": "5040250b1e352f8b0160dc226f3481ef5d68107266a8f03b960371ef3a30932b",
+      "bytes": 2207,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.process.json",
+      "git_blob_sha": "ee31fd53ac0c9d07f9e73a23635c2d43e16cafc3",
+      "sha256": "e8c0d6c19052c78afe3d5b14c042f4819bc3d9f9b6330713d5c6296779bbb7d1",
+      "bytes": 1914,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.stdout.txt",
+      "git_blob_sha": "ab396e2aa737a60ddde8e201417ad78497234c9a",
+      "sha256": "f47c2ff7afdf245feedd531f61fb26d0ecb37029c2450be7267b2f7374067c86",
+      "bytes": 1491,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/trial.json",
+      "git_blob_sha": "0fdf238b7374852172736f2fe202f5179f8a8c11",
+      "sha256": "917d2780f53bfdba04125af0c83cbc348bed479eef732377afa92c6d8e381d9d",
+      "bytes": 6710,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.process.json",
+      "git_blob_sha": "998f6b664029c3a48f513bd720bc87533a1555b5",
+      "sha256": "3ce9619c9a1f4f55d6b578ca773ae434788e0a1a4792e8094c0cad5ea9cdc989",
+      "bytes": 1734,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.stdout.txt",
+      "git_blob_sha": "825e02cea020bcc0c49e57f4b165c342906f15d5",
+      "sha256": "d4800ce720e0d3158ae85eac60de17ee9445670ddadf8177353857bbf1ae0341",
+      "bytes": 2257,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.process.json",
+      "git_blob_sha": "a4dec5356f8a0ce3aa4c1912a39f51d34a55659b",
+      "sha256": "2a5132df7ae11761410b9b9d42572faa7bff7e2ba537e39f0d124283bbc3f975",
+      "bytes": 1914,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.stdout.txt",
+      "git_blob_sha": "2a62463b9d98057a1488f32bc5a04ccb1c30a48e",
+      "sha256": "37a509990bd981e806802504613202073655c435a106b304dbda385740f98690",
+      "bytes": 2465,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/trial.json",
+      "git_blob_sha": "9381e3dcdb089f6ce35c346b687afadb4e35721a",
+      "sha256": "0dd11ecdbb561b02b6a686bfb4aa4f0413ccd84f144f8414e38bb088a376296d",
+      "bytes": 6770,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.process.json",
+      "git_blob_sha": "d6b04783a085fddecfc21914eac61d18397eb2be",
+      "sha256": "4d87199be1518c57aaa9003ca818efca520650383be419cdd139c5b9580c9cb6",
+      "bytes": 1915,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.stdout.txt",
+      "git_blob_sha": "f257cdf6ab6bcb80d4faa7c7438c048ee72e128b",
+      "sha256": "ddca3c7b5563c1480fede357deebd197c54ef8ae6411469fc4219ce511b43a33",
+      "bytes": 2465,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/environment.json",
+      "git_blob_sha": "1032d18ab331a66b12f206d73e6c35c45dcc208a",
+      "sha256": "a09f0b0a09f46ef0e1044e6f775d66cf18f56e73f62aa2ac346d174228b71aae",
+      "bytes": 9285,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/interruption-and-first-result.json",
+      "git_blob_sha": "a51e25e11d66c4642ec83c169ba08aa3f9878dbc",
+      "sha256": "e397d4876960e4944debd432526175562160ab86ad40a41894fd06c12711313d",
+      "bytes": 498,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/trials.json",
+      "git_blob_sha": "326843586e1f91e60533a3a1907ae55d53c901f2",
+      "sha256": "5d8a9bc84ad42954a73c72aa406bb81c1a5777ed47c5c669a98b94bd300bb5d8",
+      "bytes": 28040,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮必要回归/python.txt",
+      "git_blob_sha": "cec892a6b11a2a28d49e815863dedc5e4fdb9583",
+      "sha256": "3119dd268b58c4377052734b09913a9bc8202287c22fb310d2a4b90b6ec3e7c6",
+      "bytes": 1940,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮必要回归/store.jsonl",
+      "git_blob_sha": "94f4471ed53a65b94326c52ffbeb48d5bf5280e2",
+      "sha256": "3dac7e7b2ca4e011dc06e0eee1775b2fad5a66a6f9bff7a226e4b0b34b113e1e",
+      "bytes": 62980,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/纯输入模板stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/性能子代理/纯输入模板回执.json",
+      "git_blob_sha": "1456219b527e0aa1ef67e559e7d0e6cb4322bfc0",
+      "sha256": "5500665b6de5d31f01d8b85b281116d40a711fe94f43015919c165b075c3fcdf",
+      "bytes": 1593,
+      "tracked": true
+    },
+    {
       "path": "每日工作记录/2026-10-15/原始输出/提交前Go静态检查.txt",
       "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -965,38 +2939,206 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-15/截图/2026-10-15-06-修复版安全登录页.png",
+      "git_blob_sha": "333e9dbc3e778956fa100916bc0772b47ac38709",
+      "sha256": "f17ce4d52ce6f4872f12168d522b760b9e2d6d93bd08b116e39528bcc2674aed",
+      "bytes": 37379,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/01-财务差异总览.jpg",
+      "git_blob_sha": "755bd4dc8e5d9a87047cbf026d8d170816125180",
+      "sha256": "de303b40aed0c8a74a33fb22ffb634e347346f8de805c998dd8f0e5444d8bbaf",
+      "bytes": 66136,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/02-官方首年度行数守恒.jpg",
+      "git_blob_sha": "6006f3425ac83c901e5e2f126642b82239db698e",
+      "sha256": "1ed3721c127e472a5227999ecdf45423aaeeed60c031745f6ccc07f86d30f99e",
+      "bytes": 66550,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/03-本人已关闭案例与审计.jpg",
+      "git_blob_sha": "d7b93a51804501af2a2f17af268e1385c9ae1c42",
+      "sha256": "2da5859af84574ccd1d7ce23d3b0752437bd35d155c87827401131f9407c4480",
+      "bytes": 74743,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/04-重复派单拒绝.jpg",
+      "git_blob_sha": "058eb3bb56d6531471d5c8f0504aa6059f56faa0",
+      "sha256": "0dd7ab7b2b788f8e7e03d64579f98a710b1e417c304194cb3b27ee21e9e90347",
+      "bytes": 75101,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/05-两条真实候选与原始证据.jpg",
+      "git_blob_sha": "2d4ce87c5dd8cbd253ab24207604294954bee356",
+      "sha256": "da508e5875febcaac48f74f47321ec70797a4f0f2ec3f74ee7a156ac30083652",
+      "bytes": 77227,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/06-财务派单待处理.jpg",
+      "git_blob_sha": "166cd81bd7152bb058e22b2e92d584b0d639a6af",
+      "sha256": "7303220e1b56735bbaf36f70dca7eb7b32a2287dac867ab60ed4031be14e943e",
+      "bytes": 81650,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/07-待处理重复派单拒绝.jpg",
+      "git_blob_sha": "5166fd22e849e97c09e0b24882e769ad3e00a0c6",
+      "sha256": "296f887545cfc7b6de8874ee1122a4267161a169896c1c02c2e02738ca0534c4",
+      "bytes": 81391,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/08-交易查询等待状态.jpg",
+      "git_blob_sha": "a947063ac75359c51c9e8d69182657b5ebbf2632",
+      "sha256": "2f27f3953098bb1d0940b0fc96374f7807f07a829d9686d65634bad80dc75069",
+      "bytes": 70491,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/09-仓库Passkey登录及限定范围.jpg",
+      "git_blob_sha": "a7e9252533554ea357e208a586751ac5b9f245ec",
+      "sha256": "73ee3bf23b45648c0729cd7752504e751d2c8c27d08fddbf4675d3a06adee36a",
+      "bytes": 63070,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/10-待处理只能开始不可跳级.jpg",
+      "git_blob_sha": "0efc98401a799d672780e59293c0fe5537ac21b9",
+      "sha256": "593ef267d93116b8e3b2ca8ef2001be28e2286e18f3be868441f1befcd635e61",
+      "bytes": 78470,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/11-仓库开始处理.jpg",
+      "git_blob_sha": "912603765b7253aa41b6a794b1db23eb4644129c",
+      "sha256": "badde5c62785554e70f24229f7df33a61b26bf0a162e2e4bcf846645d7377fbc",
+      "bytes": 72345,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/12-处理中结论为空.jpg",
+      "git_blob_sha": "7a73234d4ae62511b8722bfa93e1c098fdf891ed",
+      "sha256": "f5fe953f9e56eff9c407c06853f4dc33e3e193c9b515d50a2ff162e88f7c6977",
+      "bytes": 73267,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/13-空结论服务端拒绝.jpg",
+      "git_blob_sha": "f7723c4a519b4c3780e0cc74c5038949845b48ca",
+      "sha256": "ae1c7e17928c48609e9a81c41759c949f850865cf1f1166cd8914c93a82d5499",
+      "bytes": 72821,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/14-结论关闭与不可修改.jpg",
+      "git_blob_sha": "e61dab494702849d34207e8dd0805cd76bb2f5fa",
+      "sha256": "d88ce5243f3b1c95b2f4dc4da629c702ee212dc1f33ee1a0107fb7a2599ed0e7",
+      "bytes": 77843,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/15-仓库仅本人两项差异.jpg",
+      "git_blob_sha": "6b426bafb5542a17d050d5275abc643868ad93ad",
+      "sha256": "a9a655fd8554d971a42a468da8818476d3df52c53af6a623a24bbe9ab844668c",
+      "bytes": 57658,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/16-仓库越权导出拒绝.jpg",
+      "git_blob_sha": "d8c5b678b7909c8880812c380c25096a9c09ea45",
+      "sha256": "4bbe5ce12d766944730d8130264d4603d14e4aed9843e933141cbc0d1802a91d",
+      "bytes": 13906,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/17-仓库结案后限定视图.jpg",
+      "git_blob_sha": "c79c2ac02175ea71bebd0059dc0b247f24fd4ac8",
+      "sha256": "c6c6b81f3185a63f04b07a7d64b0c00ce25216515b7fa9329e6fe644a0a5363a",
+      "bytes": 59323,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/18-仓库访问未派本人证据拒绝.jpg",
+      "git_blob_sha": "ea58220d0200efd02a48c7df51c07124328d66ed",
+      "sha256": "83294c733c2064c5cad74134644cf897996d772e8f04be00a3288916d7aee204",
+      "bytes": 14257,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/19-管理员Passkey登录与全局视图.jpg",
+      "git_blob_sha": "e5ff72dd1e18be35c1658039785d2e999c853d6f",
+      "sha256": "6fedccfd24f2096fbe13dedde6f9e60574029e5c9c89038104d72dfd3a253538",
+      "bytes": 66343,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/20-管理员客户筛选结果.jpg",
+      "git_blob_sha": "8745917e7f81d2aa1cd539aca403da147a27530f",
+      "sha256": "b3345724f4baa2c4c4d8e66b7e8b78eb7db271f8cdb41fc0d721ab3e77686534",
+      "bytes": 62752,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/21-管理员数据任务入口.jpg",
+      "git_blob_sha": "7b22a7d774fab055a1e362d8f459067248cfcc69",
+      "sha256": "78ba5489883b3863d7a6ba322aaa9c38d1e53d0b7a0528abbcbef148f86a482d",
+      "bytes": 38669,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/22-本人WindowsPowerShell测试通过.png",
+      "git_blob_sha": "864c56aec36be37fb880bc7ed75ccbd17207cf41",
+      "sha256": "61207899a5e6da30702a0f55f58a877a5aeebea56057460bcf748b6db603687f",
+      "bytes": 484995,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/FR12-16浏览器验收/截图索引.md",
+      "git_blob_sha": "75630c4ed17db283c96a4ec746a6f6dd512c3ae1",
+      "sha256": "7a02e8633ecf73a22cf41f46545bd5691ea4c4e2cfe367364bdc515dbf2dbb51",
+      "bytes": 3967,
+      "tracked": true
+    },
+    {
       "path": "每日工作记录/2026-10-15/截图/截图索引.md",
-      "git_blob_sha": "5398457b07cac3e7ce6e284c9d4fabf685acc243",
-      "sha256": "b8785648d67b6785a97fa1974bc2c91b459ec2d61422b659350f69b90f7f7d48",
-      "bytes": 1792,
+      "git_blob_sha": "8c8ed28ae9ee1ebeed8cf4ce8b73949155933eea",
+      "sha256": "a271e860bfcaf5cd4be2be5f200fa6530b6b3fe33c8ce9d0d45ce5cf4caf839e",
+      "bytes": 2942,
       "tracked": true
     },
     {
       "path": "每日工作记录/2026-10-15/执行交接.md",
-      "git_blob_sha": "b19f90d229a6feab5236c90d0e4508396a0ed144",
-      "sha256": "af8be433cfc3e5c570e776ccff1f5727855da6b441fcb364542f8014aefd375d",
-      "bytes": 16787,
+      "git_blob_sha": "940a58286c3e9ca8596f4f31d447de98f614f0dc",
+      "sha256": "e214c87e7c10a99c57f8ace8e99cdd82f110f4b8d102c50df6f6626e45aee558",
+      "bytes": 32596,
       "tracked": true
     },
     {
       "path": "每日工作记录/2026-10-15/执行记录.md",
-      "git_blob_sha": "50d837c66067bbeaeea62a964909be96871d9c72",
-      "sha256": "a376c15019375a2b3b7149be72dcc5f9777346d30dcfc771e34ee16c06fbec1d",
-      "bytes": 2132,
+      "git_blob_sha": "5718f69311be5db7922d8af875fc0d477a413ac0",
+      "sha256": "02003839c4b50ef3482bbe3c870da6da37172104a566a8086b49a5a81c08941c",
+      "bytes": 2926,
       "tracked": true
     },
     {
       "path": "测试记录.md",
-      "git_blob_sha": "be9c5a10bebaf76d25e3a2405d492eb1f03b6523",
-      "sha256": "ae4d2bcd034b09b3c7d6f0840835e9da9d3f0f25d323266d00ef3446c8c0cc42",
-      "bytes": 11193,
+      "git_blob_sha": "75c820e4dfceb60f20eab55c17ac86a63050c6d7",
+      "sha256": "2b04e57d7ab6040db36add35f25f9839d8b244cf4122fffae54768723a52cb6f",
+      "bytes": 18166,
       "tracked": true
     },
     {
       "path": "要做什么.md",
-      "git_blob_sha": "88c64421402cbd757342dfa5e6b0966694469ebc",
-      "sha256": "6185e4d986a1635647fdbba19e9ed9745fbb6a9ffbdd00efb9914bcbdada8960",
-      "bytes": 10066,
+      "git_blob_sha": "7be4ab6150278af35ff40bdc8bbeaab29990c4c5",
+      "sha256": "43339aa3d6b149e51faae99b06ff772f352343c6be9d847fedcda0a16fc439ad",
+      "bytes": 10847,
       "tracked": true
     },
     {
@@ -1008,9 +3150,9 @@
     },
     {
       "path": "课程完成核对表.md",
-      "git_blob_sha": "dfaabb36fd0c56ac129dff365bc929099a5c56bf",
-      "sha256": "26eca57cfb1c12522773ead548ea11cff819bc84818ace12b09ea7ab40748c6b",
-      "bytes": 8431,
+      "git_blob_sha": "d3de54d4c3cdc99a7861ed9631f88ce94c26c606",
+      "sha256": "53b6b5aaae95900505bb2e9456b34e310440ae9ef4d966f482ba6d76df29b421",
+      "bytes": 12597,
       "tracked": true
     },
     {
@@ -1043,16 +3185,16 @@
     },
     {
       "path": "运行说明.md",
-      "git_blob_sha": "0e0f98f10992b678f49936a130abad09f011948f",
-      "sha256": "8dfb576727bf09828c5d2eaee318c5bf558bb641165c71bb674935c7f538ae64",
-      "bytes": 7389,
+      "git_blob_sha": "eaf9a8710252a7191f0fd9299db3c84e87409921",
+      "sha256": "5af6f728505d0b221c9e74eb81ffa94e99358262d02c9f2dd7a014984c2fe07e",
+      "bytes": 13911,
       "tracked": true
     },
     {
       "path": "选题自查表.md",
-      "git_blob_sha": "98af60540affaa06aaed7f02fa6fe52556012065",
-      "sha256": "39f1f5bb495e64e33b22a578ad93d49c21f252f59f992cbb2989a6950e1433ac",
-      "bytes": 2252,
+      "git_blob_sha": "5045cd595681abf97ccccdd627248f867e121951",
+      "sha256": "733206a4087c9824dcac7c7475b99829e71539c7033910e7738ff6436fbd813b",
+      "bytes": 2903,
       "tracked": true
     },
     {
@@ -1064,23 +3206,22 @@
     },
     {
       "path": "每日工作记录/2026-10-15/提交记录.txt",
-      "git_blob_sha": "d2fc79308160dcd8327501d04a7cf53bb6eb6ad1",
-      "sha256": "d379a3348b226059dbde277fcc9bc15618b35187882db745449e3fbe45e9d95b",
-      "bytes": 1495,
+      "git_blob_sha": "740afa5417c6db199b35bb823820db5482a29ce1",
+      "sha256": "bdd94debcf468eeca05c5906539ca25b6e66c3b6d97a987da9e41af08f8e6f5d",
+      "bytes": 3359,
       "tracked": false
     }
   ],
   "bundle": {
     "path": "_备份/项目存档.bundle",
-    "bytes": 606281,
-    "sha256": "376d03bc524b4cfd22b4c018f91d10c70cb059d1eb9b0864ab19e651d15b18f3",
-    "git_blob_sha": "fa6bdcc225d8e15acf31cf0a3c0c0c188439408b"
+    "bytes": 2466746,
+    "sha256": "4757cbcf0d266f2cb61d0362e72abfba4f017810dd261bde2aaef1920578a8a6",
+    "git_blob_sha": "499a1dc97aaf3784d27b617f0e54aebb77733d69"
   },
   "excludes": [
     "teacher source materials",
-    "official raw data and private full row records",
+    "official workbook and private CSV full rows",
     "runtime database and credentials",
-    "dependency caches",
-    "ignored audit scratch files"
+    "dependency and scratch caches"
   ]
 }

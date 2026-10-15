@@ -1,0 +1,22 @@
+{
+  "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+  "arguments": [
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-source-20261015-163656\\source\\tools\\prepare.py",
+    "--source",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\raw\\online_retail_II.xlsx",
+    "--scope",
+    "benchmark",
+    "--output",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-1\\prepared"
+  ],
+  "working_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-source-20261015-163656\\source",
+  "started_at": "2026-10-15T16:37:08.2213065+08:00",
+  "ended_at": "2026-10-15T16:37:09.3756481+08:00",
+  "exit_code": 0,
+  "wall_seconds": 1.1399828,
+  "peak_working_set_bytes": 8822784,
+  "peak_memory_method": "Windows process PeakWorkingSet64 sampled every 20ms; process-local OS high-water mark; sequential child peaks are not summed",
+  "peak_memory_error": null,
+  "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-1\\prepare.stdout.txt",
+  "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-1\\prepare.stderr.txt"
+}

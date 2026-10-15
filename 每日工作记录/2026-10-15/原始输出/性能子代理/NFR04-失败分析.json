@@ -1,0 +1,40 @@
+{
+  "actual_time": "2026-10-15T21:18:58.492596+08:00",
+  "kind": "analysis_of_actual_failed_run_not_original_harness_summary",
+  "harness_exit": 1,
+  "terminal_error": "not_found: 任务不存在",
+  "requests": 300,
+  "failures": 228,
+  "http_statuses": {
+    "0": 228,
+    "200": 72
+  },
+  "errors": {
+    "request_error": 216,
+    "": 72,
+    "job_observation_error": 12
+  },
+  "active_before_and_after": 288,
+  "p95_ms": 30000.572500000002,
+  "max_ms": 30003.3865,
+  "categories": {
+    "cases": 50,
+    "case_candidates": 50,
+    "transactions": 50,
+    "case_evidence": 50,
+    "overview": 50,
+    "allocations": 50
+  },
+  "jobs_after_process_exit": [
+    [
+      "job-20261015-210328-sqCgLuPw_uKC",
+      "year1",
+      "failed",
+      "failed",
+      "任务中断；未发布结果不作为完成"
+    ]
+  ],
+  "source": "requests.jsonl",
+  "baseline_passed": false,
+  "limitation": "Original harness returned before writing summary on an end-of-load job lookup error. This analysis reports preserved requests only; does not invent a source-before hash or successful job completion."
+}

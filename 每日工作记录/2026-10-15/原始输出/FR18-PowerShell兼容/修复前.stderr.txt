@@ -1,0 +1,8 @@
+python.exe : test_TC01_existing_source_becomes_read_only_without_rewriting_receipt (test_fetch_data.SourceTests.test_TC
+01_existing_source_becomes_read_only_without_rewriting_receipt) ... ok
+At C:\Users\wqhqq\OneDrive\docs\大学\library-based-software-programming\软件编程大作业\退货对账与差异处理系统\test.ps1:15 char:5
++     & $pythonExe -m unittest discover -s tests -p 'test_*.py' -v *> $ ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_TC01_exist...receipt) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

@@ -1,0 +1,12 @@
+{
+  "kind": "Receipt of actual observed tool results, no artifact authored",
+  "actual_date": "2026-10-15",
+  "official_msi_url": "https://download.documentfoundation.org/libreoffice/stable/26.8.1/win/x86_64/LibreOffice_26.8.1_Win_x86-64.msi",
+  "official_and_actual_sha256": "c6298b10cfa1748bcbedad94c62ce771e240e5021bfd6d7a967cd571b04b5312",
+  "authenticode": "Valid, The Document Foundation",
+  "installed_or_extracted": false,
+  "report_or_ppt_created": false,
+  "render_verified": false,
+  "packaging_executed": false,
+  "reason": "User requires software acceptance first, explicitly keeps two optimization rounds and pauses PPT; performance still failed."
+}

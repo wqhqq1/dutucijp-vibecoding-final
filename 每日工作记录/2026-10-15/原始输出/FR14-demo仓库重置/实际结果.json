@@ -1,0 +1,24 @@
+{
+  "occurred_at": "2026-10-15T22:44:39.144654+08:00",
+  "scope": "one-time explicitly authorized local demo maintenance, not a product recovery flow or acceptance pass",
+  "account": "warehouse",
+  "state_before": "complete",
+  "version_before": 4,
+  "state_after": "new",
+  "version_after": 5,
+  "revoked_counts": {
+    "auth_sessions": 0,
+    "auth_credentials": 0,
+    "auth_recovery": 10,
+    "auth_bootstrap": 0,
+    "auth_challenges": 0,
+    "account_rate_limit": 1
+  },
+  "other_accounts_unchanged_in_transaction": true,
+  "existing_auth_audit_unchanged": true,
+  "new_auth_audit_id": 18,
+  "business_sql_writes": 0,
+  "private_backup_created": true,
+  "private_backup_runtime_relative": "demos\\demo-20261015-170120-d36101c6\\private-auth\\warehouse-before-reset-20261015-224439.sqlite",
+  "strong_password_and_verified_factor_required": true
+}

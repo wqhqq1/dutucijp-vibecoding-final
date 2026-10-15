@@ -1,0 +1,7 @@
+?   	returnsrecon/cmd/perfverify	[no test files]
+ok  	returnsrecon/cmd/recon	1.481s [no tests to run]
+ok  	returnsrecon/internal/auth	0.590s [no tests to run]
+?   	returnsrecon/internal/model	[no test files]
+ok  	returnsrecon/internal/reconcile	0.299s [no tests to run]
+ok  	returnsrecon/internal/store	0.452s [no tests to run]
+?   	returnsrecon/internal/web	[no test files]

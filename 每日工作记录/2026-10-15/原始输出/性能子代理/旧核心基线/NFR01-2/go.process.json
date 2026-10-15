@@ -1,0 +1,21 @@
+{
+  "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\perfverify.exe",
+  "arguments": [
+    "--prepared",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f",
+    "--db",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\isolated.sqlite",
+    "--mode",
+    "full"
+  ],
+  "working_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-source-20261015-163656\\source",
+  "started_at": "2026-10-15T16:37:11.3159103+08:00",
+  "ended_at": "2026-10-15T16:37:11.8166768+08:00",
+  "exit_code": 0,
+  "wall_seconds": 0.4944909,
+  "peak_working_set_bytes": 44359680,
+  "peak_memory_method": "Windows process PeakWorkingSet64 sampled every 20ms; process-local OS high-water mark; sequential child peaks are not summed",
+  "peak_memory_error": null,
+  "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\go.stdout.txt",
+  "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\go.stderr.txt"
+}

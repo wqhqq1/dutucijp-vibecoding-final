@@ -1,0 +1,142 @@
+{
+  "actual_time": "2026-10-15T22:20:08.410885+08:00",
+  "files": {
+    "PS51.stderr.txt": {
+      "bytes": 537,
+      "sha256": "5664f92af6eeb44bbed1687819ca7417ddd0e595c5f3d13f4938c60a952c2e2e"
+    },
+    "PS51.stdout.txt": {
+      "bytes": 3543,
+      "sha256": "311390e4f9d8ff9dcce2406ed4a0f3ad9641318d9e5de6a0ae94ae11a62d4497"
+    },
+    "PS51实测/go.jsonl": {
+      "bytes": 157413,
+      "sha256": "47fd88018e3254947a566a2770861a6095c773272a84cb0a996def6f208ef072"
+    },
+    "PS51实测/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51实测/python.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51实测/python.txt": {
+      "bytes": 1940,
+      "sha256": "5d5b6445e9f9fe2aab1574c15f5e03f9138b95c6c7bacb6819631f69f5d35328"
+    },
+    "PS51实测/summary.json": {
+      "bytes": 1606,
+      "sha256": "f7fac8a241b1297ebfb1152534c96f9e609286fef6d3f30872ba42d8cf04bfad"
+    },
+    "PS51最终.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51最终.stdout.txt": {
+      "bytes": 3263,
+      "sha256": "3b5a70fdd8015606c4dee18a7f615de6eede92e3eb8ff62a527df55d366ac0c0"
+    },
+    "PS51最终复验/go.jsonl": {
+      "bytes": 157411,
+      "sha256": "4e3ee0e1a700eeb2cbe6f2e4767a13c417eb1a66cfcc534bbf3c94dbab378677"
+    },
+    "PS51最终复验/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51最终复验/python.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51最终复验/python.txt": {
+      "bytes": 1940,
+      "sha256": "5df9dbb3890c1a391b89325409d7b5f288234d6571429a3beda32b5fb68cab85"
+    },
+    "PS51最终复验/summary.json": {
+      "bytes": 1326,
+      "sha256": "291caae7f12200740aac88f5e204249cc5d65a61ea320d3cb70037e4373b31e1"
+    },
+    "PS51进程反例.json": {
+      "bytes": 935,
+      "sha256": "e035a875b1235ef353dd0ed703b2340bf499d986ad6783e84677b6789f85d9b4"
+    },
+    "PS51进程反例.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS51进程反例.stdout.txt": {
+      "bytes": 932,
+      "sha256": "4113d8557856bdd0753fcb8cd31f653ba33dc41352d43b26ba287e70e728c0d9"
+    },
+    "PS7命令.txt": {
+      "bytes": 3250,
+      "sha256": "a222e0240e1b98f2dbb9922aefe6d185a0a0e95a8ee8bb3c37e1ca2456e29e0d"
+    },
+    "PS7实测/go.jsonl": {
+      "bytes": 157423,
+      "sha256": "6cf6b0700cf2dec5fdae11d74b944dafb18a74e566978a72e55f59cefaa879e6"
+    },
+    "PS7实测/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS7实测/python.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS7实测/python.txt": {
+      "bytes": 1940,
+      "sha256": "337a0f146a7b700b05034c3797cf3cea156e154edb06de32a355896d44990d2c"
+    },
+    "PS7实测/summary.json": {
+      "bytes": 1310,
+      "sha256": "b46e86982e8454aa7c4f6d36fa7e9688ff6eeaa8270733799fcbda1b0dc4770d"
+    },
+    "PS7最终命令.txt": {
+      "bytes": 3214,
+      "sha256": "2fc0336213b6786b47cd572f2648fb425bf9b573bbefcaa1a2897af8ee8efecb"
+    },
+    "PS7最终复验/go.jsonl": {
+      "bytes": 157420,
+      "sha256": "5eff66eb9e5f12651f7dfef7b48ad91d2ad0870a468618dbc65f428eec703dd4"
+    },
+    "PS7最终复验/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS7最终复验/python.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "PS7最终复验/python.txt": {
+      "bytes": 1940,
+      "sha256": "1b8aa7af701063d40514a1cf775515fb49a9210cfc976ec6087a4b3609c9a0eb"
+    },
+    "PS7最终复验/summary.json": {
+      "bytes": 1274,
+      "sha256": "8446c1e7d03672db6c215df8dd055f8d5e879fbcead960107ff5bd3a555322fb"
+    },
+    "PS7进程反例.json": {
+      "bytes": 605,
+      "sha256": "e143c62ec54b60204e400360bb08aa1f4b8fea22d1b1cf89596b995f21169e0b"
+    },
+    "修复前.json": {
+      "bytes": 452,
+      "sha256": "5516981381af1711e365822ec0b9aea8d6ef84d5abcad479f44d4537847e2028"
+    },
+    "修复前.stderr.txt": {
+      "bytes": 654,
+      "sha256": "141514215c6e4f40971907edb6c5980da9e9369de812c5e64e0bb1b2e93d175d"
+    },
+    "修复前.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "结果汇总.json": {
+      "bytes": 4708,
+      "sha256": "f5315b38f4072acd063dd1d77c559147262e72531b7a65988542984ef0245bf5"
+    }
+  },
+  "scope": "Current compatibility evidence only. Excludes own hash; no original data or credentials."
+}

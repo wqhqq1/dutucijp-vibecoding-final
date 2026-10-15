@@ -1,0 +1,13 @@
+{
+  "actual_time": "2026-10-15T21:07:31.4720990+08:00",
+  "base": "5df378c7897114c2fa91df4e08974b3eaebba232",
+  "branch": "experiment/fr18-disposable-20261015-210730",
+  "commit": "79ff9b2b1ceceb232238ac79a5a54a837997bed6",
+  "isolated_status": null,
+  "diff": [
+    " FR18-branch-canary.txt | 1 +",
+    " 1 file changed, 1 insertion(+)"
+  ],
+  "main_head": "5df378c7897114c2fa91df4e08974b3eaebba232",
+  "decision": "Do not merge: this canary only proves an actual isolated branch/commit/diff trial; it adds no business behavior. Keep branch and commit in bundle; clean disposable worktree removed without force."
+}

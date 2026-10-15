@@ -1,0 +1,14 @@
+{
+  "actual_time": "2026-10-15T21:41:13.054136+08:00",
+  "scope": "Service closing receipts only; excludes own hash. Earlier 164-file snapshot remains unchanged.",
+  "files": {
+    "HTTP与CIM复核.json": {
+      "bytes": 1150,
+      "sha256": "23aa225138d7062425800a1cb45863d3d7847c5c0267040e76ab17f721e651a0"
+    },
+    "启动冲突原文.txt": {
+      "bytes": 677,
+      "sha256": "94dab2b0f85fa34d71f11f314158f97fdd916e1b21389ecc01af1fcbb66616fa"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "actual_time": "2026-10-15T16:03:03.014514+08:00",
+  "purpose": "isolated-workflow",
+  "database": "workflow.sqlite",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite",
+  "copy_database": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\workflow-20261015-160302-c28f4c66\\workflow.sqlite",
+  "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+  "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+  "scope": "year1",
+  "cleaning_version": "cr-1.0.1",
+  "rule_version": "conservative-1.0.0",
+  "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_db_sha256_before": "750e576a93882c4dc7fbf0fb29c7c88fcfe77424542151265c426ae29af2cb88",
+  "source_db_sha256_after": "750e576a93882c4dc7fbf0fb29c7c88fcfe77424542151265c426ae29af2cb88",
+  "source_workflow_fingerprints_before": {
+    "cases": {
+      "rows": 4991,
+      "sha256": "e25acbdbcdbad799250bddb2801f0a7b8e1bbe3b8fa4f8b915ef05e7558f6585"
+    },
+    "audit_events": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "allocations": {
+      "rows": 5214,
+      "sha256": "89ad5ea57fddfe57c913b7adf97b7088e124d9a632de5cae8c152f0d14c61663"
+    },
+    "sale_balances": {
+      "rows": 511565,
+      "sha256": "62aba51652cc09735d76cd81175dc19af84c3a58016bd32a3f63dd5731973f81"
+    }
+  },
+  "source_workflow_fingerprints_after": {
+    "cases": {
+      "rows": 4991,
+      "sha256": "e25acbdbcdbad799250bddb2801f0a7b8e1bbe3b8fa4f8b915ef05e7558f6585"
+    },
+    "audit_events": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "allocations": {
+      "rows": 5214,
+      "sha256": "89ad5ea57fddfe57c913b7adf97b7088e124d9a632de5cae8c152f0d14c61663"
+    },
+    "sale_balances": {
+      "rows": 511565,
+      "sha256": "62aba51652cc09735d76cd81175dc19af84c3a58016bd32a3f63dd5731973f81"
+    }
+  },
+  "notice": "Official transactions copied read-only; subsequent actors/actions/conclusions are isolated course simulations, not human business operations or FR-14 authentication."
+}

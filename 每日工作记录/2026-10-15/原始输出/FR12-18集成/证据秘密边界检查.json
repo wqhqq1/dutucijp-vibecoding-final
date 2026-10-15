@@ -1,0 +1,8 @@
+{
+  "actual_time": "2026-10-15T21:31:43.854354+08:00",
+  "scope": "Current 2026-10-15 text evidence only; screenshots manually inspected separately. Pattern scan is a bounded check, not a proof against every possible secret.",
+  "files_checked": 248,
+  "credential_pattern_hits": [],
+  "original_data_extensions_in_new_evidence": [],
+  "expected_result": "No hits or raw data. Source-code fixtures intentionally use test-only credentials; runtime credentials are outside Git."
+}

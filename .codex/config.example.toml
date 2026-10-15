@@ -1,0 +1,4 @@
+# Copy to ignored .codex/config.toml only after reviewing the project settings.
+# Then use /hooks in the CLI to review and trust the exact hook definition.
+[features]
+hooks = true

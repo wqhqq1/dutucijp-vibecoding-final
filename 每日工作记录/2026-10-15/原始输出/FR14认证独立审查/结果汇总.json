@@ -1,0 +1,192 @@
+{
+  "recordedAt": "2026-10-15T16:57:36.0943141+08:00",
+  "workingDirectory": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+  "command": "& \"$env:LOCALAPPDATA/dutucijp-vibecoding-final/tools/go/bin/go.exe\" test -json -count=1 ./internal/auth",
+  "runs": [
+    {
+      "file": "首次-go.jsonl",
+      "topPassed": 0,
+      "topFailed": 0,
+      "topSkipped": 0,
+      "subPassed": 0,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:45:30.5788631+08:00",
+          "Action": "fail",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 0,
+          "FailedBuild": "github.com/go-viper/mapstructure/v2"
+        }
+      ],
+      "sha256": "47bbff5ce2433d499181a5bc6943046124bb0bc002d36856b1447caeb1a9c299"
+    },
+    {
+      "file": "依赖补齐复验-go.jsonl",
+      "topPassed": 0,
+      "topFailed": 16,
+      "topSkipped": 0,
+      "subPassed": 8,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:46:48.7938108+08:00",
+          "Action": "fail",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 1.712
+        }
+      ],
+      "sha256": "e1dd9cbf4e1ac3336251001845d27b9c2aaa0c2fa550510a076ecb2cb97cb0aa"
+    },
+    {
+      "file": "ACL修复复验-go.jsonl",
+      "topPassed": 16,
+      "topFailed": 0,
+      "topSkipped": 0,
+      "subPassed": 19,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:48:04.4955682+08:00",
+          "Action": "pass",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 6.321
+        }
+      ],
+      "sha256": "610b191172f6aaf980860da01c43c3ca509b2bb32555ea696278f2bf3be8bfd5"
+    },
+    {
+      "file": "恢复补发与跨账户复验-go.jsonl",
+      "topPassed": 16,
+      "topFailed": 0,
+      "topSkipped": 0,
+      "subPassed": 19,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:49:07.1544254+08:00",
+          "Action": "pass",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 6.692
+        }
+      ],
+      "sha256": "ffccb113845109e558257228c2c15ceaed51cd09afb0f19f9f626312376ac00d"
+    },
+    {
+      "file": "注册移除与WindowsACL复验-go.jsonl",
+      "topPassed": 3,
+      "topFailed": 1,
+      "topSkipped": 0,
+      "subPassed": 15,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:55:42.6928209+08:00",
+          "Action": "fail",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 2.816
+        }
+      ],
+      "sha256": "57493e1bf8d6e28eed8bffbe8817fb5be30b02a8af37889da59c192e36f6fa29"
+    },
+    {
+      "file": "WindowsACL夹具诊断-go.jsonl",
+      "topPassed": 0,
+      "topFailed": 1,
+      "topSkipped": 0,
+      "subPassed": 0,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:55:58.4585655+08:00",
+          "Action": "fail",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 1.032
+        }
+      ],
+      "sha256": "590a794693235543540a45b5b918ad903d69b99551f2d482d5b1d350d302b73d"
+    },
+    {
+      "file": "注册移除与WindowsACL最终复验-go.jsonl",
+      "topPassed": 4,
+      "topFailed": 0,
+      "topSkipped": 0,
+      "subPassed": 15,
+      "subFailed": 0,
+      "subSkipped": 0,
+      "package": [
+        {
+          "Time": "2026-10-15T16:56:18.1838705+08:00",
+          "Action": "pass",
+          "Package": "returnsrecon/internal/auth",
+          "Elapsed": 2.98
+        }
+      ],
+      "sha256": "3ccd6a8e18c7e06c44efa9914eba783cb4d967877708b2e0bbfe7dcba15d7629"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "name": "auth.go",
+      "sha256": "c3a5aa0297fdbb0cc1ff62ac13e0342091cf5ccb652e2046e6b2ab825832f3bb"
+    },
+    {
+      "name": "factors.go",
+      "sha256": "0e65b47472deafea52cb2d0f936625089d1135e8efed94e06997ab7dc2e271c5"
+    },
+    {
+      "name": "passkey.go",
+      "sha256": "4f402ce93b4d90241380c3e0bed6809d9f64b5265e85438b63387d0b0ce33369"
+    },
+    {
+      "name": "private_other.go",
+      "sha256": "ab9c28cc9362ee2cca4eb574fd9d3ec43d07ba4d6d42cdb37be2d136896833a0"
+    },
+    {
+      "name": "private_windows.go",
+      "sha256": "aaa7e5923dc934e50bc4486a6ab25f1e11f36e5699137534c1fd159d143a337f"
+    },
+    {
+      "name": "schema.sql",
+      "sha256": "05783a949d8fbf3670c5d4e3b283c8c6a28d6a40f534db5743633d6b2dfc8216"
+    },
+    {
+      "name": "security_test.go",
+      "sha256": "6709813272bb911d3df06f896fdb3c37492cd1698c73ee45bbb998d6e4bc02f4"
+    },
+    {
+      "name": "security_windows_test.go",
+      "sha256": "7287d5b2ca84c7b63bb016411a6d2bf51634a27b6d485971aa3ed5144abb41c2"
+    }
+  ],
+  "physicalDeviceAcceptance": "pending user; automated credentials are isolated synthetic test credentials",
+  "fullPackageSourceSnapshot": [
+    {
+      "name": "auth.go",
+      "sha256": "262d666645ff36d1590600ee2b30b29753b243f97426c84c28e305ff51132978"
+    },
+    {
+      "name": "factors.go",
+      "sha256": "753806836f7b30b3d67b388f8b52cd8536c646ca0692d11dae470017e48023d5"
+    },
+    {
+      "name": "passkey.go",
+      "sha256": "4f402ce93b4d90241380c3e0bed6809d9f64b5265e85438b63387d0b0ce33369"
+    },
+    {
+      "name": "schema.sql",
+      "sha256": "05783a949d8fbf3670c5d4e3b283c8c6a28d6a40f534db5743633d6b2dfc8216"
+    },
+    {
+      "name": "security_test.go",
+      "sha256": "920bcc086d82030351c0edfa7e3cc955b7bde3b63ae97203c9684410144ca358"
+    }
+  ],
+  "finalTargetedCommand": "& \"$env:LOCALAPPDATA/dutucijp-vibecoding-final/tools/go/bin/go.exe\" test -json -count=1 -run \"TestTC(38|44|48)\" ./internal/auth"
+}

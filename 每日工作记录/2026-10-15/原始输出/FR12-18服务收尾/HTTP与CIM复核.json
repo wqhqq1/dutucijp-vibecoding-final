@@ -1,0 +1,31 @@
+{
+  "actual_time": "2026-10-15T21:40:44.2205430+08:00",
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "content_type": [
+        "text/html; charset=utf-8"
+      ],
+      "app_title": true
+    },
+    {
+      "route": "/api/runs",
+      "status": 401,
+      "content_type": [
+        "application/json; charset=utf-8"
+      ],
+      "app_title": false
+    }
+  ],
+  "listener_inventory": [],
+  "listener_inventory_error": "No matching MSFT_NetTCPConnection objects found by CIM query for instances of the ROOT/StandardCimv2/MSFT_NetTCPConnection class on the  CIM server: SELECT * FROM MSFT_NetTCPConnection  WHERE ((LocalPort = 8080)) AND ((State = 2)). Verify query parameters and retry.",
+  "cim_processes": [
+    {
+      "ProcessId": 25644,
+      "Name": "recon-fixed.exe",
+      "ExecutablePath": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\20261015-170017-4cd5daea\\recon-fixed.exe"
+    }
+  ],
+  "conclusion": "HTTP is available and CIM still reports recon-fixed.exe PID25644. Empty port inventory is not evidence of service exit. Latest binary was not substituted."
+}

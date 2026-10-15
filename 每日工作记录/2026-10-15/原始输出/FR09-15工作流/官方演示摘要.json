@@ -1,0 +1,20 @@
+{
+  "actual_time": "2026-10-15T16:03:11.4821875+08:00",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite",
+  "verification_dir": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\workflow-20261015-160302-c28f4c66",
+  "source_db_sha256": "750e576a93882c4dc7fbf0fb29c7c88fcfe77424542151265c426ae29af2cb88",
+  "source_database_unchanged": true,
+  "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+  "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+  "cleaning_version": "cr-1.0.1",
+  "rule_version": "conservative-1.0.0",
+  "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "steps": 8,
+  "steps_passed": 8,
+  "concurrent_successes": 1,
+  "concurrent_rejections": 1,
+  "no_new_allocations": true,
+  "idempotent_history_preserved": true,
+  "passed": true,
+  "notice": "Official transactions copied read-only; subsequent actors/actions/conclusions are isolated course simulations, not human business operations or FR-14 authentication."
+}

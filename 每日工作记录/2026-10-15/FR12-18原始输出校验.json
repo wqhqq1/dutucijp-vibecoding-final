@@ -1,0 +1,662 @@
+{
+  "actual_time": "2026-10-15T21:36:25.091862+08:00",
+  "scope": "Five new output folders only; excludes this manifest, handover and bundles to prevent circular hashes.",
+  "files": {
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/sha256.json": {
+      "bytes": 5152,
+      "sha256": "5b3c400ad2381790a774a55d74e530987a69829b59ffa4b0876f0ddd828d68d8"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final-command.txt": {
+      "bytes": 56,
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final-summary.json": {
+      "bytes": 181,
+      "sha256": "d33681b5b4b40d1c5dbf62e3ea07585a30f26f90b46f032821b6b6dfe5e3364e"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-final.jsonl": {
+      "bytes": 62183,
+      "sha256": "44f8f04a612c50217cd3e65ae3d350af939ad030dd30be9791cc02bfb63f79d1"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-command.txt": {
+      "bytes": 56,
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-summary.json": {
+      "bytes": 181,
+      "sha256": "daa7de5baf2d31b0d28c0c9dea726164b80beee6c02811d7961d736eaad783b5"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-vet-command.txt": {
+      "bytes": 40,
+      "sha256": "8791b983c6c476210af9fbbdf38ed2d63997eea68ed8b09a5df65a090194ed69"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release-vet.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-index-release.jsonl": {
+      "bytes": 62190,
+      "sha256": "d659b77a03978b2672307ac4c10bb4141d1e0871f6ddd99568cbbde3b803afdf"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-command.txt": {
+      "bytes": 56,
+      "sha256": "84c6cf443399b22a8255e79814c025637d893a50d5854075ed60d3d390fd06ec"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-summary.json": {
+      "bytes": 181,
+      "sha256": "06ae48e29d485fa5f34b750c1eb07a19bc81660df13923551c1c15cec60a4050"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-vet-command.txt": {
+      "bytes": 40,
+      "sha256": "8791b983c6c476210af9fbbdf38ed2d63997eea68ed8b09a5df65a090194ed69"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release-vet.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/store-release.jsonl": {
+      "bytes": 62165,
+      "sha256": "ff2fccb7391df77316c4e89c7bb2b7e8332fe67d1ef83fd94fa3a4108d5abf11"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/warehouse-before-fix-command.txt": {
+      "bytes": 73,
+      "sha256": "0552c5bff0a2940717e18571dfadb83cd77eb8b42afce8d57565c11a40e6dfc6"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-16数量独立审查/warehouse-before-fix.jsonl": {
+      "bytes": 2990,
+      "sha256": "4c2de2195d8d91bf71f89106f617926f33ec9b19d3c18ee789e77b3e67f212e5"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/bundle恢复.json": {
+      "bytes": 591,
+      "sha256": "92308e08c6d64067d8226257e3854924852c735ed86f044757125de622856ec0"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/commands.json": {
+      "bytes": 2500,
+      "sha256": "d797be18aee8006ba4ab97256138dd3e130f25d0545eb21f8151ca9d4976c16e"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/Go依赖整理.txt": {
+      "bytes": 159,
+      "sha256": "0d6c2477629ce3b0ce30fc69e21f48c6f811e3cb8ad29cc8c8ed9c877806934c"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/Hook只读策略检查.json": {
+      "bytes": 654,
+      "sha256": "f347063e659fff1baf3230be1276331f00a10f5a7feb578b3d21722b97a550a0"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/PowerShell语法检查.json": {
+      "bytes": 121,
+      "sha256": "76bdc51fcfb0613b513922c5b7cf4c8601711c8881ad2ed984a025b94c5efc48"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/修复服务HTTP探针.json": {
+      "bytes": 246,
+      "sha256": "8c99df21b6123d129411b572157c39f2ad9ab540ce51c8b5322832e7f1343a4b"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/修复服务启动.json": {
+      "bytes": 161,
+      "sha256": "70a3b67b38f2b1001fd094e0d2bb0271e59bc3343d1878213c18e827ac8f6135"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/全包集成回归.jsonl": {
+      "bytes": 157288,
+      "sha256": "f6a1d7f3576a622fc84a5bf014b9b9eb5948683d4fbddd94ce341f3198f2d19a"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/全包首次编译.txt": {
+      "bytes": 382,
+      "sha256": "5d868ddf0cf154a3989dfd476a06656245588560f45ba496535df8a71c0cd0cc"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/制作工具前置.json": {
+      "bytes": 664,
+      "sha256": "47de640892629843e69b536f7593ae6f2e7577e6694f21e0cef80fbe465ffa03"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端构建依赖安装.txt": {
+      "bytes": 188,
+      "sha256": "dd4664453574796202dc8bc60805c02d925b0e619bc8e119b94e5d8dc6f4bdc1"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端构建修复复验.txt": {
+      "bytes": 433,
+      "sha256": "e7c707db792fbcfb1bab220cb7a9200f4163d2c4625af647eed5e2596ca9e8e8"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/前端运行依赖安装.txt": {
+      "bytes": 456,
+      "sha256": "91957ff73bd9c1ec74b1f0a69f8cd5e40671c721e1b86f97dd56bbe1c43b9ebc"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/完整构建.txt": {
+      "bytes": 843,
+      "sha256": "93b632215a5de52a2c2ac614f1ce09d6f87459dc6b3c29756ca2a54db37d1167"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/应用启动.json": {
+      "bytes": 401,
+      "sha256": "e8ac14ff4ba5feea670ee0b5c62abe67b77e515e95060d045557bbbf0ade6b07"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/恢复副本复现命令.txt": {
+      "bytes": 998,
+      "sha256": "7e6accecfc8f8965d51f3312bc70a4cf6b031195b1e5adc1a73f453039faeeeb"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/恢复副本真实中断与重算.json": {
+      "bytes": 1469,
+      "sha256": "4c56740788efa8db46264bd755450f8d1662402cb23472177ffdd63da9b03458"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/构建留证包装问题.txt": {
+      "bytes": 504,
+      "sha256": "b73ce6a7b5266fa49701f925f7bc662c92a7d1d4846e48cc7506bde4b61ac6d6"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/独立演示准备.txt": {
+      "bytes": 1616,
+      "sha256": "497dbae94df512e8489562a81940915ca2e837df25bf107c6457fbaa8f6fd5bd"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/真实分支试验.json": {
+      "bytes": 629,
+      "sha256": "cb98cbb8c452167a5e25a48fe1a3501a2a622ff57e6a3d637a9cee09d5e81062"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/认证协议依赖安装.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/证据秘密边界检查.json": {
+      "bytes": 485,
+      "sha256": "de8d7a81038f37ffcf8af8a23e9833c94802e85d880aecb14bf888546cf8b07a"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/go.jsonl": {
+      "bytes": 157625,
+      "sha256": "301463a931bed5596c143c48d2b2bf6888358b8ebe010c66eb51067b45789a6d"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/python.txt": {
+      "bytes": 1940,
+      "sha256": "5bd3ff9a4462222310052c63861f6700eb6b2dc9292b62257243589f1f90f202"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收/summary.json": {
+      "bytes": 712,
+      "sha256": "e4d2c3952aafa15e655790adac74d2ed9ceb8cce9223c9e36539f4f0db204ce1"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件统一验收命令.txt": {
+      "bytes": 2652,
+      "sha256": "c28842202e8923c80a58284500d8729161fc2ab0b521b7173fde2f3796d7a9c8"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/软件验收完整构建-复验.txt": {
+      "bytes": 843,
+      "sha256": "e0c35e8d5cf82cba9d4d548fa5ba1c7cbaa6f152a98d236130bbfff495f222cf"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR12-18集成/首次前端构建.txt": {
+      "bytes": 190,
+      "sha256": "51992d43712fabead4dc4bde52e1143b379b311e3bf667ce4f36d98ac5ca487c"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/结果汇总.json": {
+      "bytes": 4006,
+      "sha256": "f4b6918fafeb128eaba2b8ba3c4f1c19d762173f48163f727e877ea5d88d559a"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/范围与结果.md": {
+      "bytes": 2971,
+      "sha256": "c195a176cb216eb26efe765f13c4b2031edb677b2335af8b9f3902d1f526f34d"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/首次-go.jsonl": {
+      "bytes": 11573,
+      "sha256": "7ddd6cf976baac3336b1ad8cb92fab8707dd4779b173c968c1386f1f9896c967"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14HTTP独立审查/首次命令.txt": {
+      "bytes": 102,
+      "sha256": "6d155845aa9097585612b6b45d4541974a8b4fd79e4c0070351f50b78fbaa6c4"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/ACL修复复验-go.jsonl": {
+      "bytes": 37232,
+      "sha256": "610b191172f6aaf980860da01c43c3ca509b2bb32555ea696278f2bf3be8bfd5"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/ACL修复复验命令.txt": {
+      "bytes": 103,
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/WindowsACL夹具诊断-go.jsonl": {
+      "bytes": 1826,
+      "sha256": "590a794693235543540a45b5b918ad903d69b99551f2d482d5b1d350d302b73d"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/WindowsACL夹具诊断命令.txt": {
+      "bytes": 127,
+      "sha256": "543743d96870a0f32137f1e59a08bb7e847d49ca7d76bb984fb65c40206c31a9"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/依赖补齐复验-go.jsonl": {
+      "bytes": 36163,
+      "sha256": "e1dd9cbf4e1ac3336251001845d27b9c2aaa0c2fa550510a076ecb2cb97cb0aa"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/依赖补齐复验命令.txt": {
+      "bytes": 103,
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/恢复补发与跨账户复验-go.jsonl": {
+      "bytes": 37255,
+      "sha256": "ffccb113845109e558257228c2c15ceaed51cd09afb0f19f9f626312376ac00d"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/恢复补发与跨账户复验命令.txt": {
+      "bytes": 103,
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL复验-go.jsonl": {
+      "bytes": 20342,
+      "sha256": "57493e1bf8d6e28eed8bffbe8817fb5be30b02a8af37889da59c192e36f6fa29"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL复验命令.txt": {
+      "bytes": 127,
+      "sha256": "04d51a03fdf49f815222a4b385bc3d2bfeed771fd535ed9f820ab8df8166a1ea"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL最终复验-go.jsonl": {
+      "bytes": 20423,
+      "sha256": "3ccd6a8e18c7e06c44efa9914eba783cb4d967877708b2e0bbfe7dcba15d7629"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/注册移除与WindowsACL最终复验命令.txt": {
+      "bytes": 127,
+      "sha256": "04d51a03fdf49f815222a4b385bc3d2bfeed771fd535ed9f820ab8df8166a1ea"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/结果汇总.json": {
+      "bytes": 6017,
+      "sha256": "a75f2467e597af9e3146f375db6a27028896ab7afbc2e5e3377b8f36c74591a3"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/首次-go.jsonl": {
+      "bytes": 6774,
+      "sha256": "47bbff5ce2433d499181a5bc6943046124bb0bc002d36856b1447caeb1a9c299"
+    },
+    "每日工作记录/2026-10-15/原始输出/FR14认证独立审查/首次命令.txt": {
+      "bytes": 103,
+      "sha256": "4c3afd281442964888d794cd554c08925b76a202bd66a3313757eea7318d1985"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/commands.json": {
+      "bytes": 5002,
+      "sha256": "a41fdf07885b79a66489e1f945ec856a7e10132a120c4c3bb3c509ca849f1d2b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/build.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/environment.json": {
+      "bytes": 10500,
+      "sha256": "2fba9cd4e6243e7514a943d317c6f8cc16be6f62bca92ccde3ba320229aaa001"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.process.json": {
+      "bytes": 1902,
+      "sha256": "4531b34166f83583f86be142f3dc803f2cbecdfe2c553a70589faab26611a27b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/go.stdout.txt": {
+      "bytes": 2546,
+      "sha256": "1d6bb01cc3db6c37444f995ad17841527ffd9d8e75ff8c1afa586df3b76fd2de"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-1/trial.json": {
+      "bytes": 5278,
+      "sha256": "f2c0da3c7574557a0201ce02d48a1bf7387376fbee0ad4eca81a959faaac5a4e"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.process.json": {
+      "bytes": 1904,
+      "sha256": "027d6784f9284f0633bb6b6d3db1f1fdaa2cb25f37e6eee298a9c1fc3de626c2"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/go.stdout.txt": {
+      "bytes": 2545,
+      "sha256": "813259dbc20116d5066b8696af04befb0a2423b4cde091d8bee55f8fe0f9150e"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-2/trial.json": {
+      "bytes": 5279,
+      "sha256": "05aa370dad0204a61194d2f10abd4c234e4f107ca197f51d3339eb20176c6915"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.process.json": {
+      "bytes": 1904,
+      "sha256": "0ff2337941b3a44dfcc7c0b5f0b93dfe7a4dfb4a341b0c276afff6f5041f0eee"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/go.stdout.txt": {
+      "bytes": 2546,
+      "sha256": "4f5e5330f3e3494ea9e93b6351df5ecd87a7800e579b3db472c15e480b48109b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/NFR03-3/trial.json": {
+      "bytes": 5280,
+      "sha256": "a16c90f5fb689b125f1a549521a0d136616d4129cfe78c58c291e29ee28e1db2"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/summary.json": {
+      "bytes": 1617,
+      "sha256": "37db04e68612b73363856b38c713298c10af1d7a562bd1dc6b431842ff2bb382"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR03三次正式重算/trials.json": {
+      "bytes": 16499,
+      "sha256": "4da78b1c09cc55c1fe0cf21dfc3021bf432ba90ddf44d5a54d4ed36ff28d7233"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-command.txt": {
+      "bytes": 177,
+      "sha256": "8680cf98a955bcaceff9ae30e30944cf39c7e450edd393df70170ec8ebb3c47b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-失败分析.json": {
+      "bytes": 1133,
+      "sha256": "7c15c85177304cf03ad426f445fde8e6b9b22c6e1478951ba46f75f74cfecbd9"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/NFR04-逐请求.jsonl": {
+      "bytes": 101891,
+      "sha256": "d035e811a0690c762d39501dede64fadc1785ec2b896f367b3c99f9815797462"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/官方all准备清单.json": {
+      "bytes": 1562,
+      "sha256": "2d9f533c76f83476416e73e84be743e8ae0b062b74d0e54600aa6a253b1ef3a9"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/官方benchmark-cProfile.txt": {
+      "bytes": 149571,
+      "sha256": "28f055031e08128d654bb1cc78ba4090588b5c8d17e29536b04b1cda49453324"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/性能核查说明.md": {
+      "bytes": 7300,
+      "sha256": "d5b1a9fb10d1438e12f5780d19b09284c5ae9f6cfe8d66ac046031b8a03f518c"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/environment.json": {
+      "bytes": 6038,
+      "sha256": "82fa771132ccba660aab4dc413d00dca97b70f3a770c4cc2c22604d5eafab3b1"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.process.json": {
+      "bytes": 1413,
+      "sha256": "bf83cbc655df531434c0f1270cd431888917e3e58948c38fbdba48b5dc5b914b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/go.stdout.txt": {
+      "bytes": 2093,
+      "sha256": "f75a8e8e2eb16f181b0db83d8c9cc5b209dfc8ba92b8b77554c619be6a752fdc"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.process.json": {
+      "bytes": 1427,
+      "sha256": "c1241fb503d9557bc10e69bdd483fe1c11d8ab4fd8d17aa97c403352f075995a"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/prepare.stdout.txt": {
+      "bytes": 1493,
+      "sha256": "2cc29221ce1836ad1eaf59bb7428ce6bb840cbeb83fa76ebb588a49e4c50a16b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-1/trial.json": {
+      "bytes": 5736,
+      "sha256": "de5e05c892d15cab552936ffc6afef10cb088a29daf8ad1f6f980522ffaa98b3"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.process.json": {
+      "bytes": 1413,
+      "sha256": "fd6b80a1fda03c75416cfc1688d97a5437c061f49b2659f08d0b6618726ab9e2"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/go.stdout.txt": {
+      "bytes": 2093,
+      "sha256": "8f04df9d74901acd52b0e64a0abd39ecb0f801fbd1949e2b83be9ba08bbd82de"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.process.json": {
+      "bytes": 1427,
+      "sha256": "48eea52a3dfe2b65014759e24dc9db87c05996ec7a2ea8f61a3d89acaec31544"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/prepare.stdout.txt": {
+      "bytes": 1492,
+      "sha256": "5f0e95d77a304e1246460ea5e152dc3a4a5886354bdff12955270ce34c7bfeb7"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-2/trial.json": {
+      "bytes": 5736,
+      "sha256": "6f4ed90fa0d63fbcbb8d4a112968d48fb554d4deb2c544921539d805e0f55d76"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.process.json": {
+      "bytes": 1413,
+      "sha256": "e38da676c510434f10c42d61754379613b5768a389faca61645a3711654dd66a"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/go.stdout.txt": {
+      "bytes": 2093,
+      "sha256": "ad971fe6ed45c453fc3035a578b20a4a4006050e736995d1d2b57dcf5dee30c6"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.process.json": {
+      "bytes": 1427,
+      "sha256": "a12ff36c4bea20287fa9acee09c8ff832c40dff95fd865951362397db5071bf2"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/prepare.stdout.txt": {
+      "bytes": 1492,
+      "sha256": "dcd8dcd78fc791405ce59616531b312b525c4922436371fb10b45adde3d02d31"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR01-3/trial.json": {
+      "bytes": 5736,
+      "sha256": "20c1a1c88dc9a16e552c83cde06428c20e5042a7cd8c7c15077642fff2ebf1e0"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.process.json": {
+      "bytes": 1416,
+      "sha256": "ae7ea7e1a42acd17bab37997b0c6c4ddab4a754e71f08637ec77de028dac7815"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/go.stdout.txt": {
+      "bytes": 2139,
+      "sha256": "cb0a3331a4fa8f9f63fbd9dc1e3ef5ea0312a5308bcef62f6b5becbc147ee264"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.process.json": {
+      "bytes": 1422,
+      "sha256": "4500b894d6e71d365dc581154b2500e35f8f9f4802fbccd00d483239831dd2ae"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/prepare.stdout.txt": {
+      "bytes": 2467,
+      "sha256": "5fe24957ed166e28933400e723404fe90282a4d63536763c0fd464e1deb4025c"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-1/trial.json": {
+      "bytes": 5782,
+      "sha256": "e5d9b9fa5e93aed380221d8ed5df4ad6b6d1c86963e4c411e79573600b048b87"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.process.json": {
+      "bytes": 1416,
+      "sha256": "efb3507dfa5da87fecfd99e6217aba2a189c459d80307af9b327694b93560533"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/go.stdout.txt": {
+      "bytes": 2140,
+      "sha256": "26f390a2125740e2e7fee4840dfd45146ca062986c63f7498579eafb8f5335ed"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.process.json": {
+      "bytes": 1422,
+      "sha256": "dcda8d051d1def8a622f67a78143457f9a344dff05393dcb9f91fcf79b2f9f0d"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/prepare.stdout.txt": {
+      "bytes": 2467,
+      "sha256": "1da26738456d32bc778250c012f37b9349b568f3f8c1c57e66f993f863d43781"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/NFR02-2/trial.json": {
+      "bytes": 5783,
+      "sha256": "a04c0adfcdcdfa2d8156cb25343520c5cf2d40d198ad840d18a1bd914eb3a25e"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/旧核心基线/trials.json": {
+      "bytes": 29913,
+      "sha256": "2ed4c34ba6ecceaba2cea2fc5ef579f50e45c2b16ada6236bd351ac45da8a6af"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/查询计划只读诊断.json": {
+      "bytes": 2556,
+      "sha256": "390b9f669c92698de7437f28f4254935f61d057c400dea8bd08b8b255b7955fc"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第一轮缓存AB/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第一轮缓存AB/go.stdout.json": {
+      "bytes": 2134,
+      "sha256": "3439d8cf1341fb08fb94105ef634cb50fa81c4f0dfd6f9120c9c39cf56d02528"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/environment.json": {
+      "bytes": 9285,
+      "sha256": "a09f0b0a09f46ef0e1044e6f775d66cf18f56e73f62aa2ac346d174228b71aae"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/interruption-and-first-result.json": {
+      "bytes": 498,
+      "sha256": "e397d4876960e4944debd432526175562160ab86ad40a41894fd06c12711313d"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.process.json": {
+      "bytes": 1726,
+      "sha256": "cef2e1af71808d4a955df3512afd00002c964287ee2fe19936a7c3227183d390"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/go.stdout.txt": {
+      "bytes": 2209,
+      "sha256": "39a8325ab6f07ae3df44884b51bed7a9993e72a35989222f7781cb48a968a370"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.process.json": {
+      "bytes": 1915,
+      "sha256": "7608caf14d883d22c043e75a0ed443957d68c5d61706219031d216fa3bd07ff2"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/prepare.stdout.txt": {
+      "bytes": 1490,
+      "sha256": "daffa81512dcda320b0cee3598621509a35b2f8a34706f46fe56cb56286e2e35"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-1/trial.json": {
+      "bytes": 6713,
+      "sha256": "0c5c8d0a8bcabe61027fcc70c1d48d43fc8990f7e6fcd48c5ec2859507bc0442"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.process.json": {
+      "bytes": 1725,
+      "sha256": "f7546e6736a90b6b70dea5dcd268a0a4b887ee7c0957850f89fa17982e1a9697"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/go.stdout.txt": {
+      "bytes": 2208,
+      "sha256": "027a6d879d315352976fb2b4275cefdf631964c6241dde512d0dc64d33f0e9c4"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.process.json": {
+      "bytes": 1914,
+      "sha256": "cf00330cefc77914f998699387310db449c4da43cbf4e2345b564c9c8f465c46"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/prepare.stdout.txt": {
+      "bytes": 1489,
+      "sha256": "71d232f28f658e9f798b91dcee13e29cc3fad0be08e611ffc64a72bc1cba8c35"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-2/trial.json": {
+      "bytes": 6710,
+      "sha256": "462002ab25dc98954d5178e91cc6007ca4e46480e3f6a40f1975736ab4d2eb4b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.process.json": {
+      "bytes": 1726,
+      "sha256": "06716037c5f073a1a2199f6eb67b0858dd370cb09ce9132b5c75e98173841d43"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/go.stdout.txt": {
+      "bytes": 2207,
+      "sha256": "5040250b1e352f8b0160dc226f3481ef5d68107266a8f03b960371ef3a30932b"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.process.json": {
+      "bytes": 1914,
+      "sha256": "e8c0d6c19052c78afe3d5b14c042f4819bc3d9f9b6330713d5c6296779bbb7d1"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/prepare.stdout.txt": {
+      "bytes": 1491,
+      "sha256": "f47c2ff7afdf245feedd531f61fb26d0ecb37029c2450be7267b2f7374067c86"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR01-3/trial.json": {
+      "bytes": 6710,
+      "sha256": "917d2780f53bfdba04125af0c83cbc348bed479eef732377afa92c6d8e381d9d"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.process.json": {
+      "bytes": 1734,
+      "sha256": "3ce9619c9a1f4f55d6b578ca773ae434788e0a1a4792e8094c0cad5ea9cdc989"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/go.stdout.txt": {
+      "bytes": 2257,
+      "sha256": "d4800ce720e0d3158ae85eac60de17ee9445670ddadf8177353857bbf1ae0341"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.process.json": {
+      "bytes": 1914,
+      "sha256": "2a5132df7ae11761410b9b9d42572faa7bff7e2ba537e39f0d124283bbc3f975"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/prepare.stdout.txt": {
+      "bytes": 2465,
+      "sha256": "37a509990bd981e806802504613202073655c435a106b304dbda385740f98690"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-1/trial.json": {
+      "bytes": 6770,
+      "sha256": "0dd11ecdbb561b02b6a686bfb4aa4f0413ccd84f144f8414e38bb088a376296d"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.process.json": {
+      "bytes": 1915,
+      "sha256": "4d87199be1518c57aaa9003ca818efca520650383be419cdd139c5b9580c9cb6"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/NFR02-2/prepare.stdout.txt": {
+      "bytes": 2465,
+      "sha256": "ddca3c7b5563c1480fede357deebd197c54ef8ae6411469fc4219ce511b43a33"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮当前实现/trials.json": {
+      "bytes": 28040,
+      "sha256": "5d8a9bc84ad42954a73c72aa406bb81c1a5777ed47c5c669a98b94bd300bb5d8"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮必要回归/python.txt": {
+      "bytes": 1940,
+      "sha256": "3119dd268b58c4377052734b09913a9bc8202287c22fb310d2a4b90b6ec3e7c6"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/第二轮必要回归/store.jsonl": {
+      "bytes": 62980,
+      "sha256": "3dac7e7b2ca4e011dc06e0eee1775b2fad5a66a6f9bff7a226e4b0b34b113e1e"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/纯输入模板stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "每日工作记录/2026-10-15/原始输出/性能子代理/纯输入模板回执.json": {
+      "bytes": 1593,
+      "sha256": "5500665b6de5d31f01d8b85b281116d40a711fe94f43015919c165b075c3fcdf"
+    }
+  }
+}

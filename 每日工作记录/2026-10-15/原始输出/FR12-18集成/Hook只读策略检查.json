@@ -1,0 +1,23 @@
+{
+  "actual_time": "2026-10-15T21:32:46.157771+08:00",
+  "kind": "read-only policy unit check, NOT trusted Codex Hook execution",
+  "commands_executed": false,
+  "checks": [
+    {
+      "proposed_text_only": "git status --short",
+      "policy_says_deny": false,
+      "matches_expected": true
+    },
+    {
+      "proposed_text_only": "Remove-Item -LiteralPath DISPOSABLE_CANARY_ONLY",
+      "policy_says_deny": true,
+      "matches_expected": true
+    },
+    {
+      "proposed_text_only": "git reset --hard",
+      "policy_says_deny": true,
+      "matches_expected": true
+    }
+  ],
+  "real_trust_and_canary_deny": "pending user"
+}

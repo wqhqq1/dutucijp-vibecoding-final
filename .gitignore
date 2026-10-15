@@ -7,7 +7,8 @@
 /node_modules/
 /frontend/node_modules/
 /frontend/dist/
-/backend/internal/web/assets/
+/backend/internal/web/assets/*
+!/backend/internal/web/assets/placeholder.txt
 /dist/
 /build/
 /coverage/

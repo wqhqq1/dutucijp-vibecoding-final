@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS cases (
  id TEXT PRIMARY KEY, run_id TEXT NOT NULL, cancel_id TEXT NOT NULL, reason TEXT NOT NULL,
  status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','in_progress','closed')),
  assignee TEXT, version INTEGER NOT NULL DEFAULT 1, conclusion TEXT NOT NULL DEFAULT '',
+ assigned_at TEXT NOT NULL DEFAULT '', assigned_by TEXT NOT NULL DEFAULT '',
  UNIQUE(run_id,cancel_id), FOREIGN KEY(run_id,cancel_id) REFERENCES decisions(run_id,cancel_id) ON DELETE CASCADE
 );
 CREATE INDEX IF NOT EXISTS allocations_sale ON allocations(run_id,sale_id);
@@ -59,3 +60,9 @@ CREATE TABLE IF NOT EXISTS audit_events (
  id INTEGER PRIMARY KEY, case_id TEXT NOT NULL REFERENCES cases(id), actor TEXT NOT NULL,
  action TEXT NOT NULL, occurred_at TEXT NOT NULL, before_json TEXT NOT NULL, after_json TEXT NOT NULL
 );
+CREATE INDEX IF NOT EXISTS cases_workflow ON cases(run_id,status,assignee);
+CREATE INDEX IF NOT EXISTS audit_case ON audit_events(case_id,id);
+CREATE TRIGGER IF NOT EXISTS audit_no_update BEFORE UPDATE ON audit_events
+BEGIN SELECT RAISE(ABORT,'audit events are append-only'); END;
+CREATE TRIGGER IF NOT EXISTS audit_no_delete BEFORE DELETE ON audit_events
+BEGIN SELECT RAISE(ABORT,'audit events are append-only'); END;

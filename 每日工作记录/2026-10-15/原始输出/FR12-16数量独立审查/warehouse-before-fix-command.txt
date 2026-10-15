@@ -1,0 +1,2 @@
+command=go test -count=1 -json ./internal/store -run 'TestTC26_'
+exit=1

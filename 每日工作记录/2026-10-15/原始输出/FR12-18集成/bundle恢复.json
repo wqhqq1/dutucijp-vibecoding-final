@@ -1,0 +1,10 @@
+{
+  "actual_time": "2026-10-15T21:24:22.7891478+08:00",
+  "source_head": "746a7e1df831bfd0f3da118b59527969da24a8e3",
+  "restored_head": "746a7e1df831bfd0f3da118b59527969da24a8e3",
+  "bundle": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\software-history-20261015-212421\\software.bundle",
+  "bundle_sha256": "0702F6E880515385A2AB53A48951D10ECD5A45378FE83552B8CFF2393BD2D71D",
+  "restored": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\software-history-20261015-212421\\restored",
+  "verify_exit": 0,
+  "fsck_exit": 0
+}

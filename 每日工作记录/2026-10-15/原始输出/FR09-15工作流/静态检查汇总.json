@@ -1,0 +1,41 @@
+{
+  "actual_time": "2026-10-15T16:04:27.5288618+08:00",
+  "go_vet_exit": 0,
+  "powershell_scripts": [
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\reproduce.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\test.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\verify-data.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\verify-workflow.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\tools\\bootstrap.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\tools\\execution-day.ps1",
+      "errors": 0,
+      "messages": []
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\tools\\verify-environment.ps1",
+      "errors": 0,
+      "messages": []
+    }
+  ]
+}

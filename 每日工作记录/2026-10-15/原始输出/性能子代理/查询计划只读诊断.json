@@ -1,0 +1,117 @@
+{
+  "actual_time": "2026-10-15T21:13:16.898950+08:00",
+  "diagnostic_only": true,
+  "reader_sqlite_version": "3.53.1",
+  "production_go_sqlite_version": "3.53.4",
+  "notice": "Read-only EXPLAIN only. Different reader planner; not a formal timing or production-driver plan. No source transaction fields exported.",
+  "plans": {
+    "case_count": [
+      [
+        13,
+        0,
+        46,
+        "SEARCH r USING INDEX sqlite_autoindex_runs_1 (id=?)"
+      ],
+      [
+        22,
+        0,
+        46,
+        "SEARCH d USING INDEX sqlite_autoindex_datasets_1 (id=?)"
+      ],
+      [
+        29,
+        0,
+        62,
+        "SEARCH n USING INDEX row_stock (dataset_id=?)"
+      ],
+      [
+        38,
+        0,
+        44,
+        "SEARCH sr USING COVERING INDEX sqlite_autoindex_source_rows_1 (id=?)"
+      ],
+      [
+        42,
+        0,
+        45,
+        "SEARCH dc USING COVERING INDEX sqlite_autoindex_decisions_1 (run_id=? AND cancel_id=?) LEFT-JOIN"
+      ],
+      [
+        50,
+        0,
+        47,
+        "SEARCH c USING INDEX sqlite_autoindex_cases_2 (run_id=? AND cancel_id=?) LEFT-JOIN"
+      ]
+    ],
+    "case_page": [
+      [
+        15,
+        0,
+        46,
+        "SEARCH r USING INDEX sqlite_autoindex_runs_1 (id=?)"
+      ],
+      [
+        24,
+        0,
+        46,
+        "SEARCH d USING INDEX sqlite_autoindex_datasets_1 (id=?)"
+      ],
+      [
+        31,
+        0,
+        62,
+        "SEARCH n USING INDEX row_stock (dataset_id=?)"
+      ],
+      [
+        40,
+        0,
+        46,
+        "SEARCH sr USING INDEX sqlite_autoindex_source_rows_1 (id=?)"
+      ],
+      [
+        45,
+        0,
+        47,
+        "SEARCH c USING INDEX sqlite_autoindex_cases_2 (run_id=? AND cancel_id=?) LEFT-JOIN"
+      ],
+      [
+        71,
+        0,
+        0,
+        "USE TEMP B-TREE FOR ORDER BY"
+      ]
+    ],
+    "transaction_page": [
+      [
+        13,
+        0,
+        46,
+        "SEARCH r USING INDEX sqlite_autoindex_runs_1 (id=?)"
+      ],
+      [
+        22,
+        0,
+        46,
+        "SEARCH d USING INDEX sqlite_autoindex_datasets_1 (id=?)"
+      ],
+      [
+        29,
+        0,
+        62,
+        "SEARCH n USING INDEX row_invoice (dataset_id=?)"
+      ],
+      [
+        38,
+        0,
+        46,
+        "SEARCH sr USING INDEX sqlite_autoindex_source_rows_1 (id=?)"
+      ],
+      [
+        54,
+        0,
+        0,
+        "USE TEMP B-TREE FOR ORDER BY"
+      ]
+    ]
+  }
+}

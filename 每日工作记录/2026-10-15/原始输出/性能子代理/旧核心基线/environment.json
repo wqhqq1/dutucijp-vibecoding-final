@@ -1,0 +1,124 @@
+{
+  "recorded_at": "2026-10-15T16:37:05.4892090+08:00",
+  "actual_timezone": "Asia/Shanghai",
+  "measure": "All",
+  "git_head": "5df378c7897114c2fa91df4e08974b3eaebba232",
+  "git_status": [],
+  "source_snapshot_root": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-source-20261015-163656\\source",
+  "operating_system": "Microsoft Windows NT 10.0.26340.0",
+  "architecture": "X64",
+  "powershell": "7.6.5",
+  "logical_processors": 16,
+  "processors": [
+    {
+      "Name": "Intel(R) Core(TM) Ultra 9 285H",
+      "NumberOfCores": 16,
+      "NumberOfLogicalProcessors": 16,
+      "MaxClockSpeed": 2900
+    }
+  ],
+  "physical_memory_bytes": 33752997888,
+  "go_version": "go version go1.27.2 windows/amd64",
+  "python_version": "Python 3.12.10",
+  "python_dependencies": [
+    "et_xmlfile @ https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl#sha256=7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+    "openpyxl @ https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl#sha256=5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+  ],
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_read_only": true,
+  "binary_sha256": "fbb4f9d8623fd5362edf8a98e0191198b7707c0be51600c99bf6c3de634b6f42",
+  "binary_build_info": [
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\perfverify.exe: go1.27.2",
+    "\tpath\treturnsrecon/cmd/perfverify",
+    "\tmod\treturnsrecon\t(devel)\t",
+    "\tdep\tgithub.com/dustin/go-humanize\tv1.0.1\th1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=",
+    "\tdep\tgithub.com/gofrs/flock\tv0.13.1\th1:jjREztyBeSKBZYAC+mgc1laB+xsgy4kYMf3FbKF2UBo=",
+    "\tdep\tgithub.com/mattn/go-isatty\tv0.0.24\th1:tGZZoVgT/KiqK1c8ocVLeDS8BSWMRd47J3Lbz7vsReI=",
+    "\tdep\tgithub.com/ncruces/go-strftime\tv1.0.0\th1:HMFp8mLCTPp341M/ZnA4qaf7ZlsbTc+miZjCLOFAw7w=",
+    "\tdep\tgithub.com/remyoudompheng/bigfft\tv0.0.0-20230129092748-24d4a6f8daec\th1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=",
+    "\tdep\tgithub.com/shopspring/decimal\tv1.5.0\th1:HxSWk31RmJv0EyY4oLiGQB9u7WPludUwPBdvQZnYFPc=",
+    "\tdep\tgolang.org/x/sys\tv0.48.0\th1:bbX/i/6MgT9BVLM9RT1thmxL04yeTAhbEz4SyadbXoo=",
+    "\tdep\tmodernc.org/libc\tv1.77.1\th1:Ct8j47QtiZ1Enj2DtFXQtUqrPCAjdCmPjtCuvrYQ0Hs=",
+    "\tdep\tmodernc.org/mathutil\tv1.7.1\th1:GCZVGXdaN8gTqB1Mf/usp1Y/hSqgI2vAGGP4jZMCxOU=",
+    "\tdep\tmodernc.org/memory\tv1.12.1\th1:nFMiWrpStgZczNl6XI9GnIk/rWhYIyHGUaR04pGbp9g=",
+    "\tdep\tmodernc.org/sqlite\tv1.60.1\th1:/blz53O951KWFOso4QQvEs/Fq6cDBKLtMVrYNSeJVKw=",
+    "\tbuild\t-buildmode=exe",
+    "\tbuild\t-compiler=gc",
+    "\tbuild\tCGO_ENABLED=0",
+    "\tbuild\tGOARCH=amd64",
+    "\tbuild\tGOOS=windows",
+    "\tbuild\tGOAMD64=v1"
+  ],
+  "code_hashes": [
+    {
+      "path": "backend\\cmd\\perfverify\\main.go",
+      "sha256": "7ceecd127cb844f33edb97240adfe6a0a567a60baa0e8689b00f9d00de6b72e4"
+    },
+    {
+      "path": "backend\\cmd\\recon\\main_test.go",
+      "sha256": "2fac2dcd84c33a7733724b1c5724860cc462843978daa929eae346d7695acd1b"
+    },
+    {
+      "path": "backend\\cmd\\recon\\main.go",
+      "sha256": "5c00f130c6719e5181464a7141a0ea83455c810e1d75200cfc8d64af435e8eda"
+    },
+    {
+      "path": "backend\\cmd\\recon\\workflow_verify.go",
+      "sha256": "7a981deeff10733d527cdf3c4c979695dafadd4434b51e84e11b00317b4d41cc"
+    },
+    {
+      "path": "backend\\internal\\model\\model.go",
+      "sha256": "ac931d042c7c49a5388c6f6d10e2ea0083de3221f5d02fb864d7a570311a80f0"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\engine_test.go",
+      "sha256": "0684470ed36ed14e011d6155f3e5b5f97172a889e56c42c30e7d501ef1c4c8f0"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\engine.go",
+      "sha256": "229d0aeb6c61b88f99ce3fa08cdd24a34c710f19da61e9accbcf2abedb05b439"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\index.go",
+      "sha256": "0f1d795a6b049b5cec04e73fc84478b760ce47b9e0e41c9bc2f44517e8924300"
+    },
+    {
+      "path": "backend\\internal\\store\\evidence.go",
+      "sha256": "dc030b73650c686c13d138861a2f4bb34c295eca49cbfbe18764dd17d98e6062"
+    },
+    {
+      "path": "backend\\internal\\store\\schema.sql",
+      "sha256": "0d9289e68e335cc774dffa0159265262fb1fdb966b02621e9d48b8bb57abc9a1"
+    },
+    {
+      "path": "backend\\internal\\store\\store_test.go",
+      "sha256": "bdcdffed4c2530c62f1ed20b32f1d4b07c40f99dda9f4a1208e9d05417f96dfe"
+    },
+    {
+      "path": "backend\\internal\\store\\store.go",
+      "sha256": "b9123663fce3e73dd99354de2e23faf56fd79305436c0ddb90f348979d790bb2"
+    },
+    {
+      "path": "backend\\internal\\store\\verify_test.go",
+      "sha256": "d7f73d6d4d932f2f2d6b1f66bfcbb357cafe211a20dab27ba957326c52560c66"
+    },
+    {
+      "path": "backend\\internal\\store\\verify.go",
+      "sha256": "ec33bd4aea5d7fba0549177c802a9375ff05d2574d76dd2e10a66879c61720da"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow_test.go",
+      "sha256": "72e37f46be8264e3de04ecd4436b1d586401bc2f13cc9aa416bdd88c9f2c1c3d"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow_verify.go",
+      "sha256": "981982970d12e91693520df7407284461d6661e49673c953160c27d2aa4f8aa2"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow.go",
+      "sha256": "d37a7bbf840ca28b45f321e8864cb4d42fd9f90a3ca5969bd7178e9ffa741d9a"
+    }
+  ],
+  "prepare_sha256": "2597ad344860592c584e3a457cf4f9ac4dd89fe39cd00ca88aac24f715a1980c",
+  "boundary": "No downloads, installation or compilation timed. Fresh preparation output for each NFR01/NFR02; new empty SQLite for every trial. OS filesystem cache is not deliberately flushed. Post-timing durable checks are separate."
+}

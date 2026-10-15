@@ -1,0 +1,2 @@
+command=go test -count=1 -json ./internal/store
+exit=0

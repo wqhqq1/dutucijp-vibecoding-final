@@ -1,0 +1,39 @@
+{"ImportPath":"github.com/go-viper/mapstructure/v2","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/go-viper/mapstructure/v2","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\attestation_safetynet.go:13:2: missing go.sum entry for module providing package github.com/go-viper/mapstructure/v2 (imported by github.com/go-webauthn/webauthn/protocol); to add:\n"}
+{"ImportPath":"github.com/go-viper/mapstructure/v2","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol@v0.18.2\n"}
+{"ImportPath":"github.com/go-viper/mapstructure/v2","Action":"build-fail"}
+{"ImportPath":"github.com/fxamacker/cbor/v2","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/fxamacker/cbor/v2","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\webauthncbor\\webauthncbor.go:3:8: missing go.sum entry for module providing package github.com/fxamacker/cbor/v2 (imported by github.com/go-webauthn/webauthn/protocol/webauthncbor); to add:\n"}
+{"ImportPath":"github.com/fxamacker/cbor/v2","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol/webauthncbor@v0.18.2\n"}
+{"ImportPath":"github.com/fxamacker/cbor/v2","Action":"build-fail"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\webauthncose\\secp256k1.go:6:2: missing go.sum entry for module providing package github.com/go-webauthn/x/crypto/secp256k1 (imported by github.com/go-webauthn/webauthn/protocol/webauthncose); to add:\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol/webauthncose@v0.18.2\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1","Action":"build-fail"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1/ecdsa","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1/ecdsa","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\webauthncose\\secp256k1.go:7:2: missing go.sum entry for module providing package github.com/go-webauthn/x/crypto/secp256k1/ecdsa (imported by github.com/go-webauthn/webauthn/protocol/webauthncose); to add:\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1/ecdsa","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol/webauthncose@v0.18.2\n"}
+{"ImportPath":"github.com/go-webauthn/x/crypto/secp256k1/ecdsa","Action":"build-fail"}
+{"ImportPath":"github.com/go-webauthn/x/encoding/asn1","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/go-webauthn/x/encoding/asn1","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\webauthncose\\secp256k1.go:8:2: missing go.sum entry for module providing package github.com/go-webauthn/x/encoding/asn1 (imported by github.com/go-webauthn/webauthn/protocol); to add:\n"}
+{"ImportPath":"github.com/go-webauthn/x/encoding/asn1","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol@v0.18.2\n"}
+{"ImportPath":"github.com/go-webauthn/x/encoding/asn1","Action":"build-fail"}
+{"ImportPath":"github.com/google/go-tpm/tpm2","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/google/go-tpm/tpm2","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\webauthncose\\webauthncose.go:17:2: missing go.sum entry for module providing package github.com/google/go-tpm/tpm2 (imported by github.com/go-webauthn/webauthn/protocol); to add:\n"}
+{"ImportPath":"github.com/google/go-tpm/tpm2","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol@v0.18.2\n"}
+{"ImportPath":"github.com/google/go-tpm/tpm2","Action":"build-fail"}
+{"ImportPath":"github.com/go-webauthn/x/revoke","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/go-webauthn/x/revoke","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\metadata\\decode.go:15:2: missing go.sum entry for module providing package github.com/go-webauthn/x/revoke (imported by github.com/go-webauthn/webauthn/metadata); to add:\n"}
+{"ImportPath":"github.com/go-webauthn/x/revoke","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/metadata@v0.18.2\n"}
+{"ImportPath":"github.com/go-webauthn/x/revoke","Action":"build-fail"}
+{"ImportPath":"github.com/golang-jwt/jwt/v5","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/golang-jwt/jwt/v5","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\metadata\\decode.go:13:2: missing go.sum entry for module providing package github.com/golang-jwt/jwt/v5 (imported by github.com/go-webauthn/webauthn/protocol); to add:\n"}
+{"ImportPath":"github.com/golang-jwt/jwt/v5","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol@v0.18.2\n"}
+{"ImportPath":"github.com/golang-jwt/jwt/v5","Action":"build-fail"}
+{"ImportPath":"github.com/tinylib/msgp/msgp","Action":"build-output","Output":"# returnsrecon/internal/auth\n"}
+{"ImportPath":"github.com/tinylib/msgp/msgp","Action":"build-output","Output":"C:\\Users\\wqhqq\\go\\pkg\\mod\\github.com\\go-webauthn\\webauthn@v0.18.2\\protocol\\options_msgp_gen.go:7:2: missing go.sum entry for module providing package github.com/tinylib/msgp/msgp (imported by github.com/go-webauthn/webauthn/protocol); to add:\n"}
+{"ImportPath":"github.com/tinylib/msgp/msgp","Action":"build-output","Output":"\tgo get github.com/go-webauthn/webauthn/protocol@v0.18.2\n"}
+{"ImportPath":"github.com/tinylib/msgp/msgp","Action":"build-fail"}
+{"Time":"2026-10-15T16:45:30.5788631+08:00","Action":"start","Package":"returnsrecon/internal/auth"}
+{"Time":"2026-10-15T16:45:30.5788631+08:00","Action":"output","Package":"returnsrecon/internal/auth","Output":"FAIL\treturnsrecon/internal/auth [setup failed]\n","OutputType":"frame"}
+{"Time":"2026-10-15T16:45:30.5788631+08:00","Action":"fail","Package":"returnsrecon/internal/auth","Elapsed":0,"FailedBuild":"github.com/go-viper/mapstructure/v2"}

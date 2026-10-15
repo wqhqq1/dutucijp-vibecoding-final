@@ -1,0 +1,28 @@
+test_TC01_existing_source_becomes_read_only_without_rewriting_receipt (test_fetch_data.SourceTests.test_TC01_existing_source_becomes_read_only_without_rewriting_receipt) ... ok
+test_TC01_inconsistent_provenance_rejected (test_fetch_data.SourceTests.test_TC01_inconsistent_provenance_rejected) ... ok
+test_TC01_tampered_original_rejected_without_overwrite (test_fetch_data.SourceTests.test_TC01_tampered_original_rejected_without_overwrite) ... ok
+test_TC02_scope_selected_before_cleaning (test_prepare.CleaningTests.test_TC02_scope_selected_before_cleaning) ... ok
+test_TC03_exact_XML_price_survives_beyond_binary_float_precision (test_prepare.CleaningTests.test_TC03_exact_XML_price_survives_beyond_binary_float_precision) ... ok
+test_TC03_header_and_alphanumeric_stock (test_prepare.CleaningTests.test_TC03_header_and_alphanumeric_stock) ... ok
+test_TC04_invalid_price_quantity_and_case_insensitive_C (test_prepare.CleaningTests.test_TC04_invalid_price_quantity_and_case_insensitive_C) ... ok
+test_TC05_missing_identity_retained_description_uninvented (test_prepare.CleaningTests.test_TC05_missing_identity_retained_description_uninvented) ... ok
+test_TC06_cross_sheet_occurrence_alignment_2_and_3 (test_prepare.CleaningTests.test_TC06_cross_sheet_occurrence_alignment_2_and_3) ... ok
+test_TC07_same_sheet_duplicates_all_marked_not_deleted (test_prepare.CleaningTests.test_TC07_same_sheet_duplicates_all_marked_not_deleted) ... ok
+test_TC08_exclusion_priority_and_single_main_reason (test_prepare.CleaningTests.test_TC08_exclusion_priority_and_single_main_reason) ... ok
+test_prepared_hash_tampering_rejected (test_prepare.CleaningTests.test_prepared_hash_tampering_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.176s
+
+OK
+{
+  "actual_time": "2026-10-15T08:27:32.7599428+08:00",
+  "go_exit": 0,
+  "python_exit": 0,
+  "go_top_level_passed": 24,
+  "go_top_level_failed": 0,
+  "go_top_level_skipped": 0,
+  "python_tests_ran": "12",
+  "go_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\tests\\go.jsonl",
+  "python_output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\tests\\python.txt"
+}

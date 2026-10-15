@@ -1,0 +1,32 @@
+test_TC02_scope_selected_before_cleaning (test_prepare.CleaningTests.test_TC02_scope_selected_before_cleaning) ... ok
+test_TC03_exact_XML_price_survives_beyond_binary_float_precision (test_prepare.CleaningTests.test_TC03_exact_XML_price_survives_beyond_binary_float_precision) ... ok
+test_TC03_header_and_alphanumeric_stock (test_prepare.CleaningTests.test_TC03_header_and_alphanumeric_stock) ... ok
+test_TC03_text_identifiers_preserve_leading_zeroes (test_prepare.CleaningTests.test_TC03_text_identifiers_preserve_leading_zeroes) ... FAIL
+test_TC04_invalid_price_quantity_and_case_insensitive_C (test_prepare.CleaningTests.test_TC04_invalid_price_quantity_and_case_insensitive_C) ... ok
+test_TC05_missing_identity_retained_description_uninvented (test_prepare.CleaningTests.test_TC05_missing_identity_retained_description_uninvented) ... ok
+test_TC06_cross_sheet_occurrence_alignment_2_and_3 (test_prepare.CleaningTests.test_TC06_cross_sheet_occurrence_alignment_2_and_3) ... ok
+test_TC07_same_sheet_duplicates_all_marked_not_deleted (test_prepare.CleaningTests.test_TC07_same_sheet_duplicates_all_marked_not_deleted) ... ok
+test_TC08_exclusion_priority_and_single_main_reason (test_prepare.CleaningTests.test_TC08_exclusion_priority_and_single_main_reason) ... ok
+test_prepared_hash_tampering_rejected (test_prepare.CleaningTests.test_prepared_hash_tampering_rejected) ... ok
+
+======================================================================
+FAIL: test_TC03_text_identifiers_preserve_leading_zeroes (test_prepare.CleaningTests.test_TC03_text_identifiers_preserve_leading_zeroes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\wqhqq\OneDrive\docs\大学\library-based-software-programming\软件编程大作业\退货对账与差异处理系统\tests\test_prepare.py", line 56, in test_TC03_text_identifiers_preserve_leading_zeroes
+    self.assertEqual((rows[0]['invoice'],rows[0]['stock'],rows[0]['customer']),('00123','01A','00042'))
+AssertionError: Tuples differ: ('00123', '01A', '42') != ('00123', '01A', '00042')
+
+First differing element 2:
+'42'
+'00042'
+
+- ('00123', '01A', '42')
++ ('00123', '01A', '00042')
+?                   +++
+
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.376s
+
+FAILED (failures=1)

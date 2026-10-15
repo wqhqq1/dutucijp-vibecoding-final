@@ -1,0 +1,38 @@
+[
+  {
+    "scope": "benchmark",
+    "sqlite_counts": [
+      10000,
+      9972,
+      28
+    ],
+    "source_row": 265,
+    "sheet": "Year 2009-2010",
+    "reason": "nonpositive_price",
+    "original_eight_fields_equal": true,
+    "source_read_only": true,
+    "records_sha256": "fe8b6f1127512ef66cd6bf68c1c6d8658d7e7615a6b872bc28b8d092f6122a42",
+    "same_csv_as_cr100": true,
+    "full_private_detail": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\excluded-detail-independent.json",
+    "sqlite_engine": "3.49.1",
+    "matched_runs_in_verification_db": 0
+  },
+  {
+    "scope": "year1",
+    "sqlite_counts": [
+      525461,
+      521770,
+      3691
+    ],
+    "source_row": 265,
+    "sheet": "Year 2009-2010",
+    "reason": "nonpositive_price",
+    "original_eight_fields_equal": true,
+    "source_read_only": true,
+    "records_sha256": "13c30c289e07663d0e39bc2960fd92c5fccf453f848b591526693740155ed9d9",
+    "same_csv_as_cr100": true,
+    "full_private_detail": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\excluded-detail-independent.json",
+    "sqlite_engine": "3.49.1",
+    "matched_runs_in_verification_db": 0
+  }
+]

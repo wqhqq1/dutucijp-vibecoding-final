@@ -1,0 +1,3 @@
+./tools/bootstrap.ps1
+./tools/verify-environment.ps1
+./test.ps1 -OutputDir <本轮证据目录>/tests; ./tools/verify-environment.ps1 -OutputPath <本轮证据目录>/environment.json; ./verify-data.ps1 -Scope benchmark; ./verify-data.ps1 -Scope year1

@@ -1,0 +1,135 @@
+{
+  "actual_time": "2026-10-15T08:27:33.0818209+08:00",
+  "tools": [
+    {
+      "name": "Go",
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\go\\bin\\go.exe",
+      "expected": "go version go1.27.2 windows/amd64",
+      "actual": "go version go1.27.2 windows/amd64",
+      "exit": 0,
+      "matches": true,
+      "sha256": "b8cd508a0a7aac883cd750e9e75eb306d219e726bdf1cde29009490729437fbf",
+      "signature": "NotSigned",
+      "signer": null
+    },
+    {
+      "name": "Node",
+      "path": "D:\\nodejs\\node.exe",
+      "expected": "v24.18.0",
+      "actual": "v24.18.0",
+      "exit": 0,
+      "matches": true,
+      "sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+      "signature": "Valid",
+      "signer": "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US"
+    },
+    {
+      "name": "npm",
+      "path": "D:\\nodejs\\npm.cmd",
+      "expected": "11.16.0",
+      "actual": "11.16.0",
+      "exit": 0,
+      "matches": true,
+      "sha256": "21b46c69ad6e2f231f02a9e120f4ba6c8e75fef5a45637103002eab99f888ab8",
+      "signature": "UnknownError",
+      "signer": null
+    },
+    {
+      "name": "Python",
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+      "expected": "Python 3.12.10",
+      "actual": "Python 3.12.10",
+      "exit": 0,
+      "matches": true,
+      "sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14",
+      "signature": "Valid",
+      "signer": "CN=Python Software Foundation, O=Python Software Foundation, L=Beaverton, S=Oregon, C=US"
+    },
+    {
+      "name": "Git",
+      "path": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "expected": "git version 2.55.0.windows.3",
+      "actual": "git version 2.55.0.windows.3",
+      "exit": 0,
+      "matches": true,
+      "sha256": "7b7971dd13f0c3a284e538601f2f9770b3a87dfaccb5fb52d68141c67ed22364",
+      "signature": "Valid",
+      "signer": "CN=Johannes Schindelin, O=Johannes Schindelin, L=Bruehl, C=DE"
+    },
+    {
+      "name": "Codex CLI",
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\OpenAI\\Codex\\bin\\9614f1d9b40d9c4f\\codex.exe",
+      "expected": "codex-cli 0.162.0-alpha.17.2",
+      "actual": "codex-cli 0.162.0-alpha.17.2",
+      "exit": 0,
+      "matches": true,
+      "sha256": "e98c516f1c8935789aabe9122ee7e05ec4c3efd1ba6acf179242e031c495b99e",
+      "signature": "Valid",
+      "signer": "CN=\"OpenAI OpCo, LLC\", O=\"OpenAI OpCo, LLC\", L=San Francisco, S=California, C=US"
+    }
+  ],
+  "python": {
+    "packages": {
+      "pip": "25.0.1",
+      "openpyxl": "3.1.5",
+      "et_xmlfile": "2.0.0"
+    },
+    "official_wheel_receipts": {
+      "openpyxl": {
+        "archive_info": {
+          "hash": "sha256=5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+          "hashes": {
+            "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+          }
+        },
+        "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl"
+      },
+      "et_xmlfile": {
+        "archive_info": {
+          "hash": "sha256=7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+          "hashes": {
+            "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa"
+          }
+        },
+        "url": "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl"
+      }
+    },
+    "python_sqlite": "3.49.1"
+  },
+  "go_modules": [
+    "returnsrecon",
+    "github.com/dustin/go-humanize v1.0.1",
+    "github.com/gofrs/flock v0.13.1",
+    "github.com/google/pprof v0.0.0-20260802141513-ef3492d7dac3",
+    "github.com/google/uuid v1.6.0",
+    "github.com/hashicorp/golang-lru/v2 v2.0.7",
+    "github.com/mattn/go-isatty v0.0.24",
+    "github.com/ncruces/go-strftime v1.0.0",
+    "github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec",
+    "github.com/shopspring/decimal v1.5.0",
+    "github.com/stretchr/testify v1.12.1",
+    "go.yaml.in/yaml/v3 v3.0.5",
+    "golang.org/x/mod v0.41.0",
+    "golang.org/x/sync v0.23.0",
+    "golang.org/x/sys v0.48.0",
+    "golang.org/x/tools v0.50.0",
+    "modernc.org/cc/v4 v4.29.7",
+    "modernc.org/ccgo/v4 v4.36.1",
+    "modernc.org/fileutil v1.4.0",
+    "modernc.org/gc/v2 v2.6.5",
+    "modernc.org/gc/v3 v3.1.5",
+    "modernc.org/goabi0 v0.2.0",
+    "modernc.org/libc v1.77.1",
+    "modernc.org/mathutil v1.7.1",
+    "modernc.org/memory v1.12.1",
+    "modernc.org/opt v0.2.0",
+    "modernc.org/sortutil v1.2.1",
+    "modernc.org/sqlite v1.60.1",
+    "modernc.org/strutil v1.2.1",
+    "modernc.org/token v1.1.0"
+  ],
+  "go_module_verification": "all modules verified",
+  "go_official_archive_sha256": "1314008898bd40df77af4b014f777f08873dbdfbcd3d92308728ee03304fe04f",
+  "go_archive_matches": true,
+  "note": "Existing tools verified in place; CLI version is not a desktop-app version or a human-run claim."
+}

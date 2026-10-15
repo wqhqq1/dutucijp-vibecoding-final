@@ -1,0 +1,26 @@
+[
+  {
+    "path": "test.ps1",
+    "errors": []
+  },
+  {
+    "path": "reproduce.ps1",
+    "errors": []
+  },
+  {
+    "path": "verify-data.ps1",
+    "errors": []
+  },
+  {
+    "path": "tools/bootstrap.ps1",
+    "errors": []
+  },
+  {
+    "path": "tools/verify-environment.ps1",
+    "errors": []
+  },
+  {
+    "path": "tools/execution-day.ps1",
+    "errors": []
+  }
+]

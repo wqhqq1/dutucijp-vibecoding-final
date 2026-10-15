@@ -1,0 +1,34 @@
+[
+  {
+    "scope": "benchmark",
+    "go_sqlite_version": "3.53.4",
+    "conserved": true,
+    "counts": {
+      "raw": 10000,
+      "accepted": 9972,
+      "excluded": 28,
+      "accepted_sales": 9797,
+      "accepted_cancels": 175,
+      "raw_cancels": 175,
+      "excluded_cancels": 0
+    },
+    "row_id": "0:265",
+    "private_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\verify-final-query.json"
+  },
+  {
+    "scope": "year1",
+    "go_sqlite_version": "3.53.4",
+    "conserved": true,
+    "counts": {
+      "raw": 525461,
+      "accepted": 521770,
+      "excluded": 3691,
+      "accepted_sales": 511565,
+      "accepted_cancels": 10205,
+      "raw_cancels": 10206,
+      "excluded_cancels": 1
+    },
+    "row_id": "0:265",
+    "private_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\verify-final-query.json"
+  }
+]

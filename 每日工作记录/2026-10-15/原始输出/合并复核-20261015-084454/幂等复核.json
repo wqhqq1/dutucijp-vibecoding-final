@@ -1,0 +1,63 @@
+{
+  "unchanged": true,
+  "before": {
+    "runs": {
+      "count": 1,
+      "sha256": "2e9a03f6deeb48ec24624c6600bd2461aa810267b70c3f752a474b17ce3b1c7c"
+    },
+    "decisions": {
+      "count": 10205,
+      "sha256": "0e2180061f0c71d48f8ef59ed0828b8fd02e0ea33ce00760cc755527fad2f967"
+    },
+    "cases": {
+      "count": 4991,
+      "sha256": "e25acbdbcdbad799250bddb2801f0a7b8e1bbe3b8fa4f8b915ef05e7558f6585"
+    },
+    "allocations": {
+      "count": 5214,
+      "sha256": "89ad5ea57fddfe57c913b7adf97b7088e124d9a632de5cae8c152f0d14c61663"
+    },
+    "sale_balances": {
+      "count": 511565,
+      "sha256": "62aba51652cc09735d76cd81175dc19af84c3a58016bd32a3f63dd5731973f81"
+    },
+    "candidate_evidence": {
+      "count": 10709,
+      "sha256": "83cacd815ba76251e79baf13466306c128952b8cd73ac92b4d0f9997ebc6ab4a"
+    },
+    "audit_events": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "after": {
+    "runs": {
+      "count": 1,
+      "sha256": "2e9a03f6deeb48ec24624c6600bd2461aa810267b70c3f752a474b17ce3b1c7c"
+    },
+    "decisions": {
+      "count": 10205,
+      "sha256": "0e2180061f0c71d48f8ef59ed0828b8fd02e0ea33ce00760cc755527fad2f967"
+    },
+    "cases": {
+      "count": 4991,
+      "sha256": "e25acbdbcdbad799250bddb2801f0a7b8e1bbe3b8fa4f8b915ef05e7558f6585"
+    },
+    "allocations": {
+      "count": 5214,
+      "sha256": "89ad5ea57fddfe57c913b7adf97b7088e124d9a632de5cae8c152f0d14c61663"
+    },
+    "sale_balances": {
+      "count": 511565,
+      "sha256": "62aba51652cc09735d76cd81175dc19af84c3a58016bd32a3f63dd5731973f81"
+    },
+    "candidate_evidence": {
+      "count": 10709,
+      "sha256": "83cacd815ba76251e79baf13466306c128952b8cd73ac92b4d0f9997ebc6ab4a"
+    },
+    "audit_events": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

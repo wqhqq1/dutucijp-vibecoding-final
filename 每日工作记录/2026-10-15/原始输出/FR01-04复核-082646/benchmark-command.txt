@@ -1,0 +1,53 @@
+{
+  "actual_time": "2026-10-15T08:27:44.5387896+08:00",
+  "scope": "benchmark",
+  "dataset_id": "c707d8f7026e5f4674c9bcea05acb4c98955060cfd22be17d9f97d67aa568444",
+  "cleaning_version": "cr-1.0.0",
+  "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_read_only": true,
+  "source": {
+    "source_url": "https://archive.ics.uci.edu/dataset/502/online+retail+ii",
+    "download_url": "https://archive.ics.uci.edu/static/public/502/online%2Bretail%2Bii.zip",
+    "license": "CC BY 4.0",
+    "citation": "Chen, D. (2012). Online Retail II. DOI 10.24432/C5CG6D",
+    "acquired_at": "2026-10-15T07:49:45.502128+08:00",
+    "sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "zip_sha256": "572e36277c2390fbfde10664750731e0a86f55e33470d91919085f0408e67bfb",
+    "bytes": 45622278
+  },
+  "counts": {
+    "raw": 10000,
+    "accepted": 9972,
+    "excluded": 28,
+    "accepted_sales": 9797,
+    "accepted_cancels": 175,
+    "raw_cancels": 175,
+    "excluded_cancels": 0
+  },
+  "sheets": [
+    {
+      "sheet": "Year 2009-2010",
+      "raw": 10000,
+      "accepted": 9972,
+      "excluded": 28,
+      "first_source_row": 2,
+      "last_source_row": 10001
+    }
+  ],
+  "exclusion_reasons": {
+    "nonpositive_price": 28
+  },
+  "conserved": true,
+  "excluded_source_location": {
+    "id": "0:265",
+    "sheet": "Year 2009-2010",
+    "source_row": 265,
+    "reason": "nonpositive_price",
+    "flags": "missing_customer",
+    "duplicate_of": ""
+  },
+  "private_output_dir": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab",
+  "database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab\\verification.sqlite",
+  "prepared": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab\\prepared\\c707d8f7026e5f4674c9bcea05acb4c98955060cfd22be17d9f97d67aa568444",
+  "notice": "Isolated FR-01..04 CLI verification. Full raw fields are only in private verify.json; no HTTP service or business login. This is not NFR acceptance."
+}

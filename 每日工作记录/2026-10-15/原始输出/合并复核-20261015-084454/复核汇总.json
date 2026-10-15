@@ -1,0 +1,52 @@
+{
+  "actual_time": "2026-10-15T08:48:23.507633+08:00",
+  "status": "passed",
+  "planned_tasks_completed": [
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "actual_completion_date": "2026-10-15",
+  "cleaning_version": "cr-1.0.1",
+  "rule_version": "conservative-1.0.0",
+  "tests": {
+    "go_passed": 24,
+    "python_passed": 13,
+    "failed": 0,
+    "skipped": 0
+  },
+  "environment_verified": true,
+  "original_read_only_and_sha_unchanged": true,
+  "data_conservation": {
+    "benchmark": {
+      "raw": 10000,
+      "accepted": 9972,
+      "excluded": 28
+    },
+    "year1": {
+      "raw": 525461,
+      "accepted": 521770,
+      "excluded": 3691
+    }
+  },
+  "excluded_example": {
+    "row": 265,
+    "reason": "nonpositive_price",
+    "eight_fields_equal": true
+  },
+  "pairing": {
+    "matched": 5214,
+    "suspected": 2699,
+    "no_original": 2292,
+    "cases": 4991,
+    "coverage": "5214/10205 (51.092602%)"
+  },
+  "cases": {
+    "buy10_return4_remaining6": true,
+    "multiple_candidates_not_auto_matched": true,
+    "return3_remaining2_rejected": true
+  },
+  "idempotency_seven_tables_unchanged": true,
+  "raw_output_files_verified": 55,
+  "official_all_verified": false,
+  "formal_nfr_verified": false
+}

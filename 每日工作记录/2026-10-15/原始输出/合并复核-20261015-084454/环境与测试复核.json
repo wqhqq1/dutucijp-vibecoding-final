@@ -1,0 +1,21 @@
+{
+  "复核时间": "2026-10-15T08:48:23.507633+08:00",
+  "工具版本": {
+    "Go": "go version go1.27.2 windows/amd64",
+    "Node": "v24.18.0",
+    "npm": "11.16.0",
+    "Python": "Python 3.12.10",
+    "Git": "git version 2.55.0.windows.3",
+    "Codex CLI": "codex-cli 0.162.0-alpha.17.2"
+  },
+  "依赖版本": {
+    "pip": "25.0.1",
+    "openpyxl": "3.1.5",
+    "et_xmlfile": "2.0.0"
+  },
+  "环境核对通过": true,
+  "Go测试通过": 24,
+  "Python测试通过": 13,
+  "失败": 0,
+  "跳过": 0
+}

@@ -1,0 +1,141 @@
+{
+  "generated_at": "2026-10-15T08:35:03.4083447+08:00",
+  "applies_to": "Only this FR-01..04 follow-up; original earlier 28-file manifest preserved",
+  "files": [
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/benchmark-command.txt",
+      "bytes": 2196,
+      "sha256": "77626dc97fd91cc32af3ef33555c8e6365963065233ed00946921834dc8808b6"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/benchmark-final-command.txt",
+      "bytes": 2196,
+      "sha256": "3be4d724a26193c4f68f72ea77a02b9a6426f809f626206339a4a2f5e6533e10"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/commands.json",
+      "bytes": 6350,
+      "sha256": "8e9dd9fc59a32b50dfa8905ebdd72d5a49964ffc3df3e1d543f0773df03e8fdc"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/commands.txt",
+      "bytes": 255,
+      "sha256": "bb1e6bfdc8f6850749e3c9b188d22cb897fd6947300a18871dfee0d0d39c4524"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/environment-command.txt",
+      "bytes": 5226,
+      "sha256": "8672eb681afea388e760278af7e7c34d2d9536a348db9d89d5f3ed6b0012cbca"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/environment.json",
+      "bytes": 5226,
+      "sha256": "8672eb681afea388e760278af7e7c34d2d9536a348db9d89d5f3ed6b0012cbca"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/final-query-summary.json",
+      "bytes": 992,
+      "sha256": "d9890113116e07fe6cc683aae7708168bdbf7d3f0768653fa3fea6e43edfa13a"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/go-vet-final.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/go-vet.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/identifier-before-fix.txt",
+      "bytes": 2370,
+      "sha256": "33ea817d0ee546f807902849ce2f65d2d9ce5776dcfbe81b3126c5e010dd61ee"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/independent-source-check.json",
+      "bytes": 1284,
+      "sha256": "1f25c0917ace9eec54fa8d0aefaf3697298542132c886672d4478b440504f28b"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/official-bootstrap.txt",
+      "bytes": 1624,
+      "sha256": "598bba718ab39378baa678a2cf02c4d9d474a58528fbbc27aaf59003eaf3fc80"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/powershell-syntax.json",
+      "bytes": 387,
+      "sha256": "dc155442d04540f7596beaa4fe739d85818183f9283f3d129d4dbcb342aa22b6"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/test-command.txt",
+      "bytes": 2501,
+      "sha256": "546866c5e5b0f91eb4529723228be67e5735f7951774aa3aa2248bd2ca70d275"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/test-final-command.txt",
+      "bytes": 2652,
+      "sha256": "0db09f3101c81a921d831dcf9b2c496329c1fdc8af33621610fe310e96ef0c33"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/test-release-command.txt",
+      "bytes": 2656,
+      "sha256": "e0ede36e3179240db3c32b085fba100f5966e13359a47334aabb0847366da500"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-final/go.jsonl",
+      "bytes": 42426,
+      "sha256": "5c5965a554283db0a74caf8d43d852ef13de96a0b785664b50d8cdf2d92306c5"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-final/python.txt",
+      "bytes": 1940,
+      "sha256": "bb4a2082646770d0daf4ca9dbaeffde773e33a23f8e9215e29031c2526716648"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-final/summary.json",
+      "bytes": 712,
+      "sha256": "846c4372c4859b3f9e0ccd258806d644491d4a8c5a89a67c3fde3fc325f6914e"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-release/go.jsonl",
+      "bytes": 42434,
+      "sha256": "8ff1352f9b535893f22a99a7bd4f76681a8d996c88bfe0330e061330b9b33b38"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-release/python.txt",
+      "bytes": 1940,
+      "sha256": "50fd79dbc75441ae4672429d21d51ac21486dae8b69b16f2eff9997dc471854c"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests-release/summary.json",
+      "bytes": 716,
+      "sha256": "51448c661cd50ebe4f8f585752be55b90b9df473579ac7e6d5650510b32c5469"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests/go.jsonl",
+      "bytes": 42444,
+      "sha256": "3063c7ed2dd1743d7b79fa51171830cb68ca1e1bd1edfc561d48a4c433699883"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests/python.txt",
+      "bytes": 1801,
+      "sha256": "e281427b9867ef47b07c992f45b1d56999868b8d5dd48fbb1368bff17c7c1b21"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/tests/summary.json",
+      "bytes": 700,
+      "sha256": "5696ce56070daa14d965cf3c9c02f24d7d3a4a3821b429c53c31be1dc8c73905"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/year1-command.txt",
+      "bytes": 2239,
+      "sha256": "fc569299720fcf967921d3cf2f7fe273666dd8e5f4e3102a6586c8add467cc92"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/FR01-04复核-082646/year1-final-command.txt",
+      "bytes": 2239,
+      "sha256": "3c6e39504fd8b5cf305871f262705bb5db08d34df504bdd506a65ce03df27e93"
+    }
+  ]
+}

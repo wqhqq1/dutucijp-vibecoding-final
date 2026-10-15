@@ -1,6 +1,7 @@
 param([ValidateSet('benchmark','year1','all')][string]$Scope = 'year1')
 $ErrorActionPreference = 'Stop'
-if ((Get-Date -Format 'MM-dd') -in @('10-22','11-17')) { throw 'Reserved day: no preparation, rebuilding or verification work' }
+. (Join-Path $PSScriptRoot 'tools/execution-day.ps1')
+Assert-ExecutionDay
 $runtimeRoot = Join-Path $env:LOCALAPPDATA 'dutucijp-vibecoding-final'
 $goExe = Join-Path $runtimeRoot 'tools/go/bin/go.exe'
 $pythonExe = Join-Path $runtimeRoot 'tools/python/Scripts/python.exe'

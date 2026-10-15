@@ -1,5 +1,7 @@
 param([string]$OutputDir = '')
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'tools/execution-day.ps1')
+Assert-ExecutionDay
 $runtimeRoot = Join-Path $env:LOCALAPPDATA 'dutucijp-vibecoding-final'
 $goExe = Join-Path $runtimeRoot 'tools/go/bin/go.exe'
 $pythonExe = Join-Path $runtimeRoot 'tools/python/Scripts/python.exe'

@@ -1,0 +1,64 @@
+[
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "./tools/bootstrap.ps1",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\official-bootstrap.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "./tools/verify-environment.ps1 -OutputPath \"C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\environment.json\"",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\environment-command.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "./test.ps1 -OutputDir \"C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\tests-release\"",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\test-release-command.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "& \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe\" -m unittest discover -s tests -p test_prepare.py -v",
+    "exit": 1,
+    "phase": "before customer identifier fix",
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\identifier-before-fix.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "./verify-data.ps1 -Scope benchmark",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\benchmark-final-command.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "& \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr0104-final-recon.exe\" verify --prepared \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\" --db \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\verification.sqlite\" --row \"0:265\"",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\verify-final-query.json"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "./verify-data.ps1 -Scope year1",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\year1-final-command.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "& \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr0104-final-recon.exe\" verify --prepared \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\" --db \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\verification.sqlite\" --row \"0:265\"",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\verify-final-query.json"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\backend",
+    "command": "& \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\go\\bin\\go.exe\" vet ./...",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\go-vet-final.txt"
+  },
+  {
+    "cwd": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统",
+    "command": "& \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe\" \"C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr0104-independent-check.py\"",
+    "exit": 0,
+    "output": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录\\2026-10-15\\原始输出\\FR01-04复核-082646\\independent-source-check.json",
+    "script_sha256": "8684e61ab7233499959d169f4089c2cf027acc0d0abb2b43d69b8ec3697ff6bc"
+  }
+]

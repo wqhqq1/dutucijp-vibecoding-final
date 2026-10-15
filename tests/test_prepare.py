@@ -50,6 +50,11 @@ class CleaningTests(unittest.TestCase):
     def test_TC03_header_and_alphanumeric_stock(self):
         rows,m=self.run_prepare([self.sale()]);self.assertEqual(rows[0]['stock'],'ABC-1');self.assertEqual(rows[0]['customer'],'42');self.assertEqual(rows[0]['price'],'0.1');self.assertEqual(rows[0]['source_row'],'2')
 
+    def test_TC03_text_identifiers_preserve_leading_zeroes(self):
+        row=self.sale();row[0]='00123';row[1]='01A';row[6]='00042'
+        rows,_=self.run_prepare([row])
+        self.assertEqual((rows[0]['invoice'],rows[0]['stock'],rows[0]['customer']),('00123','01A','00042'))
+
     def test_TC03_exact_XML_price_survives_beyond_binary_float_precision(self):
         path=self.fixture([self.sale()])
         exact='0.1000000000000000000000000001'

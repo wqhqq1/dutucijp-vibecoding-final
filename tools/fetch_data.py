@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import stat
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import urlopen
@@ -30,7 +31,16 @@ def main():
             raise ValueError('Existing raw workbook differs from the reviewed official version; never overwrite it')
         if not (raw/'source.json').exists():
             raise ValueError('Existing workbook lacks source receipt; investigate provenance before using it')
-        print(json.dumps({'reused': True, 'path': str(workbook), 'sha256': EXPECTED}))
+        receipt = json.loads((raw/'source.json').read_text(encoding='utf-8'))
+        if (receipt.get('sha256'), receipt.get('source_url'), receipt.get('download_url'), receipt.get('license')) != (EXPECTED, SOURCE, DOWNLOAD, 'CC BY 4.0'):
+            raise ValueError('Existing source receipt does not identify the reviewed official original')
+        archive = raw/'online_retail_II.zip'
+        if archive.exists():
+            if sha256(archive) != receipt.get('zip_sha256'):
+                raise ValueError('Existing official archive SHA256 mismatch; never overwrite it')
+            archive.chmod(stat.S_IREAD)
+        workbook.chmod(stat.S_IREAD)
+        print(json.dumps({'reused': True, 'path': str(workbook), 'sha256': EXPECTED, 'read_only': True, 'source': receipt}))
         return
     archive = raw/'online_retail_II.zip'
     if not archive.exists():
@@ -53,6 +63,8 @@ def main():
                    acquired_at=datetime.now(timezone.utc).isoformat(), sha256=EXPECTED,
                    zip_sha256=sha256(archive), bytes=workbook.stat().st_size)
     (raw/'source.json').write_text(json.dumps(receipt, indent=2)+'\n', encoding='utf-8')
+    workbook.chmod(stat.S_IREAD)
+    archive.chmod(stat.S_IREAD)
     print(json.dumps(receipt))
 
 

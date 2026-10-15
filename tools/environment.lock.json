@@ -1,0 +1,14 @@
+{
+  "go": {
+    "version": "go1.27.2",
+    "filename": "go1.27.2.windows-amd64.zip",
+    "url": "https://go.dev/dl/go1.27.2.windows-amd64.zip",
+    "sha256": "1314008898bd40df77af4b014f777f08873dbdfbcd3d92308728ee03304fe04f"
+  },
+  "python": "3.12.10",
+  "node": "v24.18.0",
+  "npm": "11.16.0",
+  "git": "git version 2.55.0.windows.3",
+  "codex_cli": "codex-cli 0.162.0-alpha.17.2",
+  "notes": "Existing signed tools are verified in place. This does not claim they were installed by this project. Gin/React/TypeScript/Vite are not yet dependencies."
+}

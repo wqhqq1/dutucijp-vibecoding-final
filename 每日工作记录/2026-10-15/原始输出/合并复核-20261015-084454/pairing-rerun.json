@@ -1,0 +1,24 @@
+{
+  "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+  "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+  "rule_version": "conservative-1.0.0",
+  "status": "published",
+  "reused": true,
+  "input": {
+    "raw": 525461,
+    "accepted": 521770,
+    "excluded": 3691,
+    "accepted_sales": 511565,
+    "accepted_cancels": 10205,
+    "raw_cancels": 10206,
+    "excluded_cancels": 1
+  },
+  "matched": 5214,
+  "suspected": 2699,
+  "no_original": 2292,
+  "cases": 4991,
+  "workers": 8,
+  "reconcile_and_persist_seconds": 6.9831339,
+  "coverage": "5214/10205 (51.092602%)",
+  "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+}

@@ -1,0 +1,17 @@
+{
+  "清洗版本": "cr-1.0.1",
+  "benchmark": {
+    "raw": 10000,
+    "accepted": 9972,
+    "excluded": 28
+  },
+  "year1": {
+    "raw": 525461,
+    "accepted": 521770,
+    "excluded": 3691
+  },
+  "原始等于接纳加排除": true,
+  "原件只读且散列不变": true,
+  "第265行排除原因": "nonpositive_price",
+  "八个原始字段核对一致": true
+}

@@ -21,7 +21,7 @@ from openpyxl.utils.datetime import from_excel
 
 from fetch_data import sha256
 
-CLEANING = 'cr-1.0.0'
+CLEANING = 'cr-1.0.1'
 SHEETS = ('Year 2009-2010', 'Year 2010-2011')
 HEADERS = ('Invoice', 'StockCode', 'Description', 'Quantity', 'InvoiceDate', 'Price', 'Customer ID', 'Country')
 FIELDS = ('id', 'sheet_index', 'sheet', 'source_row', 'raw_json', 'invoice', 'stock', 'description',
@@ -138,9 +138,7 @@ def normalize(si, sheet, rn, raw, epoch):
         row['description'] = text(raw[2])
         row['country'] = text(raw[7])
         row['customer'] = text(raw[6])
-        if row['customer']:
-            row['customer'] = str(integer(row['customer']))
-        else:
+        if not row['customer']:
             flags.append('missing_customer')
         if not row['country']:
             flags.append('missing_country')

@@ -1,0 +1,14 @@
+test_TC02_scope_selected_before_cleaning (test_prepare.CleaningTests.test_TC02_scope_selected_before_cleaning) ... ok
+test_TC03_exact_XML_price_survives_beyond_binary_float_precision (test_prepare.CleaningTests.test_TC03_exact_XML_price_survives_beyond_binary_float_precision) ... ok
+test_TC03_header_and_alphanumeric_stock (test_prepare.CleaningTests.test_TC03_header_and_alphanumeric_stock) ... ok
+test_TC04_invalid_price_quantity_and_case_insensitive_C (test_prepare.CleaningTests.test_TC04_invalid_price_quantity_and_case_insensitive_C) ... ok
+test_TC05_missing_identity_retained_description_uninvented (test_prepare.CleaningTests.test_TC05_missing_identity_retained_description_uninvented) ... ok
+test_TC06_cross_sheet_occurrence_alignment_2_and_3 (test_prepare.CleaningTests.test_TC06_cross_sheet_occurrence_alignment_2_and_3) ... ok
+test_TC07_same_sheet_duplicates_all_marked_not_deleted (test_prepare.CleaningTests.test_TC07_same_sheet_duplicates_all_marked_not_deleted) ... ok
+test_TC08_exclusion_priority_and_single_main_reason (test_prepare.CleaningTests.test_TC08_exclusion_priority_and_single_main_reason) ... ok
+test_prepared_hash_tampering_rejected (test_prepare.CleaningTests.test_prepared_hash_tampering_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.069s
+
+OK

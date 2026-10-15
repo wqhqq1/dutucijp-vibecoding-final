@@ -1,35 +1,48 @@
 {
   "format_version": 2,
   "repository": "wqhqq1/dutucijp-vibecoding-final",
-  "backup_kind": "guidance-materials-v1.2-adoption",
+  "backup_kind": "execution-day-cli-complete-with-guidance-archive",
   "date": "2026-10-15",
   "timezone": "Asia/Shanghai",
-  "captured_at": "2026-10-15T07:41:51.849052+08:00",
-  "local_head": "0980fb71b21943f2299ebcee47e5f1bf32716a55",
-  "local_commit_count": 7,
-  "guidance_request_status": "complete",
-  "execution_day_task_status": "not assessed; no execution handoff received",
-  "application_tests_executed_in_this_guidance_task": 0,
-  "new_screenshots_in_this_guidance_task": 0,
-  "existing_screenshots_in_project": 2,
+  "captured_at": "2026-10-15T08:17:34.825594+08:00",
+  "local_head": "95c56634fc882cc62b8f533427a2d1facaacf267",
+  "local_commit_count": 14,
+  "execution_thread": "01a13cce-3ee1-7331-8b73-918928711475",
+  "execution_source_head": "984edfba6b5d488c468049386167d012d782a156",
+  "execution_handoff_head": "c137347",
+  "execution_day_task_status": "data preparation and matching CLI complete; browser workflow/auth/all/NFR pending",
+  "completed_cli_requirements": [
+    "FR-05",
+    "FR-06",
+    "FR-08"
+  ],
+  "verified_target_cases": [
+    "TC-09",
+    "TC-10",
+    "TC-11",
+    "TC-12",
+    "TC-13",
+    "TC-14",
+    "TC-15",
+    "TC-18"
+  ],
+  "automatic_test_results": {
+    "go_top_level_passed": 21,
+    "go_top_level_failed": 0,
+    "go_top_level_skipped": 0,
+    "python_tests_ran": 9,
+    "executor": "execution conversation Codex; student personal rerun pending",
+    "evidence": "每日工作记录/2026-10-15/原始输出/提交前复验"
+  },
+  "guidance_reran_application_tests": false,
+  "raw_output_files_hash_verified": 28,
+  "screenshots_collected_today": 2,
+  "screenshots_kind": "real browser screenshots of unchanged original CLI output files; not business web UI or student rerun",
   "course_requirements_version": "v1.2",
   "original_daily_tasks_retained": true,
-  "plan_static_check": {
-    "kind": "materials_plan_static_check",
-    "status": "passed",
-    "comparison_date": "2026-10-15",
-    "daily_draft_byte_unchanged": true,
-    "daily_draft_sha256": "454c093ba562de8d5b25b1c75dfa0ab8c40d17db5215d7393c1b794d6a7a2074",
-    "daily_stage_and_freeze_sections_unchanged": true,
-    "three_spec_files_unchanged": [
-      "要做什么.md",
-      "怎么做.md",
-      "怎么算做对.md"
-    ],
-    "application_tests_executed_in_this_guidance_task": 0,
-    "new_screenshots_in_this_guidance_task": 0,
-    "execution_day_task_status": "not assessed; no execution handoff received"
-  },
+  "daily_draft_sha256": "454c093ba562de8d5b25b1c75dfa0ab8c40d17db5215d7393c1b794d6a7a2074",
+  "planned_calendar_days": 34,
+  "planned_execution_days": 32,
   "reserved_days": [
     "2026-10-22",
     "2026-11-17"
@@ -38,214 +51,695 @@
     "midterm": "2026-10-21",
     "final": "2026-11-16"
   },
+  "official_scopes_executed": [
+    "benchmark",
+    "year1"
+  ],
+  "official_all_executed": false,
+  "formal_nfr_accepted": false,
+  "student_actions_pending": [
+    "personal test rerun",
+    "source and exclusion review",
+    "three example review and rule explanation"
+  ],
   "source_files": [
     {
+      "path": ".gitattributes",
+      "git_blob_sha": "333ed88fc38a90fe5c96c2b07f5a387ee45ee830",
+      "sha256": "99c160fcb3df850b98482547feddae27460fcfb8824e039cd90fea030e400cdc",
+      "bytes": 148,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
       "path": ".gitignore",
-      "git_blob_sha": "9a1f00f0c5f1f33c837e748ce973aa469aebabfb",
-      "sha256": "fc64ce22c592a19c3093dc2e2d32cc5270af61b49a5179b2dde024153d82db07",
-      "bytes": 714,
-      "tracked": true
+      "git_blob_sha": "4e3be8817443a187116f80f1c8d6fe2acfe3f66a",
+      "sha256": "849c2ba359bb8ff96e0757cdd80dca8889d16f4391147dbea6e8978dbee075a0",
+      "bytes": 752,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "AGENTS.md",
-      "git_blob_sha": "dbae9f4c298995e06d6b9a5754e936456c350534",
-      "sha256": "71dd16a4d3a8a3121d81569cd3c38a27464f25bc7dc6cb5cb69b890799e34057",
-      "bytes": 5219,
-      "tracked": true
+      "git_blob_sha": "4e30e8e9b01edd1f5fcb9334e78412e19c2fe319",
+      "sha256": "baa4111cdb108539cc4a07f30a0f7da7915f12dc2ffe14484aad3da4333abded",
+      "bytes": 5793,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "README.md",
-      "git_blob_sha": "3cf7ea542599892e4918deef13001e6bd9013295",
-      "sha256": "554d34b48d49aef0f42b7729bb54227ac15c3b124dd99765d38a38a2c2103786",
-      "bytes": 4879,
-      "tracked": true
+      "git_blob_sha": "2966eeec01edf5e3abd3b7c355243bccb1ea3420",
+      "sha256": "d57b0f9e8e4a65876e7d409bba0ac8fe58e2bb68763583c3adfd2b9df9cc8e5b",
+      "bytes": 5609,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/cmd/recon/main.go",
+      "git_blob_sha": "aca4c45d5fbd02e510e7ae4bfa4d065ba7a53345",
+      "sha256": "7fc475733fa5d9ee2536c09227f378e0057d7e3e9a73d6d53d0f81aee5246755",
+      "bytes": 1778,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/go.mod",
+      "git_blob_sha": "93b63f7540ee0ecb026e2a78c95dedc3a882c0b7",
+      "sha256": "6882d9f7f28d4f361c17d4a4c6fddf8d241b3558d56d8d636a028a0ca4bfa47c",
+      "bytes": 585,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/go.sum",
+      "git_blob_sha": "7be9f5b25633a478e736da42a1c43cedbb4223f5",
+      "sha256": "059fafd94b6de3e51a22d2c18e769d6207edb19e6bc21029e2287d111b3e1421",
+      "bytes": 4807,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/model/model.go",
+      "git_blob_sha": "94a7dd0a5f384e6b92e1105983a1a126b608e7c2",
+      "sha256": "ac931d042c7c49a5388c6f6d10e2ea0083de3221f5d02fb864d7a570311a80f0",
+      "bytes": 2073,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/reconcile/engine.go",
+      "git_blob_sha": "11c248b241da9cd797e03103f89bfa191725c901",
+      "sha256": "229d0aeb6c61b88f99ce3fa08cdd24a34c710f19da61e9accbcf2abedb05b439",
+      "bytes": 7949,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/reconcile/engine_test.go",
+      "git_blob_sha": "8a629a03ebe01a826602728948d7aaee7ab2d211",
+      "sha256": "0684470ed36ed14e011d6155f3e5b5f97172a889e56c42c30e7d501ef1c4c8f0",
+      "bytes": 6699,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/reconcile/index.go",
+      "git_blob_sha": "92baf868b5da231a8a8352339ade114fd7114c9a",
+      "sha256": "0f1d795a6b049b5cec04e73fc84478b760ce47b9e0e41c9bc2f44517e8924300",
+      "bytes": 829,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/store/evidence.go",
+      "git_blob_sha": "2ce239d4df4e09570b72b00a8128a6306612f79f",
+      "sha256": "dc030b73650c686c13d138861a2f4bb34c295eca49cbfbe18764dd17d98e6062",
+      "bytes": 3830,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/store/schema.sql",
+      "git_blob_sha": "43ac2228012e9fab008c72d5c9a149298a28dd19",
+      "sha256": "691e3b2bbf99491d100d7cb01aeef9a71cb9614866e990304ca0407bf4d5b411",
+      "bytes": 3784,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/store/store.go",
+      "git_blob_sha": "3d2e9afc8299ef24616edf8d0cb5add6e2922be3",
+      "sha256": "7d679e2c43a41371e3b3d6bc100f1c96b968986d783155fcaff0a7cff191ff00",
+      "bytes": 15243,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "backend/internal/store/store_test.go",
+      "git_blob_sha": "a6676fe6bd4b511c0b95d1b03defeb12e9f8c1f6",
+      "sha256": "bdcdffed4c2530c62f1ed20b32f1d4b07c40f99dda9f4a1208e9d05417f96dfe",
+      "bytes": 9253,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "reproduce.ps1",
+      "git_blob_sha": "40d64ecdf2aeb83d0b21abe00118a95236f62859",
+      "sha256": "13e211f1ecd0dd5e4656c48b81df00e48c084e067143f0bc56a287c74441e1b9",
+      "bytes": 2495,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "test.ps1",
+      "git_blob_sha": "f0400095978d747c58fc4ccb6b790a818f249f19",
+      "sha256": "76dfe1bfdba050457b45b583e52869f9490fc03a8da95732c3140d627fb900af",
+      "bytes": 2270,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "tests/test_prepare.py",
+      "git_blob_sha": "f18031c187243dd91281084b40224cae64f5aec8",
+      "sha256": "84b0579fb6a949f7de2079e737bd60de394d609565b5e6e00992bc07dc550f33",
+      "bytes": 5341,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "tools/bootstrap.ps1",
+      "git_blob_sha": "4f72a6b7268bc73feb3d6efbe0b3d17cdaf184bd",
+      "sha256": "d19b105759c233cfb654fdb49159c13b2f3bdf0169154e338c03e08b00289257",
+      "bytes": 1629,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "tools/fetch_data.py",
+      "git_blob_sha": "cbeae45d0843b626c27a827cfdb0a0540b1821e4",
+      "sha256": "7da6b52a59fd81ff7ae6cfedcc9234e117acc8b002336176ef07bb2c60e90168",
+      "bytes": 2665,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "tools/prepare.py",
+      "git_blob_sha": "bdf80c02f37e99ece8b15df6dd517a3b832dd240",
+      "sha256": "d676fcd38866c9e436ce28009c4baddefdda886dd60c5a75e89c8d1b9185f80f",
+      "bytes": 11771,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "tools/requirements.txt",
+      "git_blob_sha": "a054a55344623a4fe1e0d165a98b091d337f076f",
+      "sha256": "7e465dce18eabac3748eb3e6adbaf08619030a9a7248eecba4419e19c11e4aaf",
+      "bytes": 34,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "决定记录.md",
       "git_blob_sha": "69dbc528511ce084b113905757d166ff9ebf34a6",
       "sha256": "fca409ffaba959b7e2b7f6e788328c41fea21bf3ba90a2dbd514ccb768865bbc",
       "bytes": 9028,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "四段式任务草稿.md",
       "git_blob_sha": "de3b9a909dae61048b710c73d544d9b5a51e2128",
       "sha256": "454c093ba562de8d5b25b1c75dfa0ab8c40d17db5215d7393c1b794d6a7a2074",
       "bytes": 63011,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "怎么做.md",
-      "git_blob_sha": "3dbf0db06405396309a8293e55f5f48fe9d0d6aa",
-      "sha256": "3a462d315eac66697bf6c81d28b18d7e5994ffb2079eef450bc7e6ccecdaa997",
-      "bytes": 16988,
-      "tracked": true
+      "git_blob_sha": "52629c24426dce8f3140f9d23028c79f288535d4",
+      "sha256": "ec8decbfe372b1acccc87e92764fc28f5f8156b61da4e3e77c8f1d03cec55f81",
+      "bytes": 18619,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "怎么算做对.md",
-      "git_blob_sha": "4f8258578a1044e955147b60e5c7eae001fbfd72",
-      "sha256": "17a522f525c0236d017c10528ea99c36e60d32eda6ccf23779d087a267e44840",
-      "bytes": 11808,
-      "tracked": true
+      "git_blob_sha": "b14ac9d77ccde7303d0f2076f0de7c77a8775f9d",
+      "sha256": "27c0dc966c30107b641a5dc1eb00e3db7a448f60f78fbb59356e608a1d6f3a1b",
+      "bytes": 12128,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "执行交接说明.md",
       "git_blob_sha": "bc5c3563d4fa86454c5d53003fee34e70e3e4fd1",
       "sha256": "524b8c33c4b4669ab9b1e6e87dff0175b224ae668db25346c4e257ce3e0aa392",
       "bytes": 8637,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "执行计划.md",
-      "git_blob_sha": "05d57d381bf97ec6a0fb1d24067ed8be651210c6",
-      "sha256": "f55760cd9066ea806da5cc6817b0d3692d5cc7a5248c577a6105f616950e9270",
-      "bytes": 21210,
-      "tracked": true
+      "git_blob_sha": "22136b7e66ba392ee06a550d1cf7c5a93ef6e821",
+      "sha256": "520010f907e69efafe796c0d8e0c94a5873375394ad28eef8d554e5a94b3e08a",
+      "bytes": 21967,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "提交索引.md",
-      "git_blob_sha": "ab7f9bfa4f40cd554f3c8a0ce55921a08f927be2",
-      "sha256": "c37d02f8ff60575c518ee54ee14ee28be7dbcd463910a2d9f0ea7bd417aa784a",
-      "bytes": 3756,
-      "tracked": true
+      "git_blob_sha": "71d030682a8df9fa7b0c7ba99cc5a05f9fc95071",
+      "sha256": "36aa06e3b040e26286de4288b515b10a32d31ec8d12645b910fd83cf1c682ed0",
+      "bytes": 4750,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/今天做了什么.md",
       "git_blob_sha": "e3f94588ddb5da973aae22a27f892c16114ed84f",
       "sha256": "28acccaee571f13ee0f4ec11fee246ea541c9a11c9f58dfe3579ddbbeeb01eb9",
       "bytes": 1371,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/截图/2026-10-14-01-FR14修改记录-GitHub真实页面.jpg",
       "git_blob_sha": "21e1c2a70edc2dec4c746a49030b210e6502f641",
       "sha256": "c3e81c86eaa5f9eebb501c46498074a30377a5575e539a7949511dabd61f5e0f",
       "bytes": 190759,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/截图/2026-10-14-02-真实提交记录-GitHub页面.jpg",
       "git_blob_sha": "9c516cd00e5851583862f2162d0bd7d6491f1e15",
       "sha256": "4122eb53782c5489a04dadca616fe1575eac914b288a029cf4ac134ab78ecbde",
       "bytes": 83791,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/截图/待采集.md",
       "git_blob_sha": "308bad18b2e0e3006425ab1c97cb3860ebd5242c",
       "sha256": "a0be551273a62f66fc70153c489148576fa9bf7e3b5740c50ffed1c1d3326e89",
       "bytes": 733,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/截图/截图索引.md",
       "git_blob_sha": "f70a36a7f1b0a1cfdcb25e4e2cd335d89798c5b2",
       "sha256": "5a478967d84e99e798c78995b89b5adfe96a7337506b98e062e4c91343718d3b",
       "bytes": 1925,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/环境版本核查.txt",
       "git_blob_sha": "37ee185c341e8de108727506f4fb19c5559133c9",
       "sha256": "4680680cfb79c44d9ffe0ddf5091ed67500857abd5b5176fb7c487e5c385e8cc",
       "bytes": 276,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-15/今天做了什么.md",
-      "git_blob_sha": "132b31c5913126c52a3269ce957f36ef6df9b698",
-      "sha256": "26a03df7bb1a71b129e648267dbafef83f0a2b1d9371e34ec9fdb1adfe2c9887",
-      "bytes": 1370,
-      "tracked": true
+      "git_blob_sha": "4361a425e2ecb3e0a6cb65b7b0d8a65fe6253008",
+      "sha256": "43388772db19bce420636e9bf97edac9d423e98c0ad4c62bf4868af3c970c9e4",
+      "bytes": 3078,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/Go依赖安装.txt",
+      "git_blob_sha": "134054e1fec81335f6a2836cba900e405f02e8b2",
+      "sha256": "214cce09e623828f21c7e0470fb1e17d843e9c936782d8d931d687474f4f6f95",
+      "bytes": 1015,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/Go测试-修复复验.jsonl",
+      "git_blob_sha": "e9eee0f6463b89c720709fc91618c295ffb37d70",
+      "sha256": "6a838e7e4ec224d69c33ac0df5af63dc008a26e4ae705d92763cb9725a52e124",
+      "bytes": 39768,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/Go测试-首次.jsonl",
+      "git_blob_sha": "182eb49eb0500629f108d397dd5a01b443ac5083",
+      "sha256": "b9c15960e116273e492ed1bc76eff78c86c4c4326cba5725ac1ba04f26221e0d",
+      "bytes": 39239,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/Go静态检查.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/Python测试-首次.txt",
+      "git_blob_sha": "21f632ef36036d9bcdd88c3328c4888fd43329f3",
+      "sha256": "fa6857557833a52d802820e5b2cbf822062f00a48fac792538b4c3a4b28c544c",
+      "bytes": 1183,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/benchmark复现.txt",
+      "git_blob_sha": "3d0b4932a9ae677cd6c4b66f1f055b82ce70b570",
+      "sha256": "112d7c3e1da2d8c7ac5862ff605c9d288ecdcc23d454ab2b3a13c1665a06e8c9",
+      "bytes": 998,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/year1准备-最终代码复核.txt",
+      "git_blob_sha": "36343d15cd9097228bb659188d77d8088014445a",
+      "sha256": "3820b0e5d3fa4c8d35fd7f97ff7f62d71021e772fe91b51062a4fdea494c7217",
+      "bytes": 1922,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/year1准备.txt",
+      "git_blob_sha": "d54a97b8ed0c39cf81b03167cdc9cbb06936ed1b",
+      "sha256": "1b4538c71a35cb89369f96c551a768cc4cf42eb8b8e55cb3109060498b124447",
+      "bytes": 1888,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/year1复现-修复复验.txt",
+      "git_blob_sha": "871bff603766ff610ac31362bbf8e821cb0101ea",
+      "sha256": "da7884b464f7f239c1b9ec4a0c5fc35aaf756c991128651619357172cb89c4de",
+      "bytes": 1020,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/year1复现.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/year1导入失败-原始程序输出.txt",
+      "git_blob_sha": "05f13f1712b862ac7226e78ab474ba6ac8e177c6",
+      "sha256": "7816eb6c6bee90348bde2d6dbb936cb646b888fffbc2d5679dd09e72a9494b7a",
+      "bytes": 87,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/官方幂等验算.json",
+      "git_blob_sha": "1e4eb400167911d0889b6ed440fa0f971b20f499",
+      "sha256": "e9959eee4daf2f800e766df206a414a801ea5583ae7062c56a2539a41d00c099",
+      "bytes": 2857,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/官方数据获取.txt",
+      "git_blob_sha": "469097c1bb2a39737bd264ffae58f80e81ba76ce",
+      "sha256": "e9965268b62015ed5aa01dc730baa1bbe9bb9118e81682ab70e6162d5502aabf",
+      "bytes": 490,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/提交前Go静态检查.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/提交前复验/go.jsonl",
+      "git_blob_sha": "3d7265cff320b25c720b2e2fc9ffc1173ef9a3bd",
+      "sha256": "251e5dfbcf35edfe9be1d6cd5347c95a673ed2fc19f2e0d7bcbbd1cf27a7e029",
+      "bytes": 39763,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/提交前复验/python.txt",
+      "git_blob_sha": "5b31c8ca8fb945cacd8e88d9c388f7b381ee015e",
+      "sha256": "f17ebafd29e34cf16bf3529feb2e3b5b2716e4ff0823bacf46f25f421a04d433",
+      "bytes": 1350,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/提交前复验/summary.json",
+      "git_blob_sha": "72d04f0c689e25fa729c4a4deb8f667d43911f7c",
+      "sha256": "05d25ad8e4feb36808a6f4b887268f7aa5975c7db75280b93e3ef57295d39824",
+      "bytes": 675,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/提交前复验命令.txt",
+      "git_blob_sha": "2f2c0ed2e2bcff1dff7b3dd39879595919fbab79",
+      "sha256": "c7c310f64896a2ba5f012e6b9c2c085c4ff770f1e5a4b31ec3050425670ef999",
+      "bytes": 2025,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/收工测试/go.jsonl",
+      "git_blob_sha": "e49d72e2340ee11703b7631ce56512cccbbce0f5",
+      "sha256": "e7ee0071c11525adc5f6166f78b73ee09a2f5b40b9692c345c07f14588f07072",
+      "bytes": 39711,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/收工测试/python.txt",
+      "git_blob_sha": "e2f73ca19970d458d74fcef69bd7d569c2205488",
+      "sha256": "b55047ea720620d264e813bf105047b98b6b1c639ef4911499276de48c721471",
+      "bytes": 1350,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/收工测试/summary.json",
+      "git_blob_sha": "135a0ee47444433041d255e7023d7c2a115c77f0",
+      "sha256": "a0a3abd9ad3af5799dff90e9c97e4a6480d7d9037c9396e1b32f10e623261534",
+      "bytes": 669,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/收工测试命令.txt",
+      "git_blob_sha": "7e1c0307f7681c8f06affaf7bb13e5a4b143b456",
+      "sha256": "15eab914ad973455539175de176c86b087c0e9eae01f6a686d063dc63a326322",
+      "bytes": 2019,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/最终测试/go.jsonl",
+      "git_blob_sha": "bbf28d532c3ca1a5df5053f4b88499825299f761",
+      "sha256": "d47caeb4d159fe77a92e03f2bb8859f94cc6b0d5eca9aa0b8327502d17dbc870",
+      "bytes": 39766,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/最终测试/python.txt",
+      "git_blob_sha": "13a38b3177a6ef1f6989eab3c74fc8842bc8d531",
+      "sha256": "f5d6750cded86272da991a6f69cb203c42fe2e6f14401e64f0211e4a3afe024b",
+      "bytes": 1183,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/最终测试/summary.json",
+      "git_blob_sha": "8466319915f268f8d7e745584347e058e6558c5d",
+      "sha256": "8a44d4df25c0c5173cb271739eb6baf805abd4b75a3db6446fe531e78911d371",
+      "bytes": 641,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/最终测试命令.txt",
+      "git_blob_sha": "4705e59e788a11c56c5e88c1b15e58123ade8f47",
+      "sha256": "300f32a2765cc3f7fac2db7aa70dbcf4f7af3f3a3ce1e1d4f22d4780b3a38366",
+      "bytes": 1824,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/环境安装.txt",
+      "git_blob_sha": "8f59e7c3425880fc5e346ede1090846cd1a629e5",
+      "sha256": "08100b991ce04c90ce34a59ffa3c076b826bbd6ad3212d5c4e1f9929b89b47f7",
+      "bytes": 1612,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出/脚本语法检查.txt",
+      "git_blob_sha": "a18bae1390284c486fdfeddf336614033cd84463",
+      "sha256": "1b119d1ab746df8b3ac3d8e450f7aba5bbb4a7dcef6c19044e56d2e23857bb53",
+      "bytes": 40,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/原始输出校验.json",
+      "git_blob_sha": "3c38036425c3c695013e8e76b46d90a2abed0fc9",
+      "sha256": "4ddcfb2de6194986c6c4948a0d303050e404407f10fa27eeb27cac3ee8f40ecb",
+      "bytes": 4969,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/归档核验.md",
+      "git_blob_sha": "96bef102e423c6ca468ae43bd213c02d5587bb26",
+      "sha256": "9b736a28ef043e60a5dea0a067879a8006ffd186e3a92d72fd2847bbbd821428",
+      "bytes": 3106,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/2026-10-15-01-真实测试输出-浏览器原文.jpg",
+      "git_blob_sha": "7d5628cf95da3e565ee98b5d4adb82231192f354",
+      "sha256": "ed1c1910de88e44fcca4644bd2cdc6b1f8ce05e58bfec80cdd2e8e912fac1476",
+      "bytes": 42658,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/2026-10-15-02-首年度对账输出-浏览器原文.jpg",
+      "git_blob_sha": "be9822aba46a26ffa892201af4ab42042ff91b38",
+      "sha256": "ba500464d0000416f83ceb8d98cc444c75bf02912e8f2ede1bdd396b2f986f46",
+      "bytes": 57924,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/截图/截图索引.md",
+      "git_blob_sha": "424cbce14e4149c07f91f2835b6ed49d3dc62105",
+      "sha256": "35c89f91011e4534cf91dfe73a82b61b536608feb9c54f7081eb48c1df788b19",
+      "bytes": 1404,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/执行交接.md",
+      "git_blob_sha": "bb48af318c33853c185b8d83167c8fb4ee1c4cc4",
+      "sha256": "abcd3203666817ace716ade6c39cf9dfcb308ab0a7adf42f3cbbd53d85290d01",
+      "bytes": 10505,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/执行记录.md",
+      "git_blob_sha": "132f2fdc05101420d0850f2c2730a38e7fbd1c4f",
+      "sha256": "0b13b5ccbd504afc9b93f8e682f1734433ccf40e94c4e5e9d6cf8fb6bc2806ea",
+      "bytes": 1439,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "测试记录.md",
+      "git_blob_sha": "2075f827d2f13c1a01b531021186ae22f24002af",
+      "sha256": "69f55d3d927aaa9653f0001605157b9721e35dd0ccd863edff5a8bc0ddbfba96",
+      "bytes": 8650,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "要做什么.md",
-      "git_blob_sha": "edaa1d2703f173925bc56160ebb66c732043a9f0",
-      "sha256": "41b7971f836057928767a83a18447cf236636dce7698340aaa5cf55852eac32b",
-      "bytes": 9624,
-      "tracked": true
+      "git_blob_sha": "471d02d24032fb5895c64db08e4f9e849c7f5755",
+      "sha256": "347266f1bb70102da372ca74c56180b59d6638da5f13f34e20990ab919ecbd26",
+      "bytes": 9729,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "规划校验记录.md",
       "git_blob_sha": "547db312731b6fe2396032a6d9e495f90a4ceb19",
       "sha256": "65493e69b16f38aaf61003d178c076accaf93510ca6973e86818ec92d2ba1359",
       "bytes": 3302,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "课程完成核对表.md",
-      "git_blob_sha": "d7ab1858e631481941753b3249bc4eebcd9730b9",
-      "sha256": "66db8767fc694327d8acb2d307dc0e1eb2aa1a6a2be88a7dca07991d411ddfc2",
-      "bytes": 6568,
-      "tracked": true
+      "git_blob_sha": "0900a8abe897a617b0dc81377e13aeeeef23b96d",
+      "sha256": "c3df4b1a1915057de3a29f2382317b79b07ad8ee339e8c284e33a7b6ee8c3bb4",
+      "bytes": 7283,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "资料/官方数据只读核查.md",
       "git_blob_sha": "3d9f0ffad3fda0a46270823b6c5346fae254b797",
       "sha256": "2d0572d2f20c083d4359e106af4735113030a49ceff729eb3cc9cd449e2f94ac",
       "bytes": 1829,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "资料/新版材料对照与采纳.md",
       "git_blob_sha": "31ead837583e88cdce450766e3f5c3968bf6e0f0",
       "sha256": "f845c8b1b09f00fad60e2d69f144715269aa434b9116ca122b274c45569cd294",
       "bytes": 9559,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "资料/本人需求修改记录.md",
       "git_blob_sha": "4fefa55112bd061ab8b436fa933a7cb009057bec",
       "sha256": "63cc43b581623c09128e8b48ce0ceb3be1c01406ca09ea0a7510bb34576fd70f",
       "bytes": 2524,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "资料/认证方案依据.md",
       "git_blob_sha": "08a2c556ae7cbce4594f48959ebd6ad2ca1eabae",
       "sha256": "f887f98bf48cba863f19f18260c4876c3fda1fe4a299896a375c1822116634d2",
       "bytes": 2651,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
+    },
+    {
+      "path": "运行说明.md",
+      "git_blob_sha": "52cbaf97580a6cc82936c5ef02eec7f88fdeefb8",
+      "sha256": "1cbc6353dd379f02d2c8bbb69e0ca06e3de65624f4f9147e90c4b37f198ff763",
+      "bytes": 4583,
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "选题自查表.md",
       "git_blob_sha": "98af60540affaa06aaed7f02fa6fe52556012065",
       "sha256": "39f1f5bb495e64e33b22a578ad93d49c21f252f59f992cbb2989a6950e1433ac",
       "bytes": 2252,
-      "tracked": true
+      "tracked": true,
+      "hash_basis": "canonical committed Git blob"
     },
     {
       "path": "每日工作记录/2026-10-14/提交记录.txt",
       "git_blob_sha": "60004c7c7e9e22e6ff317169582d78237e83c653",
       "sha256": "357fde847ffad51a1f4a7a83d3a6c24e01764487adbebba63acfa8b7c471d9bd",
       "bytes": 627,
-      "tracked": false
+      "tracked": false,
+      "hash_basis": "actual derived log bytes"
     },
     {
       "path": "每日工作记录/2026-10-15/提交记录.txt",
-      "git_blob_sha": "1b690dc78aed6dc47be09b2abfb0908371e8113f",
-      "sha256": "aab1d087978093d332ddc3e8b2545c6f90f898b89ddf873ce562181ddc76e19b",
-      "bytes": 111,
-      "tracked": false
+      "git_blob_sha": "4a6525939296812d93196e62985d2df316008883",
+      "sha256": "75a9699b79631c372b2c6e8513f4a379f9c5f888573fb11e227e114169e4593d",
+      "bytes": 846,
+      "tracked": false,
+      "hash_basis": "actual derived log bytes"
     }
   ],
   "bundle": {
     "path": "_备份/项目存档.bundle",
-    "bytes": 328713,
-    "sha256": "feeacae06dcfe92c0b10c4cf8d3fec71cc916575b3aadca4634527dfa0f22e08",
-    "git_blob_sha": "d604ebcede70c4515e64a116a085cabe467a83a6",
+    "bytes": 489645,
+    "sha256": "909b8beaa28bc880130dd22bcf3005dea354a8b9e94be79cdcb93e49d2ee5eb3",
+    "git_blob_sha": "2695825dafb7203d304fd36dce90fe71ff8d7bbd",
     "history": "complete local Git history"
   },
   "excludes": [
     "teacher source materials and attachment",
-    "official raw data",
+    "official raw data and private full row evidence",
     "runtime database and credentials",
     "dependency caches",
     "ignored audit scratch files"
-  ],
-  "conversation_roles": {
-    "guidance": "current thread",
-    "implementation": "separate user-created execution thread",
-    "handoff": "execution saves actual evidence and stops writing before guidance archives"
-  }
+  ]
 }

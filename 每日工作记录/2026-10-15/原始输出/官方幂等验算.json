@@ -1,0 +1,76 @@
+{
+  "command": [
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075444-ed083080\\recon.exe",
+    "run",
+    "--prepared",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\prepared-final-code-20261015\\acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5",
+    "--db",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075444-ed083080\\verification.sqlite"
+  ],
+  "exit": 0,
+  "reused": true,
+  "run_id": "50a59e168207d6567ff833f9c9e9dc1a63f6c71fdb553e8ddef4f88039ed098f",
+  "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "final_code_records_hash": "13c30c289e07663d0e39bc2960fd92c5fccf453f848b591526693740155ed9d9",
+  "before": {
+    "runs": {
+      "count": 1,
+      "content_sha256": "d655b942102903c02ed306d65017538c3d3353d66226feb008460ec5ac079a13"
+    },
+    "decisions": {
+      "count": 10205,
+      "content_sha256": "7b4ed5f63f9d91a7dc9a8172130e24517b3652e5e58fd96c0dc901ec85634f3f"
+    },
+    "cases": {
+      "count": 4991,
+      "content_sha256": "22db80db887bfac9fc8d6cb9670f619d71d189cfb52e44519591578309f9404d"
+    },
+    "allocations": {
+      "count": 5214,
+      "content_sha256": "d7f371dcda99f5d397a5fd333944de9356f546c2b8c15267f8bbf32d07fda079"
+    },
+    "sale_balances": {
+      "count": 511565,
+      "content_sha256": "898b03551704af279c58a25cbb8e689283ccf8cb7124729db9624d759bc982c2"
+    },
+    "candidate_evidence": {
+      "count": 10709,
+      "content_sha256": "33e1d2ce515ee415da74d5e24cf250b0b24f11a0c62d220ab11e91c651dc9ade"
+    },
+    "audit_events": {
+      "count": 0,
+      "content_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "after": {
+    "runs": {
+      "count": 1,
+      "content_sha256": "d655b942102903c02ed306d65017538c3d3353d66226feb008460ec5ac079a13"
+    },
+    "decisions": {
+      "count": 10205,
+      "content_sha256": "7b4ed5f63f9d91a7dc9a8172130e24517b3652e5e58fd96c0dc901ec85634f3f"
+    },
+    "cases": {
+      "count": 4991,
+      "content_sha256": "22db80db887bfac9fc8d6cb9670f619d71d189cfb52e44519591578309f9404d"
+    },
+    "allocations": {
+      "count": 5214,
+      "content_sha256": "d7f371dcda99f5d397a5fd333944de9356f546c2b8c15267f8bbf32d07fda079"
+    },
+    "sale_balances": {
+      "count": 511565,
+      "content_sha256": "898b03551704af279c58a25cbb8e689283ccf8cb7124729db9624d759bc982c2"
+    },
+    "candidate_evidence": {
+      "count": 10709,
+      "content_sha256": "33e1d2ce515ee415da74d5e24cf250b0b24f11a0c62d220ab11e91c651dc9ade"
+    },
+    "audit_events": {
+      "count": 0,
+      "content_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "unchanged": true
+}

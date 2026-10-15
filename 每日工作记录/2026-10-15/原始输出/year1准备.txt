@@ -1,0 +1,11 @@
+{"stage": "read_source", "rows": 50000}
+{"stage": "read_source", "rows": 100000}
+{"stage": "read_source", "rows": 150000}
+{"stage": "read_source", "rows": 200000}
+{"stage": "read_source", "rows": 250000}
+{"stage": "read_source", "rows": 300000}
+{"stage": "read_source", "rows": 350000}
+{"stage": "read_source", "rows": 400000}
+{"stage": "read_source", "rows": 450000}
+{"stage": "read_source", "rows": 500000}
+{"stage": "prepared", "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\prepared\\acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5", "dataset_id": "acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5", "scope": "year1", "cleaning_version": "cr-1.0.0", "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980", "source": {"source_url": "https://archive.ics.uci.edu/dataset/502/online+retail+ii", "download_url": "https://archive.ics.uci.edu/static/public/502/online%2Bretail%2Bii.zip", "license": "CC BY 4.0", "citation": "Chen, D. (2012). Online Retail II. DOI 10.24432/C5CG6D", "acquired_at": "2026-10-14T23:49:45.502128+00:00", "sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980", "zip_sha256": "572e36277c2390fbfde10664750731e0a86f55e33470d91919085f0408e67bfb", "bytes": 45622278}, "sheets": ["Year 2009-2010"], "stats": {"raw": 525461, "accepted": 521770, "excluded": 3691, "exclusion_reasons": {"nonpositive_price": 3690, "invalid_quantity": 1}, "flags": {"missing_customer": 107927, "same_sheet_duplicate": 13283, "missing_description": 2928}, "accepted_sales": 511565, "accepted_cancels": 10205, "raw_cancels": 10206, "excluded_cancels": 1, "unknown_invoice": 0}, "records_sha256": "13c30c289e07663d0e39bc2960fd92c5fccf453f848b591526693740155ed9d9", "seconds": 24.115530900000067, "source_time_semantics": "timezone unspecified in source", "status": "prepared"}

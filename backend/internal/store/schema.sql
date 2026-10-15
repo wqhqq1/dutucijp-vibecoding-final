@@ -1,0 +1,61 @@
+PRAGMA journal_mode=WAL;
+CREATE TABLE IF NOT EXISTS datasets (
+ id TEXT PRIMARY KEY, scope TEXT NOT NULL, source_hash TEXT NOT NULL,
+ cleaning_version TEXT NOT NULL, records_hash TEXT NOT NULL,
+ manifest_json TEXT NOT NULL, status TEXT NOT NULL CHECK(status IN ('staging','published','failed'))
+);
+CREATE TABLE IF NOT EXISTS source_rows (
+ id TEXT PRIMARY KEY, source_hash TEXT NOT NULL, sheet TEXT NOT NULL,
+ sheet_index INTEGER NOT NULL, source_row INTEGER NOT NULL, raw_json TEXT NOT NULL,
+ UNIQUE(source_hash,sheet,source_row)
+);
+CREATE TABLE IF NOT EXISTS normalized_rows (
+ dataset_id TEXT NOT NULL REFERENCES datasets(id), id TEXT NOT NULL,
+ source_id TEXT NOT NULL REFERENCES source_rows(id), invoice TEXT NOT NULL,
+ stock TEXT NOT NULL, description TEXT NOT NULL, quantity INTEGER NOT NULL,
+ source_time TEXT NOT NULL, price TEXT NOT NULL, customer TEXT NOT NULL,
+ country TEXT NOT NULL, kind TEXT NOT NULL, excluded TEXT NOT NULL,
+ flags TEXT NOT NULL, duplicate_of TEXT NOT NULL, PRIMARY KEY(dataset_id,id)
+);
+CREATE INDEX IF NOT EXISTS row_lookup ON normalized_rows(dataset_id,excluded,kind);
+CREATE INDEX IF NOT EXISTS row_identity ON normalized_rows(dataset_id,customer,stock,price,country,source_time);
+CREATE TABLE IF NOT EXISTS runs (
+ id TEXT PRIMARY KEY, dataset_id TEXT NOT NULL REFERENCES datasets(id), rule_version TEXT NOT NULL,
+ status TEXT NOT NULL CHECK(status IN ('staging','published','failed')), started_at TEXT NOT NULL,
+ completed_at TEXT, summary_json TEXT, error TEXT, UNIQUE(dataset_id,rule_version)
+);
+CREATE TABLE IF NOT EXISTS decisions (
+ run_id TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE, cancel_id TEXT NOT NULL,
+ quantity INTEGER NOT NULL CHECK(quantity>0), classification TEXT NOT NULL
+ CHECK(classification IN ('matched','suspected','no_original')), reason TEXT NOT NULL,
+ candidate_lower_bound INTEGER NOT NULL, PRIMARY KEY(run_id,cancel_id)
+);
+CREATE TABLE IF NOT EXISTS sale_balances (
+ run_id TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE, sale_id TEXT NOT NULL,
+ original INTEGER NOT NULL CHECK(original>0), allocated INTEGER NOT NULL CHECK(allocated>=0),
+ remaining INTEGER NOT NULL CHECK(remaining>=0), CHECK(original-allocated=remaining), PRIMARY KEY(run_id,sale_id)
+);
+CREATE TABLE IF NOT EXISTS allocations (
+ run_id TEXT NOT NULL, cancel_id TEXT NOT NULL, sale_id TEXT NOT NULL,
+ quantity INTEGER NOT NULL CHECK(quantity>0), amount TEXT NOT NULL, method TEXT NOT NULL,
+ actor TEXT, PRIMARY KEY(run_id,cancel_id),
+ FOREIGN KEY(run_id,cancel_id) REFERENCES decisions(run_id,cancel_id) ON DELETE CASCADE,
+ FOREIGN KEY(run_id,sale_id) REFERENCES sale_balances(run_id,sale_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS cases (
+ id TEXT PRIMARY KEY, run_id TEXT NOT NULL, cancel_id TEXT NOT NULL, reason TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','in_progress','closed')),
+ assignee TEXT, version INTEGER NOT NULL DEFAULT 1, conclusion TEXT NOT NULL DEFAULT '',
+ UNIQUE(run_id,cancel_id), FOREIGN KEY(run_id,cancel_id) REFERENCES decisions(run_id,cancel_id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS allocations_sale ON allocations(run_id,sale_id);
+CREATE TABLE IF NOT EXISTS candidate_evidence (
+ run_id TEXT NOT NULL, cancel_id TEXT NOT NULL, position INTEGER NOT NULL,
+ sale_id TEXT NOT NULL, remaining INTEGER NOT NULL, eligible INTEGER NOT NULL,
+ reason TEXT NOT NULL, rule_version TEXT NOT NULL, PRIMARY KEY(run_id,cancel_id,position),
+ FOREIGN KEY(run_id,cancel_id) REFERENCES decisions(run_id,cancel_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS audit_events (
+ id INTEGER PRIMARY KEY, case_id TEXT NOT NULL REFERENCES cases(id), actor TEXT NOT NULL,
+ action TEXT NOT NULL, occurred_at TEXT NOT NULL, before_json TEXT NOT NULL, after_json TEXT NOT NULL
+);

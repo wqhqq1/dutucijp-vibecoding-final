@@ -3,7 +3,7 @@
 ## 项目与当前阶段
 
 本项目为 VC-R-03 退货对账与差异处理系统。所有工程工作遵循执行计划与三份规格。
-当前为规格阶段，应用代码和测试尚未完成。未实际运行的结果不得写成通过。
+2026-10-15实际状态：数据准备与保守配对CLI已实现，year1/benchmark实跑；FR-05、FR-06、FR-08及目标用例已验证。页面、认证、人工工作流与正式NFR尚未完成，all官方全量尚未实跑。未实际运行的结果不得写成通过。
 学生：王麒皓，20251101030，机国际2502。
 Claude Code 格式已获老师批准改为 Codex 对应格式。
 
@@ -19,8 +19,9 @@ Claude Code 格式已获老师批准改为 Codex 对应格式。
 
 ## 怎么运行
 
-启动、测试、复现脚本的目标接口分别为 start.ps1、test.ps1、reproduce.ps1；它们目前待实现。
-脚本实现后，在这里替换为已验证的实际命令和环境版本。
+已验证环境：Go 1.27.2 windows/amd64；隔离Python 3.12.10、openpyxl 3.1.5。依赖和运行数据在%LOCALAPPDATA%/dutucijp-vibecoding-final/，Go依赖由go.mod/go.sum锁定。
+准备环境：`./tools/bootstrap.ps1`；测试：`./test.ps1`；隔离后端复现：`./reproduce.ps1 -Scope year1`（也支持benchmark/all参数，all尚未用官方全量实跑）。每次复现创建新验证库，已有业务库不清空。
+当前只有CLI，没有监听中的HTTP服务。start.ps1、浏览器界面、认证和完整复现门槛仍待后续实现，不能将CLI通过称为全系统通过。
 后端采用 Go + Gin + database/sql + modernc.org/sqlite，前端采用 React + TypeScript + Vite；Python 负责 Excel 准备。
 
 ## 目录职责

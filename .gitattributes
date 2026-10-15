@@ -1,0 +1,2 @@
+# Preserve original tool output bytes; CRLF is a valid native Windows line ending.
+每日工作记录/**/原始输出/** -text whitespace=cr-at-eol

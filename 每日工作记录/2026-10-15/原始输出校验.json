@@ -1,0 +1,147 @@
+{
+  "verified_at": "2026-10-15T08:05:40.961832+08:00",
+  "source_code_head": "984edfba6b5d488c468049386167d012d782a156",
+  "original_output_bytes_equal_staged": true,
+  "files": [
+    {
+      "path": "原始输出/benchmark复现.txt",
+      "bytes": 998,
+      "sha256": "112d7c3e1da2d8c7ac5862ff605c9d288ecdcc23d454ab2b3a13c1665a06e8c9"
+    },
+    {
+      "path": "原始输出/Go依赖安装.txt",
+      "bytes": 1015,
+      "sha256": "214cce09e623828f21c7e0470fb1e17d843e9c936782d8d931d687474f4f6f95"
+    },
+    {
+      "path": "原始输出/Go测试-修复复验.jsonl",
+      "bytes": 39768,
+      "sha256": "6a838e7e4ec224d69c33ac0df5af63dc008a26e4ae705d92763cb9725a52e124"
+    },
+    {
+      "path": "原始输出/Go测试-首次.jsonl",
+      "bytes": 39239,
+      "sha256": "b9c15960e116273e492ed1bc76eff78c86c4c4326cba5725ac1ba04f26221e0d"
+    },
+    {
+      "path": "原始输出/Go静态检查.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "原始输出/Python测试-首次.txt",
+      "bytes": 1183,
+      "sha256": "fa6857557833a52d802820e5b2cbf822062f00a48fac792538b4c3a4b28c544c"
+    },
+    {
+      "path": "原始输出/year1准备-最终代码复核.txt",
+      "bytes": 1922,
+      "sha256": "3820b0e5d3fa4c8d35fd7f97ff7f62d71021e772fe91b51062a4fdea494c7217"
+    },
+    {
+      "path": "原始输出/year1准备.txt",
+      "bytes": 1888,
+      "sha256": "1b4538c71a35cb89369f96c551a768cc4cf42eb8b8e55cb3109060498b124447"
+    },
+    {
+      "path": "原始输出/year1复现-修复复验.txt",
+      "bytes": 1020,
+      "sha256": "da7884b464f7f239c1b9ec4a0c5fc35aaf756c991128651619357172cb89c4de"
+    },
+    {
+      "path": "原始输出/year1复现.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "原始输出/year1导入失败-原始程序输出.txt",
+      "bytes": 87,
+      "sha256": "7816eb6c6bee90348bde2d6dbb936cb646b888fffbc2d5679dd09e72a9494b7a"
+    },
+    {
+      "path": "原始输出/官方幂等验算.json",
+      "bytes": 2857,
+      "sha256": "e9959eee4daf2f800e766df206a414a801ea5583ae7062c56a2539a41d00c099"
+    },
+    {
+      "path": "原始输出/官方数据获取.txt",
+      "bytes": 490,
+      "sha256": "e9965268b62015ed5aa01dc730baa1bbe9bb9118e81682ab70e6162d5502aabf"
+    },
+    {
+      "path": "原始输出/提交前Go静态检查.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "原始输出/提交前复验/go.jsonl",
+      "bytes": 39763,
+      "sha256": "251e5dfbcf35edfe9be1d6cd5347c95a673ed2fc19f2e0d7bcbbd1cf27a7e029"
+    },
+    {
+      "path": "原始输出/提交前复验/python.txt",
+      "bytes": 1350,
+      "sha256": "f17ebafd29e34cf16bf3529feb2e3b5b2716e4ff0823bacf46f25f421a04d433"
+    },
+    {
+      "path": "原始输出/提交前复验/summary.json",
+      "bytes": 675,
+      "sha256": "05d25ad8e4feb36808a6f4b887268f7aa5975c7db75280b93e3ef57295d39824"
+    },
+    {
+      "path": "原始输出/提交前复验命令.txt",
+      "bytes": 2025,
+      "sha256": "c7c310f64896a2ba5f012e6b9c2c085c4ff770f1e5a4b31ec3050425670ef999"
+    },
+    {
+      "path": "原始输出/收工测试/go.jsonl",
+      "bytes": 39711,
+      "sha256": "e7ee0071c11525adc5f6166f78b73ee09a2f5b40b9692c345c07f14588f07072"
+    },
+    {
+      "path": "原始输出/收工测试/python.txt",
+      "bytes": 1350,
+      "sha256": "b55047ea720620d264e813bf105047b98b6b1c639ef4911499276de48c721471"
+    },
+    {
+      "path": "原始输出/收工测试/summary.json",
+      "bytes": 669,
+      "sha256": "a0a3abd9ad3af5799dff90e9c97e4a6480d7d9037c9396e1b32f10e623261534"
+    },
+    {
+      "path": "原始输出/收工测试命令.txt",
+      "bytes": 2019,
+      "sha256": "15eab914ad973455539175de176c86b087c0e9eae01f6a686d063dc63a326322"
+    },
+    {
+      "path": "原始输出/最终测试/go.jsonl",
+      "bytes": 39766,
+      "sha256": "d47caeb4d159fe77a92e03f2bb8859f94cc6b0d5eca9aa0b8327502d17dbc870"
+    },
+    {
+      "path": "原始输出/最终测试/python.txt",
+      "bytes": 1183,
+      "sha256": "f5d6750cded86272da991a6f69cb203c42fe2e6f14401e64f0211e4a3afe024b"
+    },
+    {
+      "path": "原始输出/最终测试/summary.json",
+      "bytes": 641,
+      "sha256": "8a44d4df25c0c5173cb271739eb6baf805abd4b75a3db6446fe531e78911d371"
+    },
+    {
+      "path": "原始输出/最终测试命令.txt",
+      "bytes": 1824,
+      "sha256": "300f32a2765cc3f7fac2db7aa70dbcf4f7af3f3a3ce1e1d4f22d4780b3a38366"
+    },
+    {
+      "path": "原始输出/环境安装.txt",
+      "bytes": 1612,
+      "sha256": "08100b991ce04c90ce34a59ffa3c076b826bbd6ad3212d5c4e1f9929b89b47f7"
+    },
+    {
+      "path": "原始输出/脚本语法检查.txt",
+      "bytes": 40,
+      "sha256": "1b119d1ab746df8b3ac3d8e450f7aba5bbb4a7dcef6c19044e56d2e23857bb53"
+    }
+  ]
+}

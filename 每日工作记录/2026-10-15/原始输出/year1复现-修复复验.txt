@@ -1,0 +1,26 @@
+{
+  "run_id": "50a59e168207d6567ff833f9c9e9dc1a63f6c71fdb553e8ddef4f88039ed098f",
+  "dataset_id": "acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5",
+  "rule_version": "conservative-1.0.0",
+  "status": "published",
+  "reused": false,
+  "input": {
+    "raw": 525461,
+    "accepted": 521770,
+    "excluded": 3691,
+    "accepted_sales": 511565,
+    "accepted_cancels": 10205,
+    "raw_cancels": 10206,
+    "excluded_cancels": 1
+  },
+  "matched": 5214,
+  "suspected": 2699,
+  "no_original": 2292,
+  "cases": 4991,
+  "workers": 8,
+  "reconcile_and_persist_seconds": 7.525859,
+  "coverage": "5214/10205 (51.092602%)",
+  "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+}
+Original outputs and private official row evidence: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\verification\20261015-075444-ed083080
+This is an isolated backend verification, not a browser workflow, human operation, or NFR acceptance.

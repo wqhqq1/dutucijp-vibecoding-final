@@ -49,3 +49,7 @@ orders_*.csv
 Thumbs.db
 *.tmp
 *.log
+__pycache__/
+*.pyc
+*.heavy.lock
+*.exe

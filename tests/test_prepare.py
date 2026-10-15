@@ -1,0 +1,99 @@
+"""Isolated fixtures for cleaning rules; never substitutes for official business data."""
+import csv
+import json
+import sys
+import tempfile
+import unittest
+from zipfile import ZipFile
+from datetime import datetime
+from pathlib import Path
+
+import openpyxl
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
+from prepare import HEADERS, SHEETS, prepare
+from fetch_data import sha256
+
+
+class CleaningTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.addCleanup(self.temp.cleanup)
+
+    def fixture(self, first, second=()):
+        book = openpyxl.Workbook()
+        book.remove(book.active)
+        for title, rows in zip(SHEETS, (first, second)):
+            sheet = book.create_sheet(title)
+            sheet.append(HEADERS)
+            for row in rows:
+                sheet.append(row)
+        path = self.root/'fixture.xlsx'
+        book.save(path)
+        return path
+
+    def sale(self):
+        return ['123', 'ABC-1', 'Fixture only', 10, datetime(2010,1,1,9), 0.1, 42, 'UK']
+
+    def run_prepare(self, first, second=(), scope='all'):
+        path = self.fixture(first, second)
+        before = sha256(path)
+        target = prepare(path, scope, self.root/'prepared', progress=lambda _:None)
+        self.assertEqual(before, sha256(path))
+        with (target/'records.csv').open(encoding='utf-8',newline='') as stream:
+            rows = list(csv.DictReader(stream))
+        manifest=json.loads((target/'manifest.json').read_text(encoding='utf-8'))
+        self.assertEqual(manifest['stats']['raw'], manifest['stats']['accepted']+manifest['stats']['excluded'])
+        return rows,manifest
+
+    def test_TC03_header_and_alphanumeric_stock(self):
+        rows,m=self.run_prepare([self.sale()]);self.assertEqual(rows[0]['stock'],'ABC-1');self.assertEqual(rows[0]['customer'],'42');self.assertEqual(rows[0]['price'],'0.1');self.assertEqual(rows[0]['source_row'],'2')
+
+    def test_TC03_exact_XML_price_survives_beyond_binary_float_precision(self):
+        path=self.fixture([self.sale()])
+        exact='0.1000000000000000000000000001'
+        with ZipFile(path) as source:
+            parts={name:source.read(name) for name in source.namelist()}
+        parts['xl/worksheets/sheet1.xml']=parts['xl/worksheets/sheet1.xml'].replace(b'<v>0.1</v>', ('<v>'+exact+'</v>').encode())
+        with ZipFile(path,'w') as target:
+            for name,content in parts.items():target.writestr(name,content)
+        prepared=prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+        with (prepared/'records.csv').open(encoding='utf-8',newline='') as stream:
+            row=next(csv.DictReader(stream))
+        self.assertEqual(row['price'],exact)
+        self.assertEqual(json.loads(row['raw_json'])[5],['n',exact])
+
+    def test_TC04_invalid_price_quantity_and_case_insensitive_C(self):
+        values=[]
+        for invoice,quantity,price in [('C1',4,1),('123',-4,1),('C2',-4,0),('123',1.5,1),('c3',-4,1)]:
+            r=self.sale();r[0],r[3],r[5]=invoice,quantity,price;values.append(r)
+        rows,m=self.run_prepare(values)
+        self.assertEqual([r['excluded'] for r in rows],['invalid_quantity','invalid_quantity','nonpositive_price','invalid_quantity',''])
+        self.assertEqual(rows[-1]['kind'],'cancel')
+
+    def test_TC05_missing_identity_retained_description_uninvented(self):
+        r=self.sale();r[0]='C1';r[3]=-4;r[2]=r[6]=r[7]=None
+        rows,m=self.run_prepare([r]);r=rows[0];self.assertEqual(r['excluded'],'');self.assertEqual(r['description'],'');self.assertEqual(r['flags'],'missing_customer|missing_country|missing_description')
+
+    def test_TC06_cross_sheet_occurrence_alignment_2_and_3(self):
+        a=self.sale();rows,m=self.run_prepare([a,a],[a,a,a]);self.assertEqual([r['excluded'] for r in rows],['','','cross_sheet_duplicate','cross_sheet_duplicate','']);self.assertEqual([r['duplicate_of'] for r in rows[2:]],['0:2','0:3','']);self.assertEqual(m['stats']['raw'],5)
+
+    def test_TC07_same_sheet_duplicates_all_marked_not_deleted(self):
+        a=self.sale();rows,m=self.run_prepare([a,a]);self.assertEqual(m['stats']['accepted'],2);self.assertTrue(all('same_sheet_duplicate' in r['flags'] for r in rows))
+
+    def test_TC08_exclusion_priority_and_single_main_reason(self):
+        a=self.sale();a[0]=None;a[3]=-1;a[5]=0
+        rows,m=self.run_prepare([a],[a]);self.assertEqual(rows[0]['excluded'],'invalid_field');self.assertEqual(rows[1]['excluded'],'cross_sheet_duplicate');self.assertEqual(sum(m['stats']['exclusion_reasons'].values()),2)
+
+    def test_TC02_scope_selected_before_cleaning(self):
+        rows,m=self.run_prepare([self.sale()]*10002,[self.sale()],scope='benchmark');self.assertEqual(m['stats']['raw'],10000);self.assertEqual(rows[0]['source_row'],'2');self.assertEqual(rows[-1]['source_row'],'10001')
+
+    def test_prepared_hash_tampering_rejected(self):
+        path=self.fixture([self.sale()]);target=prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+        with (target/'records.csv').open('a',encoding='utf-8') as stream:stream.write('tamper')
+        with self.assertRaisesRegex(ValueError,'hash mismatch'):prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

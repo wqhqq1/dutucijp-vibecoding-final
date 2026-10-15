@@ -1,0 +1,1 @@
+SQL logic error: table normalized_rows has 15 columns but 16 values were supplied (1)

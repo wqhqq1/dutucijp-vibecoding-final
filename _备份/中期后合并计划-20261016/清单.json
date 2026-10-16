@@ -1,0 +1,36 @@
+{
+  "actual_time": "2026-10-16T23:48:55.235544+08:00",
+  "kind": "planning-only-post-midterm-merged",
+  "native_head": "da50e92cb4797413a58504e07e7874219d456a9d",
+  "native_main_commit_count": 49,
+  "bundle_sha256": "8da372135ea018aa01258f915e3172d1c4610c49657a1646c73b009d874e9804",
+  "bundle_bytes": 14032616,
+  "parts": [
+    {
+      "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part001",
+      "bytes": 6291456,
+      "sha256": "f69a5114e896013eba56a29e1852a4e5a2cba0d7502326cb5474cd2e4f9b1d7d"
+    },
+    {
+      "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part002",
+      "bytes": 6291456,
+      "sha256": "77413dc687cdf859462577212d786f55732b992ed48e7484e14415e505d3447c"
+    },
+    {
+      "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part003",
+      "bytes": 1449704,
+      "sha256": "d628093cbb9c9435391795c42377b342ac781d4e06faf040c2fd0a00a523d4ac"
+    }
+  ],
+  "source_files": [
+    "AGENTS.md",
+    "四段式任务草稿.md",
+    "四段式任务草稿-中期后合并.md",
+    "执行交接说明.md",
+    "执行计划.md",
+    "资料/计划历史/四段式任务草稿-合并前-20261016.md"
+  ],
+  "midterm_files_or_package_modified": false,
+  "new_development_executed": false,
+  "note": "完整原生bundle按parts顺序拼接可恢复；本次只合并prompt并新增交易检索性能要求，不是实现或验收。旧中期及教师交付备份保留。"
+}

@@ -1,0 +1,629 @@
+- complementary:
+  - generic: R
+  - text: 退货对账
+  - generic: 差异处理工作台
+  - paragraph: 工作空间
+  - button "差异处理 ›":
+    - text: 差异处理
+    - generic: ›
+  - button "交易检索 ›":
+    - text: 交易检索
+    - generic: ›
+  - button "配对明细 ›":
+    - text: 配对明细
+    - generic: ›
+  - button "数据任务 ›":
+    - text: 数据任务
+    - generic: ›
+  - button "账户安全 ›":
+    - text: 账户安全
+    - generic: ›
+  - text: UCI Online Retail II
+  - text: 规则推断 · 课程模拟
+- main:
+  - paragraph: RETURN RECONCILIATION
+  - heading "差异处理" [level=1]
+  - text: finance
+  - generic: 财务
+  - button "退出"
+  - generic: 当前数据范围
+  - combobox "当前数据运行":
+    - option "all · cr-1.0.1 · conservative-1.0.0" [selected]
+    - option "year1 · cr-1.0.1 · conservative-1.0.0"
+  - generic: 财务与管理员全局视图
+  - status: 统计为最近一次加载结果；筛选仅作用于下方明细。
+  - button "刷新统计"
+  - generic: 待处理
+  - strong: "9450"
+  - generic: 处理中
+  - strong: "0"
+  - generic: 已关闭
+  - strong: "0"
+  - generic: 差异总数
+  - strong: "9450"
+  - generic: 规则推断；没有真实原订单关联号。人工处理记录为课程模拟。
+  - generic "查看来源、行数守恒与初始配对口径" [active]
+  - paragraph: 原始 1067371 ＝ 接纳 1038818 ＋ 排除 28553；初始自动配对 9714，疑似 6275，当前规则下无合格原单 3175。人工确认保留初始分类。
+  - text: 客户编号
+  - textbox "客户编号"
+  - text: 商品编码
+  - textbox "商品编码"
+  - text: 交易单号
+  - textbox "交易单号"
+  - text: 状态
+  - combobox "状态":
+    - option "全部" [selected]
+    - option "待处理"
+    - option "处理中"
+    - option "已关闭"
+  - text: 起始日期
+  - textbox "起始日期"
+  - text: 结束日期 不含
+  - textbox "结束日期 不含"
+  - button "查询"
+  - link "导出筛选交易CSV":
+    - /url: /api/exports?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page=1&page_size=50
+  - table:
+    - rowgroup:
+      - row "源记录 差异原因 责任人 状态 版本 操作":
+        - columnheader "源记录"
+        - columnheader "差异原因"
+        - columnheader "责任人"
+        - columnheader "状态"
+        - columnheader "版本"
+        - columnheader "操作"
+    - rowgroup:
+      - row "0:180 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:180 Year 2009-2010":
+          - text: 0:180
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:181 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:181 Year 2009-2010":
+          - text: 0:181
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:182 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:182 Year 2009-2010":
+          - text: 0:182
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:183 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:183 Year 2009-2010":
+          - text: 0:183
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:184 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:184 Year 2009-2010":
+          - text: 0:184
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:185 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:185 Year 2009-2010":
+          - text: 0:185
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:186 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:186 Year 2009-2010":
+          - text: 0:186
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:187 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:187 Year 2009-2010":
+          - text: 0:187
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:188 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:188 Year 2009-2010":
+          - text: 0:188
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:198 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:198 Year 2009-2010":
+          - text: 0:198
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:199 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:199 Year 2009-2010":
+          - text: 0:199
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:200 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:200 Year 2009-2010":
+          - text: 0:200
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:201 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:201 Year 2009-2010":
+          - text: 0:201
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:202 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:202 Year 2009-2010":
+          - text: 0:202
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:203 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:203 Year 2009-2010":
+          - text: 0:203
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:204 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:204 Year 2009-2010":
+          - text: 0:204
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:205 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:205 Year 2009-2010":
+          - text: 0:205
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:206 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:206 Year 2009-2010":
+          - text: 0:206
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:207 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:207 Year 2009-2010":
+          - text: 0:207
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:208 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:208 Year 2009-2010":
+          - text: 0:208
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:209 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:209 Year 2009-2010":
+          - text: 0:209
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:210 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:210 Year 2009-2010":
+          - text: 0:210
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:287 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:287 Year 2009-2010":
+          - text: 0:287
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:318 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:318 Year 2009-2010":
+          - text: 0:318
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:319 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:319 Year 2009-2010":
+          - text: 0:319
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:320 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:320 Year 2009-2010":
+          - text: 0:320
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:401 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:401 Year 2009-2010":
+          - text: 0:401
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:402 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:402 Year 2009-2010":
+          - text: 0:402
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:403 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:403 Year 2009-2010":
+          - text: 0:403
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:578 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:578 Year 2009-2010":
+          - text: 0:578
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:591 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:591 Year 2009-2010":
+          - text: 0:591
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:592 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:592 Year 2009-2010":
+          - text: 0:592
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:593 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:593 Year 2009-2010":
+          - text: 0:593
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:628 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:628 Year 2009-2010":
+          - text: 0:628
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:679 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:679 Year 2009-2010":
+          - text: 0:679
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:736 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:736 Year 2009-2010":
+          - text: 0:736
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:737 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:737 Year 2009-2010":
+          - text: 0:737
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:738 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:738 Year 2009-2010":
+          - text: 0:738
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:928 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:928 Year 2009-2010":
+          - text: 0:928
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:929 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:929 Year 2009-2010":
+          - text: 0:929
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:935 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:935 Year 2009-2010":
+          - text: 0:935
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:955 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:955 Year 2009-2010":
+          - text: 0:955
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1112 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1112 Year 2009-2010":
+          - text: 0:1112
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1136 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1136 Year 2009-2010":
+          - text: 0:1136
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1162 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1162 Year 2009-2010":
+          - text: 0:1162
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1163 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1163 Year 2009-2010":
+          - text: 0:1163
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1165 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1165 Year 2009-2010":
+          - text: 0:1165
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1166 Year 2009-2010 no_identity_match 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1166 Year 2009-2010":
+          - text: 0:1166
+          - generic: Year 2009-2010
+        - cell "no_identity_match"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1378 Year 2009-2010 多个合格候选 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1378 Year 2009-2010":
+          - text: 0:1378
+          - generic: Year 2009-2010
+        - cell "多个合格候选"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+      - row "0:1425 Year 2009-2010 no_strictly_earlier_sale 待派单 待处理 1 查看与处理 ›":
+        - cell "0:1425 Year 2009-2010":
+          - text: 0:1425
+          - generic: Year 2009-2010
+        - cell "no_strictly_earlier_sale"
+        - cell "待派单"
+        - cell "待处理":
+          - generic: 待处理
+        - cell "1"
+        - cell "查看与处理 ›":
+          - button "查看与处理 ›"
+  - generic: 共 9450 条 · 每页50条
+  - button "上一页" [disabled]
+  - generic: 第 1 页
+  - button "下一页"

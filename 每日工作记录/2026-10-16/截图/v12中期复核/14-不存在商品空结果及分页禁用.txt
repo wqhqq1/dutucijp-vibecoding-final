@@ -1,0 +1,71 @@
+- complementary:
+  - generic: R
+  - text: 退货对账
+  - generic: 差异处理工作台
+  - paragraph: 工作空间
+  - button "差异处理 ›":
+    - text: 差异处理
+    - generic: ›
+  - button "交易检索 ›":
+    - text: 交易检索
+    - generic: ›
+  - button "配对明细 ›":
+    - text: 配对明细
+    - generic: ›
+  - button "数据任务 ›":
+    - text: 数据任务
+    - generic: ›
+  - button "账户安全 ›":
+    - text: 账户安全
+    - generic: ›
+  - text: UCI Online Retail II
+  - text: 规则推断 · 课程模拟
+- main:
+  - paragraph: RETURN RECONCILIATION
+  - heading "交易检索" [level=1]
+  - text: finance
+  - generic: 财务
+  - button "退出"
+  - status: 操作已保存
+  - generic: 当前数据范围
+  - combobox "当前数据运行":
+    - option "all · cr-1.0.1 · conservative-1.0.0"
+    - option "year1 · cr-1.0.1 · conservative-1.0.0" [selected]
+  - generic: 财务与管理员全局视图
+  - status: 统计为最近一次加载结果；筛选仅作用于下方明细。
+  - button "刷新统计"
+  - generic: 待处理
+  - strong: "4988"
+  - generic: 处理中
+  - strong: "0"
+  - generic: 已关闭
+  - strong: "3"
+  - generic: 差异总数
+  - strong: "4991"
+  - generic: 规则推断；没有真实原订单关联号。人工处理记录为课程模拟。
+  - generic "查看来源、行数守恒与初始配对口径"
+  - text: 客户编号
+  - textbox "客户编号": "13526"
+  - text: 商品编码
+  - textbox "商品编码": DOES-NOT-EXIST-20261016
+  - text: 交易单号
+  - textbox "交易单号"
+  - text: 状态
+  - combobox "状态":
+    - option "全部" [selected]
+    - option "待处理"
+    - option "处理中"
+    - option "已关闭"
+  - text: 起始日期
+  - textbox "起始日期"
+  - text: 结束日期 不含
+  - textbox "结束日期 不含"
+  - button "查询" [active]
+  - link "导出筛选交易CSV":
+    - /url: /api/exports?run_id=76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad&page=1&page_size=50&customer=13526&stock=DOES-NOT-EXIST-20261016
+  - heading "当前范围没有记录" [level=3]
+  - paragraph: 可调整筛选条件，或等待新的差异派单。
+  - generic: 共 0 条 · 每页50条
+  - button "上一页" [disabled]
+  - generic: 第 1 页
+  - button "下一页" [disabled]

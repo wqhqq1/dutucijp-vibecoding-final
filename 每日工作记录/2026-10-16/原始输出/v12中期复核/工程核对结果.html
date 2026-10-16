@@ -1,0 +1,103 @@
+<!doctype html><meta charset="utf-8"><title>工程动作真实输出复核</title><style>body{font:20px/1.55 system-ui;margin:36px;max-width:1250px;color:#163747}pre{white-space:pre-wrap;font:17px/1.6 Consolas,monospace;background:#f2f5f6;padding:20px}h1{font-size:32px}.pending{color:#975120}</style>
+<h1>2026-10-16 工程动作真实输出复核</h1>
+<p>本页展示下列原始文件的内容；是浏览器结果页，不是Codex CLI界面截图。</p>
+<h2>run-app：新CLI进程显式调用</h2>
+<pre>已通过本进程技能目录发现并调用 `run-app`，路径为仓库下 `.agents/skills/run-app/SKILL.md`。
+
+- 安全要求：保留现有改动、业务库及历史；复用已验证版本，不清库；真实密码、Passkey/TOTP及恢复材料由本人操作，秘密不得读取或记录；10-22、11-17仅用预先构建并预演的版本。
+- 已只读核对技能、AGENTS.md、10-16执行交接、运行说明及 Git 状态；存在5项未跟踪文件/目录，未改动。
+- 复用既有演示的推荐命令（本轮未执行）：
+  ```powershell
+  ./tools/launch-demo.ps1
+  ```
+  运行说明记载其复用 `optimized-20261016` 和原演示库。
+- 本轮可见输出中**未观察到不可信 Hook 警告**；未启用、信任或验证任何 Hook，不能据此记为可信 Hook deny 通过。
+
+未构建、启停应用、运行测试或性能测试，也未访问凭据、运行数据库或原始行。</pre>
+<h2>Hook：定义/策略自测通过，运行时拦截尚未验证</h2>
+<p class="pending">待本人在 /hooks 审阅信任；没有启用信任绕过，不以策略自测代替实际deny。</p>
+<pre>{
+  &quot;actual_time&quot;: &quot;2026-10-16T19:30:40.255142+08:00&quot;,
+  &quot;cli_version&quot;: &quot;codex-cli 0.163.0-alpha.10.2&quot;,
+  &quot;skill_fresh_process_invocation&quot;: &quot;completed; see original JSONL and result&quot;,
+  &quot;hook_policy_tests&quot;: [
+    {
+      &quot;case&quot;: &quot;safe_read&quot;,
+      &quot;input&quot;: {
+        &quot;hook_event_name&quot;: &quot;PreToolUse&quot;,
+        &quot;tool_input&quot;: {
+          &quot;command&quot;: &quot;Get-Content -LiteralPath canary.txt&quot;
+        }
+      },
+      &quot;output&quot;: {},
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;remove_item&quot;,
+      &quot;input&quot;: {
+        &quot;hook_event_name&quot;: &quot;PreToolUse&quot;,
+        &quot;tool_input&quot;: {
+          &quot;command&quot;: &quot;Remove-Item -LiteralPath canary.txt&quot;
+        }
+      },
+      &quot;output&quot;: {
+        &quot;hookSpecificOutput&quot;: {
+          &quot;hookEventName&quot;: &quot;PreToolUse&quot;,
+          &quot;permissionDecision&quot;: &quot;deny&quot;,
+          &quot;permissionDecisionReason&quot;: &quot;Destructive filesystem/history command blocked. Use the documented disposable Hook canary for the demonstration; never target source, original data or private credentials.&quot;
+        }
+      },
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;hard_reset&quot;,
+      &quot;input&quot;: {
+        &quot;hook_event_name&quot;: &quot;PreToolUse&quot;,
+        &quot;tool_input&quot;: {
+          &quot;command&quot;: &quot;git reset --hard&quot;
+        }
+      },
+      &quot;output&quot;: {
+        &quot;hookSpecificOutput&quot;: {
+          &quot;hookEventName&quot;: &quot;PreToolUse&quot;,
+          &quot;permissionDecision&quot;: &quot;deny&quot;,
+          &quot;permissionDecisionReason&quot;: &quot;Destructive filesystem/history command blocked. Use the documented disposable Hook canary for the demonstration; never target source, original data or private credentials.&quot;
+        }
+      },
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;other_event&quot;,
+      &quot;input&quot;: {
+        &quot;hook_event_name&quot;: &quot;PostToolUse&quot;,
+        &quot;tool_input&quot;: {
+          &quot;command&quot;: &quot;Remove-Item canary.txt&quot;
+        }
+      },
+      &quot;output&quot;: {},
+      &quot;passed&quot;: true
+    }
+  ],
+  &quot;hook_runtime_denial_verified&quot;: false,
+  &quot;hook_trust&quot;: &quot;awaiting human review in /hooks&quot;,
+  &quot;context_compaction&quot;: &quot;not performed in the user conversation; no fabricated before/after numbers&quot;,
+  &quot;model_usage&quot;: &quot;CLI event totals recorded separately when present; no invented monetary cost&quot;,
+  &quot;source_hashes&quot;: {
+    &quot;.agents\\skills\\run-app\\SKILL.md&quot;: &quot;7322117470759ed978871d4e1efc758cabdf9be4452ace46244eeba02a1a2696&quot;,
+    &quot;.codex\\hooks.json&quot;: &quot;1f08658c7ae29b0e61079e0fba948824fadf622c36dc06e26f0c9c30b1ef26e4&quot;,
+    &quot;.codex\\hooks\\pre_tool_use_policy.py&quot;: &quot;80a84ee3384393a757376bc3d3b40b3206038aa3099ab70b5e1f3283ad119810&quot;
+  },
+  &quot;cli_usage_events&quot;: [
+    {
+      &quot;type&quot;: &quot;turn.completed&quot;,
+      &quot;usage&quot;: {
+        &quot;input_tokens&quot;: 83827,
+        &quot;cached_input_tokens&quot;: 63744,
+        &quot;cache_write_input_tokens&quot;: 0,
+        &quot;output_tokens&quot;: 446,
+        &quot;reasoning_output_tokens&quot;: 0
+      }
+    }
+  ],
+  &quot;cli_usage_note&quot;: &quot;Only this ephemeral read-only verification process; not project-wide token totals or cost.&quot;
+}</pre>

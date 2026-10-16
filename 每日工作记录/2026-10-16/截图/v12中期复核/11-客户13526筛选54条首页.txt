@@ -1,0 +1,480 @@
+- complementary:
+  - generic: R
+  - text: 退货对账
+  - generic: 差异处理工作台
+  - paragraph: 工作空间
+  - button "差异处理 ›":
+    - text: 差异处理
+    - generic: ›
+  - button "交易检索 ›":
+    - text: 交易检索
+    - generic: ›
+  - button "配对明细 ›":
+    - text: 配对明细
+    - generic: ›
+  - button "数据任务 ›":
+    - text: 数据任务
+    - generic: ›
+  - button "账户安全 ›":
+    - text: 账户安全
+    - generic: ›
+  - text: UCI Online Retail II
+  - text: 规则推断 · 课程模拟
+- main:
+  - paragraph: RETURN RECONCILIATION
+  - heading "交易检索" [level=1]
+  - text: finance
+  - generic: 财务
+  - button "退出"
+  - status: 操作已保存
+  - generic: 当前数据范围
+  - combobox "当前数据运行":
+    - option "all · cr-1.0.1 · conservative-1.0.0"
+    - option "year1 · cr-1.0.1 · conservative-1.0.0" [selected]
+  - generic: 财务与管理员全局视图
+  - status: 统计为最近一次加载结果；筛选仅作用于下方明细。
+  - button "刷新统计"
+  - generic: 待处理
+  - strong: "4988"
+  - generic: 处理中
+  - strong: "0"
+  - generic: 已关闭
+  - strong: "3"
+  - generic: 差异总数
+  - strong: "4991"
+  - generic: 规则推断；没有真实原订单关联号。人工处理记录为课程模拟。
+  - generic "查看来源、行数守恒与初始配对口径"
+  - text: 客户编号
+  - textbox "客户编号": "13526"
+  - text: 商品编码
+  - textbox "商品编码"
+  - text: 交易单号
+  - textbox "交易单号"
+  - text: 状态
+  - combobox "状态":
+    - option "全部" [selected]
+    - option "待处理"
+    - option "处理中"
+    - option "已关闭"
+  - text: 起始日期
+  - textbox "起始日期"
+  - text: 结束日期 不含
+  - textbox "结束日期 不含"
+  - button "查询" [active]
+  - link "导出筛选交易CSV":
+    - /url: /api/exports?run_id=76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad&page=1&page_size=50&customer=13526
+  - table:
+    - rowgroup:
+      - row "源记录 单号 客户 商品 数量 单价 国家":
+        - columnheader "源记录"
+        - columnheader "单号"
+        - columnheader "客户"
+        - columnheader "商品"
+        - columnheader "数量"
+        - columnheader "单价"
+        - columnheader "国家"
+    - rowgroup:
+      - row "0:1259 489560 13526 17164D 288 0.37 United Kingdom":
+        - cell "0:1259"
+        - cell "489560"
+        - cell "13526"
+        - cell "17164D"
+        - cell "288"
+        - cell "0.37"
+        - cell "United Kingdom"
+      - row "0:1260 489560 13526 17165D 108 0.85 United Kingdom":
+        - cell "0:1260"
+        - cell "489560"
+        - cell "13526"
+        - cell "17165D"
+        - cell "108"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1261 489560 13526 17165B 288 0.85 United Kingdom":
+        - cell "0:1261"
+        - cell "489560"
+        - cell "13526"
+        - cell "17165B"
+        - cell "288"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1262 489560 13526 35955 33 0.42 United Kingdom":
+        - cell "0:1262"
+        - cell "489560"
+        - cell "13526"
+        - cell "35955"
+        - cell "33"
+        - cell "0.42"
+        - cell "United Kingdom"
+      - row "0:1263 489560 13526 85208 1 2.1 United Kingdom":
+        - cell "0:1263"
+        - cell "489560"
+        - cell "13526"
+        - cell "85208"
+        - cell "1"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1264 489560 13526 90090 12 0.85 United Kingdom":
+        - cell "0:1264"
+        - cell "489560"
+        - cell "13526"
+        - cell "90090"
+        - cell "12"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1265 489560 13526 90092 3 0.85 United Kingdom":
+        - cell "0:1265"
+        - cell "489560"
+        - cell "13526"
+        - cell "90092"
+        - cell "3"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1266 489560 13526 16161C 100 0.1 United Kingdom":
+        - cell "0:1266"
+        - cell "489560"
+        - cell "13526"
+        - cell "16161C"
+        - cell "100"
+        - cell "0.1"
+        - cell "United Kingdom"
+      - row "0:1267 489560 13526 22155 12 0.42 United Kingdom":
+        - cell "0:1267"
+        - cell "489560"
+        - cell "13526"
+        - cell "22155"
+        - cell "12"
+        - cell "0.42"
+        - cell "United Kingdom"
+      - row "0:1268 489560 13526 35160 8 0.85 United Kingdom":
+        - cell "0:1268"
+        - cell "489560"
+        - cell "13526"
+        - cell "35160"
+        - cell "8"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1269 489560 13526 17108D 12 0.42 United Kingdom":
+        - cell "0:1269"
+        - cell "489560"
+        - cell "13526"
+        - cell "17108D"
+        - cell "12"
+        - cell "0.42"
+        - cell "United Kingdom"
+      - row "0:1270 489560 13526 21805 36 0.42 United Kingdom":
+        - cell "0:1270"
+        - cell "489560"
+        - cell "13526"
+        - cell "21805"
+        - cell "36"
+        - cell "0.42"
+        - cell "United Kingdom"
+      - row "0:1271 489560 13526 90125A 12 2.1 United Kingdom":
+        - cell "0:1271"
+        - cell "489560"
+        - cell "13526"
+        - cell "90125A"
+        - cell "12"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1272 489560 13526 84578 1 3.75 United Kingdom":
+        - cell "0:1272"
+        - cell "489560"
+        - cell "13526"
+        - cell "84578"
+        - cell "1"
+        - cell "3.75"
+        - cell "United Kingdom"
+      - row "0:1273 489560 13526 84901 1 3.75 United Kingdom":
+        - cell "0:1273"
+        - cell "489560"
+        - cell "13526"
+        - cell "84901"
+        - cell "1"
+        - cell "3.75"
+        - cell "United Kingdom"
+      - row "0:1274 489560 13526 84327A 3 2.1 United Kingdom":
+        - cell "0:1274"
+        - cell "489560"
+        - cell "13526"
+        - cell "84327A"
+        - cell "3"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1275 489560 13526 84270 90 0.21 United Kingdom":
+        - cell "0:1275"
+        - cell "489560"
+        - cell "13526"
+        - cell "84270"
+        - cell "90"
+        - cell "0.21"
+        - cell "United Kingdom"
+      - row "0:1276 489560 13526 21034 3 0.95 United Kingdom":
+        - cell "0:1276"
+        - cell "489560"
+        - cell "13526"
+        - cell "21034"
+        - cell "3"
+        - cell "0.95"
+        - cell "United Kingdom"
+      - row "0:1277 489560 13526 35931 48 0.38 United Kingdom":
+        - cell "0:1277"
+        - cell "489560"
+        - cell "13526"
+        - cell "35931"
+        - cell "48"
+        - cell "0.38"
+        - cell "United Kingdom"
+      - row "0:1278 489560 13526 35933 48 0.38 United Kingdom":
+        - cell "0:1278"
+        - cell "489560"
+        - cell "13526"
+        - cell "35933"
+        - cell "48"
+        - cell "0.38"
+        - cell "United Kingdom"
+      - row "0:1279 489560 13526 90087 48 0.85 United Kingdom":
+        - cell "0:1279"
+        - cell "489560"
+        - cell "13526"
+        - cell "90087"
+        - cell "48"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1280 489560 13526 90092 24 0.85 United Kingdom":
+        - cell "0:1280"
+        - cell "489560"
+        - cell "13526"
+        - cell "90092"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1281 489560 13526 90085 81 0.85 United Kingdom":
+        - cell "0:1281"
+        - cell "489560"
+        - cell "13526"
+        - cell "90085"
+        - cell "81"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1282 489560 13526 90093 24 0.85 United Kingdom":
+        - cell "0:1282"
+        - cell "489560"
+        - cell "13526"
+        - cell "90093"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1283 489560 13526 90084 12 0.85 United Kingdom":
+        - cell "0:1283"
+        - cell "489560"
+        - cell "13526"
+        - cell "90084"
+        - cell "12"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1284 489560 13526 90090 24 0.85 United Kingdom":
+        - cell "0:1284"
+        - cell "489560"
+        - cell "13526"
+        - cell "90090"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1285 489560 13526 90088 24 0.85 United Kingdom":
+        - cell "0:1285"
+        - cell "489560"
+        - cell "13526"
+        - cell "90088"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1286 489560 13526 21034 1 0.95 United Kingdom":
+        - cell "0:1286"
+        - cell "489560"
+        - cell "13526"
+        - cell "21034"
+        - cell "1"
+        - cell "0.95"
+        - cell "United Kingdom"
+      - row "0:1287 489560 13526 35955 96 0.19 United Kingdom":
+        - cell "0:1287"
+        - cell "489560"
+        - cell "13526"
+        - cell "35955"
+        - cell "96"
+        - cell "0.19"
+        - cell "United Kingdom"
+      - row "0:1288 489560 13526 35957 144 0.19 United Kingdom":
+        - cell "0:1288"
+        - cell "489560"
+        - cell "13526"
+        - cell "35957"
+        - cell "144"
+        - cell "0.19"
+        - cell "United Kingdom"
+      - row "0:1355 C489563 13526 90088 -24 0.85 United Kingdom":
+        - cell "0:1355"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90088"
+        - cell "-24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1356 C489563 13526 90090 -24 0.85 United Kingdom":
+        - cell "0:1356"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90090"
+        - cell "-24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1357 C489563 13526 90084 -12 0.85 United Kingdom":
+        - cell "0:1357"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90084"
+        - cell "-12"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1358 C489563 13526 90093 -24 0.85 United Kingdom":
+        - cell "0:1358"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90093"
+        - cell "-24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1359 C489563 13526 90085 -81 0.85 United Kingdom":
+        - cell "0:1359"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90085"
+        - cell "-81"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1360 C489563 13526 90092 -24 0.85 United Kingdom":
+        - cell "0:1360"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90092"
+        - cell "-24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1361 C489563 13526 90087 -48 0.85 United Kingdom":
+        - cell "0:1361"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90087"
+        - cell "-48"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1362 C489563 13526 90092 -3 0.85 United Kingdom":
+        - cell "0:1362"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90092"
+        - cell "-3"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1363 C489563 13526 90090 -12 0.85 United Kingdom":
+        - cell "0:1363"
+        - cell "C489563"
+        - cell "13526"
+        - cell "90090"
+        - cell "-12"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1364 489564 13526 90090 36 0.85 United Kingdom":
+        - cell "0:1364"
+        - cell "489564"
+        - cell "13526"
+        - cell "90090"
+        - cell "36"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1365 489564 13526 90125C 12 2.1 United Kingdom":
+        - cell "0:1365"
+        - cell "489564"
+        - cell "13526"
+        - cell "90125C"
+        - cell "12"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1366 489564 13526 90125D 12 2.1 United Kingdom":
+        - cell "0:1366"
+        - cell "489564"
+        - cell "13526"
+        - cell "90125D"
+        - cell "12"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1367 489564 13526 90214H 2 1.25 United Kingdom":
+        - cell "0:1367"
+        - cell "489564"
+        - cell "13526"
+        - cell "90214H"
+        - cell "2"
+        - cell "1.25"
+        - cell "United Kingdom"
+      - row "0:1368 489564 13526 90125A 12 2.1 United Kingdom":
+        - cell "0:1368"
+        - cell "489564"
+        - cell "13526"
+        - cell "90125A"
+        - cell "12"
+        - cell "2.1"
+        - cell "United Kingdom"
+      - row "0:1369 489564 13526 90085 81 0.85 United Kingdom":
+        - cell "0:1369"
+        - cell "489564"
+        - cell "13526"
+        - cell "90085"
+        - cell "81"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1370 489564 13526 90092 24 0.85 United Kingdom":
+        - cell "0:1370"
+        - cell "489564"
+        - cell "13526"
+        - cell "90092"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1371 489564 13526 90087 48 0.85 United Kingdom":
+        - cell "0:1371"
+        - cell "489564"
+        - cell "13526"
+        - cell "90087"
+        - cell "48"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1372 489564 13526 90092 3 0.85 United Kingdom":
+        - cell "0:1372"
+        - cell "489564"
+        - cell "13526"
+        - cell "90092"
+        - cell "3"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1373 489564 13526 90090 12 0.85 United Kingdom":
+        - cell "0:1373"
+        - cell "489564"
+        - cell "13526"
+        - cell "90090"
+        - cell "12"
+        - cell "0.85"
+        - cell "United Kingdom"
+      - row "0:1374 489564 13526 90088 24 0.85 United Kingdom":
+        - cell "0:1374"
+        - cell "489564"
+        - cell "13526"
+        - cell "90088"
+        - cell "24"
+        - cell "0.85"
+        - cell "United Kingdom"
+  - generic: 共 54 条 · 每页50条
+  - button "上一页" [disabled]
+  - generic: 第 1 页
+  - button "下一页"

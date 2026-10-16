@@ -1,0 +1,40 @@
+{
+  "actual_time": "2026-10-16T18:35:08.783209+08:00",
+  "software_source_commit": "97b790a",
+  "base_head_before_materials": "4a6ae5e",
+  "slides": 10,
+  "pdf_pages": 10,
+  "native_table_slide": 3,
+  "native_chart_slide": 5,
+  "embedded_chart_workbooks": 1,
+  "genuine_unchanged_embedded_images": 7,
+  "notes_parts": 10,
+  "planned_speech_seconds": 300,
+  "source_paths_exist": true,
+  "template_sample_text_absent_on_slides": true,
+  "pptx_finalizer_status": "pass",
+  "visual_review": {
+    "not_automated": true,
+    "see_manual_record": "每日工作记录/2026-10-16/FR18中期PPT与逐页检查.md",
+    "native_powerpoint_application_run": false
+  },
+  "artifacts": [
+    {
+      "path": "中期汇报.pptx",
+      "bytes": 790301,
+      "sha256": "fcb4fb427396f2545d266ef287fd62fb47a27946a299bea48bdbe4e88b03fd89"
+    },
+    {
+      "path": "中期汇报.pdf",
+      "bytes": 976527,
+      "sha256": "3bb259575a5bf4b417aeaf2bd5a4c200054a5843fadc0aebb2e5f5a14bbea251"
+    }
+  ],
+  "status": "pass",
+  "limits": [
+    "可审阅初稿，未冻结",
+    "真机恢复、技能重启和可信Hook deny尚待本人",
+    "97项回归为代理运行，截图22为本人亲跑旧版84项",
+    "PDF为静态预览，可编辑内容及讲者备注在PPTX"
+  ]
+}

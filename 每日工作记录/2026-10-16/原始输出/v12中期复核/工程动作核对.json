@@ -1,0 +1,87 @@
+{
+  "actual_time": "2026-10-16T19:30:40.255142+08:00",
+  "cli_version": "codex-cli 0.163.0-alpha.10.2",
+  "skill_fresh_process_invocation": "completed; see original JSONL and result",
+  "hook_policy_tests": [
+    {
+      "case": "safe_read",
+      "input": {
+        "hook_event_name": "PreToolUse",
+        "tool_input": {
+          "command": "Get-Content -LiteralPath canary.txt"
+        }
+      },
+      "output": {},
+      "passed": true
+    },
+    {
+      "case": "remove_item",
+      "input": {
+        "hook_event_name": "PreToolUse",
+        "tool_input": {
+          "command": "Remove-Item -LiteralPath canary.txt"
+        }
+      },
+      "output": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "Destructive filesystem/history command blocked. Use the documented disposable Hook canary for the demonstration; never target source, original data or private credentials."
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "hard_reset",
+      "input": {
+        "hook_event_name": "PreToolUse",
+        "tool_input": {
+          "command": "git reset --hard"
+        }
+      },
+      "output": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "Destructive filesystem/history command blocked. Use the documented disposable Hook canary for the demonstration; never target source, original data or private credentials."
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "other_event",
+      "input": {
+        "hook_event_name": "PostToolUse",
+        "tool_input": {
+          "command": "Remove-Item canary.txt"
+        }
+      },
+      "output": {},
+      "passed": true
+    }
+  ],
+  "hook_runtime_denial_verified": false,
+  "hook_trust": "cancelled by user; no trust or runtime test pending",
+  "context_compaction": "not performed in the user conversation; no fabricated before/after numbers",
+  "model_usage": "CLI event totals recorded separately when present; no invented monetary cost",
+  "source_hashes": {
+    ".agents\\skills\\run-app\\SKILL.md": "7322117470759ed978871d4e1efc758cabdf9be4452ace46244eeba02a1a2696",
+    ".codex\\hooks.json": "1f08658c7ae29b0e61079e0fba948824fadf622c36dc06e26f0c9c30b1ef26e4",
+    ".codex\\hooks\\pre_tool_use_policy.py": "80a84ee3384393a757376bc3d3b40b3206038aa3099ab70b5e1f3283ad119810"
+  },
+  "cli_usage_events": [
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 83827,
+        "cached_input_tokens": 63744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 446,
+        "reasoning_output_tokens": 0
+      }
+    }
+  ],
+  "cli_usage_note": "Only this ephemeral read-only verification process; not project-wide token totals or cost.",
+  "updated_at": "2026-10-16T19:44:29.990826+08:00",
+  "hook_scope": "Historical policy self-tests only; all Hook plans, acceptance and presentation cancelled. New local enable config removed."
+}

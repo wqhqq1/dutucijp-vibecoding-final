@@ -1,0 +1,16 @@
+{
+  "actual_time": "2026-10-16T18:39:14.912526+08:00",
+  "files": [
+    {
+      "path": "中期汇报.pptx",
+      "working_sha256": "fcb4fb427396f2545d266ef287fd62fb47a27946a299bea48bdbe4e88b03fd89",
+      "staged_sha256": "fcb4fb427396f2545d266ef287fd62fb47a27946a299bea48bdbe4e88b03fd89"
+    },
+    {
+      "path": "中期汇报.pdf",
+      "working_sha256": "3bb259575a5bf4b417aeaf2bd5a4c200054a5843fadc0aebb2e5f5a14bbea251",
+      "staged_sha256": "3bb259575a5bf4b417aeaf2bd5a4c200054a5843fadc0aebb2e5f5a14bbea251"
+    }
+  ],
+  "git_diff_cached_check_exit": 0
+}

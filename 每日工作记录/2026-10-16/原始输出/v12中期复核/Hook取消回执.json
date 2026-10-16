@@ -1,0 +1,9 @@
+{
+  "actual_time": "2026-10-16T19:39:43.231602+08:00",
+  "reason": "User explicitly cancelled non-required Hook tasks and presentation",
+  "active_hook_tasks_cancelled": true,
+  "runtime_hook_test_cancelled": true,
+  "new_local_enable_config_removed": true,
+  "historical_definition_retained": true,
+  "other_dates_and_tasks_retained": true
+}

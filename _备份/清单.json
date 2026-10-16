@@ -2,11 +2,11 @@
   "format_version": 3,
   "repository": "wqhqq1/dutucijp-vibecoding-final",
   "date": "2026-10-16",
-  "captured_at": "2026-10-16T18:00:12.706939+08:00",
+  "captured_at": "2026-10-16T19:45:03.470373+08:00",
   "timezone": "Asia/Shanghai",
-  "backup_kind": "performance-floors-passed-progress-and-demo-launchers",
-  "local_head": "4a6ae5e5c4f74494dec18f80b926bf5c3c4e9834",
-  "local_commit_count": 41,
+  "backup_kind": "v1.2-presentation-review-ui-verification-and-user-hook-cancellation",
+  "local_head": "d3b37004094ee0836d61a3f5d77c47657e39ff4c",
+  "local_commit_count": 43,
   "actual_work_dates": [
     "2026-10-14",
     "2026-10-15",
@@ -21,38 +21,136 @@
     "2026-10-22",
     "2026-11-17"
   ],
-  "original_task_bodies_unchanged": true,
+  "original_task_bodies_unchanged": false,
+  "daily_changes_scope": "user-authorized Hook clause removal and directly related skill evidence wording; other daily bodies unchanged",
+  "only_user_authorized_hook_and_related_skill_clauses_changed": true,
+  "tracked_worktree_clean": true,
+  "preserved_untracked_work_excluded": [
+    "中期汇报网页版/index.html",
+    "中期汇报网页版/中期汇报-网页版.pdf",
+    "中期汇报讲稿（网页版）.md",
+    "每日工作记录/2026-10-16/FR18中期网页版演示.md"
+  ],
   "course_requirements_version": "v1.2",
   "software_overall_acceptance": "performance floors passed; remaining real-device and course-delivery items incomplete",
-  "ppt": "next planned work; no authored PPT/PDF",
-  "formal_course_report": "not generated",
+  "ppt": "tracked ten-page PPTX/PDF and script exist; v1.2 revision pending. Existing untracked web authoring work preserved locally and excluded from this native snapshot.",
+  "formal_course_report": "not completed",
   "verification": {
-    "status": "passed",
-    "actual_date": "2026-10-16",
-    "execution_evidence_files_verified": 102,
-    "formal_nfr01_03_trials": 9,
-    "all_four_performance_floors_passed": true,
-    "nfr04_requests": 300,
-    "nfr04_failed": 0,
-    "nfr04_p95_milliseconds": 11.7245,
-    "go_tests": 76,
-    "python_tests": 15,
-    "frontend_tests": 6,
-    "priority_target_45s_5s": "not reached; optimization stopped by user",
-    "task_counts": {
-      "completed": 3,
-      "partial": 3,
-      "pending": 26,
-      "reserved": 2
-    },
-    "course_delivery_complete": false,
-    "coaching_test_output_files": 8,
-    "coaching_retest_passed": true,
-    "launcher_check_only_passed": true,
-    "launcher_cold_start_exercised": false,
-    "original_daily_task_bodies_unchanged": 32,
-    "future_records_created": 0,
-    "broken_links": []
+    "actual_time": "2026-10-16T19:44:29.990826+08:00",
+    "pdf_pages_read_and_rendered": 10,
+    "actual_ui_screenshot_count": 16,
+    "hook_cancelled": true,
+    "no_hook_runtime_test": true,
+    "temporary_hook_enable_config_absent": true,
+    "daily_execution_slots": 32,
+    "reserved_days": [
+      "2026-10-22",
+      "2026-11-17"
+    ],
+    "daily_bodies_changed_dates": [
+      "2026-10-19",
+      "2026-10-20",
+      "2026-11-06"
+    ],
+    "daily_changes_scope": "user-authorized Hook clause removal and directly related skill evidence wording; other daily bodies unchanged",
+    "screenshots": [
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/01-未登录业务门禁.jpg",
+        "bytes": 14133,
+        "sha256": "6467aff15cb2704d85a93a007f99e8cd50c8d476963b24196c555872d6c89cef",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/02-全量来源与分类守恒.jpg",
+        "bytes": 108565,
+        "sha256": "95d3b5bcde6fb35d7764aab35f41f67eba79ca0a527049ef9dd5b2db31b0f33f",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/03-多候选不自动配对.jpg",
+        "bytes": 113183,
+        "sha256": "81684d19dc8b551f572b42b9dc67437bc9adca7c579ed6ed1d729a80610f5e99",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/04-案例182起点与时间边界.jpg",
+        "bytes": 105391,
+        "sha256": "13bf7e090f38961d561fcd1cfb821cfea80a4d7833cc54e3e78492740c41af55",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/05-派单成功版本2.jpg",
+        "bytes": 103802,
+        "sha256": "933dc17dfe0b38ce9a73bb8983f980fe2479ce53c0ec1fd48dc581af610ab3bb",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/06-重复派单被拒绝.jpg",
+        "bytes": 104148,
+        "sha256": "5bc0d1609850cd9ead8d01ce424ac3dd75e37cd28aab53923a5f86c25e93b6ee",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/07-开始处理版本3.jpg",
+        "bytes": 115261,
+        "sha256": "b6510fe897eed801a89abcbfde2c0b52492dd276e3cf15cef05216e384b51093",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/08-空结论拒绝且仍为版本3.jpg",
+        "bytes": 116207,
+        "sha256": "dd1c935743c303fdfc0705a61ed74178fe6a223309b3dd2002984c6d79f088b5",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/09-结案版本4与三条审计.jpg",
+        "bytes": 124587,
+        "sha256": "f446e06e073d6a747fa69a496d1e1e8369018a79c9cde9227348f58448a8199a",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.jpg",
+        "bytes": 122375,
+        "sha256": "708a8ebe9034f1ca64365d07ec253b10df2f00c65f3f1cddb164343ff89efa9d",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/11-客户13526筛选54条首页.jpg",
+        "bytes": 105188,
+        "sha256": "891f7d9a6f47db012bc645191f352e70d5271130f6122b0eef29401b7a4eec0a",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/12-筛选第二页4条且末页禁用.jpg",
+        "bytes": 89691,
+        "sha256": "14c46258935f67cecf71ac6fdb1f0c127debf7fa357ecd77c61041d32770a0af",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/13-技能新进程调用与Hook自测原始结果.jpg",
+        "bytes": 56106,
+        "sha256": "326c47d0cffc860f7d208af42f92267bc8a3a35e943ffa5f0c0475268300e9de",
+        "use_in_new_presentation": false
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/14-不存在商品空结果及分页禁用.jpg",
+        "bytes": 76284,
+        "sha256": "f791379129e709325eea79b25a4aea612599f4528b9687e0289b67318ae7c630",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/15-冷启动后会话与演示记录保留.jpg",
+        "bytes": 102268,
+        "sha256": "a19ce6447da4296741064831324e5de91e6673c880d6945c20d6b35fe4b80222",
+        "use_in_new_presentation": true
+      },
+      {
+        "path": "每日工作记录/2026-10-16/截图/v12中期复核/16-技能新CLI进程调用实证.jpg",
+        "bytes": 88440,
+        "sha256": "0fc409dc5975a0516a159bc13b0d53571ee8db5fc890d49c1d09cf41846f27d6",
+        "use_in_new_presentation": true
+      }
+    ]
   },
   "source_files": [
     {
@@ -85,9 +183,9 @@
     },
     {
       "path": ".gitattributes",
-      "git_blob_sha": "9bc0106cf7af3c060f339528f707fd9072a3ab9e",
-      "sha256": "ebbd1eecb392601b670adf077cf72ade2eacd42c140cd968279f661ebb49b80f",
-      "bytes": 213,
+      "git_blob_sha": "810df5e9088aff1e986e038f08447ba81239038a",
+      "sha256": "8c90ba54dbfbfe8fd620d8407d170abaece690d65628f243c088d5ddebddb238",
+      "bytes": 335,
       "tracked": true
     },
     {
@@ -99,16 +197,16 @@
     },
     {
       "path": "AGENTS.md",
-      "git_blob_sha": "e317924940d4977e3a187b2c427d7e08e637101f",
-      "sha256": "cada70a4f7d9a3c6d3ee3b0346183446ae6a91b9e2c879bc762f6d2fcaf1de5b",
-      "bytes": 11039,
+      "git_blob_sha": "3a468402fa9be7ea69b85999f71455eb848defc1",
+      "sha256": "9b2f1006d25e42a40f05bcdc0800a93b4d7de45a308fedcefaa2a9205bba58f3",
+      "bytes": 12252,
       "tracked": true
     },
     {
       "path": "README.md",
-      "git_blob_sha": "ab924f436f1fec423e666fb65bf1803f29904c58",
-      "sha256": "8da87360d11e19713cbfaa465a5f8c997954a073254ac5bb0836ff71cc65ac3a",
-      "bytes": 10039,
+      "git_blob_sha": "8e9ef544e6a076576e5a3bfe2480c7a5c6f1772e",
+      "sha256": "d24cad16b93945df81fb6be4512f8c53fa7173f68fdc6703f11ada27d01fef08",
+      "bytes": 10857,
       "tracked": true
     },
     {
@@ -539,10 +637,24 @@
       "tracked": true
     },
     {
+      "path": "tools/build_midterm_slides.mjs",
+      "git_blob_sha": "36ef41bd2c90b0efa912255f96c5c60a84f24503",
+      "sha256": "b74c92735b82fdc499ddf7fd5bb1fd21a0b0882bd2fe0e578e00511e64ee4ae1",
+      "bytes": 21580,
+      "tracked": true
+    },
+    {
       "path": "tools/copy_workflow_db.py",
       "git_blob_sha": "4874fbd2c5b08df0580eb770cd3adf9b845ba3fc",
       "sha256": "a306e147a1a580dca0f7582cd930c1562567eca7d9ea740900e039b6b1b312a5",
       "bytes": 4773,
+      "tracked": true
+    },
+    {
+      "path": "tools/create_midterm_preview.py",
+      "git_blob_sha": "6f026050e60e2d4896b9321ef263299ac56b1009",
+      "sha256": "080bb4d737f6bb7b35107c8c556fcef2850aed21712910d0d553fe4357a711e8",
+      "bytes": 1830,
       "tracked": true
     },
     {
@@ -564,6 +676,13 @@
       "git_blob_sha": "7c63ed9de14e48b79cdab9ea11615fb1f849f049",
       "sha256": "5996091d7a8ba1e108d76ffab467e475ec96aef851539fa7bd8e339cbef6edf6",
       "bytes": 3434,
+      "tracked": true
+    },
+    {
+      "path": "tools/inspect_midterm_materials.py",
+      "git_blob_sha": "ea0ee65978071d096899bbc4f63d55cb8ee4af1c",
+      "sha256": "c7adede02f75963f21444a8636d45c448bdd8f74216ee71cfd8b2f22a4632b74",
+      "bytes": 4840,
       "tracked": true
     },
     {
@@ -644,6 +763,27 @@
       "tracked": true
     },
     {
+      "path": "中期汇报.pdf",
+      "git_blob_sha": "2005af305db58a58fe784af97cfec223228a6d47",
+      "sha256": "3bb259575a5bf4b417aeaf2bd5a4c200054a5843fadc0aebb2e5f5a14bbea251",
+      "bytes": 976527,
+      "tracked": true
+    },
+    {
+      "path": "中期汇报.pptx",
+      "git_blob_sha": "465502e3907553decf1b0388e26d4dbcdd11db04",
+      "sha256": "fcb4fb427396f2545d266ef287fd62fb47a27946a299bea48bdbe4e88b03fd89",
+      "bytes": 790301,
+      "tracked": true
+    },
+    {
+      "path": "中期汇报讲稿.md",
+      "git_blob_sha": "7f38a5a9137ba818f178ad13f35aee750efceec8",
+      "sha256": "d5584cc3540b0c9ec4a5cfe0193f73877560ef72fc3a327c7c4b45ca8d57c0d7",
+      "bytes": 6550,
+      "tracked": true
+    },
+    {
       "path": "决定记录.md",
       "git_blob_sha": "61038eb55af7e53e15a56cc92759b9bdf2f910a2",
       "sha256": "46cf419ee68ef9656c61dd59f2a92d60f2df3d3d1f0df1cc5b21d8c663339fca",
@@ -659,9 +799,16 @@
     },
     {
       "path": "四段式任务草稿.md",
-      "git_blob_sha": "86155d1c0a9dcac051133c0b65a3602093f1193e",
-      "sha256": "03b3b40ef4b948191f1dc6e6e8dbe6dcb5c110d0e848dfe55816aede99568bb3",
-      "bytes": 64664,
+      "git_blob_sha": "1d11bc5d853471a697d6434f4bf6b3a9fb11f73d",
+      "sha256": "353192a050e9df07da81d91c13e7125d9de8ad762b65d6604d04aeb6cdaa4ab5",
+      "bytes": 64960,
+      "tracked": true
+    },
+    {
+      "path": "四段式任务草稿补充-v1.2汇报调整.md",
+      "git_blob_sha": "adfb6e781bb91dbb61ff30ac7c78e04b72b0dbc9",
+      "sha256": "d39414497836aa181bb8c2a9a02a384c12ef1f09e3664a526c7a9ff3dd60e79b",
+      "bytes": 3824,
       "tracked": true
     },
     {
@@ -680,37 +827,37 @@
     },
     {
       "path": "执行交接说明.md",
-      "git_blob_sha": "2a7834d5c0dea558fac43ad6879aa04d52d347f0",
-      "sha256": "14f333fcf3fd4b43e4245e6572e967aefc012998896ee4e7db6fd5373d232dd4",
-      "bytes": 9167,
+      "git_blob_sha": "b7600f03e3e62b33568c8b1e782b4c3d8840995b",
+      "sha256": "cd1b72424f59fbf2c33647a4c80c16b6932ea1e064d55254d25515c869abe6d3",
+      "bytes": 9950,
       "tracked": true
     },
     {
       "path": "执行计划.md",
-      "git_blob_sha": "0a350216386a20cef9ce3798032002c225fdd131",
-      "sha256": "3a421e9fc32169e875653506253f624ffd69841c7c6378ca2f5fc0d302765cac",
-      "bytes": 26311,
+      "git_blob_sha": "de76ef23f8f2eb4614908c7df8f77192c752813f",
+      "sha256": "3cc6f413b83fa67e22d3b36d6f773b39ca908327118f812b07521fffff40b08a",
+      "bytes": 27001,
       "tracked": true
     },
     {
       "path": "提交索引.md",
-      "git_blob_sha": "fba5686e89f46c641527e79222a02e7e73a01e7a",
-      "sha256": "f2f39fc71e0a7e6bfc80bc8d98409d885d4edab64ee3e0d57507b4aae1f48e69",
-      "bytes": 7748,
+      "git_blob_sha": "89ca286b1f175000306331c4c9d38c7459716944",
+      "sha256": "41b6c8fed579634415d74a5f570421b990e9d7f458e6595a4621dcea75117edf",
+      "bytes": 9111,
       "tracked": true
     },
     {
       "path": "本人验收步骤.md",
-      "git_blob_sha": "906e901b964e4c58013248c30695a27502ba9968",
-      "sha256": "00620d568298567f9ac1bc1a1f4f4f3f636a3884976c29b84917a5327ebea010",
-      "bytes": 6158,
+      "git_blob_sha": "a18689659940a4f6de9603a901d2177258a5a860",
+      "sha256": "af18fe8096773abdf1950c132cdc37bb7772d7bf276bbe31b1422b33ef69a4a4",
+      "bytes": 5966,
       "tracked": true
     },
     {
       "path": "材料清单.md",
-      "git_blob_sha": "5edb43a8a4ce3e42a85171c47f77abbfc7f6298a",
-      "sha256": "84cf4a7c4f50791f3a9a0ba88c81ff08f98571880b91db0f1770148eb94a334e",
-      "bytes": 3475,
+      "git_blob_sha": "7cd56b213021a3e1141d8c93fba42543c3074812",
+      "sha256": "d8ee3c4e237df9c7e1d0c3c98ab67a8001d489d80740f3a5c6ff93bf370c2dbe",
+      "bytes": 4459,
       "tracked": true
     },
     {
@@ -3171,10 +3318,73 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-16/FR18中期PPT与逐页检查.md",
+      "git_blob_sha": "a4a391571cbd2f9f1d6add0776d1fc4b2749a6d5",
+      "sha256": "1b6e836d5f1d3c5af3bdac506b468655febc25fdd7232511189004e093244c80",
+      "bytes": 7385,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/v1.2汇报复核与补验.md",
+      "git_blob_sha": "be81fc0b29a4803445e37b2261947f57926a1ee0",
+      "sha256": "890c1b452b94683c1fdec8a6db1d560ed53be89689b6fc642eb005a50be3a124",
+      "bytes": 3783,
+      "tracked": true
+    },
+    {
       "path": "每日工作记录/2026-10-16/今天做了什么.md",
-      "git_blob_sha": "34f29e4b80bc1ca7eff8ae2d659fe7afa165cdca",
-      "sha256": "8fef9b2e5ce563d2aae8e598f7d1dff3f262aeaa1e2e876d4787f4b308b2303e",
-      "bytes": 704,
+      "git_blob_sha": "1e27ef77aa32ac97d0210963c6953368cdfcd30a",
+      "sha256": "071554b88e2cee9709a111a9329bcc68b71ed8ee89097db79414371325c12568",
+      "bytes": 1133,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/Git暂存字节核对.json",
+      "git_blob_sha": "c97fcd5e43ac6e824a184f68ffeff0935aea8d7b",
+      "sha256": "77c7e71c5c5c513ea07099e95bd246fbdd46e6bc536a1da882c94b1014574a12",
+      "bytes": 567,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/pdf-check.json",
+      "git_blob_sha": "cb28d9ef5fad89e5f4b61280e7f9a50f7d61c14d",
+      "sha256": "2adf8d77f3814a3c207752d6124e8dac2caf92d26feb085eeb2c6b96bf907ac6",
+      "bytes": 240,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/slide-content.json",
+      "git_blob_sha": "9d8d329c9fae85ad0eda9c12776bdbfd973394cb",
+      "sha256": "d7c02f084603497eb76170115b7bb2c0be7ccff8cfb8c6c64e282561101f638d",
+      "bytes": 11154,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/中期汇报.pptx.validation.json",
+      "git_blob_sha": "397b51d062411ec2033d080771945b4e6e827b1b",
+      "sha256": "8afa0323a0a2945261c47f834a334f790ec99a42a69661da73465be32608f77d",
+      "bytes": 6893,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/归档操作.json",
+      "git_blob_sha": "fc8b978bf53e2f5d4ef1013a67405cc518331999",
+      "sha256": "c3b26d0566f14fd0c90813e84b78dc8715e4268d09037f29849c0121dcd35208",
+      "bytes": 267,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/材料检查.json",
+      "git_blob_sha": "36bdb3ab5f45377e647a93a0b9b905579c8ecb3f",
+      "sha256": "e5efa723d6877150ea33e9d006a1b405f35e062b8c8c2e4677cf2b6b17a543f1",
+      "bytes": 1303,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/FR18中期PPT/逐页渲染清单.json",
+      "git_blob_sha": "fa2aa623f9d23f4e7abb87263049f5289a92e789",
+      "sha256": "00194f53aca2160c8dac307d4c7225fca6dc86e1d4bd8f7800078df03576c3db",
+      "bytes": 3414,
       "tracked": true
     },
     {
@@ -3224,6 +3434,118 @@
       "git_blob_sha": "c53b977a0d620a5d146491e1ed11bdeb7d4f07ce",
       "sha256": "d290ead7806c4f11f3052bbe730bcb179070c0001bc87cf0d8fdc94750779bec",
       "bytes": 1201,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/Hook取消回执.json",
+      "git_blob_sha": "01688c2d4d30cbb5b5377ee5d5b1af0c1580c854",
+      "sha256": "1817dc710b94092d28930400d538a6c2e5badbd949833ff9cda03cce91da6512",
+      "bytes": 343,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动stderr.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动stdout.txt",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动健康检查.json",
+      "git_blob_sha": "e3814bb924e2bfb82e4af476e601d6b659342656",
+      "sha256": "8a5e77c51e1dd2412544a78b82b79f0aa4aa72d69fda86911c66bf8012fbd8f7",
+      "bytes": 244,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动前状态.json",
+      "git_blob_sha": "125876a0b49cdbb5dd7916e9de2b6b083df66bc8",
+      "sha256": "de30b9aa0a7dfc79b84431aa147baa8bd55b285328d8fbacfc6062f61d0da26f",
+      "bytes": 653,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动后状态.json",
+      "git_blob_sha": "125876a0b49cdbb5dd7916e9de2b6b083df66bc8",
+      "sha256": "de30b9aa0a7dfc79b84431aa147baa8bd55b285328d8fbacfc6062f61d0da26f",
+      "bytes": 653,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动核对说明.md",
+      "git_blob_sha": "d13158d08e5606e3463bf2b713a202b668be48a1",
+      "sha256": "4c4b42e04badca2a95e6cd577c6f68b4f0825183e36db134cad2833c90e2cf51",
+      "bytes": 720,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/冷启动运行回执.json",
+      "git_blob_sha": "94451b96071095fcfae0e1c35968c51fc7bb5e87",
+      "sha256": "620b9bc721717783a767a22e4ddf44811cb340346ef0bf87242e2049cd2ff49e",
+      "bytes": 492,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/工程动作核对.json",
+      "git_blob_sha": "c0cee765bbf3ac9527697a5238439114abc00df6",
+      "sha256": "7dba740b935347b414290adc6fad13ffa7b9f906b2278abf57c9c4bd5ed9f17b",
+      "bytes": 3070,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/工程核对结果.html",
+      "git_blob_sha": "ac7b45b7905e01d8d451ee7dfa321c4fc0cd7fd9",
+      "sha256": "4720440f8e857917079886cd753137c6985f6984209e09abfe82270d39d72bf2",
+      "bytes": 5358,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/技能新进程调用stderr.txt",
+      "git_blob_sha": "13e6d9bdbe8c2b51d6b8790f4d326139d458c8c3",
+      "sha256": "69b762c07bcdb4691e52025b081aaee151281a4a973fefb83394c574df1c8b13",
+      "bytes": 739,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/技能新进程调用事件.jsonl",
+      "git_blob_sha": "c994e7907226b240901dd978d349d134745e2535",
+      "sha256": "9ed7c328756b21f6876f1254834ca260df86ddab6711d20056eebc4db842fc88",
+      "bytes": 46766,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/技能新进程调用结果.md",
+      "git_blob_sha": "7cc64c0350aa04b77e61e4151fc5e17818779c6c",
+      "sha256": "372f4c4a72e143dc2405253a131e0c1182f2c0dadb631c188a67ae4aeced23e5",
+      "bytes": 924,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/技能调用回执.json",
+      "git_blob_sha": "b9d71c1aaebd5289016ce535369eaf18696f5454",
+      "sha256": "5af25a12a69ee50d9bcb3d35e90767c4c8ff84ad959b9a655f4f10d47231e075",
+      "bytes": 194,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/技能调用结果.html",
+      "git_blob_sha": "58461271969330657c13a912d90f21711ed68159",
+      "sha256": "9f6396dba1718c258b8cd2572f740541cc3891d867eb6105529584763ed318f5",
+      "bytes": 1199,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/v12中期复核/补验与截图清单.json",
+      "git_blob_sha": "1df04b4e2fa4007b0937e64c7c2b4a17769db3af",
+      "sha256": "d2b3658e461b9d5214cc07918aba88c8179fac6da06583d5888204b07f0dddf0",
+      "bytes": 4814,
       "tracked": true
     },
     {
@@ -3955,10 +4277,304 @@
       "tracked": true
     },
     {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-01.png",
+      "git_blob_sha": "894047ed08f675db93f8eee6281313ea2718a2ae",
+      "sha256": "068f2c495d5379f727b80932a474a89664021751b1ea5bdd48b706dd1fe1ea90",
+      "bytes": 35033,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-02.png",
+      "git_blob_sha": "9d67a2ff988a7cef3c9971805ec62837f9fd76ef",
+      "sha256": "997d565c5392e5f53db9878d89025eed7c8822a560387c138dbfe8be65c8b5c2",
+      "bytes": 137853,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-03.png",
+      "git_blob_sha": "60e49787f3affb0a82de6771bf5b72716957bf66",
+      "sha256": "ba0f10c113c39e83842d30f772d9c8d0b2d4f728671c9f700f5b587475db7ce7",
+      "bytes": 61468,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-04.png",
+      "git_blob_sha": "1c9384c9e27717ea75b85ee8fc72c244bd5ee640",
+      "sha256": "d6cd65f18f85e6cd5edb5f8f788b5f15e627a0e1b3ffddb9e0be35b7e7d25199",
+      "bytes": 157634,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-05.png",
+      "git_blob_sha": "3d8abdd4eadc1939482f05738cedc6326ab40e73",
+      "sha256": "fb8b66fc1506fb92655959d9bfbe099895d4fd966e6e38626ec4566b6e5611da",
+      "bytes": 67932,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-06.png",
+      "git_blob_sha": "307c9ed7ff0acd6aee9309da93c9dda8c8a25485",
+      "sha256": "71f08799d12a63ced5df1a909e6fdc5f4b98fdb28a13d0da27380153677f23cd",
+      "bytes": 201984,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-07.png",
+      "git_blob_sha": "dcd6d04e783615311d04208165eb529eaf383267",
+      "sha256": "6630688575154e377cc803e58f5153228bcc526a315b31f6c00e2bb97a2b11fe",
+      "bytes": 109737,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-08.png",
+      "git_blob_sha": "44badc83fe307f229c5eaaed9da3d160ef5c2e3e",
+      "sha256": "2141046200e7567374889ca0221ce834f90dce099353b69fa6d375eb72a8e85e",
+      "bytes": 53290,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-09.png",
+      "git_blob_sha": "0a66e3a1e85b5abe017b1f2eb19a057858ebbe9a",
+      "sha256": "447c201fc7b16a7d353cb730f7b7401227fba21b53a636d148ffa9aa928b999f",
+      "bytes": 130074,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-10.png",
+      "git_blob_sha": "6ad174ec675200eae6d2f25ef2f139d1adbaf9c2",
+      "sha256": "1c84d0456b7e9cd81e176d7e58f2a583fd1c680f6ea1d25f9fd7399603d02f1c",
+      "bytes": 72173,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/截图索引.md",
+      "git_blob_sha": "3a82a91c3277da93f894aa3f4aa0a243add3668a",
+      "sha256": "d24fcbdb4eda6e30954381781e6e418df0ee966cc0c66d7d7b6643466e3a2781",
+      "bytes": 604,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/01-未登录业务门禁.jpg",
+      "git_blob_sha": "03e93ff1994b49f6cadee8cf57b3f8bbc685b3c8",
+      "sha256": "6467aff15cb2704d85a93a007f99e8cd50c8d476963b24196c555872d6c89cef",
+      "bytes": 14133,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/02-全量来源与分类守恒.jpg",
+      "git_blob_sha": "f932cc01640a0c0beb5b2850fc9fa032121fb988",
+      "sha256": "95d3b5bcde6fb35d7764aab35f41f67eba79ca0a527049ef9dd5b2db31b0f33f",
+      "bytes": 108565,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/02-全量来源与分类守恒.txt",
+      "git_blob_sha": "8685c3ef32399982336c8201ef294bd0c1321138",
+      "sha256": "ef820330a176902226bed941c9f15a29efa23fb0c98a40133e3c3098bd18378b",
+      "bytes": 23651,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/03-多候选不自动配对.jpg",
+      "git_blob_sha": "7840386d8e894e6a649e7ce180710d9ebaf6224c",
+      "sha256": "81684d19dc8b551f572b42b9dc67437bc9adca7c579ed6ed1d729a80610f5e99",
+      "bytes": 113183,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/03-多候选不自动配对.txt",
+      "git_blob_sha": "6489ec3da7b77c3b0012b01cc1776c3bbe34e058",
+      "sha256": "7f01158f2809949ee22cc4c63b708c13bd998405cc24eb2399712c9168e548f6",
+      "bytes": 25180,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/04-案例182起点与时间边界.jpg",
+      "git_blob_sha": "66d6f20a5b4c4f27081b03ec435cc34436589c88",
+      "sha256": "13bf7e090f38961d561fcd1cfb821cfea80a4d7833cc54e3e78492740c41af55",
+      "bytes": 105391,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/04-案例182起点与时间边界.txt",
+      "git_blob_sha": "009fac79d381d6a05cc85c20f888fc54c658227e",
+      "sha256": "cbe05f15ea959d47e1a60064f89c97ff80e2b2c58d12698194094d08157b48f7",
+      "bytes": 24609,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/05-派单成功版本2.jpg",
+      "git_blob_sha": "f14c19e341d0a8d98433486ea08502a403d84e26",
+      "sha256": "933dc17dfe0b38ce9a73bb8983f980fe2479ce53c0ec1fd48dc581af610ab3bb",
+      "bytes": 103802,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/05-派单成功版本2.txt",
+      "git_blob_sha": "6006e8be9a51c513d6d55cdf82d3beeb81a1fbc6",
+      "sha256": "fb18ec1fb8cff59ee6b16158c688f0440ea781c5fc4bba5b34b4afdf9f8f56c3",
+      "bytes": 24630,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/06-重复派单被拒绝.jpg",
+      "git_blob_sha": "b9f122ba2cf421571a5750eda16c27ad3a7a3d61",
+      "sha256": "5bc0d1609850cd9ead8d01ce424ac3dd75e37cd28aab53923a5f86c25e93b6ee",
+      "bytes": 104148,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/06-重复派单被拒绝.txt",
+      "git_blob_sha": "974938d7379642e994c030046998273782130fd7",
+      "sha256": "461594a3665837aa1f5a64129ee256314e44cb1ab24f7b79e56655ff6c56c275",
+      "bytes": 24683,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/07-开始处理版本3.jpg",
+      "git_blob_sha": "e836a795c37dd68991f2f24d9610b4a8c214d2b0",
+      "sha256": "b6510fe897eed801a89abcbfde2c0b52492dd276e3cf15cef05216e384b51093",
+      "bytes": 115261,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/07-开始处理版本3.txt",
+      "git_blob_sha": "9a26f81d95eb6163ce2b2992862ac2d073b1a15d",
+      "sha256": "5c5b46a87f37cfd2cdcba4bc12132cd0a7be7ffa7fb0402bda3bbe2d53a87779",
+      "bytes": 24915,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/08-空结论拒绝且仍为版本3.jpg",
+      "git_blob_sha": "78a43b5f8bb359f41ade5ebb874ad956bbd5dffb",
+      "sha256": "dd1c935743c303fdfc0705a61ed74178fe6a223309b3dd2002984c6d79f088b5",
+      "bytes": 116207,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/08-空结论拒绝且仍为版本3.txt",
+      "git_blob_sha": "a3559c4c3d7d91b85d2db5ba47dce609a8b46a90",
+      "sha256": "87d9cfe937bf53ed5f8d9894536b3df0eb8d8505448caa715f281c5cc808c018",
+      "bytes": 24979,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/09-结案版本4与三条审计.jpg",
+      "git_blob_sha": "ce61ebdcfb6cc3812317462eed936ec82f6f25c1",
+      "sha256": "f446e06e073d6a747fa69a496d1e1e8369018a79c9cde9227348f58448a8199a",
+      "bytes": 124587,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/09-结案版本4与三条审计.txt",
+      "git_blob_sha": "f0e006baef11609e37e7e92c0fb7f8b8f37b70f1",
+      "sha256": "1acf734d85fd98b4bb485d65aeee8fc5dbc8c092848765576ca02871e9086226",
+      "bytes": 25178,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.jpg",
+      "git_blob_sha": "0cf1e42eb4d28bfbdee2a19fa9baff905061ea33",
+      "sha256": "708a8ebe9034f1ca64365d07ec253b10df2f00c65f3f1cddb164343ff89efa9d",
+      "bytes": 122375,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.txt",
+      "git_blob_sha": "f0e006baef11609e37e7e92c0fb7f8b8f37b70f1",
+      "sha256": "1acf734d85fd98b4bb485d65aeee8fc5dbc8c092848765576ca02871e9086226",
+      "bytes": 25178,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/11-客户13526筛选54条首页.jpg",
+      "git_blob_sha": "b6e728285b6fc05a10402f403892d313c69bc2be",
+      "sha256": "891f7d9a6f47db012bc645191f352e70d5271130f6122b0eef29401b7a4eec0a",
+      "bytes": 105188,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/11-客户13526筛选54条首页.txt",
+      "git_blob_sha": "f31f03bcba7be72d53002ff39c1f6c4857112122",
+      "sha256": "928ef1ca456e590ccbdb800e43a0e27464f822958615a0f3f6d3921bf7f642b0",
+      "bytes": 14098,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/12-筛选第二页4条且末页禁用.jpg",
+      "git_blob_sha": "22775003963dd4cb30b70eebb50fc8ea61933575",
+      "sha256": "14c46258935f67cecf71ac6fdb1f0c127debf7fa357ecd77c61041d32770a0af",
+      "bytes": 89691,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/12-筛选第二页4条且末页禁用.txt",
+      "git_blob_sha": "6d19e50e79f0b5cee67df2a4ced879e3c02e3e75",
+      "sha256": "667c6d2b5262f69f0d71e408f802b7828c87e8616d0eeacf5f111a514d4cb5db",
+      "bytes": 3389,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/13-技能新进程调用与Hook自测原始结果.jpg",
+      "git_blob_sha": "79be29eb4d0d68e67084169e82acdce0560192ca",
+      "sha256": "326c47d0cffc860f7d208af42f92267bc8a3a35e943ffa5f0c0475268300e9de",
+      "bytes": 56106,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/13-技能新进程调用与Hook自测原始结果.txt",
+      "git_blob_sha": "c4cbf72228742e43d9d8bdb66f51c47c50129f3e",
+      "sha256": "996fb44b978c04f3e915ea24db5015a69ed22504a9de41c89e5a29623420f597",
+      "bytes": 3911,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/14-不存在商品空结果及分页禁用.jpg",
+      "git_blob_sha": "bc459d896571a8b0996c24f71d610b5eeae48cdb",
+      "sha256": "f791379129e709325eea79b25a4aea612599f4528b9687e0289b67318ae7c630",
+      "bytes": 76284,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/14-不存在商品空结果及分页禁用.txt",
+      "git_blob_sha": "5875cb1de1fef9e36a8fd679389f91cd26a357f6",
+      "sha256": "c60fc23e9daa0b5d6ee2eeb8b05a4c599b27181c80651a665227f53cb8cbdf9e",
+      "bytes": 2313,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/15-冷启动后会话与演示记录保留.jpg",
+      "git_blob_sha": "84efa2841098a58381d4728a274dd9f0fa81fb1d",
+      "sha256": "a19ce6447da4296741064831324e5de91e6673c880d6945c20d6b35fe4b80222",
+      "bytes": 102268,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/15-冷启动后会话与演示记录保留.txt",
+      "git_blob_sha": "cf48a77c9b29a21dfc21157f00d92c54c1e2f28a",
+      "sha256": "5b5252c83c6ec002bdf3d3ff41a9a383d91751e228d18714dddbd83e9a8b2faf",
+      "bytes": 23458,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/16-技能新CLI进程调用实证.jpg",
+      "git_blob_sha": "9b27bff5eebeb2b9b5fcfd5da6344fc64fd03429",
+      "sha256": "0fc409dc5975a0516a159bc13b0d53571ee8db5fc890d49c1d09cf41846f27d6",
+      "bytes": 88440,
+      "tracked": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/16-技能新CLI进程调用实证.txt",
+      "git_blob_sha": "60056639f3fd558ea8e7c8a13d14c42195ab9d23",
+      "sha256": "21a58eafd477395f6033d23b1774da229855d89c32df17bc2cd2e6482742f12c",
+      "bytes": 945,
+      "tracked": true
+    },
+    {
       "path": "每日工作记录/2026-10-16/执行交接.md",
-      "git_blob_sha": "e2974cd43fe50ca98502b62cee4d4cd2e53add1f",
-      "sha256": "2644b02be9a7869269f754f54acdea313d7a0441f5f1a049f5fdd44508bb6d84",
-      "bytes": 7643,
+      "git_blob_sha": "baae5d6a27c1bc2b1bc84519e615a632efb5b5e0",
+      "sha256": "fb9db8ba159f658d4d8bdf4f594d2d5e6d7879f5a089a3373a98dd1b90acc327",
+      "bytes": 8672,
       "tracked": true
     },
     {
@@ -4012,9 +4628,23 @@
     },
     {
       "path": "课程完成核对表.md",
-      "git_blob_sha": "9bbff940b7f27ea34dcbab0723263f4e477a9f6d",
-      "sha256": "3aafa0ac64f69fad3cdaabefe1a13c32d9767c19fe10f0a0dfe3a4f03b8cd106",
-      "bytes": 13257,
+      "git_blob_sha": "c33d7a33364cff732f5eb26275bf5450c3e36bf9",
+      "sha256": "9dc48931d4f48ee90c0e0a90ed46bf00357a1096c92b824371bcf1011a38149f",
+      "bytes": 14514,
+      "tracked": true
+    },
+    {
+      "path": "资料/Hook启用前核对.md",
+      "git_blob_sha": "c5d327a1d832d6076ce7fd15fb0fb41b0fa807e8",
+      "sha256": "9e9b627aa3e758dea285782b11c21a47681a86036f341a0341943d4f3cc4d47b",
+      "bytes": 1890,
+      "tracked": true
+    },
+    {
+      "path": "资料/中期汇报v1.2审阅与调整任务.md",
+      "git_blob_sha": "218a63d64dc88ddf995efdabc474995305e37154",
+      "sha256": "432dfe135ddaecd2577d550f7398098264b3e1eb138bde8929c676f6ff16b8c2",
+      "bytes": 9927,
       "tracked": true
     },
     {
@@ -4054,9 +4684,9 @@
     },
     {
       "path": "选题自查表.md",
-      "git_blob_sha": "5045cd595681abf97ccccdd627248f867e121951",
-      "sha256": "733206a4087c9824dcac7c7475b99829e71539c7033910e7738ff6436fbd813b",
-      "bytes": 2903,
+      "git_blob_sha": "0ba77e1b1301b09edd38431bf6c5f4b9c325b9ee",
+      "sha256": "0363e632da9f39f4b022a462156eb55bac87e48189df934e2f9fbedb5d84d6ec",
+      "bytes": 3250,
       "tracked": true
     },
     {
@@ -4075,17 +4705,17 @@
     },
     {
       "path": "每日工作记录/2026-10-16/提交记录.txt",
-      "git_blob_sha": "46443e85efee01d3b155a2286f156b04b975221b",
-      "sha256": "d116cb7b6810526bab646f7f8fac840ebbef09b7d780ef2a8d284bda370ee870",
-      "bytes": 438,
+      "git_blob_sha": "f8d8cad62028a508ea5be8d003f1b525c0e83fb5",
+      "sha256": "36431157b65ebaec83c2e5976ef9e2beecfd43027fd1fa929fae938d7865c4d3",
+      "bytes": 631,
       "tracked": false
     }
   ],
   "bundle": {
     "path": "_备份/项目存档.bundle",
-    "bytes": 2600592,
-    "sha256": "fe64321f815a21ad061d647d5775963849e95569ed7b17f3c780773a7c80c343",
-    "git_blob_sha": "3ff82b4a17653c023bb421ebddd756b60c766166"
+    "bytes": 6331174,
+    "sha256": "fdf308622e8efc0a604091203621af8d64d0b2631b0dec4dbb20088ac89684fb",
+    "git_blob_sha": "22eb6802ad0136cd3c3493943ddd8fc917560710"
   },
   "excludes": [
     "teacher source materials",

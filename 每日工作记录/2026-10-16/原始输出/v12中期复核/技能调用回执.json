@@ -1,0 +1,7 @@
+{
+  "actual_time": "2026-10-16T19:27:15.9658472+08:00",
+  "exit_code": 0,
+  "mode": "fresh ephemeral read-only CLI invocation",
+  "model": "gpt-6.1-sol",
+  "no_hook_trust_bypass": true
+}

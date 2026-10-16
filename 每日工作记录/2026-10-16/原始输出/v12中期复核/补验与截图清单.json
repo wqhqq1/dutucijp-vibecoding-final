@@ -1,0 +1,117 @@
+{
+  "actual_time": "2026-10-16T19:44:29.990826+08:00",
+  "pdf_pages_read_and_rendered": 10,
+  "actual_ui_screenshot_count": 16,
+  "hook_cancelled": true,
+  "no_hook_runtime_test": true,
+  "temporary_hook_enable_config_absent": true,
+  "daily_execution_slots": 32,
+  "reserved_days": [
+    "2026-10-22",
+    "2026-11-17"
+  ],
+  "daily_bodies_changed_dates": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-11-06"
+  ],
+  "daily_changes_scope": "user-authorized Hook clause removal and directly related skill evidence wording; other daily bodies unchanged",
+  "screenshots": [
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/01-未登录业务门禁.jpg",
+      "bytes": 14133,
+      "sha256": "6467aff15cb2704d85a93a007f99e8cd50c8d476963b24196c555872d6c89cef",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/02-全量来源与分类守恒.jpg",
+      "bytes": 108565,
+      "sha256": "95d3b5bcde6fb35d7764aab35f41f67eba79ca0a527049ef9dd5b2db31b0f33f",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/03-多候选不自动配对.jpg",
+      "bytes": 113183,
+      "sha256": "81684d19dc8b551f572b42b9dc67437bc9adca7c579ed6ed1d729a80610f5e99",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/04-案例182起点与时间边界.jpg",
+      "bytes": 105391,
+      "sha256": "13bf7e090f38961d561fcd1cfb821cfea80a4d7833cc54e3e78492740c41af55",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/05-派单成功版本2.jpg",
+      "bytes": 103802,
+      "sha256": "933dc17dfe0b38ce9a73bb8983f980fe2479ce53c0ec1fd48dc581af610ab3bb",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/06-重复派单被拒绝.jpg",
+      "bytes": 104148,
+      "sha256": "5bc0d1609850cd9ead8d01ce424ac3dd75e37cd28aab53923a5f86c25e93b6ee",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/07-开始处理版本3.jpg",
+      "bytes": 115261,
+      "sha256": "b6510fe897eed801a89abcbfde2c0b52492dd276e3cf15cef05216e384b51093",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/08-空结论拒绝且仍为版本3.jpg",
+      "bytes": 116207,
+      "sha256": "dd1c935743c303fdfc0705a61ed74178fe6a223309b3dd2002984c6d79f088b5",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/09-结案版本4与三条审计.jpg",
+      "bytes": 124587,
+      "sha256": "f446e06e073d6a747fa69a496d1e1e8369018a79c9cde9227348f58448a8199a",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.jpg",
+      "bytes": 122375,
+      "sha256": "708a8ebe9034f1ca64365d07ec253b10df2f00c65f3f1cddb164343ff89efa9d",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/11-客户13526筛选54条首页.jpg",
+      "bytes": 105188,
+      "sha256": "891f7d9a6f47db012bc645191f352e70d5271130f6122b0eef29401b7a4eec0a",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/12-筛选第二页4条且末页禁用.jpg",
+      "bytes": 89691,
+      "sha256": "14c46258935f67cecf71ac6fdb1f0c127debf7fa357ecd77c61041d32770a0af",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/13-技能新进程调用与Hook自测原始结果.jpg",
+      "bytes": 56106,
+      "sha256": "326c47d0cffc860f7d208af42f92267bc8a3a35e943ffa5f0c0475268300e9de",
+      "use_in_new_presentation": false
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/14-不存在商品空结果及分页禁用.jpg",
+      "bytes": 76284,
+      "sha256": "f791379129e709325eea79b25a4aea612599f4528b9687e0289b67318ae7c630",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/15-冷启动后会话与演示记录保留.jpg",
+      "bytes": 102268,
+      "sha256": "a19ce6447da4296741064831324e5de91e6673c880d6945c20d6b35fe4b80222",
+      "use_in_new_presentation": true
+    },
+    {
+      "path": "每日工作记录/2026-10-16/截图/v12中期复核/16-技能新CLI进程调用实证.jpg",
+      "bytes": 88440,
+      "sha256": "0fc409dc5975a0516a159bc13b0d53571ee8db5fc890d49c1d09cf41846f27d6",
+      "use_in_new_presentation": true
+    }
+  ]
+}

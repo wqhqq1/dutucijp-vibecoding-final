@@ -1,0 +1,76 @@
+{
+  "actual_time": "2026-10-16T18:35:08.405398+08:00",
+  "origin": "由最终PPTX导入渲染，非业务页面新采图",
+  "slides": [
+    {
+      "slide": 1,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-01.png",
+      "sha256": "068f2c495d5379f727b80932a474a89664021751b1ea5bdd48b706dd1fe1ea90",
+      "bytes": 35033,
+      "pdf_page_render_sha256": "1649fbe9e7b8368b60b103d70e0ecfa3ebafcdc1d7bbd166631b4666fef8385f"
+    },
+    {
+      "slide": 2,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-02.png",
+      "sha256": "997d565c5392e5f53db9878d89025eed7c8822a560387c138dbfe8be65c8b5c2",
+      "bytes": 137853,
+      "pdf_page_render_sha256": "4c7e6d45088adb87e3d4093f29f92e79fd252fff5e6c90e2ffb0d268cd4c14bb"
+    },
+    {
+      "slide": 3,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-03.png",
+      "sha256": "ba0f10c113c39e83842d30f772d9c8d0b2d4f728671c9f700f5b587475db7ce7",
+      "bytes": 61468,
+      "pdf_page_render_sha256": "27b1d83c7c8817fcde2beee8d2ce281674e0104eaeecec1b8f2587839e663ab4"
+    },
+    {
+      "slide": 4,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-04.png",
+      "sha256": "d6cd65f18f85e6cd5edb5f8f788b5f15e627a0e1b3ffddb9e0be35b7e7d25199",
+      "bytes": 157634,
+      "pdf_page_render_sha256": "6e247251d310fd9550a169f9418453f2fd7c000a62b1a30b1056f008e527acc5"
+    },
+    {
+      "slide": 5,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-05.png",
+      "sha256": "fb8b66fc1506fb92655959d9bfbe099895d4fd966e6e38626ec4566b6e5611da",
+      "bytes": 67932,
+      "pdf_page_render_sha256": "f61132bbbd979a2d7d3f0a679af76fc6da7244df92c18e0c246cc1a5bff05556"
+    },
+    {
+      "slide": 6,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-06.png",
+      "sha256": "71f08799d12a63ced5df1a909e6fdc5f4b98fdb28a13d0da27380153677f23cd",
+      "bytes": 201984,
+      "pdf_page_render_sha256": "c213788aa37fd2cc67781703108628d944b8165f0ff954d361d8531e18d6fd43"
+    },
+    {
+      "slide": 7,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-07.png",
+      "sha256": "6630688575154e377cc803e58f5153228bcc526a315b31f6c00e2bb97a2b11fe",
+      "bytes": 109737,
+      "pdf_page_render_sha256": "c809b32fd087431fb9669cc102da6f77d77627380c5b58bc5f3dafb93d102087"
+    },
+    {
+      "slide": 8,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-08.png",
+      "sha256": "2141046200e7567374889ca0221ce834f90dce099353b69fa6d375eb72a8e85e",
+      "bytes": 53290,
+      "pdf_page_render_sha256": "f5e71e26c82db9bf01b42b0bb5504db1991edfb39975098bacebe89e32386315"
+    },
+    {
+      "slide": 9,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-09.png",
+      "sha256": "447c201fc7b16a7d353cb730f7b7401227fba21b53a636d148ffa9aa928b999f",
+      "bytes": 130074,
+      "pdf_page_render_sha256": "d56062239509210a36437a5f5c5cd0d216210f196a2af8b113d5385c50bd2bca"
+    },
+    {
+      "slide": 10,
+      "path": "每日工作记录/2026-10-16/截图/PPT逐页渲染/slide-10.png",
+      "sha256": "1c84d0456b7e9cd81e176d7e58f2a583fd1c680f6ea1d25f9fd7399603d02f1c",
+      "bytes": 72173,
+      "pdf_page_render_sha256": "8db2178ccad382c48118d029bf13168d980951f8a107286d69ea17c6d374f1eb"
+    }
+  ]
+}

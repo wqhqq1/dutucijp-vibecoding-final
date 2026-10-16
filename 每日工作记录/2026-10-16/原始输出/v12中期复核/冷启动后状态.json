@@ -1,0 +1,39 @@
+{
+  "active_jobs": 0,
+  "case_status_counts": [
+    [
+      "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+      "closed",
+      3
+    ],
+    [
+      "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+      "pending",
+      4988
+    ],
+    [
+      "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "pending",
+      9450
+    ]
+  ],
+  "allocations": 14928,
+  "business_audit": 9,
+  "accounts": [
+    [
+      "admin",
+      "admin",
+      "complete"
+    ],
+    [
+      "finance",
+      "finance",
+      "complete"
+    ],
+    [
+      "warehouse",
+      "warehouse",
+      "complete"
+    ]
+  ]
+}

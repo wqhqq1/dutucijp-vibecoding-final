@@ -1,0 +1,39 @@
+{
+  "actual_time": "2026-10-16T19:48:37.498485+08:00",
+  "kind": "read-only snapshot of existing untracked user authoring files",
+  "native_git_commit": "d3b37004094ee0836d61a3f5d77c47657e39ff4c",
+  "source_files_still_untracked": true,
+  "native_files_modified": false,
+  "formal_submission_or_presentation_freeze": false,
+  "note": "Separate from native HEAD and bundle; no claim these files are committed, reviewed or final. Web assets are preserved separately in the native-source snapshot; this is an archival snapshot, not a portable presentation package.",
+  "files": [
+    {
+      "original_path": "中期汇报网页版/index.html",
+      "backup_path": "_备份/未提交工作区/2026-10-16/中期汇报网页版/index.html",
+      "bytes": 61096,
+      "sha256": "2d12a688586da3a81d749f41163ad5abd436e01669fda54f9659d721b8e58a25",
+      "git_blob_sha": "1297a77e67e2c3f86c60222a58a9e32de5132161"
+    },
+    {
+      "original_path": "中期汇报网页版/中期汇报-网页版.pdf",
+      "backup_path": "_备份/未提交工作区/2026-10-16/中期汇报网页版/中期汇报-网页版.pdf",
+      "bytes": 2578232,
+      "sha256": "975ae6b77db4296d9e80844bf32e806aee858436ff0a052d80aea229f7d51116",
+      "git_blob_sha": "94166074c4e99e263cd2a1c99e3a4c5f745860b2"
+    },
+    {
+      "original_path": "中期汇报讲稿（网页版）.md",
+      "backup_path": "_备份/未提交工作区/2026-10-16/中期汇报讲稿（网页版）.md",
+      "bytes": 11779,
+      "sha256": "23dbee9a315332d784d6ec8da44d7d3cda4d4bd43aa7f3dafee6b88419c83b61",
+      "git_blob_sha": "71e238f3ff9d64f639f496333ba93d7769a2a3e0"
+    },
+    {
+      "original_path": "每日工作记录/2026-10-16/FR18中期网页版演示.md",
+      "backup_path": "_备份/未提交工作区/2026-10-16/每日工作记录/2026-10-16/FR18中期网页版演示.md",
+      "bytes": 1934,
+      "sha256": "37dfb9d50b2fb1079596d03c2d8d2d43a47d02eef22fe6edf64b0ba2729d9326",
+      "git_blob_sha": "e6cc7580d18917be785e77c7b3aad81ad475a64b"
+    }
+  ]
+}

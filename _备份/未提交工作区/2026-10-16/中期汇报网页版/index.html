@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中期汇报 · 退货对账与差异处理系统</title>
+<style>
+:root{
+  --paper:#f5f2ea; --paper-2:#ece7da; --card:#fffdf8;
+  --ink:#13303c; --ink-2:#3d5560; --muted:#7b8a8f; --rule:#d6cfbf;
+  --teal:#17394a; --teal-2:#1f6f78; --teal-soft:#dbe9e8;
+  --pass:#2d7a56; --pass-soft:#e1efe6;
+  --todo:#b0532c; --todo-soft:#f6e3d8;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;
+  --mono:"Cascadia Mono","Cascadia Code",Consolas,"Noto Sans SC",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0f2530;overflow:hidden;font-family:var(--sans);color:var(--ink)}
+#viewport{position:fixed;inset:0;display:grid;place-items:center}
+#deck{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--paper);color:var(--ink);padding:64px 88px 0;display:none;flex-direction:column;overflow:hidden;
+  background-image:linear-gradient(90deg,transparent 0 63px,rgba(176,83,44,.18) 63px 64px,transparent 64px 68px,rgba(176,83,44,.18) 68px 69px,transparent 69px)}
+.slide.active{display:flex;animation:enter .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.slide.active .reveal{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.slide.active .reveal:nth-child(2){animation-delay:.08s}.slide.active .reveal:nth-child(3){animation-delay:.16s}.slide.active .reveal:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* header */
+.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;position:relative}
+.head::after{content:"";position:absolute;left:0;right:0;bottom:-6px;border-bottom:1px solid var(--ink)}
+.head h2{font-family:var(--serif);font-weight:800;font-size:52px;letter-spacing:.02em;line-height:1.1}
+.head .no{font-family:var(--mono);font-size:18px;color:var(--muted);text-align:right;line-height:1.5}
+.head .no b{display:block;font-size:44px;color:var(--teal-2);font-weight:600;letter-spacing:-.02em}
+
+/* body */
+.main{flex:1;display:grid;gap:44px;padding-top:34px;min-height:0}
+.cols{grid-template-columns:540px 1fr}
+.rows{grid-template-rows:auto 1fr}
+.lines{list-style:none;display:flex;flex-direction:column;gap:22px;counter-reset:l}
+.lines li{counter-increment:l;font-size:27px;line-height:1.5;padding-left:54px;position:relative;color:var(--ink)}
+.lines li::before{content:counter(l,decimal-leading-zero);position:absolute;left:0;top:5px;font-family:var(--mono);font-size:17px;color:var(--teal-2);border:1px solid var(--teal-2);border-radius:3px;padding:1px 6px}
+.lines li b{color:var(--teal);font-weight:700}
+.lines.row3{flex-direction:row;gap:28px}.lines.row3 li{flex:1}
+.k{font-family:var(--mono);font-size:.92em;letter-spacing:-.01em}
+.tag{display:inline-block;font-size:.66em;font-weight:700;padding:2px 9px 3px;border-radius:3px;vertical-align:3px;margin-left:4px;letter-spacing:.04em}
+.tag.ok{color:var(--pass);background:var(--pass-soft)}.tag.todo{color:var(--todo);background:var(--todo-soft)}
+.tag.ok::before{content:"✓ "}.tag.todo::before{content:"○ "}
+
+/* footer */
+.foot{height:76px;flex:none;display:flex;align-items:center;gap:16px;border-top:1px solid var(--rule);margin-top:26px;font-size:18px;color:var(--ink-2)}
+.foot .ev{font-family:var(--serif);font-weight:700;color:var(--todo);border:1.5px solid var(--todo);padding:2px 10px;border-radius:2px;transform:rotate(-2deg);flex:none}
+.foot .src{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.foot .pg{font-family:var(--mono);color:var(--muted);flex:none}
+
+/* evidence figure */
+.fig{position:relative;background:var(--card);border:1px solid var(--rule);box-shadow:0 18px 40px -22px rgba(19,48,60,.45);border-radius:6px;overflow:hidden;cursor:zoom-in;align-self:start}
+.fig figcaption{position:absolute;left:0;bottom:0;right:0;padding:7px 12px;font-size:14px;color:#fff;background:linear-gradient(transparent,rgba(15,37,48,.82));font-family:var(--mono);pointer-events:none}
+.crop{position:relative;overflow:hidden;aspect-ratio:calc(var(--w)/var(--h));width:100%}
+.crop img{position:absolute;display:block;width:calc(var(--W)/var(--w)*100%);left:calc(var(--x)/var(--w)*-100%);top:calc(var(--y)/var(--h)*-100%);max-width:none}
+.mark{position:absolute;border:3px solid var(--todo);border-radius:6px;box-shadow:0 0 0 4px rgba(176,83,44,.18);
+  left:calc((var(--mx) - var(--x))/var(--w)*100%);top:calc((var(--my) - var(--y))/var(--h)*100%);width:calc(var(--mw)/var(--w)*100%);height:calc(var(--mh)/var(--h)*100%)}
+.mark span{position:absolute;right:-3px;bottom:100%;margin-bottom:6px;background:var(--todo);color:#fff;font-size:14px;font-weight:700;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.mark.below span{bottom:auto;top:100%;margin:6px 0 0}
+.mark.left span{right:auto;left:-3px}
+
+/* cover */
+.slide.cover{padding:0;background:var(--teal);color:#eef3f1;background-image:none}
+.cover .inner{position:absolute;inset:0;padding:86px 110px;display:grid;grid-template-columns:1fr 580px;gap:50px}
+.cover .eyebrow{font-family:var(--mono);letter-spacing:.32em;font-size:16px;color:#8fb8b6}
+.cover h1{font-family:var(--serif);font-weight:900;font-size:96px;line-height:1.12;margin:30px 0 0;color:#fff;letter-spacing:.03em}
+.cover .sub{margin-top:30px;font-size:24px;color:#b8cfcc;line-height:1.7}
+.cover dl{align-self:center;border-top:2px solid #e8efe9;border-bottom:2px solid #e8efe9}
+.cover dl div{display:grid;grid-template-columns:120px 1fr;padding:24px 0;border-bottom:1px solid rgba(232,239,233,.25);align-items:baseline}
+.cover dl div:last-child{border-bottom:0}
+.cover dt{font-size:17px;color:#8fb8b6;letter-spacing:.2em}
+.cover dd{font-size:28px;white-space:nowrap;font-weight:600;color:#fff}
+.cover .ledger{position:absolute;left:110px;bottom:150px;font-family:var(--mono);color:rgba(255,255,255,.1);font-size:150px;font-weight:700;letter-spacing:-.04em;line-height:1;pointer-events:none}
+.cover .foot{position:absolute;left:110px;right:110px;bottom:34px;border-top-color:rgba(232,239,233,.3);color:#b8cfcc;margin:0}
+.cover .foot .ev{color:#f0b694;border-color:#f0b694}
+
+/* table */
+table.scale{width:100%;border-collapse:collapse;font-size:25px}
+.scale th{font-size:17px;letter-spacing:.14em;color:var(--muted);text-align:left;font-weight:600;padding:0 18px 12px;border-bottom:2px solid var(--ink)}
+.scale td{padding:13px 18px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.scale td:nth-child(1){font-weight:700;width:260px}
+.scale td:nth-child(2){font-family:var(--mono);color:var(--muted);width:240px}
+.scale td:nth-child(3) .big{font-family:var(--serif);font-weight:800;font-size:34px;color:var(--teal);margin-right:10px}
+.scale td:nth-child(4){width:260px;text-align:right}
+.scale tr:hover td{background:rgba(31,111,120,.05)}
+.scale .note{color:var(--ink-2);font-size:21px}
+
+/* modules strip */
+.mods{display:flex;gap:10px;margin-top:4px}
+.mods span{flex:1;text-align:center;font-size:19px;padding:10px 0;border:1px solid var(--teal-2);color:var(--teal);border-radius:4px;background:var(--teal-soft)}
+
+/* chart */
+.chart{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:26px 30px 18px;box-shadow:0 18px 40px -22px rgba(19,48,60,.45);align-self:start}
+.chart h3{font-family:var(--serif);font-size:24px;margin-bottom:4px}
+.chart .cap{font-size:16px;color:var(--muted);margin-bottom:6px}
+.chart svg{width:100%;height:auto;display:block}
+.chart svg text{font-family:var(--sans)}
+.bar{transition:opacity .2s}.bar:hover{opacity:.82}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.tile{border:1px solid var(--rule);border-radius:6px;padding:14px 16px;background:var(--paper)}
+.tile .lab{font-size:15px;color:var(--muted)}
+.tile .val{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--teal);line-height:1.25}
+.tile .val small{font-size:18px;font-weight:600;margin-left:3px}
+.tile .lim{font-size:15px;color:var(--ink-2)}
+
+/* flow chips */
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.flow span{background:var(--card);border:1px solid var(--teal-2);color:var(--teal);font-size:20px;font-weight:600;padding:6px 14px;border-radius:999px}
+.flow i{font-style:normal;color:var(--teal-2);font-size:20px}
+.demo-btn{display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:var(--todo);color:#fff;border:0;border-radius:6px;padding:14px 22px;font:700 22px var(--sans);cursor:pointer;box-shadow:0 10px 24px -12px rgba(176,83,44,.8)}
+.demo-btn:hover{filter:brightness(1.08)}
+.demo-btn .dot{width:12px;height:12px;border-radius:50%;background:#ccc;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.demo-btn .dot.on{background:#7be3a6}.demo-btn .dot.off{background:#ffd27a}
+.demo-btn small{font:500 15px var(--mono);opacity:.85}
+
+/* terminal */
+.term{background:#0f1f26;color:#cfe3df;border-radius:6px;padding:20px 26px;font:16px/1.55 var(--mono);box-shadow:0 18px 40px -22px rgba(0,0,0,.6);align-self:start;white-space:pre;overflow:hidden}
+.term .p{color:#7fb7b0}.term .h{color:#f0b694}.term .g{color:#6c8a90}.term .y{color:#ffd27a}
+.term .ann{display:inline-block;margin-left:8px;color:#0f1f26;background:#f0b694;padding:0 8px;border-radius:3px;font-weight:700;font-family:var(--sans);font-size:14px}
+.term .ann.ok{background:#7be3a6}
+
+/* file cards */
+.files{display:flex;flex-direction:column;gap:16px;align-self:start}
+.file{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(19,48,60,.5)}
+.file .fh{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--paper-2);font:600 16px var(--mono);color:var(--ink-2)}
+.file pre{padding:14px 18px;font:15.5px/1.6 var(--mono);color:var(--ink);white-space:pre-wrap}
+.file pre .c{color:var(--muted)}.file pre .s{color:var(--teal-2)}
+.stamp{font:700 15px var(--sans);padding:2px 10px;border-radius:3px}
+.stamp.ok{color:var(--pass);background:var(--pass-soft)}.stamp.todo{color:var(--todo);background:var(--todo-soft)}
+
+/* failure cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;flex:1;min-height:0}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 18px 40px -24px rgba(19,48,60,.5)}
+.card .ct{padding:20px 22px 0}
+.card .n{font:600 15px var(--mono);color:var(--todo);letter-spacing:.1em}
+.card h3{font-family:var(--serif);font-size:30px;margin:6px 0 12px}
+.card dl{display:grid;grid-template-columns:62px 1fr;row-gap:6px;font-size:19.5px;line-height:1.45}
+.card dt{color:var(--muted);font-size:16px;padding-top:3px}
+.card .fig{margin:20px 22px 22px;border-radius:4px;align-self:stretch}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(7,1fr);gap:0;align-self:start;margin-top:4px}
+.tl div{position:relative;padding:44px 12px 0 0}
+.tl div::before{content:"";position:absolute;left:0;right:0;top:15px;border-top:3px solid var(--rule)}
+.tl div::after{content:"";position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:50%;background:var(--paper);border:3px solid var(--teal-2)}
+.tl .done::before{border-top-color:var(--teal-2)}.tl .done::after{background:var(--teal-2)}
+.tl .rest::after{border-color:var(--todo);border-style:dashed}
+.tl b{display:block;font:700 25px var(--mono);color:var(--teal)}
+.tl .rest b{color:var(--todo)}
+.tl p{font-size:20px;line-height:1.5;color:var(--ink-2);margin-top:6px}
+.ask{margin-top:6px;background:var(--teal);color:#fff;border-radius:6px;padding:22px 26px;font-size:27px;display:flex;gap:18px;align-items:center}
+.ask b{font-family:var(--serif);color:#f0b694;font-size:20px;flex:none;border:1.5px solid #f0b694;padding:2px 10px;border-radius:3px}
+
+/* chrome (not in print) */
+#progress{position:fixed;left:0;bottom:0;height:4px;background:#f0b694;transition:width .35s;z-index:5}
+#hud{position:fixed;right:16px;bottom:14px;display:flex;gap:8px;z-index:6;opacity:.0;transition:opacity .3s}
+body:hover #hud{opacity:1}
+#hud button{background:rgba(15,37,48,.78);color:#dfe9e6;border:1px solid rgba(255,255,255,.18);border-radius:6px;font:13px var(--sans);padding:7px 11px;cursor:pointer}
+#hud button:hover{background:#1f6f78}
+.overlay{position:fixed;inset:0;background:rgba(9,22,28,.92);z-index:20;display:none;color:#e8efed}
+.overlay.open{display:block}
+#lightbox{display:none;place-items:center;cursor:zoom-out;padding:36px}
+#lightbox.open{display:grid}
+#lightbox img{max-width:94vw;max-height:84vh;box-shadow:0 20px 60px rgba(0,0,0,.6);background:#fff}
+#lightbox p{margin-top:14px;font:14px var(--mono);color:#9fbcb8;text-align:center}
+#overview{overflow:auto;padding:40px}
+#overview .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px}
+#overview .th{cursor:pointer;border-radius:6px;overflow:hidden;outline:2px solid transparent}
+#overview .th:hover,#overview .th.cur{outline-color:#f0b694}
+#overview .th .box{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--paper)}
+#overview .th .box>.slide{display:flex;transform:scale(var(--s));transform-origin:0 0;width:1600px;height:900px;animation:none}
+#overview .th p{padding:8px 4px;font-size:14px}
+#demo-panel{padding:60px 80px;overflow:auto;background:#0f2530}
+#demo-panel h2{font-family:var(--serif);font-size:38px;margin-bottom:6px}
+#demo-panel .lead{color:#9fbcb8;margin-bottom:26px;font-size:17px}
+#demo-panel ol{counter-reset:d;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 34px;max-width:1300px}
+#demo-panel li{counter-increment:d;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:16px 18px 16px 62px;position:relative;font-size:18px;line-height:1.55}
+#demo-panel li::before{content:counter(d);position:absolute;left:18px;top:14px;width:30px;height:30px;border-radius:50%;background:#f0b694;color:#0f1f26;font:700 16px/30px var(--mono);text-align:center}
+#demo-panel li b{color:#fff}#demo-panel li em{font-style:normal;color:#9fbcb8;font-size:15px;display:block;margin-top:4px}
+#demo-panel .acts{display:flex;gap:14px;margin:26px 0}
+#demo-panel .acts button,#demo-panel .acts code{font:600 17px var(--sans);padding:12px 18px;border-radius:6px;border:0;cursor:pointer}
+#demo-panel .acts button{background:#b0532c;color:#fff}
+#demo-panel .acts code{background:rgba(255,255,255,.08);color:#ffd27a;font-family:var(--mono);cursor:copy}
+#demo-panel .warn{color:#ffd27a;font-size:15px;max-width:1300px;line-height:1.6}
+.toast{position:fixed;left:50%;top:22px;transform:translateX(-50%);background:#1f6f78;color:#fff;padding:9px 18px;border-radius:6px;font-size:15px;z-index:30;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.blank #deck{visibility:hidden}
+.static *{animation:none!important}
+
+/* presenter */
+body.presenter{overflow:auto;background:#0d1d24;color:#dfe9e6}
+body.presenter #viewport,body.presenter #hud,body.presenter #progress{display:none}
+#pv{display:none;height:100vh;padding:18px;gap:18px;grid-template-columns:1.55fr 1fr;grid-template-rows:auto 1fr auto}
+body.presenter #pv{display:grid}
+#pv .bar{grid-column:1/-1;display:flex;align-items:center;gap:22px;font-family:var(--mono)}
+#pv .clock{font-size:46px;font-weight:700;color:#fff}
+#pv .clock small{font-size:20px;color:#7fb7b0;margin-left:8px}
+#pv .meter{flex:1;height:10px;background:#21363f;border-radius:5px;position:relative;overflow:hidden}
+#pv .meter i{position:absolute;inset:0 auto 0 0;background:#1f6f78;border-radius:5px}
+#pv .meter i.late{background:#b0532c}
+#pv .st{font-size:22px}
+#pv .st.late{color:#f0b694}
+#pv .bar button{background:#21363f;color:#dfe9e6;border:1px solid #35505a;border-radius:6px;font:15px var(--sans);padding:8px 14px;cursor:pointer}
+#pv .bar button:hover{background:#1f6f78}
+#pv .bar button.hot{background:#b0532c;border-color:#b0532c}
+#pv .now,#pv .next{position:relative;background:#000;border-radius:8px;overflow:hidden}
+#pv .now{grid-row:2;aspect-ratio:16/9;align-self:start}
+#pv .plan{grid-row:3;display:flex;gap:6px;font:13px var(--sans)}
+#pv .plan span{flex:var(--f);min-width:58px;background:#17303a;border-radius:4px;padding:8px 6px;color:#9fbcb8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#pv .plan span.done{background:#1f4b52;color:#dfe9e6}
+#pv .plan span.cur{background:#b0532c;color:#fff}
+#pv .stage{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0}
+#pv .stage .slide{display:flex;animation:none}
+#pv .side{display:flex;flex-direction:column;gap:14px;min-height:0;grid-row:2/4}
+#pv .next{aspect-ratio:16/9;flex:none}
+#pv .next::after{content:"下一页";position:absolute;left:10px;top:8px;background:rgba(0,0,0,.6);padding:2px 8px;border-radius:4px;font-size:13px}
+#pv .notes{flex:1;overflow:auto;background:#13262e;border-radius:8px;padding:20px 24px;font-size:22px;line-height:1.75;color:#eef4f2}
+#pv .notes h4{font:600 15px var(--mono);color:#7fb7b0;margin-bottom:10px;letter-spacing:.06em}
+#pv .notes .hint{margin-top:16px;font-size:16px;color:#9fbcb8;line-height:1.6;border-top:1px solid #2a434c;padding-top:12px}
+#pv .notes strong{color:#ffd27a;font-weight:600}
+aside.notes{display:none}
+
+@media print{
+  @page{size:1600px 900px;margin:0}
+  html,body{overflow:visible;background:#fff;height:auto}
+  #viewport{position:static;display:block}
+  #deck{transform:none!important;width:1600px;height:auto}
+  .slide{position:relative;display:flex!important;width:1600px;height:900px;break-after:page;animation:none!important}
+  .slide *{animation:none!important}
+  #hud,#progress,.overlay,.toast,.demo-btn,#pv{display:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="deck">
+
+<!-- ============ 封面 ============ -->
+<section class="slide cover" data-title="封面" data-sec="10">
+  <div class="inner">
+    <div>
+      <p class="eyebrow">MIDTERM REVIEW · VC-R-03</p>
+      <h1>退货对账<br>与差异处理系统</h1>
+      <p class="sub">取消交易没有原单号——<br>规则给候选，人来核查，过程可追溯。</p>
+    </div>
+    <dl>
+      <div><dt>题目</dt><dd>退货对账与差异处理系统</dd></div>
+      <div><dt>班级</dt><dd>机国际2502</dd></div>
+      <div><dt>学号姓名</dt><dd>20251101030 王麒皓</dd></div>
+      <div><dt>数据档位</dt><dd>UCI Online Retail II · 挑战档</dd></div>
+    </dl>
+  </div>
+  <div class="ledger">1,067,371</div>
+  <div class="foot"><span class="ev">证据</span><span class="src">软件编程-20251101030-王麒皓-中期材料.zip　·　材料状态截至 2026-10-16，尚未冻结</span><span class="pg">00 / 09</span></div>
+  <aside class="notes">
+    <p>老师好，我是王麒皓。题目是退货对账与差异处理系统，数据集 UCI Online Retail II，挑战档。</p>
+    <p class="hint">背景大数字 1,067,371 = 官方两张表原始行数。压缩包在 10-21 用打包脚本生成。</p>
+  </aside>
+</section>
+
+<!-- ============ 第1页 ============ -->
+<section class="slide" data-title="一、业务场景与用户" data-sec="25">
+  <div class="head"><h2>一、业务场景与用户</h2><div class="no"><b>01</b>业务场景</div></div>
+  <div class="main cols">
+    <ul class="lines">
+      <li class="reveal">三类用户：<b>财务</b>派单，<b>仓库</b>核查本人差异，<b>管理员</b>看全局。</li>
+      <li class="reveal">麻烦：取消交易<b>没有原单号</b>，只能在表格里逐行筛、手写备注。</li>
+      <li class="reveal">本系统替代“表格＋备注”：候选、责任人、状态、结论连成一条记录。</li>
+    </ul>
+    <figure class="fig reveal" data-src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/01-财务差异总览.jpg">
+      <div class="crop" style="--W:1585;--x:226;--y:110;--w:1359;--h:704;--mx:1214;--my:228;--mw:316;--mh:90">
+        <img src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/01-财务差异总览.jpg" alt="财务差异总览">
+        <div class="mark below"><span>year1 初始差异 4,991</span></div>
+      </div>
+      <figcaption>01-财务差异总览.jpg · 2026-10-15 Chrome 实拍 · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md；每日工作记录/2026-10-15/截图/FR12-16浏览器验收/01-财务差异总览.jpg。交易真实，人工处理为课程模拟</span><span class="pg">01 / 09</span></div>
+  <aside class="notes">
+    <p>系统给三类人用：财务、仓库和管理员。难点是取消交易<strong>没有原订单号</strong>，过去只能在表格里逐行筛、手写备注，谁在处理、结论是什么都追不到。系统先用保守规则给出候选，再把责任人、状态和结论串成一条可追溯的记录。右图是财务看到的总览，year1 一共 4991 条差异。</p>
+    <p class="hint">边界：4,991 是初始差异数，不是已人工处理完的工单数。没有访谈证据，“替代表格＋备注”是设计目标。</p>
+  </aside>
+</section>
+
+<!-- ============ 第2页 ============ -->
+<section class="slide" data-title="二、选题规模对照表" data-sec="25">
+  <div class="head"><h2>二、选题规模对照表</h2><div class="no"><b>02</b>七项指标</div></div>
+  <div class="main" style="padding-top:26px">
+    <table class="scale reveal">
+      <thead><tr><th>指标</th><th>课程下限</th><th>我的实际</th><th style="text-align:right">状态</th></tr></thead>
+      <tbody>
+        <tr><td>需求条数</td><td>≥ 12 条</td><td><span class="big">18</span><span class="note">FR-01 – FR-18</span></td><td><span class="tag ok">已定义</span><span class="tag todo">真机未全验</span></td></tr>
+        <tr><td>其中不做的</td><td>≥ 2 条</td><td><span class="big">4</span><span class="note">NR-01 – NR-04</span></td><td><span class="tag ok">已定义</span></td></tr>
+        <tr><td>其中异常情况</td><td>≥ 3 条</td><td><span class="big">8</span><span class="note">重复派单、跳级关闭、超量确认…</span></td><td><span class="tag ok">自动测试覆盖</span></td></tr>
+        <tr><td>独立可验收模块</td><td>≥ 3 个</td><td><span class="big">5</span><span class="note">准备 · 对账 · 工作流 · 认证 · 查询导出</span></td><td><span class="tag ok">已实现</span><span class="tag todo">真机未全验</span></td></tr>
+        <tr><td>非增删改查规则</td><td>≥ 3 条</td><td><span class="big">8</span><span class="note">R-01 – R-08</span></td><td><span class="tag ok">已定义</span></td></tr>
+        <tr><td>口径与清洗规则</td><td>≥ 3 条且配用例</td><td><span class="big">6</span><span class="note">CR-01 – CR-06 ↔ TC-01 – TC-08</span></td><td><span class="tag ok">已实测</span></td></tr>
+        <tr><td>非功能指标</td><td>≥ 1 条</td><td><span class="big">4</span><span class="note">NFR-01 – NFR-04 必须底线</span></td><td><span class="tag ok">全部通过</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">选题自查表.md；要做什么.md / 怎么做.md / 怎么算做对.md；每日工作记录/2026-10-16/原始输出/正式NFR01-03、正式NFR04/summary.json</span><span class="pg">02 / 09</span></div>
+  <aside class="notes">
+    <p>七项指标都对得上编号：需求 18 条，不做 4 条，异常 8 项，模块 5 个，非增删改查规则 8 条，清洗规则 6 条、每条配了用例。非功能 4 项必须底线全部实测通过。要说明的是，18 条是<strong>定义数</strong>，不等于本人真机全部验收完，模块的真机验收还有缺口。</p>
+    <p class="hint">这一页按说明书要求以表格本身为证据。异常 8 项 = FR-05/06/08/10/11/12/13 + FR-14 未授权分支。</p>
+  </aside>
+</section>
+
+<!-- ============ 第3页 ============ -->
+<section class="slide" data-title="三、规格骨架" data-sec="25">
+  <div class="head"><h2>三、规格骨架</h2><div class="no"><b>03</b>需求 · 模块 · 用例</div></div>
+  <div class="main cols" style="grid-template-columns:520px 1fr">
+    <div style="display:flex;flex-direction:column;gap:26px">
+      <ul class="lines">
+        <li class="reveal"><b>FR-01 – FR-18</b> 分五个模块，<b>48 条 TC</b> 区分自动与本人验收。</li>
+        <li class="reveal"><span class="k">FR-10</span>：同一差异已有责任人时，系统应当拒绝再派，并显示当前责任人。</li>
+        <li class="reveal"><span class="k">TC-20</span>：已派 warehouse 再派一次 → 被拒绝，责任人仍是 warehouse。</li>
+      </ul>
+      <div class="mods reveal"><span>数据准备</span><span>对账</span><span>工作流</span><span>认证审计</span><span>查询导出</span></div>
+    </div>
+    <figure class="fig reveal" data-src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/04-重复派单拒绝.jpg">
+      <div class="crop" style="--W:1585;--x:236;--y:24;--w:1349;--h:790;--mx:262;--my:115;--mw:614;--mh:44">
+        <img src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/04-重复派单拒绝.jpg" alt="重复派单拒绝">
+        <div class="mark below left"><span>服务端拒绝：已有责任人 warehouse</span></div>
+        <div class="mark below" style="--mx:1158;--my:170;--mw:370;--mh:30"><span>责任人不变</span></div>
+      </div>
+      <figcaption>04-重复派单拒绝.jpg · 2026-10-15 Chrome 实拍 · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md FR-10；怎么算做对.md TC-20；截图 04-重复派单拒绝.jpg；隔离 SQLite 并发测试（FR09-15工作流记录.md）</span><span class="pg">03 / 09</span></div>
+  <aside class="notes">
+    <p>规格按五个模块组织，需求都写成“系统应当……”的句子。举一条：<strong>FR-10</strong>，同一条差异已经有责任人时，系统应当拒绝再次派单，并显示当前责任人。对应用例 <strong>TC-20</strong>：已经派给 warehouse 再派一次，被拒绝，责任人不变。右图就是真实页面上的拒绝提示。</p>
+    <p class="hint">追问备用：同时争抢派单用隔离 SQLite 并发测试验证——只有一次成功，状态与审计原子提交。48 条 TC 是规格条目，不能和 97 项自动测试互换。</p>
+  </aside>
+</section>
+
+<!-- ============ 第4页 ============ -->
+<section class="slide" data-title="四、技术选型与决定记录" data-sec="25">
+  <div class="head"><h2>四、技术选型与决定记录</h2><div class="no"><b>04</b>D-04 · D-18</div></div>
+  <div class="main cols" style="grid-template-columns:580px 1fr">
+    <ul class="lines">
+      <li class="reveal">比较 FastAPI、Rust、C#、Java，选 <b>Go＋Gin＋SQLite</b>：单文件部署，全量可并行。</li>
+      <li class="reveal">放弃 Python 后端的省事；没做同条件对比，<b>不声称快几倍</b>。</li>
+      <li class="reveal">首次全量 198.8 s 未达标 → 改<b>索引分页＋有界批量事务</b>，代价是导入控制更复杂。</li>
+    </ul>
+    <div class="chart reveal">
+      <h3>官方全量 · 首次完整流程（秒）</h3>
+      <p class="cap">准备＋导入＋索引＋计算＋验算＋持久化；10-16 取三次中最慢一次</p>
+      <svg viewBox="0 0 860 250" role="img" aria-label="首次全量耗时：10-15为198.84秒，10-16为72.34秒；必须底线90秒，优选目标45秒">
+        <g font-size="15" fill="#7b8a8f">
+          <line x1="150" y1="20" x2="150" y2="200" stroke="#d6cfbf"/>
+          <text x="150" y="226" text-anchor="middle">0</text>
+          <line x1="300" y1="20" x2="300" y2="200" stroke="#ece7da"/><text x="300" y="226" text-anchor="middle">50</text>
+          <line x1="450" y1="20" x2="450" y2="200" stroke="#ece7da"/><text x="450" y="226" text-anchor="middle">100</text>
+          <line x1="600" y1="20" x2="600" y2="200" stroke="#ece7da"/><text x="600" y="226" text-anchor="middle">150</text>
+          <line x1="750" y1="20" x2="750" y2="200" stroke="#ece7da"/><text x="750" y="226" text-anchor="middle">200</text>
+        </g>
+        <g font-size="17" fill="#3d5560" text-anchor="end">
+          <text x="138" y="72">10-15 正式</text>
+          <text x="138" y="158">10-16 正式</text>
+        </g>
+        <rect class="bar" x="150" y="44" width="596.5" height="40" rx="4" fill="#9aa6a8"><title>10-15 首次全量 198.841174 秒（未达 90 秒底线，保留为历史）</title></rect>
+        <text x="756" y="71" font-size="20" font-weight="700" fill="#13303c">198.84</text>
+        <rect class="bar" x="150" y="130" width="217" height="40" rx="4" fill="#1f6f78"><title>10-16 三次：72.3367 / 71.9752 / 71.9158 秒，必须底线 90 秒通过</title></rect>
+        <text x="357" y="157" font-size="20" font-weight="700" fill="#fff" text-anchor="end">72.34</text>
+        <line x1="420" y1="14" x2="420" y2="200" stroke="#2d7a56" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <text x="426" y="28" font-size="15" fill="#2d7a56" font-weight="700">必须 ≤ 90</text>
+        <line x1="285" y1="100" x2="285" y2="200" stroke="#b0532c" stroke-width="2" stroke-dasharray="3 4"/>
+        <text x="291" y="116" font-size="15" fill="#b0532c" font-weight="700">优选 45（未达）</text>
+      </svg>
+      <div class="tiles">
+        <div class="tile"><div class="lab">一万行完整流程</div><div class="val">1.84<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 5 s</span></div></div>
+        <div class="tile"><div class="lab">全量重算并落库</div><div class="val">10.96<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 15 s</span> <span class="tag todo">优选 5</span></div></div>
+        <div class="tile"><div class="lab">后台任务中查询 P95</div><div class="val">11.72<small>ms</small></div><div class="lim"><span class="tag ok">≤ 500 ms · 300 次 0 失败</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">决定记录.md D-04、D-18；提交 97b790a；2026-10-16 原始输出/正式NFR01-03、正式NFR04/summary.json</span><span class="pg">04 / 09</span></div>
+  <aside class="notes">
+    <p>后端比较了 FastAPI、Rust、C#、Java，选了 Go 加 Gin 加 SQLite，看重单文件部署和全量并行；没做同条件对比，所以<strong>不说 Go 快几倍</strong>。10 月 15 日首次全量要 198 秒，没过 90 秒底线；改成索引分页和有界批量事务后，三次最慢 72 秒，四项底线全部通过。</p>
+    <p class="hint">三次：72.34 / 71.98 / 71.92 s；重算最大 10.96 s；一万行最大 1.84 s；10 路共 300 次真实认证 HTTP，0 失败，P95 11.7245 ms。45 s / 5 s 是优选目标，未达，本人已要求停止优化（D-19）。</p>
+  </aside>
+</section>
+
+<!-- ============ 第5页 ============ -->
+<section class="slide" data-title="五、核心链路演示与数据准备" data-sec="40">
+  <div class="head"><h2>五、核心链路演示与数据准备</h2><div class="no"><b>05</b>一条通了的链路</div></div>
+  <div class="main cols" style="grid-template-columns:640px 1fr">
+    <div>
+      <ul class="lines">
+        <li class="reveal">官方两表 <b>1,067,371</b> 行 = 接纳 1,038,818 ＋ 排除 28,553（单独计数，不丢）。</li>
+        <li class="reveal">year1 取消 <b>10,205</b> = 自动 5,214 ＋ 疑似 2,699 ＋ 无合格原单 2,292 → 差异 4,991。</li>
+        <li class="reveal">主链路：
+          <div class="flow"><span>财务派单</span><i>→</i><span>仓库开始</span><i>→</i><span>填写结论</span><i>→</i><span>关闭锁定</span></div>
+        </li>
+      </ul>
+      <button class="demo-btn reveal" data-demo><span class="dot"></span>实机演示<small>localhost:8080</small></button>
+    </div>
+    <figure class="fig reveal" data-src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/14-结论关闭与不可修改.jpg">
+      <div class="crop" style="--W:1585;--x:890;--y:262;--w:650;--h:552;--mx:905;--my:330;--mw:620;--mh:226">
+        <img src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/14-结论关闭与不可修改.jpg" alt="结论关闭与不可修改">
+        <div class="mark below left"><span>0 条合格候选 → 资料不足结案，关闭后不可改</span></div>
+      </div>
+      <figcaption>14-结论关闭与不可修改.jpg · 2026-10-15 Chrome 实拍 · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">./reproduce.ps1 -Scope year1 | all；FR-01–FR-06、FR-09–FR-11；截图 14-结论关闭与不可修改.jpg 及操作历史</span><span class="pg">05 / 09</span></div>
+  <aside class="notes">
+    <p>数据从官方两张表进来，一共 106 万 7 千多行；排除的 2 万 8 千多行单独计数，不丢掉，<strong>全量已经实际跑通</strong>。第一版演示用第一个工作表 year1：1 万零 205 条取消，自动配对 5214 条，疑似和找不到合格原单的合起来，就是 4991 条差异。主链路是：财务派单，仓库开始处理，填写核查结论后关闭，关闭后不能再改。右图这一条没有合格候选，所以如实写“资料不足”结案，<strong>不为演示硬造关联</strong>。</p>
+    <p class="hint">全量：接纳取消 19,164 = 自动 9,714 + 疑似 6,275 + 无合格原单 3,175，初始差异 9,450。year1 原始 525,461 = 接纳 521,770 + 排除 3,691。自动覆盖约 51% 不是真值准确率。追问时点“实机演示”或按 D 打开演示路线。</p>
+  </aside>
+</section>
+
+<!-- ============ 第6页 ============ -->
+<section class="slide" data-title="六、工程化控制物证" data-sec="40">
+  <div class="head"><h2>六、工程化控制物证</h2><div class="no"><b>06</b>可控 · 可回退 · 可审查</div></div>
+  <div class="main cols" style="grid-template-columns:600px 1fr">
+    <ul class="lines">
+      <li class="reveal"><b>可控</b>：提交均以 FR 编号开头，42 次跨 3 天；97 项自动回归 0 失败 0 跳过。</li>
+      <li class="reveal"><b>可回退</b>：实验分支 <span class="k">79ff9b2</span> 比较后未合入；快照 <span class="k">746a7e1</span> 已 bundle 恢复复现。</li>
+      <li class="reveal"><b>可审查</b>：失败原样保留（198.8 s、228 次请求失败）；上下文压缩记录<span class="tag todo">待补</span></li>
+    </ul>
+<pre class="term reveal"><span class="p">PS&gt;</span> git log --graph --oneline --all
+* d30361a FR-18 完成优化版本十页中期汇报与逐页检查
+* 97b790a FR-07 FR-14 FR-17 优化首次查询、全量准备及有界落库…<span class="ann ok">四项底线通过</span>
+<span class="g">  ⋮</span>
+* 452224c FR-18 修复Windows PowerShell 5.1测试进度误报…
+<span class="g">  ⋮</span>
+* 746a7e1 FR-18 增加新隔离状态的真实中断、重开与恢复验证<span class="ann ok">已恢复核验</span>
+* bac32e0 FR-07 FR-18 接入业务界面、构建启动与安全演示入口
+<span class="g">  ⋮</span>
+<span class="h">| * 79ff9b2 FR-18 record disposable branch experiment</span><span class="ann">实验未合入</span>
+<span class="h">|/</span>
+* 5df378c FR-09 FR-10 FR-11 FR-13 FR-15 记录真实工作流验收…
+<span class="g">  ⋮</span>
+* 73bdb4a FR-01 定下对账任务规格、验收计划与真实过程记录
+
+<span class="p">PS&gt;</span> git log --format=%ad --date=short | sort | uniq -c
+<span class="y">      6 2026-10-14
+     31 2026-10-15
+      5 2026-10-16</span></pre>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">git log --graph --oneline --all（2026-10-16 实际输出，节选）；746a7e1 恢复记录；每日工作记录/2026-10-16/原始输出/辅导收工回归/summary.json</span><span class="pg">06 / 09</span></div>
+  <aside class="notes">
+    <p>工程化控制三样。<strong>可控</strong>：每次提交都以需求编号开头，截至今天主线 42 次提交、跨 3 天；最新 97 项自动测试 0 失败 0 跳过。<strong>可回退</strong>：我开过一个实验分支 79ff9b2，比较后没有价值，没有合入；746a7e1 这个快照用 bundle 在新目录恢复并复现过。<strong>可审查</strong>：失败结果原样保留，198 秒和 228 次请求失败都在记录里。上下文压缩的前后数字我还没记，这是待补项。</p>
+    <p class="hint">97 项 = 76 Go 顶层 + 15 Python + 6 前端，属于代理运行；本人亲跑截图是 10-15 的 71 Go + 13 Python，不能说本人跑了 97 项。746a7e1 是旧软件快照，不冒充最终冻结包。</p>
+  </aside>
+</section>
+
+<!-- ============ 第7页 ============ -->
+<section class="slide" data-title="七、制度物证" data-sec="40">
+  <div class="head"><h2>七、制度物证</h2><div class="no"><b>07</b>技能 · 子代理 · Hook</div></div>
+  <div class="main cols" style="grid-template-columns:600px 1fr">
+    <ul class="lines">
+      <li class="reveal"><b>技能</b>：run-app 已写明启动、测试与安全边界；重启后真实调用<span class="tag todo">待验</span></li>
+      <li class="reveal"><b>子代理</b>：两轮独立静态审查均 0 问题；核心实现子代理中断，由主代理接管回归。</li>
+      <li class="reveal"><b>Hook</b>：拦截破坏性命令的策略自测通过；可信配置下被拒一屏<span class="tag todo">待触发</span></li>
+    </ul>
+    <div class="files reveal">
+      <div class="file"><div class="fh">.agents/skills/run-app/SKILL.md<span class="stamp todo">文件已备 · 调用待验</span></div>
+<pre><span class="c">---</span>
+<span class="s">name:</span> run-app
+<span class="s">description:</span> Build, start, test and diagnose this local returns
+  reconciliation app while preserving official data, private
+  credentials and mandatory account security.
+<span class="c">---</span>
+3. Use http://localhost:8080. … Only the user configures real
+   passwords, devices and recovery material.
+<span class="c">A skill file being present is not evidence that it was invoked.</span></pre></div>
+      <div class="file"><div class="fh">.codex/hooks.json<span class="stamp todo">自测通过 · 实拒待触发</span></div>
+<pre>"PreToolUse": [{ <span class="s">"matcher"</span>: "Bash", "hooks": [{
+  <span class="s">"command"</span>: "python3 …/.codex/hooks/pre_tool_use_policy.py",
+  <span class="s">"statusMessage"</span>: "Checking destructive command policy" }]}]</pre></div>
+      <div class="file"><div class="fh">性能优化与验证.md · 子代理记录<span class="stamp ok">两轮 0 问题</span></div>
+<pre>独立静态审查及增量复审均由指定的 GPT-6.1-sol 执行，两次均零条问题；
+三个核心实现子代理因服务额度中断，主代理接管、修复、编译并完整验证。</pre></div>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">.agents/skills/run-app/SKILL.md；.codex/hooks.json；每日工作记录/2026-10-16/性能优化与验证.md；课程完成核对表.md</span><span class="pg">07 / 09</span></div>
+  <aside class="notes">
+    <p>制度物证我照实说状态。<strong>技能</strong>：run-app 技能文件写好了，规定怎么启动、测试，以及不能代填密码和设备；但重启后的真实调用还没做，所以标待验。<strong>子代理</strong>：两轮独立静态审查都是零问题；核心实现的子代理中途因额度中断，由主代理接管并跑完回归。<strong>Hook</strong>：拦截破坏性命令的策略脚本自测通过，但可信配置下真正被拒绝的那一屏还没拿到，我不把它算完成。</p>
+    <p class="hint">右侧是文件原文节选，不是被拒截图。不能用应用 API 的 403 冒充 Hook 证据。计划 10-19 本人完成这两项。</p>
+  </aside>
+</section>
+
+<!-- ============ 第8页 ============ -->
+<section class="slide" data-title="八、失败与修复记录" data-sec="40">
+  <div class="head"><h2>八、失败与修复记录</h2><div class="no"><b>08</b>三次真实失败</div></div>
+  <div class="main" style="padding-top:28px">
+    <div class="cards">
+      <article class="card reveal">
+        <div class="ct"><p class="n">FAIL 01</p><h3>PS 5.1 误报测试失败</h3>
+          <dl><dt>卡在</dt><dd>执行环境层</dd><dt>发现</dt><dd>本人亲跑 test.ps1</dd><dt>修</dt><dd>分收两路输出，按退出码判定</dd></dl></div>
+        <figure class="fig" data-src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/22-本人WindowsPowerShell测试通过.png">
+          <div class="crop" style="--W:3200;--x:0;--y:800;--w:940;--h:820"><img src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/22-本人WindowsPowerShell测试通过.png" alt="PS5.1 测试通过"></div>
+          <figcaption>22 · 修复后本人亲跑</figcaption>
+        </figure>
+      </article>
+      <article class="card reveal">
+        <div class="ct"><p class="n">FAIL 02</p><h3>交易检索一直等待</h3>
+          <dl><dt>卡在</dt><dd>实现层：索引与加载顺序</dd><dt>发现</dt><dd>Chrome 实测查询</dd><dt>修</dt><dd>来源索引分页，前端独立加载</dd></dl></div>
+        <figure class="fig" data-src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/08-交易查询等待状态.jpg">
+          <div class="crop" style="--W:1585;--x:780;--y:96;--w:760;--h:660;--mx:1326;--my:386;--mw:58;--mh:44"><img src="../每日工作记录/2026-10-15/截图/FR12-16浏览器验收/08-交易查询等待状态.jpg" alt="交易查询等待"><div class="mark below"><span>等待中</span></div></div>
+          <figcaption>08 · 修复前实拍</figcaption>
+        </figure>
+      </article>
+      <article class="card reveal">
+        <div class="ct"><p class="n">FAIL 03</p><h3>首页 301 重定向循环</h3>
+          <dl><dt>卡在</dt><dd>实现层：静态路由</dd><dt>发现</dt><dd>HTTP 请求复现</dd><dt>修</dt><dd>显式返回嵌入首页，回到 200</dd></dl></div>
+        <figure class="fig" data-src="../每日工作记录/2026-10-15/截图/2026-10-15-06-修复版安全登录页.png">
+          <div class="crop" style="--W:736;--x:0;--y:0;--w:736;--h:640"><img src="../每日工作记录/2026-10-15/截图/2026-10-15-06-修复版安全登录页.png" alt="修复后登录页"></div>
+          <figcaption>06 · 修复后首页</figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">提交 452224c（PS5.1）、97b790a（查询）；FR12-18执行记录.md P2 首页 301；截图 22 / 08 / 2026-10-15-06</span><span class="pg">08 / 09</span></div>
+  <aside class="notes">
+    <p>三次真实失败。第一，在 Windows PowerShell 5.1 跑测试，Python 正常写到标准错误的进度被当成报错，卡在执行环境层；是我亲自跑发现的，改成独立进程分别收两路输出、只按退出码判定。第二，Chrome 里交易检索一直等待，卡在实现层；改了来源索引、连接顺序和前端独立加载，并发测试通过。第三，首页 301 重定向循环，用 HTTP 请求复现，改成显式返回嵌入的首页，恢复 200。</p>
+    <p class="hint">三张图：22 是修复后亲跑、08 是修复前等待、06 是修复后首页，不是同一次测试拼接。查询修复后未采新版浏览器端总计时，后端 2–3 ms 诊断不代表浏览器首屏。</p>
+  </aside>
+</section>
+
+<!-- ============ 第9页 ============ -->
+<section class="slide" data-title="九、剩余工作、风险与计划" data-sec="30">
+  <div class="head"><h2>九、剩余工作、风险与计划</h2><div class="no"><b>09</b>到 10-22 的排期</div></div>
+  <div class="main rows" style="gap:44px">
+    <ul class="lines" style="gap:16px">
+      <li class="reveal"><b>剩余</b>：FR-14 标准恢复真机反例；FR-18 技能重启、Hook 实拒；3–5 页报告。</li>
+      <li class="reveal"><b>风险一</b>：首次全量 45 s、重算 5 s 优选目标未达（必须底线已过，已停止优化）。</li>
+      <li class="reveal"><b>风险二</b>：本人完整预演、九样打包与冻结未做，压在 10-21 一天。</li>
+    </ul>
+    <div style="display:flex;flex-direction:column;gap:44px">
+      <div class="tl reveal">
+        <div class="done"><b>10-14</b><p>选题、三份规格、本人改认证要求</p></div>
+        <div class="done"><b>10-15</b><p>数据准备、配对、工作流、认证、网页</p></div>
+        <div class="done"><b>10-16</b><p>四项底线通过、PPT 初稿</p></div>
+        <div><b>10-17/18</b><p>FR-14 恢复真机反例</p></div>
+        <div><b>10-19</b><p>技能重启、Hook 实拒、分支</p></div>
+        <div><b>10-20</b><p>报告 3–5 页、亲跑 ≥10 条</p></div>
+        <div class="rest"><b>10-21</b><p>预演、打包、冻结、发送；10-22 留空</p></div>
+      </div>
+      <div class="ask reveal"><b>请老师帮</b>没有原单关联号时，“保守推断＋资料不足结案”的口径是否认可？</div>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">执行计划.md 10-17–10-22 排期；本人验收步骤.md；课程完成核对表.md；决定记录.md D-19。10-17 起均为计划</span><span class="pg">09 / 09</span></div>
+  <aside class="notes">
+    <p>还剩三块：FR-14 标准恢复的真机反例、技能重启和 Hook 真实拒绝、3 到 5 页报告，按图排到 10-21 冻结发送，10-22 不再改。风险一：45 秒和 5 秒两个优选目标没达到；风险二：预演和冻结都压在 10-21。想请老师确认：<strong>没有原单号时，保守推断加“资料不足结案”是否认可</strong>。</p>
+    <p class="hint">每日工作记录目前 10-14/15/16 三天，需每天续记到 10-21 才满 8 天；不补造日期。</p>
+  </aside>
+</section>
+
+</div></div>
+
+<div id="progress"></div>
+<div id="hud">
+  <button data-act="prev" title="上一页 ←">‹</button>
+  <button data-act="next" title="下一页 →">›</button>
+  <button data-act="overview" title="总览 O">总览</button>
+  <button data-act="presenter" title="讲者视图 P">讲者视图</button>
+  <button data-act="demo" title="实机演示 D">实机演示</button>
+  <button data-act="full" title="全屏 F">全屏</button>
+</div>
+<div id="lightbox" class="overlay"><div><img alt=""><p></p></div></div>
+<div id="overview" class="overlay"><div class="grid"></div></div>
+<div id="demo-panel" class="overlay">
+  <h2>实机演示路线（追问时用）</h2>
+  <p class="lead">系统：<span class="k">http://localhost:8080</span>　状态：<span id="demo-state">检测中…</span>　·　Esc 返回幻灯片</p>
+  <div class="acts">
+    <button data-demo>打开系统（新窗口）</button>
+    <code data-copy="启动Demo.cmd" title="点击复制">未启动？双击项目根目录 启动Demo.cmd</code>
+    <code data-copy="./test.ps1" title="点击复制">./test.ps1</code>
+  </div>
+  <ol>
+    <li><b>finance 用 Passkey 登录</b><em>上台前先登录好，保持在 localhost 地址，避免 Passkey 失配</em></li>
+    <li><b>差异处理：看总览 4,991 与来源守恒</b><em>展开“查看来源、行数守恒与初始配对口径” → 525,461 = 521,770 + 3,691</em></li>
+    <li><b>打开 0:180 → 点“再次派单”</b><em>对应 FR-10 / TC-20：提示“已有责任人：warehouse”，状态不变</em></li>
+    <li><b>打开 0:181 → 看关闭结论与操作历史</b><em>0 条合格候选、资料不足结案；派单 → 开始 → 关闭三步可追溯</em></li>
+    <li><b>交易检索：客户 13526 筛选、翻页</b><em>服务端分页，默认每页 50；可导出筛选 CSV</em></li>
+    <li><b>（可选）终端跑 ./test.ps1</b><em>预期 76 Go 顶层 + 15 Python + 6 前端，0 失败 0 跳过</em></li>
+  </ol>
+  <p class="warn" style="margin-top:24px">注意：每次演示都会在演示库留下真实记录。台上不要新关闭待处理差异、不要重开已结案记录；数据任务“两个年度全部”约 72 秒，不适合在 2 分钟追问里现跑。10-22 当天只做正常登录和预设操作，不修补、不重建。</p>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- 讲者视图 -->
+<div id="pv">
+  <div class="bar">
+    <div class="clock" id="pv-total">0:00<small>/ 5:00</small></div>
+    <div class="meter"><i id="pv-meter" style="width:0"></i></div>
+    <div class="st" id="pv-slide">本页 0s / 10s</div>
+    <button data-pv="prev">‹ 上一页</button><button data-pv="next">下一页 ›</button>
+    <button data-pv="timer" id="pv-timer-btn">开始计时</button><button data-pv="reset">重置</button>
+    <button data-pv="demo" class="hot">实机演示</button>
+  </div>
+  <div class="now"><div class="stage" id="pv-now"></div></div>
+  <div class="plan" id="pv-plan"></div>
+  <div class="side">
+    <div class="next"><div class="stage" id="pv-next"></div></div>
+    <div class="notes" id="pv-notes"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const DEMO_URL = 'http://localhost:8080';
+  const slides = [...document.querySelectorAll('#deck > .slide')];
+  const total = slides.length;
+  const isPresenter = new URLSearchParams(location.search).has('presenter');
+  if (new URLSearchParams(location.search).has('static')) document.documentElement.classList.add('static');
+  let cur = 0, presenterWin = null;
+  const $ = s => document.querySelector(s);
+  const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1800); };
+
+  // ---------- scaling ----------
+  function fit() {
+    const deck = $('#deck');
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    deck.style.transform = `scale(${s})`;
+  }
+  addEventListener('resize', () => { fit(); if (isPresenter) renderPresenter(); });
+
+  // ---------- navigation ----------
+  function go(i, from) {
+    i = Math.max(0, Math.min(total - 1, i));
+    if (i === cur && from !== 'init') return;
+    slides[cur].classList.remove('active');
+    cur = i;
+    slides[cur].classList.add('active');
+    $('#progress').style.width = (cur / (total - 1) * 100) + '%';
+    if (!isPresenter) history.replaceState(null, '', '#' + cur);
+    slideStart = Date.now();
+    if (from !== 'remote') sync();
+    if (isPresenter) renderPresenter();
+  }
+  function sync() {
+    const msg = { type: 'deck-go', i: cur };
+    try { if (presenterWin && !presenterWin.closed) presenterWin.postMessage(msg, '*'); } catch (e) {}
+    try { if (window.opener && !window.opener.closed) window.opener.postMessage(msg, '*'); } catch (e) {}
+  }
+  addEventListener('message', e => {
+    const d = e.data || {};
+    if (d.type === 'deck-go') go(d.i, 'remote');
+    if (d.type === 'deck-hello' && !isPresenter) sync();
+  });
+
+  // ---------- demo ----------
+  function openDemo() {
+    const w = window.open(DEMO_URL, 'recon-demo');
+    if (w) { try { w.focus(); } catch (e) {} } else toast('浏览器拦截了弹窗，请允许本页面打开新窗口');
+  }
+  async function probeDemo() {
+    let up = false;
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 1500);
+      await fetch(DEMO_URL + '/?probe=' + Date.now(), { mode: 'no-cors', cache: 'no-store', signal: ctl.signal });
+      clearTimeout(t); up = true;
+    } catch (e) { up = false; }
+    document.querySelectorAll('.demo-btn .dot').forEach(d => { d.classList.toggle('on', up); d.classList.toggle('off', !up); });
+    const st = $('#demo-state'); if (st) { st.textContent = up ? '● 在线' : '○ 未检测到服务（双击 启动Demo.cmd）'; st.style.color = up ? '#7be3a6' : '#ffd27a'; }
+    return up;
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-demo]'); if (b) { e.stopPropagation(); openDemo(); }
+    const c = e.target.closest('[data-copy]'); if (c) { navigator.clipboard && navigator.clipboard.writeText(c.dataset.copy).then(() => toast('已复制：' + c.dataset.copy)); }
+  });
+
+  // ---------- overlays ----------
+  const overlays = ['#lightbox', '#overview', '#demo-panel'];
+  const closeAll = () => overlays.forEach(s => $(s).classList.remove('open'));
+  const anyOpen = () => overlays.some(s => $(s).classList.contains('open'));
+  function toggle(sel) { const el = $(sel); const was = el.classList.contains('open'); closeAll(); if (!was) { el.classList.add('open'); if (sel === '#overview') buildOverview(); if (sel === '#demo-panel') probeDemo(); } }
+  document.addEventListener('click', e => {
+    const f = e.target.closest('#deck .fig[data-src]');
+    if (f) { const lb = $('#lightbox'); lb.querySelector('img').src = f.dataset.src; lb.querySelector('p').textContent = decodeURI(f.dataset.src).replace(/^\.\.\//, '退货对账与差异处理系统/') + '　（原图，未修改）'; closeAll(); lb.classList.add('open'); }
+  });
+  $('#lightbox').addEventListener('click', closeAll);
+  function buildOverview() {
+    const g = $('#overview .grid'); g.innerHTML = '';
+    slides.forEach((s, i) => {
+      const th = document.createElement('div'); th.className = 'th' + (i === cur ? ' cur' : '');
+      const box = document.createElement('div'); box.className = 'box';
+      const c = s.cloneNode(true); c.classList.remove('active'); c.querySelectorAll('.notes').forEach(n => n.remove());
+      box.appendChild(c); th.appendChild(box);
+      const p = document.createElement('p'); p.textContent = `${String(i).padStart(2, '0')}　${s.dataset.title}　·　${s.dataset.sec}s`; th.appendChild(p);
+      th.onclick = () => { closeAll(); go(i); };
+      g.appendChild(th);
+      requestAnimationFrame(() => box.style.setProperty('--s', box.clientWidth / 1600));
+    });
+  }
+
+  // ---------- hud ----------
+  function openPresenter() {
+    const url = location.href.split('#')[0].split('?')[0] + '?presenter#' + cur;
+    presenterWin = window.open(url, 'deck-presenter', 'width=1400,height=860');
+    if (!presenterWin) toast('浏览器拦截了讲者视图弹窗');
+  }
+  function fullscreen() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  document.querySelectorAll('#hud button').forEach(b => b.onclick = () => {
+    ({ prev: () => go(cur - 1), next: () => go(cur + 1), overview: () => toggle('#overview'), presenter: openPresenter, demo: () => toggle('#demo-panel'), full: fullscreen })[b.dataset.act]();
+  });
+
+  // ---------- keys ----------
+  let numBuf = '';
+  addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    if (k === 'Escape') { closeAll(); document.body.classList.remove('blank'); return; }
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) {
+      if (k === 'Enter' && numBuf) { go(parseInt(numBuf, 10)); numBuf = ''; e.preventDefault(); return; }
+      if (anyOpen() && k !== 'Enter') closeAll();
+      go(cur + 1); e.preventDefault(); return;
+    }
+    if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { go(cur - 1); e.preventDefault(); return; }
+    if (k === 'Home') return go(0);
+    if (k === 'End') return go(total - 1);
+    if (/^\d$/.test(k)) { numBuf = (numBuf + k).slice(-2); return; }
+    const lk = k.toLowerCase();
+    if (lk === 'f' && !isPresenter) fullscreen();
+    if (lk === 'o') toggle('#overview');
+    if (lk === 'd') toggle('#demo-panel');
+    if (lk === 'p' && !isPresenter) openPresenter();
+    if (lk === 'b' || k === '.') document.body.classList.toggle('blank');
+    if (lk === 't' && isPresenter) toggleTimer();
+    if (lk === 'r' && isPresenter) resetTimer();
+  });
+  // click right/left third of slide to navigate (not on interactive elements)
+  $('#viewport').addEventListener('click', e => {
+    if (e.target.closest('button,.fig,a,code')) return;
+    (e.clientX > innerWidth * 0.66 ? go(cur + 1) : e.clientX < innerWidth * 0.2 ? go(cur - 1) : null);
+  });
+
+  // ---------- presenter ----------
+  let slideStart = Date.now(), timerOn = false, timerStart = 0, timerAcc = 0, perSlide = {};
+  const budgetTotal = slides.reduce((a, s) => a + +s.dataset.sec, 0);
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  function elapsed() { return (timerAcc + (timerOn ? Date.now() - timerStart : 0)) / 1000; }
+  function toggleTimer() { if (timerOn) { timerAcc += Date.now() - timerStart; timerOn = false; } else { timerStart = Date.now(); timerOn = true; slideStart = Date.now(); } $('#pv-timer-btn').textContent = timerOn ? '暂停计时' : '继续计时'; }
+  function resetTimer() { timerOn = false; timerAcc = 0; slideStart = Date.now(); $('#pv-timer-btn').textContent = '开始计时'; tick(); }
+  function placeStage(holder, idx) {
+    const st = holder; st.innerHTML = '';
+    if (idx >= total) { st.innerHTML = '<div style="color:#7fb7b0;font:28px var(--sans);padding:40px">— 结束，进入 2 分钟追问 —</div>'; st.style.transform = 'none'; return; }
+    const c = slides[idx].cloneNode(true); c.classList.add('active'); c.querySelectorAll('.notes').forEach(n => n.remove());
+    c.querySelectorAll('.reveal').forEach(r => r.style.animation = 'none');
+    st.appendChild(c);
+    const box = st.parentElement; st.style.transform = `scale(${Math.min(box.clientWidth / 1600, box.clientHeight / 900)})`;
+  }
+  function renderPresenter() {
+    placeStage($('#pv-now'), cur); placeStage($('#pv-next'), cur + 1);
+    const s = slides[cur], n = s.querySelector('.notes');
+    $('#pv-plan').innerHTML = slides.map((x, i) => `<span style="--f:${x.dataset.sec}" class="${i < cur ? 'done' : i === cur ? 'cur' : ''}" data-i="${i}">${String(i).padStart(2,'0')} · ${x.dataset.sec}s</span>`).join('');
+    $('#pv-plan').querySelectorAll('span').forEach(sp => sp.onclick = () => go(+sp.dataset.i));
+    $('#pv-notes').innerHTML = `<h4>${String(cur).padStart(2, '0')} · ${s.dataset.title} · 建议 ${s.dataset.sec} 秒</h4>` + (n ? n.innerHTML : '');
+    tick();
+  }
+  function tick() {
+    if (!isPresenter) return;
+    const el = elapsed();
+    const lateTotal = el > budgetTotal;
+    $('#pv-total').innerHTML = `${fmt(el)}<small>/ ${fmt(budgetTotal)}</small>`;
+    $('#pv-total').style.color = lateTotal ? '#f0b694' : '#fff';
+    const m = $('#pv-meter'); m.style.width = Math.min(100, el / budgetTotal * 100) + '%'; m.classList.toggle('late', lateTotal);
+    // planned cumulative time at end of this slide
+    const planEnd = slides.slice(0, cur + 1).reduce((a, x) => a + +x.dataset.sec, 0);
+    const ss = timerOn ? (Date.now() - slideStart) / 1000 : 0, budget = +slides[cur].dataset.sec;
+    const st = $('#pv-slide'); st.textContent = `本页 ${Math.floor(ss)}s / ${budget}s　·　应在 ${fmt(planEnd)} 讲完`;
+    st.classList.toggle('late', ss > budget);
+  }
+  if (isPresenter) {
+    document.body.classList.add('presenter');
+    document.title = '讲者视图 · 中期汇报';
+    document.querySelectorAll('#pv [data-pv]').forEach(b => b.onclick = () => ({ prev: () => go(cur - 1), next: () => go(cur + 1), timer: toggleTimer, reset: resetTimer, demo: openDemo })[b.dataset.pv]());
+    setInterval(tick, 250);
+    try { window.opener && window.opener.postMessage({ type: 'deck-hello' }, '*'); } catch (e) {}
+  }
+
+  // ---------- init ----------
+  fit();
+  const start = parseInt((location.hash || '#0').slice(1), 10) || 0;
+  slides[0].classList.add('active'); cur = 0; go(start, 'init');
+  probeDemo(); setInterval(() => { if (!isPresenter) probeDemo(); }, 15000);
+  const openParam = new URLSearchParams(location.search).get('open');
+  if (openParam === 'demo') toggle('#demo-panel');
+  if (openParam === 'overview') toggle('#overview');
+})();
+</script>
+</body>
+</html>

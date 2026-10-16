@@ -23,6 +23,9 @@ func serveCommand(command string, args []string) error {
 	dbPath := flags.String("db", filepath.Join(runtimeRoot, "state", "business.sqlite"), "business database outside source")
 	project := flags.String("project", ".", "project source directory for data worker")
 	secretDir := flags.String("secrets", "", "private authentication directory (default beside database)")
+	port := flags.Int("port", 8080, "loopback HTTP port")
+	python := flags.String("python", "", "explicit bundled Python for data jobs")
+	runtimeID := flags.String("runtime-id", "", "public instance identity for the launcher")
 	renew := flags.String("renew", "", "renew bootstrap only for an untouched new account")
 	if err := flags.Parse(args); err != nil {
 		return err
@@ -30,15 +33,11 @@ func serveCommand(command string, args []string) error {
 	if *secretDir == "" {
 		*secretDir = filepath.Join(filepath.Dir(*dbPath), "private-auth")
 	}
-	day := time.Now().In(time.FixedZone("Asia/Shanghai", 8*3600)).Format("01-02")
-	if command == "init-auth" && (day == "10-22" || day == "11-17") {
-		return fmt.Errorf("reserved day: no initialization or first security configuration")
+	if *port < 1024 || *port > 65535 {
+		return fmt.Errorf("port must be between 1024 and 65535")
 	}
-	if command == "serve" && (day == "10-22" || day == "11-17") {
-		if _, err := os.Stat(filepath.Join(*secretDir, "master.key")); err != nil {
-			return fmt.Errorf("reserved day requires a preconfigured frozen runtime")
-		}
-	}
+	origin := fmt.Sprintf("http://localhost:%d", *port)
+
 	s, err := store.Open(*dbPath)
 	if err != nil {
 		return err
@@ -47,7 +46,7 @@ func serveCommand(command string, args []string) error {
 	if err = s.EnsureQueryIndexes(context.Background()); err != nil {
 		return err
 	}
-	security, err := auth.New(s.DB, auth.Config{SecretDir: *secretDir, Origin: "http://localhost:8080"})
+	security, err := auth.New(s.DB, auth.Config{SecretDir: *secretDir, Origin: origin})
 	if err != nil {
 		return err
 	}
@@ -71,7 +70,7 @@ func serveCommand(command string, args []string) error {
 		}
 		links := map[string]string{}
 		for id, token := range tokens {
-			links[id] = "http://localhost:8080/#bootstrap=" + token
+			links[id] = origin + "/#bootstrap=" + token
 		}
 		data, _ := json.MarshalIndent(map[string]any{"expires_at": time.Now().Add(15 * time.Minute).Format(time.RFC3339), "links": links, "notice": "Private one-use initialization links. Do not upload, log, screenshot or share; passwords and real factors must be configured by the user."}, "", "  ")
 		path := filepath.Join(*secretDir, "initialization-"+time.Now().Format("20060102-150405.000000000")+".json")
@@ -86,8 +85,13 @@ func serveCommand(command string, args []string) error {
 		return err
 	}
 	defer jobs.Close()
-	handler := (&web.Server{Store: s, Auth: security, Origin: "http://localhost:8080", Jobs: jobs}).Handler()
-	listener, err := net.Listen("tcp", "127.0.0.1:8080")
+	jobs.Python = *python
+	sessionCookie := "recon_session"
+	if *port != 8080 {
+		sessionCookie = fmt.Sprintf("recon_session_%d", *port)
+	}
+	handler := (&web.Server{Store: s, Auth: security, Origin: origin, Jobs: jobs, CookieName: sessionCookie, RuntimeID: *runtimeID}).Handler()
+	listener, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", *port))
 	if err != nil {
 		return err
 	}
@@ -100,7 +104,7 @@ func serveCommand(command string, args []string) error {
 		defer cancel()
 		server.Shutdown(shutdown)
 	}()
-	fmt.Println("Local application: http://localhost:8080 (all roles require complete security configuration)")
+	fmt.Printf("Local application: %s (all roles require complete security configuration)\n", origin)
 	err = server.Serve(listener)
 	if err == http.ErrServerClosed {
 		return nil

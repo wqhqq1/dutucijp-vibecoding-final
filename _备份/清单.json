@@ -1,9 +1,9 @@
 {
   "format_version": 4,
   "backup_kind": "midterm-package-and-native-source",
-  "actual_time": "2026-10-16T22:45:45.938831+08:00",
-  "local_head": "e3657cfd8d7fb6a6ffa932943fba99e7c8475203",
-  "native_commit_count": 48,
+  "actual_time": "2026-10-16T23:36:21.191724+08:00",
+  "local_head": "3ac3cacca5f16d48abcee275b51413eccfce40e0",
+  "native_commit_count": 49,
   "source_files": [
     {
       "path": ".agents/skills/run-app/SKILL.md",
@@ -50,16 +50,16 @@
     {
       "path": "AGENTS.md",
       "mode": "100644",
-      "git_blob_sha": "7f2f0ac25b7be7f14e6ab4d1e3d507747d02ace7",
-      "bytes": 13049,
-      "sha256": "7985b73157dcc9684de4986954f7c2b68fc359c8784eea7462e60ff66ffd0154"
+      "git_blob_sha": "19827fad6f0ac79cbfee22d2ec7bdd2c14928f85",
+      "bytes": 13452,
+      "sha256": "8c4fb8c842dc7cfc3dee5c8b4d8aa49c7319ffc7b18b25788ad525e27381401d"
     },
     {
       "path": "README.md",
       "mode": "100644",
-      "git_blob_sha": "0dcea105924254ce38118d9cfcacc7c15b2cb12e",
-      "bytes": 11228,
-      "sha256": "d6d67a567be13bdbd04eeb823ae6ee766a1c130d026df60453182b6c2165f553"
+      "git_blob_sha": "46351a73556514f587ed89d90f0b3f2a6fb2fbc2",
+      "bytes": 11775,
+      "sha256": "e10eb779fdcdff270906eb23301a008f8b51b44a4bca6f3e4e54c39a84ddd86f"
     },
     {
       "path": "backend/cmd/perfhttp/main.go",
@@ -99,9 +99,9 @@
     {
       "path": "backend/cmd/recon/serve.go",
       "mode": "100644",
-      "git_blob_sha": "6606aec0b5ae851072a55399d69a915429924c06",
-      "bytes": 3973,
-      "sha256": "0c5b7a2b8c06e4ff2e900a350c2a53024d7d1d8ad8a06d806b22b9cbc7684031"
+      "git_blob_sha": "d2378bb0502a7c6e5af533fbf7e6fa054f456794",
+      "bytes": 4037,
+      "sha256": "e8eb22d5d5d12995a5c18629c32a2f7c95918f31bfd67638ae3c9b25082d6a4c"
     },
     {
       "path": "backend/cmd/recon/workflow_verify.go",
@@ -337,9 +337,16 @@
     {
       "path": "backend/internal/web/jobs.go",
       "mode": "100644",
-      "git_blob_sha": "87fe3b5026ec6f1287f467cd7a7f0cc3be225ad4",
-      "bytes": 5744,
-      "sha256": "fb18df1fa65f66f01b0afc7b5ca520dbfd4c670bbd3a4d378722b9929dbb5698"
+      "git_blob_sha": "143debf7982ca0dfb2528a81170db068ce4ae9ca",
+      "bytes": 5552,
+      "sha256": "255c4d0e7d458b4524364ccffd9ceb4e310b846eb40f668eab50ef4753e02b0f"
+    },
+    {
+      "path": "backend/internal/web/portable_test.go",
+      "mode": "100644",
+      "git_blob_sha": "db5a58000505d945257680af55048ffe1dc9134f",
+      "bytes": 1429,
+      "sha256": "945584bf906a527b9bb96a8e46817af6d7311b6e23bb367f0bc2cabec11bc87f"
     },
     {
       "path": "backend/internal/web/security_http_test.go",
@@ -351,9 +358,9 @@
     {
       "path": "backend/internal/web/server.go",
       "mode": "100644",
-      "git_blob_sha": "c6b6c81bd9961fe76297c0ac0f658bc64973b0d2",
-      "bytes": 16626,
-      "sha256": "0235c7fe0603d70910ceeaf3b4e6d697104dc326f4485ffc14d0dc55452d221d"
+      "git_blob_sha": "7cdbe23b091d7ee14fc10c9972eb7d3679ca17a8",
+      "bytes": 16322,
+      "sha256": "5ce7de659af35e84ad4f326e6a081fb4e54e80e26acf1995d44df37a20217468"
     },
     {
       "path": "build.ps1",
@@ -424,6 +431,34 @@
       "git_blob_sha": "351710a834b8d73329c10677c8805d110fcf0100",
       "bytes": 232,
       "sha256": "f0cb46c8dd34a05c182a1c67bea16fd72a87b580085986c4897b575ff88c8b71"
+    },
+    {
+      "path": "portable/build_bundle.py",
+      "mode": "100644",
+      "git_blob_sha": "5993103b6e891b2a44e401278726fd86482070f8",
+      "bytes": 6678,
+      "sha256": "29c83641a9e6c9965e24689feeadc36a8a8b17818163fc12e911e302598f96c9"
+    },
+    {
+      "path": "portable/launcher.py",
+      "mode": "100644",
+      "git_blob_sha": "3b0efb7ee189317d8d27e05f311ebed0341820c4",
+      "bytes": 9732,
+      "sha256": "c2abe3f167efc7508ac41141c0ea7dfc4699b81edfa48b7f6c21fddac055663c"
+    },
+    {
+      "path": "portable/package_delivery.py",
+      "mode": "100644",
+      "git_blob_sha": "7189c22d767eba86a9e1f494f226f87dc6cf42ec",
+      "bytes": 5736,
+      "sha256": "e317fc634d6cd5618dae8801513a81f73b32cb02a2facb88bd50e0dc01bc13cf"
+    },
+    {
+      "path": "portable/verify_delivery.py",
+      "mode": "100644",
+      "git_blob_sha": "a3da4ee7c0a92155696e8f01f38618ac7c3e47d4",
+      "bytes": 8696,
+      "sha256": "d38447b384d84962873bbfcd6e7c125bd089dbd864dc0a2be982b26f2f2f904e"
     },
     {
       "path": "prepare-demo.ps1",
@@ -568,9 +603,9 @@
     {
       "path": "tools/launch-demo.ps1",
       "mode": "100644",
-      "git_blob_sha": "1623d5f9344c5b3613270b47749089e9407fbfdd",
-      "bytes": 4056,
-      "sha256": "35ac982267828e2ae2d28ac5b1754b528057cec6e820cd6a2098884010005cf1"
+      "git_blob_sha": "85897458249b947a28b90ecebe3c56f602897a16",
+      "bytes": 1005,
+      "sha256": "e3c39baf3f1e52b20cdb9cd11c1073c5de297b0c289261277a70f2fd1b515ae5"
     },
     {
       "path": "tools/measure-performance.ps1",
@@ -645,9 +680,9 @@
     {
       "path": "中期打包说明.md",
       "mode": "100644",
-      "git_blob_sha": "d4eec75b33038a65b2a729fe694e4c173c0478d4",
-      "bytes": 2050,
-      "sha256": "ede0a9caf953167dcf0954ef5d6212804ea53346ff287dd6a5b2afff85114adf"
+      "git_blob_sha": "acebd4b2af05bc40e28f860ff4a493cab4f16847",
+      "bytes": 2597,
+      "sha256": "1d386d8fbff4ad15f36724b50b832f4209ddcdc648df7d82ba6f0081de1271f7"
     },
     {
       "path": "中期汇报.pdf",
@@ -734,6 +769,13 @@
       "sha256": "df251e2a6333ee06c2893dd429b1834c675f0e5b22f1e7feeb84ee97caf6055f"
     },
     {
+      "path": "停止Demo.cmd",
+      "mode": "100644",
+      "git_blob_sha": "4fbb36d63dbd7dd7f0ff19366bb422d6c7f2afbf",
+      "bytes": 137,
+      "sha256": "c597a8b69247daec3b09e8f63173d6082915600ad66b4e84d7ecf5caac0cde4b"
+    },
+    {
       "path": "决定记录.md",
       "mode": "100644",
       "git_blob_sha": "61038eb55af7e53e15a56cc92759b9bdf2f910a2",
@@ -743,9 +785,9 @@
     {
       "path": "启动Demo.cmd",
       "mode": "100644",
-      "git_blob_sha": "bb93e734574d464a9015ca42376dbced3a26e953",
-      "bytes": 111,
-      "sha256": "5a4a03aa94489e7c408cb1f2c2aecc69ce9135cf56f749e133088f03defbacbc"
+      "git_blob_sha": "7958f5f17ff0bea54a81c4aa589dc8dfb674318a",
+      "bytes": 303,
+      "sha256": "95ef99689bb9275b8b9beb08e4e998f933b64f0709c7bfc199a25c38e2c4b90f"
     },
     {
       "path": "四段式任务草稿.md",
@@ -778,16 +820,16 @@
     {
       "path": "怎么做.md",
       "mode": "100644",
-      "git_blob_sha": "f22b6ccb95527ffb5309ef9221a5ea2276edf8fd",
-      "bytes": 24238,
-      "sha256": "a40ff8d83a2be966ee7c113e9e72f636d922d765d3ffcf9438a9440a0aa9bdbd"
+      "git_blob_sha": "c5f0305a740d75748cad9d0df9e77cafc1c311c9",
+      "bytes": 24738,
+      "sha256": "3e70cee13642293aebea18f14fa64da6ee9341e94a70c4aac0bb135931838877"
     },
     {
       "path": "怎么算做对.md",
       "mode": "100644",
-      "git_blob_sha": "f68dd6fe0a48ee16b572cd167da80bda9057d646",
-      "bytes": 15544,
-      "sha256": "0ace43dfb967e6a6038db06cf6d1ef475d199dd7c416b9fbc749ef52f581a0bd"
+      "git_blob_sha": "6cbc5fc4ec23461bf96e56ef2db69106a92ebe7a",
+      "bytes": 16044,
+      "sha256": "232776c2410e1911208252c43a52ac2912a2050847272b1e0799456cd72db144"
     },
     {
       "path": "执行交接说明.md",
@@ -806,9 +848,16 @@
     {
       "path": "提交索引.md",
       "mode": "100644",
-      "git_blob_sha": "aff75eae5f215df26284215a2aac2a67ef3976f1",
-      "bytes": 11172,
-      "sha256": "801d344e1f7b03d4e17a14cfce89731a9f3e4428773724b0bba9152baeaa3d52"
+      "git_blob_sha": "0e944d03e5e68ba9aadc9aa1a8074a179552ce2b",
+      "bytes": 11719,
+      "sha256": "e540e1088459fd9e94af686023575d99ea3b82866ebad0a4b843d09cec149638"
+    },
+    {
+      "path": "教师独立运行说明.md",
+      "mode": "100644",
+      "git_blob_sha": "5e1c52b4de3bbb6845d499e3a3b9b58f433dede9",
+      "bytes": 1692,
+      "sha256": "887fd85eb3bd15ea6e192a4146a807922aa808f3c3a58d1297e0212a0e934bee"
     },
     {
       "path": "本人验收步骤.md",
@@ -820,9 +869,9 @@
     {
       "path": "材料清单.md",
       "mode": "100644",
-      "git_blob_sha": "7cd56b213021a3e1141d8c93fba42543c3074812",
-      "bytes": 4459,
-      "sha256": "d8ee3c4e237df9c7e1d0c3c98ab67a8001d489d80740f3a5c6ff93bf370c2dbe"
+      "git_blob_sha": "4b8b0dc5ed9078df59ab0633327ba1e0e9bcb47c",
+      "bytes": 5006,
+      "sha256": "3a978fc82ae81657bb6e0d21493a79b306b86621a5a111f7924e5fe4f3a42c59"
     },
     {
       "path": "每日工作记录/2026-10-14/今天做了什么.md",
@@ -3303,6 +3352,13 @@
       "sha256": "37dfb9d50b2fb1079596d03c2d8d2d43a47d02eef22fe6edf64b0ba2729d9326"
     },
     {
+      "path": "每日工作记录/2026-10-16/FR18教师独立运行交付.md",
+      "mode": "100644",
+      "git_blob_sha": "81589d2638aa22847c814c381af57ec40ed2e64b",
+      "bytes": 3821,
+      "sha256": "baa1a703aff435d33db6689f8107b012645e490b6b51f47205191ea225128efa"
+    },
+    {
       "path": "每日工作记录/2026-10-16/v1.2汇报复核与补验.md",
       "mode": "100644",
       "git_blob_sha": "be81fc0b29a4803445e37b2261947f57926a1ee0",
@@ -3651,6 +3707,90 @@
       "git_blob_sha": "b08c7bbbe4cb2b00e09efb61fbe7ed3abdc723b2",
       "bytes": 5134,
       "sha256": "7e408f9e6c08fc5aa7d41e0d7b15ffdc9bd6ce704a199054064d41f70d36dcaa"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/frontend-regression.txt",
+      "mode": "100644",
+      "git_blob_sha": "5ee1267f9359e76f201f11f76240d3f010ba553d",
+      "bytes": 1308,
+      "sha256": "9f3f06cb555c936829a56d8e58136460b0758deeadb3af4eb2fd1e0ac4c57ff7"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/go-regression.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "6610f6f7f2cf2aa49d147815e07644fe9bac85c5",
+      "bytes": 200989,
+      "sha256": "57da35d1dd013df30a6928d7e5d36ccdb8632f47ab0cbd40a9d415353b36136a"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/portable-safety-checks.json",
+      "mode": "100644",
+      "git_blob_sha": "3a4b42fd29ca18556b804253511bcec96b5740e8",
+      "bytes": 153,
+      "sha256": "8e67cd3c3b778f61b9f5c7ca0842889b205434dbe0ff0a2c6b555366401c42fd"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/python-regression.txt",
+      "mode": "100644",
+      "git_blob_sha": "25e3c3661f554d3a820f50a2fbcd0397393eede2",
+      "bytes": 2284,
+      "sha256": "e82bcf7d00567798691a520999c85f3c71bdfc7f1662b1f02d1a70f3127606c0"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/teacher-final-acceptance.json",
+      "mode": "100644",
+      "git_blob_sha": "89a7f00a56dfe42b75f15cb6518e870cf4f8e98b",
+      "bytes": 1178,
+      "sha256": "91774faf17486e4a480f28c997305f52d9db01708f4b54273a7908ebd4e9711f"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/teacher-http-acceptance.json",
+      "mode": "100644",
+      "git_blob_sha": "c8fb1f13c7d550928bebcf9e2e497f539605fba2",
+      "bytes": 1178,
+      "sha256": "cf375e396da0858d3a66033e3f8068060dbc8a0e614c60a44449e9074700ddce"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/teacher-relocation-acceptance.json",
+      "mode": "100644",
+      "git_blob_sha": "7e5c30ad89e6bc356b8b8c5d2582594cee8c0b92",
+      "bytes": 1178,
+      "sha256": "b21258ff174593ba810b64786150717b11b25917fb329c40fc5d5b9c655b6b4f"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/最终首启-download.txt",
+      "mode": "100644",
+      "git_blob_sha": "a8a145f8d2c005c94eba7ce5286bcce82df0b99b",
+      "bytes": 490,
+      "sha256": "5ffcfa364e5cc4e80d26b013c133d01a4327c7d504c79a3e6db6187a89ddbfeb"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/最终首启-prepare.txt",
+      "mode": "100644",
+      "git_blob_sha": "e3b37b75924e5b31f5922aa258a72ae80f6e218d",
+      "bytes": 2517,
+      "sha256": "493424667cacb829d8af7f5cb3f13257788f8e572607148de43d4d3b282b8028"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/最终首启-reconcile.txt",
+      "mode": "100644",
+      "git_blob_sha": "d4d0f2b43e9baee649ebd45e08dd7d111aad2cb0",
+      "bytes": 755,
+      "sha256": "c7a02576ac0603bb74bc29cdab1a1d1c49a3ebd9c99705da536a9dfd2a3d66fb"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/演示文件未修改.json",
+      "mode": "100644",
+      "git_blob_sha": "c4b27546bd7eda2bbba82c569ccffc2139619a3b",
+      "bytes": 1538,
+      "sha256": "22a967b8977901bb169437ff567768f23cf48ff5e2fb099254e55efdd042e0cb"
+    },
+    {
+      "path": "每日工作记录/2026-10-16/原始输出/教师独立交付/验收汇总.json",
+      "mode": "100644",
+      "git_blob_sha": "0b46eb1c011bdfe533e2bf8f881a19b1df9c737e",
+      "bytes": 1025,
+      "sha256": "222870c5d20872f76489f3aee7856dbbc8f89e18925c66d44c2dd9c781aa2516"
     },
     {
       "path": "每日工作记录/2026-10-16/原始输出/正式NFR01-03/NFR01-1/go.process.json",
@@ -4556,6 +4696,13 @@
       "sha256": "21a58eafd477395f6033d23b1774da229855d89c32df17bc2cd2e6482742f12c"
     },
     {
+      "path": "每日工作记录/2026-10-16/截图/教师独立运行/01-独立包真实安全登录入口.jpg",
+      "mode": "100644",
+      "git_blob_sha": "d40a355a1a184925061b47113f53696d4a503b8d",
+      "bytes": 38162,
+      "sha256": "fbfce7e217c270c6f3cb1565fa79c9553103da87f124d221369e4c3bd7a8ec93"
+    },
+    {
       "path": "每日工作记录/2026-10-16/执行交接.md",
       "mode": "100644",
       "git_blob_sha": "baae5d6a27c1bc2b1bc84519e615a632efb5b5e0",
@@ -4600,9 +4747,9 @@
     {
       "path": "要做什么.md",
       "mode": "100644",
-      "git_blob_sha": "bdaa50b20109327c3145c2a314f36e554532ac83",
-      "bytes": 11028,
-      "sha256": "8cc6fcd0b40f7ac3a4ff2e50221196a1146f6dfd6613d8c2d1ba3278b1af7ccf"
+      "git_blob_sha": "f3e030573ed27bf975ab925355c63ca770272400",
+      "bytes": 11528,
+      "sha256": "0a177af0b501ffacb31b2e1f0455651648fcc82efa1375a80d52618a19e2ad5d"
     },
     {
       "path": "规划校验记录.md",
@@ -4698,9 +4845,9 @@
     {
       "path": "运行说明.md",
       "mode": "100644",
-      "git_blob_sha": "c8fc9e7bbd0271cac41a09363977db232bd44bde",
-      "bytes": 19207,
-      "sha256": "35c73f38997f8733929e98115ce0c4e583e50f029fff4495033bae8e5006ef5a"
+      "git_blob_sha": "234e87771de74b9249b3fa2d1b0cc60c8f69d031",
+      "bytes": 19754,
+      "sha256": "1be95a77d5b3784e0ca63eaaefdfe8b250f308b18532993f5fe4e1fcb8dd6420"
     },
     {
       "path": "选题自查表.md",
@@ -4711,64 +4858,92 @@
     }
   ],
   "archive": {
-    "archive_name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip",
-    "zip_sha256": "2744241286f12250937cb14ca933d396868ea2bc941f273b682df422fc1b438e",
-    "zip_bytes": 26214801,
+    "archive_name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip",
+    "zip_sha256": "a2083170ba93d8bf07038fe2bec2bc42d1f7ddc45c31eca9819a83c99fd9b358",
+    "zip_bytes": 55336774,
     "parts": [
       {
-        "path": "_备份/中期-20261016/软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part001",
-        "name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part001",
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part001",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part001",
         "bytes": 6291456,
-        "sha256": "92f2d04b3fd29e9ae16ef3eb901719b7ece914173e4eedaec5a63af99d90655a",
-        "git_blob_sha": "fad42bc76341baeaed40c289a04d9240430e69ea"
+        "sha256": "8821b968581c8321c891a204caaba6c0545de7fe83e39d2b1f41ffb12c75c19d",
+        "git_blob_sha": "0a58a51530566dde29081ec13e2d3adc73afb7b2"
       },
       {
-        "path": "_备份/中期-20261016/软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part002",
-        "name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part002",
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part002",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part002",
         "bytes": 6291456,
-        "sha256": "71fdb21c6d8232d0566b1e04d8968448e9bc65dafd0fc0a05247f2d1f2fb2bcc",
-        "git_blob_sha": "06d91d6d5a3872746387dee3689ee94af2975c37"
+        "sha256": "5cc00406798fd7a58c5d1d71b17c86d962d723d6bce56b11e677c1300d196eea",
+        "git_blob_sha": "ffa984bede887e03e766ffe0219e8f165cb14aef"
       },
       {
-        "path": "_备份/中期-20261016/软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part003",
-        "name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part003",
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part003",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part003",
         "bytes": 6291456,
-        "sha256": "7a1f81fb8c333867190cf98ff5b5d270223c31cb79634f67fb535b3e34f90cf1",
-        "git_blob_sha": "b77a35ef79287389036cd65b02bce06b818d0321"
+        "sha256": "cdba69b7e4a195af7c7de3e2547013360300456b79f3779f49941e7d98b97a62",
+        "git_blob_sha": "5550c2edc8c8541286bbf36fdd3d18e27e92e2cb"
       },
       {
-        "path": "_备份/中期-20261016/软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part004",
-        "name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part004",
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part004",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part004",
         "bytes": 6291456,
-        "sha256": "ffdb18253fd21ad9f0cf752ce7a9ffeb5ae83b0ebbe8ae4fbe2945a2b954fbed",
-        "git_blob_sha": "5f7810f2b9b3413c921fc724b12d380ee6b0cb11"
+        "sha256": "f081630abb49cfca783af2f1c523167248011513e993cc7046dc2710fe2d653e",
+        "git_blob_sha": "d4108ecaf919665c6868addf91d1792e7be62ef0"
       },
       {
-        "path": "_备份/中期-20261016/软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part005",
-        "name": "软件编程-中期-20251101030-王麒皓-20261016-224441.zip.part005",
-        "bytes": 1048977,
-        "sha256": "4a66bf147ba4924961d467e83030a0b113662514200f142eb31ae39297d44a02",
-        "git_blob_sha": "1b0b4dcd2b8a55b4bc994b6bc291ad39589837f3"
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part005",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part005",
+        "bytes": 6291456,
+        "sha256": "c4efe485e5a11f7d03cf1810421ee4a86e3aae15455b77d16897f8400cee231e",
+        "git_blob_sha": "8f3e30fd3f6dedac394206664ab77b98e9a8681a"
+      },
+      {
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part006",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part006",
+        "bytes": 6291456,
+        "sha256": "0d54770fd3568698500d234ce90962a22b4d513ea09af7aa0d5f5f906449a16f",
+        "git_blob_sha": "63a48accf3f6debf0d25822a3b575457f0da4653"
+      },
+      {
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part007",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part007",
+        "bytes": 6291456,
+        "sha256": "f1740e5fca35c80c21a4d2c1e6c6447d00d06ffe900a6efe5b6432dd8d8e8b6b",
+        "git_blob_sha": "e9627bd9e20f85a51639879aefd289aec8e4bc28"
+      },
+      {
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part008",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part008",
+        "bytes": 6291456,
+        "sha256": "54567fd286b8094daa75d005fd711598c1ddffce272d80bb6f8e3911aad0e5d8",
+        "git_blob_sha": "5344902f3644ccb9ab16600294f713607d738813"
+      },
+      {
+        "path": "_备份/教师独立运行-20261016/软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part009",
+        "name": "软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip.part009",
+        "bytes": 5005126,
+        "sha256": "6aee63baec816d52483f03e00e2af53895a3b8506b2f3ce59e6f5e460dad7aa3",
+        "git_blob_sha": "2224af61b39bfcbcc0a2a06a552aa4bb3239ec6f"
       }
     ]
   },
   "bundle": {
     "path_in_zip": "中期材料/项目存档.bundle",
-    "sha256": "b6192f18044d5439233db2d137721289e6eb21368324223e9ed3b9f8ddbea204",
-    "bytes": 13951724,
+    "sha256": "c4342fcc6a7b9a91d2680215b33b5a275640e1c9323f56eb0c152b6ff24c47e8",
+    "bytes": 14016674,
     "note": "current full bundle is inside the byte-identical archived ZIP; older standalone bundle retained as history"
   },
   "verification": {
-    "actual_time": "2026-10-16T22:44:45.260418+08:00",
-    "kind": "midterm_materials_v1.2",
-    "source_head": "e3657cfd8d7fb6a6ffa932943fba99e7c8475203",
-    "native_commits_restored": 48,
-    "zip": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\..\\中期提交包-20261016-定稿\\软件编程-中期-20251101030-王麒皓-20261016-224441.zip",
-    "zip_bytes": 26214801,
-    "zip_sha256": "2744241286f12250937cb14ca933d396868ea2bc941f273b682df422fc1b438e",
-    "bundle": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\退货对账与差异处理系统\\..\\中期提交包-20261016-定稿\\中期材料\\项目存档.bundle",
-    "bundle_bytes": 13951724,
-    "bundle_sha256": "b6192f18044d5439233db2d137721289e6eb21368324223e9ed3b9f8ddbea204",
+    "actual_time": "2026-10-16T23:34:55.906884+08:00",
+    "kind": "midterm-with-teacher-portable-demo",
+    "source_head": "3ac3cacca5f16d48abcee275b51413eccfce40e0",
+    "native_commits_restored": 49,
+    "zip": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\中期提交包-教师独立运行-20261016\\软件编程-中期-教师独立运行-20251101030-王麒皓-20261016-233455.zip",
+    "zip_bytes": 55336774,
+    "zip_sha256": "a2083170ba93d8bf07038fe2bec2bc42d1f7ddc45c31eca9819a83c99fd9b358",
+    "bundle": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\中期提交包-教师独立运行-20261016\\中期材料\\项目存档.bundle",
+    "bundle_bytes": 14016674,
+    "bundle_sha256": "c4342fcc6a7b9a91d2680215b33b5a275640e1c9323f56eb0c152b6ff24c47e8",
     "bundle_verify_exit": 0,
     "bundle_restore_and_fsck": "passed",
     "archive_integrity_and_all_file_hashes": "passed",
@@ -4787,25 +4962,25 @@
       "中期汇报讲稿.md": "19b6495f7aef9547bae3e51ae9285676b1863fbd59830002a1b8f18b66b5b300"
     },
     "web_reference_count": 24,
-    "file_count": 672,
+    "file_count": 945,
     "course_universal_20MiB_limit": false,
-    "local_submission_or_email_sent": false
+    "local_submission_or_email_sent": false,
+    "portable_manifest_sha256": "10dc979c92592eaf8b58181e13f94e7d722d48b959aa3b68fc3ae963cff314d2",
+    "relocated_package_check_exit": 0,
+    "first_start_requires_internet": true,
+    "private_runtime_included": false,
+    "teacher_package_contains_executable_and_python": true,
+    "source_only_intermediate_zip": "C:\\Users\\wqhqq\\OneDrive\\docs\\大学\\library-based-software-programming\\软件编程大作业\\中期提交包-教师独立运行-20261016\\软件编程-中期-20251101030-王麒皓-20261016-233450.zip",
+    "actual_extracted_root_cmd_test": {
+      "status": "passed",
+      "port": 18083,
+      "external_developer_tools_on_path": false,
+      "own_runtime_identity_checked": true,
+      "unauthenticated_business_endpoint": 401,
+      "matching_stop_cmd_exit": 0,
+      "first_start_data_download_already_tested_separately": true,
+      "different_physical_machine_tested": false
+    }
   },
-  "excluded_untracked_files": [
-    "tools/build_midterm_v12.py",
-    "中期汇报v1.2.pdf",
-    "中期汇报v1.2讲稿.md",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/00.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/01.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/02.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/03.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/04.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/05.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/06.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/07.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/08.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/09.png",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/contact-1.jpg",
-    "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/contact-2.jpg"
-  ]
+  "excluded_untracked_files": []
 }

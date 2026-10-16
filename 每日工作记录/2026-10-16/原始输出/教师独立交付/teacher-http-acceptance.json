@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "actual_time": "2026-10-16T23:19:30.589051+08:00",
+  "test_kind": "same-host clean profile, no external language runtime PATH, fresh official download, synthetic isolated account credentials",
+  "scope": "all and year1",
+  "port": 18080,
+  "checks": [
+    "Unauthenticated business rejected",
+    "New synthetic finance/warehouse required strong password, verified TOTP and recovery-code saving; no credential bypass",
+    "Real official-data case assigned finance to warehouse, duplicate rejected, start/empty conclusion/close checked, three audits and warehouse export denial verified",
+    "Background year1 preparation/reconciliation succeeded using only bundled Python and newly downloaded official data",
+    "CSV exports all 54 filtered rows, not only the first page",
+    "Restart retained account, session and closed case; subsequent password plus fresh real-time TOTP login succeeded"
+  ],
+  "counts": {
+    "source_rows": 1067371,
+    "allocations": 14928,
+    "cases": 14441,
+    "audit_events": 3
+  },
+  "private_state_included_in_release": false,
+  "different_physical_machine_tested": false,
+  "real_human_factor_setup_claimed": false
+}

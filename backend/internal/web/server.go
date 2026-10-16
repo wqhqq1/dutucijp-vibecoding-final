@@ -12,7 +12,6 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"returnsrecon/internal/auth"
@@ -25,10 +24,12 @@ var assets embed.FS
 const cookieName = "recon_session"
 
 type Server struct {
-	Store  *store.Store
-	Auth   *auth.Service
-	Origin string
-	Jobs   *Jobs
+	Store      *store.Store
+	Auth       *auth.Service
+	Origin     string
+	Jobs       *Jobs
+	CookieName string
+	RuntimeID  string
 }
 
 func (s *Server) Handler() http.Handler {
@@ -39,6 +40,7 @@ func (s *Server) Handler() http.Handler {
 	r.Use(gin.RecoveryWithWriter(io.Discard, func(c *gin.Context, _ any) {
 		c.AbortWithStatusJSON(500, gin.H{"code": "internal_error", "message": "请求未完成"})
 	}), s.boundary)
+	r.GET("/api/health", func(c *gin.Context) { c.JSON(200, gin.H{"application": "returns-recon", "runtime_id": s.RuntimeID}) })
 	r.GET("/api/auth/me", func(c *gin.Context) { v, e := s.Auth.Current(c, token(c), false); respond(c, v, e) })
 	r.POST("/api/auth/bootstrap", func(c *gin.Context) {
 		var b struct {
@@ -150,7 +152,7 @@ func (s *Server) Handler() http.Handler {
 	}
 	r.POST("/api/auth/logout", func(c *gin.Context) {
 		e := s.Auth.Logout(c, token(c))
-		c.SetCookie(cookieName, "", -1, "/", "", false, true)
+		c.SetCookie(s.sessionCookieName(), "", -1, "/", "", false, true)
 		respond(c, map[string]bool{"logged_out": e == nil}, e)
 	})
 	r.POST("/api/auth/recovery/reissue", func(c *gin.Context) { g, e := s.Auth.ReissueRecovery(c, token(c)); s.grant(c, g, e) })
@@ -329,10 +331,23 @@ func (s *Server) Handler() http.Handler {
 	})
 	return r
 }
-func token(c *gin.Context) string { t, _ := c.Cookie(cookieName); return t }
+func (s *Server) sessionCookieName() string {
+	if s.CookieName != "" {
+		return s.CookieName
+	}
+	return cookieName
+}
+func token(c *gin.Context) string {
+	name := c.GetString("session_cookie_name")
+	if name == "" {
+		name = cookieName
+	}
+	t, _ := c.Cookie(name)
+	return t
+}
 func (s *Server) cookie(c *gin.Context, t string) {
 	c.SetSameSite(http.SameSiteStrictMode)
-	c.SetCookie(cookieName, t, 8*3600, "/", "", false, true)
+	c.SetCookie(s.sessionCookieName(), t, 8*3600, "/", "", false, true)
 }
 func (s *Server) grant(c *gin.Context, g auth.Grant, e error) {
 	if e == nil {
@@ -384,14 +399,8 @@ func respond(c *gin.Context, value any, e error) {
 	c.JSON(500, gin.H{"code": "internal_error", "message": "操作未完成，请查看本地诊断并重试"})
 }
 func (s *Server) boundary(c *gin.Context) {
-	day := time.Now().In(time.FixedZone("Asia/Shanghai", 8*3600)).Format("01-02")
-	if c.Request.Method == "POST" && (day == "10-22" || day == "11-17") {
-		blocked := map[string]bool{"/api/auth/bootstrap": true, "/api/auth/setup/password": true, "/api/auth/setup/complete": true, "/api/auth/totp/enroll": true, "/api/auth/totp/confirm": true, "/api/auth/passkeys/register/begin": true, "/api/auth/passkeys/register/finish": true, "/api/auth/recover": true, "/api/auth/credentials/change": true, "/api/auth/recovery/reissue": true}
-		if blocked[c.Request.URL.Path] {
-			c.AbortWithStatusJSON(403, gin.H{"code": "reserved_day", "message": "预留日不能首次配置、恢复重绑或更改凭据，请使用已配置的演示账户"})
-			return
-		}
-	}
+	c.Set("session_cookie_name", s.sessionCookieName())
+
 	expected, _ := url.Parse(s.Origin)
 	host := strings.ToLower(c.Request.Host)
 	if host != expected.Host {

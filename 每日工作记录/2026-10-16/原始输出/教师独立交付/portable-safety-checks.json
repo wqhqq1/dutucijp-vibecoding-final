@@ -1,0 +1,6 @@
+{
+  "passed": [
+    "New instance refused before changing selection when port occupied",
+    "Original 8080 application was not adopted or stopped"
+  ]
+}

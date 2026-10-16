@@ -1,0 +1,21 @@
+{
+  "actual_time": "2026-10-16T23:32:11.408776+08:00",
+  "branch": "delivery/teacher-portable-demo",
+  "base_head": "e3657cfd8d7fb6a6ffa932943fba99e7c8475203",
+  "go_passed": 77,
+  "python_passed": 15,
+  "frontend_passed": 6,
+  "total_passed": 98,
+  "failed": 0,
+  "skipped": 0,
+  "fresh_profile_http_acceptance_rounds": 3,
+  "different_physical_machine_tested": false,
+  "real_human_factor_setup_claimed": false,
+  "first_start_requires_internet": true,
+  "free_disk_requirement_gib": 8,
+  "binary_sha256": "cbcd9b1c992912150eee05108f4423282f5642932a950b0e1cee02aa90541a4e",
+  "python_official_embed_sha256": "4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3",
+  "original_database_or_credentials_copied": false,
+  "presentation_files_unchanged": true,
+  "source_build_note": "Binary was built from these working-tree source changes before their final commit; compiler base revision metadata is not presented as the patched source commit. Exact source tree is preserved by the branch and complete bundle."
+}

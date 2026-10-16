@@ -4,7 +4,7 @@ No teacher scripts are executed. Reads committed Git blobs only. Runtime secrets
 source data, dependencies, untracked changes and previous bundles cannot enter it.
 """
 from __future__ import annotations
-import argparse, datetime as dt, hashlib, json, os, subprocess, zipfile
+import argparse, datetime as dt, hashlib, json, os, re, subprocess, zipfile
 from pathlib import Path, PurePosixPath
 
 def digest(p):
@@ -27,7 +27,7 @@ def main():
     def git(*command,where=project):return subprocess.check_output(['git',*command],cwd=where,stderr=subprocess.STDOUT)
     head=git('rev-parse','HEAD').decode().strip()
     files=[n for n in git('ls-tree','-rz','--name-only',head).decode('utf-8').split('\0') if n]
-    allowed_suffixes={'.go','.sql','.py','.ps1','.json','.toml','.md','.ts','.tsx','.css','.html','.txt','.docx','.pptx','.jpg','.jpeg','.png'}
+    allowed_suffixes={'.go','.sql','.py','.ps1','.cmd','.json','.toml','.md','.ts','.tsx','.css','.html','.txt','.docx','.pptx','.pdf','.jpg','.jpeg','.png'}
     rejected=[]; mapping={}
     def safe(name):
         path=PurePosixPath(name)
@@ -36,7 +36,8 @@ def main():
         if not safe(name):rejected.append(name);continue
         p=PurePosixPath(name)
         if name=='大作业报告.docx': target='01-报告/'+p.name
-        elif name=='中期汇报.pptx': target='02-PPT/'+p.name
+        elif name in ('中期汇报.pptx','中期汇报.pdf','中期汇报讲稿.md'): target='02-PPT/'+p.name
+        elif p.parts[0]=='中期汇报网页版': target='02-PPT/'+name  # keeps 证据原图/ beside index.html
         elif p.parts[0]=='每日工作记录':target='04-每日记录/'+name
         elif name in ('要做什么.md','怎么做.md','怎么算做对.md'):target='05-三份规格/'+p.name
         elif name=='选题自查表.md':target='06-自查/'+p.name
@@ -47,8 +48,12 @@ def main():
         else:rejected.append(name);continue
         data=git('show',head+':'+name)
         dest=stage/target;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data);mapping[target]=name
-    for expected in ('01-报告/大作业报告.docx','02-PPT/中期汇报.pptx','09-材料清单/材料清单.md'):
+    for expected in ('01-报告/大作业报告.docx','02-PPT/中期汇报.pptx','02-PPT/中期汇报.pdf','02-PPT/中期汇报讲稿.md','02-PPT/中期汇报网页版/index.html','09-材料清单/交付源码/启动Demo.cmd','09-材料清单/材料清单.md'):
         if expected not in mapping:raise SystemExit('Required committed material missing: '+expected)
+    # The web deck must open from the package alone: every local image it references is packed beside it.
+    deck=stage/'02-PPT/中期汇报网页版/index.html'
+    for ref in sorted(set(re.findall(r'(?:src|data-src)="(证据原图/[^"]+)"',deck.read_text(encoding='utf-8')))):
+        if not (deck.parent/ref).is_file():raise SystemExit('Web deck image missing from package: '+ref)
     bundle=stage/'03-Git历史/项目存档.bundle';bundle.parent.mkdir()
     subprocess.run(['git','bundle','create',str(bundle),'--all'],cwd=project,check=True,capture_output=True)
     verify=subprocess.run(['git','bundle','verify',str(bundle)],cwd=project,check=True,capture_output=True,text=True)
@@ -66,7 +71,8 @@ def main():
                 part=bundle.with_name(bundle.name+f'.part{i:03}');part.write_bytes(b);parts.append({'name':str(part.relative_to(stage)).replace('\\','/'),'sha256':digest(part)})
         # Full bundle remains in the archive for direct local restoration; parts support plugin upload limits.
     daily=sorted({PurePosixPath(n).parts[1] for n in files if n.startswith('每日工作记录/') and len(PurePosixPath(n).parts)>2})
-    pending=['本人三角色首次强密码及真机Passkey/TOTP绑定、登录与恢复码保存','本人亲跑测试、重启技能、可信Hook实际deny、上下文与完整演练','八个真实日期记录：当前只有'+','.join(daily),'NFR02未达标；NFR04以逐请求实际结果为准','本人邮件发送和辅导截图/插件备份，另一台机器验证另列最终待做']
+    # v1.2: Hook cancelled by the student; day count is not a course threshold. Only unproven items stay pending.
+    pending=['正式项目报告（01-报告）与本人汇报实际计时以实物/记录为准','真实日期记录：'+','.join(daily),'NFR-02/03优选45秒/5秒未达，四项必须底线以正式summary.json为准','本人邮件发送和辅导截图/插件备份，另一台机器验证另列最终待做']
     manifest={'actual_time':now.isoformat(),'kind':'review_only_not_frozen','source_head':head,'nine_categories':[p.name for p in sorted(stage.iterdir()) if p.is_dir()],'pending':pending,'excluded_tracked_paths':rejected,'mapping':mapping,'files':{str(p.relative_to(stage)).replace('\\','/'):{'bytes':p.stat().st_size,'sha256':digest(p)} for p in sorted(stage.rglob('*')) if p.is_file()},'bundle_parts':parts,'note':'Manifest excludes itself. ZIP hash and restore/unpack receipt are external, with no circular self-hashes. No teacher originals or runtime files are included.'}
     (stage/'09-材料清单/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     archive=output/('软件编程-中期审阅-20251101030-王麒皓-'+now.strftime('%Y%m%d-%H%M%S')+'.zip')

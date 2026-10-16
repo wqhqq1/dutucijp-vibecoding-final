@@ -1,0 +1,18 @@
+{
+  "actual_time": "2026-10-16T22:40:14.236294+08:00",
+  "source_head": "1085e2ee903eb993a82c991e8a8fdb627e78230e",
+  "presentation_hashes_unchanged": {
+    "中期汇报.pptx": "e9c89670a827e182298b65702dffe0a8bb894f6d3b1dea4b647d1eacdda295a9",
+    "中期汇报.pdf": "a1e669313dcb5aa347a9995634d0705927fc897eb8f95f509f4a8f060ff08d76",
+    "中期汇报网页版/index.html": "c05d84f168902746c45c5e087e5984dadfc6d1176d7648e3a333f931dbbc8c7d",
+    "中期汇报讲稿.md": "19b6495f7aef9547bae3e51ae9285676b1863fbd59830002a1b8f18b66b5b300"
+  },
+  "report_sha256": "88f4ef59aecc32179a71fa7254ddfd1b29306144043983037118bd82bae92f4e",
+  "report_pages": 4,
+  "report_visual_qa": "all four pages inspected; no blank page, clipping or overlap",
+  "docx_renderer_attempt": "render_docx.py unavailable because no LibreOffice in selected Windows runtime; native Word read-only PDF export plus bundled Poppler used",
+  "pptx_slide_count": 10,
+  "presentation_pdf_pages": 10,
+  "presentation_modified": false,
+  "package_receipt": "generated externally after pinned native commit; not fabricated here"
+}

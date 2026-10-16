@@ -1,0 +1,133 @@
+"""Build the current report from checked project evidence without changing slides."""
+from pathlib import Path
+import hashlib, json, re, subprocess
+from datetime import datetime, timezone, timedelta
+from docx import Document
+from docx.shared import Cm, Pt, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+
+ROOT=Path(__file__).resolve().parents[1]
+SLIDES=['中期汇报.pptx','中期汇报.pdf','中期汇报网页版/index.html','中期汇报讲稿.md']
+before={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in SLIDES}
+now=datetime.now(timezone(timedelta(hours=8)))
+head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip()
+count=subprocess.check_output(['git','rev-list','--count','HEAD'],cwd=ROOT).decode().strip()
+doc=Document()
+sec=doc.sections[0];sec.page_width=Cm(21);sec.page_height=Cm(29.7)
+sec.top_margin=Cm(1.7);sec.bottom_margin=Cm(1.7);sec.left_margin=Cm(1.9);sec.right_margin=Cm(1.9)
+for name,size in [('Normal',10.5),('Title',20),('Subtitle',10.5),('Heading 1',13),('Heading 2',11)]:
+    st=doc.styles[name];st.font.name='宋体';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0)
+    st.element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
+    st.paragraph_format.space_after=Pt(5);st.paragraph_format.line_spacing=1.12
+doc.styles['Title'].font.bold=True
+for st in doc.styles:
+    for border in st.element.xpath('.//w:pBdr'):
+        border.getparent().remove(border)
+doc.styles['Title'].font.underline=False
+doc.styles['Subtitle'].font.italic=False
+doc.styles['Heading 1'].paragraph_format.space_before=Pt(8)
+doc.styles['Normal'].paragraph_format.widow_control=True
+doc.core_properties.author='王麒皓';doc.core_properties.title='退货对账与差异处理中期报告'
+md=[]
+nextpage=False
+def para(s,style=None):
+    p=doc.add_paragraph(s,style);md.append(s+'\n');return p
+def heading(s):
+    global nextpage
+    p=doc.add_heading(s,1)
+    if nextpage:p.paragraph_format.page_break_before=True;nextpage=False
+    md.append('## '+s+'\n')
+def table(headers,rows,widths,size=9.5):
+    t=doc.add_table(rows=1,cols=len(headers));t.autofit=False;t.alignment=WD_TABLE_ALIGNMENT.CENTER
+    for c,w in zip(t.columns,widths):c.width=Cm(w)
+    for i,h in enumerate(headers):t.rows[0].cells[i].text=h
+    for row in rows:
+        cells=t.add_row().cells
+        for c,s in zip(cells,row):c.text=str(s)
+    for ri,row in enumerate(t.rows):
+        pr=row._tr.get_or_add_trPr();pr.append(OxmlElement('w:cantSplit'))
+        if ri==0:pr.append(OxmlElement('w:tblHeader'))
+        for ci,c in enumerate(row.cells):
+            c.width=Cm(widths[ci]);c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
+            cp=c._tc.get_or_add_tcPr();b=OxmlElement('w:tcBorders')
+            for side in ['top','left','bottom','right']:
+                e=OxmlElement('w:'+side);e.set(qn('w:val'),'single');e.set(qn('w:sz'),'4');e.set(qn('w:color'),'D9D9D9');b.append(e)
+            cp.append(b);m=OxmlElement('w:tcMar')
+            for side in ['top','bottom','left','right']:
+                e=OxmlElement('w:'+side);e.set(qn('w:w'),'55');e.set(qn('w:type'),'dxa');m.append(e)
+            cp.append(m)
+            if ri==0:
+                fill=OxmlElement('w:shd');fill.set(qn('w:fill'),'E8EDF1');cp.append(fill)
+            for p in c.paragraphs:
+                p.paragraph_format.space_after=Pt(1);p.paragraph_format.space_before=Pt(1);p.paragraph_format.line_spacing=1.02
+                if ci==0:p.alignment=WD_ALIGN_PARAGRAPH.CENTER
+                for r in p.runs:r.font.size=Pt(size);r.font.bold=ri==0
+    md.append('| '+' | '.join(headers)+' |\n| '+' | '.join(['---']*len(headers))+' |\n'+'\n'.join('| '+' | '.join(map(str,row))+' |' for row in rows)+'\n')
+    spacer=doc.add_paragraph();spacer.paragraph_format.space_after=Pt(0);spacer.paragraph_format.space_before=Pt(0);spacer.paragraph_format.line_spacing=Pt(1)
+    spacer.add_run().font.size=Pt(1)
+    return t
+para('退货对账与差异处理中期报告','Title')
+para('软件编程大作业  VC-R-03  课程要求 v1.2','Subtitle')
+para(f'王麒皓  20251101030  机国际2502  {now.date().isoformat()}')
+heading('一 选题与背景')
+para('本项目帮助财务和仓库核查无法直接关联原销售的取消记录。当前已完成公开数据准备、保守配对、差异派单与结案、权限审计和网页查询；已有两年度全量实跑及主流程、边界验证。本文说明当前成果、判断依据和限制，最终验收仍需持续核对。')
+para('数据来自 UCI Online Retail II，DOI 10.24432/C5CG6D，许可 CC BY 4.0。使用 online_retail_II.xlsx 的两个年度工作表，原件只读。Invoice、StockCode、Description、Quantity、InvoiceDate、Price、Customer ID、Country 是原始事实；配对关系、角色、工单和处理结论是规则推断或课程模拟记录。系统不执行实际退款，不接入支付或物流。')
+heading('二 需求')
+para('以下按原 FR 编号摘要列出，完整“系统应当”条文、4 项不做内容及 CR 清洗规则见《要做什么.md》。18 项均有实现，具体实测范围与设备验证边界按第五节记录，不将实现等同全部真机验收。')
+rows=[('01','读取官方原件并验证出处与散列'),('02','支持 benchmark、year1、all 并显示进度'),('03','清洗并保留源行及排除原因'),('04','展示接纳、排除与守恒'),('05','不自动确认无候选、多候选或缺身份记录'),('06','唯一合格候选自动配对且不超退'),('07','检索、服务端分页与证据详情'),('08','相同输入幂等且保留人工历史'),('09','财务或管理员派单并留痕'),('10','拒绝重复派单，并发最多一次成功'),('11','仅按待处理、处理中、已关闭顺序流转'),('12','责任人确认候选时重验余量与版本'),('13','关闭前必须填写非空结论'),('14','首次强密码加 Passkey 或 2FA，后端校验权限'),('15','成功业务动作与不可改审计同事务写入'),('16','财务或管理员导出全部筛选结果 CSV'),('17','全量处理与并发查询达到四项底线'),('18','提供复现、失败说明与完整 Git 历史')]
+table(['编号','系统应当完成的行为'],[(f'FR-{i}',s) for i,s in rows],[1.8,15.4],9)
+nextpage=True
+heading('三 设计与技术选型')
+para('数据流为官方工作簿 → Python 准备 → Go/Gin 配对及工作流 → SQLite 持久化 → React/TypeScript 查询与证据页面。Python 负责读取原始 XML、清洗和来源回执；后端负责规则、数量事务、认证和权限；页面不决定身份或配对结果。')
+table(['数据对象','关键内容与约束'],[
+('来源与准备','source_files/source_rows/datasets/normalized_rows：文件散列、工作表、源行和接纳排除口径'),
+('运行与数量','runs/allocations/sale_balances：相同输入唯一、取消行唯一分配、销售累计退量不超原量'),
+('核查与证据','cases/candidate_evidence/audit_events：归属、状态、版本、结论和前后操作记录'),
+('账户与会话','用户、会话、Passkey、TOTP 和恢复材料表：服务端验证，秘密只存项目外运行状态')],[2.5,14.7])
+para('2026-10-14 的 D-02 选择唯一候选保守配对，放弃数量相等优先和跨销售分摊，代价是更多待核查。D-03 保留 year1 首版与 all 最终全量，benchmark 只用于独立基准。D-04 选择 Go/Gin 与 SQLite；FastAPI、Rust、C#、Java 是备选，没有同条件实测，不宣称固定速度倍数。详见《决定记录.md》。')
+heading('四 实现情况与实际结果')
+para('当前清洗 cr-1.0.1、规则 conservative-1.0.0。C 前缀识别取消，关键格式/非正价格等异常记录排除并留主要原因；缺客户保留核查，跨表副本按出现次数对应。精确十进制价格用于判定，显示舍入不参与配对。')
+table(['数据范围','原始行','接纳行','排除行','自动配对取消行'],[
+('benchmark','10,000','9,972','28','见独立基准输出'),('year1','525,461','521,770','3,691','5,214 / 10,205'),('all','1,067,371','1,038,818','28,553','9,714 / 19,164')],[2.8,3.1,3.1,2.7,5.5])
+para('all 接纳取消 19,164 = 自动 9,714 + 疑似 6,275 + 当前规则下无合格原单 3,175，初始差异 9,450。配对覆盖率 50.69%，没有真实原订单关联标签，不能解释为准确率。year1 初始覆盖率为 51.09%。')
+para('R-02 要求客户、商品、精确价格、国家相同，销售严格在先且余量足够；只有唯一合格候选才自动确认。R-03 支持买 10 退 4，但累计退量不能超过 10，一条取消不跨多条销售分摊。R-04 要求先开始再带非空结论关闭，资料不足结案不新增配对。这些约束分别改变候选选择、数量分配和结案结果。')
+para('本机双击“启动Demo.cmd”复用已构建的优化版与既有演示库；“测试Demo.cmd”运行隔离回归。另机从零按《运行说明.md》执行 bootstrap、build、prepare-demo/start；原件与依赖需事先准备，账户须本人完成强密码和因素配置。当前机器已有三个 Passkey 账户，不能将本机入口称为无依赖的通用安装包。')
+nextpage=True
+heading('五 测试与验收')
+para('已有 76 项 Go 顶层、15 项 Python、6 项前端自动测试，共 97 项通过，零失败、零跳过，PowerShell 7 与 5.1 均有记录。重复运行不重复计数。以下分别列自动夹具和真实浏览器结果，原始输出与测试源码均随包提供。')
+table(['用例','输入与预期','实际结果及证据'],[
+('TC-19/24 主流程','year1 0:182 派给 finance；开始后填理由关闭','v1→v2→v3→v4，三条审计；资料不足结案，未新增配对。实录图 05、10'),
+('TC-20 重复派单','已有 finance 责任人，再次派单应拒绝','显示已有责任人 finance，仍 v2。实录图 06'),
+('TC-24 空结论','处理中不填结论关闭，应拒绝且状态不变','仍处理中 v3，未增加关闭审计。实录图 08'),
+('TC-10 多候选','all 0:1378 有两条合格候选，不自动挑选','0:1271、0:1368 各余 12，仍待核查。实录图 03'),
+('TC-09/13/14 数量','夹具买10退4余6，再退6余0；余3退4应拒绝','自动用例通过；超量不留半次分配。reconcile/engine_test.go'),
+('FR-07 分页边界','客户13526共54条，每页50；不存在商品返回空','第二页4条且下一页禁用；空结果0条，非加载错误。实录图 11、12、14')],[2.4,6.5,8.3],9)
+para('图号指“每日工作记录/2026-10-16/截图/v12中期复核”。0:182 是 finance 自任处理人的本轮闭环；此前跨角色、权限和 CSV 核对另有 10-15 记录。Passkey 配置由本人操作，业务点击和新 CLI 调用由 AI 辅助执行，不能当作本人手工完成所有新版测试。')
+table(['性能项','三次实测或并发结果','底线与结论'],[
+('NFR-01 一万行','1.839084 / 1.612311 / 1.598021 s','≤5 s，通过'),('NFR-02 全量首次','72.336732 / 71.975185 / 71.915839 s','≤90 s，通过；45 s 优选未达'),('NFR-03 全量重算','10.732953 / 10.806692 / 10.955740 s','≤15 s，通过；5 s 优选未达'),('NFR-04 后台任务时查询','10路、300次、0失败，P95 11.7245 ms','≤500 ms，通过，也达200 ms优选')],[3.1,8.2,5.9],9)
+para('计时边界为本地原件已在、依赖与程序已构建，不含下载安装编译。正式成绩来自 97b790a 对应的“正式NFR01-03/summary.json”“正式NFR04/summary.json”；自动回归见“辅导收工回归/summary.json”，路径均在 2026-10-16 原始输出目录。')
+para('冷启动后账号与业务记录保留：首页 200、未登录业务 401；year1 为待处理 4,988、处理中 0、关闭 3，总 4,991。外层启动测试包装进程未自行结束并被终止，不能记为包装器退出 0；服务保持运行。')
+nextpage=True
+heading('六 开发过程与AI使用')
+para(f'本报告整理前源码基线 {head[:7]}，main 共 {count} 次原生提交，实际日期跨度为 2026-10-14 至 10-16；后续归档提交不回改这次统计。代表提交：97b790a 完成全量与查询优化；d3b3700 复核中期材料并补验；78df10d 完成 v1.2 网页主讲及同源静态备份。完整历史由 bundle 保存。')
+para('开发与检查主要使用 Codex，当前网页汇报由 Claude Code 调整。AI 用于代码、测试、排错和材料整理；关键数字对照官方原件、原始输出和真实浏览器画面核验。本人提出需求、选择技术方案，并完成三账户 Passkey 配置。AGENTS 约束范围，run-app 已由新 CLI 显式调用并退出 0；技能结果页是输出摘录展示，不是 CLI 实拍。')
+para('上下文压缩次数和前后占用未取得完整可核验记录，不填估算数；已有保留记录继续归档。没有以聊天篇数、截图数或记录天数代替功能完成度。')
+heading('七 问题与解决')
+para('全量首次处理曾耗时 198.84 s，并发 300 次查询有 228 次失败。实测定位后调整处理批次、查询索引和读写路径，正式复测达到四项底线；首次 45 s、重算 5 s 优选仍未达，按本人决定停止追加优化。旧失败与复测输出均保留。')
+para('PowerShell 5.1 把 Python 正常 stderr 进度当作 NativeCommandError。真实复现后改为异步分流并依据进程退出码判断，随后两种 Shell 回归通过；不能把单一 Shell 的通过推成跨 Shell 兼容。')
+para('客户编号 00042 曾被转换为 42。通过文本编号反例发现，修复为保留字符串语义并添加回归。另有应用目录虚拟化造成路径比较误拒绝，采用目录身份核对；修复前输出保留，不以成功截图覆盖失败。')
+heading('八 成本统计')
+para('项目全程 token 和货币费用未完整取得，记为未提供。仅技能核查这一新 CLI 轮次有输入 83,827、其中缓存输入 63,744、输出 446 token，不另加缓存输入，也不外推项目总量。环境记录包括 Windows amd64、Go 1.27.2、Python 3.12.10、Node 24.18.0；具体锁定依赖见 tools/environment.lock.json 和各包锁文件。')
+heading('九 遗留问题与后续计划')
+para('按当前汇报计划：10-23起结合反馈核对 FR-12/16/17；10-26至11-05继续全量边界、异常恢复与从零交付；11-06至11-12核对工程证据和另机兼容；11-13至11-16完成最终报告、实练与冻结，11-17只提交和演示。缺真实记录的真机恢复、人工确认、现场投影及实际计时不写已验证；优选性能差距持续披露。')
+heading('十 自查与材料入口')
+para('本项目保留目标为18项FR、4项不做、8条业务规则、6条清洗规则、48个计划TC和4项NFR。它们是项目范围，不称 v1.2 统一课程下限。报告与 PPT 分别供阅读和讲述；主讲网页、同源 PDF、静态 PPTX 和讲稿由本轮打包原样保留。规则见《要做什么.md》，设计见《怎么做.md》，实测见《测试记录.md》，入口见《提交索引.md》。')
+doc.save(ROOT/'大作业报告.docx')
+(ROOT/'中期项目报告.md').write_text('# 退货对账与差异处理中期报告\n\n'+'\n'.join(md),encoding='utf-8',newline='\n')
+assert before=={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in SLIDES}
+out=ROOT/'.working/midterm-package-20261016';out.mkdir(parents=True,exist_ok=True)
+(out/'report-build.json').write_text(json.dumps({'actual_time':now.isoformat(),'source_head':head,'presentation_hashes_unchanged':before,'report_sha256':hashlib.sha256((ROOT/'大作业报告.docx').read_bytes()).hexdigest()},ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps({'report':'大作业报告.docx','presentation_files_unchanged':True},ensure_ascii=False))

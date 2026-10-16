@@ -50,12 +50,13 @@ type Config struct {
 	Now               func() time.Time
 }
 type Service struct {
-	DB       *sql.DB
-	WA       *webauthn.WebAuthn
-	key      []byte
-	now      func() time.Time
-	Origin   string
-	hashGate chan struct{}
+	DB        *sql.DB
+	WA        *webauthn.WebAuthn
+	key       []byte
+	now       func() time.Time
+	Origin    string
+	hashGate  chan struct{}
+	touchGate chan struct{}
 }
 type Identity struct {
 	ID   string `json:"id"`
@@ -131,7 +132,7 @@ func New(db *sql.DB, cfg Config) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Service{db, wa, key, cfg.Now, cfg.Origin, make(chan struct{}, 2)}, nil
+	return &Service{DB: db, WA: wa, key: key, now: cfg.Now, Origin: cfg.Origin, hashGate: make(chan struct{}, 2), touchGate: make(chan struct{}, 1)}, nil
 }
 
 func PrivateDirectory(path string) error {
@@ -288,9 +289,48 @@ func (s *Service) Current(ctx context.Context, token string, business bool) (Ses
 		return v, restricted()
 	}
 	if s.now().Unix()-v.Seen >= 60 {
-		_, e = s.DB.ExecContext(ctx, "UPDATE auth_sessions SET seen=? WHERE hash=? AND seen<?", s.now().Unix(), Digest(token), s.now().Unix()-60)
+		e = s.touch(ctx, token, v)
 	}
 	return v, e
+}
+
+// Activity renewal must not queue authenticated readers behind an import writer.
+// Authorization above is always read from SQLite, never from this concurrency gate.
+// A busy writer leaves the persisted expiry unchanged; a later request retries.
+func (s *Service) touch(ctx context.Context, token string, v Session) error {
+	select {
+	case s.touchGate <- struct{}{}:
+		defer func() { <-s.touchGate }()
+	default:
+		return nil
+	}
+	conn, err := s.DB.Conn(ctx)
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+	var timeout int
+	if err = conn.QueryRowContext(ctx, "PRAGMA busy_timeout").Scan(&timeout); err != nil {
+		return err
+	}
+	if _, err = conn.ExecContext(ctx, "PRAGMA busy_timeout=0"); err != nil {
+		return err
+	}
+	defer conn.ExecContext(context.Background(), fmt.Sprintf("PRAGMA busy_timeout=%d", timeout))
+	if _, err = conn.ExecContext(ctx, "BEGIN IMMEDIATE"); err != nil {
+		var code interface{ Code() int }
+		if errors.As(err, &code) && (code.Code()&255 == 5 || code.Code()&255 == 6) {
+			return nil // SQLITE_BUSY / SQLITE_LOCKED: do not extend the session.
+		}
+		return err
+	}
+	defer conn.ExecContext(context.Background(), "ROLLBACK")
+	now := s.now().Unix()
+	if _, err = conn.ExecContext(ctx, `UPDATE auth_sessions SET seen=? WHERE hash=? AND version=? AND seen<=? AND seen>? AND expires>?`, now, Digest(token), v.Version, now-60, now-1800, now); err != nil {
+		return err
+	}
+	_, err = conn.ExecContext(ctx, "COMMIT")
+	return err
 }
 func (s *Service) Initialize(ctx context.Context, identities []Identity) (map[string]string, error) {
 	out := map[string]string{}

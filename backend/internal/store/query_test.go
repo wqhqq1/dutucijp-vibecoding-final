@@ -4,9 +4,12 @@ import (
 	"bytes"
 	"context"
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
 	"io"
+	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -263,4 +266,195 @@ func TestQueriesRejectUnpublishedRun(t *testing.T) {
 	requireWorkflowCode(t, err, "not_found")
 	_, err = s.ListCandidates(context.Background(), testFinance, id, PageRequest{})
 	requireWorkflowCode(t, err, "not_found")
+}
+
+func TestTC16_SourceOrderAndCountAcrossSharedSourceRanges(t *testing.T) {
+	s := openTest(t, filepath.Join(t.TempDir(), "ranges.sqlite"))
+	ctx := context.Background()
+	rows := []model.Row{fixtureRow("0:2", 2, -6, "08:00"), fixtureRow("0:10", 10, -6, "08:00"), fixtureRow("1:2", 2, -6, "08:00")}
+	rows[2].SheetIndex, rows[2].Sheet = 1, "Year 2010-2011"
+	var runs []string
+	for i, subset := range [][]model.Row{rows, rows[1:]} {
+		dir, m := preparedFixture(t, subset)
+		m.Scope = fmt.Sprintf("test-range-%d", i)
+		m.DatasetID = ID(m.SourceHash + "|" + m.Scope + "|" + m.CleaningVersion)
+		encoded, err := json.Marshal(m)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(filepath.Join(dir, "manifest.json"), encoded, 0600); err != nil {
+			t.Fatal(err)
+		}
+		if _, err = s.Import(ctx, dir); err != nil {
+			t.Fatal(err)
+		}
+		run, err := s.Run(ctx, m.DatasetID, 1)
+		if err != nil {
+			t.Fatal(err)
+		}
+		runs = append(runs, run.RunID)
+	}
+	for i, want := range [][]string{{"0:2", "0:10", "1:2"}, {"0:10", "1:2"}} {
+		for page := 1; page <= len(want)+1; page++ {
+			got, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: runs[i], Page: page, PageSize: 1})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got.Total != len(want) {
+				t.Fatalf("range %d total=%d, want %d", i, got.Total, len(want))
+			}
+			if page <= len(want) {
+				if len(got.Items) != 1 || got.Items[0].ID != want[page-1] {
+					t.Fatalf("range %d page %d: %+v", i, page, got.Items)
+				}
+			} else if len(got.Items) != 0 {
+				t.Fatal("page beyond range returned rows")
+			}
+			cases, err := s.ListCases(ctx, testFinance, QueryFilter{RunID: runs[i], Page: page, PageSize: 1})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if cases.Total != len(want) {
+				t.Fatal("case total differs from source rows")
+			}
+			if page <= len(want) && (len(cases.Items) != 1 || cases.Items[0].CancelID != want[page-1]) {
+				t.Fatalf("case numeric source order differs: %+v", cases.Items)
+			}
+		}
+	}
+}
+
+func TestTC16_OptimizedListsMatchReferenceAfterWorkflowWrites(t *testing.T) {
+	s, run, own, other := queryFixture(t)
+	ctx := context.Background()
+	c := assignWorkflow(t, s, own)
+	c, err := s.TransitionCase(ctx, testOwner, c.ID, "in_progress", c.Version, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	confirmed, err := s.ConfirmCandidate(ctx, testOwner, c.ID, "0:2", c.Version)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err = s.TransitionCase(ctx, testOwner, c.ID, "closed", confirmed.Case.Version, "isolated reference query test"); err != nil {
+		t.Fatal(err)
+	}
+	if _, err = s.AssignCase(ctx, testFinance, testOther, other); err != nil {
+		t.Fatal(err)
+	}
+	// The original joined query is a reference for exact source order, filters,
+	// counts and visible ownership after assignment, allocation and close.
+	const referenceFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id JOIN normalized_rows n ON n.dataset_id=d.id JOIN source_rows sr ON sr.id=n.source_id LEFT JOIN decisions dc ON dc.run_id=r.id AND dc.cancel_id=n.id LEFT JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
+	filters := []QueryFilter{{}, {Status: "closed"}, {Status: "pending"}, {Assignee: testOwner.ID}, {Classification: "suspected"}, {Classification: "matched"}, {Kind: "sale"}, {Kind: "cancel"}, {Customer: "42", Stock: "A"}, {Invoice: "0:125"}, {DateFrom: "2010-01-01T09:00:00", DateTo: "2010-01-02"}, {Status: "closed", Assignee: testOwner.ID, Customer: "42", Kind: "cancel", Page: 2}}
+	for _, actor := range []WorkflowActor{testFinance, testOwner, testOther} {
+		for i, input := range filters {
+			t.Run(fmt.Sprintf("%s-%s-%d", actor.Role, actor.ID, i), func(t *testing.T) {
+				input.RunID, input.PageSize = run, 2
+				f, err := s.validateFilter(ctx, actor, input)
+				if err != nil {
+					t.Fatal(err)
+				}
+				where, args := queryWhere(actor, f)
+				read, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+referenceFrom+where+" ORDER BY sr.sheet_index,sr.source_row,n.id", args...)
+				if err != nil {
+					t.Fatal(err)
+				}
+				wantRows := []TransactionRecord{}
+				for read.Next() {
+					var r TransactionRecord
+					if err = scanTransaction(read, &r); err != nil {
+						t.Fatal(err)
+					}
+					wantRows = append(wantRows, r)
+				}
+				if err = read.Err(); err != nil {
+					t.Fatal(err)
+				}
+				read.Close()
+				got, err := s.ListTransactions(ctx, actor, input)
+				if err != nil {
+					t.Fatal(err)
+				}
+				start, end := (f.Page-1)*f.PageSize, f.Page*f.PageSize
+				if start > len(wantRows) {
+					start = len(wantRows)
+				}
+				if end > len(wantRows) {
+					end = len(wantRows)
+				}
+				if got.Total != len(wantRows) || !reflect.DeepEqual(got.Items, wantRows[start:end]) {
+					t.Fatalf("transaction reference differs: total=%d/%d items=%d/%d", got.Total, len(wantRows), len(got.Items), end-start)
+				}
+				read, err = s.DB.QueryContext(ctx, "SELECT c.id"+referenceFrom+where+" AND c.id IS NOT NULL ORDER BY sr.sheet_index,sr.source_row,c.id", args...)
+				if err != nil {
+					t.Fatal(err)
+				}
+				ids := []string{}
+				for read.Next() {
+					var id string
+					if err = read.Scan(&id); err != nil {
+						t.Fatal(err)
+					}
+					ids = append(ids, id)
+				}
+				if err = read.Err(); err != nil {
+					t.Fatal(err)
+				}
+				read.Close()
+				wantCases := []WorkflowCase{}
+				start, end = (f.Page-1)*f.PageSize, f.Page*f.PageSize
+				if start > len(ids) {
+					start = len(ids)
+				}
+				if end > len(ids) {
+					end = len(ids)
+				}
+				for _, id := range ids[start:end] {
+					c, e := s.WorkflowCase(ctx, actor, id)
+					if e != nil {
+						t.Fatal(e)
+					}
+					wantCases = append(wantCases, c)
+				}
+				cases, err := s.ListCases(ctx, actor, input)
+				if err != nil {
+					t.Fatal(err)
+				}
+				if cases.Total != len(ids) || !reflect.DeepEqual(cases.Items, wantCases) {
+					t.Fatalf("case reference differs: %+v vs %+v", cases, wantCases)
+				}
+				allocationFrom := referenceFrom + ` JOIN allocations a ON a.run_id=r.id AND a.cancel_id=n.id JOIN normalized_rows sn ON sn.dataset_id=d.id AND sn.id=a.sale_id JOIN source_rows ss ON ss.id=sn.source_id`
+				read, err = s.DB.QueryContext(ctx, `SELECT a.run_id,a.cancel_id,a.sale_id,a.quantity,a.amount,a.method,coalesce(a.actor,''),r.rule_version,sr.sheet,sr.source_row,ss.sheet,ss.source_row`+allocationFrom+where+" ORDER BY sr.sheet_index,sr.source_row,a.cancel_id", args...)
+				if err != nil {
+					t.Fatal(err)
+				}
+				wantAllocations := []AllocationRecord{}
+				for read.Next() {
+					var a AllocationRecord
+					if err = read.Scan(&a.RunID, &a.CancelID, &a.SaleID, &a.Quantity, &a.Amount, &a.Method, &a.Actor, &a.RuleVersion, &a.CancelSheet, &a.CancelSourceRow, &a.SaleSheet, &a.SaleSourceRow); err != nil {
+						t.Fatal(err)
+					}
+					wantAllocations = append(wantAllocations, a)
+				}
+				if err = read.Err(); err != nil {
+					t.Fatal(err)
+				}
+				read.Close()
+				allocations, err := s.ListAllocations(ctx, actor, input)
+				if err != nil {
+					t.Fatal(err)
+				}
+				start, end = (f.Page-1)*f.PageSize, f.Page*f.PageSize
+				if start > len(wantAllocations) {
+					start = len(wantAllocations)
+				}
+				if end > len(wantAllocations) {
+					end = len(wantAllocations)
+				}
+				if allocations.Total != len(wantAllocations) || !reflect.DeepEqual(allocations.Items, wantAllocations[start:end]) {
+					t.Fatalf("allocation reference differs: %+v vs %+v", allocations, wantAllocations[start:end])
+				}
+			})
+		}
+	}
 }

@@ -1,0 +1,18 @@
+{
+  "actual_time": "2026-10-16T12:27:35.9926247+08:00",
+  "powershell_version": "7.6.5",
+  "go_exit": 0,
+  "python_exit": 0,
+  "frontend_exit": 0,
+  "go_top_level_passed": 76,
+  "go_top_level_failed": 0,
+  "go_top_level_skipped": 0,
+  "python_tests_ran": "15",
+  "frontend_passed": "6",
+  "go_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\go.jsonl",
+  "go_stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\go.stderr.txt",
+  "python_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\python.txt",
+  "python_stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\python.stdout.txt",
+  "frontend_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\frontend.tap.txt",
+  "frontend_stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-final-tests\\frontend.stderr.txt"
+}

@@ -1,0 +1,128 @@
+{
+  "measurement_complete": true,
+  "actual_time": "2026-10-16T12:33:40.2652643+08:00",
+  "go_version": "go1.27.2",
+  "logical_cpus": 16,
+  "binary_sha256": "e7cfc685e693533ac76513d51934690e50cf6a866061fa996ca441a1424a04ed",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-1\\isolated.sqlite",
+  "source_sha256_before": "333cae8661271c5a03dbf9db0ee30a70e1e579b93236d752b7a5839f952f13b9",
+  "source_sha256_after": "333cae8661271c5a03dbf9db0ee30a70e1e579b93236d752b7a5839f952f13b9",
+  "isolated_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-http-final\\isolated.sqlite",
+  "read_only_backup_seconds": 4.2216302,
+  "actual_http_server_url": "http://127.0.0.1:5649",
+  "request_host_and_origin": "http://localhost:8080",
+  "authentication_method": "Isolated random finance identity; real Bootstrap -\u003e strong password -\u003e TOTP proof -\u003e Complete -\u003e Logout -\u003e password+TOTP login. No sessions inserted. No real human/device claim.",
+  "query_scope": "all",
+  "query_run": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+  "job_id": "job-20261016-123359-K3a914FIrraM",
+  "job_scope": "year1",
+  "job_at_load_start": {
+    "id": "job-20261016-123359-K3a914FIrraM",
+    "scope": "year1",
+    "status": "running",
+    "stage": "importing",
+    "run_id": "",
+    "progress": {
+      "stage": "prepared",
+      "stats": {
+        "accepted": 521770,
+        "accepted_cancels": 10205,
+        "accepted_sales": 511565,
+        "excluded": 3691,
+        "excluded_cancels": 1,
+        "exclusion_reasons": {
+          "invalid_quantity": 1,
+          "nonpositive_price": 3690
+        },
+        "flags": {
+          "missing_customer": 107927,
+          "missing_description": 2928,
+          "same_sheet_duplicate": 13283
+        },
+        "raw": 525461,
+        "raw_cancels": 10206,
+        "unknown_invoice": 0
+      }
+    }
+  },
+  "job_at_load_end": {
+    "id": "job-20261016-123359-K3a914FIrraM",
+    "scope": "year1",
+    "status": "running",
+    "stage": "importing",
+    "run_id": "",
+    "progress": {
+      "stage": "prepared",
+      "stats": {
+        "accepted": 521770,
+        "accepted_cancels": 10205,
+        "accepted_sales": 511565,
+        "excluded": 3691,
+        "excluded_cancels": 1,
+        "exclusion_reasons": {
+          "invalid_quantity": 1,
+          "nonpositive_price": 3690
+        },
+        "flags": {
+          "missing_customer": 107927,
+          "missing_description": 2928,
+          "same_sheet_duplicate": 13283
+        },
+        "raw": 525461,
+        "raw_cancels": 10206,
+        "unknown_invoice": 0
+      }
+    }
+  },
+  "job_final": {
+    "id": "job-20261016-123359-K3a914FIrraM",
+    "scope": "year1",
+    "status": "succeeded",
+    "stage": "published",
+    "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+    "progress": {
+      "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+      "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+      "rule_version": "conservative-1.0.0",
+      "status": "published",
+      "reused": false,
+      "input": {
+        "raw": 525461,
+        "accepted": 521770,
+        "excluded": 3691,
+        "accepted_sales": 511565,
+        "accepted_cancels": 10205,
+        "raw_cancels": 10206,
+        "excluded_cancels": 1
+      },
+      "matched": 5214,
+      "suspected": 2699,
+      "no_original": 2292,
+      "cases": 4991,
+      "workers": 8,
+      "reconcile_and_persist_seconds": 5.9519833,
+      "coverage": "5214/10205 (51.092602%)",
+      "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+    }
+  },
+  "workers": 10,
+  "requests": 300,
+  "requests_per_worker": 30,
+  "failures": 0,
+  "requests_with_active_job_before_and_after": 300,
+  "p95_milliseconds_nearest_rank": 11.7245,
+  "max_milliseconds": 19.1248,
+  "baseline_passed": true,
+  "target_passed": true,
+  "categories": {
+    "allocations": 50,
+    "case_candidates": 50,
+    "case_evidence": 50,
+    "cases": 50,
+    "overview": 50,
+    "transactions": 50
+  },
+  "request_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-http-final\\requests.jsonl",
+  "measurement_boundary": "10 simultaneous goroutines, 30 mixed authenticated HTTP GETs each. Timer spans request construction/transport/server/authentication/query/full body read. Per-request production job state sampled directly before and after, outside query timer. Load begins only at real importing/reconciling stage. No password hashing per query.",
+  "notice": "Official transactions in an isolated read-only backup. Test secrets remain only in private runtime or memory and are never logged. Source database must remain unchanged; current all is queried while a real previously absent year1 dataset is prepared/imported/reconciled."
+}

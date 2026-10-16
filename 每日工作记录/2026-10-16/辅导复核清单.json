@@ -1,0 +1,42 @@
+[
+  {
+    "path": "原始输出/辅导收工回归/Demo启动只读核验.json",
+    "bytes": 218,
+    "sha256": "82b87e7e4988b857f52fb734ef0601d43919ca7adc1a18221c45fe5973e99887"
+  },
+  {
+    "path": "原始输出/辅导收工回归/frontend.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "原始输出/辅导收工回归/frontend.tap.txt",
+    "bytes": 1310,
+    "sha256": "5e8ffccefbddd9440456e9e612a2c9d91d6c85a2f71cd37bfde206f0a185b02f"
+  },
+  {
+    "path": "原始输出/辅导收工回归/go.jsonl",
+    "bytes": 200089,
+    "sha256": "4cd5eb1cf8f8f5a559ba761bf21bd1d924118c0210d87015f83967305a19ce81"
+  },
+  {
+    "path": "原始输出/辅导收工回归/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "原始输出/辅导收工回归/python.stdout.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "原始输出/辅导收工回归/python.txt",
+    "bytes": 2284,
+    "sha256": "bf8822b671d5b59aed90f1f3473d879b55fd39c2a33c068ac417ebe43f3ecd6f"
+  },
+  {
+    "path": "原始输出/辅导收工回归/summary.json",
+    "bytes": 1549,
+    "sha256": "feac96ee6053b7f8dfdd722b67656acf635b7e6595d96d780ab93571635abc2e"
+  }
+]

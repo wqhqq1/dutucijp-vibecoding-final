@@ -26,6 +26,8 @@ import (
 //go:embed schema.sql
 var schema string
 
+const batchRows = 4096
+
 type Store struct {
 	DB   *sql.DB
 	path string
@@ -88,17 +90,22 @@ func Open(path string) (*Store, error) {
 	// A bounded 64 MiB page cache per connection prevents million-row imports
 	// from repeatedly evicting B-tree pages. WAL and FULL synchronization retain
 	// the existing durability policy; the pool remains capped at four below.
-	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=cache_size(-65536)")
+	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=cache_size(-65536)&_pragma=mmap_size(536870912)&_pragma=temp_store(2)")
 	if err != nil {
 		return nil, err
 	}
 	db.SetMaxOpenConns(4)
+	db.SetMaxIdleConns(4)
 	if _, err = db.Exec(schema); err != nil {
 		db.Close()
 		return nil, err
 	}
 	s := &Store{DB: db, path: absolute}
 	if err = s.migrateWorkflow(context.Background()); err != nil {
+		db.Close()
+		return nil, err
+	}
+	if err = s.EnsureQueryIndexes(context.Background()); err != nil {
 		db.Close()
 		return nil, err
 	}
@@ -188,7 +195,7 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 	if strings.Join(header, ",") != expected {
 		return m, fmt.Errorf("unsupported prepared CSV columns")
 	}
-	batch := make([][]string, 0, 1000)
+	batch := make([][]string, 0, batchRows)
 	for {
 		record, e := reader.Read()
 		if e == io.EOF {
@@ -198,7 +205,7 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 			return m, e
 		}
 		batch = append(batch, record)
-		if len(batch) == 1000 {
+		if len(batch) == batchRows {
 			if err = s.importBatch(ctx, m, batch); err != nil {
 				return m, err
 			}
@@ -220,6 +227,11 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 	if _, _, err = ReadManifest(dir); err != nil {
 		return m, err
 	}
+	// Empty databases build secondary indexes once, after their input batches.
+	// Existing published data keeps its indexes throughout subsequent imports.
+	if err = s.ensureQueryIndexes(ctx, true); err != nil {
+		return m, err
+	}
 	_, err = s.DB.ExecContext(ctx, "UPDATE datasets SET status='published' WHERE id=? AND status='staging'", m.DatasetID)
 	return m, err
 }
@@ -235,7 +247,7 @@ func (s *Store) importBatch(ctx context.Context, m Manifest, batch [][]string) e
 	defer tx.Rollback()
 	// Multi-row statements amortize the driver/SQLite VM boundary. Each has
 	// at most 64*15=960 parameters, below even SQLite's legacy 999 limit.
-	// All chunks of the existing <=1000-row batch still share one transaction.
+	// All chunks of the bounded batch still share one transaction.
 	const statementRows = 64
 	sourceStatements := make(map[int]*sql.Stmt)
 	normalizedStatements := make(map[int]*sql.Stmt)
@@ -291,12 +303,16 @@ func (s *Store) importBatch(ctx context.Context, m Manifest, batch [][]string) e
 }
 
 func (s *Store) LoadRows(ctx context.Context, dataset string) ([]model.Row, error) {
+	return s.loadRows(ctx, dataset, 0)
+}
+
+func (s *Store) loadRows(ctx context.Context, dataset string, capacity int) ([]model.Row, error) {
 	query, err := s.DB.QueryContext(ctx, `SELECT n.id,s.sheet_index,s.sheet,s.source_row,n.invoice,n.stock,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.flags FROM normalized_rows n JOIN source_rows s ON s.id=n.source_id JOIN datasets d ON d.id=n.dataset_id WHERE n.dataset_id=? AND n.excluded='' AND d.status='published'`, dataset)
 	if err != nil {
 		return nil, err
 	}
 	defer query.Close()
-	rows := []model.Row{}
+	rows := make([]model.Row, 0, capacity)
 	for query.Next() {
 		var r model.Row
 		if err = query.Scan(&r.ID, &r.SheetIndex, &r.Sheet, &r.SourceRow, &r.Invoice, &r.Stock, &r.Quantity, &r.Time, &r.Price, &r.Customer, &r.Country, &r.Kind, &r.Flags); err != nil {
@@ -345,7 +361,7 @@ func (s *Store) Run(ctx context.Context, dataset string, workers int) (summary S
 		}
 	}()
 	started := time.Now()
-	rows, err := s.LoadRows(ctx, dataset)
+	rows, err := s.loadRows(ctx, dataset, m.Stats.Accepted)
 	if err != nil {
 		return summary, err
 	}
@@ -372,25 +388,41 @@ func (s *Store) Run(ctx context.Context, dataset string, workers int) (summary S
 	return summary, err
 }
 
-// Batches are at most 1000 SQL rows. Publication follows SQL conservation checks.
+// Batches are bounded. Publication follows SQL conservation checks.
 func (s *Store) batch(ctx context.Context, statement string, values [][]any) error {
+	valueStart := strings.LastIndex(statement, "VALUES")
+	if valueStart < 0 {
+		return fmt.Errorf("batch insert must contain VALUES")
+	}
+	prefix, rowSQL := statement[:valueStart+6], statement[valueStart+6:]
 	for len(values) > 0 {
-		n := min(1000, len(values))
+		n := min(batchRows, len(values))
 		tx, err := s.DB.BeginTx(ctx, nil)
 		if err != nil {
 			return err
 		}
-		stmt, err := tx.PrepareContext(ctx, statement)
-		if err != nil {
-			tx.Rollback()
-			return err
-		}
-		for _, v := range values[:n] {
-			if _, err = stmt.ExecContext(ctx, v...); err != nil {
+		statements := make(map[int]*sql.Stmt)
+		for offset := 0; offset < n; offset += 64 {
+			chunk := values[offset:min(offset+64, n)]
+			stmt := statements[len(chunk)]
+			if stmt == nil {
+				stmt, err = tx.PrepareContext(ctx, prefix+strings.TrimSuffix(strings.Repeat(rowSQL+",", len(chunk)), ","))
+				if err != nil {
+					break
+				}
+				statements[len(chunk)] = stmt
+			}
+			args := make([]any, 0, len(chunk)*len(chunk[0]))
+			for _, v := range chunk {
+				args = append(args, v...)
+			}
+			if _, err = stmt.ExecContext(ctx, args...); err != nil {
 				break
 			}
 		}
-		stmt.Close()
+		for _, stmt := range statements {
+			stmt.Close()
+		}
 		if err != nil {
 			tx.Rollback()
 			return err
@@ -404,9 +436,15 @@ func (s *Store) batch(ctx context.Context, statement string, values [][]any) err
 }
 
 func (s *Store) persist(ctx context.Context, runID string, r model.Result) error {
-	balances := make([][]any, 0, len(r.Balances))
+	balances := make([][]any, 0, batchRows)
 	for _, b := range r.Balances {
 		balances = append(balances, []any{runID, b.SaleID, b.Original, b.Allocated, b.Remaining})
+		if len(balances) == batchRows {
+			if err := s.batch(ctx, "INSERT INTO sale_balances VALUES(?,?,?,?,?)", balances); err != nil {
+				return err
+			}
+			balances = balances[:0]
+		}
 	}
 	if err := s.batch(ctx, "INSERT INTO sale_balances VALUES(?,?,?,?,?)", balances); err != nil {
 		return err

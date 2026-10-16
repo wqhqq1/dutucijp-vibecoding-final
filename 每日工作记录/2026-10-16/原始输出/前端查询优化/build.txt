@@ -1,0 +1,14 @@
+
+> returns-reconciliation-ui@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 44 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.32 kB
+dist/assets/index-DviN2X_z.css    9.57 kB │ gzip:  2.95 kB
+dist/assets/index-P1floUj5.js   274.35 kB │ gzip: 86.84 kB
+
+✓ built in 132ms

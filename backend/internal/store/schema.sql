@@ -17,8 +17,6 @@ CREATE TABLE IF NOT EXISTS normalized_rows (
  country TEXT NOT NULL, kind TEXT NOT NULL, excluded TEXT NOT NULL,
  flags TEXT NOT NULL, duplicate_of TEXT NOT NULL, PRIMARY KEY(dataset_id,id)
 );
-CREATE INDEX IF NOT EXISTS row_lookup ON normalized_rows(dataset_id,excluded,kind);
-CREATE INDEX IF NOT EXISTS row_identity ON normalized_rows(dataset_id,customer,stock,price,country,source_time);
 CREATE TABLE IF NOT EXISTS runs (
  id TEXT PRIMARY KEY, dataset_id TEXT NOT NULL REFERENCES datasets(id), rule_version TEXT NOT NULL,
  status TEXT NOT NULL CHECK(status IN ('staging','published','failed')), started_at TEXT NOT NULL,

@@ -1,0 +1,52 @@
+{
+  "same_state": true,
+  "state": {
+    "accounts": [
+      [
+        "admin",
+        "admin",
+        "complete",
+        4
+      ],
+      [
+        "finance",
+        "finance",
+        "complete",
+        4
+      ],
+      [
+        "warehouse",
+        "warehouse",
+        "complete",
+        8
+      ]
+    ],
+    "passkeys": [
+      [
+        "admin",
+        1
+      ],
+      [
+        "finance",
+        1
+      ],
+      [
+        "warehouse",
+        1
+      ]
+    ],
+    "cases": [
+      [
+        "closed",
+        2
+      ],
+      [
+        "pending",
+        4989
+      ]
+    ],
+    "allocations": 5214,
+    "business_audit": 6,
+    "auth_audit": 24
+  }
+}

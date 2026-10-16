@@ -1,0 +1,4 @@
+NFR04: authenticated isolated HTTP server started; waiting for real year1 import
+NFR04: real import active; starting 10 goroutines x 30 mixed GETs
+NFR04: 300 requests, 0 failures, 300 active-window requests, P95 608.115ms; waiting for actual job completion
+actual NFR04 did not meet its baseline; raw request evidence preserved

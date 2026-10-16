@@ -1,0 +1,11 @@
+{
+  "actual_time": "2026-10-16T17:29:44.8863946+08:00",
+  "homepage_status": 200,
+  "unauthenticated_api_status": 401,
+  "binary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\optimized-20261016\\recon.exe",
+  "binary_sha256": "31eb1c6c75788bd26ff5dc6bdb8ecb7b48cdfa98d281a18fbf6b7d150f9c7c7a",
+  "pid": 29944,
+  "url": "http://localhost:8080",
+  "frontend_asset_present": true,
+  "reason": "Earlier foreground process was no longer running at final handoff check; restarted the same tested binary and existing database with a hidden background process."
+}

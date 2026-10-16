@@ -102,13 +102,38 @@ type CaseEvidencePage struct {
 // EnsureQueryIndexes is an idempotent startup migration. It changes no business
 // records and must run before serving queries, never on a user's read request.
 func (s *Store) EnsureQueryIndexes(ctx context.Context) error {
+	return s.ensureQueryIndexes(ctx, false)
+}
+
+// Defer non-constraint row indexes on an empty database until the import has
+// inserted and verified its rows. Building them once retains the same indexes
+// without maintaining every B-tree for each of a million individual inserts.
+func (s *Store) ensureQueryIndexes(ctx context.Context, force bool) error {
 	return s.immediate(ctx, func(conn *sql.Conn) error {
-		for _, statement := range []string{
+		statements := []string{
 			"CREATE INDEX IF NOT EXISTS cases_owner ON cases(run_id,assignee,cancel_id)",
-			"CREATE INDEX IF NOT EXISTS row_invoice ON normalized_rows(dataset_id,invoice)",
-			"CREATE INDEX IF NOT EXISTS row_source_time ON normalized_rows(dataset_id,source_time,id)",
-			"CREATE INDEX IF NOT EXISTS row_stock ON normalized_rows(dataset_id,stock,id)",
-		} {
+			"CREATE INDEX IF NOT EXISTS cases_source_order ON cases(run_id," + cancelOrder + ",id)",
+			"CREATE INDEX IF NOT EXISTS allocations_source_order ON allocations(run_id," + cancelOrder + ")",
+		}
+		var populated bool
+		if !force {
+			if err := conn.QueryRowContext(ctx, "SELECT EXISTS(SELECT 1 FROM normalized_rows LIMIT 1)").Scan(&populated); err != nil {
+				return err
+			}
+		}
+		if force || populated {
+			statements = append(statements,
+				"CREATE INDEX IF NOT EXISTS row_lookup ON normalized_rows(dataset_id,excluded,kind)",
+				"CREATE INDEX IF NOT EXISTS row_identity ON normalized_rows(dataset_id,customer,stock,price,country,source_time)",
+				"CREATE INDEX IF NOT EXISTS row_invoice ON normalized_rows(dataset_id,invoice)",
+				"CREATE INDEX IF NOT EXISTS row_source_time ON normalized_rows(dataset_id,source_time,id)",
+				"CREATE INDEX IF NOT EXISTS row_stock ON normalized_rows(dataset_id,stock,id)",
+				"CREATE INDEX IF NOT EXISTS row_kind ON normalized_rows(dataset_id,kind)",
+				"CREATE INDEX IF NOT EXISTS row_source ON normalized_rows(dataset_id,source_id,id)",
+				"CREATE INDEX IF NOT EXISTS source_order ON source_rows(source_hash,sheet_index,source_row,id)",
+			)
+		}
+		for _, statement := range statements {
 			if _, err := conn.ExecContext(ctx, statement); err != nil {
 				return err
 			}
@@ -182,7 +207,43 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 }
 
 const transactionColumns = `n.id,sr.sheet_index,sr.sheet,sr.source_row,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,n.duplicate_of,d.id,d.scope,d.source_hash,r.rule_version,d.cleaning_version`
-const transactionFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id JOIN normalized_rows n ON n.dataset_id=d.id JOIN source_rows sr ON sr.id=n.source_id LEFT JOIN decisions dc ON dc.run_id=r.id AND dc.cancel_id=n.id LEFT JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
+const runFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id`
+
+// Only join relations used by a filter. The unfiltered transaction page walks
+// the source-order index and stops at LIMIT; it must not sort a million joined
+// rows before returning the first page after login. Selective filters instead
+// use their row index and sort their much smaller result set.
+func transactionQueryFrom(f QueryFilter, sourceOrdered, includeSource bool) string {
+	from := runFrom
+	if sourceOrdered {
+		from += ` CROSS JOIN source_rows sr ON sr.source_hash=d.source_hash CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.source_id=sr.id`
+	} else {
+		from += ` JOIN normalized_rows n ON n.dataset_id=d.id`
+		if includeSource {
+			from += ` JOIN source_rows sr ON sr.id=n.source_id`
+		}
+	}
+	return from + filterJoins(f, false)
+}
+
+func filterJoins(f QueryFilter, hasCase bool) string {
+	from := ""
+	if !hasCase && (f.Status != "" || f.Assignee != "") {
+		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
+	}
+	if f.Classification != "" {
+		from += ` JOIN decisions dc ON dc.run_id=r.id AND dc.cancel_id=n.id`
+	}
+	return from
+}
+
+func unfilteredTransactions(f QueryFilter) bool {
+	return f.Status == "" && f.Assignee == "" && f.Customer == "" && f.Stock == "" && f.Invoice == "" && f.Classification == "" && f.Kind == "" && f.DateFrom == "" && f.DateTo == ""
+}
+
+func sourceOrderedTransactions(actor WorkflowActor, f QueryFilter) bool {
+	return actor.Role != "warehouse" && unfilteredTransactions(f)
+}
 
 type scanner interface{ Scan(...any) error }
 
@@ -195,17 +256,34 @@ func scanTransaction(s scanner, r *TransactionRecord, extra ...any) error {
 // qualified candidates, original decision evidence or confirmed allocation.
 const warehouseRelated = `n.id IN (
  SELECT own.cancel_id FROM cases own WHERE own.run_id=? AND own.assignee=?
- UNION SELECT oa.sale_id FROM cases own JOIN allocations oa ON oa.run_id=own.run_id AND oa.cancel_id=own.cancel_id WHERE own.run_id=? AND own.assignee=?
- UNION SELECT oe.sale_id FROM cases own JOIN candidate_evidence oe ON oe.run_id=own.run_id AND oe.cancel_id=own.cancel_id WHERE own.run_id=? AND own.assignee=?
- UNION SELECT eligible.id FROM cases own JOIN runs ownrun ON ownrun.id=own.run_id
- JOIN normalized_rows cr ON cr.dataset_id=ownrun.dataset_id AND cr.id=own.cancel_id
- JOIN normalized_rows eligible ON eligible.dataset_id=cr.dataset_id AND eligible.customer=cr.customer AND eligible.country=cr.country AND eligible.stock=cr.stock AND eligible.price=cr.price
- JOIN sale_balances rb ON rb.run_id=own.run_id AND rb.sale_id=eligible.id
+ UNION SELECT oa.sale_id FROM cases own CROSS JOIN allocations oa ON oa.run_id=own.run_id AND oa.cancel_id=own.cancel_id WHERE own.run_id=? AND own.assignee=?
+ UNION SELECT oe.sale_id FROM cases own CROSS JOIN candidate_evidence oe ON oe.run_id=own.run_id AND oe.cancel_id=own.cancel_id WHERE own.run_id=? AND own.assignee=?
+ UNION SELECT eligible.id FROM cases own CROSS JOIN runs ownrun ON ownrun.id=own.run_id
+ CROSS JOIN normalized_rows cr ON cr.dataset_id=ownrun.dataset_id AND cr.id=own.cancel_id
+ CROSS JOIN normalized_rows eligible ON eligible.dataset_id=cr.dataset_id AND eligible.customer=cr.customer AND eligible.country=cr.country AND eligible.stock=cr.stock AND eligible.price=cr.price
+ CROSS JOIN sale_balances rb ON rb.run_id=own.run_id AND rb.sale_id=eligible.id
  WHERE own.run_id=? AND own.assignee=? AND cr.kind='cancel' AND cr.quantity<0 AND cr.quantity>-9223372036854775808 AND cr.excluded=''
  AND cr.customer<>'' AND cr.country<>'' AND cr.stock<>'' AND eligible.kind='sale' AND eligible.excluded='' AND eligible.quantity>0 AND eligible.source_time<cr.source_time AND rb.remaining>=-cr.quantity
 )`
 
+// Import validates every row ID against its sheet_index:source_row. These
+// numeric expression indexes preserve source order without joining/sorting all
+// rows before LIMIT. Both values are nonnegative integers, never lexical IDs.
+const cancelOrder = `CAST(substr(cancel_id,1,instr(cancel_id,':')-1) AS INTEGER),CAST(substr(cancel_id,instr(cancel_id,':')+1) AS INTEGER)`
+
+func sourceOrder(alias string) string {
+	return strings.ReplaceAll(cancelOrder, "cancel_id", alias+".cancel_id")
+}
+
+func hasRowFilter(f QueryFilter) bool {
+	return f.Customer != "" || f.Stock != "" || f.Invoice != "" || f.Kind != "" || f.DateFrom != "" || f.DateTo != ""
+}
+
 func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
+	return queryScopeWhere(actor, f, false)
+}
+
+func queryScopeWhere(actor WorkflowActor, f QueryFilter, ownCases bool) (string, []any) {
 	parts := []string{"r.id=?", "r.status='published'", "d.status='published'"}
 	args := []any{f.RunID}
 	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
@@ -215,9 +293,14 @@ func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
 		}
 	}
 	if actor.Role == "warehouse" {
-		parts = append(parts, warehouseRelated)
-		for range 4 {
-			args = append(args, f.RunID, actor.ID)
+		if ownCases {
+			parts = append(parts, "c.assignee=?")
+			args = append(args, actor.ID)
+		} else {
+			parts = append(parts, warehouseRelated)
+			for range 4 {
+				args = append(args, f.RunID, actor.ID)
+			}
 		}
 	}
 	return " WHERE " + strings.Join(parts, " AND "), args
@@ -230,11 +313,18 @@ func (s *Store) ListTransactions(ctx context.Context, actor WorkflowActor, f Que
 	}
 	out = TransactionPage{Items: []TransactionRecord{}, Page: f.Page, PageSize: f.PageSize}
 	where, args := queryWhere(actor, f)
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+transactionFrom+where, args...).Scan(&out.Total); err != nil {
+	ordered := sourceOrderedTransactions(actor, f)
+	countSQL := "SELECT count(*)" + transactionQueryFrom(f, false, false) + where
+	if ordered {
+		// Import verifies the immutable manifest's raw count before publication.
+		// Read that persisted count, not an account cache or a full-row COUNT.
+		countSQL = `SELECT json_extract(d.manifest_json,'$.stats.raw')` + runFrom + where
+	}
+	if err = s.DB.QueryRowContext(ctx, countSQL, args...).Scan(&out.Total); err != nil {
 		return
 	}
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionFrom+where+" ORDER BY sr.sheet_index,sr.source_row,n.id LIMIT ? OFFSET ?", args...)
+	rows, e := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, ordered, true)+where+" ORDER BY sr.sheet_index,sr.source_row,n.id LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
@@ -257,39 +347,37 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 		return
 	}
 	out = CasePage{Items: []WorkflowCase{}, Page: f.Page, PageSize: f.PageSize}
-	where, args := queryWhere(actor, f)
-	where += " AND c.id IS NOT NULL"
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+transactionFrom+where, args...).Scan(&out.Total); err != nil {
+	where, args := queryScopeWhere(actor, f, true)
+	from := runFrom + ` CROSS JOIN cases c ON c.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id` + filterJoins(f, true)
+	countFrom := from
+	if !hasRowFilter(f) && f.Classification == "" {
+		countFrom = runFrom + ` CROSS JOIN cases c ON c.run_id=r.id`
+	}
+	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
 		return
 	}
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, "SELECT c.id"+transactionFrom+where+" ORDER BY sr.sheet_index,sr.source_row,c.id LIMIT ? OFFSET ?", args...)
+	rows, e := s.DB.QueryContext(ctx, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
+ c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,
+ d.source_hash,sr.sheet,sr.source_row,r.rule_version,d.cleaning_version`+from+` CROSS JOIN source_rows sr ON sr.id=n.source_id`+where+" ORDER BY "+sourceOrder("c")+",c.id LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
 	}
-	ids := []string{}
+	defer rows.Close()
 	for rows.Next() {
-		var id string
-		if err = rows.Scan(&id); err != nil {
-			rows.Close()
+		var c WorkflowCase
+		if err = rows.Scan(&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason,
+			&c.Status, &c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy,
+			&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion); err != nil {
 			return
 		}
-		ids = append(ids, id)
-	}
-	err = rows.Err()
-	rows.Close()
-	if err != nil {
-		return
-	}
-	for _, id := range ids {
-		c, e := s.WorkflowCase(ctx, actor, id)
-		if e != nil {
-			err = e
+		if err = authorizeWorkflowRead(actor, c); err != nil {
 			return
 		}
 		out.Items = append(out.Items, c)
 	}
+	err = rows.Err()
 	return
 }
 
@@ -299,13 +387,25 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 		return
 	}
 	out = AllocationPage{Items: []AllocationRecord{}, Page: f.Page, PageSize: f.PageSize}
-	from := transactionFrom + ` JOIN allocations a ON a.run_id=r.id AND a.cancel_id=n.id JOIN normalized_rows sn ON sn.dataset_id=d.id AND sn.id=a.sale_id JOIN source_rows ss ON ss.id=sn.source_id`
-	where, args := queryWhere(actor, f)
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+from+where, args...).Scan(&out.Total); err != nil {
+	from := runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=a.cancel_id`
+	if actor.Role == "warehouse" || f.Status != "" || f.Assignee != "" {
+		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
+	}
+	from += filterJoins(f, true)
+	where, args := queryScopeWhere(actor, f, true)
+	countFrom := from
+	if !hasRowFilter(f) && f.Classification == "" {
+		countFrom = runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id`
+		if actor.Role == "warehouse" || f.Status != "" || f.Assignee != "" {
+			countFrom += ` CROSS JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
+		}
+	}
+	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
 		return
 	}
+	from += ` CROSS JOIN source_rows sr ON sr.id=n.source_id CROSS JOIN normalized_rows sn ON sn.dataset_id=d.id AND sn.id=a.sale_id CROSS JOIN source_rows ss ON ss.id=sn.source_id`
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, `SELECT a.run_id,a.cancel_id,a.sale_id,a.quantity,a.amount,a.method,coalesce(a.actor,''),r.rule_version,sr.sheet,sr.source_row,ss.sheet,ss.source_row`+from+where+" ORDER BY sr.sheet_index,sr.source_row,a.cancel_id LIMIT ? OFFSET ?", args...)
+	rows, e := s.DB.QueryContext(ctx, `SELECT a.run_id,a.cancel_id,a.sale_id,a.quantity,a.amount,a.method,coalesce(a.actor,''),r.rule_version,sr.sheet,sr.source_row,ss.sheet,ss.source_row`+from+where+" ORDER BY "+sourceOrder("a")+" LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
@@ -421,7 +521,7 @@ func (s *Store) ExportCSV(ctx context.Context, actor WorkflowActor, f QueryFilte
 		return err
 	}
 	where, args := queryWhere(actor, f)
-	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionFrom+where+" ORDER BY sr.sheet_index,sr.source_row,n.id", args...)
+	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, sourceOrderedTransactions(actor, f), true)+where+" ORDER BY sr.sheet_index,sr.source_row,n.id", args...)
 	if err != nil {
 		return err
 	}

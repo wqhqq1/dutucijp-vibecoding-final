@@ -1,0 +1,14 @@
+✔ the first server page is available while the overview is still pending (2.7166ms)
+✔ changing query cancels the old request and discards a late response (0.4553ms)
+✔ logout cancellation suppresses both pending data and pending failures (0.3441ms)
+✔ overview failure does not discard a successful table response (0.5188ms)
+✔ cancelling transport abort errors never produces a failure notice (0.3556ms)
+✔ synchronous request failure leaves a useful terminal state (0.1439ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.5997

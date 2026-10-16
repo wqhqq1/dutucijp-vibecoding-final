@@ -1,0 +1,512 @@
+[
+  {
+    "path": "并发查询优化后/requests.jsonl",
+    "bytes": 95772,
+    "sha256": "769ef5cfe304bcb8e3a2b6abae65a697a52c734fe5b8be45e9838a001403ffbd"
+  },
+  {
+    "path": "并发查询优化后/summary.json",
+    "bytes": 5047,
+    "sha256": "c6edaffe78353df2dff637ff5bc18ee0cc306d0d1911bb97aba13d5289f69468"
+  },
+  {
+    "path": "并发首次复测/requests.jsonl",
+    "bytes": 96050,
+    "sha256": "7e4f6f8c5d9dff9bef4c4a389361fe15b9136c0fd8b474e66f5e5975893f88a1"
+  },
+  {
+    "path": "并发首次复测/summary.json",
+    "bytes": 5134,
+    "sha256": "7e408f9e6c08fc5aa7d41e0d7b15ffdc9bd6ce704a199054064d41f70d36dcaa"
+  },
+  {
+    "path": "部署核验/after-state.json",
+    "bytes": 720,
+    "sha256": "7621ff9e3b355d7f81c4683feb749301d15f4b4614e57b49789a58ba4e6d9a11"
+  },
+  {
+    "path": "部署核验/before-state.json",
+    "bytes": 584,
+    "sha256": "9909b44c3c69a34fe614fcef0d0ff4c6c6170dd7b0635eaa4054379a3e99b1b3"
+  },
+  {
+    "path": "部署核验/build.json",
+    "bytes": 256,
+    "sha256": "980e9f5dc24c39f7b5b7527e271c2332f43aabfbede74141238af5a63e70ac21"
+  },
+  {
+    "path": "部署核验/deployment.json",
+    "bytes": 472,
+    "sha256": "c152d8ecf14b7c4a551ead02e20d08da01a116401df1a04f1707d4861625b77e"
+  },
+  {
+    "path": "部署核验/restart-deployment.json",
+    "bytes": 650,
+    "sha256": "0d65ee5a5c3d68f296f5ca357a2925410511c0be6593b6fa21522954db9a3603"
+  },
+  {
+    "path": "部署核验/restart.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "部署核验/restart.stdout.txt",
+    "bytes": 93,
+    "sha256": "80ac03abef131223471b83b7be4ca727c35434d6f9241f70c96d57331c6d4a4c"
+  },
+  {
+    "path": "分项诊断/查询第二版.json",
+    "bytes": 2083,
+    "sha256": "1645f2c986c6ab2cb82fb356e26a81daf28840cd80940c1acb75559beadcfbef"
+  },
+  {
+    "path": "分项诊断/查询第一版.json",
+    "bytes": 2201,
+    "sha256": "ee168d76e5a08bf331a0715be68a362ce5bd333ab9f90ed5ff092af531486e4e"
+  },
+  {
+    "path": "分项诊断/准备末次完整输出.txt",
+    "bytes": 2445,
+    "sha256": "14b99b16634f2a2c9c6adca0101a28b41511250e8756b24110aa78e69d3c7ee3"
+  },
+  {
+    "path": "分项诊断/first.json",
+    "bytes": 2270,
+    "sha256": "bfd42ddce97547b3dafc2d074f5c2b96b16dfc04c1fecab34850d538e4c80024"
+  },
+  {
+    "path": "分项诊断/http1.stderr.txt",
+    "bytes": 332,
+    "sha256": "5a438487881e6ffc567614f865151ece6bae55a10a5f83bb5aba172e3763bdd9"
+  },
+  {
+    "path": "分项诊断/http1.stdout.txt",
+    "bytes": 5040,
+    "sha256": "ae6aafeca2cab344f219975ff840139022bff1551c86184203002692920dc941"
+  },
+  {
+    "path": "分项诊断/http2.stderr.txt",
+    "bytes": 259,
+    "sha256": "46e33861b7b7d08ee9c8911dc3d99342d9c66a63e0c079dd6f51b9056f970b49"
+  },
+  {
+    "path": "分项诊断/http2.stdout.txt",
+    "bytes": 5047,
+    "sha256": "c6edaffe78353df2dff637ff5bc18ee0cc306d0d1911bb97aba13d5289f69468"
+  },
+  {
+    "path": "分项诊断/mmap.json",
+    "bytes": 2267,
+    "sha256": "3586f491ce736170467425641f65a227ed19692e8b1051c1ffbc3ce216437bdc"
+  },
+  {
+    "path": "分项诊断/recompute-batch.json",
+    "bytes": 2543,
+    "sha256": "0c4dfd3a28fc07e1fea7ea841a34b76fb9207955845507de69b863416c47188c"
+  },
+  {
+    "path": "分项诊断/recompute1.json",
+    "bytes": 2533,
+    "sha256": "07100186a3eea57ebde9002f78c9c61497aeef6cf4b9ddc84ee3710981003393"
+  },
+  {
+    "path": "前端查询优化/build.txt",
+    "bytes": 433,
+    "sha256": "a1c83c72da269dea77563e53054ec42835e16c25b65b99c50e87e0412e71d2e6"
+  },
+  {
+    "path": "前端查询优化/request-tests.txt",
+    "bytes": 612,
+    "sha256": "ae4e86c1c3db0ad7911f34e013a4289f661affc49b1b944a1cbd5611736fa0df"
+  },
+  {
+    "path": "统一回归/frontend.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "统一回归/frontend.tap.txt",
+    "bytes": 1311,
+    "sha256": "e804191f4308fed6d6c7e5d940f91dcbd86f2427b2f5f20984203255b60168e3"
+  },
+  {
+    "path": "统一回归/go.jsonl",
+    "bytes": 200204,
+    "sha256": "22c4ca6a37906b5331868dd836a70a303b17bcffbc98fc1aeacae877832a04c5"
+  },
+  {
+    "path": "统一回归/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "统一回归/python.stdout.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "统一回归/python.txt",
+    "bytes": 2284,
+    "sha256": "05f6e2cce99057651d72d44391ea2752bc3ad41a6e1efbd77ce17ef7ecb3dda7"
+  },
+  {
+    "path": "统一回归/summary.json",
+    "bytes": 1183,
+    "sha256": "376b21da32ae5966b4f9da33b33ed2eef09d04a481d385aaf0a16de5aef2f6a5"
+  },
+  {
+    "path": "正式NFR01-03/build.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/environment.json",
+    "bytes": 9689,
+    "sha256": "8823dee1bb087460971a9ac8ce40b9dfa1eef36b72fc61b4192892ac85637b84"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/go.process.json",
+    "bytes": 1696,
+    "sha256": "ce00f6842c0eb642afea1ce57bb461f1d4b08bef4184b85acaef0b8258af2eb8"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/go.stdout.txt",
+    "bytes": 2220,
+    "sha256": "b04564b6c5a2aa9213d2706d677f1faab2061b676e2c0fc88abd8b2f9875a2bd"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/prepare.process.json",
+    "bytes": 1897,
+    "sha256": "36415831cbbe384772d941b015cafe99a58a717be078f2a1dd35c68a697dffff"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/prepare.stdout.txt",
+    "bytes": 1484,
+    "sha256": "f98f7babf8b18cee230550fe712d14b8e18342e5cad57aec65f750b6c0af41bd"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-1/trial.json",
+    "bytes": 6679,
+    "sha256": "3f8e7aeed00d2a20eefda54465f77f46c4034fc3a832abeb621ad95cc281fd24"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/go.process.json",
+    "bytes": 1696,
+    "sha256": "856856d65ee47348fad3c2e6932d8c2fb1ef751ece7e79583edfa9dbf8aa5d99"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/go.stdout.txt",
+    "bytes": 2222,
+    "sha256": "97eea1a5b57a2b72c8aa0031247d734eb5628328877ffde9f8d1506b223ae5e1"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/prepare.process.json",
+    "bytes": 1897,
+    "sha256": "b83bbb47e42a172d3919c18785b17044144e8ea76cffc07a4a466118b554333d"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/prepare.stdout.txt",
+    "bytes": 1484,
+    "sha256": "f053fae32a001e8734acf1ec2103d9a2676b1efe1cb9e7f655dfc8b1acbc76b3"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-2/trial.json",
+    "bytes": 6681,
+    "sha256": "2c9ca894aac0ecc122fde606e833430285ec2226f7892c29ff0762cc4be16e93"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/go.process.json",
+    "bytes": 1696,
+    "sha256": "387cb814b575f4c044ee11aa112056e2bed58a35e30c270f3bb3ff0edb04bd7e"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/go.stdout.txt",
+    "bytes": 2223,
+    "sha256": "e2fc937881d1840714baf80cee33dd1009167607036741193b15ef3ba41095dc"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/prepare.process.json",
+    "bytes": 1896,
+    "sha256": "a649a1ae9e0c1d540172c45282b4cd9cb5a47e8ddbd25942a867fa1b958184d0"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/prepare.stdout.txt",
+    "bytes": 1484,
+    "sha256": "2263f69f31eeb3fc27c09a66f3ef997d8af1455d9825a478422c6b9f2578dc37"
+  },
+  {
+    "path": "正式NFR01-03/NFR01-3/trial.json",
+    "bytes": 6681,
+    "sha256": "3884b31a106c8d9584681319ca395ef5757ebac57728fa589d5750edfe520b12"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/go.process.json",
+    "bytes": 1703,
+    "sha256": "e52497c7dafa48f34eeb0e231888484a81ae03ea86c7f407cd7b93ea098ea362"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/go.stdout.txt",
+    "bytes": 2268,
+    "sha256": "e4802ac1f79d470d207911b386f98fded415dd07fa52f78809a4ff3cd5613ffc"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/prepare.process.json",
+    "bytes": 1893,
+    "sha256": "14da37720a855091d2f762aa5ab764e9dfb3af6846e89f49d6aa32716c68f79c"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/prepare.stdout.txt",
+    "bytes": 2458,
+    "sha256": "22e98f36d2bca9b6272872e2caeb7162cbc231c676b38f89f61c77f2fcd2dc37"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-1/trial.json",
+    "bytes": 6730,
+    "sha256": "bf2e129dc4d36ee667dedb3c92d42fbc351729ffebd41390cd42d9e1104740d7"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/go.process.json",
+    "bytes": 1703,
+    "sha256": "6dbc1fe1ae5fd858851e37e763527c3ff2a02ddfb6d076b64c4d59991491086f"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/go.stdout.txt",
+    "bytes": 2272,
+    "sha256": "e7cb0c64300ef983f693431c1dfb99518bc84c298b90727bc092d374fa3cf634"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/prepare.process.json",
+    "bytes": 1893,
+    "sha256": "cf3389377c3ebe9b927f3657d60f3a1404f27c99848865a54847fbbb718a9d7e"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/prepare.stdout.txt",
+    "bytes": 2457,
+    "sha256": "70c7142ceddfb11191ba0e0714348a6e8712a97924ff4113c29012f9208600e0"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-2/trial.json",
+    "bytes": 6734,
+    "sha256": "397cbdb77c6c3b387f9994a1129ca9c0fd59d1b2fa8a86bd851ad1da2d3891ec"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/go.process.json",
+    "bytes": 1703,
+    "sha256": "c044b91c60acce4242b5d8a92e3a4d031eb0a35f36f4e88fc23489045e8e0c29"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/go.stdout.txt",
+    "bytes": 2272,
+    "sha256": "67ba8ec6ad8f1689c758be9b9bfa8184a98f85995a9d8ca1e048c7e4a53bc53d"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/prepare.process.json",
+    "bytes": 1893,
+    "sha256": "4da0c3a7f3c7f66f2ddf650e1b6a64d408717194c2f4817d23c4d8255d576157"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/prepare.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/prepare.stdout.txt",
+    "bytes": 2458,
+    "sha256": "8b9174367d329ac291bd9bd87974bfb24e5a624bb8184bc900f6b0f4e788dc9b"
+  },
+  {
+    "path": "正式NFR01-03/NFR02-3/trial.json",
+    "bytes": 6734,
+    "sha256": "ab15592118be02a37c70fa6a8f14a25664f87b083544b8ae2c5ecfd54daf60a9"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-1/go.process.json",
+    "bytes": 1878,
+    "sha256": "e32bbe7f219e4350b268e1ab90ef66ea8e307c296595088130f858147d8f1ca2"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-1/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-1/go.stdout.txt",
+    "bytes": 2534,
+    "sha256": "be941144ef4a905f2302abd6210b93f9d3612842117d8629b65c024d6c0c08e9"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-1/trial.json",
+    "bytes": 5242,
+    "sha256": "dde6ae127bf47023e858e9471954a0bc1be63f2f5e4d051ebe540f39f62a8f2a"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-2/go.process.json",
+    "bytes": 1878,
+    "sha256": "298c0fc708e63c70c0e50e936d58ce1a6602214e348c02cf58798461db9a4d8d"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-2/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-2/go.stdout.txt",
+    "bytes": 2532,
+    "sha256": "314f85bdd3e7decfa96aed3d47b3d8ad37f95783d8d8e8544fa24abcea0e01be"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-2/trial.json",
+    "bytes": 5240,
+    "sha256": "e4e47c80646c90fbfb999f243f668050dfe26773c5f05afcc255f6772a3137a0"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-3/go.process.json",
+    "bytes": 1878,
+    "sha256": "1551e230b9661812cbbabd36c2d2ac375112ddf237d6cf03422fe2511936d900"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-3/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-3/go.stdout.txt",
+    "bytes": 2535,
+    "sha256": "17b52d71cdcb6906076e20acc7b0f560686281bfde6fcfbccf164822e71125fa"
+  },
+  {
+    "path": "正式NFR01-03/NFR03-3/trial.json",
+    "bytes": 5243,
+    "sha256": "b8e759b75e17dec13618ee595ffe250dccf6c975e6acb2c294b8facb2851f68a"
+  },
+  {
+    "path": "正式NFR01-03/summary.json",
+    "bytes": 3335,
+    "sha256": "5a073d12a12d12921c86e6c788b19e665b3cadbc3c02c39738ab89c7ad10c41a"
+  },
+  {
+    "path": "正式NFR01-03/trials.json",
+    "bytes": 58336,
+    "sha256": "037cd02fb5511b8380230ac451371761165eb8153991032b8e25999ed3437781"
+  },
+  {
+    "path": "正式NFR04/http-final.stderr.txt",
+    "bytes": 259,
+    "sha256": "ab5c367055a95a960c5aa288462c8f45280e3647c931f3cc6587dc5572dad6f3"
+  },
+  {
+    "path": "正式NFR04/http-final.stdout.txt",
+    "bytes": 5046,
+    "sha256": "e3590984b01f6088425d706ae1d24ec8318d5d0beb8af3969727dca53e6ba9b2"
+  },
+  {
+    "path": "正式NFR04/requests.jsonl",
+    "bytes": 95844,
+    "sha256": "b3d9d64a4382753f938876a28d38f68e1fb48a6c39ac214cbaadcb54f2765e27"
+  },
+  {
+    "path": "正式NFR04/summary.json",
+    "bytes": 5046,
+    "sha256": "e3590984b01f6088425d706ae1d24ec8318d5d0beb8af3969727dca53e6ba9b2"
+  },
+  {
+    "path": "追加只读诊断/conservation-diagnostic.go",
+    "bytes": 1898,
+    "sha256": "d3e848fd2836d2d4ac744b91dedf23f77c5ec439b12c627d35c829e5e5d90f18"
+  },
+  {
+    "path": "追加只读诊断/conservation-diagnostic.jsonl",
+    "bytes": 455,
+    "sha256": "6729b4be5b2c9768ac7f6291e446fe2655b97191c3054c7440d8c0c4679f70f4"
+  },
+  {
+    "path": "PowerShell51回归/frontend.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "PowerShell51回归/frontend.tap.txt",
+    "bytes": 1308,
+    "sha256": "9f983d5979ce3aa000d8cf01c475b65041895ae93c2c742d723cbd6b7798a0fc"
+  },
+  {
+    "path": "PowerShell51回归/go.jsonl",
+    "bytes": 200236,
+    "sha256": "0d5c98df0341ca7a65ca7f78c1f96eb63fea4edc9f27572eac6b21576a238f07"
+  },
+  {
+    "path": "PowerShell51回归/go.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "PowerShell51回归/python.stdout.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "PowerShell51回归/python.txt",
+    "bytes": 2284,
+    "sha256": "c949848084866e154a9b82a13311e3f1c65149f605edb07c47e9848cc8558424"
+  },
+  {
+    "path": "PowerShell51回归/summary.json",
+    "bytes": 1201,
+    "sha256": "d290ead7806c4f11f3052bbe730bcb179070c0001bc87cf0d8fdc94750779bec"
+  }
+]

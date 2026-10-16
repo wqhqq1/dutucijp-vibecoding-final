@@ -1,5 +1,6 @@
 """Isolated fixtures for cleaning rules; never substitutes for official business data."""
 import csv
+import gc
 import json
 import sys
 import tempfile
@@ -11,7 +12,7 @@ from pathlib import Path
 import openpyxl
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
-from prepare import HEADERS, SHEETS, prepare
+from prepare import HEADERS, SHEETS, prepare, raw_rows
 from fetch_data import sha256
 
 
@@ -98,6 +99,34 @@ class CleaningTests(unittest.TestCase):
         path=self.fixture([self.sale()]);target=prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
         with (target/'records.csv').open('a',encoding='utf-8') as stream:stream.write('tamper')
         with self.assertRaisesRegex(ValueError,'hash mismatch'):prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+
+    def test_source_1904_calendar_and_nonstandard_cell_types_remain_exact(self):
+        first=self.sale();first[0]='=1+1';first[3]=True
+        path=self.fixture([first,self.sale()])
+        book=openpyxl.load_workbook(path)
+        book.epoch=openpyxl.utils.datetime.CALENDAR_MAC_1904
+        book.save(path);book.close()
+        source=list(raw_rows(path,'year1'))
+        self.assertEqual(source[0][3][0],('formula','1+1'))
+        self.assertEqual(source[0][3][3],('b','1'))
+        target=prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+        with (target/'records.csv').open(encoding='utf-8',newline='') as stream:
+            rows=list(csv.DictReader(stream))
+        self.assertEqual(rows[0]['excluded'],'invalid_field')
+        self.assertEqual(rows[1]['time'],'2010-01-01T09:00:00.000000')
+        self.assertEqual(json.loads(rows[0]['raw_json'])[0],['formula','1+1'])
+
+    def test_preparation_restores_cycle_collection_after_success_and_failure(self):
+        enabled=gc.isenabled()
+        self.addCleanup(gc.enable if enabled else gc.disable)
+        path=self.fixture([self.sale()])
+        for initial in (True,False):
+            (gc.enable if initial else gc.disable)()
+            prepare(path,'year1',self.root/f'prepared-{initial}',progress=lambda _:None)
+            self.assertEqual(gc.isenabled(),initial)
+            with self.assertRaises(FileNotFoundError):
+                prepare(self.root/'missing.xlsx','all',self.root/'failed',progress=lambda _:None)
+            self.assertEqual(gc.isenabled(),initial)
 
 
 if __name__ == '__main__':

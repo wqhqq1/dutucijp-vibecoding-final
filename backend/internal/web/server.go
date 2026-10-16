@@ -487,7 +487,15 @@ func (s *Server) runs(c *gin.Context) {
 func (s *Server) overview(c *gin.Context) {
 	run := c.Query("run_id")
 	a := actor(c)
-	if _, e := s.Store.ListCases(c, a, store.QueryFilter{RunID: run, Page: 1, PageSize: 1}); e != nil {
+	if run == "" {
+		respond(c, nil, &auth.Error{Code: "invalid_input", Message: "必须指定当前运行版本", Status: 422})
+		return
+	}
+	var published int
+	if e := s.Store.DB.QueryRowContext(c, "SELECT 1 FROM runs r JOIN datasets d ON d.id=r.dataset_id WHERE r.id=? AND r.status='published' AND d.status='published'", run).Scan(&published); e != nil {
+		if errors.Is(e, sql.ErrNoRows) {
+			e = &auth.Error{Code: "not_found", Message: "运行不存在或尚未发布", Status: 404}
+		}
 		respond(c, nil, e)
 		return
 	}

@@ -13,7 +13,7 @@ import (
 )
 
 type key struct{ customer, stock, price, country string }
-type group struct{ sales, cancels []model.Row }
+type group struct{ sales, cancels []*model.Row }
 type groupResult struct {
 	decisions []model.Decision
 	balances  []model.Balance
@@ -33,7 +33,15 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 	result := model.Result{RuleVersion: model.RuleVersion}
 	groups := make(map[key]*group)
 	seen := make(map[string]bool, len(rows))
-	for _, r := range rows {
+	prices := make(map[string]string)
+	timestamps := make(map[string]bool)
+	for i := range rows {
+		if i%1024 == 0 {
+			if err := ctx.Err(); err != nil {
+				return result, err
+			}
+		}
+		r := &rows[i]
 		if seen[r.ID] {
 			return result, fmt.Errorf("duplicate source row %s", r.ID)
 		}
@@ -41,17 +49,29 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 		if r.Excluded != "" {
 			continue
 		}
-		p, err := decimal.NewFromString(r.Price)
-		if err != nil || !p.IsPositive() {
-			return result, fmt.Errorf("invalid accepted price: %s", r.ID)
+		price, cached := prices[r.Price]
+		if !cached {
+			p, err := decimal.NewFromString(r.Price)
+			if err != nil || !p.IsPositive() {
+				return result, fmt.Errorf("invalid accepted price: %s", r.ID)
+			}
+			price = p.String()
+			if len(prices) < 65536 {
+				prices[r.Price] = price
+			}
 		}
-		if _, err = time.Parse("2006-01-02T15:04:05.000000", r.Time); err != nil {
-			return result, fmt.Errorf("invalid source timestamp: %s", r.ID)
+		if !timestamps[r.Time] {
+			if _, err := time.Parse("2006-01-02T15:04:05.000000", r.Time); err != nil {
+				return result, fmt.Errorf("invalid source timestamp: %s", r.ID)
+			}
+			if len(timestamps) < 65536 {
+				timestamps[r.Time] = true
+			}
 		}
 		if (r.Kind == "sale" && r.Quantity <= 0) || (r.Kind == "cancel" && r.Quantity >= 0) || (r.Kind != "sale" && r.Kind != "cancel") || r.Quantity == -1<<63 {
 			return result, fmt.Errorf("invalid accepted quantity: %s", r.ID)
 		}
-		k := key{r.Customer, r.Stock, p.String(), r.Country}
+		k := key{r.Customer, r.Stock, price, r.Country}
 		g := groups[k]
 		if g == nil {
 			g = &group{}
@@ -119,8 +139,15 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 }
 
 func computeGroup(g *group) groupResult {
-	sort.Slice(g.sales, func(i, j int) bool { return before(g.sales[i], g.sales[j]) })
-	sort.Slice(g.cancels, func(i, j int) bool { return before(g.cancels[i], g.cancels[j]) })
+	if len(g.cancels) == 0 {
+		out := groupResult{balances: make([]model.Balance, 0, len(g.sales))}
+		for _, s := range g.sales {
+			out.balances = append(out.balances, model.Balance{SaleID: s.ID, Original: s.Quantity, Remaining: s.Quantity})
+		}
+		return out
+	}
+	sort.Slice(g.sales, func(i, j int) bool { return before(*g.sales[i], *g.sales[j]) })
+	sort.Slice(g.cancels, func(i, j int) bool { return before(*g.cancels[i], *g.cancels[j]) })
 	index := newIndex(len(g.sales))
 	remaining := make([]int64, len(g.sales))
 	for i, s := range g.sales {
@@ -197,9 +224,10 @@ func computeGroup(g *group) groupResult {
 // Validate independently checks row/classification, allocation and balance conservation.
 // It runs before persistence, then SQL checks persisted totals before publication.
 func Validate(rows []model.Row, result model.Result) error {
-	byID := make(map[string]model.Row, len(rows))
+	byID := make(map[string]*model.Row, len(rows))
 	cancels, sales := 0, 0
-	for _, r := range rows {
+	for i := range rows {
+		r := &rows[i]
 		if r.Excluded != "" {
 			continue
 		}

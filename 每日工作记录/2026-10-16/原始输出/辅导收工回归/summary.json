@@ -1,0 +1,18 @@
+﻿{
+    "actual_time":  "2026-10-16T17:52:42.7368926+08:00",
+    "powershell_version":  "5.1.26100.9596",
+    "go_exit":  0,
+    "python_exit":  0,
+    "frontend_exit":  0,
+    "go_top_level_passed":  76,
+    "go_top_level_failed":  0,
+    "go_top_level_skipped":  0,
+    "python_tests_ran":  "15",
+    "frontend_passed":  "6",
+    "go_output":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\go.jsonl",
+    "go_stderr":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\go.stderr.txt",
+    "python_output":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\python.txt",
+    "python_stdout":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\python.stdout.txt",
+    "frontend_output":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\frontend.tap.txt",
+    "frontend_stderr":  "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\coaching-20261016-latest-tests\\frontend.stderr.txt"
+}

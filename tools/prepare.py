@@ -5,12 +5,13 @@ retained. Decimal display rounding is never used to form an identity or match ke
 """
 import argparse
 import csv
+import gc
 import hashlib
 import json
 import os
 import tempfile
 import time
-from collections import Counter, defaultdict
+from collections import Counter
 from decimal import Decimal, InvalidOperation
 from functools import lru_cache
 from pathlib import Path
@@ -28,6 +29,8 @@ HEADERS = ('Invoice', 'StockCode', 'Description', 'Quantity', 'InvoiceDate', 'Pr
 FIELDS = ('id', 'sheet_index', 'sheet', 'source_row', 'raw_json', 'invoice', 'stock', 'description',
           'quantity', 'time', 'price', 'customer', 'country', 'kind', 'excluded', 'flags', 'duplicate_of')
 NS = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+ROW_TAG, VALUE_TAG, FORMULA_TAG, TEXT_TAG, STRING_TAG = (NS+tag for tag in ('row', 'v', 'f', 't', 'si'))
+encode_raw = json.JSONEncoder(ensure_ascii=False, separators=(',', ':')).encode
 
 
 @lru_cache(maxsize=65536)
@@ -50,11 +53,18 @@ def source_time(value, epoch):
     return rendered
 
 
+@lru_cache(maxsize=65536)
 def integer(value):
     number = Decimal(value)
     if not number.is_finite() or number != number.to_integral_value() or abs(number) > 2**63-1:
         raise ValueError('invalid integer')
     return int(number)
+
+
+@lru_cache(maxsize=131072)
+def raw_cell(typ, value):
+    """Share immutable repeated XML values without changing their source lexeme."""
+    return (typ, value)
 
 
 def raw_rows(path, scope):
@@ -71,41 +81,41 @@ def raw_rows(path, scope):
         if 'xl/sharedStrings.xml' in zipped.namelist():
             with zipped.open('xl/sharedStrings.xml') as stream:
                 for _, elem in ET.iterparse(stream, events=('end',)):
-                    if elem.tag == NS+'si':
-                        strings.append(''.join(t.text or '' for t in elem.iter(NS+'t')))
+                    if elem.tag == STRING_TAG:
+                        strings.append(('s', ''.join(t.text or '' for t in elem.iter(TEXT_TAG))))
                         elem.clear()
         for si, sheet in enumerate(SHEETS[:2 if scope == 'all' else 1]):
             with zipped.open(f'xl/worksheets/sheet{si+1}.xml') as stream:
-                parser = ET.iterparse(stream, events=('start', 'end'))
-                _, root = next(parser)
-                for event, row in parser:
-                    if event != 'end' or row.tag != NS+'row':
+                # Only row-end events are consumed; subscribing to starts also
+                # allocated/dispatched millions of unused events per workbook.
+                parser = ET.iterparse(stream, events=('end',))
+                for _, row in parser:
+                    if row.tag != ROW_TAG:
                         continue
                     rn = int(row.attrib['r'])
                     if scope == 'benchmark' and rn > 10001:
                         break
                     values = [None]*8
                     for cell in row:
-                        column = ''.join(c for c in cell.attrib['r'] if c.isalpha())
+                        column = cell.attrib['r'].rstrip('0123456789')
                         if len(column) != 1 or not 'A' <= column <= 'H':
                             raise ValueError('Unexpected column '+column)
                         typ = cell.get('t', 'n')
-                        value = cell.findtext(NS+'v')
-                        if cell.find(NS+'f') is not None:
-                            values[ord(column)-65] = ['formula', cell.findtext(NS+'f')]
+                        value = cell.findtext(VALUE_TAG)
+                        if cell.find(FORMULA_TAG) is not None:
+                            values[ord(column)-65] = ('formula', cell.findtext(FORMULA_TAG))
                         elif typ == 's':
-                            values[ord(column)-65] = ['s', strings[int(value)]]
+                            values[ord(column)-65] = strings[int(value)]
                         elif typ == 'inlineStr':
-                            values[ord(column)-65] = ['s', ''.join(t.text or '' for t in cell.iter(NS+'t'))]
+                            values[ord(column)-65] = raw_cell('s', ''.join(t.text or '' for t in cell.iter(TEXT_TAG)))
                         elif value is not None:
-                            values[ord(column)-65] = [typ, value]
+                            values[ord(column)-65] = raw_cell(typ, value)
                     if rn == 1:
                         if tuple(v[1] if v else None for v in values) != HEADERS:
                             raise ValueError('Unexpected source headers')
                     else:
-                        yield si, sheet, rn, values, epoch
+                        yield si, sheet, rn, tuple(values), epoch
                     row.clear()
-                    root.clear()
 
 
 def text(cell):
@@ -132,14 +142,16 @@ def fingerprint(raw):
                 value = canonical(value)
             except (ValueError, InvalidOperation):
                 pass  # A bad numeric cell is classified by cleaning, not silently dropped.
-        normalized.append([typ, value])
-    return hashlib.sha256(json.dumps(normalized, ensure_ascii=False, separators=(',', ':')).encode()).digest()
+        normalized.append(raw_cell(typ, value))
+    # This key is internal, never persisted. Tuple equality preserves all eight
+    # typed values without serializing/hashing an extra JSON document per row.
+    return tuple(normalized)
 
 
 def normalize(si, sheet, rn, raw, epoch):
     row = dict.fromkeys(FIELDS, '')
     row.update(id=f'{si}:{rn}', sheet_index=si, sheet=sheet, source_row=rn,
-               raw_json=json.dumps(raw, ensure_ascii=False, separators=(',', ':')))
+               raw_json=encode_raw(raw))
     flags = []
     problems = []
     try:
@@ -181,6 +193,19 @@ def normalize(si, sheet, rn, raw, epoch):
 
 
 def prepare(path, scope, output_root, progress=print):
+    # The XML/row graph is acyclic and is released by reference counting. Avoid
+    # repeatedly scanning a growing million-row graph for cycles while loading.
+    # Always restore the caller's setting, including when parsing fails.
+    collect_cycles = gc.isenabled()
+    try:
+        gc.disable()
+        return _prepare(path, scope, output_root, progress)
+    finally:
+        if collect_cycles:
+            gc.enable()
+
+
+def _prepare(path, scope, output_root, progress):
     started = time.perf_counter()
     source_hash = sha256(path)
     dataset_id = hashlib.sha256(f'{source_hash}|{scope}|{CLEANING}'.encode()).hexdigest()
@@ -193,39 +218,43 @@ def prepare(path, scope, output_root, progress=print):
         return target
     output_root.mkdir(parents=True, exist_ok=True)
     scratch = Path(tempfile.mkdtemp(prefix='preparing-', dir=output_root))
-    counts = [Counter(), Counter()]
-    first_ids = defaultdict(list)
+    signatures = {}
     rows = []
     for si, sheet, rn, raw, epoch in raw_rows(path, scope):
         fp = fingerprint(raw)
-        counts[si][fp] += 1
+        group = signatures.get(fp)
+        if group is None:
+            group = [0, 0, []]
+            signatures[fp] = group
+        occurrence = group[si]
+        group[si] += 1
+        duplicate_of = ''
         if si == 0:
-            first_ids[fp].append(f'{si}:{rn}')
-        rows.append((si, sheet, rn, raw, epoch, fp))
+            group[2].append(f'{si}:{rn}')
+        elif occurrence < len(group[2]):
+            duplicate_of = group[2][occurrence]
+        rows.append((si, sheet, rn, raw, epoch, group, duplicate_of))
         if len(rows) % 50000 == 0:
             progress(json.dumps(dict(stage='read_source', rows=len(rows))))
-    seen_second = Counter()
     excluded = Counter()
     flags_count = Counter()
     categories = Counter()
     raw_cancel = excluded_cancel = unknown_invoice = 0
     with (scratch/'records.csv').open('w', newline='', encoding='utf-8') as stream:
-        writer = csv.DictWriter(stream, fieldnames=FIELDS)
-        writer.writeheader()
-        for si, sheet, rn, raw, epoch, fp in rows:
+        writer = csv.writer(stream)
+        writer.writerow(FIELDS)
+        for si, sheet, rn, raw, epoch, group, duplicate_of in rows:
             row = normalize(si, sheet, rn, raw, epoch)
-            if counts[si][fp] > 1:
+            if group[si] > 1:
                 row['flags'].append('same_sheet_duplicate')
-            if si == 1:
-                occurrence = seen_second[fp]
-                seen_second[fp] += 1
-                if occurrence < len(first_ids[fp]):
-                    row['excluded'] = 'cross_sheet_duplicate'
-                    row['duplicate_of'] = first_ids[fp][occurrence]
+            if duplicate_of:
+                row['excluded'] = 'cross_sheet_duplicate'
+                row['duplicate_of'] = duplicate_of
             invoice = raw[0]
-            is_cancel = bool(invoice and invoice[0] in ('s','n') and text(invoice).upper().startswith('C'))
+            invoice_text = text(invoice) if invoice and invoice[0] in ('s','n') else ''
+            is_cancel = invoice_text.upper().startswith('C')
             raw_cancel += is_cancel
-            unknown_invoice += not bool(invoice and invoice[0] in ('s','n') and text(invoice))
+            unknown_invoice += not bool(invoice_text)
             if row['excluded']:
                 excluded[row['excluded']] += 1
                 excluded_cancel += is_cancel
@@ -233,7 +262,9 @@ def prepare(path, scope, output_root, progress=print):
                 categories[row['kind']] += 1
             flags_count.update(row['flags'])
             row['flags'] = '|'.join(row['flags'])
-            writer.writerow(row)
+            # normalize initializes keys in FIELDS order; updating values does
+            # not reorder them. Avoid DictWriter's per-column Python generator.
+            writer.writerow(row.values())
     if source_hash != sha256(path):
         raise ValueError('Original changed during preparation; nothing published')
     stats = dict(raw=len(rows), accepted=sum(categories.values()), excluded=sum(excluded.values()),

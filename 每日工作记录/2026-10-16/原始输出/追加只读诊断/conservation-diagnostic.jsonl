@@ -1,0 +1,6 @@
+{"bad":0,"count":0,"query":"correlated","repeat":1,"seconds":2.0813095}
+{"bad":0,"count":0,"query":"grouped","repeat":1,"seconds":0.6277755}
+{"bad":0,"count":1019654,"query":"grouped_combined","repeat":1,"seconds":0.6750675}
+{"bad":0,"count":0,"query":"correlated","repeat":2,"seconds":1.421282}
+{"bad":0,"count":0,"query":"grouped","repeat":2,"seconds":0.6318103}
+{"bad":0,"count":1019654,"query":"grouped_combined","repeat":2,"seconds":0.6825956}

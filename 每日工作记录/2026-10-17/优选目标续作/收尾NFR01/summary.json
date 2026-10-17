@@ -1,0 +1,22 @@
+{
+  "actual_time": "2026-10-17T20:09:04.0276939+08:00",
+  "output_dir": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\closing-nfr01-20261017",
+  "environment": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\closing-nfr01-20261017\\environment.json",
+  "iterations_requested": 1,
+  "prepared_full": "",
+  "results": [
+    {
+      "nfr": "NFR01",
+      "iteration": 1,
+      "scope": "benchmark",
+      "measured_seconds": 1.7444502,
+      "limit_seconds": 5,
+      "target_seconds": 5,
+      "baseline_passed": true,
+      "target_passed": true,
+      "peak_working_set_bytes": 65150976.0
+    }
+  ],
+  "all_measured_baselines_passed": true,
+  "nfr04": "Not executed by this script; requires authenticated HTTP service, live long task, 10 workers and at least 300 requests."
+}

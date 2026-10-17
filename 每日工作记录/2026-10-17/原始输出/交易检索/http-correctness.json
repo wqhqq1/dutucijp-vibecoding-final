@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "scenario": "source",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "source",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "source",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "customer",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "customer",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "customer",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "invoice",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "invoice",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "invoice",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "stock",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "stock",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "stock",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "year_date",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "year_date",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "year_date",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "combination",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "combination",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "combination",
+      "repetition": 3,
+      "equal": true
+    },
+    {
+      "scenario": "deep_page",
+      "repetition": 1,
+      "equal": true
+    },
+    {
+      "scenario": "deep_page",
+      "repetition": 2,
+      "equal": true
+    },
+    {
+      "scenario": "deep_page",
+      "repetition": 3,
+      "equal": true
+    }
+  ],
+  "all_equal": true
+}

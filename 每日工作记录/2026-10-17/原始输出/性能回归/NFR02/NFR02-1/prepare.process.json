@@ -1,0 +1,38 @@
+{
+  "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+  "arguments": [
+    "E:\\软件编程大作业\\退货对账与差异处理系统\\tools\\prepare.py",
+    "--source",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\raw\\online_retail_II.xlsx",
+    "--scope",
+    "all",
+    "--output",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR02-20261017-085349-68bbb271\\NFR02-1\\prepared"
+  ],
+  "working_directory": "E:\\软件编程大作业\\退货对账与差异处理系统",
+  "started_at": "2026-10-17T08:53:52.9089498+08:00",
+  "ended_at": "2026-10-17T08:54:16.9502357+08:00",
+  "exit_code": 0,
+  "wall_seconds": 24.0290933,
+  "peak_working_set_bytes": 792788992,
+  "root_peak_working_set_bytes": 8843264,
+  "observed_process_peaks": [
+    {
+      "pid": 5480,
+      "peak_working_set_bytes": 8843264
+    },
+    {
+      "pid": 35916,
+      "peak_working_set_bytes": 11730944
+    },
+    {
+      "pid": 31132,
+      "peak_working_set_bytes": 774610944
+    }
+  ],
+  "python_interpreter_child_observed": true,
+  "peak_memory_method": "Maximum of sampled simultaneous root/interpreter-child working sets (20ms), and OS root process PeakWorkingSet64; per-process high-water marks are separate and never summed. Python launcher child discovered with Win32_Process.",
+  "peak_memory_error": null,
+  "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR02-20261017-085349-68bbb271\\NFR02-1\\prepare.stdout.txt",
+  "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR02-20261017-085349-68bbb271\\NFR02-1\\prepare.stderr.txt"
+}

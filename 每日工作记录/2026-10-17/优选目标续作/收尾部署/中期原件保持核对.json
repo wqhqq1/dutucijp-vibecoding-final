@@ -1,0 +1,25 @@
+{
+  "head_before_work": "da50e92cb4797413a58504e07e7874219d456a9d",
+  "files": [
+    {
+      "path": "中期汇报.pptx",
+      "unchanged": true,
+      "sha256": "e9c89670a827e182298b65702dffe0a8bb894f6d3b1dea4b647d1eacdda295a9"
+    },
+    {
+      "path": "中期汇报.pdf",
+      "unchanged": true,
+      "sha256": "a1e669313dcb5aa347a9995634d0705927fc897eb8f95f509f4a8f060ff08d76"
+    },
+    {
+      "path": "中期汇报网页版/index.html",
+      "unchanged": true,
+      "sha256": "c05d84f168902746c45c5e087e5984dadfc6d1176d7648e3a333f931dbbc8c7d"
+    },
+    {
+      "path": "中期汇报讲稿.md",
+      "unchanged": true,
+      "sha256": "19b6495f7aef9547bae3e51ae9285676b1863fbd59830002a1b8f18b66b5b300"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+date-day iteration=1 4.445ms total=6216 returned=50
+date-day iteration=2 3.985ms total=6216 returned=50
+date-day iteration=3 3.201ms total=6216 returned=50
+date-day iteration=4 3.356ms total=6216 returned=50
+date-day iteration=5 3.370ms total=6216 returned=50

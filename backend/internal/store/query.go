@@ -26,12 +26,16 @@ type QueryFilter struct {
 	Customer       string `json:"customer"`
 	Stock          string `json:"stock"`
 	Invoice        string `json:"invoice"`
+	Country        string `json:"country"`
+	Sort           string `json:"sort"`
+	Direction      string `json:"direction"`
 	Classification string `json:"classification"`
 	Kind           string `json:"kind"`
 	DateFrom       string `json:"date_from"`
 	DateTo         string `json:"date_to"`
 	Page           int    `json:"page"`
 	PageSize       int    `json:"page_size"`
+	datasetID      string // Resolved from the published run, never from client input.
 }
 type TransactionRecord struct {
 	model.Row
@@ -128,10 +132,13 @@ func (s *Store) ensureQueryIndexes(ctx context.Context, force bool) error {
 				"CREATE INDEX IF NOT EXISTS row_invoice ON normalized_rows(dataset_id,invoice)",
 				"CREATE INDEX IF NOT EXISTS row_source_time ON normalized_rows(dataset_id,source_time,id)",
 				"CREATE INDEX IF NOT EXISTS row_stock ON normalized_rows(dataset_id,stock,id)",
-				"CREATE INDEX IF NOT EXISTS row_kind ON normalized_rows(dataset_id,kind)",
-				"CREATE INDEX IF NOT EXISTS row_source ON normalized_rows(dataset_id,source_id,id)",
-				"CREATE INDEX IF NOT EXISTS source_order ON source_rows(source_hash,sheet_index,source_row,id)",
+				"CREATE INDEX IF NOT EXISTS row_query_source ON normalized_rows(dataset_id,"+rowSourceOrder("id")+",id)",
+				"CREATE INDEX IF NOT EXISTS row_country ON normalized_rows(dataset_id,country,id)",
+				"CREATE INDEX IF NOT EXISTS row_customer ON normalized_rows(dataset_id,customer,id)",
 			)
+			// The old row_source/source_order paths have been replaced by numeric
+			// page keys. row_lookup already covers dataset/kind counts. Do not build
+			// those redundant indexes on new input; existing indexes are preserved.
 		}
 		for _, statement := range statements {
 			if _, err := conn.ExecContext(ctx, statement); err != nil {
@@ -198,8 +205,19 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 	if f.Kind != "" && f.Kind != "sale" && f.Kind != "cancel" {
 		return f, workflowError("invalid_input", "未知交易类型", WorkflowCase{})
 	}
-	var published int
-	err = s.DB.QueryRowContext(ctx, "SELECT 1 FROM runs r JOIN datasets d ON d.id=r.dataset_id WHERE r.id=? AND r.status='published' AND d.status='published'", f.RunID).Scan(&published)
+	if f.Sort == "" {
+		f.Sort = "source"
+	}
+	if _, ok := transactionSortColumns[f.Sort]; !ok {
+		return f, workflowError("invalid_input", "未知交易排序字段", WorkflowCase{})
+	}
+	if f.Direction == "" {
+		f.Direction = "asc"
+	}
+	if f.Direction != "asc" && f.Direction != "desc" {
+		return f, workflowError("invalid_input", "排序方向须为asc或desc", WorkflowCase{})
+	}
+	err = s.DB.QueryRowContext(ctx, "SELECT d.id FROM runs r JOIN datasets d ON d.id=r.dataset_id WHERE r.id=? AND r.status='published' AND d.status='published'", f.RunID).Scan(&f.datasetID)
 	if errors.Is(err, sql.ErrNoRows) {
 		err = workflowError("not_found", "运行不存在或尚未发布", WorkflowCase{})
 	}
@@ -209,21 +227,85 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 const transactionColumns = `n.id,sr.sheet_index,sr.sheet,sr.source_row,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,n.duplicate_of,d.id,d.scope,d.source_hash,r.rule_version,d.cleaning_version`
 const runFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id`
 
-// Only join relations used by a filter. The unfiltered transaction page walks
-// the source-order index and stops at LIMIT; it must not sort a million joined
-// rows before returning the first page after login. Selective filters instead
-// use their row index and sort their much smaller result set.
-func transactionQueryFrom(f QueryFilter, sourceOrdered, includeSource bool) string {
-	from := runFrom
-	if sourceOrdered {
-		from += ` CROSS JOIN source_rows sr ON sr.source_hash=d.source_hash CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.source_id=sr.id`
-	} else {
-		from += ` JOIN normalized_rows n ON n.dataset_id=d.id`
-		if includeSource {
-			from += ` JOIN source_rows sr ON sr.id=n.source_id`
-		}
+// Exports and permission-scoped keys use only the relations their filters need.
+func transactionQueryFrom(f QueryFilter, includeSource bool) string {
+	from := runFrom + ` JOIN normalized_rows n ON n.dataset_id=d.id`
+	if includeSource {
+		from += ` JOIN source_rows sr ON sr.id=n.source_id`
 	}
 	return from + filterJoins(f, false)
+}
+
+// SQLite's generic row-count estimates can choose the year-wide date index
+// over an exact customer lookup. Pick only known production indexes and let
+// each narrow lookup sort its compact keys. Broad source pages walk their
+// numeric order directly, including arbitrary OFFSET jumps.
+func transactionKeyFrom(f QueryFilter, page bool) string {
+	return runFrom + ` JOIN ` + transactionRowsFrom(f, page) + ` ON n.dataset_id=d.id` + filterJoins(f, false)
+}
+
+func transactionRowsFrom(f QueryFilter, page bool) string {
+	index := ""
+	switch {
+	case f.Invoice != "":
+		index = "row_invoice"
+	case f.Customer != "":
+		index = "row_customer"
+	case f.Stock != "":
+		index = "row_stock"
+	case page && narrowTransactionDate(f):
+		index = "row_source_time"
+	case page && (f.Sort == "source" || f.Sort == "") && f.Status == "" && f.Assignee == "" && f.Classification == "":
+		index = "row_query_source"
+	case page && f.Sort == "date":
+		index = "row_source_time"
+	case page && f.Sort == "customer":
+		index = "row_customer"
+	case page && f.Sort == "stock":
+		index = "row_stock"
+	case page && f.Sort == "country":
+		index = "row_country"
+	case page && f.Sort == "invoice":
+		index = "row_invoice"
+	case f.Country != "":
+		index = "row_country"
+	case f.DateFrom != "" || f.DateTo != "":
+		index = "row_source_time"
+	case f.Kind != "":
+		index = "row_lookup"
+	}
+	from := `normalized_rows n`
+	if index != "" {
+		from += " INDEXED BY " + index
+	}
+	return from
+}
+
+// These scopes contain only immutable published input. Warehouse ownership and
+// workflow/decision filters must retain their live joins on both count and page.
+func immutableTransactionScope(actor WorkflowActor, f QueryFilter) bool {
+	return (actor.Role == "finance" || actor.Role == "admin") && f.Status == "" && f.Assignee == "" && f.Classification == ""
+}
+
+func immutableTransactionWhere(f QueryFilter) (string, []any) {
+	parts := []string{"n.dataset_id=?"}
+	args := []any{f.datasetID}
+	for _, pair := range []struct{ sql, value string }{{"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
+		if pair.value != "" {
+			parts = append(parts, pair.sql)
+			args = append(args, pair.value)
+		}
+	}
+	return " WHERE " + strings.Join(parts, " AND "), args
+}
+
+func narrowTransactionDate(f QueryFilter) bool {
+	if f.DateFrom == "" || f.DateTo == "" {
+		return false
+	}
+	from, fromErr := time.Parse("2006-01-02T15:04:05.000000", f.DateFrom)
+	to, toErr := time.Parse("2006-01-02T15:04:05.000000", f.DateTo)
+	return fromErr == nil && toErr == nil && to.Sub(from) <= 31*24*time.Hour
 }
 
 func filterJoins(f QueryFilter, hasCase bool) string {
@@ -238,10 +320,10 @@ func filterJoins(f QueryFilter, hasCase bool) string {
 }
 
 func unfilteredTransactions(f QueryFilter) bool {
-	return f.Status == "" && f.Assignee == "" && f.Customer == "" && f.Stock == "" && f.Invoice == "" && f.Classification == "" && f.Kind == "" && f.DateFrom == "" && f.DateTo == ""
+	return f.Status == "" && f.Assignee == "" && f.Customer == "" && f.Stock == "" && f.Invoice == "" && f.Country == "" && f.Classification == "" && f.Kind == "" && f.DateFrom == "" && f.DateTo == ""
 }
 
-func sourceOrderedTransactions(actor WorkflowActor, f QueryFilter) bool {
+func manifestTransactionCount(actor WorkflowActor, f QueryFilter) bool {
 	return actor.Role != "warehouse" && unfilteredTransactions(f)
 }
 
@@ -275,8 +357,29 @@ func sourceOrder(alias string) string {
 	return strings.ReplaceAll(cancelOrder, "cancel_id", alias+".cancel_id")
 }
 
+func rowSourceOrder(id string) string {
+	return strings.ReplaceAll(cancelOrder, "cancel_id", id)
+}
+
+var transactionSortColumns = map[string]string{
+	"source": "", "date": "n.source_time", "invoice": "n.invoice", "customer": "n.customer", "stock": "n.stock", "country": "n.country",
+}
+
+// Source order is numeric, as verified on import; other sorts use the unique
+// row ID as a deterministic tie breaker. Only validated constants reach SQL.
+func transactionOrder(f QueryFilter) string {
+	direction := " ASC"
+	if f.Direction == "desc" {
+		direction = " DESC"
+	}
+	if f.Sort == "" || f.Sort == "source" {
+		return "CAST(substr(n.id,1,instr(n.id,':')-1) AS INTEGER)" + direction + ",CAST(substr(n.id,instr(n.id,':')+1) AS INTEGER)" + direction + ",n.id" + direction
+	}
+	return transactionSortColumns[f.Sort] + direction + ",n.id" + direction
+}
+
 func hasRowFilter(f QueryFilter) bool {
-	return f.Customer != "" || f.Stock != "" || f.Invoice != "" || f.Kind != "" || f.DateFrom != "" || f.DateTo != ""
+	return f.Customer != "" || f.Stock != "" || f.Invoice != "" || f.Country != "" || f.Kind != "" || f.DateFrom != "" || f.DateTo != ""
 }
 
 func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
@@ -286,7 +389,7 @@ func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
 func queryScopeWhere(actor WorkflowActor, f QueryFilter, ownCases bool) (string, []any) {
 	parts := []string{"r.id=?", "r.status='published'", "d.status='published'"}
 	args := []any{f.RunID}
-	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
+	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
 		if pair.value != "" {
 			parts = append(parts, pair.sql)
 			args = append(args, pair.value)
@@ -313,18 +416,64 @@ func (s *Store) ListTransactions(ctx context.Context, actor WorkflowActor, f Que
 	}
 	out = TransactionPage{Items: []TransactionRecord{}, Page: f.Page, PageSize: f.PageSize}
 	where, args := queryWhere(actor, f)
-	ordered := sourceOrderedTransactions(actor, f)
-	countSQL := "SELECT count(*)" + transactionQueryFrom(f, false, false) + where
+	ordered := manifestTransactionCount(actor, f)
+	countFrom := transactionKeyFrom(f, false)
+	keyFrom := transactionKeyFrom(f, true)
+	immutable := immutableTransactionScope(actor, f)
+	if immutable {
+		// Publication is checked above on every request. Bind the resolved dataset
+		// directly, avoiding a run/dataset lookup for each scanned input row.
+		where, args = immutableTransactionWhere(f)
+		countFrom = " FROM " + transactionRowsFrom(f, false)
+		keyFrom = " FROM " + transactionRowsFrom(f, true)
+	}
+	countSQL := "SELECT count(*)" + countFrom + where
+	countArgs := args
 	if ordered {
 		// Import verifies the immutable manifest's raw count before publication.
 		// Read that persisted count, not an account cache or a full-row COUNT.
-		countSQL = `SELECT json_extract(d.manifest_json,'$.stats.raw')` + runFrom + where
+		countSQL = `SELECT json_extract(d.manifest_json,'$.stats.raw')` + runFrom + ` WHERE r.id=? AND r.status='published' AND d.status='published'`
+		countArgs = []any{f.RunID}
 	}
-	if err = s.DB.QueryRowContext(ctx, countSQL, args...).Scan(&out.Total); err != nil {
-		return
+	countKey, boundedKey := immutableCountKey(f)
+	cacheCount := immutable && !ordered && boundedKey
+	cached := false
+	if cacheCount {
+		out.Total, cached = s.transactionCounts.get(countKey)
 	}
-	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, ordered, true)+where+" ORDER BY sr.sheet_index,sr.source_row,n.id LIMIT ? OFFSET ?", args...)
+	if !cached {
+		if err = s.DB.QueryRowContext(ctx, countSQL, countArgs...).Scan(&out.Total); err != nil {
+			return
+		}
+		if cacheCount {
+			s.transactionCounts.put(countKey, out.Total)
+		}
+	}
+	// OFFSET walks compact row/index entries. Read full source/provenance only
+	// for the selected 50/100 keys, rather than for every skipped/sorted row.
+	if actor.Role == "warehouse" {
+		keyFrom = transactionQueryFrom(f, false)
+	}
+	pageOrder := f
+	limit, offset := f.PageSize, (f.Page-1)*f.PageSize
+	if immutable {
+		if offset >= out.Total {
+			return out, nil
+		}
+		limit = min(limit, out.Total-offset)
+		// Scan from the closer end. Use the actual tail length, so a partial
+		// final page selects the same keys. The outer query restores original order.
+		if reverseOffset := out.Total - offset - limit; reverseOffset < offset {
+			offset = reverseOffset
+			pageOrder.Direction = "desc"
+			if f.Direction == "desc" {
+				pageOrder.Direction = "asc"
+			}
+		}
+	}
+	keys := "SELECT n.dataset_id,n.id" + keyFrom + where + " ORDER BY " + transactionOrder(pageOrder) + " LIMIT ? OFFSET ?"
+	args = append(args, limit, offset, f.RunID)
+	rows, e := s.DB.QueryContext(ctx, "WITH page AS MATERIALIZED ("+keys+") SELECT "+transactionColumns+` FROM page CROSS JOIN normalized_rows n ON n.dataset_id=page.dataset_id AND n.id=page.id CROSS JOIN source_rows sr ON sr.id=n.source_id CROSS JOIN datasets d ON d.id=n.dataset_id CROSS JOIN runs r ON r.id=? ORDER BY `+transactionOrder(f), args...)
 	if e != nil {
 		err = e
 		return
@@ -521,7 +670,7 @@ func (s *Store) ExportCSV(ctx context.Context, actor WorkflowActor, f QueryFilte
 		return err
 	}
 	where, args := queryWhere(actor, f)
-	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, sourceOrderedTransactions(actor, f), true)+where+" ORDER BY sr.sheet_index,sr.source_row,n.id", args...)
+	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, true)+where+" ORDER BY "+transactionOrder(f), args...)
 	if err != nil {
 		return err
 	}

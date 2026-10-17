@@ -1,0 +1,5 @@
+Starting: account-initialization
+Completed: account-initialization
+Starting: admin-link
+Completed: admin-link
+Demo ready at http://localhost:18087. First use requires your own strong password and verified Passkey or TOTP. Keep this window open; Ctrl+C stops only this instance.

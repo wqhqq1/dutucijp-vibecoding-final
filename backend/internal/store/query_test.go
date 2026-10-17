@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"sort"
 	"strings"
 	"testing"
 
@@ -42,6 +43,206 @@ func queryFixture(t *testing.T) (*Store, string, string, string) {
 		t.Fatal(err)
 	}
 	return s, run.RunID, ID(run.RunID + "|0:125"), ID(run.RunID + "|0:128")
+}
+
+func TestTC16_TransactionCountrySortAndJumpPages(t *testing.T) {
+	s, run, _, _ := queryFixture(t)
+	ctx := context.Background()
+	all, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, PageSize: 100})
+	if err != nil {
+		t.Fatal(err)
+	}
+	last, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, Page: 2, PageSize: 100})
+	if err != nil {
+		t.Fatal(err)
+	}
+	all.Items = append(all.Items, last.Items...)
+	for _, field := range []string{"source", "date", "invoice", "customer", "stock", "country"} {
+		for _, direction := range []string{"asc", "desc"} {
+			t.Run(field+"-"+direction, func(t *testing.T) {
+				want := append([]TransactionRecord{}, all.Items...)
+				value := func(r TransactionRecord) string {
+					switch field {
+					case "date":
+						return r.Time
+					case "invoice":
+						return r.Invoice
+					case "customer":
+						return r.Customer
+					case "stock":
+						return r.Stock
+					case "country":
+						return r.Country
+					}
+					return ""
+				}
+				sort.Slice(want, func(i, j int) bool {
+					a, b := want[i], want[j]
+					less := value(a) < value(b)
+					if value(a) == value(b) {
+						less = a.ID < b.ID
+					}
+					if field == "source" {
+						less = a.SheetIndex < b.SheetIndex || a.SheetIndex == b.SheetIndex && a.SourceRow < b.SourceRow
+					}
+					if direction == "desc" {
+						return !less && a.ID != b.ID
+					}
+					return less
+				})
+				filter := QueryFilter{RunID: run, Sort: field, Direction: direction, Page: 3, PageSize: 50}
+				got, e := s.ListTransactions(ctx, testFinance, filter)
+				if e != nil || got.Total != len(want) || !reflect.DeepEqual(got.Items, want[100:]) {
+					t.Fatalf("sort/page mismatch: field=%s direction=%s total=%d err=%v", field, direction, got.Total, e)
+				}
+				var output bytes.Buffer
+				if e = s.ExportCSV(ctx, testFinance, filter, &output); e != nil {
+					t.Fatal(e)
+				}
+				records, e := csv.NewReader(&output).ReadAll()
+				if e != nil {
+					t.Fatal(e)
+				}
+				if len(records) != len(want)+1 {
+					t.Fatal("export count differs")
+				}
+				for i, r := range want {
+					if records[i+1][8] != r.ID {
+						t.Fatal("export and page order differ")
+					}
+				}
+			})
+		}
+	}
+	country := all.Items[0].Country
+	got, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, Country: country})
+	if err != nil || got.Total != all.Total {
+		t.Fatalf("country=%q total=%d err=%v", country, got.Total, err)
+	}
+	got, err = s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, Country: "' OR 1=1 --"})
+	if err != nil || got.Total != 0 {
+		t.Fatal("country must remain an exact parameterized filter")
+	}
+	for _, f := range []QueryFilter{{RunID: run, Sort: "source; DROP TABLE runs"}, {RunID: run, Direction: "DESC;"}} {
+		_, err = s.ListTransactions(ctx, testFinance, f)
+		requireWorkflowCode(t, err, "invalid_input")
+	}
+	for _, f := range []QueryFilter{{RunID: run, Sort: "date", Direction: "desc"}, {RunID: run, Country: country}} {
+		page, e := s.ListTransactions(ctx, testOwner, f)
+		if e != nil || page.Total != 0 {
+			t.Fatal("sorting/country escaped warehouse ownership")
+		}
+	}
+}
+
+func TestTC16_ReversePagesMatchFullJoinedReference(t *testing.T) {
+	s, run, own, _ := queryFixture(t)
+	ctx := context.Background()
+	assignWorkflow(t, s, own)
+	filters := []QueryFilter{
+		{RunID: run}, {RunID: run, Customer: "42"},
+		{RunID: run, Country: "UK", Kind: "sale"},
+		{RunID: run, DateFrom: "2010-01-01", DateTo: "2010-01-02", Sort: "date"},
+		{RunID: run, Country: "France"},
+		{RunID: run, Status: "pending"},
+		{RunID: run, Assignee: testOwner.ID},
+		{RunID: run, Classification: "suspected"},
+	}
+	for _, actor := range []WorkflowActor{testFinance, testAdmin, testOwner} {
+		for _, filter := range filters {
+			for _, direction := range []string{"asc", "desc"} {
+				filter.Direction = direction
+				f, err := s.validateFilter(ctx, actor, filter)
+				if err != nil {
+					t.Fatal(err)
+				}
+				where, args := queryWhere(actor, f)
+				// The reference reads the whole joined result without page-key,
+				// direct-dataset or reverse-offset optimizations.
+				rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, true)+where+" ORDER BY "+transactionOrder(f), args...)
+				if err != nil {
+					t.Fatal(err)
+				}
+				reference := []TransactionRecord{}
+				for rows.Next() {
+					var row TransactionRecord
+					if err = scanTransaction(rows, &row); err != nil {
+						t.Fatal(err)
+					}
+					reference = append(reference, row)
+				}
+				err = rows.Err()
+				rows.Close()
+				if err != nil {
+					t.Fatal(err)
+				}
+				for _, size := range []int{50, 100} {
+					for page := 1; page <= 4; page++ {
+						filter.Page, filter.PageSize = page, size
+						got, err := s.ListTransactions(ctx, actor, filter)
+						lo := min((page-1)*size, len(reference))
+						hi := min(lo+size, len(reference))
+						want := append([]TransactionRecord{}, reference[lo:hi]...)
+						if err != nil || got.Total != len(reference) || got.Page != page || got.PageSize != size || !reflect.DeepEqual(got.Items, want) {
+							t.Fatalf("scope/page mismatch: actor=%s filter=%+v page=%d size=%d total=%d want=%d err=%v", actor.Role, filter, page, size, got.Total, len(reference), err)
+						}
+					}
+				}
+			}
+		}
+	}
+	_, err := s.DB.ExecContext(ctx, "UPDATE datasets SET status='failed' WHERE id=(SELECT dataset_id FROM runs WHERE id=?)", run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, Page: 3})
+	requireWorkflowCode(t, err, "not_found")
+}
+
+func TestTC26_ImmutableCountsNeverReplaceLiveScopeChecks(t *testing.T) {
+	s, run, own, _ := queryFixture(t)
+	ctx := context.Background()
+	filter := QueryFilter{RunID: run, Country: "UK"}
+	for range 2 {
+		page, err := s.ListTransactions(ctx, testFinance, filter)
+		if err != nil || page.Total != 127 {
+			t.Fatalf("immutable input count: %d %v", page.Total, err)
+		}
+	}
+	page, err := s.ListTransactions(ctx, testOwner, filter)
+	if err != nil || page.Total != 0 {
+		t.Fatal("warehouse reused a global immutable count")
+	}
+	filter.Status = "pending"
+	page, err = s.ListTransactions(ctx, testFinance, filter)
+	if err != nil || page.Total != 2 {
+		t.Fatal("workflow filter reused the global immutable count")
+	}
+	c := assignWorkflow(t, s, own)
+	filter.Status, filter.Assignee = "", testOwner.ID
+	page, err = s.ListTransactions(ctx, testFinance, filter)
+	if err != nil || page.Total != 1 {
+		t.Fatal("assignee filter reused an immutable count")
+	}
+	c, err = s.TransitionCase(ctx, testOwner, c.ID, "in_progress", c.Version, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = s.TransitionCase(ctx, testOwner, c.ID, "closed", c.Version, "核对后资料不足")
+	if err != nil {
+		t.Fatal(err)
+	}
+	filter.Status, filter.Assignee = "pending", ""
+	page, err = s.ListTransactions(ctx, testFinance, filter)
+	if err != nil || page.Total != 1 {
+		t.Fatal("workflow mutation was hidden by a cached count")
+	}
+	if _, err = s.DB.ExecContext(ctx, "UPDATE runs SET status='failed' WHERE id=?", run); err != nil {
+		t.Fatal(err)
+	}
+	filter.Status = ""
+	_, err = s.ListTransactions(ctx, testFinance, filter)
+	requireWorkflowCode(t, err, "not_found")
 }
 
 func TestTC16_ServerFilteringPaginationAndDateBoundaries(t *testing.T) {
@@ -295,6 +496,10 @@ func TestTC16_SourceOrderAndCountAcrossSharedSourceRanges(t *testing.T) {
 		runs = append(runs, run.RunID)
 	}
 	for i, want := range [][]string{{"0:2", "0:10", "1:2"}, {"0:10", "1:2"}} {
+		filtered, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: runs[i], Customer: rows[0].Customer})
+		if err != nil || filtered.Total != len(want) {
+			t.Fatalf("immutable count crossed dataset ranges: total=%d want=%d err=%v", filtered.Total, len(want), err)
+		}
 		for page := 1; page <= len(want)+1; page++ {
 			got, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: runs[i], Page: page, PageSize: 1})
 			if err != nil {

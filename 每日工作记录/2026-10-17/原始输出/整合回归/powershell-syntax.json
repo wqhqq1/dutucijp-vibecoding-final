@@ -1,0 +1,67 @@
+{
+  "actual_time": "2026-10-17T08:51:01.4170222+08:00",
+  "scripts": 15,
+  "failed": 0,
+  "results": [
+    {
+      "file": "start.ps1",
+      "errors": []
+    },
+    {
+      "file": "reproduce.ps1",
+      "errors": []
+    },
+    {
+      "file": "prepare-demo.ps1",
+      "errors": []
+    },
+    {
+      "file": "test.ps1",
+      "errors": []
+    },
+    {
+      "file": "tests\\test_native_runner.ps1",
+      "errors": []
+    },
+    {
+      "file": "verify-workflow.ps1",
+      "errors": []
+    },
+    {
+      "file": "verify-data.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\verify-environment.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\measure-performance.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\launch-demo.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\invoke-test-process.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\execution-day.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\cleanup-workspace.ps1",
+      "errors": []
+    },
+    {
+      "file": "tools\\bootstrap.ps1",
+      "errors": []
+    },
+    {
+      "file": "build.ps1",
+      "errors": []
+    }
+  ]
+}

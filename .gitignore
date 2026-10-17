@@ -10,6 +10,7 @@
 /backend/internal/web/assets/*
 !/backend/internal/web/assets/placeholder.txt
 /dist/
+/teacher-demo/
 /build/
 /coverage/
 /.working/

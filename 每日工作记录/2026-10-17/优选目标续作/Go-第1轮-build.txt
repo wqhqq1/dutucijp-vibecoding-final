@@ -1,0 +1,6 @@
+
+Algorithm : SHA256
+Hash      : 8FEE5F44D94BDFFE40E9358C54BDA67D6FB7009DB1B418C0610CF5898C6B8D99
+Path      : C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\builds\priority-20261017-round1\perfverify.exe
+
+

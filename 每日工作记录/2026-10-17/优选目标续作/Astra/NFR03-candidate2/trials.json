@@ -1,0 +1,143 @@
+{
+  "nfr": "NFR03",
+  "iteration": 1,
+  "scope": "all",
+  "measured_seconds": 5.681961200000001,
+  "limit_seconds": 15,
+  "target_seconds": 5,
+  "baseline_passed": true,
+  "target_passed": false,
+  "peak_working_set_bytes": 833159168.0,
+  "preparation": null,
+  "go_process": {
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\perfverify.exe",
+    "arguments": [
+      "--prepared",
+      "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/python-prepare-round1-all-20261017-103410-c0d867a2/prepared/5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "--db",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\NFR03-1\\isolated.sqlite",
+      "--mode",
+      "recompute",
+      "--input-template",
+      "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/performance-input-template-20261015-165942/input-only.sqlite"
+    ],
+    "working_directory": "E:\\软件编程大作业\\退货对账与差异处理系统",
+    "started_at": "2026-10-17T15:06:46.1199305+08:00",
+    "ended_at": "2026-10-17T15:07:01.1287964+08:00",
+    "exit_code": 0,
+    "wall_seconds": 14.9981181,
+    "peak_working_set_bytes": 833159168,
+    "root_peak_working_set_bytes": 833159168,
+    "observed_process_peaks": [
+      {
+        "pid": 11180,
+        "peak_working_set_bytes": 833159168
+      }
+    ],
+    "python_interpreter_child_observed": null,
+    "peak_memory_method": "Maximum of sampled simultaneous root/interpreter-child working sets (20ms), and OS root process PeakWorkingSet64; per-process high-water marks are separate and never summed. Python launcher child discovered with Win32_Process.",
+    "peak_memory_error": null,
+    "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\NFR03-1\\go.stdout.txt",
+    "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\NFR03-1\\go.stderr.txt"
+  },
+  "go_report": {
+    "mode": "recompute",
+    "database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\NFR03-1\\isolated.sqlite",
+    "prepared": "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/python-prepare-round1-all-20261017-103410-c0d867a2/prepared/5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+    "input_template": "C:/Users/wqhqq/AppData/Local/dutucijp-vibecoding-final/verification/performance-input-template-20261015-165942/input-only.sqlite",
+    "input_copy_sha256": "f9eaa0f575ae0c5c9ec4086183068d934f8d392aa7906905bde03001b96d241b",
+    "input_copy_seconds": 1.4526728,
+    "open_seconds": 7.3300576,
+    "import_seconds": 0.157207,
+    "run_wall_seconds": 5.632882,
+    "close_seconds": 0.0490792,
+    "total_go_seconds": 13.1692258,
+    "measured_seconds": 5.681961200000001,
+    "runs_before": 0,
+    "published_runs_after": 1,
+    "cases_after": 9450,
+    "decisions_after": 19164,
+    "sqlite_version": "3.53.4",
+    "sqlite_cache_size": -65536,
+    "sqlite_synchronous": 2,
+    "query_indexes_present": 4,
+    "bound_parameter_probe": 960,
+    "go_version": "go1.27.2",
+    "manifest": {
+      "dataset_id": "5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "scope": "all",
+      "cleaning_version": "cr-1.0.1",
+      "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+      "records_sha256": "84ccfb61dc98d320c22ee7dc86c5843179a1d8e9ee2ef91013434d3eddc6f75a",
+      "status": "prepared",
+      "stats": {
+        "raw": 1067371,
+        "accepted": 1038818,
+        "excluded": 28553,
+        "accepted_sales": 1019654,
+        "accepted_cancels": 19164,
+        "raw_cancels": 19494,
+        "excluded_cancels": 330
+      }
+    },
+    "summary": {
+      "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "dataset_id": "5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "rule_version": "conservative-1.0.0",
+      "status": "published",
+      "reused": false,
+      "input": {
+        "raw": 1067371,
+        "accepted": 1038818,
+        "excluded": 28553,
+        "accepted_sales": 1019654,
+        "accepted_cancels": 19164,
+        "raw_cancels": 19494,
+        "excluded_cancels": 330
+      },
+      "matched": 9714,
+      "suspected": 6275,
+      "no_original": 3175,
+      "cases": 9450,
+      "workers": 8,
+      "reconcile_and_persist_seconds": 5.628871,
+      "coverage": "9714/19164 (50.688791%)",
+      "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+    },
+    "phases": [
+      {
+        "phase": "import.manifest_before",
+        "seconds": 0.1567034
+      },
+      {
+        "phase": "run.balance_layout",
+        "seconds": 0
+      },
+      {
+        "phase": "run.load",
+        "seconds": 1.7156178
+      },
+      {
+        "phase": "run.compute",
+        "seconds": 0.7024724
+      },
+      {
+        "phase": "persist.balances",
+        "seconds": 2.4889888
+      },
+      {
+        "phase": "persist.decisions_and_evidence",
+        "seconds": 0.413289
+      },
+      {
+        "phase": "persist.conservation",
+        "seconds": 0.308503
+      },
+      {
+        "phase": "run.persist",
+        "seconds": 3.2107808
+      }
+    ]
+  },
+  "timing_boundary": "Store.Run including input load, matching, case/statistics persistence, publication; plus close/flush. Initial import reported separately, excluded from recompute metric. Process peak memory includes initial input import and is not a compute-only peak."
+}

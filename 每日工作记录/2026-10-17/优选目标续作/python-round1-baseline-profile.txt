@@ -1,0 +1,43 @@
+         2631628 function calls (2631265 primitive calls) in 0.882 seconds
+
+   Ordered by: cumulative time
+   List reduced from 567 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002    0.882    0.882 prepare.py:195(prepare)
+        1    0.030    0.030    0.880    0.880 prepare.py:208(_prepare)
+    10001    0.119    0.000    0.557    0.000 prepare.py:70(raw_rows)
+        1    0.000    0.000    0.220    0.220 excel.py:316(load_workbook)
+        1    0.000    0.000    0.216    0.216 excel.py:286(read)
+        1    0.000    0.000    0.210    0.210 excel.py:139(read_strings)
+        1    0.018    0.018    0.209    0.209 strings.py:10(read_string_table)
+   227444    0.027    0.000    0.181    0.000 ElementTree.py:1233(iterator)
+15822/15771    0.028    0.000    0.134    0.000 serialisable.py:46(from_tree)
+        3    0.000    0.000    0.126    0.042 fetch_data.py:17(sha256)
+        3    0.000    0.000    0.119    0.040 hashlib.py:195(file_digest)
+      366    0.097    0.000    0.097    0.000 {method 'readinto' of '_io.BufferedReader' objects}
+   227681    0.055    0.000    0.087    0.000 ElementTree.py:1302(read_events)
+    15758    0.011    0.000    0.080    0.000 text.py:161(__init__)
+    10000    0.024    0.000    0.072    0.000 prepare.py:151(normalize)
+      240    0.055    0.000    0.055    0.000 {method 'feed' of 'xml.etree.ElementTree.XMLParser' objects}
+      235    0.000    0.000    0.055    0.000 ElementTree.py:1278(feed)
+    10000    0.026    0.000    0.037    0.000 prepare.py:132(fingerprint)
+   401601    0.030    0.000    0.033    0.000 {built-in method builtins.isinstance}
+    31557    0.023    0.000    0.031    0.000 sequence.py:24(__set__)
+    10002    0.006    0.000    0.028    0.000 encoder.py:183(encode)
+    15845    0.007    0.000    0.028    0.000 nested.py:26(__set__)
+    10001    0.026    0.000    0.026    0.000 {method 'writerow' of '_csv.writer' objects}
+    15758    0.012    0.000    0.026    0.000 text.py:173(content)
+      363    0.022    0.000    0.022    0.000 {method 'update' of '_hashlib.HASH' objects}
+    16127    0.007    0.000    0.020    0.000 base.py:68(__set__)
+    32134    0.013    0.000    0.019    0.000 base.py:39(__set__)
+    10002    0.019    0.000    0.019    0.000 encoder.py:205(iterencode)
+   227442    0.017    0.000    0.017    0.000 {method 'popleft' of 'collections.deque' objects}
+    15833    0.008    0.000    0.016    0.000 functions.py:77(localname)
+   151138    0.015    0.000    0.015    0.000 {method 'append' of 'list' objects}
+      243    0.001    0.000    0.013    0.000 __init__.py:967(read)
+      241    0.001    0.000    0.012    0.000 __init__.py:1049(_read1)
+    60000    0.009    0.000    0.011    0.000 prepare.py:121(text)
+    51541    0.008    0.000    0.011    0.000 {method 'join' of 'str' objects}
+
+

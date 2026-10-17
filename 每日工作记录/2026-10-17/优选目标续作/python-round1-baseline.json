@@ -1,0 +1,7 @@
+{
+  "kind": "profiled benchmark diagnostic; not full NFR",
+  "wall_seconds_with_profiler": 0.8853354000002582,
+  "raw": 10000,
+  "records_sha256": "fe8b6f1127512ef66cd6bf68c1c6d8658d7e7615a6b872bc28b8d092f6122a42",
+  "prepare_source_sha256": "94c537a6a790ecc467889e3c3bc328c12023e1a091938e0d0c57fafa2c360002"
+}

@@ -1,0 +1,57 @@
+{
+  "kind": "one warm-process benchmark comparison only; not full target attempt",
+  "lxml": [
+    6,
+    1,
+    3,
+    0
+  ],
+  "results": [
+    {
+      "implementation": "round1",
+      "seconds_in_warm_python_process": 0.25894739999966987,
+      "records_sha256": "fe8b6f1127512ef66cd6bf68c1c6d8658d7e7615a6b872bc28b8d092f6122a42",
+      "stats": {
+        "raw": 10000,
+        "accepted": 9972,
+        "excluded": 28,
+        "exclusion_reasons": {
+          "nonpositive_price": 28
+        },
+        "flags": {
+          "missing_customer": 2805,
+          "same_sheet_duplicate": 185,
+          "missing_description": 16
+        },
+        "accepted_sales": 9797,
+        "accepted_cancels": 175,
+        "raw_cancels": 175,
+        "excluded_cancels": 0,
+        "unknown_invoice": 0
+      }
+    },
+    {
+      "implementation": "round2",
+      "seconds_in_warm_python_process": 0.3043548000005103,
+      "records_sha256": "fe8b6f1127512ef66cd6bf68c1c6d8658d7e7615a6b872bc28b8d092f6122a42",
+      "stats": {
+        "raw": 10000,
+        "accepted": 9972,
+        "excluded": 28,
+        "exclusion_reasons": {
+          "nonpositive_price": 28
+        },
+        "flags": {
+          "missing_customer": 2805,
+          "same_sheet_duplicate": 185,
+          "missing_description": 16
+        },
+        "accepted_sales": 9797,
+        "accepted_cancels": 175,
+        "raw_cancels": 175,
+        "excluded_cancels": 0,
+        "unknown_invoice": 0
+      }
+    }
+  ]
+}

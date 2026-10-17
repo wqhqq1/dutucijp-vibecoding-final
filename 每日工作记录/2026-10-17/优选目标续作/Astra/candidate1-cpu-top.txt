@@ -1,0 +1,79 @@
+File: perfverify.exe
+Build ID: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\verification\astra-nfr03-candidate1-20261017\perfverify.exe2026-10-17 15:02:38.7191665 +0800 CST
+Type: cpu
+Time: 2026-10-17 15:04:00 CST
+Duration: 6.23s, Total samples = 6.34s (101.68%)
+Showing nodes accounting for 2.89s, 45.58% of 6.34s total
+Dropped 206 nodes (cum <= 0.03s)
+Showing top 70 nodes out of 204
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      5.96s 94.01%  main.main
+         0     0%     0%      5.96s 94.01%  main.run
+         0     0%     0%      5.96s 94.01%  runtime.main
+         0     0%     0%      5.90s 93.06%  returnsrecon/internal/store.(*Store).Run
+         0     0%     0%      4.19s 66.09%  modernc.org/sqlite/lib.Xsqlite3_step
+         0     0%     0%      4.18s 65.93%  modernc.org/sqlite/lib._sqlite3Step
+         0     0%     0%      3.52s 55.52%  returnsrecon/internal/store.(*Store).persist
+     0.36s  5.68%  5.68%      3.47s 54.73%  modernc.org/sqlite/lib._sqlite3VdbeExec
+         0     0%  5.68%      3.30s 52.05%  database/sql.withLock
+         0     0%  5.68%      2.81s 44.32%  modernc.org/sqlite.(*conn).step
+         0     0%  5.68%      2.69s 42.43%  returnsrecon/internal/store.(*Store).persistBalances
+     0.01s  0.16%  5.84%      2.69s 42.43%  returnsrecon/internal/store.(*Store).persistBalances.func1
+     2.33s 36.75% 42.59%      2.34s 36.91%  runtime.cgocall
+         0     0% 42.59%      2.34s 36.91%  syscall.SyscallN
+         0     0% 42.59%      2.34s 36.91%  syscall.syscalln
+         0     0% 42.59%      1.75s 27.60%  modernc.org/sqlite.(*stmt).exec
+         0     0% 42.59%      1.75s 27.60%  modernc.org/sqlite.(*stmt).exec.func2
+         0     0% 42.59%      1.69s 26.66%  returnsrecon/internal/store.(*Store).loadComputeRows
+         0     0% 42.59%      1.56s 24.61%  database/sql.(*Rows).Next
+         0     0% 42.59%      1.56s 24.61%  database/sql.(*Rows).Next.func1
+     0.03s  0.47% 43.06%      1.54s 24.29%  database/sql.(*Rows).nextLocked
+         0     0% 43.06%      1.51s 23.82%  database/sql.(*DB).execDC
+         0     0% 43.06%      1.51s 23.82%  database/sql.(*DB).execDC.func2
+         0     0% 43.06%      1.51s 23.82%  database/sql.(*Tx).ExecContext
+         0     0% 43.06%      1.51s 23.82%  database/sql.ctxDriverExec
+         0     0% 43.06%      1.51s 23.82%  modernc.org/sqlite.(*conn).ExecContext
+         0     0% 43.06%      1.51s 23.82%  modernc.org/sqlite.(*conn).exec
+         0     0% 43.06%      1.51s 23.82%  modernc.org/sqlite.(*rows).Next
+         0     0% 43.06%      1.49s 23.50%  golang.org/x/sys/windows.(*LazyProc).Call
+         0     0% 43.06%      1.49s 23.50%  golang.org/x/sys/windows.(*Proc).Call
+     0.02s  0.32% 43.38%      1.44s 22.71%  modernc.org/sqlite/lib._modernc_seh_try
+         0     0% 43.38%      1.44s 22.71%  modernc.org/sqlite/lib._walSehTry (inline)
+         0     0% 43.38%      1.38s 21.77%  database/sql.(*Tx).Commit
+         0     0% 43.38%      1.38s 21.77%  database/sql.(*Tx).Commit.func1
+         0     0% 43.38%      1.38s 21.77%  modernc.org/sqlite.(*tx).Commit
+         0     0% 43.38%      1.38s 21.77%  modernc.org/sqlite.(*tx).exec
+         0     0% 43.38%      1.38s 21.77%  modernc.org/sqlite/lib.Xsqlite3_exec
+     0.01s  0.16% 43.53%      1.32s 20.82%  modernc.org/sqlite/lib._sqlite3PagerGet (inline)
+     0.04s  0.63% 44.16%      1.31s 20.66%  modernc.org/sqlite/lib._getPageMMap
+         0     0% 44.16%      1.30s 20.50%  modernc.org/sqlite/lib._getAndInitPage
+     0.03s  0.47% 44.64%      1.12s 17.67%  modernc.org/sqlite/lib._getPageNormal
+         0     0% 44.64%      1.03s 16.25%  modernc.org/sqlite/lib._moveToChild
+         0     0% 44.64%      0.97s 15.30%  modernc.org/sqlite/lib._sqlite3OsRead (inline)
+     0.01s  0.16% 44.79%      0.97s 15.30%  modernc.org/sqlite/lib._winRead
+         0     0% 44.79%      0.96s 15.14%  modernc.org/libc.XReadFile
+     0.03s  0.47% 45.27%      0.95s 14.98%  modernc.org/sqlite/lib._sqlite3BtreeNext
+         0     0% 45.27%      0.92s 14.51%  modernc.org/sqlite/lib._moveToLeftmost
+         0     0% 45.27%      0.92s 14.51%  modernc.org/sqlite/lib._readDbPage
+         0     0% 45.27%      0.81s 12.78%  modernc.org/sqlite/lib._sqlite3OsSync
+         0     0% 45.27%      0.81s 12.78%  modernc.org/sqlite/lib._winSync
+     0.01s  0.16% 45.43%      0.78s 12.30%  modernc.org/sqlite/lib._sqlite3BtreeTableMoveto
+         0     0% 45.43%      0.78s 12.30%  modernc.org/sqlite/lib._sqlite3VdbeFinishMoveto
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib.Xsqlite3_wal_checkpoint (inline)
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib.Xsqlite3_wal_checkpoint_v2
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._doWalCallbacks
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._sqlite3BtreeCheckpoint
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._sqlite3Checkpoint
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._sqlite3PagerCheckpoint
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._sqlite3WalCheckpoint
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._sqlite3WalDefaultHook
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._walCheckpoint
+         0     0% 45.43%      0.71s 11.20%  modernc.org/sqlite/lib._walSehCheckpoint
+         0     0% 45.43%      0.69s 10.88%  golang.org/x/sys/windows.FlushFileBuffers
+         0     0% 45.43%      0.69s 10.88%  modernc.org/libc.XFlushFileBuffers
+     0.01s  0.16% 45.58%      0.69s 10.88%  returnsrecon/internal/reconcile.Compute
+         0     0% 45.58%      0.67s 10.57%  modernc.org/sqlite/lib._sqlite3BtreeCommitPhaseOne
+         0     0% 45.58%      0.67s 10.57%  modernc.org/sqlite/lib._sqlite3PagerCommitPhaseOne
+         0     0% 45.58%      0.67s 10.57%  modernc.org/sqlite/lib._sqlite3VdbeHalt
+         0     0% 45.58%      0.67s 10.57%  modernc.org/sqlite/lib._vdbeCommit
+         0     0% 45.58%      0.66s 10.41%  modernc.org/sqlite/lib._pagerWalFrames

@@ -1,0 +1,962 @@
+[
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo-候选包",
+    "bytes": 57134022,
+    "files": 429,
+    "reason": "已由最终程序包和中期ZIP保留的候选副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo-交付候选",
+    "bytes": 57125519,
+    "files": 429,
+    "reason": "已由最终程序包和中期ZIP保留的候选副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo-正式发行文件",
+    "bytes": 57126748,
+    "files": 429,
+    "reason": "已由最终程序包和中期ZIP保留的候选副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师验收 独立路径",
+    "bytes": 57131573,
+    "files": 430,
+    "reason": "已由最终程序包和中期ZIP保留的候选副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo验收-空目录\\local",
+    "bytes": 3511426514,
+    "files": 18,
+    "reason": "同机独立验收的临时数据库、准备结果及原始数据副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo验收-二次空目录\\local",
+    "bytes": 3511459601,
+    "files": 19,
+    "reason": "同机独立验收的临时数据库、准备结果及原始数据副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\教师独立Demo验收-最终版本\\local",
+    "bytes": 3482055661,
+    "files": 20,
+    "reason": "同机独立验收的临时数据库、准备结果及原始数据副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-20261016-定稿\\解包核验",
+    "bytes": 32959228,
+    "files": 672,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-20261016-定稿\\历史还原核验",
+    "bytes": 37322379,
+    "files": 700,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-20261016-原样演示版\\解包核验",
+    "bytes": 32957429,
+    "files": 672,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-20261016-原样演示版\\历史还原核验",
+    "bytes": 37320084,
+    "files": 700,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-教师独立运行-20261016\\解包核验",
+    "bytes": 33320719,
+    "files": 693,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-教师独立运行-20261016\\历史还原核验",
+    "bytes": 37684331,
+    "files": 721,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\中期提交包-教师独立运行-20261016\\教师版解包核验",
+    "bytes": 89350230,
+    "files": 945,
+    "reason": "中期ZIP仍原样保留，移除已完成核验的解包/还原副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\midterm-reassembled-from-github",
+    "bytes": 26214801,
+    "files": 1,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\midterm-reassembly-local-check",
+    "bytes": 26214801,
+    "files": 1,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-day15-95c5663",
+    "bytes": 2438761,
+    "files": 114,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-fr14-96e9874",
+    "bytes": 264842,
+    "files": 50,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-fr14-abd56b0",
+    "bytes": 1412126,
+    "files": 54,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-fr14-c8f90e8",
+    "bytes": 1243533,
+    "files": 53,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-fr14-d69b948",
+    "bytes": 1381339,
+    "files": 54,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-merge-7b3b350",
+    "bytes": 3185973,
+    "files": 172,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-midterm-e3657cf",
+    "bytes": 94810764,
+    "files": 722,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-progress-94cdd36",
+    "bytes": 16049293,
+    "files": 605,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-progress-final-4a6ae5e",
+    "bytes": 16121206,
+    "files": 605,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-snapshot-20261014",
+    "bytes": 202606,
+    "files": 48,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-v12-0980fb7",
+    "bytes": 1479925,
+    "files": 58,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-v12-review-d3b3700",
+    "bytes": 35625557,
+    "files": 703,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-workflow-c39912c",
+    "bytes": 14138742,
+    "files": 481,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-day15-95c5663",
+    "bytes": 1449322,
+    "files": 109,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-fr14-96e9874",
+    "bytes": 163018,
+    "files": 46,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-fr14-abd56b0",
+    "bytes": 789158,
+    "files": 50,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-fr14-c8f90e8",
+    "bytes": 677135,
+    "files": 49,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-fr14-d69b948",
+    "bytes": 770995,
+    "files": 50,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-history-20261014",
+    "bytes": 127084,
+    "files": 44,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-merge-7b3b350",
+    "bytes": 1956246,
+    "files": 167,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-midterm-e3657cf",
+    "bytes": 37322253,
+    "files": 700,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-progress-4a6ae5e",
+    "bytes": 10039860,
+    "files": 600,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-v12-0980fb7",
+    "bytes": 828879,
+    "files": 53,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-v12-review-d3b3700",
+    "bytes": 18564875,
+    "files": 676,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\restored-workflow-c39912c",
+    "bytes": 8632097,
+    "files": 477,
+    "reason": "已完成散列核对的远端下载/历史还原副本；bundle及回执保留"
+  },
+  {
+    "path": "E:\\软件编程大作业\\.chart-data-2SM7Nh",
+    "bytes": 791370,
+    "files": 2,
+    "reason": "临时绘图副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\.chart-data-edkxxT",
+    "bytes": 73632,
+    "files": 2,
+    "reason": "临时绘图副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\.chart-data-fukp3Q",
+    "bytes": 791286,
+    "files": 2,
+    "reason": "临时绘图副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\.chart-data-xxf8DD",
+    "bytes": 791382,
+    "files": 2,
+    "reason": "临时绘图副本"
+  },
+  {
+    "path": "E:\\软件编程大作业\\.chart-data-yhpi7w",
+    "bytes": 791371,
+    "files": 2,
+    "reason": "临时绘图副本"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr0104-final-recon.exe",
+    "bytes": 11733504,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\perfhttp-20261015-2103.exe",
+    "bytes": 33150464,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075415-d2a051ad\\recon.exe",
+    "bytes": 11716608,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075415-d2a051ad\\verification.sqlite",
+    "bytes": 114688,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075444-ed083080\\recon.exe",
+    "bytes": 11716608,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075444-ed083080\\verification.sqlite",
+    "bytes": 706031616,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075617-2c2762e3\\recon.exe",
+    "bytes": 11716608,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-075617-2c2762e3\\verification.sqlite",
+    "bytes": 13344768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-212435-573833ac\\recon.exe",
+    "bytes": 32186368,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\20261015-212435-573833ac\\verification.sqlite",
+    "bytes": 13373440,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab\\recon.exe",
+    "bytes": 11732480,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab\\verification.sqlite",
+    "bytes": 11522048,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082741-adc101ab\\prepared\\c707d8f7026e5f4674c9bcea05acb4c98955060cfd22be17d9f97d67aa568444\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082744-c809ebf3\\recon.exe",
+    "bytes": 11732480,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082744-c809ebf3\\verification.sqlite",
+    "bytes": 605519872,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082744-c809ebf3\\prepared\\acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5\\records.csv",
+    "bytes": 172196328,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\recon.exe",
+    "bytes": 11732480,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\verification.sqlite",
+    "bytes": 11522048,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082906-5ef9654e\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\recon.exe",
+    "bytes": 11732480,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\verification.sqlite",
+    "bytes": 605519872,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-082910-f9d6c980\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\\records.csv",
+    "bytes": 172196328,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084159-eb6a948a\\recon.exe",
+    "bytes": 11733504,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084159-eb6a948a\\verification.sqlite",
+    "bytes": 11522048,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084159-eb6a948a\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084209-bf30ab63\\recon.exe",
+    "bytes": 11733504,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084209-bf30ab63\\verification.sqlite",
+    "bytes": 552042496,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084209-bf30ab63\\verification.sqlite-shm",
+    "bytes": 32768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084209-bf30ab63\\verification.sqlite-wal",
+    "bytes": 9393632,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084209-bf30ab63\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\\records.csv",
+    "bytes": 172196328,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\recon.exe",
+    "bytes": 11733504,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite",
+    "bytes": 706043904,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite-shm",
+    "bytes": 32768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\verification.sqlite-wal",
+    "bytes": 0,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-88b71af8\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\\records.csv",
+    "bytes": 172196328,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-f5fa2017\\recon.exe",
+    "bytes": 11733504,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-f5fa2017\\verification.sqlite",
+    "bytes": 11522048,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\data-20261015-084454-f5fa2017\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\deployment-optimized-20261016\\before-update.sqlite",
+    "bytes": 855658496,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\perfverify.exe",
+    "bytes": 12087808,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-1\\isolated.sqlite",
+    "bytes": 19730432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-1\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-2\\isolated.sqlite",
+    "bytes": 19730432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-2\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-3\\isolated.sqlite",
+    "bytes": 19730432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR01-3\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-2\\isolated.sqlite",
+    "bytes": 2134003712,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-3\\isolated.sqlite",
+    "bytes": 2134003712,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-3\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR03-1\\isolated.sqlite",
+    "bytes": 2145828864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR03-2\\isolated.sqlite",
+    "bytes": 2145828864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR03-3\\isolated.sqlite",
+    "bytes": 2145828864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-http-final\\isolated.sqlite",
+    "bytes": 2939154432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-http1\\isolated.sqlite",
+    "bytes": 2935783424,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-http2\\isolated.sqlite",
+    "bytes": 2939154432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\first.sqlite",
+    "bytes": 2131582976,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\mmap.sqlite",
+    "bytes": 2131582976,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfhttp-final.exe",
+    "bytes": 33437696,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfhttp.exe",
+    "bytes": 33180160,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfhttp2.exe",
+    "bytes": 33183232,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfverify-batch.exe",
+    "bytes": 12087808,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfverify-compute.exe",
+    "bytes": 12108800,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfverify-mmap.exe",
+    "bytes": 12106752,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\perfverify.exe",
+    "bytes": 12106752,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\recompute-batch.sqlite",
+    "bytes": 2145828864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\recompute-batch.sqlite-shm",
+    "bytes": 32768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\recompute-batch.sqlite-wal",
+    "bytes": 0,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-store-diag\\recompute1.sqlite",
+    "bytes": 2145828864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\perfverify.exe",
+    "bytes": 12060672,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-1\\isolated.sqlite",
+    "bytes": 13373440,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-1\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\isolated.sqlite",
+    "bytes": 13373440,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-2\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-3\\isolated.sqlite",
+    "bytes": 13373440,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR01-3\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR02-1\\isolated.sqlite",
+    "bytes": 1433161728,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR02-2\\isolated.sqlite",
+    "bytes": 1433161728,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-20261015-163704-bd86ec34\\NFR02-2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-cache64-ab-20261015-164222\\isolated.sqlite",
+    "bytes": 1433161728,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-cache64-ab-20261015-164222\\perfverify.exe",
+    "bytes": 12060672,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-nfr03-20261015-170628\\perfverify.exe",
+    "bytes": 12090368,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-nfr03-20261015-170628\\NFR03-1\\isolated.sqlite",
+    "bytes": 1715023872,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-nfr03-20261015-170628\\NFR03-2\\isolated.sqlite",
+    "bytes": 1715023872,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-nfr03-20261015-170628\\NFR03-3\\isolated.sqlite",
+    "bytes": 1715023872,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-nfr04-20261015-210314\\isolated.sqlite",
+    "bytes": 1909059584,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-python-profile-20261015-164440\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\perfverify.exe",
+    "bytes": 12078592,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-1\\isolated.sqlite",
+    "bytes": 16494592,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-1\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-2\\isolated.sqlite",
+    "bytes": 16494592,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-2\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-3\\isolated.sqlite",
+    "bytes": 16494592,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR01-3\\prepared\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-1\\isolated.sqlite",
+    "bytes": 1775140864,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-2\\isolated.sqlite",
+    "bytes": 550674432,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-2\\isolated.sqlite-shm",
+    "bytes": 32768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-2\\isolated.sqlite-wal",
+    "bytes": 10011632,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\performance-round2-20261015-165018\\NFR02-2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\prepared-final-code-20261015\\acbb4c28276a4047f076ed485bd67af87e8ec485cf98cf07deb83627ae3c00f5\\records.csv",
+    "bytes": 172196328,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-opt-20261016-073830\\baseline\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-opt-20261016-073830\\final\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-opt-20261016-073830\\optimized\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-opt-20261016-073830\\optimized-benchmark\\87fd98ba98de3e518a6b89024ceaf8686514f9f56140123a1ba72ab33dce635f\\records.csv",
+    "bytes": 3237100,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-opt-20261016-073830\\optimized2\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+    "bytes": 349792719,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\query-20261016-074128\\query.sqlite",
+    "bytes": 2371788800,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\query-20261016-074128\\query.sqlite-shm",
+    "bytes": 32768,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\query-20261016-074128\\query.sqlite-wal",
+    "bytes": 0,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\resume-20261015-212434\\verification.sqlite",
+    "bytes": 13373440,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\software-history-20261015-212421\\resumeverify.exe",
+    "bytes": 11702784,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\workflow-20261015-160302-c28f4c66\\recon.exe",
+    "bytes": 11904512,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\workflow-20261015-160302-c28f4c66\\workflow.sqlite",
+    "bytes": 706486272,
+    "files": 1,
+    "reason": "历史隔离验证可再生数据库/CSV/程序；原始计时JSON、日志及一个正式全量实例保留"
+  }
+]

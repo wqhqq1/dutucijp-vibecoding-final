@@ -1,0 +1,7 @@
+{
+  "actual_time": "2026-10-17T15:14:08.6287853+08:00",
+  "command": "go vet ./...",
+  "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\go\\bin\\go.exe",
+  "exit_code": 0,
+  "elapsed_seconds": 1.320779
+}

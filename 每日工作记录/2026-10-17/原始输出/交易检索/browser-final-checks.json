@@ -1,0 +1,16 @@
+{
+  "binary_sha256":"c113058c2612bd57cc55d9b5d1b813675e7598c63213e437a7971e648894d22b",
+  "default_serve_public_identity":"local-ba78af508a4b46129e392b65",
+  "checks":[
+    {"scenario":"final time column visible","passed":true},
+    {"scenario":"direct jump page 10000","passed":true,"elapsed_upper_bound_ms":578,"first_row":"0:499952","notice":"pre-task-progress UI build, same query backend"},
+    {"scenario":"quick UK to France shows only latest condition","passed":true,"total":14330},
+    {"scenario":"reload restores running all data preparation job","passed":true},
+    {"scenario":"year1 to all during real preparation","passed":true,"elapsed_upper_bound_ms":337},
+    {"scenario":"all year-date filter during real preparation","passed":true,"elapsed_upper_bound_ms":1870,"first_row":"0:45230","total":522714,"one_second_experience_target_met":false},
+    {"scenario":"reload succeeded job refreshes runs and selects all","passed":true},
+    {"scenario":"Chinese terminal stage and actual row/classification counts","passed":true,"raw":1067371,"accepted":1038818,"excluded":28553},
+    {"scenario":"logout during query suppresses late data; reload stays logged out","passed":true}
+  ],
+  "boundary":"Visible browser checks on isolated official-data test instance; timings include automation and observation overhead. One sample each, no stable percentile claim. UI background job was preparing data; importing/reconciling ten-worker 300-request validation is separately recorded in nfr04-summary.json."
+}

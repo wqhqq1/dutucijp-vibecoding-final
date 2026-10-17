@@ -1,0 +1,2 @@
+Initialization links saved privately: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\verification\portable-current-20261017\local\dutucijp-vibecoding-final\state\private-auth\initialization-20261017-090942.790397500.json
+Existing accounts retained. New untouched accounts can receive a fresh local token with init-auth --renew ID.

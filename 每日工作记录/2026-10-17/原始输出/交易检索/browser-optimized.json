@@ -1,0 +1,12 @@
+{
+  "phase":"optimized",
+  "boundary":"same browser, same official all database and isolated authenticated account as baseline; click to correct visible accessibility result, including automation/observation overhead; one sample each, no P95 claim; OS file cache not cleared",
+  "results":[
+    {"scenario":"all首次进入交易检索","elapsed_upper_bound_ms":349,"correct":true,"total":1067371,"first_row":"0:2"},
+    {"scenario":"2010整年日期筛选","elapsed_upper_bound_ms":309,"correct":true,"total":522714,"first_row":"0:45230"},
+    {"scenario":"整年日期第2页","elapsed_upper_bound_ms":373,"correct":true,"total":522714,"first_row":"0:45280"},
+    {"scenario":"客户商品宽日期组合","elapsed_upper_bound_ms":221,"correct":true,"total":1,"first_row":"0:2"},
+    {"scenario":"France国家与日期降序","elapsed_upper_bound_ms":313,"correct":true,"total":14330,"first_row":"1:541911"}
+  ],
+  "notice":"该测量时点之后增加了交易时间显示列及跳页表单样式；最终构建另作一次受影响页面确认，不把这些少量样本说成稳定P95。"
+}

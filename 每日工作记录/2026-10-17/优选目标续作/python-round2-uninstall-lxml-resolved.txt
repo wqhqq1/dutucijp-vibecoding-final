@@ -1,0 +1,4 @@
+{"verified_same_owned_venv": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\tools\\python", "interpreter": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe"}
+Found existing installation: lxml 6.1.3
+Uninstalling lxml-6.1.3:
+  Successfully uninstalled lxml-6.1.3

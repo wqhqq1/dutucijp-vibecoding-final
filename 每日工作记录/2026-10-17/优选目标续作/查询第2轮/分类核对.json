@@ -1,0 +1,72 @@
+[
+  {
+    "category": "transactions-combined",
+    "n": 30,
+    "p95": 91.37349999999999,
+    "max": 138.1747,
+    "first_started_request_ms": 20.6373
+  },
+  {
+    "category": "transactions-country-france",
+    "n": 30,
+    "p95": 142.5476,
+    "max": 149.9084,
+    "first_started_request_ms": 149.9084
+  },
+  {
+    "category": "transactions-country-uk",
+    "n": 30,
+    "p95": 259.6348,
+    "max": 285.2051,
+    "first_started_request_ms": 254.12380000000002
+  },
+  {
+    "category": "transactions-customer",
+    "n": 30,
+    "p95": 97.8828,
+    "max": 127.3654,
+    "first_started_request_ms": 24.2794
+  },
+  {
+    "category": "transactions-date-year",
+    "n": 30,
+    "p95": 149.53549999999998,
+    "max": 168.2954,
+    "first_started_request_ms": 149.53549999999998
+  },
+  {
+    "category": "transactions-deep-page",
+    "n": 30,
+    "p95": 173.15259999999998,
+    "max": 175.9368,
+    "first_started_request_ms": 128.7579
+  },
+  {
+    "category": "transactions-default",
+    "n": 30,
+    "p95": 105.22710000000001,
+    "max": 128.24630000000002,
+    "first_started_request_ms": 3.1632000000000002
+  },
+  {
+    "category": "transactions-invoice",
+    "n": 30,
+    "p95": 34.4437,
+    "max": 96.0649,
+    "first_started_request_ms": 22.709300000000002
+  },
+  {
+    "category": "transactions-sort-date-deep",
+    "n": 30,
+    "p95": 54.5932,
+    "max": 62.65469999999999,
+    "first_started_request_ms": 19.555
+  },
+  {
+    "category": "transactions-stock",
+    "n": 30,
+    "p95": 76.5541,
+    "max": 126.1507,
+    "first_started_request_ms": 26.616600000000002
+  }
+]

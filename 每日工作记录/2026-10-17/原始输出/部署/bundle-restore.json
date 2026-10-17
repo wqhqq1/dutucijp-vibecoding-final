@@ -1,0 +1,12 @@
+{
+  "actual_time": "2026-10-17T09:41:15.7835535+08:00",
+  "source_head": "dcc1b03f2656106b4cbb71f4be05018b401373ad",
+  "restored_head": "dcc1b03f2656106b4cbb71f4be05018b401373ad",
+  "source_commits": "53",
+  "restored_commits": "53",
+  "bundle": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\software-acceptance-20261017.bundle",
+  "bundle_bytes": 14248714,
+  "bundle_sha256": "373bb5e248bc9c739f806da7a36917bd1c195a27b3bebbc2b9ac899baf6e8601",
+  "kind": "Local native Git history backup, not final submission package",
+  "restored_without_repeating_test_suite": true
+}

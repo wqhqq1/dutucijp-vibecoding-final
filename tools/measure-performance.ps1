@@ -1,5 +1,6 @@
 param(
     [ValidateSet('All','NFR01','NFR02','NFR03')][string]$Measure = 'All',
+    [ValidateRange(1,3)][int]$Iterations = 3,
     [string]$PreparedFull = '',
     [string]$InputTemplate = '',
     [string]$SourceCommit = '',
@@ -116,7 +117,7 @@ if (Test-Path -LiteralPath (Join-Path $projectRoot '.git')) {
     throw 'Exported source snapshot requires explicit full -SourceCommit provenance'
 }
 $environment = [ordered]@{
-    recorded_at=[DateTimeOffset]::Now.ToString('o'); actual_timezone='Asia/Shanghai'; measure=$Measure
+    recorded_at=[DateTimeOffset]::Now.ToString('o'); actual_timezone='Asia/Shanghai'; measure=$Measure; iterations_requested=$Iterations
     git_head=$SourceCommit; git_status=$sourceStatus; source_snapshot_root=$projectRoot
     operating_system=[Environment]::OSVersion.VersionString; architecture=[Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
     powershell=$PSVersionTable.PSVersion.ToString(); logical_processors=[Environment]::ProcessorCount
@@ -137,7 +138,7 @@ $trials = [Collections.Generic.List[object]]::new()
 foreach ($nfr in @('NFR01','NFR02','NFR03')) {
     if ($Measure -ne 'All' -and $Measure -ne $nfr) { continue }
     if ($nfr -eq 'NFR03' -and -not $PreparedFull) { throw 'NFR03 requires an already prepared official full-data directory via -PreparedFull, or -Measure All' }
-    for ($iteration=1; $iteration -le 3; $iteration++) {
+    for ($iteration=1; $iteration -le $Iterations; $iteration++) {
         Assert-ExecutionDay
         $trialDir = Join-Path $OutputDir ($nfr + '-' + $iteration)
         New-Item -ItemType Directory -Path $trialDir | Out-Null
@@ -180,7 +181,7 @@ foreach ($nfr in @('NFR01','NFR02','NFR03')) {
     }
 }
 $summary = [ordered]@{
-    actual_time=[DateTimeOffset]::Now.ToString('o'); output_dir=$OutputDir; environment=(Join-Path $OutputDir 'environment.json')
+    actual_time=[DateTimeOffset]::Now.ToString('o'); output_dir=$OutputDir; environment=(Join-Path $OutputDir 'environment.json'); iterations_requested=$Iterations
     prepared_full=$PreparedFull; results=@($trials | Select-Object nfr,iteration,scope,measured_seconds,limit_seconds,target_seconds,baseline_passed,target_passed,peak_working_set_bytes)
     all_measured_baselines_passed=(@($trials | Where-Object { -not $_.baseline_passed }).Count -eq 0)
     nfr04='Not executed by this script; requires authenticated HTTP service, live long task, 10 workers and at least 300 requests.'

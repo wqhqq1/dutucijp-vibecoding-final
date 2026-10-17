@@ -1,0 +1,3 @@
+kind-cancel iteration=1 129.574ms total=19494 returned=50
+kind-cancel iteration=2 0.000ms total=19494 returned=50
+kind-cancel iteration=3 0.000ms total=19494 returned=50

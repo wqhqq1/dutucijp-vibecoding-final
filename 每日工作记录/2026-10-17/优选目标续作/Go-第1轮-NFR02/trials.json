@@ -1,0 +1,188 @@
+{
+  "nfr": "NFR02",
+  "iteration": 1,
+  "scope": "all",
+  "measured_seconds": 76.1350232,
+  "limit_seconds": 90,
+  "target_seconds": 45,
+  "baseline_passed": true,
+  "target_passed": false,
+  "peak_working_set_bytes": 1111379968.0,
+  "preparation": {
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe",
+    "arguments": [
+      "E:\\软件编程大作业\\退货对账与差异处理系统\\tools\\prepare.py",
+      "--source",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\raw\\online_retail_II.xlsx",
+      "--scope",
+      "all",
+      "--output",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepared"
+    ],
+    "working_directory": "E:\\软件编程大作业\\退货对账与差异处理系统",
+    "started_at": "2026-10-17T10:36:17.2497014+08:00",
+    "ended_at": "2026-10-17T10:36:40.4434667+08:00",
+    "exit_code": 0,
+    "wall_seconds": 23.1812944,
+    "peak_working_set_bytes": 747712512,
+    "root_peak_working_set_bytes": 8835072,
+    "observed_process_peaks": [
+      {
+        "pid": 26880,
+        "peak_working_set_bytes": 8835072
+      },
+      {
+        "pid": 3916,
+        "peak_working_set_bytes": 11739136
+      },
+      {
+        "pid": 17412,
+        "peak_working_set_bytes": 727703552
+      }
+    ],
+    "python_interpreter_child_observed": true,
+    "peak_memory_method": "Maximum of sampled simultaneous root/interpreter-child working sets (20ms), and OS root process PeakWorkingSet64; per-process high-water marks are separate and never summed. Python launcher child discovered with Win32_Process.",
+    "peak_memory_error": null,
+    "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepare.stdout.txt",
+    "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepare.stderr.txt"
+  },
+  "go_process": {
+    "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\perfverify.exe",
+    "arguments": [
+      "--prepared",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "--db",
+      "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\isolated.sqlite",
+      "--mode",
+      "full"
+    ],
+    "working_directory": "E:\\软件编程大作业\\退货对账与差异处理系统",
+    "started_at": "2026-10-17T10:36:40.4619198+08:00",
+    "ended_at": "2026-10-17T10:37:33.3653039+08:00",
+    "exit_code": 0,
+    "wall_seconds": 52.8965805,
+    "peak_working_set_bytes": 1111379968,
+    "root_peak_working_set_bytes": 1111379968,
+    "observed_process_peaks": [
+      {
+        "pid": 2324,
+        "peak_working_set_bytes": 1111379968
+      }
+    ],
+    "python_interpreter_child_observed": null,
+    "peak_memory_method": "Maximum of sampled simultaneous root/interpreter-child working sets (20ms), and OS root process PeakWorkingSet64; per-process high-water marks are separate and never summed. Python launcher child discovered with Win32_Process.",
+    "peak_memory_error": null,
+    "stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\go.stdout.txt",
+    "stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\go.stderr.txt"
+  },
+  "go_report": {
+    "mode": "full",
+    "database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\isolated.sqlite",
+    "prepared": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+    "input_copy_seconds": 0,
+    "open_seconds": 0.0156121,
+    "import_seconds": 45.8634498,
+    "run_wall_seconds": 6.5545835,
+    "close_seconds": 0.1390196,
+    "total_go_seconds": 52.572665,
+    "measured_seconds": 52.572665,
+    "runs_before": 0,
+    "published_runs_after": 1,
+    "cases_after": 9450,
+    "decisions_after": 19164,
+    "sqlite_version": "3.53.4",
+    "sqlite_cache_size": -65536,
+    "sqlite_synchronous": 2,
+    "query_indexes_present": 4,
+    "bound_parameter_probe": 960,
+    "go_version": "go1.27.2",
+    "manifest": {
+      "dataset_id": "5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "scope": "all",
+      "cleaning_version": "cr-1.0.1",
+      "source_hash": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+      "records_sha256": "84ccfb61dc98d320c22ee7dc86c5843179a1d8e9ee2ef91013434d3eddc6f75a",
+      "status": "prepared",
+      "stats": {
+        "raw": 1067371,
+        "accepted": 1038818,
+        "excluded": 28553,
+        "accepted_sales": 1019654,
+        "accepted_cancels": 19164,
+        "raw_cancels": 19494,
+        "excluded_cancels": 330
+      }
+    },
+    "summary": {
+      "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "dataset_id": "5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+      "rule_version": "conservative-1.0.0",
+      "status": "published",
+      "reused": false,
+      "input": {
+        "raw": 1067371,
+        "accepted": 1038818,
+        "excluded": 28553,
+        "accepted_sales": 1019654,
+        "accepted_cancels": 19164,
+        "raw_cancels": 19494,
+        "excluded_cancels": 330
+      },
+      "matched": 9714,
+      "suspected": 6275,
+      "no_original": 3175,
+      "cases": 9450,
+      "workers": 8,
+      "reconcile_and_persist_seconds": 6.5297586,
+      "coverage": "9714/19164 (50.688791%)",
+      "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+    },
+    "phases": [
+      {
+        "phase": "import.manifest_before",
+        "seconds": 0.1496392
+      },
+      {
+        "phase": "import.rows",
+        "seconds": 14.7456709
+      },
+      {
+        "phase": "import.conservation",
+        "seconds": 0.7444884
+      },
+      {
+        "phase": "import.manifest_after",
+        "seconds": 0.1505453
+      },
+      {
+        "phase": "import.indexes",
+        "seconds": 30.0698144
+      },
+      {
+        "phase": "run.load",
+        "seconds": 1.7977908
+      },
+      {
+        "phase": "run.compute",
+        "seconds": 1.1105113
+      },
+      {
+        "phase": "persist.balances",
+        "seconds": 2.5347292
+      },
+      {
+        "phase": "persist.decisions_and_evidence",
+        "seconds": 0.3728594
+      },
+      {
+        "phase": "persist.conservation",
+        "seconds": 0.7138679
+      },
+      {
+        "phase": "run.persist",
+        "seconds": 3.6214565
+      }
+    ]
+  },
+  "timing_boundary": "External wall from fresh official XLSX preparation through full Go process completion, including import, computation, difference/statistics persistence and close. Go post-timing durable verification also included conservatively."
+}

@@ -1,0 +1,44 @@
+File: perfverify-compute.exe
+Build ID: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\verification\optimization-20261016-store-diag\perfverify-compute.exe2026-10-16 12:25:07.0635379 +0800 CST
+Type: cpu
+Time: 2026-10-16 12:25:19 CST
+Duration: 11.38s, Total samples = 13.95s (122.63%)
+Showing nodes accounting for 3.56s, 25.52% of 13.95s total
+Dropped 327 nodes (cum <= 0.07s)
+Showing top 35 nodes out of 245
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     10.31s 73.91%  main.main
+         0     0%     0%     10.31s 73.91%  main.run
+         0     0%     0%     10.31s 73.91%  runtime.main
+         0     0%     0%     10.24s 73.41%  returnsrecon/internal/store.(*Store).Run
+         0     0%     0%      6.54s 46.88%  modernc.org/sqlite/lib.Xsqlite3_step
+         0     0%     0%      6.51s 46.67%  modernc.org/sqlite/lib._sqlite3Step
+     0.47s  3.37%  3.37%      5.74s 41.15%  modernc.org/sqlite/lib._sqlite3VdbeExec
+     0.01s 0.072%  3.44%      4.99s 35.77%  returnsrecon/internal/store.(*Store).persist
+         0     0%  3.44%      4.79s 34.34%  modernc.org/sqlite.(*conn).step
+         0     0%  3.44%      3.55s 25.45%  database/sql.withLock
+         0     0%  3.44%      3.45s 24.73%  returnsrecon/internal/store.(*Store).loadRows
+         0     0%  3.44%      3.33s 23.87%  returnsrecon/internal/store.(*Store).batch
+         0     0%  3.44%      3.18s 22.80%  database/sql.(*Rows).Next
+         0     0%  3.44%      3.18s 22.80%  database/sql.(*Rows).Next.func1
+     0.04s  0.29%  3.73%      3.17s 22.72%  database/sql.(*Rows).nextLocked
+         0     0%  3.73%      3.12s 22.37%  modernc.org/sqlite.(*rows).Next
+         0     0%  3.73%      3.08s 22.08%  database/sql.(*DB).retry
+     2.50s 17.92% 21.65%      2.51s 17.99%  runtime.cgocall
+         0     0% 21.65%      2.51s 17.99%  syscall.SyscallN
+         0     0% 21.65%      2.51s 17.99%  syscall.syscalln
+     0.19s  1.36% 23.01%      2.38s 17.06%  modernc.org/sqlite/lib._sqlite3BtreeIndexMoveto
+     0.04s  0.29% 23.30%      1.93s 13.84%  modernc.org/sqlite/lib._modernc_seh_try
+         0     0% 23.30%      1.93s 13.84%  modernc.org/sqlite/lib._walSehTry (inline)
+     0.01s 0.072% 23.37%      1.80s 12.90%  returnsrecon/internal/reconcile.Compute
+     0.01s 0.072% 23.44%      1.76s 12.62%  database/sql.(*Tx).Commit
+         0     0% 23.44%      1.75s 12.54%  database/sql.(*Tx).Commit.func1
+         0     0% 23.44%      1.75s 12.54%  modernc.org/sqlite.(*tx).Commit
+         0     0% 23.44%      1.75s 12.54%  modernc.org/sqlite.(*tx).exec
+         0     0% 23.44%      1.75s 12.54%  modernc.org/sqlite/lib.Xsqlite3_exec
+         0     0% 23.44%      1.66s 11.90%  golang.org/x/sys/windows.(*LazyProc).Call
+         0     0% 23.44%      1.66s 11.90%  golang.org/x/sys/windows.(*Proc).Call
+         0     0% 23.44%      1.66s 11.90%  returnsrecon/internal/reconcile.Compute.func1
+     0.29s  2.08% 25.52%      1.64s 11.76%  modernc.org/sqlite/lib._vdbeRecordCompareString
+         0     0% 25.52%      1.63s 11.68%  database/sql.(*DB).QueryContext
+         0     0% 25.52%      1.63s 11.68%  database/sql.(*DB).QueryContext.func1

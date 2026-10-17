@@ -230,3 +230,18 @@ func TestCancelledCompute(t *testing.T) {
 		t.Fatal("cancelled computation accepted")
 	}
 }
+
+func TestCancellationOnlySchedulingRetainsOrdinarySalesAndExactPriceKeys(t *testing.T) {
+	ordinary := row("ordinary", 7, "08:00")
+	ordinary.Customer = "unrelated"
+	sale, cancel := row("sale", 10, "09:00"), row("cancel", -4, "10:00")
+	sale.Price, cancel.Price = "0.10", "0.100"
+	result := compute(t, ordinary, sale, cancel)
+	if len(result.Balances) != 2 || result.Matched != 1 || decision(result, cancel.ID).SaleID != sale.ID || balance(result, ordinary.ID).Original != 7 || balance(result, ordinary.ID).Remaining != 7 || balance(result, sale.ID).Remaining != 6 {
+		t.Fatalf("scheduling changed complete result: %+v", result)
+	}
+	result = compute(t, ordinary, sale)
+	if len(result.Balances) != 2 || len(result.Decisions) != 0 || balance(result, sale.ID).Remaining != 10 {
+		t.Fatal("all ordinary sales must still be persisted")
+	}
+}

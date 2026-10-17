@@ -1,0 +1,15 @@
+{
+  "actual_time": "2026-10-17T20:23:12.0379281+08:00",
+  "snapshot_head": "6ead220ccf425ab7c3b8a29ded13fe2278e8ea3b",
+  "restored_head": "6ead220ccf425ab7c3b8a29ded13fe2278e8ea3b",
+  "source_commit_count": 56,
+  "restored_commit_count": 56,
+  "prerequisite": "dcc1b03f2656106b4cbb71f4be05018b401373ad",
+  "base_bundle": ".backup/software-acceptance-20261017.bundle",
+  "incremental_bundle": ".backup/development-increment-20261017-closing.bundle",
+  "bytes": 348393,
+  "sha256": "a2593f1041c68a25f3c4128a26e78d50dc0eb8527b4def1286d44873e952ddfb",
+  "verified": true,
+  "restore_verified": true,
+  "final_submission_package_created": false
+}

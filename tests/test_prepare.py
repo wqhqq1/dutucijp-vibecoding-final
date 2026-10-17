@@ -128,6 +128,37 @@ class CleaningTests(unittest.TestCase):
                 prepare(self.root/'missing.xlsx','all',self.root/'failed',progress=lambda _:None)
             self.assertEqual(gc.isenabled(),initial)
 
+    def test_shared_and_inline_rich_text_and_empty_numeric_lexemes_remain_exact(self):
+        path=self.fixture([self.sale()])
+        with ZipFile(path) as source:
+            parts={name:source.read(name) for name in source.namelist()}
+        xml=parts['xl/worksheets/sheet1.xml']
+        start=xml.index(b'<c r="A2"');end=xml.index(b'</c>',start)+4
+        xml=xml[:start]+b'<c r="A2" t="s"><v>0</v></c>'+xml[end:]
+        start=xml.index(b'<c r="C2"');end=xml.index(b'</c>',start)+4
+        xml=xml[:start]+b'<c r="C2" t="inlineStr"><is><r><t> A&amp;</t></r><r><t> B </t></r></is></c>'+xml[end:]
+        start=xml.index(b'<c r="F2"');end=xml.index(b'</c>',start)+4
+        xml=xml[:start]+b'<c r="F2" t="n"><v/></c>'+xml[end:]
+        parts['xl/worksheets/sheet1.xml']=xml
+        parts['xl/sharedStrings.xml']=b'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><si><r><t>00</t></r><r><t>123</t></r></si></sst>'
+        with ZipFile(path,'w') as target:
+            for name,content in parts.items():target.writestr(name,content)
+        source=list(raw_rows(path,'year1'))
+        self.assertEqual(source[0][3][0],('s','00123'))
+        self.assertEqual(source[0][3][2],('s',' A& B '))
+        self.assertEqual(source[0][3][5],('n',''))
+        target=prepare(path,'year1',self.root/'prepared',progress=lambda _:None)
+        with (target/'records.csv').open(encoding='utf-8',newline='') as stream:row=next(csv.DictReader(stream))
+        self.assertEqual(row['invoice'],'00123')
+        self.assertEqual(row['description'],'A& B')
+        self.assertEqual(row['excluded'],'invalid_field')
+
+    def test_unexpected_workbook_sheet_metadata_is_rejected(self):
+        path=self.fixture([self.sale()])
+        book=openpyxl.load_workbook(path);book.worksheets[1].title='Unexpected sheet';book.save(path);book.close()
+        with self.assertRaisesRegex(ValueError,'Unexpected worksheets'):
+            list(raw_rows(path,'year1'))
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

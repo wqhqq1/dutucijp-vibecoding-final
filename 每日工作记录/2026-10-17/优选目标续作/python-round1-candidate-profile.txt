@@ -1,0 +1,43 @@
+         1652891 function calls (1652608 primitive calls) in 0.542 seconds
+
+   Ordered by: cumulative time
+   List reduced from 456 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002    0.542    0.542 prepare.py:211(prepare)
+        1    0.028    0.028    0.540    0.540 prepare.py:224(_prepare)
+    10001    0.106    0.000    0.303    0.000 prepare.py:70(raw_rows)
+   195923    0.022    0.000    0.150    0.000 ElementTree.py:1233(iterator)
+   196126    0.045    0.000    0.072    0.000 ElementTree.py:1302(read_events)
+    10000    0.023    0.000    0.071    0.000 prepare.py:167(normalize)
+      202    0.000    0.000    0.047    0.000 ElementTree.py:1278(feed)
+      204    0.047    0.000    0.047    0.000 {method 'feed' of 'xml.etree.ElementTree.XMLParser' objects}
+        3    0.000    0.000    0.046    0.015 fetch_data.py:17(sha256)
+        3    0.000    0.000    0.039    0.013 hashlib.py:195(file_digest)
+    10000    0.025    0.000    0.035    0.000 prepare.py:148(fingerprint)
+    10002    0.006    0.000    0.027    0.000 encoder.py:183(encode)
+    10001    0.026    0.000    0.026    0.000 {method 'writerow' of '_csv.writer' objects}
+      363    0.023    0.000    0.023    0.000 {method 'update' of '_hashlib.HASH' objects}
+   227372    0.017    0.000    0.020    0.000 {built-in method builtins.isinstance}
+    10002    0.019    0.000    0.019    0.000 encoder.py:205(iterencode)
+      366    0.016    0.000    0.016    0.000 {method 'readinto' of '_io.BufferedReader' objects}
+   195922    0.014    0.000    0.014    0.000 {method 'popleft' of 'collections.deque' objects}
+    60000    0.009    0.000    0.011    0.000 prepare.py:137(text)
+   119279    0.011    0.000    0.011    0.000 {method 'append' of 'list' objects}
+    78356    0.010    0.000    0.010    0.000 {method 'rstrip' of 'str' objects}
+    35778    0.006    0.000    0.009    0.000 {method 'join' of 'str' objects}
+      205    0.000    0.000    0.009    0.000 __init__.py:967(read)
+    10003    0.003    0.000    0.009    0.000 __init__.py:669(update)
+      204    0.001    0.000    0.009    0.000 __init__.py:1049(_read1)
+        8    0.008    0.001    0.008    0.001 {built-in method _io.open}
+        2    0.007    0.004    0.007    0.004 {built-in method nt.mkdir}
+    88769    0.006    0.000    0.006    0.000 {built-in method builtins.len}
+    25759    0.006    0.000    0.006    0.000 {method 'clear' of 'xml.etree.ElementTree.Element' objects}
+        1    0.000    0.000    0.006    0.006 pathlib.py:1306(mkdir)
+    77191    0.006    0.000    0.006    0.000 {method 'get' of 'xml.etree.ElementTree.Element' objects}
+    77187    0.005    0.000    0.005    0.000 {built-in method builtins.ord}
+      204    0.005    0.000    0.005    0.000 {method 'decompress' of 'zlib.Decompress' objects}
+    10000    0.004    0.000    0.004    0.000 {built-in method fromkeys}
+     2881    0.002    0.000    0.003    0.000 prepare.py:36(canonical)
+
+

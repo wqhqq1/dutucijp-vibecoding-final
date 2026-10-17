@@ -49,6 +49,113 @@ type requestResult struct {
 	AfterState   string  `json:"job_state_after"`
 	AfterStage   string  `json:"job_stage_after"`
 	InWindow     bool    `json:"both_job_observations_active"`
+	Path         string  `json:"query_path,omitempty"`
+}
+
+type workload struct {
+	Category         string             `json:"category"`
+	Path             string             `json:"path"`
+	Filter           *store.QueryFilter `json:"transaction_filter,omitempty"`
+	ExpectedTotal    int                `json:"expected_total,omitempty"`
+	ExpectedReturned int                `json:"expected_returned,omitempty"`
+}
+
+func queryWorkloads(runID, caseID string, matrix bool) []workload {
+	query := url.QueryEscape(runID)
+	if !matrix {
+		return []workload{
+			{Category: "cases", Path: "/api/cases?run_id=" + query + "&page_size=50"},
+			{Category: "transactions", Path: "/api/transactions?run_id=" + query + "&page_size=50"},
+			{Category: "overview", Path: "/api/overview?run_id=" + query},
+			{Category: "allocations", Path: "/api/allocations?run_id=" + query + "&page_size=50"},
+			{Category: "case_evidence", Path: "/api/cases/" + caseID + "/evidence?page_size=50"},
+			{Category: "case_candidates", Path: "/api/cases/" + caseID + "/candidates?page_size=50"},
+		}
+	}
+	tests := []struct {
+		name            string
+		filter          store.QueryFilter
+		total, returned int
+	}{
+		{"transactions-default", store.QueryFilter{}, 1067371, 50},
+		{"transactions-customer", store.QueryFilter{Customer: "17850"}, 2827, 50},
+		{"transactions-invoice", store.QueryFilter{Invoice: "489434"}, 8, 8},
+		{"transactions-stock", store.QueryFilter{Stock: "85123A"}, 5829, 50},
+		{"transactions-date-year", store.QueryFilter{DateFrom: "2010-01-01", DateTo: "2011-01-01"}, 522714, 50},
+		{"transactions-combined", store.QueryFilter{Customer: "17850", Stock: "85123A", DateFrom: "2009-12-01", DateTo: "2011-12-10"}, 89, 50},
+		{"transactions-deep-page", store.QueryFilter{Page: 10000}, 1067371, 50},
+		{"transactions-country-uk", store.QueryFilter{Country: "United Kingdom"}, 981330, 50},
+		{"transactions-country-france", store.QueryFilter{Country: "France"}, 14330, 50},
+		{"transactions-sort-date-deep", store.QueryFilter{Sort: "date", Direction: "asc", Page: 10000, PageSize: 100}, 1067371, 100},
+	}
+	out := make([]workload, 0, len(tests))
+	for _, test := range tests {
+		f := test.filter
+		f.RunID = runID
+		if f.Page == 0 {
+			f.Page = 1
+		}
+		if f.PageSize == 0 {
+			f.PageSize = 50
+		}
+		values := url.Values{"run_id": {runID}, "page": {fmt.Sprint(f.Page)}, "page_size": {fmt.Sprint(f.PageSize)}}
+		for _, pair := range []struct{ key, value string }{{"customer", f.Customer}, {"invoice", f.Invoice}, {"stock", f.Stock}, {"date_from", f.DateFrom}, {"date_to", f.DateTo}, {"country", f.Country}, {"sort", f.Sort}, {"direction", f.Direction}} {
+			if pair.value != "" {
+				values.Set(pair.key, pair.value)
+			}
+		}
+		out = append(out, workload{Category: test.name, Path: "/api/transactions?" + values.Encode(), Filter: &f, ExpectedTotal: test.total, ExpectedReturned: test.returned})
+	}
+	return out
+}
+
+func heavyJobActive(job web.Job) bool {
+	return job.Status == "running" && (job.Stage == "importing" || job.Stage == "reconciling")
+}
+
+func baselineSatisfied(out report) bool {
+	return out.Workers == 10 && out.PerWorker == 30 && out.Requests == 300 && out.Failures == 0 && out.InWindow == 300 && out.P95 <= 500 && out.SourceBefore != "" && out.SourceBefore == out.SourceAfter && out.JobFinal.Status == "succeeded"
+}
+
+// Matrix results must contain the known official all counts and complete page,
+// and each returned row must satisfy its exact filter. Validation is outside
+// the HTTP timer; the timer already includes the complete response body read.
+func validTransactionResponse(work workload, data []byte) bool {
+	if work.Filter == nil {
+		return json.Valid(data)
+	}
+	var page store.TransactionPage
+	if json.Unmarshal(data, &page) != nil {
+		return false
+	}
+	f := *work.Filter
+	if page.Total != work.ExpectedTotal || len(page.Items) != work.ExpectedReturned || page.Page != f.Page || page.PageSize != f.PageSize {
+		return false
+	}
+	seen := map[string]bool{}
+	for i, row := range page.Items {
+		if row.ID == "" || seen[row.ID] || row.Scope != "all" || row.SourceHash != "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980" {
+			return false
+		}
+		seen[row.ID] = true
+		if f.Customer != "" && row.Customer != f.Customer || f.Invoice != "" && row.Invoice != f.Invoice || f.Stock != "" && row.Stock != f.Stock || f.Country != "" && row.Country != f.Country {
+			return false
+		}
+		if f.DateFrom != "" && row.Time < f.DateFrom+"T00:00:00.000000" || f.DateTo != "" && row.Time >= f.DateTo+"T00:00:00.000000" {
+			return false
+		}
+		if i > 0 {
+			previous := page.Items[i-1]
+			if f.Sort == "date" {
+				if previous.Time > row.Time || previous.Time == row.Time && previous.ID >= row.ID {
+					return false
+				}
+			} else if previous.SheetIndex > row.SheetIndex || previous.SheetIndex == row.SheetIndex && previous.SourceRow >= row.SourceRow {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 type report struct {
@@ -86,6 +193,8 @@ type report struct {
 	RequestsPath   string         `json:"request_output"`
 	Boundary       string         `json:"measurement_boundary"`
 	Note           string         `json:"notice"`
+	Workload       string         `json:"workload"`
+	Workloads      []workload     `json:"workload_queries"`
 }
 
 func main() {
@@ -243,6 +352,7 @@ func run() (runErr error) {
 	source := flags.String("source-db", "", "closed published official all database to back up read-only")
 	output := flags.String("output-dir", "", "required new isolated directory outside source")
 	project := flags.String("project", "", "actual project source for the real preparation worker")
+	transactionMatrix := flags.Bool("transaction-matrix", false, "use the official all transaction filter/sort/deep-page matrix instead of the original six-category mixed workload")
 	if err := flags.Parse(os.Args[1:]); err != nil {
 		return err
 	}
@@ -276,6 +386,11 @@ func run() (runErr error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Minute)
 	defer cancel()
 	out := report{ActualTime: time.Now().Format(time.RFC3339Nano), GoVersion: runtime.Version(), LogicalCPUs: runtime.NumCPU(), SourceDB: *source, IsolatedDB: filepath.Join(root, "isolated.sqlite"), CanonicalHost: origin, Authentication: "Isolated random finance identity; real Bootstrap -> strong password -> TOTP proof -> Complete -> Logout -> password+TOTP login. No sessions inserted. No real human/device claim.", QueryScope: "all", JobScope: "year1", Workers: 10, PerWorker: 30, Categories: map[string]int{}, RequestsPath: filepath.Join(root, "requests.jsonl"), Boundary: "10 simultaneous goroutines, 30 mixed authenticated HTTP GETs each. Timer spans request construction/transport/server/authentication/query/full body read. Per-request production job state sampled directly before and after, outside query timer. Load begins only at real importing/reconciling stage. No password hashing per query.", Note: "Official transactions in an isolated read-only backup. Test secrets remain only in private runtime or memory and are never logged. Source database must remain unchanged; current all is queried while a real previously absent year1 dataset is prepared/imported/reconciled."}
+	out.Workload = "original-six-category-mixed"
+	if *transactionMatrix {
+		out.Workload = "official-all-transaction-matrix"
+	}
+	out.Boundary += " Every request qualifies for the active window only when both observations are running/importing or running/reconciling. Matrix response count/page/filter/source/order validation is outside the HTTP timer."
 	// Preserve an explicitly incomplete report on timeout/observation failures.
 	// A failed verifier must never discard already measured request evidence.
 	defer func() {
@@ -326,6 +441,7 @@ func run() (runErr error) {
 	if err = s.DB.QueryRowContext(ctx, "SELECT id FROM cases WHERE run_id=? ORDER BY cancel_id LIMIT 1", out.QueryRun).Scan(&caseID); err != nil {
 		return err
 	}
+	out.Workloads = queryWorkloads(out.QueryRun, caseID, *transactionMatrix)
 	security, err := auth.New(s.DB, auth.Config{SecretDir: filepath.Join(root, "private-auth"), Origin: origin})
 	if err != nil {
 		return err
@@ -369,7 +485,7 @@ func run() (runErr error) {
 		if err != nil {
 			return err
 		}
-		if job.Status == "running" && (job.Stage == "importing" || job.Stage == "reconciling") {
+		if heavyJobActive(job) {
 			break
 		}
 		if job.Status == "failed" || job.Status == "succeeded" {
@@ -382,16 +498,8 @@ func run() (runErr error) {
 		}
 	}
 	out.JobAtLoadStart = job
-	fmt.Fprintln(os.Stderr, "NFR04: real import active; starting 10 goroutines x 30 mixed GETs")
-	query := url.QueryEscape(out.QueryRun)
-	workloads := []struct{ category, path string }{
-		{"cases", "/api/cases?run_id=" + query + "&page_size=50"},
-		{"transactions", "/api/transactions?run_id=" + query + "&page_size=50"},
-		{"overview", "/api/overview?run_id=" + query},
-		{"allocations", "/api/allocations?run_id=" + query + "&page_size=50"},
-		{"case_evidence", "/api/cases/" + caseID + "/evidence?page_size=50"},
-		{"case_candidates", "/api/cases/" + caseID + "/candidates?page_size=50"},
-	}
+	fmt.Fprintf(os.Stderr, "NFR04: real import active; starting 10 goroutines x 30 GETs; workload=%s\n", out.Workload)
+	workloads := out.Workloads
 	results := make(chan requestResult, 300)
 	startGate := make(chan struct{})
 	var wg sync.WaitGroup
@@ -402,23 +510,25 @@ func run() (runErr error) {
 			<-startGate
 			for sequence := 0; sequence < 30; sequence++ {
 				work := workloads[(worker+sequence)%len(workloads)]
-				result := requestResult{Worker: worker, Sequence: sequence, Category: work.category}
+				result := requestResult{Worker: worker, Sequence: sequence, Category: work.Category, Path: work.Path}
 				before, beforeErr := jobs.Get(ctx, out.JobID)
 				result.BeforeState, result.BeforeStage = before.Status, before.Stage
 				result.StartedAt = time.Now().Format(time.RFC3339Nano)
 				started := time.Now()
-				status, data, requestErr := c.request(ctx, "GET", work.path, nil)
+				status, data, requestErr := c.request(ctx, "GET", work.Path, nil)
 				result.Milliseconds = time.Since(started).Seconds() * 1000
 				result.Status, result.Bytes = status, len(data)
 				after, afterErr := jobs.Get(ctx, out.JobID)
 				result.AfterState, result.AfterStage = after.Status, after.Stage
-				result.InWindow = beforeErr == nil && afterErr == nil && (before.Status == "running" || before.Status == "queued") && (after.Status == "running" || after.Status == "queued")
+				result.InWindow = beforeErr == nil && afterErr == nil && heavyJobActive(before) && heavyJobActive(after)
 				if requestErr != nil {
 					result.Error = "request_error"
 				} else if status != 200 {
 					result.Error = "non_200"
 				} else if !json.Valid(data) {
 					result.Error = "invalid_json"
+				} else if !validTransactionResponse(work, data) {
+					result.Error = "unexpected_transaction_result"
 				}
 				if beforeErr != nil || afterErr != nil {
 					result.Error = "job_observation_error"
@@ -483,7 +593,7 @@ func run() (runErr error) {
 	if err != nil {
 		return err
 	}
-	out.BaselinePassed = out.Requests >= 300 && out.Failures == 0 && out.InWindow >= 300 && out.P95 <= 500 && out.SourceBefore == out.SourceAfter && out.JobFinal.Status == "succeeded"
+	out.BaselinePassed = baselineSatisfied(out)
 	out.TargetPassed = out.BaselinePassed && out.P95 <= 200
 	out.Complete = true
 	encoded, err := json.MarshalIndent(out, "", "  ")

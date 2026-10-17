@@ -1,0 +1,9 @@
+go version go1.27.2 windows/amd64
+build_exit_code=0
+
+Algorithm : SHA256
+Hash      : BDBD2D9B08E4C5BA22EA7B5437BCBE85FB0195D8FC70391267D334CDB14EC6FA
+Path      : C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\builds\perfhttp-transaction-20261017.exe
+
+
+ok  	returnsrecon/cmd/perfhttp	1.196s

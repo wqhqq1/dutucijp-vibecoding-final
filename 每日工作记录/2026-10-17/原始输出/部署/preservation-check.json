@@ -1,0 +1,10 @@
+{
+  "all_unchanged": true,
+  "checks": {
+    "accounts": true,
+    "cases_by_status": true,
+    "audits": true,
+    "runs": true
+  },
+  "note": "Both snapshots compared after JSON normalization; initial Python tuple-vs-JSON-list assertion was a verifier error, not a state difference."
+}

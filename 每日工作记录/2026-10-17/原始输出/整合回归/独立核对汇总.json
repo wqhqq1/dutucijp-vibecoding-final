@@ -1,0 +1,374 @@
+{
+  "actual_time": "2026-10-17T08:53:27.518134+08:00",
+  "head": "da50e92cb4797413a58504e07e7874219d456a9d",
+  "working_tree_changes_included": true,
+  "go_full_run_top_level_passed": 81,
+  "go_supplemental_unique_top_level_passed": 2,
+  "go_unique_top_level_passed": 83,
+  "go_failed_events": 0,
+  "go_skipped_test_events": 0,
+  "python_ran": 22,
+  "python_ok_cases": 22,
+  "python_failed": 0,
+  "python_skipped": 0,
+  "frontend": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "unique_total": 111,
+  "go_vet_exit": 0,
+  "powershell_syntax_files": 15,
+  "powershell_syntax_failed": 0,
+  "new_python_compile_files": 6,
+  "new_python_compile_failed": 0,
+  "repeated_full_suite": false,
+  "production_secrets_read": false,
+  "heavy_official_preparation_run": false,
+  "go_passed_tests": [
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestPortablePortValidationPrecedesDatabaseCreation"
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestUnsupportedBusinessCommandRejectedBeforeOpening"
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestVerifyRequiresExplicitDatabaseBeforeOpeningStore"
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestWorkflowVerificationMarkerBoundAndClaimedOnce"
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestWorkflowVerifyRejectsDefaultOrBusinessDatabaseBeforeOpening"
+    },
+    {
+      "package": "returnsrecon/cmd/transactionverify",
+      "test": "TestRetainedBaselineMatchesProductionResults"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestSessionActivityDoesNotBlockReadersOrBypassRevocation"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestSessionBusyRenewalCannotReviveIdleExpiredSession"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC33_AllRolesRequirePasswordFactorAndRecovery"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC34_PasswordBoundariesWeakListAndNFC"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC35_PasswordHashesAreSaltedAndNoPlaintextAudit"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC36_InterruptedSetupResumesAfterRestartWithoutBootstrapReuse"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC37_PasskeyRealProtocolRegistrationLoginAndZeroCounter"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC38_PasskeyRejectsMalformedAssertionsAndChallengeReplay"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC39_PasskeyRejectsOtherAccountHandleAndDuplicateCredential"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC40_TOTPOnlyVerifiedCurrentEnrollmentBecomesActive"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC41_TOTPReplayWindowAndConcurrentConsumption"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC42_PasswordCannotConfigureNewFactorForCompletedAccount"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC43_RecoveryCodeAtomicAndRestrictedUntilReenrolled"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC44_LastFactorAndPasswordChangeRevokeOldSessions"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC45_RateLimitAccountSourceWindowAndPrehash"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC46_SessionRotationCSRFIdleAndAbsoluteExpiry"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC47_SetupCompetitionAndAuditFailureRollback"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC48_MissingMasterKeyFailsAndSecretsAreNotAuditFields"
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestBoundedWorkersAndDeterministicOrder"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestCancelledCompute"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestConservationRejectsCorruptResult"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestInvalidAcceptedInputFailsClosed"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC07_DuplicateInvolvement"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC09_AmountPrecision"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC09_PartialReturn10Minus4"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC10_TwoCandidates"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC11_IdentityBoundaries"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC12_StrictlyEarlier"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC13_CumulativeReturns"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC14_NoSplitAcrossSales"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC14_OverReturnRejected"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC15_NoExactQuantityPreference"
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC15_PrecisionCandidateBranch"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestBulkImportRollsBackEarlierSQLChunks"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestExportStreamFailureAndFormulaVariants"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestFailedPersistenceNeverPublishesAndCanRetry"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestImportPartialBatchesStayUnpublishedAndRetryBuildsIndexes"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestPreparedTamperRefused"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestQueriesRejectUnpublishedRun"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestSourceAndDecisionEvidenceRetained"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC01TC08_VerifyDatasetSourceExclusionAndCorruption"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC01_VerifyRejectsUnpublishedDataset"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC14_RejectLeavesNoPartialDatabaseAllocation"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_OptimizedListsMatchReferenceAfterWorkflowWrites"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_ServerFilteringPaginationAndDateBoundaries"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_SourceOrderAndCountAcrossSharedSourceRanges"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_TransactionCountrySortAndJumpPages"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC17_CurrentCandidatesAllPagesAndOriginalEvidence"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC18_ConcurrentSameInputOnePublishedRun"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC18_IdempotencyPreservesSimulatedManualHistory"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC19_AssignmentAndAuditAtomic"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC20_DuplicateAndConcurrentAssignment"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC21_RejectSkippedReverseStaleAndClosedWrites"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualAuditFailureRollsBackEverything"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualConfirmationAtomicQualifiedAndAudited"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualRejectsPermissionStateVersionIdentity"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC23_ConcurrentManualAllocationCannotOverdraw"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC23_ConcurrentSameCancelAndRepeatRejected"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC24_ConclusionAndDurableHistoryWithoutInventedMatch"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC26_ConsumedCandidateStopsBeingUnrelatedEvidence"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC26_WarehouseCannotReadOtherCasesCandidatesOrTransactions"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC27_ExportCurrentFilteredScopeAndFormulaSafety"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowAuditFailureRollsBackEveryAction"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowOldSchemaMigrationPreservesHistory"
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowPermissionsAndPublishedBoundary"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestFrontendEntryDoesNotRedirectIndexToItself"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC16_CountrySortPaginationAndExportAgree"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC25_TrustedSessionRejectsMissingOrForgedIdentity"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC26_WarehouseScopeIncludesOnlyOwnCaseAndRelatedEvidence"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC27_FilteredCSVOnlyFinanceAndAdmin"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC33_AllRolesRestrictedUntilActualFactorAndRecoveryConfirmation"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_AlreadyAdmittedJobRejectsRevokedSession"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_AlreadyAdmittedWriteRechecksRevokedSessionInsideTransaction"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_ValidAdmittedJobCanStillQueue"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC46_OriginCSRFHostCookieAndRecoveryRevocation"
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestPortableInstanceAndCookieIsolation"
+    }
+  ],
+  "go_packages_with_no_test_files_in_original_full_run": [
+    "returnsrecon/cmd/queryverify",
+    "returnsrecon/cmd/perfhttp",
+    "returnsrecon/cmd/perfverify",
+    "returnsrecon/cmd/resumeverify",
+    "returnsrecon/cmd/transactionverify",
+    "returnsrecon/internal/model"
+  ],
+  "supplemental_note": "The later-added transactionverify test now covers its package; the original package-level no-test-files event remains historical, not a skipped test."
+}

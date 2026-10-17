@@ -1,0 +1,52 @@
+{
+  "transactions-stock": {
+    "count": 30,
+    "p95_ms": 49.8129,
+    "max_ms": 69.4215
+  },
+  "transactions-invoice": {
+    "count": 30,
+    "p95_ms": 126.4746,
+    "max_ms": 133.542
+  },
+  "transactions-country-france": {
+    "count": 30,
+    "p95_ms": 117.64330000000001,
+    "max_ms": 131.4922
+  },
+  "transactions-sort-date-deep": {
+    "count": 30,
+    "p95_ms": 118.8807,
+    "max_ms": 129.24779999999998
+  },
+  "transactions-customer": {
+    "count": 30,
+    "p95_ms": 132.786,
+    "max_ms": 149.0449
+  },
+  "transactions-combined": {
+    "count": 30,
+    "p95_ms": 87.85510000000001,
+    "max_ms": 91.40379999999999
+  },
+  "transactions-default": {
+    "count": 30,
+    "p95_ms": 127.45290000000001,
+    "max_ms": 135.1855
+  },
+  "transactions-date-year": {
+    "count": 30,
+    "p95_ms": 157.7888,
+    "max_ms": 161.24839999999998
+  },
+  "transactions-deep-page": {
+    "count": 30,
+    "p95_ms": 188.5301,
+    "max_ms": 193.81719999999999
+  },
+  "transactions-country-uk": {
+    "count": 30,
+    "p95_ms": 304.451,
+    "max_ms": 306.7872
+  }
+}

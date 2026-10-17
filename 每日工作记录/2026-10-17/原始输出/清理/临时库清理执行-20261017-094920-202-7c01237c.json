@@ -1,0 +1,47 @@
+{
+  "started_at": "2026-10-17T09:49:20.2072439+08:00",
+  "finished_at": "2026-10-17T09:49:20.5747376+08:00",
+  "manifest_sha256": "F51EBC98B2C22EE57E95F7B89ECDDB63B9424AECC1A3BFB4A358F86B0468EF62",
+  "planned_bytes": 18299248569,
+  "deleted_bytes": 18299248569,
+  "completed": true,
+  "error": null,
+  "targets": [
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-baseline",
+      "exists": true,
+      "bytes": 2228754432,
+      "status": "deleted"
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-optimized",
+      "exists": true,
+      "bytes": 2501632000,
+      "status": "deleted"
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-optimized-final",
+      "exists": true,
+      "bytes": 2501632000,
+      "status": "deleted"
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-browser",
+      "exists": true,
+      "bytes": 3695947514,
+      "status": "deleted"
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-nfr04",
+      "exists": true,
+      "bytes": 3398121453,
+      "status": "deleted"
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\portable-current-20261017\\local",
+      "exists": true,
+      "bytes": 3973161170,
+      "status": "deleted"
+    }
+  ]
+}

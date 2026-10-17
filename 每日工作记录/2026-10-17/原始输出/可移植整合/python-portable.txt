@@ -1,0 +1,12 @@
+test_busy_port_rejects_before_preparing_or_stopping (test_portable.PortableTests.test_busy_port_rejects_before_preparing_or_stopping) ... ok
+test_check_only_does_not_create_user_state (test_portable.PortableTests.test_check_only_does_not_create_user_state) ... ok
+test_child_environment_uses_isolated_state (test_portable.PortableTests.test_child_environment_uses_isolated_state) ... ok
+test_first_preparation_requires_eight_gib_before_any_download (test_portable.PortableTests.test_first_preparation_requires_eight_gib_before_any_download) ... ok
+test_manifest_verification_detects_changed_executable (test_portable.PortableTests.test_manifest_verification_detects_changed_executable) ... ok
+test_partial_database_is_retained_and_rejected (test_portable.PortableTests.test_partial_database_is_retained_and_rejected) ... ok
+test_repeat_preparation_retains_completed_state (test_portable.PortableTests.test_repeat_preparation_retains_completed_state) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.050s
+
+OK

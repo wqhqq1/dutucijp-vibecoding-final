@@ -1,0 +1,13 @@
+{
+  "phase": "baseline",
+  "binary": "builds/optimized-20261016/recon.exe",
+  "authentication": "isolated finance account with actual password and TOTP protocol; no human/device claim",
+  "data": "official all, 1067371 source rows; same isolated database used for before and after",
+  "boundary": "wall time inside browser-control call from click to accessibility tree containing correct visible result; includes automation and observation overhead, so an upper bound; one sample per scenario, no P95 claim; OS cache not cleared",
+  "results": [
+    {"scenario":"all首次进入交易检索","elapsed_upper_bound_ms":353,"correct":true,"total":1067371,"first_row":"0:2"},
+    {"scenario":"2010整年日期筛选","elapsed_upper_bound_ms":1210,"correct":true,"total":522714,"first_row":"0:45230"},
+    {"scenario":"整年日期第2页","elapsed_upper_bound_ms":1267,"correct":true,"total":522714,"first_row":"0:45280"},
+    {"scenario":"客户商品宽日期组合","elapsed_upper_bound_ms":1150,"correct":true,"total":1,"first_row":"0:2"}
+  ]
+}

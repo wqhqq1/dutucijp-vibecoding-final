@@ -18,7 +18,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
-import openpyxl
+from openpyxl.reader.excel import ExcelReader
 from openpyxl.utils.datetime import from_excel
 
 from fetch_data import sha256
@@ -69,13 +69,20 @@ def raw_cell(typ, value):
 
 def raw_rows(path, scope):
     """Decode original cell types/values; don't round numeric prices to float."""
-    book = openpyxl.load_workbook(path, read_only=True, data_only=False)
+    # Only calendar and sheet metadata are needed here. load_workbook also
+    # decodes every shared string and all styles before our exact XML reader
+    # decodes the strings again. Keep openpyxl's workbook/date handling without
+    # constructing that unused cell/style representation.
+    metadata = ExcelReader(path, read_only=True, data_only=False)
     try:
-        if tuple(book.sheetnames) != SHEETS:
-            raise ValueError('Unexpected worksheets: '+repr(book.sheetnames))
-        epoch = book.epoch
+        metadata.read_manifest()
+        metadata.read_workbook()
+        sheetnames = tuple(sheet.name for sheet in metadata.parser.sheets)
+        if sheetnames != SHEETS:
+            raise ValueError('Unexpected worksheets: '+repr(sheetnames))
+        epoch = metadata.wb.epoch
     finally:
-        book.close()
+        metadata.archive.close()
     with ZipFile(path) as zipped:
         strings = []
         if 'xl/sharedStrings.xml' in zipped.namelist():
@@ -101,9 +108,18 @@ def raw_rows(path, scope):
                         if len(column) != 1 or not 'A' <= column <= 'H':
                             raise ValueError('Unexpected column '+column)
                         typ = cell.get('t', 'n')
-                        value = cell.findtext(VALUE_TAG)
-                        if cell.find(FORMULA_TAG) is not None:
-                            values[ord(column)-65] = ('formula', cell.findtext(FORMULA_TAG))
+                        value = formula = None
+                        has_formula = False
+                        # A cell normally has one v child; inspect its direct
+                        # children once rather than searching separately for v
+                        # and f (and searching for f again for formula cells).
+                        for child in cell:
+                            if child.tag == VALUE_TAG and value is None:
+                                value = child.text or ''
+                            elif child.tag == FORMULA_TAG and not has_formula:
+                                has_formula, formula = True, child.text
+                        if has_formula:
+                            values[ord(column)-65] = ('formula', formula or '')
                         elif typ == 's':
                             values[ord(column)-65] = strings[int(value)]
                         elif typ == 'inlineStr':
@@ -230,10 +246,12 @@ def _prepare(path, scope, output_root, progress):
         group[si] += 1
         duplicate_of = ''
         if si == 0:
-            group[2].append(f'{si}:{rn}')
+            # Retain the numeric source row once; render an ID only for the
+            # comparatively few actual cross-sheet copies.
+            group[2].append(rn)
         elif occurrence < len(group[2]):
-            duplicate_of = group[2][occurrence]
-        rows.append((si, sheet, rn, raw, epoch, group, duplicate_of))
+            duplicate_of = f'0:{group[2][occurrence]}'
+        rows.append((si, rn, raw, group, duplicate_of))
         if len(rows) % 50000 == 0:
             progress(json.dumps(dict(stage='read_source', rows=len(rows))))
     excluded = Counter()
@@ -243,8 +261,8 @@ def _prepare(path, scope, output_root, progress):
     with (scratch/'records.csv').open('w', newline='', encoding='utf-8') as stream:
         writer = csv.writer(stream)
         writer.writerow(FIELDS)
-        for si, sheet, rn, raw, epoch, group, duplicate_of in rows:
-            row = normalize(si, sheet, rn, raw, epoch)
+        for si, rn, raw, group, duplicate_of in rows:
+            row = normalize(si, SHEETS[si], rn, raw, epoch)
             if group[si] > 1:
                 row['flags'].append('same_sheet_duplicate')
             if duplicate_of:

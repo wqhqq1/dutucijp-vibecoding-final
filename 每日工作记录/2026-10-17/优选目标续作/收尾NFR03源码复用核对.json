@@ -1,0 +1,111 @@
+{
+  "checked": 26,
+  "all_unchanged": true,
+  "files": [
+    {
+      "path": "backend/cmd/perfverify/main.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/model/model.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/reconcile/engine_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/reconcile/engine.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/reconcile/index.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/balance_cancel_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/balance_storage_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/balance_storage.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/bulk_import_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/compute_load_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/evidence.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/manual_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/manual.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/phase.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/query_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/query.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/schema.sql",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/store_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/store.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/transaction_counts.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/verify_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/verify.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/web_jobs.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/workflow_test.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/workflow_verify.go",
+      "unchanged": true
+    },
+    {
+      "path": "backend/internal/store/workflow.go",
+      "unchanged": true
+    }
+  ],
+  "scope": "Core compute/store/model and perfverify. Authentication and UI changed separately; no claim of identical whole app source."
+}

@@ -27,10 +27,12 @@ import (
 var schema string
 
 const batchRows = 4096
+const balanceBatchRows = 16384
 
 type Store struct {
-	DB   *sql.DB
-	path string
+	DB                *sql.DB
+	path              string
+	transactionCounts transactionCountCache
 }
 type Stats struct {
 	Raw             int `json:"raw"`
@@ -87,10 +89,11 @@ func Open(path string) (*Store, error) {
 	if err = os.MkdirAll(filepath.Dir(absolute), 0700); err != nil {
 		return nil, err
 	}
-	// A bounded 64 MiB page cache per connection prevents million-row imports
-	// from repeatedly evicting B-tree pages. WAL and FULL synchronization retain
-	// the existing durability policy; the pool remains capped at four below.
-	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=cache_size(-65536)&_pragma=mmap_size(536870912)&_pragma=temp_store(2)")
+	// A bounded 64 MiB page cache and at most 2 GiB read-only file mapping per
+	// connection avoid repeated Windows reads for million-row inputs. SQLite may
+	// cap the mapping below the request. WAL/FULL durability and the four-connection
+	// pool remain unchanged; mapped address space is not reserved resident memory.
+	db, err := sql.Open("sqlite", filepath.ToSlash(absolute)+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=cache_size(-65536)&_pragma=mmap_size(2147483648)&_pragma=temp_store(2)")
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +160,9 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 		return m, err
 	}
 	defer unlock()
+	phaseStarted := time.Now()
 	m, raw, err := ReadManifest(dir)
+	observePhase(ctx, "import.manifest_before", phaseStarted)
 	if err != nil {
 		return m, err
 	}
@@ -195,6 +200,7 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 	if strings.Join(header, ",") != expected {
 		return m, fmt.Errorf("unsupported prepared CSV columns")
 	}
+	phaseStarted = time.Now()
 	batch := make([][]string, 0, batchRows)
 	for {
 		record, e := reader.Read()
@@ -215,6 +221,8 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 	if err = s.importBatch(ctx, m, batch); err != nil {
 		return m, err
 	}
+	observePhase(ctx, "import.rows", phaseStarted)
+	phaseStarted = time.Now()
 	var got Stats
 	err = s.DB.QueryRowContext(ctx, `SELECT count(*),coalesce(sum(excluded=''),0),coalesce(sum(excluded<>''),0),coalesce(sum(excluded='' AND kind='sale'),0),coalesce(sum(excluded='' AND kind='cancel'),0) FROM normalized_rows WHERE dataset_id=?`, m.DatasetID).Scan(&got.Raw, &got.Accepted, &got.Excluded, &got.AcceptedSales, &got.AcceptedCancels)
 	if err != nil {
@@ -223,15 +231,20 @@ func (s *Store) Import(ctx context.Context, dir string) (m Manifest, err error) 
 	if got.Raw != m.Stats.Raw || got.Accepted != m.Stats.Accepted || got.Excluded != m.Stats.Excluded || got.AcceptedSales != m.Stats.AcceptedSales || got.AcceptedCancels != m.Stats.AcceptedCancels {
 		return m, fmt.Errorf("persisted dataset conservation failed: %+v", got)
 	}
+	observePhase(ctx, "import.conservation", phaseStarted)
+	phaseStarted = time.Now()
 	// Verify bytes again after streaming, so a changed intermediate is never published.
 	if _, _, err = ReadManifest(dir); err != nil {
 		return m, err
 	}
+	observePhase(ctx, "import.manifest_after", phaseStarted)
+	phaseStarted = time.Now()
 	// Empty databases build secondary indexes once, after their input batches.
 	// Existing published data keeps its indexes throughout subsequent imports.
 	if err = s.ensureQueryIndexes(ctx, true); err != nil {
 		return m, err
 	}
+	observePhase(ctx, "import.indexes", phaseStarted)
 	_, err = s.DB.ExecContext(ctx, "UPDATE datasets SET status='published' WHERE id=? AND status='staging'", m.DatasetID)
 	return m, err
 }
@@ -323,6 +336,36 @@ func (s *Store) loadRows(ctx context.Context, dataset string, capacity int) ([]m
 	return rows, query.Err()
 }
 
+// Input publication verifies canonical sheet_index:source_row IDs. Computation
+// only needs that ordering and the exact matching fields; provenance is still
+// read from source_rows by public row/evidence APIs, never reconstructed there.
+func (s *Store) loadComputeRows(ctx context.Context, dataset string, capacity int) ([]model.Row, error) {
+	query, err := s.DB.QueryContext(ctx, `SELECT n.id,n.stock,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.flags FROM normalized_rows n WHERE n.dataset_id=(SELECT id FROM datasets WHERE id=? AND status='published') AND n.excluded=''`, dataset)
+	if err != nil {
+		return nil, err
+	}
+	defer query.Close()
+	rows := make([]model.Row, 0, capacity)
+	for query.Next() {
+		// Scan directly into the final preallocated row. A temporary Row whose
+		// field addresses escape through Scan would allocate and copy per input.
+		rows = append(rows, model.Row{})
+		r := &rows[len(rows)-1]
+		if err = query.Scan(&r.ID, &r.Stock, &r.Quantity, &r.Time, &r.Price, &r.Customer, &r.Country, &r.Kind, &r.Flags); err != nil {
+			return nil, err
+		}
+		if len(r.ID) < 3 || r.ID[0] < '0' || r.ID[0] > '1' || r.ID[1] != ':' || r.ID[2] < '1' || r.ID[2] > '9' {
+			return nil, fmt.Errorf("invalid persisted source ID")
+		}
+		r.SheetIndex = int(r.ID[0] - '0')
+		r.SourceRow, err = strconv.Atoi(r.ID[2:])
+		if err != nil || r.SourceRow < 2 {
+			return nil, fmt.Errorf("invalid persisted source order")
+		}
+	}
+	return rows, query.Err()
+}
+
 func (s *Store) Run(ctx context.Context, dataset string, workers int) (summary Summary, err error) {
 	unlock, err := s.heavyLock(ctx)
 	if err != nil {
@@ -361,21 +404,33 @@ func (s *Store) Run(ctx context.Context, dataset string, workers int) (summary S
 		}
 	}()
 	started := time.Now()
-	rows, err := s.loadRows(ctx, dataset, m.Stats.Accepted)
+	phaseStarted := time.Now()
+	if err = s.ensureBalanceStorage(ctx); err != nil {
+		return summary, err
+	}
+	observePhase(ctx, "run.balance_layout", phaseStarted)
+	phaseStarted = time.Now()
+	rows, err := s.loadComputeRows(ctx, dataset, m.Stats.Accepted)
+	observePhase(ctx, "run.load", phaseStarted)
 	if err != nil {
 		return summary, err
 	}
 	if len(rows) != m.Stats.Accepted {
 		return summary, fmt.Errorf("published input row count differs from its manifest")
 	}
+	phaseStarted = time.Now()
 	result, err := reconcile.Compute(ctx, rows, workers)
+	observePhase(ctx, "run.compute", phaseStarted)
 	if err != nil {
 		return summary, err
 	}
 	if len(result.Decisions) != m.Stats.AcceptedCancels || len(result.Balances) != m.Stats.AcceptedSales {
 		return summary, fmt.Errorf("result counts differ from published dataset manifest")
 	}
-	if err = s.persist(ctx, runID, result); err != nil {
+	phaseStarted = time.Now()
+	err = s.persist(ctx, runID, result)
+	observePhase(ctx, "run.persist", phaseStarted)
+	if err != nil {
 		return summary, err
 	}
 	summary = Summary{RunID: runID, DatasetID: dataset, RuleVersion: model.RuleVersion, Status: "published", Stats: m.Stats, Matched: result.Matched, Suspected: result.Suspected, NoOriginal: result.NoOriginal, Cases: result.Suspected + result.NoOriginal, Workers: result.Workers, Coverage: "not applicable", Caveat: "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"}
@@ -435,20 +490,87 @@ func (s *Store) batch(ctx context.Context, statement string, values [][]any) err
 	return nil
 }
 
-func (s *Store) persist(ctx context.Context, runID string, r model.Result) error {
-	balances := make([][]any, 0, batchRows)
-	for _, b := range r.Balances {
-		balances = append(balances, []any{runID, b.SaleID, b.Original, b.Allocated, b.Remaining})
-		if len(balances) == batchRows {
-			if err := s.batch(ctx, "INSERT INTO sale_balances VALUES(?,?,?,?,?)", balances); err != nil {
-				return err
-			}
-			balances = balances[:0]
-		}
-	}
-	if err := s.batch(ctx, "INSERT INTO sale_balances VALUES(?,?,?,?,?)", balances); err != nil {
+// Each batch walks a disjoint primary-key range, never a growing OFFSET. SQL
+// copies the immutable originals once; only actually allocated sales need Go
+// parameters. Both initial rows and guarded adjustments share the bounded FULL
+// transaction, and allocations are inserted only after all balances exist.
+func (s *Store) persistBalances(ctx context.Context, runID string, balances []model.Balance) error {
+	var dataset string
+	if err := s.DB.QueryRowContext(ctx, "SELECT dataset_id FROM runs WHERE id=? AND status='staging'", runID).Scan(&dataset); err != nil {
 		return err
 	}
+	lower := ""
+	for offset := 0; offset < len(balances); offset += balanceBatchRows {
+		chunk := balances[offset:min(offset+balanceBatchRows, len(balances))]
+		upper := chunk[len(chunk)-1].SaleID
+		if upper <= lower {
+			return fmt.Errorf("computed balances are not ordered")
+		}
+		err := func() error {
+			tx, err := s.DB.BeginTx(ctx, nil)
+			if err != nil {
+				return err
+			}
+			defer tx.Rollback()
+			inserted, err := tx.ExecContext(ctx, `INSERT INTO sale_balances(run_id,sale_id,original,allocated,remaining)
+ SELECT ?,n.id,n.quantity,0,n.quantity FROM normalized_rows n INDEXED BY sqlite_autoindex_normalized_rows_1
+ JOIN datasets d ON d.id=n.dataset_id AND d.status='published'
+ WHERE n.dataset_id=? AND n.id>? AND n.id<=? AND n.excluded='' AND n.kind='sale' AND n.quantity>0 ORDER BY n.id`, runID, dataset, lower, upper)
+			if err != nil {
+				return err
+			}
+			count, err := inserted.RowsAffected()
+			if err != nil {
+				return err
+			}
+			if count != int64(len(chunk)) {
+				return fmt.Errorf("persisted balance batch count differs")
+			}
+			var update *sql.Stmt
+			defer func() {
+				if update != nil {
+					update.Close()
+				}
+			}()
+			for _, b := range chunk {
+				if b.Allocated == 0 {
+					continue
+				}
+				if update == nil {
+					update, err = tx.PrepareContext(ctx, `UPDATE sale_balances SET allocated=?,remaining=? WHERE run_id=? AND sale_id=? AND original=? AND allocated=0 AND remaining=original`)
+					if err != nil {
+						return err
+					}
+				}
+				changed, err := update.ExecContext(ctx, b.Allocated, b.Remaining, runID, b.SaleID, b.Original)
+				if err != nil {
+					return err
+				}
+				count, err = changed.RowsAffected()
+				if err != nil {
+					return err
+				}
+				if count != 1 {
+					return fmt.Errorf("persisted balance initial state differs")
+				}
+			}
+			return tx.Commit()
+		}()
+		if err != nil {
+			return err
+		}
+		lower = upper
+	}
+	return nil
+}
+
+func (s *Store) persist(ctx context.Context, runID string, r model.Result) error {
+	phaseStarted := time.Now()
+	if err := s.persistBalances(ctx, runID, r.Balances); err != nil {
+		return err
+	}
+	observePhase(ctx, "persist.balances", phaseStarted)
+	phaseStarted = time.Now()
 	decisions := [][]any{}
 	allocations := [][]any{}
 	cases := [][]any{}
@@ -472,25 +594,36 @@ func (s *Store) persist(ctx context.Context, runID string, r model.Result) error
 			return err
 		}
 	}
-	var total, matched, casesN, balancesN, bad int
+	observePhase(ctx, "persist.decisions_and_evidence", phaseStarted)
+	phaseStarted = time.Now()
+	var total, matched, casesN, balancesN, nonzeroBalances, bad int
 	if err := s.DB.QueryRowContext(ctx, "SELECT count(*),coalesce(sum(classification='matched'),0) FROM decisions WHERE run_id=?", runID).Scan(&total, &matched); err != nil {
 		return err
 	}
 	if err := s.DB.QueryRowContext(ctx, "SELECT count(*) FROM cases WHERE run_id=?", runID).Scan(&casesN); err != nil {
 		return err
 	}
-	if err := s.DB.QueryRowContext(ctx, "SELECT count(*) FROM sale_balances WHERE run_id=?", runID).Scan(&balancesN); err != nil {
+	// Every persisted balance is still checked. Only nonzero balances can have
+	// allocation groups: checking every group against its balance and comparing
+	// the two set sizes proves both directions without joining a million zeros.
+	if err := s.DB.QueryRowContext(ctx, `SELECT count(*),coalesce(sum(allocated<>0),0),
+ coalesce(sum(original<=0 OR allocated<0 OR remaining<0 OR original-allocated<>remaining),0)
+ FROM sale_balances WHERE run_id=?`, runID).Scan(&balancesN, &nonzeroBalances, &bad); err != nil {
 		return err
 	}
-	if err := s.DB.QueryRowContext(ctx, `SELECT count(*) FROM sale_balances b WHERE b.run_id=? AND (b.allocated<>coalesce((SELECT sum(a.quantity) FROM allocations a WHERE a.run_id=b.run_id AND a.sale_id=b.sale_id),0) OR b.original-b.allocated<>b.remaining OR b.remaining<0)`, runID).Scan(&bad); err != nil {
+	var allocatedSales, badAllocations int
+	if err := s.DB.QueryRowContext(ctx, `SELECT count(*),coalesce(sum(b.sale_id IS NULL OR b.allocated<>a.quantity),0)
+ FROM (SELECT sale_id,sum(quantity) AS quantity FROM allocations WHERE run_id=? GROUP BY sale_id) a
+ LEFT JOIN sale_balances b ON b.run_id=? AND b.sale_id=a.sale_id`, runID, runID).Scan(&allocatedSales, &badAllocations); err != nil {
 		return err
 	}
 	var allocationN int
 	if err := s.DB.QueryRowContext(ctx, "SELECT count(*) FROM allocations WHERE run_id=?", runID).Scan(&allocationN); err != nil {
 		return err
 	}
-	if total != len(r.Decisions) || matched != r.Matched || allocationN != matched || casesN != total-matched || balancesN != len(r.Balances) || bad != 0 {
+	if total != len(r.Decisions) || matched != r.Matched || allocationN != matched || casesN != total-matched || balancesN != len(r.Balances) || bad != 0 || badAllocations != 0 || allocatedSales != nonzeroBalances {
 		return fmt.Errorf("persisted run conservation failed")
 	}
+	observePhase(ctx, "persist.conservation", phaseStarted)
 	return nil
 }

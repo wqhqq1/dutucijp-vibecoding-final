@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-17T09:47:35.5800370+08:00",
+  "verification_root": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification",
+  "description": "Fixed snapshot of six disposable verification directories; no deletion has been performed.",
+  "targets": [
+    {
+      "relative": "transaction-20261017-baseline",
+      "entries": [
+        {
+          "kind": "file",
+          "relative": "query.sqlite",
+          "bytes": 2205687808,
+          "modified_ticks": "639277946450597886"
+        },
+        {
+          "kind": "file",
+          "relative": "transactionverify-new.exe",
+          "bytes": 11534336,
+          "modified_ticks": "639277950016169984"
+        },
+        {
+          "kind": "file",
+          "relative": "transactionverify.exe",
+          "bytes": 11532288,
+          "modified_ticks": "639277946258801534"
+        }
+      ]
+    },
+    {
+      "relative": "transaction-20261017-optimized",
+      "entries": [
+        {
+          "kind": "file",
+          "relative": "query.sqlite",
+          "bytes": 2501632000,
+          "modified_ticks": "639277949211553335"
+        }
+      ]
+    },
+    {
+      "relative": "transaction-20261017-optimized-final",
+      "entries": [
+        {
+          "kind": "file",
+          "relative": "query.sqlite",
+          "bytes": 2501632000,
+          "modified_ticks": "639277950188408021"
+        }
+      ]
+    },
+    {
+      "relative": "transaction-20261017-browser",
+      "entries": [
+        {
+          "kind": "file",
+          "relative": "baseline.stderr.txt",
+          "bytes": 0,
+          "modified_ticks": "639277947738879400"
+        },
+        {
+          "kind": "file",
+          "relative": "baseline.stdout.txt",
+          "bytes": 93,
+          "modified_ticks": "639277947739810802"
+        },
+        {
+          "kind": "directory",
+          "relative": "private-auth",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "private-auth\\initialization-20261017-084613.864844100.json",
+          "bytes": 502,
+          "modified_ticks": "639277947738654652"
+        },
+        {
+          "kind": "file",
+          "relative": "private-auth\\master.key",
+          "bytes": 32,
+          "modified_ticks": "639277947738506150"
+        },
+        {
+          "kind": "file",
+          "relative": "private-auth\\test-only.json",
+          "bytes": 46,
+          "modified_ticks": "639277947844347521"
+        },
+        {
+          "kind": "file",
+          "relative": "process.json",
+          "bytes": 81,
+          "modified_ticks": "639277947739167475"
+        },
+        {
+          "kind": "file",
+          "relative": "ui.sqlite",
+          "bytes": 3397959680,
+          "modified_ticks": "639277957390476359"
+        },
+        {
+          "kind": "file",
+          "relative": "ui.sqlite-shm",
+          "bytes": 32768,
+          "modified_ticks": "639277959449438368"
+        },
+        {
+          "kind": "file",
+          "relative": "ui.sqlite-wal",
+          "bytes": 297954312,
+          "modified_ticks": "639277960435397269"
+        },
+        {
+          "kind": "file",
+          "relative": "ui.sqlite.heavy.lock",
+          "bytes": 0,
+          "modified_ticks": "639277956845508034"
+        }
+      ]
+    },
+    {
+      "relative": "transaction-20261017-nfr04",
+      "entries": [
+        {
+          "kind": "file",
+          "relative": "isolated.sqlite",
+          "bytes": 3397959680,
+          "modified_ticks": "639277955362251971"
+        },
+        {
+          "kind": "file",
+          "relative": "isolated.sqlite.heavy.lock",
+          "bytes": 0,
+          "modified_ticks": "639277954824931724"
+        },
+        {
+          "kind": "directory",
+          "relative": "private-auth",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "private-auth\\master.key",
+          "bytes": 32,
+          "modified_ticks": "639277954699449242"
+        },
+        {
+          "kind": "file",
+          "relative": "requests.jsonl",
+          "bytes": 148814,
+          "modified_ticks": "639277954907761485"
+        },
+        {
+          "kind": "file",
+          "relative": "summary.json",
+          "bytes": 12927,
+          "modified_ticks": "639277955363002010"
+        }
+      ]
+    },
+    {
+      "relative": "portable-current-20261017\\local",
+      "entries": [
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\jobs",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt\\prepare.jsonl",
+          "bytes": 1992,
+          "modified_ticks": "639277962607797174"
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt\\prepared",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\\manifest.json",
+          "bytes": 1496,
+          "modified_ticks": "639277962606689776"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\jobs\\job-20261017-091049-TxzTE5p86IGt\\prepared\\992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a\\records.csv",
+          "bytes": 172196328,
+          "modified_ticks": "639277962605736912"
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\prepared",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\manifest.json",
+          "bytes": 1562,
+          "modified_ticks": "639277961265277336"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+          "bytes": 349792719,
+          "modified_ticks": "639277961263620174"
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\raw",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\raw\\online_retail_II.xlsx",
+          "bytes": 45622278,
+          "modified_ticks": "639277961037267297"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\raw\\online_retail_II.zip",
+          "bytes": 45622418,
+          "modified_ticks": "639277961036544403"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\raw\\source.json",
+          "bytes": 517,
+          "modified_ticks": "639277961037467367"
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\state",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\business.sqlite",
+          "bytes": 3327578112,
+          "modified_ticks": "639277963119781900"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\business.sqlite-shm",
+          "bytes": 65536,
+          "modified_ticks": "639277962640569100"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\business.sqlite-wal",
+          "bytes": 32276112,
+          "modified_ticks": "639277963202036116"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\business.sqlite.heavy.lock",
+          "bytes": 0,
+          "modified_ticks": "639277961275598438"
+        },
+        {
+          "kind": "directory",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth",
+          "bytes": 0,
+          "modified_ticks": ""
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-090942.790397500.json",
+          "bytes": 505,
+          "modified_ticks": "639277961827914004"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-090942.852129500.json",
+          "bytes": 311,
+          "modified_ticks": "639277961828526685"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-090942.901809800.json",
+          "bytes": 313,
+          "modified_ticks": "639277961829023818"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-090942.948894900.json",
+          "bytes": 315,
+          "modified_ticks": "639277961829494395"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-090943.544201500.json",
+          "bytes": 313,
+          "modified_ticks": "639277961835448047"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\initialization-20261017-091157.667290000.json",
+          "bytes": 311,
+          "modified_ticks": "639277963176678290"
+        },
+        {
+          "kind": "file",
+          "relative": "dutucijp-vibecoding-final\\state\\private-auth\\master.key",
+          "bytes": 32,
+          "modified_ticks": "639277961827770599"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{"Time":"2026-10-17T08:53:09.7245854+08:00","Action":"start","Package":"returnsrecon/cmd/transactionverify"}
+{"Time":"2026-10-17T08:53:10.3005634+08:00","Action":"run","Package":"returnsrecon/cmd/transactionverify","Test":"TestRetainedBaselineMatchesProductionResults"}
+{"Time":"2026-10-17T08:53:10.3005634+08:00","Action":"output","Package":"returnsrecon/cmd/transactionverify","Test":"TestRetainedBaselineMatchesProductionResults","Output":"=== RUN   TestRetainedBaselineMatchesProductionResults\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:53:10.3215311+08:00","Action":"output","Package":"returnsrecon/cmd/transactionverify","Test":"TestRetainedBaselineMatchesProductionResults","Output":"--- PASS: TestRetainedBaselineMatchesProductionResults (0.02s)\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:53:10.3215311+08:00","Action":"pass","Package":"returnsrecon/cmd/transactionverify","Test":"TestRetainedBaselineMatchesProductionResults","Elapsed":0.02}
+{"Time":"2026-10-17T08:53:10.3215311+08:00","Action":"output","Package":"returnsrecon/cmd/transactionverify","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:53:10.3244118+08:00","Action":"output","Package":"returnsrecon/cmd/transactionverify","Output":"ok  \treturnsrecon/cmd/transactionverify\t0.599s\n"}
+{"Time":"2026-10-17T08:53:10.3244118+08:00","Action":"pass","Package":"returnsrecon/cmd/transactionverify","Elapsed":0.6}

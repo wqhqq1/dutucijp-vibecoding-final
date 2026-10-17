@@ -1,0 +1,31 @@
+{
+  "actual_time": "2026-10-17T08:51:10.514969+08:00",
+  "files": 6,
+  "failed": 0,
+  "results": [
+    {
+      "file": "portable/build_bundle.py",
+      "passed": true
+    },
+    {
+      "file": "portable/launcher.py",
+      "passed": true
+    },
+    {
+      "file": "portable/verify_delivery.py",
+      "passed": true
+    },
+    {
+      "file": "tests/test_portable.py",
+      "passed": true
+    },
+    {
+      "file": "tools/build_midterm_v12.py",
+      "passed": true
+    },
+    {
+      "file": "tools/measure-transactions-http.py",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "rejected lxml-only changes from round1 baseline; no runtime data",
+  "patch_sha256": "bd680212ee0f26d8ff1cbf45cc4ac387cf449a5bb321decdb2045f1cda7fa490",
+  "files": [
+    {
+      "file": "tools/prepare.py",
+      "candidate_sha256": "144957538698f6c1977f0bc2e74f1e5cf72b89ac5f7a8bed548d5ebda80d04d5",
+      "round1_restoration_sha256": "98b7f7335b172de4b5df60356e1aa68d074dcce967fb8620fc13bca58f2206c7"
+    },
+    {
+      "file": "tools/requirements.txt",
+      "candidate_sha256": "effdce2fc850f89a8cbe4091fe339dfae93573772a227f69725f47a8629c4f34",
+      "round1_restoration_sha256": "ad122b3a950017c4467995796ca1fc1808d08f245390d24104d129221f304c15"
+    },
+    {
+      "file": "tools/bootstrap.ps1",
+      "candidate_sha256": "ea181e9e9d875726138df338697304160e047fd759b68e4682e97d86ded84bc3",
+      "round1_restoration_sha256": "5e5791527834bafdc6fee9b2fa2ef6ad79bb86134168baf90be90773a9bf3a73"
+    },
+    {
+      "file": "tools/verify-environment.ps1",
+      "candidate_sha256": "9b09f860f2355e27044d895db61b2ab56e537bd820039f2e9b7026350ceb088e",
+      "round1_restoration_sha256": "b70b2f903ed53a264ff8282939ac361bab3ae77aa50d8b0f056379bd97acec27"
+    },
+    {
+      "file": "tools/environment.lock.json",
+      "candidate_sha256": "7804883f9c3608966a4a0821f896601ac4475eb67f5abef97d97ab5aaba52155",
+      "round1_restoration_sha256": "aa41b4d9a2f6cef7f9b35927abdf1916ce15d372d1821d796c5b256d160ea1b4"
+    },
+    {
+      "file": "portable/build_bundle.py",
+      "candidate_sha256": "fc8a0ded415af5bcc2227d07ceb22235bf5c3c02cd9d729319ac8b9bfb4e2048",
+      "round1_restoration_sha256": "2f1428df2037dea46a69ba2bf19148038bb165a4f16eb05fed4cf74ac2d880fe"
+    }
+  ]
+}

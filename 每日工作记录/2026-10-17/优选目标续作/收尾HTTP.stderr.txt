@@ -1,0 +1,3 @@
+NFR04: authenticated isolated HTTP server started; waiting for real year1 import
+NFR04: real import active; starting 10 goroutines x 30 GETs; workload=official-all-transaction-matrix
+NFR04: 300 requests, 0 failures, 300 active-window requests, P95 149.045ms; waiting for actual job completion

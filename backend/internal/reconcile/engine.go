@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"runtime"
+	"slices"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 
@@ -30,9 +32,9 @@ func before(a, b model.Row) bool {
 }
 
 func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, error) {
-	result := model.Result{RuleVersion: model.RuleVersion}
+	result := model.Result{RuleVersion: model.RuleVersion, Balances: make([]model.Balance, 0, len(rows))}
 	groups := make(map[key]*group)
-	seen := make(map[string]bool, len(rows))
+	byID := make(map[string]int, len(rows))
 	prices := make(map[string]string)
 	timestamps := make(map[string]bool)
 	for i := range rows {
@@ -42,10 +44,10 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 			}
 		}
 		r := &rows[i]
-		if seen[r.ID] {
+		if _, exists := byID[r.ID]; exists {
 			return result, fmt.Errorf("duplicate source row %s", r.ID)
 		}
-		seen[r.ID] = true
+		byID[r.ID] = i
 		if r.Excluded != "" {
 			continue
 		}
@@ -72,15 +74,37 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 			return result, fmt.Errorf("invalid accepted quantity: %s", r.ID)
 		}
 		k := key{r.Customer, r.Stock, price, r.Country}
-		g := groups[k]
-		if g == nil {
-			g = &group{}
-			groups[k] = g
+		// Only cancellation-bearing identities need a matching job. Ordinary
+		// sales retain full balances without allocating and scheduling hundreds
+		// of thousands of groups that cannot produce a decision.
+		if r.Kind == "cancel" {
+			g := groups[k]
+			if g == nil {
+				g = &group{}
+				groups[k] = g
+			}
+			g.cancels = append(g.cancels, r)
 		}
-		if r.Kind == "sale" {
+	}
+	for i := range rows {
+		if i%1024 == 0 {
+			if err := ctx.Err(); err != nil {
+				return result, err
+			}
+		}
+		r := &rows[i]
+		if r.Excluded != "" || r.Kind != "sale" {
+			continue
+		}
+		price, cached := prices[r.Price]
+		if !cached {
+			p, _ := decimal.NewFromString(r.Price)
+			price = p.String()
+		}
+		if g := groups[key{r.Customer, r.Stock, price, r.Country}]; g != nil {
 			g.sales = append(g.sales, r)
 		} else {
-			g.cancels = append(g.cancels, r)
+			result.Balances = append(result.Balances, model.Balance{SaleID: r.ID, Original: r.Quantity, Remaining: r.Quantity})
 		}
 	}
 	if workers <= 0 {
@@ -123,8 +147,8 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 	if err := ctx.Err(); err != nil {
 		return result, err
 	}
-	sort.Slice(result.Decisions, func(i, j int) bool { return result.Decisions[i].CancelID < result.Decisions[j].CancelID })
-	sort.Slice(result.Balances, func(i, j int) bool { return result.Balances[i].SaleID < result.Balances[j].SaleID })
+	slices.SortFunc(result.Decisions, func(a, b model.Decision) int { return strings.Compare(a.CancelID, b.CancelID) })
+	slices.SortFunc(result.Balances, func(a, b model.Balance) int { return strings.Compare(a.SaleID, b.SaleID) })
 	for _, d := range result.Decisions {
 		switch d.Classification {
 		case "matched":
@@ -135,7 +159,10 @@ func Compute(ctx context.Context, rows []model.Row, workers int) (model.Result, 
 			result.NoOriginal++
 		}
 	}
-	return result, Validate(rows, result)
+	// The index contains input positions only. The independent validation below
+	// still reconstructs classifications and allocated quantities from decisions,
+	// and checks every balance against its original input row.
+	return result, validateIndexed(rows, result, byID)
 }
 
 func computeGroup(g *group) groupResult {
@@ -224,14 +251,23 @@ func computeGroup(g *group) groupResult {
 // Validate independently checks row/classification, allocation and balance conservation.
 // It runs before persistence, then SQL checks persisted totals before publication.
 func Validate(rows []model.Row, result model.Result) error {
-	byID := make(map[string]*model.Row, len(rows))
+	byID := make(map[string]int, len(rows))
+	for i := range rows {
+		if _, exists := byID[rows[i].ID]; exists {
+			return fmt.Errorf("duplicate source row %s", rows[i].ID)
+		}
+		byID[rows[i].ID] = i
+	}
+	return validateIndexed(rows, result, byID)
+}
+
+func validateIndexed(rows []model.Row, result model.Result, byID map[string]int) error {
 	cancels, sales := 0, 0
 	for i := range rows {
 		r := &rows[i]
 		if r.Excluded != "" {
 			continue
 		}
-		byID[r.ID] = r
 		if r.Kind == "cancel" {
 			cancels++
 		} else {
@@ -241,15 +277,19 @@ func Validate(rows []model.Row, result model.Result) error {
 	if len(result.Decisions) != cancels || len(result.Balances) != sales || result.Matched+result.Suspected+result.NoOriginal != cancels {
 		return fmt.Errorf("result row conservation failed")
 	}
-	used := map[string]int64{}
-	seen := map[string]bool{}
+	used := map[int]int64{}
+	seen := make([]bool, len(rows))
 	classes := map[string]int{}
 	for _, d := range result.Decisions {
-		c, ok := byID[d.CancelID]
-		if !ok || c.Kind != "cancel" || seen[c.ID] || d.Quantity != -c.Quantity {
+		ci, ok := byID[d.CancelID]
+		if !ok {
 			return fmt.Errorf("invalid decision %s", d.CancelID)
 		}
-		seen[c.ID] = true
+		c := &rows[ci]
+		if c.Excluded != "" || c.Kind != "cancel" || seen[ci] || d.Quantity != -c.Quantity {
+			return fmt.Errorf("invalid decision %s", d.CancelID)
+		}
+		seen[ci] = true
 		classes[d.Classification]++
 		if d.Classification != "matched" {
 			if d.SaleID != "" || (d.Classification != "suspected" && d.Classification != "no_original") {
@@ -257,8 +297,12 @@ func Validate(rows []model.Row, result model.Result) error {
 			}
 			continue
 		}
-		s, ok := byID[d.SaleID]
-		if !ok || s.Kind != "sale" || !c.HasIdentity() || s.Duplicate() || c.Duplicate() || s.Customer != c.Customer || s.Stock != c.Stock || s.Country != c.Country || s.Time >= c.Time {
+		si, ok := byID[d.SaleID]
+		if !ok {
+			return fmt.Errorf("ineligible allocation %s", c.ID)
+		}
+		s := &rows[si]
+		if s.Excluded != "" || s.Kind != "sale" || !c.HasIdentity() || s.Duplicate() || c.Duplicate() || s.Customer != c.Customer || s.Stock != c.Stock || s.Country != c.Country || s.Time >= c.Time {
 			return fmt.Errorf("ineligible allocation %s", c.ID)
 		}
 		sp, _ := decimal.NewFromString(s.Price)
@@ -266,21 +310,24 @@ func Validate(rows []model.Row, result model.Result) error {
 		if !sp.Equal(cp) || cp.Mul(decimal.NewFromInt(d.Quantity)).String() != d.Amount {
 			return fmt.Errorf("price or amount mismatch")
 		}
-		if d.Quantity > s.Quantity-used[s.ID] {
+		if d.Quantity > s.Quantity-used[si] {
 			return fmt.Errorf("over allocation %s", s.ID)
 		}
-		used[s.ID] += d.Quantity
+		used[si] += d.Quantity
 	}
 	if classes["matched"] != result.Matched || classes["suspected"] != result.Suspected || classes["no_original"] != result.NoOriginal {
 		return fmt.Errorf("classification counters differ")
 	}
-	seen = map[string]bool{}
 	for _, b := range result.Balances {
-		s, ok := byID[b.SaleID]
-		if !ok || s.Kind != "sale" || seen[s.ID] || b.Original != s.Quantity || b.Allocated != used[s.ID] || b.Remaining < 0 || b.Allocated < 0 || b.Original-b.Allocated != b.Remaining {
+		si, ok := byID[b.SaleID]
+		if !ok {
 			return fmt.Errorf("balance conservation failed for %s", b.SaleID)
 		}
-		seen[s.ID] = true
+		s := &rows[si]
+		if s.Excluded != "" || s.Kind != "sale" || seen[si] || b.Original != s.Quantity || b.Allocated != used[si] || b.Remaining < 0 || b.Allocated < 0 || b.Original-b.Allocated != b.Remaining {
+			return fmt.Errorf("balance conservation failed for %s", b.SaleID)
+		}
+		seen[si] = true
 	}
 	return nil
 }

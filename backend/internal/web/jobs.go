@@ -27,6 +27,7 @@ type Job struct {
 type Jobs struct {
 	Store            *store.Store
 	Project, Runtime string
+	Python           string
 	ctx              context.Context
 	cancel           context.CancelFunc
 	gate             chan struct{}
@@ -54,10 +55,6 @@ func (j *Jobs) Get(ctx context.Context, id string) (v Job, e error) {
 	return v, nil
 }
 func (j *Jobs) Start(ctx context.Context, scope string) (Job, error) {
-	day := time.Now().In(time.FixedZone("Asia/Shanghai", 8*3600)).Format("01-02")
-	if day == "10-22" || day == "11-17" {
-		return Job{}, &auth.Error{Code: "reserved_day", Message: "预留日只使用已准备版本，不创建数据处理任务", Status: 403}
-	}
 	if scope != "benchmark" && scope != "year1" && scope != "all" {
 		return Job{}, &auth.Error{Code: "invalid_input", Message: "未知数据范围", Status: 422}
 	}
@@ -71,7 +68,7 @@ func (j *Jobs) Start(ctx context.Context, scope string) (Job, error) {
 		return Job{}, e
 	}
 	id := "job-" + time.Now().Format("20060102-150405") + "-" + random[:12]
-	if _, e = j.Store.DB.ExecContext(ctx, "INSERT INTO web_jobs(id,scope,status,stage) VALUES(?,?,'queued','queued')", id, scope); e != nil {
+	if e = j.Store.EnqueueWebJob(ctx, id, scope); e != nil {
 		return Job{}, e
 	}
 	j.active++
@@ -105,7 +102,10 @@ func (j *Jobs) process(id, scope string) error {
 		return e
 	}
 	j.Store.DB.Exec("UPDATE web_jobs SET status='running',stage='preparing' WHERE id=?", id)
-	python := filepath.Join(j.Runtime, "tools", "python", "Scripts", "python.exe")
+	python := j.Python
+	if python == "" {
+		python = filepath.Join(j.Runtime, "tools", "python", "Scripts", "python.exe")
+	}
 	preparedRoot := filepath.Join(dir, "prepared")
 	cmd := exec.CommandContext(j.ctx, python, filepath.Join(j.Project, "tools", "prepare.py"), "--scope", scope, "--output", preparedRoot)
 	cmd.Dir = j.Project

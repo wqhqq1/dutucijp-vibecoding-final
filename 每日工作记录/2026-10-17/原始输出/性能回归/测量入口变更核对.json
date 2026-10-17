@@ -1,0 +1,11 @@
+{
+  "actual_time": "2026-10-17T08:56:10.3183104+08:00",
+  "file": "tools/measure-performance.ps1",
+  "syntax_errors": 0,
+  "iterations_default": 3,
+  "iterations_validate_range": [
+    1,
+    3
+  ],
+  "actual_iterations_per_measure": 1
+}

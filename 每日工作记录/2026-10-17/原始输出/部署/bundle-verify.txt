@@ -1,0 +1,9 @@
+The bundle contains these 5 refs:
+3ac3cacca5f16d48abcee275b51413eccfce40e0 refs/heads/delivery/teacher-portable-demo
+79ff9b2b1ceceb232238ac79a5a54a837997bed6 refs/heads/experiment/fr18-disposable-20261015-210730
+dcc1b03f2656106b4cbb71f4be05018b401373ad refs/heads/main
+dcc1b03f2656106b4cbb71f4be05018b401373ad HEAD
+3ac3cacca5f16d48abcee275b51413eccfce40e0 worktrees/教师独立Demo工作区/HEAD
+The bundle records a complete history.
+The bundle uses this hash algorithm: sha1
+E:/软件编程大作业/退货对账与差异处理系统/.backup/software-acceptance-20261017.bundle is okay

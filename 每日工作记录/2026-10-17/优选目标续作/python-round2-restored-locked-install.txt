@@ -1,0 +1,17 @@
+Collecting openpyxl@ https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl (from -r tools/requirements.txt (line 2))
+  Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+Collecting et_xmlfile@ https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl (from -r tools/requirements.txt (line 3))
+  Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+Installing collected packages: openpyxl, et_xmlfile
+  Attempting uninstall: openpyxl
+    Found existing installation: openpyxl 3.1.5
+    Uninstalling openpyxl-3.1.5:
+      Successfully uninstalled openpyxl-3.1.5
+  Attempting uninstall: et_xmlfile
+    Found existing installation: et_xmlfile 2.0.0
+    Uninstalling et_xmlfile-2.0.0:
+      Successfully uninstalled et_xmlfile-2.0.0
+Successfully installed et_xmlfile-2.0.0 openpyxl-3.1.5
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: C:\Users\wqhqq\AppData\Local\dutucijp-vibecoding-final\tools\python\Scripts\python.exe -m pip install --upgrade pip

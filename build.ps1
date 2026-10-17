@@ -4,9 +4,8 @@ $ErrorActionPreference='Stop'
 Assert-ExecutionDay
 $runtimeRoot=Join-Path $env:LOCALAPPDATA 'dutucijp-vibecoding-final'
 $goExe=Join-Path $runtimeRoot 'tools/go/bin/go.exe'
-$nodeDir='C:/Users/wqhqq/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin'
-$nodeExe=Join-Path $nodeDir 'node.exe'
-if(-not (Test-Path -LiteralPath $nodeExe)){$nodeExe=(Get-Command node -ErrorAction Stop).Source;$nodeDir=Split-Path $nodeExe -Parent}
+$nodeExe=(Get-Command node -ErrorAction Stop).Source
+$nodeDir=Split-Path $nodeExe -Parent
 $npmDirectory=Split-Path (Get-Command npm -ErrorAction Stop).Source -Parent
 $npmCli=Join-Path $npmDirectory 'node_modules/npm/bin/npm-cli.js'
 if(-not (Test-Path -LiteralPath $npmCli)){throw 'Official npm CLI is unavailable; see tools/environment.lock.json'}

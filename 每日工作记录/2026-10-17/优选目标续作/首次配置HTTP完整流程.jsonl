@@ -1,0 +1,9 @@
+{"Time":"2026-10-17T20:15:37.8609701+08:00","Action":"start","Package":"returnsrecon/internal/web"}
+{"Time":"2026-10-17T20:15:39.2573853+08:00","Action":"run","Package":"returnsrecon/internal/web","Test":"TestTC36_FirstSetupHTTPBoundaryAndAccountSelection"}
+{"Time":"2026-10-17T20:15:39.2573853+08:00","Action":"output","Package":"returnsrecon/internal/web","Test":"TestTC36_FirstSetupHTTPBoundaryAndAccountSelection","Output":"=== RUN   TestTC36_FirstSetupHTTPBoundaryAndAccountSelection\n","OutputType":"frame"}
+{"Time":"2026-10-17T20:15:39.3944623+08:00","Action":"output","Package":"returnsrecon/internal/web","Test":"TestTC36_FirstSetupHTTPBoundaryAndAccountSelection","Output":"    setup_http_test.go:62: HTTP status=422, want=403, response code=invalid_input (secret response body withheld)\n","OutputType":"error"}
+{"Time":"2026-10-17T20:15:39.3973966+08:00","Action":"output","Package":"returnsrecon/internal/web","Test":"TestTC36_FirstSetupHTTPBoundaryAndAccountSelection","Output":"--- FAIL: TestTC36_FirstSetupHTTPBoundaryAndAccountSelection (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-10-17T20:15:39.3973966+08:00","Action":"fail","Package":"returnsrecon/internal/web","Test":"TestTC36_FirstSetupHTTPBoundaryAndAccountSelection","Elapsed":0.14}
+{"Time":"2026-10-17T20:15:39.3973966+08:00","Action":"output","Package":"returnsrecon/internal/web","Output":"FAIL\n","OutputType":"frame"}
+{"Time":"2026-10-17T20:15:39.4060062+08:00","Action":"output","Package":"returnsrecon/internal/web","Output":"FAIL\treturnsrecon/internal/web\t1.545s\n","OutputType":"frame"}
+{"Time":"2026-10-17T20:15:39.4060062+08:00","Action":"fail","Package":"returnsrecon/internal/web","Elapsed":1.545}

@@ -1,0 +1,9 @@
+{
+  "actual_time": "2026-10-17T20:24:11.0533894+08:00",
+  "runtime_id": "personal-demo",
+  "home_status": 200,
+  "anonymous_business_status": 401,
+  "untouched_accounts_count": 0,
+  "all_checks_passed": true,
+  "note": "An earlier shell probe used a reserved HOME variable name and was corrected; no application state was changed by that verifier error."
+}

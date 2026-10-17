@@ -78,7 +78,7 @@ func TestImportPartialBatchesStayUnpublishedAndRetryBuildsIndexes(t *testing.T) 
 	if scalar(t, s, "SELECT count(*) FROM normalized_rows WHERE dataset_id=?", m.DatasetID) != len(rows) || scalar(t, s, "SELECT count(*) FROM source_rows") != len(rows) {
 		t.Fatal("retry duplicated or lost source records")
 	}
-	if scalar(t, s, "SELECT count(*) FROM sqlite_master WHERE name IN ('row_identity','row_source','source_order','cases_source_order','allocations_source_order')") != 5 {
+	if scalar(t, s, "SELECT count(*) FROM sqlite_master WHERE name IN ('row_identity','row_query_source','row_source_time','cases_source_order','allocations_source_order')") != 5 {
 		t.Fatal("input published before required indexes were built")
 	}
 }

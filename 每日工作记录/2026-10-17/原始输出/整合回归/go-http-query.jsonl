@@ -1,0 +1,8 @@
+{"Time":"2026-10-17T08:51:27.3589162+08:00","Action":"start","Package":"returnsrecon/internal/web"}
+{"Time":"2026-10-17T08:51:28.6691266+08:00","Action":"run","Package":"returnsrecon/internal/web","Test":"TestHTTP_TC16_CountrySortPaginationAndExportAgree"}
+{"Time":"2026-10-17T08:51:28.6691266+08:00","Action":"output","Package":"returnsrecon/internal/web","Test":"TestHTTP_TC16_CountrySortPaginationAndExportAgree","Output":"=== RUN   TestHTTP_TC16_CountrySortPaginationAndExportAgree\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:51:28.8312924+08:00","Action":"output","Package":"returnsrecon/internal/web","Test":"TestHTTP_TC16_CountrySortPaginationAndExportAgree","Output":"--- PASS: TestHTTP_TC16_CountrySortPaginationAndExportAgree (0.16s)\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:51:28.8312924+08:00","Action":"pass","Package":"returnsrecon/internal/web","Test":"TestHTTP_TC16_CountrySortPaginationAndExportAgree","Elapsed":0.16}
+{"Time":"2026-10-17T08:51:28.8318249+08:00","Action":"output","Package":"returnsrecon/internal/web","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-10-17T08:51:28.8411264+08:00","Action":"output","Package":"returnsrecon/internal/web","Output":"ok  \treturnsrecon/internal/web\t1.482s\n"}
+{"Time":"2026-10-17T08:51:28.8411264+08:00","Action":"pass","Package":"returnsrecon/internal/web","Elapsed":1.482}

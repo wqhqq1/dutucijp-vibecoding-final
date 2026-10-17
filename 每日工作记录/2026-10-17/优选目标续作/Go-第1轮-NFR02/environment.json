@@ -1,0 +1,280 @@
+{
+  "recorded_at": "2026-10-17T10:36:15.1757529+08:00",
+  "actual_timezone": "Asia/Shanghai",
+  "measure": "NFR02",
+  "iterations_requested": 1,
+  "git_head": "944544b12122bfeb9924fee6aa8ca6e6ba078b1d",
+  "git_status": [
+    " M AGENTS.md",
+    " M backend/cmd/perfverify/main.go",
+    " M backend/internal/reconcile/engine.go",
+    " M backend/internal/reconcile/engine_test.go",
+    " M backend/internal/store/query.go",
+    " M backend/internal/store/query_test.go",
+    " M backend/internal/store/store.go",
+    " M tests/test_prepare.py",
+    " M tools/prepare.py",
+    " M 决定记录.md",
+    " M 怎么做.md",
+    " M 怎么算做对.md",
+    " M 要做什么.md",
+    "?? backend/internal/store/compute_load_test.go",
+    "?? backend/internal/store/phase.go",
+    "?? tools/build_midterm_v12.py",
+    "?? 中期汇报v1.2.pdf",
+    "?? 中期汇报v1.2讲稿.md",
+    "?? 四段式任务草稿补充-教师独立运行Demo.md",
+    "?? 每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/",
+    "?? 每日工作记录/2026-10-17/优选目标续作/",
+    "?? 资料/教师独立运行核查.md"
+  ],
+  "source_snapshot_root": "E:\\软件编程大作业\\退货对账与差异处理系统",
+  "operating_system": "Microsoft Windows NT 10.0.26340.0",
+  "architecture": "X64",
+  "powershell": "7.6.5",
+  "logical_processors": 16,
+  "processors": [
+    {
+      "Name": "Intel(R) Core(TM) Ultra 9 285H",
+      "NumberOfCores": 16,
+      "NumberOfLogicalProcessors": 16,
+      "MaxClockSpeed": 2900
+    }
+  ],
+  "physical_memory_bytes": 33752997888,
+  "go_version": "go version go1.27.2 windows/amd64",
+  "python_version": "Python 3.12.10",
+  "python_dependencies": [
+    "et_xmlfile @ https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl#sha256=7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+    "openpyxl @ https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl#sha256=5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+  ],
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_read_only": true,
+  "binary_sha256": "8fee5f44d94bdffe40e9358c54bda67d6fb7009db1b418c0610cf5898c6b8d99",
+  "binary_build_info": [
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\perfverify.exe: go1.27.2",
+    "\tpath\treturnsrecon/cmd/perfverify",
+    "\tmod\treturnsrecon\t(devel)\t",
+    "\tdep\tgithub.com/dustin/go-humanize\tv1.0.1\th1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=",
+    "\tdep\tgithub.com/gofrs/flock\tv0.13.1\th1:jjREztyBeSKBZYAC+mgc1laB+xsgy4kYMf3FbKF2UBo=",
+    "\tdep\tgithub.com/mattn/go-isatty\tv0.0.24\th1:tGZZoVgT/KiqK1c8ocVLeDS8BSWMRd47J3Lbz7vsReI=",
+    "\tdep\tgithub.com/ncruces/go-strftime\tv1.0.0\th1:HMFp8mLCTPp341M/ZnA4qaf7ZlsbTc+miZjCLOFAw7w=",
+    "\tdep\tgithub.com/remyoudompheng/bigfft\tv0.0.0-20230129092748-24d4a6f8daec\th1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=",
+    "\tdep\tgithub.com/shopspring/decimal\tv1.5.0\th1:HxSWk31RmJv0EyY4oLiGQB9u7WPludUwPBdvQZnYFPc=",
+    "\tdep\tgolang.org/x/sys\tv0.49.0\th1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=",
+    "\tdep\tmodernc.org/libc\tv1.77.1\th1:Ct8j47QtiZ1Enj2DtFXQtUqrPCAjdCmPjtCuvrYQ0Hs=",
+    "\tdep\tmodernc.org/mathutil\tv1.7.1\th1:GCZVGXdaN8gTqB1Mf/usp1Y/hSqgI2vAGGP4jZMCxOU=",
+    "\tdep\tmodernc.org/memory\tv1.12.1\th1:nFMiWrpStgZczNl6XI9GnIk/rWhYIyHGUaR04pGbp9g=",
+    "\tdep\tmodernc.org/sqlite\tv1.60.1\th1:/blz53O951KWFOso4QQvEs/Fq6cDBKLtMVrYNSeJVKw=",
+    "\tbuild\t-buildmode=exe",
+    "\tbuild\t-compiler=gc",
+    "\tbuild\tCGO_ENABLED=0",
+    "\tbuild\tGOARCH=amd64",
+    "\tbuild\tGOOS=windows",
+    "\tbuild\tGOAMD64=v1",
+    "\tbuild\tvcs=git",
+    "\tbuild\tvcs.revision=944544b12122bfeb9924fee6aa8ca6e6ba078b1d",
+    "\tbuild\tvcs.time=2026-10-17T01:49:42Z",
+    "\tbuild\tvcs.modified=true"
+  ],
+  "code_hashes": [
+    {
+      "path": "backend\\cmd\\perfhttp\\main_test.go",
+      "sha256": "819445e8d3025c9c449de2c0fd3d79a4fb83eadf1ea24e5695400f7cd3616094"
+    },
+    {
+      "path": "backend\\cmd\\perfhttp\\main.go",
+      "sha256": "cc402bddafbaf6e3d45e2c37a7d7fa677cb215eb9ae137120ed4c2157a4873b7"
+    },
+    {
+      "path": "backend\\cmd\\perfverify\\main.go",
+      "sha256": "01465770e56a85ee231fbf4562c237ec818675031b7da58cf50796305902592b"
+    },
+    {
+      "path": "backend\\cmd\\queryverify\\main.go",
+      "sha256": "05f116028aa17b1fe26ba7f7b15184cfa6819e4b59356c173eee943b4d7531d9"
+    },
+    {
+      "path": "backend\\cmd\\recon\\main_test.go",
+      "sha256": "2fac2dcd84c33a7733724b1c5724860cc462843978daa929eae346d7695acd1b"
+    },
+    {
+      "path": "backend\\cmd\\recon\\main.go",
+      "sha256": "be4bf2ca07310985b0ac1ecb3de2ee312efc4957ee3f87a530571fea94988330"
+    },
+    {
+      "path": "backend\\cmd\\recon\\portable_test.go",
+      "sha256": "67cf8d33b42317804888d4e28d56181762d6c4bf0a42afa88ba43b3136581c1a"
+    },
+    {
+      "path": "backend\\cmd\\recon\\serve.go",
+      "sha256": "0d085644cb42cbbd5411310b848f0344f9c34c0c09f3f0d44417e2bfd7125310"
+    },
+    {
+      "path": "backend\\cmd\\recon\\workflow_verify.go",
+      "sha256": "7a981deeff10733d527cdf3c4c979695dafadd4434b51e84e11b00317b4d41cc"
+    },
+    {
+      "path": "backend\\cmd\\resumeverify\\main.go",
+      "sha256": "a35934fcb3dcdb94135524dbc92ec95567c2275a91d2799210d6a30930ff2a66"
+    },
+    {
+      "path": "backend\\cmd\\transactionverify\\main_test.go",
+      "sha256": "b2d28c4804bf7b0c125c6e27f9c12bc867b4e8f66ff9b947df608699c4492e6a"
+    },
+    {
+      "path": "backend\\cmd\\transactionverify\\main.go",
+      "sha256": "c16bf090f8a52ab99220a2f0b73efed5e100a4d4462852853955256b05e0c5af"
+    },
+    {
+      "path": "backend\\internal\\auth\\activity_test.go",
+      "sha256": "6f36addd416af8120db5f37213209c683d44edfa5dd40bdbeb35513e39e431ec"
+    },
+    {
+      "path": "backend\\internal\\auth\\auth.go",
+      "sha256": "d0c057a2495b000da720cdf6c6e2bb9a8e61a5062e2cce5574cebc74e0da340f"
+    },
+    {
+      "path": "backend\\internal\\auth\\factors.go",
+      "sha256": "0e65b47472deafea52cb2d0f936625089d1135e8efed94e06997ab7dc2e271c5"
+    },
+    {
+      "path": "backend\\internal\\auth\\passkey.go",
+      "sha256": "4f402ce93b4d90241380c3e0bed6809d9f64b5265e85438b63387d0b0ce33369"
+    },
+    {
+      "path": "backend\\internal\\auth\\private_other.go",
+      "sha256": "ab9c28cc9362ee2cca4eb574fd9d3ec43d07ba4d6d42cdb37be2d136896833a0"
+    },
+    {
+      "path": "backend\\internal\\auth\\private_windows.go",
+      "sha256": "aaa7e5923dc934e50bc4486a6ab25f1e11f36e5699137534c1fd159d143a337f"
+    },
+    {
+      "path": "backend\\internal\\auth\\schema.sql",
+      "sha256": "05783a949d8fbf3670c5d4e3b283c8c6a28d6a40f534db5743633d6b2dfc8216"
+    },
+    {
+      "path": "backend\\internal\\auth\\security_test.go",
+      "sha256": "6709813272bb911d3df06f896fdb3c37492cd1698c73ee45bbb998d6e4bc02f4"
+    },
+    {
+      "path": "backend\\internal\\auth\\security_windows_test.go",
+      "sha256": "7287d5b2ca84c7b63bb016411a6d2bf51634a27b6d485971aa3ed5144abb41c2"
+    },
+    {
+      "path": "backend\\internal\\model\\model.go",
+      "sha256": "ac931d042c7c49a5388c6f6d10e2ea0083de3221f5d02fb864d7a570311a80f0"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\engine_test.go",
+      "sha256": "cbd1c4b1f1ae3f53580d11ad9ce36a4bbe15b570cc8765b9d748b7f0bb9ae8c5"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\engine.go",
+      "sha256": "5511ab672c2c112c46f94a17f7677183fc5a7772aab1f0e804201c17bee55730"
+    },
+    {
+      "path": "backend\\internal\\reconcile\\index.go",
+      "sha256": "0f1d795a6b049b5cec04e73fc84478b760ce47b9e0e41c9bc2f44517e8924300"
+    },
+    {
+      "path": "backend\\internal\\store\\bulk_import_test.go",
+      "sha256": "f19643cec6e5a421dc8e2933bb9fca8d6302e7b064562c90f2877ce2167d713e"
+    },
+    {
+      "path": "backend\\internal\\store\\compute_load_test.go",
+      "sha256": "9d43e4e6201a69f59f2f340271841ce9222d958f06b492b780e95cb86f6740b6"
+    },
+    {
+      "path": "backend\\internal\\store\\evidence.go",
+      "sha256": "dc030b73650c686c13d138861a2f4bb34c295eca49cbfbe18764dd17d98e6062"
+    },
+    {
+      "path": "backend\\internal\\store\\manual_test.go",
+      "sha256": "069e8c83869de7376aea76931c7203913258a134a9b079a8b919abb0bc5043db"
+    },
+    {
+      "path": "backend\\internal\\store\\manual.go",
+      "sha256": "be6129c043606fedcfb4d8fbfa88456a1159659918d199522560e4280593ded7"
+    },
+    {
+      "path": "backend\\internal\\store\\phase.go",
+      "sha256": "d8465462ac6f1c460dad4bd978d51157053d5e9842793740c7de4f28f8ebd801"
+    },
+    {
+      "path": "backend\\internal\\store\\query_test.go",
+      "sha256": "ccc3115022fe38e2ec44154659ceb2874190a53a2f0c4c119132d7c375d007c4"
+    },
+    {
+      "path": "backend\\internal\\store\\query.go",
+      "sha256": "35fe1336d128e42162f4750c31f098f8418d20f3cb5e349eba04da8e7aaf9621"
+    },
+    {
+      "path": "backend\\internal\\store\\schema.sql",
+      "sha256": "061a3b038ba0459de65f8931e76072ca1ba4ee7ef739895070321a2264563295"
+    },
+    {
+      "path": "backend\\internal\\store\\store_test.go",
+      "sha256": "bdcdffed4c2530c62f1ed20b32f1d4b07c40f99dda9f4a1208e9d05417f96dfe"
+    },
+    {
+      "path": "backend\\internal\\store\\store.go",
+      "sha256": "88abd8e9e2b924e694abcefeae560a83a5768f06f22f7a3d82fe25cb638cf8ad"
+    },
+    {
+      "path": "backend\\internal\\store\\verify_test.go",
+      "sha256": "d7f73d6d4d932f2f2d6b1f66bfcbb357cafe211a20dab27ba957326c52560c66"
+    },
+    {
+      "path": "backend\\internal\\store\\verify.go",
+      "sha256": "ec33bd4aea5d7fba0549177c802a9375ff05d2574d76dd2e10a66879c61720da"
+    },
+    {
+      "path": "backend\\internal\\store\\web_jobs.go",
+      "sha256": "3d745fcaa361ea0bc1f9062f5237d6880e577398cd90919bbbe2dd695072a56f"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow_test.go",
+      "sha256": "72e37f46be8264e3de04ecd4436b1d586401bc2f13cc9aa416bdd88c9f2c1c3d"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow_verify.go",
+      "sha256": "981982970d12e91693520df7407284461d6661e49673c953160c27d2aa4f8aa2"
+    },
+    {
+      "path": "backend\\internal\\store\\workflow.go",
+      "sha256": "8084bcc53a3acd29cb7239dea342efc2cb9af97efc4f16cb1cdfde5bad78311a"
+    },
+    {
+      "path": "backend\\internal\\web\\frontend_test.go",
+      "sha256": "f9040bf0f6630450c3c8d1b14d7e39413ade40ed69f5c1722dd565946cb74dfe"
+    },
+    {
+      "path": "backend\\internal\\web\\jobs_authorization_test.go",
+      "sha256": "1f2a039193a815e16105d11474358da8a6599ec8ccc002843f78c30dc5210f21"
+    },
+    {
+      "path": "backend\\internal\\web\\jobs.go",
+      "sha256": "831e9846e361568216c5833277dcfc9ad8420e75666292ab9969449db1f5c984"
+    },
+    {
+      "path": "backend\\internal\\web\\portable_test.go",
+      "sha256": "945584bf906a527b9bb96a8e46817af6d7311b6e23bb367f0bc2cabec11bc87f"
+    },
+    {
+      "path": "backend\\internal\\web\\security_http_test.go",
+      "sha256": "ca02ab7f254a74897566d3f53605d571c58756767f1d1549981d92c61bdeb87e"
+    },
+    {
+      "path": "backend\\internal\\web\\server.go",
+      "sha256": "1264fcfd4cbbf6b7fd3346c4cebef8160b4ead4a54e95868f0f8d9d9a4342ed7"
+    },
+    {
+      "path": "backend\\internal\\web\\transaction_query_test.go",
+      "sha256": "b701e436fdda6be4dfa1fc7ce5002a586abf1dd1132aa095ee69f9059c9f1ecc"
+    }
+  ],
+  "prepare_sha256": "98b7f7335b172de4b5df60356e1aa68d074dcce967fb8620fc13bca58f2206c7",
+  "boundary": "No downloads, installation or compilation timed. Fresh preparation output for each NFR01/NFR02; new empty SQLite for every trial. OS filesystem cache is not deliberately flushed. Post-timing durable checks are separate."
+}

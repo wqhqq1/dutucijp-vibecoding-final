@@ -1,0 +1,82 @@
+[
+  {
+    "category": "transactions-combined",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 272.336,
+    "max_ms": 370.4534
+  },
+  {
+    "category": "transactions-country-france",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 224.1317,
+    "max_ms": 232.383
+  },
+  {
+    "category": "transactions-country-uk",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 504.88449999999995,
+    "max_ms": 576.3256
+  },
+  {
+    "category": "transactions-customer",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 307.438,
+    "max_ms": 485.2723
+  },
+  {
+    "category": "transactions-date-year",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 565.3324,
+    "max_ms": 594.5663
+  },
+  {
+    "category": "transactions-deep-page",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 393.4274,
+    "max_ms": 407.192
+  },
+  {
+    "category": "transactions-default",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 233.71910000000003,
+    "max_ms": 391.8809
+  },
+  {
+    "category": "transactions-invoice",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 301.78549999999996,
+    "max_ms": 342.60249999999996
+  },
+  {
+    "category": "transactions-sort-date-deep",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 523.9351,
+    "max_ms": 552.667
+  },
+  {
+    "category": "transactions-stock",
+    "requests": 30,
+    "failures": 0,
+    "active": 30,
+    "p95_ms": 268.5847,
+    "max_ms": 288.4391
+  }
+]

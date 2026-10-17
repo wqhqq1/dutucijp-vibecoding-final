@@ -1,0 +1,365 @@
+{
+  "measurement_complete": true,
+  "actual_time": "2026-10-17T14:57:48.0458061+08:00",
+  "go_version": "go1.27.2",
+  "logical_cpus": 16,
+  "binary_sha256": "49fc833e950d1778f55f3cf0ec4bd6d2d9806fa80c8534aada257e79a9af7322",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-query2\\query.sqlite",
+  "source_sha256_before": "8b39ad979fd69df3276e5e5035450844b37feeccb104b47847b575503008c1bc",
+  "source_sha256_after": "8b39ad979fd69df3276e5e5035450844b37feeccb104b47847b575503008c1bc",
+  "isolated_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-query-round2-20261017-145747\\isolated.sqlite",
+  "read_only_backup_seconds": 8.3481918,
+  "actual_http_server_url": "http://127.0.0.1:10345",
+  "request_host_and_origin": "http://localhost:8080",
+  "authentication_method": "Isolated random finance identity; real Bootstrap -\u003e strong password -\u003e TOTP proof -\u003e Complete -\u003e Logout -\u003e password+TOTP login. No sessions inserted. No real human/device claim.",
+  "query_scope": "all",
+  "query_run": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+  "job_id": "job-20261017-145809-bY_Cwc6SAO8m",
+  "job_scope": "year1",
+  "job_at_load_start": {
+    "id": "job-20261017-145809-bY_Cwc6SAO8m",
+    "scope": "year1",
+    "status": "running",
+    "stage": "importing",
+    "run_id": "",
+    "progress": {
+      "stage": "prepared",
+      "stats": {
+        "accepted": 521770,
+        "accepted_cancels": 10205,
+        "accepted_sales": 511565,
+        "excluded": 3691,
+        "excluded_cancels": 1,
+        "exclusion_reasons": {
+          "invalid_quantity": 1,
+          "nonpositive_price": 3690
+        },
+        "flags": {
+          "missing_customer": 107927,
+          "missing_description": 2928,
+          "same_sheet_duplicate": 13283
+        },
+        "raw": 525461,
+        "raw_cancels": 10206,
+        "unknown_invoice": 0
+      }
+    }
+  },
+  "job_at_load_end": {
+    "id": "job-20261017-145809-bY_Cwc6SAO8m",
+    "scope": "year1",
+    "status": "running",
+    "stage": "importing",
+    "run_id": "",
+    "progress": {
+      "stage": "prepared",
+      "stats": {
+        "accepted": 521770,
+        "accepted_cancels": 10205,
+        "accepted_sales": 511565,
+        "excluded": 3691,
+        "excluded_cancels": 1,
+        "exclusion_reasons": {
+          "invalid_quantity": 1,
+          "nonpositive_price": 3690
+        },
+        "flags": {
+          "missing_customer": 107927,
+          "missing_description": 2928,
+          "same_sheet_duplicate": 13283
+        },
+        "raw": 525461,
+        "raw_cancels": 10206,
+        "unknown_invoice": 0
+      }
+    }
+  },
+  "job_final": {
+    "id": "job-20261017-145809-bY_Cwc6SAO8m",
+    "scope": "year1",
+    "status": "succeeded",
+    "stage": "published",
+    "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+    "progress": {
+      "run_id": "76071de939f6d680ce008f094b505a7e94de83ebdd1eab43fab6d0660cb3baad",
+      "dataset_id": "992846f99933864f7afd6785a18c4bb6bbcf7556e4480eb0cffa6b42b63bb17a",
+      "rule_version": "conservative-1.0.0",
+      "status": "published",
+      "reused": false,
+      "input": {
+        "raw": 525461,
+        "accepted": 521770,
+        "excluded": 3691,
+        "accepted_sales": 511565,
+        "accepted_cancels": 10205,
+        "raw_cancels": 10206,
+        "excluded_cancels": 1
+      },
+      "matched": 5214,
+      "suspected": 2699,
+      "no_original": 2292,
+      "cases": 4991,
+      "workers": 8,
+      "reconcile_and_persist_seconds": 4.0322919,
+      "coverage": "5214/10205 (51.092602%)",
+      "caveat": "规则推断；无真实原订单关联号。无原单仅指当前范围及规则下无合格候选。"
+    }
+  },
+  "workers": 10,
+  "requests": 300,
+  "requests_per_worker": 30,
+  "failures": 0,
+  "requests_with_active_job_before_and_after": 300,
+  "p95_milliseconds_nearest_rank": 137.5671,
+  "max_milliseconds": 285.2051,
+  "baseline_passed": true,
+  "target_passed": true,
+  "categories": {
+    "transactions-combined": 30,
+    "transactions-country-france": 30,
+    "transactions-country-uk": 30,
+    "transactions-customer": 30,
+    "transactions-date-year": 30,
+    "transactions-deep-page": 30,
+    "transactions-default": 30,
+    "transactions-invoice": 30,
+    "transactions-sort-date-deep": 30,
+    "transactions-stock": 30
+  },
+  "request_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-query-round2-20261017-145747\\requests.jsonl",
+  "measurement_boundary": "10 simultaneous goroutines, 30 mixed authenticated HTTP GETs each. Timer spans request construction/transport/server/authentication/query/full body read. Per-request production job state sampled directly before and after, outside query timer. Load begins only at real importing/reconciling stage. No password hashing per query. Every request qualifies for the active window only when both observations are running/importing or running/reconciling. Matrix response count/page/filter/source/order validation is outside the HTTP timer.",
+  "notice": "Official transactions in an isolated read-only backup. Test secrets remain only in private runtime or memory and are never logged. Source database must remain unchanged; current all is queried while a real previously absent year1 dataset is prepared/imported/reconciled.",
+  "workload": "official-all-transaction-matrix",
+  "workload_queries": [
+    {
+      "category": "transactions-default",
+      "path": "/api/transactions?page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 1067371,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-customer",
+      "path": "/api/transactions?customer=17850\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "17850",
+        "stock": "",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 2827,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-invoice",
+      "path": "/api/transactions?invoice=489434\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "489434",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 8,
+      "expected_returned": 8
+    },
+    {
+      "category": "transactions-stock",
+      "path": "/api/transactions?page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9\u0026stock=85123A",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "85123A",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 5829,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-date-year",
+      "path": "/api/transactions?date_from=2010-01-01\u0026date_to=2011-01-01\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "2010-01-01",
+        "date_to": "2011-01-01",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 522714,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-combined",
+      "path": "/api/transactions?customer=17850\u0026date_from=2009-12-01\u0026date_to=2011-12-10\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9\u0026stock=85123A",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "17850",
+        "stock": "85123A",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "2009-12-01",
+        "date_to": "2011-12-10",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 89,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-deep-page",
+      "path": "/api/transactions?page=10000\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 10000,
+        "page_size": 50
+      },
+      "expected_total": 1067371,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-country-uk",
+      "path": "/api/transactions?country=United+Kingdom\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "United Kingdom",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 981330,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-country-france",
+      "path": "/api/transactions?country=France\u0026page=1\u0026page_size=50\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "France",
+        "sort": "",
+        "direction": "",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 1,
+        "page_size": 50
+      },
+      "expected_total": 14330,
+      "expected_returned": 50
+    },
+    {
+      "category": "transactions-sort-date-deep",
+      "path": "/api/transactions?direction=asc\u0026page=10000\u0026page_size=100\u0026run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9\u0026sort=date",
+      "transaction_filter": {
+        "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+        "status": "",
+        "assignee": "",
+        "customer": "",
+        "stock": "",
+        "invoice": "",
+        "country": "",
+        "sort": "date",
+        "direction": "asc",
+        "classification": "",
+        "kind": "",
+        "date_from": "",
+        "date_to": "",
+        "page": 10000,
+        "page_size": 100
+      },
+      "expected_total": 1067371,
+      "expected_returned": 100
+    }
+  ]
+}

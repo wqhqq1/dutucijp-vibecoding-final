@@ -21,30 +21,32 @@ import (
 )
 
 type report struct {
-	Mode            string         `json:"mode"`
-	Database        string         `json:"database"`
-	Prepared        string         `json:"prepared"`
-	InputTemplate   string         `json:"input_template,omitempty"`
-	InputCopySHA256 string         `json:"input_copy_sha256,omitempty"`
-	InputCopySecs   float64        `json:"input_copy_seconds"`
-	OpenSeconds     float64        `json:"open_seconds"`
-	ImportSeconds   float64        `json:"import_seconds"`
-	RunSeconds      float64        `json:"run_wall_seconds"`
-	CloseSeconds    float64        `json:"close_seconds"`
-	TotalSeconds    float64        `json:"total_go_seconds"`
-	MeasuredSeconds float64        `json:"measured_seconds"`
-	RunsBefore      int            `json:"runs_before"`
-	RunsAfter       int            `json:"published_runs_after"`
-	CasesAfter      int            `json:"cases_after"`
-	DecisionsAfter  int            `json:"decisions_after"`
-	SQLiteVersion   string         `json:"sqlite_version"`
-	SQLiteCacheSize int            `json:"sqlite_cache_size"`
-	SQLiteSync      int            `json:"sqlite_synchronous"`
-	QueryIndexes    int            `json:"query_indexes_present"`
-	ParameterProbe  int            `json:"bound_parameter_probe"`
-	GoVersion       string         `json:"go_version"`
-	Manifest        store.Manifest `json:"manifest"`
-	Summary         store.Summary  `json:"summary"`
+	Mode            string              `json:"mode"`
+	Database        string              `json:"database"`
+	Prepared        string              `json:"prepared"`
+	InputTemplate   string              `json:"input_template,omitempty"`
+	InputCopySHA256 string              `json:"input_copy_sha256,omitempty"`
+	InputCopySecs   float64             `json:"input_copy_seconds"`
+	OpenSeconds     float64             `json:"open_seconds"`
+	ImportSeconds   float64             `json:"import_seconds"`
+	RunSeconds      float64             `json:"run_wall_seconds"`
+	CloseSeconds    float64             `json:"close_seconds"`
+	TotalSeconds    float64             `json:"total_go_seconds"`
+	MeasuredSeconds float64             `json:"measured_seconds"`
+	RunsBefore      int                 `json:"runs_before"`
+	RunsAfter       int                 `json:"published_runs_after"`
+	CasesAfter      int                 `json:"cases_after"`
+	DecisionsAfter  int                 `json:"decisions_after"`
+	SQLiteVersion   string              `json:"sqlite_version"`
+	SQLiteCacheSize int                 `json:"sqlite_cache_size"`
+	SQLiteMmapSize  int64               `json:"sqlite_mmap_size"`
+	SQLiteSync      int                 `json:"sqlite_synchronous"`
+	QueryIndexes    int                 `json:"query_indexes_present"`
+	ParameterProbe  int                 `json:"bound_parameter_probe"`
+	GoVersion       string              `json:"go_version"`
+	Manifest        store.Manifest      `json:"manifest"`
+	Summary         store.Summary       `json:"summary"`
+	Phases          []store.PhaseTiming `json:"phases,omitempty"`
 }
 
 func main() {
@@ -88,6 +90,7 @@ func run() error {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 	out := report{Mode: *mode, Database: abs, Prepared: *prepared, GoVersion: runtime.Version()}
+	ctx = store.WithPhaseObserver(ctx, func(phase store.PhaseTiming) { out.Phases = append(out.Phases, phase) })
 	if *inputTemplate != "" {
 		copyStarted := time.Now()
 		for _, suffix := range []string{"-wal", "-shm"} {
@@ -197,6 +200,7 @@ func run() error {
 	}{
 		{"SELECT sqlite_version()", &out.SQLiteVersion},
 		{"PRAGMA cache_size", &out.SQLiteCacheSize},
+		{"PRAGMA mmap_size", &out.SQLiteMmapSize},
 		{"PRAGMA synchronous", &out.SQLiteSync},
 		{"SELECT count(*) FROM sqlite_master WHERE type='index' AND name IN ('cases_owner','row_invoice','row_source_time','row_stock')", &out.QueryIndexes},
 		{"SELECT count(*) FROM runs WHERE status='published'", &out.RunsAfter},

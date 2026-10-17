@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS sale_balances (
  run_id TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE, sale_id TEXT NOT NULL,
  original INTEGER NOT NULL CHECK(original>0), allocated INTEGER NOT NULL CHECK(allocated>=0),
  remaining INTEGER NOT NULL CHECK(remaining>=0), CHECK(original-allocated=remaining), PRIMARY KEY(run_id,sale_id)
-);
+) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS allocations (
  run_id TEXT NOT NULL, cancel_id TEXT NOT NULL, sale_id TEXT NOT NULL,
  quantity INTEGER NOT NULL CHECK(quantity>0), amount TEXT NOT NULL, method TEXT NOT NULL,

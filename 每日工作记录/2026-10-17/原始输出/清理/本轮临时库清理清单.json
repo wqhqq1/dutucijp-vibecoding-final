@@ -1,0 +1,32 @@
+[
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-baseline",
+    "files": 3,
+    "bytes": 2228754432
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-optimized",
+    "files": 1,
+    "bytes": 2501632000
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-optimized-final",
+    "files": 1,
+    "bytes": 2501632000
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-browser",
+    "files": 10,
+    "bytes": 3695947514
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\transaction-20261017-nfr04",
+    "files": 5,
+    "bytes": 3398121453
+  },
+  {
+    "path": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\portable-current-20261017\\local",
+    "files": 19,
+    "bytes": 3973161170
+  }
+]

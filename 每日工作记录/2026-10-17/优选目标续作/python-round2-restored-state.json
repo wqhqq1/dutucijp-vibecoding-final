@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "openpyxl": "3.1.5",
+    "et_xmlfile": "2.0.0",
+    "lxml": null
+  },
+  "lxml_module_found": false,
+  "openpyxl_lxml_enabled": false,
+  "prepare_sha256": "98b7f7335b172de4b5df60356e1aa68d074dcce967fb8620fc13bca58f2206c7",
+  "executable": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools\\python\\Scripts\\python.exe"
+}

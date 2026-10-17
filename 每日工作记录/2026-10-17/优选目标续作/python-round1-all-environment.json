@@ -1,0 +1,46 @@
+{
+  "actual_time": "2026-10-17T10:34:10.6700087+08:00",
+  "kind": "Python round1 official all preparation only; not complete NFR02",
+  "head": "944544b12122bfeb9924fee6aa8ca6e6ba078b1d",
+  "status": [
+    " M AGENTS.md",
+    " M backend/cmd/perfverify/main.go",
+    " M backend/internal/reconcile/engine.go",
+    " M backend/internal/store/store.go",
+    " M tests/test_prepare.py",
+    " M tools/prepare.py",
+    " M 决定记录.md",
+    " M 怎么做.md",
+    " M 怎么算做对.md",
+    " M 要做什么.md",
+    "?? backend/internal/store/phase.go",
+    "?? tools/build_midterm_v12.py",
+    "?? 中期汇报v1.2.pdf",
+    "?? 中期汇报v1.2讲稿.md",
+    "?? 四段式任务草稿补充-教师独立运行Demo.md",
+    "?? 每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/",
+    "?? 每日工作记录/2026-10-17/优选目标续作/",
+    "?? 资料/教师独立运行核查.md"
+  ],
+  "python": "Python 3.12.10",
+  "dependencies": [
+    "et_xmlfile @ https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl#sha256=7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+    "openpyxl @ https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl#sha256=5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+  ],
+  "prepare_sha256": "98b7f7335b172de4b5df60356e1aa68d074dcce967fb8620fc13bca58f2206c7",
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_read_only": true,
+  "logical_processors": 16,
+  "processors": [
+    {
+      "Name": "Intel(R) Core(TM) Ultra 9 285H",
+      "NumberOfCores": 16,
+      "NumberOfLogicalProcessors": 16
+    }
+  ],
+  "physical_memory_bytes": 33752997888,
+  "os": "Microsoft Windows NT 10.0.26340.0",
+  "cache": "not deliberately flushed",
+  "original_baseline_prepare_process_seconds": 24.0290933,
+  "original_baseline_prepare_internal_seconds": 22.8430169
+}

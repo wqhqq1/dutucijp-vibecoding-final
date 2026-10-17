@@ -363,7 +363,7 @@ func (s *Service) RenewBootstrap(ctx context.Context, id string) (string, error)
 	var token string
 	err := s.atomic(ctx, func(c *sql.Conn) error {
 		a, e := load(ctx, c, id)
-		if e != nil || a.State != "new" {
+		if e != nil || a.State != "new" || a.Password != "" {
 			return fmt.Errorf("only untouched new accounts can receive a new local bootstrap token")
 		}
 		token, e = RandomToken()
@@ -373,7 +373,7 @@ func (s *Service) RenewBootstrap(ctx context.Context, id string) (string, error)
 		if _, e = c.ExecContext(ctx, "DELETE FROM auth_bootstrap WHERE user_id=?", id); e != nil {
 			return e
 		}
-		_, e = c.ExecContext(ctx, "INSERT INTO auth_bootstrap VALUES(?,?,?,?)", Digest(token), id, a.Version, s.now().Unix()+900)
+		_, e = c.ExecContext(ctx, "INSERT INTO auth_bootstrap VALUES(?,?,?,0)", Digest(token), id, a.Version)
 		return e
 	})
 	return token, err

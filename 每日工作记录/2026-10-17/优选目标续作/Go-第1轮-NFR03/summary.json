@@ -1,0 +1,22 @@
+{
+  "actual_time": "2026-10-17T10:36:06.0964220+08:00",
+  "output_dir": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR03-20261017",
+  "environment": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR03-20261017\\environment.json",
+  "iterations_requested": 1,
+  "prepared_full": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\python-prepare-round1-all-20261017-103410-c0d867a2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+  "results": [
+    {
+      "nfr": "NFR03",
+      "iteration": 1,
+      "scope": "all",
+      "measured_seconds": 6.9798736,
+      "limit_seconds": 15,
+      "target_seconds": 5,
+      "baseline_passed": true,
+      "target_passed": false,
+      "peak_working_set_bytes": 1101062144.0
+    }
+  ],
+  "all_measured_baselines_passed": true,
+  "nfr04": "Not executed by this script; requires authenticated HTTP service, live long task, 10 workers and at least 300 requests."
+}

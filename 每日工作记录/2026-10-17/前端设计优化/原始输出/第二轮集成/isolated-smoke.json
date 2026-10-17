@@ -1,0 +1,39 @@
+{
+  "runtime_id": "frontend-round2-isolated",
+  "index_sha256": "1a98bf912574a65e8dfefaceee2a5a06b7eb5c3a5cfc357c2154d1c9e934abb6",
+  "assets": {
+    "/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff": {
+      "sha256": "328d50b6ece9ca25c46eea3e885ba497f6237f2fb84ef7b92f88e14a1a25e381",
+      "bytes": 13144,
+      "content_type": "font/woff"
+    },
+    "/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2": {
+      "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
+      "bytes": 14708,
+      "content_type": "font/woff2"
+    },
+    "/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff": {
+      "sha256": "09f018c58556e5801ecc49d5b5275dcff4c73311c2af6b88e31c51d76d076a9d",
+      "bytes": 13156,
+      "content_type": "font/woff"
+    },
+    "/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2": {
+      "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
+      "bytes": 14888,
+      "content_type": "font/woff2"
+    },
+    "/assets/index-DpGLKcvL.js": {
+      "sha256": "fff23005d1934ab3f664c794ebd9100bb16d451250cbd41fd664fc0346208e7f",
+      "bytes": 287574,
+      "content_type": "text/javascript"
+    },
+    "/assets/index-k7Kn9fox.css": {
+      "sha256": "fc7b546db2b1081ca43a18ba41b18ac9ed32173b249a5f8122fd76c4b39da88d",
+      "bytes": 26779,
+      "content_type": "text/css"
+    }
+  },
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+  "unauthenticated_business_status": 401,
+  "note": "Unknown reason 422 is checked with a fully configured synthetic HTTP identity in the regression fixture; unauthenticated requests must remain 401."
+}

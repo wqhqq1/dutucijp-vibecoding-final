@@ -290,7 +290,7 @@ func TestTC16_ServerFilteringPaginationAndDateBoundaries(t *testing.T) {
 	if err != nil || empty.Total != 0 {
 		t.Fatalf("query not parameterized: %d %v", empty.Total, err)
 	}
-	for _, f := range []QueryFilter{{RunID: run, DateFrom: "2010-02-30"}, {RunID: run, DateFrom: "2010-01-02", DateTo: "2010-01-01"}, {RunID: run, Page: -1}, {RunID: run, Status: "reopened"}, {RunID: run, Classification: "invented"}, {RunID: run, Kind: "other"}, {}} {
+	for _, f := range []QueryFilter{{RunID: run, DateFrom: "2010-02-30"}, {RunID: run, DateFrom: "2010-01-02", DateTo: "2010-01-01"}, {RunID: run, Page: -1}, {RunID: run, Status: "reopened"}, {RunID: run, Reason: "invented"}, {RunID: run, Classification: "invented"}, {RunID: run, Kind: "other"}, {}} {
 		_, err = s.ListTransactions(ctx, testFinance, f)
 		requireWorkflowCode(t, err, "invalid_input")
 	}
@@ -550,7 +550,7 @@ func TestTC16_OptimizedListsMatchReferenceAfterWorkflowWrites(t *testing.T) {
 	// The original joined query is a reference for exact source order, filters,
 	// counts and visible ownership after assignment, allocation and close.
 	const referenceFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id JOIN normalized_rows n ON n.dataset_id=d.id JOIN source_rows sr ON sr.id=n.source_id LEFT JOIN decisions dc ON dc.run_id=r.id AND dc.cancel_id=n.id LEFT JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
-	filters := []QueryFilter{{}, {Status: "closed"}, {Status: "pending"}, {Assignee: testOwner.ID}, {Classification: "suspected"}, {Classification: "matched"}, {Kind: "sale"}, {Kind: "cancel"}, {Customer: "42", Stock: "A"}, {Invoice: "0:125"}, {DateFrom: "2010-01-01T09:00:00", DateTo: "2010-01-02"}, {Status: "closed", Assignee: testOwner.ID, Customer: "42", Kind: "cancel", Page: 2}}
+	filters := []QueryFilter{{}, {Status: "closed"}, {Status: "pending"}, {Assignee: testOwner.ID}, {Classification: "suspected"}, {Classification: "matched"}, {Kind: "sale"}, {Kind: "cancel"}, {Customer: "42", Stock: "A"}, {Invoice: "0:125"}, {DateFrom: "2010-01-01T09:00:00", DateTo: "2010-01-02"}, {Status: "closed", Assignee: testOwner.ID, Customer: "42", Kind: "cancel", Page: 2}, {Reason: "ambiguous_candidates"}, {Reason: "missing_identity"}, {Reason: "suspected_duplicate_sale", Status: "pending"}, {Reason: "insufficient_remaining_quantity", Customer: "42"}}
 	for _, actor := range []WorkflowActor{testFinance, testOwner, testOther} {
 		for i, input := range filters {
 			t.Run(fmt.Sprintf("%s-%s-%d", actor.Role, actor.ID, i), func(t *testing.T) {
@@ -662,4 +662,33 @@ func TestTC16_OptimizedListsMatchReferenceAfterWorkflowWrites(t *testing.T) {
 			})
 		}
 	}
+}
+
+func TestTC16_CaseReasonFilterMatchesCaseRows(t *testing.T) {
+	s, run, _, _ := queryFixture(t)
+	ctx := context.Background()
+	all, err := s.ListCases(ctx, testFinance, QueryFilter{RunID: run, PageSize: 100})
+	if err != nil || all.Total == 0 {
+		t.Fatalf("fixture cases %d %v", all.Total, err)
+	}
+	want := map[string]int{}
+	for _, c := range all.Items {
+		want[c.Reason]++
+	}
+	for reason, n := range want {
+		got, err := s.ListCases(ctx, testFinance, QueryFilter{RunID: run, Reason: reason, PageSize: 100})
+		if err != nil || got.Total != n || len(got.Items) != n {
+			t.Fatalf("reason %s total=%d want %d err=%v", reason, got.Total, n, err)
+		}
+		for _, c := range got.Items {
+			if c.Reason != reason {
+				t.Fatalf("reason filter leaked %s", c.Reason)
+			}
+		}
+		rows, err := s.ListTransactions(ctx, testFinance, QueryFilter{RunID: run, Reason: reason, PageSize: 100})
+		if err != nil || rows.Total != n {
+			t.Fatalf("transaction reason scope %s total=%d want %d err=%v", reason, rows.Total, n, err)
+		}
+	}
+	t.Logf("TC-16 case reason filter: %v", want)
 }

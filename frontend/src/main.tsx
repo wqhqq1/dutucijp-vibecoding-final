@@ -2,6 +2,8 @@ import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import QRCode from 'qrcode';
 import {startResourceRequest,type ResourceResult} from './requests';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
 import './style.css';
 
 type Session={id:string;role:string;state:string;scope:string;has_totp:boolean;has_passkey:boolean;csrf:string};
@@ -10,8 +12,21 @@ type Row={id:string;invoice:string;stock:string;customer:string;country:string;p
 type Page<T>={items:T[];total:number;page:number;page_size:number};
 type Evidence={case:Case;cancel:Row;decision_evidence:Row[];candidates:Page<Row>;caveat:string};
 type Run={run_id:string;scope:string;cleaning_version:string;rule_version:string};
-const labels:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',finance:'财务',warehouse:'仓库',admin:'管理员',ambiguous_candidates:'多个合格候选',no_eligible_candidate:'当前规则下无合格候选',same_sheet_duplicate:'同表疑似重复',missing_identity:'缺关键身份'};
-const emptyFilters={customer:'',stock:'',invoice:'',country:'',status:'',assignee:'',date_from:'',date_to:'',sort:'source',direction:'asc'};
+const labels:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',finance:'财务',warehouse:'仓库',admin:'管理员'};
+// Case reasons produced by rule version conservative-1.0.0 (backend/internal/reconcile/engine.go).
+const reasons:Record<string,[string,string]>={
+ missing_identity:['缺客户或国家','取消记录缺少客户编号或国家，按规则不自动配对。'],
+ suspected_duplicate_cancel:['取消行疑似重复','这条取消在同一工作表内疑似重复，需人工核查。'],
+ ambiguous_candidates:['多个合格候选','两条以上销售同时满足条件，不按先后顺序猜测。'],
+ suspected_duplicate_sale:['候选销售疑似重复','唯一合格的销售行在同一工作表内疑似重复。'],
+ no_identity_match:['无同身份销售','当前范围内没有客户、商品、单价和国家都相同的销售。'],
+ no_strictly_earlier_sale:['无更早销售','同身份的销售都不早于这次取消。'],
+ insufficient_remaining_quantity:['可退余量不足','更早的同身份销售，剩余可退数量都不够。'],
+};
+const evidenceReasons:Record<string,string>={qualified:'合格候选',suspected_duplicate_sale:'合格，但销售行疑似重复',remaining_quantity_too_small:'剩余数量不足',sale_not_strictly_earlier:'销售不早于取消'};
+const auditActions:Record<string,string>={assign:'派单',start:'开始处理',confirm_candidate:'人工确认候选',close:'关闭'};
+const scopeLabels:Record<string,string>={benchmark:'首表固定一万行',year1:'首年度全部',all:'两个年度全部'};
+const emptyFilters={customer:'',stock:'',invoice:'',country:'',status:'',reason:'',assignee:'',date_from:'',date_to:'',sort:'source',direction:'asc'};
 const jobLabels:Record<string,string>={queued:'排队等待',running:'正在运行',succeeded:'已完成',failed:'未完成',preparing:'准备官方数据',importing:'导入并校验',reconciling:'对账与保存',published:'已发布',interrupted:'上次运行中断'};
 const jobCountLabels:Record<string,string>={rows:'已读取原始行',rows_read:'已读取原始行',raw:'原始行',accepted:'接纳行',excluded:'排除行',accepted_sales:'接纳销售',accepted_cancels:'接纳取消',matched:'初始自动配对',suspected:'疑似',no_original:'当前规则下无合格原单'};
 const emptyPage:Page<any>={items:[],total:0,page:1,page_size:50};
@@ -83,49 +98,240 @@ function App(){
  useEffect(()=>{if(jobStorageKey&&job?.id)try{sessionStorage.setItem(jobStorageKey,job.id)}catch{}},[owner,jobStorageKey,job?.id]);
  const generated=()=>{const bytes=crypto.getRandomValues(new Uint8Array(16));const value=base64(bytes.buffer);setPassword(value);setPasswordAgain(value);setShowPassword(true)};
  const logout=()=>action(async()=>{await api('/auth/logout',{});try{if(jobStorageKey)sessionStorage.removeItem(jobStorageKey)}catch{}resetWorkspace();csrf='';setSession(null);setCodes([]);setSaved(false);setEnrollment(null);setPassword('');setPasswordAgain('');setOTP('');setRecoveryCode('');setID('');setRecover(false);setShowPassword(false);setExistingLogin(false);setSetupRevision(n=>n+1)});
- if(loading)return <div className="initial"><span className="brand-mark">R</span><p>正在检查会话…</p></div>;
- const firstSetup=<section className="login-panel setup-panel"><p className="eyebrow">首次使用 · 账户配置</p><h2>先为账户设置密码</h2><p className="muted">选择要使用的账户，设置密码后完成安全验证。这里仅显示尚未设置密码的账户。</p><div className="setup-accounts">{setupAccounts.map(account=><button className="setup-account" key={account.id} disabled={busy} onClick={()=>action(async()=>accept(await api('/auth/setup/start',{id:account.id})))}><span className="setup-role">{labels[account.role]}</span><span><strong>{account.id}</strong><small>尚未设置密码</small></span><span aria-hidden="true">→</span></button>)}</div><p className="scope-note">直接选择即可开始，无需初始化链接，也没有15分钟截止时间。</p><div className="setup-footer"><span className="muted">已有密码，或需要继续配置？</span><button className="text-button" disabled={busy} onClick={()=>{setExistingLogin(true);setError('')}}>登录已有账户</button></div></section>;
+ const tabTitles:Record<string,string>={cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全'};
+ const tabHints:Record<string,string>={cases:'查看差异原因与证据，派单、核查并记录结论。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。'};
+ const navItems:[string,string][]=[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(finance?[['jobs','数据任务'] as [string,string]]:[]),['security','账户安全']];
+ const pageCount=Math.max(1,Math.ceil(data.total/50));
+ const appliedCount=Object.entries(applied).filter(([k,v])=>v&&!['sort','direction'].includes(k)).length;
+ const draftChanged=JSON.stringify(filters)!==JSON.stringify(applied);
+ const columns:[string,string][]=tab==='cases'?[['源记录',''],['差异原因',''],['责任人',''],['状态',''],['版本','num'],['操作','act']]:tab==='transactions'?[['源记录',''],['单号',''],['交易时间',''],['客户',''],['商品',''],['数量','num'],['单价','num'],['国家','']]:[['取消源记录',''],['销售源记录',''],['数量','num'],['精确金额','num'],['方式',''],['操作人','']];
+ const caseCounts=overview?.cases;
+ const caseShare=caseCounts&&caseCounts.total>0?[['pending',caseCounts.pending],['in_progress',caseCounts.in_progress],['closed',caseCounts.closed]].reduce<{key:string;x:number;w:number}[]>((acc,[key,value])=>{const x=acc.length?acc[acc.length-1].x+acc[acc.length-1].w:0;acc.push({key:String(key),x,w:Number(value)/caseCounts.total*100});return acc},[]):[];
+ const count=(v:unknown)=>typeof v==='number'?v.toLocaleString('zh-CN'):String(v??'—');
+ // Unknown codes stay visible (never guessed) but break anywhere so they cannot overflow a cell.
+ const reasonName=(code:string)=>reasons[code]?.[0]||<span className="raw-code">{code}</span>;
+ const scopeName=(scope:string)=>scopeLabels[scope]||scope;
+ if(loading)return <div className="initial"><span className="brand-mark" aria-hidden="true">账</span><p>正在检查会话…</p></div>;
+ const firstSetup=<section className="login-panel setup-panel">
+  <h2>先为账户设置密码</h2>
+  <p className="muted">选择要使用的账户，设置密码后完成安全验证。这里仅显示尚未设置密码的账户。</p>
+  <div className="setup-accounts">{setupAccounts.map(account=><button className="setup-account" key={account.id} disabled={busy} onClick={()=>action(async()=>accept(await api('/auth/setup/start',{id:account.id})))}>
+   <span className="setup-role">{labels[account.role]}</span>
+   <span className="setup-id"><strong>{account.id}</strong><small>尚未设置密码</small></span>
+   <span className="setup-go">开始配置</span>
+  </button>)}</div>
+  <p className="scope-note">直接选择即可开始，无需初始化链接，也没有15分钟截止时间。</p>
+  <div className="setup-footer"><span className="muted">已有密码，或需要继续配置？</span><button className="text-button" disabled={busy} onClick={()=>{setExistingLogin(true);setError('')}}>登录已有账户</button></div>
+ </section>;
  const security=<section className="security-panel">
-  <h2>{session?.state==='new'?'为账户设置密码':'完成安全配置'}</h2><p className="muted">当前账户 <strong>{session?.id}</strong> · {labels[session?.role||'']}。完成以下三步后即可使用。</p>
-  <ol className="steps"><li className={session?.state!=='new'?'done':''}>强密码</li><li className={session?.has_passkey||session?.has_totp?'done':''}>验证Passkey或认证器</li><li className={complete?'done':''}>保存恢复码</li></ol>
-  {session?.state==='new'?<><p className="muted">设置16至128个字符的密码，也可一键生成。请先保存密码，下一步绑定自己的Passkey或认证器。</p><form onSubmit={e=>{e.preventDefault();action(async()=>{if(password!==passwordAgain)throw new Error('两次输入的密码不一致');accept(await api('/auth/setup/password',{password}))})}}><label>新密码<input autoComplete="new-password" type={showPassword?'text':'password'} value={password} onChange={e=>setPassword(e.target.value)} required/></label><label>确认新密码<input autoComplete="new-password" type={showPassword?'text':'password'} value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} required/></label><label className="checkbox"><input type="checkbox" checked={showPassword} onChange={e=>setShowPassword(e.target.checked)}/>显示密码</label><div className="button-row"><button type="button" className="secondary" disabled={busy} onClick={generated}>安全生成密码</button><button disabled={busy||!password||!passwordAgain}>设置密码并继续</button></div></form><button className="text-button" disabled={busy} onClick={logout}>返回选择其他账户</button><p className="scope-note">初始化入口没有时限。若配置会话失效，刷新后重新选择账户；已设密码则使用密码登录续办。</p></>:<>
-  <div className="button-row"><button disabled={busy} onClick={()=>action(()=>passkey(true))}>绑定Passkey</button><button className="secondary" disabled={busy||session?.has_totp} onClick={()=>action(enroll)}>绑定认证器TOTP</button></div>
-  <p className="muted">使用你自己的设备完成验证。已有Passkey不能验证时，请使用已绑定的认证器或恢复流程。</p>
-  {enrollment&&<div className="factor-material"><p>用认证器扫码，然后输入当前验证码。绑定资料仅在当前页面显示，请勿截入证据。</p><img src={enrollment.qr} alt="认证器绑定二维码，仅供本人配置"/><details><summary>手动输入密钥</summary><code>{enrollment.secret}</code></details><form onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/totp/confirm',{code:otp})))}}><label>认证器验证码<input value={otp} onChange={e=>setOTP(e.target.value)} inputMode="numeric" autoComplete="one-time-code" required/></label><button disabled={busy}>验证绑定</button></form></div>}
-  {(codes.length>0||session?.state==='factor')&&<div className="recovery-material"><h3>保存恢复码</h3>{codes.length>0?<><p>每个恢复码只能使用一次。保存在项目外的私人位置，完成后再确认。</p><details><summary>查看并保存10个恢复码</summary><pre>{codes.join('\n')}</pre><button className="secondary" onClick={()=>{const blob=new Blob([codes.join('\n')],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='private-recovery-codes.txt';a.click();URL.revokeObjectURL(url)}}>下载到私人位置</button></details><label className="checkbox"><input type="checkbox" checked={saved} onChange={e=>setSaved(e.target.checked)}/>我已安全保存恢复码</label><button disabled={busy||!saved} onClick={()=>action(async()=>{accept(await api('/auth/setup/complete',{saved}));setCodes([])})}>完成配置并进入</button></>:<><p>恢复码只展示一次。已绑定方式重新验证后，可补发新一组并作废旧组。</p><button className="secondary" disabled={busy} onClick={()=>action(async()=>accept(await api('/auth/recovery/reissue',{})))}>重新生成恢复码</button></>}</div>}
+  <h2>{session?.state==='new'?'为账户设置密码':'完成安全配置'}</h2>
+  <p className="muted">当前账户 <strong>{session?.id}</strong>（{labels[session?.role||'']}）。完成以下三步后即可使用。</p>
+  <ol className="steps"><li className={session?.state!=='new'?'done':''}><span>强密码</span></li><li className={session?.has_passkey||session?.has_totp?'done':''}><span>验证Passkey或认证器</span></li><li className={complete?'done':''}><span>保存恢复码</span></li></ol>
+  {session?.state==='new'?<>
+   <p className="muted">设置16至128个字符的密码，也可一键生成。请先保存密码，下一步绑定自己的Passkey或认证器。</p>
+   <form className="stack-form" onSubmit={e=>{e.preventDefault();action(async()=>{if(password!==passwordAgain)throw new Error('两次输入的密码不一致');accept(await api('/auth/setup/password',{password}))})}}>
+    <label>新密码<input autoComplete="new-password" type={showPassword?'text':'password'} value={password} onChange={e=>setPassword(e.target.value)} required/></label>
+    <label>确认新密码<input autoComplete="new-password" type={showPassword?'text':'password'} value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} required/></label>
+    <label className="checkbox"><input type="checkbox" checked={showPassword} onChange={e=>setShowPassword(e.target.checked)}/>显示密码</label>
+    <div className="button-row"><button type="button" className="secondary" disabled={busy} onClick={generated}>安全生成密码</button><button disabled={busy||!password||!passwordAgain}>设置密码并继续</button></div>
+   </form>
+   <button className="text-button" disabled={busy} onClick={logout}>返回选择其他账户</button>
+   <p className="scope-note">初始化入口没有时限。若配置会话失效，刷新后重新选择账户；已设密码则使用密码登录续办。</p>
+  </>:<>
+   <div className="button-row"><button disabled={busy} onClick={()=>action(()=>passkey(true))}>绑定Passkey</button><button className="secondary" disabled={busy||session?.has_totp} onClick={()=>action(enroll)}>绑定认证器TOTP</button></div>
+   <p className="muted">使用你自己的设备完成验证。已有Passkey不能验证时，请使用已绑定的认证器或恢复流程。</p>
+   {enrollment&&<div className="factor-material">
+    <p>用认证器扫码，然后输入当前验证码。绑定资料仅在当前页面显示，请勿截入证据。</p>
+    <img src={enrollment.qr} alt="认证器绑定二维码，仅供本人配置"/>
+    <details><summary>手动输入密钥</summary><code>{enrollment.secret}</code></details>
+    <form className="stack-form" onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/totp/confirm',{code:otp})))}}><label>认证器验证码<input value={otp} onChange={e=>setOTP(e.target.value)} inputMode="numeric" autoComplete="one-time-code" required/></label><button disabled={busy}>验证绑定</button></form>
+   </div>}
+   {(codes.length>0||session?.state==='factor')&&<div className="recovery-material"><h3>保存恢复码</h3>{codes.length>0?<>
+    <p>每个恢复码只能使用一次。保存在项目外的私人位置，完成后再确认。</p>
+    <details><summary>查看并保存10个恢复码</summary><pre>{codes.join('\n')}</pre><button className="secondary" onClick={()=>{const blob=new Blob([codes.join('\n')],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='private-recovery-codes.txt';a.click();URL.revokeObjectURL(url)}}>下载到私人位置</button></details>
+    <label className="checkbox"><input type="checkbox" checked={saved} onChange={e=>setSaved(e.target.checked)}/>我已安全保存恢复码</label>
+    <button disabled={busy||!saved} onClick={()=>action(async()=>{accept(await api('/auth/setup/complete',{saved}));setCodes([])})}>完成配置并进入</button>
+   </>:<>
+    <p>恢复码只展示一次。已绑定方式重新验证后，可补发新一组并作废旧组。</p>
+    <button className="secondary" disabled={busy} onClick={()=>action(async()=>accept(await api('/auth/recovery/reissue',{})))}>重新生成恢复码</button>
+   </>}</div>}
   </>}
  </section>;
- return <div className={complete?'app-layout':'auth-layout'}>
-  {complete?<aside className="sidebar"><div className="brand"><span className="brand-mark">R</span><div>退货对账<small>差异处理工作台</small></div></div><p className="nav-label">工作空间</p>{[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(finance?[['jobs','数据任务']]:[]),['security','账户安全']].map(([k,v])=><button key={k} className={'nav-item '+(tab===k?'active':'')} onClick={()=>{setTab(k);setPage(1);closeCase()}}>{v}<span>›</span></button>)}<div className="sidebar-foot">UCI Online Retail II<br/>规则推断 · 课程模拟</div></aside>:<aside className="auth-intro"><div className="brand"><span className="brand-mark">R</span><div>退货对账<small>与差异处理系统</small></div></div><div><p className="eyebrow">RECONCILIATION WORKSPACE</p><h1>让每一项差异<br/>有据可查</h1><p>核对来源，保留歧义，<br/>把核查过程记录到结案。</p></div><p className="source-note">公开交易来自UCI Online Retail II<br/>匹配为规则推断，人工处理为课程模拟</p></aside>}
-  <main><header className="topbar"><div><p className="eyebrow">{complete?'RETURN RECONCILIATION':'SECURE ACCESS'}</p><h1>{complete?({cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全'} as Record<string,string>)[tab]:(choosingSetup||session?.state==='new'?'首次配置':'安全登录')}</h1></div><div className="account">{session&&<><span>{session.id}<small>{labels[session.role]}</small></span><button className="text-button" disabled={busy} onClick={logout}>退出</button></>}</div></header>
-  {error&&<div role="alert" className="notice error">{error}<button onClick={()=>setError('')} aria-label="关闭错误">×</button></div>}{message&&<div role="status" className="notice">{message}</div>}{busy&&<p className="busy" role="status">正在处理，请稍候…</p>}
-  {!complete?<div className="auth-content">{choosingSetup?firstSetup:!session?<section className="login-panel"><h2>{recover?'恢复访问':'欢迎回来'}</h2><p className="muted">{recover?'密码和一次性恢复码只用于受限重新绑定。':'使用Passkey，或密码加认证器验证码登录。'}</p><form onSubmit={e=>{e.preventDefault();action(async()=>accept(await api(recover?'/auth/recover':'/auth/login',recover?{id,password,code:recoveryCode}:{id,password})))}}><label>账户<input autoComplete="username" value={id} onChange={e=>setID(e.target.value)} placeholder="finance / warehouse / admin" required/></label><label>密码<input autoComplete="current-password" type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label>{recover&&<label>一次性恢复码<input type="password" value={recoveryCode} onChange={e=>setRecoveryCode(e.target.value)} required/></label>}<button disabled={busy}>{recover?'开始受限恢复':'密码验证并继续'}</button></form>{!recover&&<button className="secondary full-width" disabled={busy||!id} onClick={()=>action(()=>passkey(false))}>使用Passkey登录</button>}<button className="text-button" onClick={()=>{setRecover(!recover);setPassword('');setRecoveryCode('')}}>{recover?'返回登录':'认证设备不可用，使用恢复码'}</button>{setupResource.loading&&<p className="muted" role="status">正在检查首次配置账户…</p>}{setupResource.error&&<p role="alert">首次配置账户加载失败：{setupResource.error} <button className="text-button" onClick={()=>setSetupRevision(n=>n+1)}>重试</button></p>}{setupAccounts.length>0&&<div className="setup-footer"><span className="muted">还有{setupAccounts.length}个账户尚未设置密码</span><button className="text-button" disabled={busy} onClick={()=>{setRecover(false);setExistingLogin(false);setPassword('');setError('')}}>为新账户设置密码</button></div>}</section>:session.scope==='login_factor'||session.scope==='login_passkey'?<section className="login-panel"><h2>完成因素验证</h2><p>仅密码验证不开放业务。</p>{session.has_totp&&<form onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/totp/login',{code:otp})))}}><label>认证器验证码<input inputMode="numeric" autoComplete="one-time-code" value={otp} onChange={e=>setOTP(e.target.value)} required/></label><button disabled={busy}>验证并继续</button></form>}{session.has_passkey&&<button className="secondary" onClick={()=>{setID(session.id);action(()=>passkey(false))}}>使用Passkey验证</button>}{!session.has_totp&&!session.has_passkey&&<p>恢复状态需要原有效恢复会话。仅密码不能重新取得绑定权限；请按验收说明处理会话遗失。</p>}</section>:security}</div>:<div className="workspace">
-  {tab==='security'?<><p className="scope-note">变更认证方式需要5分钟内的完整认证；超过时请重新登录。</p>{security}<section className="panel"><h2>更改密码</h2><form onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/credentials/change',{password})))}}><label>新的强密码<input type="password" autoComplete="new-password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button disabled={busy}>验证权限并更改</button></form><button className="text-button" onClick={()=>action(async()=>accept(await api('/auth/recovery/reissue',{})))}>重新生成恢复码</button></section></>:tab==='jobs'?<section className="panel"><h2>准备与对账任务</h2><p>新任务按真实数据计数更新进度。已有业务运行按数据和规则版本复用，保留人工处理历史。</p><div className="button-row"><select value={scope} onChange={e=>setScope(e.target.value)}><option value="benchmark">首表固定一万行</option><option value="year1">首年度全部</option><option value="all">两个年度全部</option></select><button disabled={busy} onClick={()=>action(createJob)}>创建任务</button></div>{job&&<div className="job-status"><h3 role="status">{jobLabels[job.status]||job.status} · {jobLabels[job.stage]||job.stage}</h3><p className="muted">{['queued','running'].includes(job.status)?'可继续检索已发布数据。准备完成后会切换至新运行；请保持服务运行。':'仅成功发布的运行可进入业务查询。'}</p><dl className="job-counts">{Object.entries(jobProgress).filter(([key,value])=>jobCountLabels[key]&&typeof value==='number').map(([key,value])=><div key={key}><dt>{jobCountLabels[key]}</dt><dd>{String(value)}</dd></div>)}</dl><details><summary>任务标识（排查问题时使用）</summary><code>{job.id}</code></details>{job.error&&<p role="alert">{job.error}</p>}</div>}</section>:<>
-  <div className="run-bar"><div><span className="muted">当前数据范围</span><select aria-label="当前数据运行" value={runID} onChange={e=>{setRunID(e.target.value);setPage(1);closeCase()}}>{runs.map(r=><option key={r.run_id} value={r.run_id}>{r.scope} · {r.cleaning_version} · {r.rule_version}</option>)}</select></div><span className="scope-note">{finance?'财务与管理员全局视图':'仅显示分派给你的差异及相关证据'}</span></div>
-  {runsResource.error&&<div role="alert" className="notice error">运行列表加载失败：{runsResource.error}<button onClick={()=>setRunsRevision(n=>n+1)}>重试</button></div>}
-  {runID&&<div className="button-row"><span className="muted" role="status">{overviewResource.loading?'正在加载当前运行统计，列表可独立查询。':overviewResource.error?'统计暂不可用；下方列表独立加载。':'统计为最近一次加载结果；筛选仅作用于下方明细。'}</span><button className="text-button" disabled={overviewResource.loading} onClick={()=>setOverviewRevision(n=>n+1)}>刷新统计</button></div>}
-  {overviewResource.error&&<div role="alert" className="notice error">统计加载失败：{overviewResource.error}</div>}
-  {overview&&<section className="metrics">{[['待处理',overview.cases.pending],['处理中',overview.cases.in_progress],['已关闭',overview.cases.closed],['差异总数',overview.cases.total]].map(([k,v])=><div key={String(k)}><span>{k}</span><strong>{v}</strong></div>)}</section>}
-  <div className="scope-note caveat">{overview?.caveat||'匹配只表示规则推断。资料不足时保留原因，不制造关联。'}</div>
-  {finance&&overview?.initial_reconciliation&&<details className="conservation"><summary>查看来源、行数守恒与初始配对口径</summary><p>原始 {overview.initial_reconciliation.input.raw} ＝ 接纳 {overview.initial_reconciliation.input.accepted} ＋ 排除 {overview.initial_reconciliation.input.excluded}；初始自动配对 {overview.initial_reconciliation.matched}，疑似 {overview.initial_reconciliation.suspected}，当前规则下无合格原单 {overview.initial_reconciliation.no_original}。人工确认保留初始分类。</p></details>}
-  <section className="panel table-panel" aria-busy={dataResource.loading||runsResource.loading}><form className="filters" onSubmit={e=>{e.preventDefault();setApplied({...filters});setPage(1);setQueryRevision(n=>n+1)}}>{[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号'],['country','国家']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}<label>状态<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}><option value="">全部</option>{['pending','in_progress','closed'].map(x=><option key={x} value={x}>{labels[x]}</option>)}</select></label><label>起始日期<input type="date" value={filters.date_from} onChange={e=>setFilters({...filters,date_from:e.target.value})}/></label><label>结束日期 不含<input type="date" value={filters.date_to} onChange={e=>setFilters({...filters,date_to:e.target.value})}/></label>{tab==='transactions'&&<><label>排序字段<select value={filters.sort} onChange={e=>setFilters({...filters,sort:e.target.value})}>{[['source','来源顺序'],['date','交易时间'],['invoice','交易单号'],['customer','客户编号'],['stock','商品编码'],['country','国家']].map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label><label>排序方向<select value={filters.direction} onChange={e=>setFilters({...filters,direction:e.target.value})}><option value="asc">升序</option><option value="desc">降序</option></select></label></>}<button disabled={busy||!runID}>查询</button>{finance&&runID&&<a className="secondary export" href={'/api/exports?'+query()}>导出筛选交易CSV</a>}</form>
-  {runsResource.loading&&!runID?<div className="empty" role="status"><h3>正在读取已发布运行…</h3></div>:runsResource.error&&!runID?<div className="empty"><h3>运行列表尚未加载</h3><p>请使用上方重试按钮重新查询。</p></div>:!runID?<div className="empty"><h3>还没有已发布运行</h3><p>{finance?'在数据任务中准备官方数据后开始对账。':'请等待财务派单。'}</p></div>:dataResource.loading?<div className="empty" role="status" aria-live="polite"><h3>正在查询当前页…</h3><p>仍可切换页面或修改筛选条件。</p></div>:dataResource.error?<div className="empty" role="alert"><h3>查询未完成</h3><p>{dataResource.error}</p><button className="secondary" onClick={()=>setQueryRevision(n=>n+1)}>重试当前查询</button></div>:data.items.length===0?<div className="empty"><h3>当前范围没有记录</h3><p>可调整筛选条件，或等待新的差异派单。</p></div>:<div className="table-scroll"><table><thead><tr>{(tab==='cases'?['源记录','差异原因','责任人','状态','版本','操作']:tab==='transactions'?['源记录','单号','交易时间','客户','商品','数量','单价','国家']:['取消源记录','销售源记录','数量','精确金额','方式','操作人']).map(x=><th key={x}>{x}</th>)}</tr></thead><tbody>{data.items.map((x:any)=><tr key={x.id||x.cancel_id}>{tab==='cases'?<><td className="mono">{x.cancel_id}<small>{x.sheet}</small></td><td>{labels[x.reason]||x.reason}</td><td>{x.assignee||'待派单'}</td><td><span className={'status '+x.status}>{labels[x.status]}</span></td><td>{x.version}</td><td><button className="text-button" disabled={busy} onClick={()=>openCase(x)}>查看与处理 ›</button></td></>:tab==='transactions'?<><td className="mono">{x.id}</td><td>{x.invoice}</td><td>{x.time?.replace('T',' ')}</td><td>{x.customer||'未提供'}</td><td>{x.stock}</td><td>{x.quantity}</td><td>{x.price}</td><td>{x.country||'未提供'}</td></>:<><td>{x.cancel_id}</td><td>{x.sale_id}</td><td>{x.quantity}</td><td>{x.amount}</td><td>{x.method==='manual'?'人工确认':'规则自动'}</td><td>{x.actor||'自动规则'}</td></>}</tr>)}</tbody></table></div>}
-  <footer className="pagination"><span>{dataResource.value?`共 ${data.total} 条 · 每页50条`:dataResource.loading?'正在查询…':'每页50条'}</span><div><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value||page<=1} onClick={()=>setPage(page-1)}>上一页</button><span>第 {page} 页</span><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value||page*50>=data.total} onClick={()=>setPage(page+1)}>下一页</button></div><form key={page} onSubmit={e=>{e.preventDefault();const input=e.currentTarget.elements.namedItem('targetPage') as HTMLInputElement;const target=Number(input.value);if(Number.isSafeInteger(target)&&target>=1&&target<=Math.max(1,Math.ceil(data.total/50)))setPage(target)}}><label>跳至页<input name="targetPage" aria-label="跳至页" type="number" min="1" max={Math.max(1,Math.ceil(data.total/50))} defaultValue={page} required style={{width:'6em'}}/></label><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value}>跳转</button></form></footer></section></>}
+ const loginPanel=<section className="login-panel">
+  <h2>{recover?'恢复访问':'欢迎回来'}</h2>
+  <p className="muted">{recover?'密码和一次性恢复码只用于受限重新绑定。':'使用Passkey，或密码加认证器验证码登录。'}</p>
+  <form className="stack-form" onSubmit={e=>{e.preventDefault();action(async()=>accept(await api(recover?'/auth/recover':'/auth/login',recover?{id,password,code:recoveryCode}:{id,password})))}}>
+   <label>账户<input autoComplete="username" value={id} onChange={e=>setID(e.target.value)} placeholder="finance / warehouse / admin" required/></label>
+   <label>密码<input autoComplete="current-password" type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label>
+   {recover&&<label>一次性恢复码<input type="password" value={recoveryCode} onChange={e=>setRecoveryCode(e.target.value)} required/></label>}
+   <button disabled={busy}>{recover?'开始受限恢复':'密码验证并继续'}</button>
+  </form>
+  {!recover&&<><div className="or-rule"><span>或</span></div><button className="secondary full-width" disabled={busy||!id} onClick={()=>action(()=>passkey(false))}>使用Passkey登录</button><p className="field-hint">先在上方填写账户，再使用Passkey。</p></>}
+  <button className="text-button" onClick={()=>{setRecover(!recover);setPassword('');setRecoveryCode('')}}>{recover?'返回登录':'认证设备不可用，使用恢复码'}</button>
+  {setupResource.loading&&<p className="muted" role="status">正在检查首次配置账户…</p>}
+  {setupResource.error&&<p role="alert" className="inline-alert">首次配置账户加载失败：{setupResource.error} <button className="text-button" onClick={()=>setSetupRevision(n=>n+1)}>重试</button></p>}
+  {setupAccounts.length>0&&<div className="setup-footer"><span className="muted">还有{setupAccounts.length}个账户尚未设置密码</span><button className="text-button" disabled={busy} onClick={()=>{setRecover(false);setExistingLogin(false);setPassword('');setError('')}}>为新账户设置密码</button></div>}
+ </section>;
+ const factorPanel=session&&<section className="login-panel">
+  <h2>完成因素验证</h2>
+  <p className="muted">仅密码验证不开放业务。</p>
+  {session.has_totp&&<form className="stack-form" onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/totp/login',{code:otp})))}}><label>认证器验证码<input inputMode="numeric" autoComplete="one-time-code" value={otp} onChange={e=>setOTP(e.target.value)} required/></label><button disabled={busy}>验证并继续</button></form>}
+  {session.has_passkey&&<button className="secondary full-width" onClick={()=>{setID(session.id);action(()=>passkey(false))}}>使用Passkey验证</button>}
+  {!session.has_totp&&!session.has_passkey&&<p>恢复状态需要原有效恢复会话。仅密码不能重新取得绑定权限；请按验收说明处理会话遗失。</p>}
+ </section>;
+ const securityTab=<div className="security-grid">
+  <div className="panel"><p className="scope-note">变更认证方式需要5分钟内的完整认证；超过时请重新登录。</p>{security}</div>
+  <section className="panel"><h2>更改密码</h2><form className="stack-form" onSubmit={e=>{e.preventDefault();action(async()=>accept(await api('/auth/credentials/change',{password})))}}><label>新的强密码<input type="password" autoComplete="new-password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button disabled={busy}>验证权限并更改</button></form><button className="text-button" onClick={()=>action(async()=>accept(await api('/auth/recovery/reissue',{})))}>重新生成恢复码</button></section>
+ </div>;
+ const jobsTab=<section className="panel jobs-panel">
+  <h2>准备与对账任务</h2>
+  <p className="muted">新任务按真实数据计数更新进度。已有业务运行按数据和规则版本复用，保留人工处理历史。</p>
+  <div className="job-create"><label>数据范围<select value={scope} onChange={e=>setScope(e.target.value)}><option value="benchmark">首表固定一万行</option><option value="year1">首年度全部</option><option value="all">两个年度全部</option></select></label><button disabled={busy} onClick={()=>action(createJob)}>创建任务</button></div>
+  {job&&<div className={'job-status '+(job.status||'')}>
+   <h3 role="status"><span className="job-dot" aria-hidden="true"/>{jobLabels[job.status]||job.status} · {jobLabels[job.stage]||job.stage}</h3>
+   <p className="muted">{['queued','running'].includes(job.status)?'可继续检索已发布数据。准备完成后会切换至新运行；请保持服务运行。':'仅成功发布的运行可进入业务查询。'}</p>
+   <dl className="job-counts">{Object.entries(jobProgress).filter(([key,value])=>jobCountLabels[key]&&typeof value==='number').map(([key,value])=><div key={key}><dt>{jobCountLabels[key]}</dt><dd>{count(value)}</dd></div>)}</dl>
+   <details><summary>任务标识（排查问题时使用）</summary><code>{job.id}</code></details>
+   {job.error&&<p role="alert" className="inline-alert">{job.error}</p>}
   </div>}
+ </section>;
+ const dataTab=<>
+  <div className="run-bar">
+   <label className="run-select"><span>当前数据范围</span><select aria-label="当前数据运行" value={runID} onChange={e=>{setRunID(e.target.value);setPage(1);closeCase()}}>{runs.map(r=><option key={r.run_id} value={r.run_id}>{scopeName(r.scope)}（清洗 {r.cleaning_version}，规则 {r.rule_version}）</option>)}</select></label>
+   <span className={'view-scope '+(finance?'global':'assigned')}>{finance?'财务与管理员全局视图':'仅显示分派给你的差异及相关证据'}</span>
+  </div>
+  {runsResource.error&&<div role="alert" className="notice error">运行列表加载失败：{runsResource.error}<button onClick={()=>setRunsRevision(n=>n+1)}>重试</button></div>}
+  {runID&&<section className="overview" aria-label="当前运行差异统计">
+   <div className="overview-head"><span className="muted" role="status">{overviewResource.loading?'正在加载当前运行统计，列表可独立查询。':overviewResource.error?'统计暂不可用；下方列表独立加载。':'统计为最近一次加载结果；筛选仅作用于下方明细。'}</span><button className="text-button" disabled={overviewResource.loading} onClick={()=>setOverviewRevision(n=>n+1)}>刷新统计</button></div>
+   {overviewResource.error&&<div role="alert" className="notice error">统计加载失败：{overviewResource.error}</div>}
+   {overview&&<>
+    <dl className="metrics">{[['total','差异总数',overview.cases.total],['pending','待处理',overview.cases.pending],['in_progress','处理中',overview.cases.in_progress],['closed','已关闭',overview.cases.closed]].map(([key,k,v])=><div key={String(key)} className={'metric '+key}><dt>{k}</dt><dd>{count(v)}</dd></div>)}</dl>
+    {caseShare.length>0&&<svg className="share-bar" viewBox="0 0 100 6" preserveAspectRatio="none" role="img" aria-label={`待处理${caseCounts.pending}，处理中${caseCounts.in_progress}，已关闭${caseCounts.closed}，共${caseCounts.total}`}>{caseShare.map(s=><rect key={s.key} className={s.key} x={s.x} y={0} width={s.w} height={6}/>)}</svg>}
+   </>}
+   <p className="caveat">{overview?.caveat||'匹配只表示规则推断。资料不足时保留原因，不制造关联。'}</p>
+   {finance&&overview?.initial_reconciliation&&<details className="conservation"><summary>查看来源、行数守恒与初始配对口径</summary><p>原始 {overview.initial_reconciliation.input.raw} ＝ 接纳 {overview.initial_reconciliation.input.accepted} ＋ 排除 {overview.initial_reconciliation.input.excluded}；初始自动配对 {overview.initial_reconciliation.matched}，疑似 {overview.initial_reconciliation.suspected}，当前规则下无合格原单 {overview.initial_reconciliation.no_original}。人工确认保留初始分类。</p></details>}
+  </section>}
+  <section className="panel table-panel" aria-busy={dataResource.loading||runsResource.loading}>
+   <form className="filters" onSubmit={e=>{e.preventDefault();setApplied({...filters});setPage(1);setQueryRevision(n=>n+1)}}>
+    <div className="filter-grid">
+     {[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号'],['country','国家']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}
+     <label>状态<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}><option value="">全部</option>{['pending','in_progress','closed'].map(x=><option key={x} value={x}>{labels[x]}</option>)}</select></label>
+     <label className="wide">差异原因<select value={filters.reason} onChange={e=>setFilters({...filters,reason:e.target.value})}><option value="">全部原因</option>{Object.entries(reasons).map(([k,[v]])=><option key={k} value={k}>{v}</option>)}</select></label>
+     <label>起始日期<input type="date" value={filters.date_from} onChange={e=>setFilters({...filters,date_from:e.target.value})}/></label>
+     <label>结束日期 不含<input type="date" value={filters.date_to} onChange={e=>setFilters({...filters,date_to:e.target.value})}/></label>
+     {tab==='transactions'&&<>
+      <label>排序字段<select value={filters.sort} onChange={e=>setFilters({...filters,sort:e.target.value})}>{[['source','来源顺序'],['date','交易时间'],['invoice','交易单号'],['customer','客户编号'],['stock','商品编码'],['country','国家']].map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
+      <label>排序方向<select value={filters.direction} onChange={e=>setFilters({...filters,direction:e.target.value})}><option value="asc">升序</option><option value="desc">降序</option></select></label>
+     </>}
+    </div>
+    <div className="filter-actions">
+     <span className={'filter-state'+(draftChanged?' changed':'')} role="status">{draftChanged?'条件已修改，点击查询后生效':appliedCount?`已应用 ${appliedCount} 个筛选条件`:'未设置筛选条件'}</span>
+     <button type="button" className="secondary" disabled={busy} onClick={()=>setFilters(emptyFilters)}>清空条件</button>
+     <button disabled={busy||!runID}>查询</button>
+     {finance&&runID&&<a className="button-link secondary export" href={'/api/exports?'+query()}>导出筛选交易CSV</a>}
+    </div>
+   </form>
+   {runsResource.loading&&!runID?<div className="empty" role="status"><h3>正在读取已发布运行…</h3></div>
+   :runsResource.error&&!runID?<div className="empty"><h3>运行列表尚未加载</h3><p>请使用上方重试按钮重新查询。</p></div>
+   :!runID?<div className="empty"><h3>还没有已发布运行</h3><p>{finance?'在数据任务中准备官方数据后开始对账。':'请等待财务派单。'}</p></div>
+   :dataResource.loading?<div className="empty" role="status" aria-live="polite"><span className="spinner" aria-hidden="true"/><h3>正在查询当前页…</h3><p>仍可切换页面或修改筛选条件。</p></div>
+   :dataResource.error?<div className="empty" role="alert"><h3>查询未完成</h3><p>{dataResource.error}</p><button className="secondary" onClick={()=>setQueryRevision(n=>n+1)}>重试当前查询</button></div>
+   :data.items.length===0?<div className="empty"><h3>当前范围没有记录</h3><p>可调整筛选条件，或等待新的差异派单。</p></div>
+   :<div className="table-scroll"><table className={'data-table '+tab}>
+    <thead><tr>{columns.map(([x,c])=><th key={x} className={c}>{x}</th>)}</tr></thead>
+    <tbody>{data.items.map((x:any)=><tr key={x.id||x.cancel_id} className={tab==='cases'?'row-'+x.status:''}>{tab==='cases'?<>
+     <td><span className="mono">{x.cancel_id}</span><small>{x.sheet}{x.source_row?` · 原行 ${x.source_row}`:''}</small></td>
+     <td className="reason-cell"><span title={reasons[x.reason]?.[1]}>{reasonName(x.reason)}</span></td>
+     <td>{x.assignee||<span className="unassigned">待派单</span>}</td>
+     <td><span className={'status '+x.status}>{labels[x.status]}</span></td>
+     <td className="num">{x.version}</td>
+     <td className="act"><button className="row-action" disabled={busy} onClick={()=>openCase(x)}>查看与处理</button></td>
+    </>:tab==='transactions'?<>
+     <td className="mono">{x.id}</td>
+     <td className="mono">{x.invoice}</td>
+     <td className="nowrap">{x.time?.replace('T',' ')}</td>
+     <td>{x.customer||<span className="unassigned">未提供</span>}</td>
+     <td><span className="mono">{x.stock}</span>{x.description&&<small className="clip" title={x.description}>{x.description}</small>}</td>
+     <td className={'num'+(x.quantity<0?' negative':'')}>{x.quantity}</td>
+     <td className="num">{x.price}</td>
+     <td>{x.country||<span className="unassigned">未提供</span>}</td>
+    </>:<>
+     <td><span className="mono">{x.cancel_id}</span>{x.cancel_sheet&&<small>{x.cancel_sheet} · 原行 {x.cancel_source_row}</small>}</td>
+     <td><span className="mono">{x.sale_id}</span>{x.sale_sheet&&<small>{x.sale_sheet} · 原行 {x.sale_source_row}</small>}</td>
+     <td className="num">{x.quantity}</td>
+     <td className="num">{x.amount}</td>
+     <td><span className={'method '+(x.method==='manual'?'manual':'auto')}>{x.method==='manual'?'人工确认':'规则自动'}</span></td>
+     <td>{x.actor||'自动规则'}</td>
+    </>}</tr>)}</tbody>
+   </table></div>}
+   <footer className="pagination">
+    <span className="page-total">{dataResource.value?`共 ${data.total.toLocaleString('zh-CN')} 条 · 每页50条`:dataResource.loading?'正在查询…':'每页50条'}</span>
+    <div className="page-steps"><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value||page<=1} onClick={()=>setPage(page-1)}>上一页</button><span>第 {page} 页{dataResource.value?` / 共 ${pageCount.toLocaleString('zh-CN')} 页`:''}</span><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value||page*50>=data.total} onClick={()=>setPage(page+1)}>下一页</button></div>
+    <form className="page-jump" key={page} onSubmit={e=>{e.preventDefault();const input=e.currentTarget.elements.namedItem('targetPage') as HTMLInputElement;const target=Number(input.value);if(Number.isSafeInteger(target)&&target>=1&&target<=Math.max(1,Math.ceil(data.total/50)))setPage(target)}}><label>跳至页<input name="targetPage" aria-label="跳至页" type="number" min="1" max={Math.max(1,Math.ceil(data.total/50))} defaultValue={page} required/></label><button className="secondary" disabled={busy||dataResource.loading||!dataResource.value}>跳转</button></form>
+   </footer>
+  </section>
+ </>;
+ const drawerHead=(title:React.ReactNode,meta?:React.ReactNode,status?:string)=><header className="drawer-head"><div><h2>{title}</h2>{meta&&<p className="drawer-meta">{meta}</p>}</div><div className="drawer-head-side">{status&&<span className={'status '+status}>{labels[status]}</span>}<button className="icon-button" onClick={closeCase} aria-label="关闭详情">×</button></div></header>;
+ const isAssignee=!!selected&&selected.case.assignee===session?.id;
+ const drawer=complete&&activeCase&&(!selected?<div className="drawer-backdrop"><section className="drawer" aria-label="差异证据与处理">{drawerHead('差异证据')}<div className="drawer-body">{detailResource.loading?<p role="status" className="muted"><span className="spinner" aria-hidden="true"/>正在加载当前差异证据…</p>:<div role="alert" className="inline-alert"><p>{detailResource.error||'证据尚未加载'}</p><button className="secondary" onClick={()=>setDetailRevision(n=>n+1)}>重试证据查询</button></div>}</div></section></div>
+ :<div className="drawer-backdrop"><section className="drawer" aria-label="差异证据与处理">
+  {drawerHead(<>差异 <span className="mono">{selected.case.cancel_id}</span></>,<>{selected.case.sheet} · 原Excel行 {selected.case.source_row} · 版本 {selected.case.version}</>,selected.case.status)}
+  <div className="drawer-body">
+   <dl className="detail-facts">
+    <div className="fact-reason"><dt>差异原因</dt><dd>{reasonName(selected.case.reason)}{reasons[selected.case.reason]&&<small>{reasons[selected.case.reason][1]}</small>}</dd></div>
+    <div><dt>状态</dt><dd>{labels[selected.case.status]}</dd></div>
+    <div><dt>责任人</dt><dd>{selected.case.assignee||'待派单'}</dd></div>
+    <div><dt>取消数量</dt><dd className="num">{Math.abs(selected.cancel.quantity)}</dd></div>
+    <div><dt>精确单价</dt><dd className="num">{selected.cancel.price}</dd></div>
+   </dl>
+   <p className="caveat">{selected.caveat}</p>
+   {finance&&usersResource.error&&<p role="alert" className="inline-alert">责任人列表加载失败：{usersResource.error} <button className="text-button" onClick={()=>setUsersRevision(n=>n+1)}>重试</button></p>}
+   {(finance||(isAssignee&&selected.case.status==='pending'))&&<div className="drawer-actions">
+    {finance&&!selected.case.assignee&&<><select aria-label="选择责任人" value={assignee} onChange={e=>setAssignee(e.target.value)}>{users.map(x=><option key={x.id} value={x.id}>{x.id} · {labels[x.role]}</option>)}</select><button disabled={busy||usersResource.loading||!users.length} onClick={()=>action(()=>mutate('assign',{assignee}))}>派单</button></>}
+    {selected.case.assignee&&finance&&<button className="secondary" disabled={busy} onClick={()=>action(()=>mutate('assign',{assignee}))}>再次派单</button>}
+    {isAssignee&&selected.case.status==='pending'&&<button disabled={busy} onClick={()=>action(()=>mutate('start',{version:selected.case.version}))}>开始处理</button>}
+   </div>}
+   <h3>决策时证据</h3>
+   <p className="muted">只保存支撑原决策的有限证据，不等于全部当前候选。</p>
+   {selected.decision_evidence.length?<div className="evidence-list">{selected.decision_evidence.map(x=><div className="evidence-line" key={x.id}><span>销售 <span className="mono">{x.id}</span></span><span className="num-pair"><small>当时余量</small>{x.remaining_at_decision}</span><span className="num-pair"><small>现在余量</small>{x.current_remaining}</span><span className="evidence-reason">{x.reason&&(evidenceReasons[x.reason]||<span className="raw-code">{x.reason}</span>)}</span></div>)}</div>:<p className="muted empty-inline">本差异没有合格的决策时候选证据。</p>}
+   <h3>全部当前合格候选 <span className="count-badge">{selected.candidates.total} 条</span></h3>
+   {selected.candidates.total===0&&<p className="muted empty-inline">当前规则下没有合格候选。</p>}
+   <div className="candidate-list">{selected.candidates.items.map(x=><div className="candidate" key={x.id}>
+    <div className="candidate-main"><strong>销售 <span className="mono">{x.id}</span></strong><small>{[`原行 ${x.source_row}`,x.time?.replace('T',' '),x.customer?`客户 ${x.customer}`:'客户未提供',x.stock,`单价 ${x.price}`,x.country||'国家未提供'].filter(Boolean).join(' · ')}</small></div>
+    <span className="num-pair"><small>数量</small>{x.quantity}</span>
+    <span className="num-pair"><small>当前余量</small>{x.current_remaining}</span>
+    {isAssignee&&selected.case.status==='in_progress'&&<button className="secondary" disabled={busy} onClick={()=>{if(window.confirm('确认此候选已人工核查？系统会重新校验身份、时间、余量和版本。'))action(()=>mutate('confirm-match',{version:selected.case.version,sale_row_id:x.id}))}}>确认候选</button>}
+   </div>)}</div>
+   {selected.candidates.total>50&&<div className="button-row candidate-pages"><button className="secondary" disabled={busy||selected.candidates.page<=1} onClick={()=>openCase(selected.case,selected.candidates.page-1)}>上一页候选</button><span>第 {selected.candidates.page} 页 / 共 {Math.ceil(selected.candidates.total/50)} 页</span><button className="secondary" disabled={busy||selected.candidates.page*50>=selected.candidates.total} onClick={()=>openCase(selected.case,selected.candidates.page+1)}>下一页候选</button></div>}
+   {isAssignee&&selected.case.status==='in_progress'&&<form className="closure" onSubmit={e=>{e.preventDefault();action(()=>mutate('close',{version:selected.case.version,conclusion}))}}><label>核查结论<textarea value={conclusion} onChange={e=>setConclusion(e.target.value)} placeholder="说明核查依据；资料不足可说明原因后结案，不制造关联。"/></label><div className="button-row"><button disabled={busy}>保存结论并关闭</button></div></form>}
+   {selected.case.status==='closed'&&<div className="closed-conclusion"><h3>关闭结论</h3><p>{selected.case.conclusion}</p><p className="muted">此差异已关闭，不能修改或重新开启。</p></div>}
+   <h3>操作历史</h3>
+   {auditResource.loading&&<p role="status" className="muted">正在加载操作历史…</p>}
+   {auditResource.error&&<p role="alert" className="inline-alert">操作历史加载失败：{auditResource.error} <button className="text-button" onClick={()=>setDetailRevision(n=>n+1)}>重试</button></p>}
+   {!auditResource.loading&&!auditResource.error&&history.length===0&&<p className="muted empty-inline">暂无操作记录。</p>}
+   <ol className="audit-list">{history.map(x=><li key={x.id}><strong>{auditActions[x.action]||<span className="raw-code">{x.action}</span>}</strong><small>{x.actor} · {x.occurred_at}<br/>{labels[x.before.status]} v{x.before.version} → {labels[x.after.status]} v{x.after.version}</small>{x.after_evidence?.manual_confirmation&&<p>销售 {x.after_evidence.manual_confirmation.sale_id} · 分配 {x.after_evidence.manual_confirmation.quantity}</p>}</li>)}</ol>
+  </div>
+ </section></div>);
+ return <div className={complete?'app-layout':'auth-layout'}>
+  {complete?<aside className="sidebar">
+   <div className="brand"><span className="brand-mark" aria-hidden="true">账</span><div>退货对账<small>差异处理工作台</small></div></div>
+   <nav aria-label="工作空间"><p className="nav-label">工作空间</p>{navItems.map(([k,v])=><button key={k} className={'nav-item '+(tab===k?'active':'')} aria-current={tab===k?'page':undefined} onClick={()=>{setTab(k);setPage(1);closeCase()}}>{v}</button>)}</nav>
+   <div className="sidebar-foot">UCI Online Retail II<br/>规则推断 · 课程模拟</div>
+  </aside>:<aside className="auth-intro">
+   <div className="brand"><span className="brand-mark" aria-hidden="true">账</span><div>退货对账<small>与差异处理系统</small></div></div>
+   <div className="auth-pitch"><h1>让每一项差异<br/>有据可查</h1><p>核对来源，保留歧义，<br/>把核查过程记录到结案。</p></div>
+   <p className="source-note">公开交易来自UCI Online Retail II<br/>匹配为规则推断，人工处理为课程模拟</p>
+  </aside>}
+  <main>
+   <header className="topbar">
+    <div className="title-block"><h1>{complete?tabTitles[tab]:(choosingSetup||session?.state==='new'?'首次配置':'安全登录')}</h1>{complete&&<p className="page-hint">{tabHints[tab]}</p>}</div>
+    <div className="account">{session&&<><span className="account-id"><span className="avatar" aria-hidden="true">{session.id.slice(0,1).toUpperCase()}</span><span>{session.id}<small>{labels[session.role]}</small></span></span><button className="secondary compact" disabled={busy} onClick={logout}>退出</button></>}</div>
+   </header>
+   {error&&<div role="alert" className="notice error">{error}<button onClick={()=>setError('')} aria-label="关闭错误">×</button></div>}{message&&<div role="status" className="notice">{message}</div>}{busy&&<p className="busy" role="status">正在处理，请稍候…</p>}
+   {!complete?<div className="auth-content">{choosingSetup?firstSetup:!session?loginPanel:session.scope==='login_factor'||session.scope==='login_passkey'?factorPanel:security}</div>
+   :<div className="workspace">{tab==='security'?securityTab:tab==='jobs'?jobsTab:dataTab}</div>}
   </main>
-  {complete&&activeCase&&!selected&&<div className="drawer-backdrop"><section className="drawer" aria-label="差异证据与处理"><header><h2>差异证据</h2><button className="text-button" onClick={closeCase} aria-label="关闭详情">×</button></header>{detailResource.loading?<p role="status">正在加载当前差异证据…</p>:<div role="alert"><p>{detailResource.error||'证据尚未加载'}</p><button className="secondary" onClick={()=>setDetailRevision(n=>n+1)}>重试证据查询</button></div>}</section></div>}
-  {complete&&selected&&<div className="drawer-backdrop"><section className="drawer" aria-label="差异证据与处理"><header><div><p className="eyebrow">CASE EVIDENCE</p><h2>差异 {selected.case.cancel_id}</h2></div><button className="text-button" onClick={closeCase} aria-label="关闭详情">×</button></header><p className="scope-note">{selected.case.sheet} · 原Excel行 {selected.case.source_row} · 版本 {selected.case.version}</p><div className="detail-facts"><p>状态 <strong>{labels[selected.case.status]}</strong></p><p>责任人 <strong>{selected.case.assignee||'待派单'}</strong></p><p>取消数量 <strong>{Math.abs(selected.cancel.quantity)}</strong></p><p>精确单价 <strong>{selected.cancel.price}</strong></p></div><p>{selected.caveat}</p>
-  {finance&&usersResource.error&&<p role="alert">责任人列表加载失败：{usersResource.error} <button className="text-button" onClick={()=>setUsersRevision(n=>n+1)}>重试</button></p>}
-  {finance&&!selected.case.assignee&&<div className="button-row"><select aria-label="选择责任人" value={assignee} onChange={e=>setAssignee(e.target.value)}>{users.map(x=><option key={x.id} value={x.id}>{x.id} · {labels[x.role]}</option>)}</select><button disabled={busy||usersResource.loading||!users.length} onClick={()=>action(()=>mutate('assign',{assignee}))}>派单</button></div>}
-  {selected.case.assignee&&finance&&<button className="secondary" disabled={busy} onClick={()=>action(()=>mutate('assign',{assignee}))}>再次派单</button>}
-  {selected.case.assignee===session.id&&selected.case.status==='pending'&&<div className="button-row"><button disabled={busy} onClick={()=>action(()=>mutate('start',{version:selected.case.version}))}>开始处理</button></div>}
-  <h3>决策时证据</h3><p className="muted">只保存支撑原决策的有限证据，不等于全部当前候选。</p>{selected.decision_evidence.length?selected.decision_evidence.map(x=><p className="evidence-line" key={x.id}>销售 {x.id} · 当时余量 {x.remaining_at_decision} · 现在余量 {x.current_remaining} · {x.reason}</p>):<p className="muted">本差异没有合格的决策时候选证据。</p>}
-  <h3>全部当前合格候选 <small>{selected.candidates.total} 条</small></h3>{selected.candidates.items.map(x=><div className="candidate" key={x.id}><div><strong>销售 {x.id}</strong><small>原行 {x.source_row} · 数量 {x.quantity} · 当前余量 {x.current_remaining}<br/>{x.time} · {x.customer} · {x.stock} · {x.price} · {x.country}</small></div>{selected.case.assignee===session.id&&selected.case.status==='in_progress'&&<button className="secondary" disabled={busy} onClick={()=>{if(window.confirm('确认此候选已人工核查？系统会重新校验身份、时间、余量和版本。'))action(()=>mutate('confirm-match',{version:selected.case.version,sale_row_id:x.id}))}}>确认候选</button>}</div>)}
-  {selected.candidates.total>50&&<div className="button-row"><button className="secondary" disabled={busy||selected.candidates.page<=1} onClick={()=>openCase(selected.case,selected.candidates.page-1)}>上一页候选</button><span>{selected.candidates.page}</span><button className="secondary" disabled={busy||selected.candidates.page*50>=selected.candidates.total} onClick={()=>openCase(selected.case,selected.candidates.page+1)}>下一页候选</button></div>}
-  {selected.case.assignee===session.id&&selected.case.status==='in_progress'&&<form className="closure" onSubmit={e=>{e.preventDefault();action(()=>mutate('close',{version:selected.case.version,conclusion}))}}><label>核查结论<textarea value={conclusion} onChange={e=>setConclusion(e.target.value)} placeholder="说明核查依据；资料不足可说明原因后结案，不制造关联。"/></label><div className="button-row"><button disabled={busy}>保存结论并关闭</button></div></form>}
-  {selected.case.status==='closed'&&<div className="closed-conclusion"><h3>关闭结论</h3><p>{selected.case.conclusion}</p><p className="muted">此差异已关闭，不能修改或重新开启。</p></div>}
-  <h3>操作历史</h3>{auditResource.loading&&<p role="status">正在加载操作历史…</p>}{auditResource.error&&<p role="alert">操作历史加载失败：{auditResource.error} <button className="text-button" onClick={()=>setDetailRevision(n=>n+1)}>重试</button></p>}<ol className="audit-list">{history.map(x=><li key={x.id}><strong>{({assign:'派单',start:'开始处理',confirm_match:'人工确认',close:'关闭'} as Record<string,string>)[x.action]||x.action}</strong><small>{x.actor} · {x.occurred_at}<br/>{labels[x.before.status]} v{x.before.version} → {labels[x.after.status]} v{x.after.version}</small>{x.after_evidence?.manual_confirmation&&<p>销售 {x.after_evidence.manual_confirmation.sale_id} · 分配 {x.after_evidence.manual_confirmation.quantity}</p>}</li>)}</ol>
-  </section></div>}
+  {drawer}
  </div>
 }
 createRoot(document.getElementById('root')!).render(<App/>);

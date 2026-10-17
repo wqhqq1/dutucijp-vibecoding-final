@@ -22,6 +22,7 @@ type PageRequest struct {
 type QueryFilter struct {
 	RunID          string `json:"run_id"`
 	Status         string `json:"status"`
+	Reason         string `json:"reason"`
 	Assignee       string `json:"assignee"`
 	Customer       string `json:"customer"`
 	Stock          string `json:"stock"`
@@ -199,6 +200,9 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 	if f.Status != "" && f.Status != "pending" && f.Status != "in_progress" && f.Status != "closed" {
 		return f, workflowError("invalid_input", "未知差异状态", WorkflowCase{})
 	}
+	if f.Reason != "" && !caseReasons[f.Reason] {
+		return f, workflowError("invalid_input", "未知差异原因", WorkflowCase{})
+	}
 	if f.Classification != "" && f.Classification != "matched" && f.Classification != "suspected" && f.Classification != "no_original" {
 		return f, workflowError("invalid_input", "未知初始分类", WorkflowCase{})
 	}
@@ -255,7 +259,7 @@ func transactionRowsFrom(f QueryFilter, page bool) string {
 		index = "row_stock"
 	case page && narrowTransactionDate(f):
 		index = "row_source_time"
-	case page && (f.Sort == "source" || f.Sort == "") && f.Status == "" && f.Assignee == "" && f.Classification == "":
+	case page && (f.Sort == "source" || f.Sort == "") && !caseFiltered(f) && f.Classification == "":
 		index = "row_query_source"
 	case page && f.Sort == "date":
 		index = "row_source_time"
@@ -284,7 +288,7 @@ func transactionRowsFrom(f QueryFilter, page bool) string {
 // These scopes contain only immutable published input. Warehouse ownership and
 // workflow/decision filters must retain their live joins on both count and page.
 func immutableTransactionScope(actor WorkflowActor, f QueryFilter) bool {
-	return (actor.Role == "finance" || actor.Role == "admin") && f.Status == "" && f.Assignee == "" && f.Classification == ""
+	return (actor.Role == "finance" || actor.Role == "admin") && !caseFiltered(f) && f.Classification == ""
 }
 
 func immutableTransactionWhere(f QueryFilter) (string, []any) {
@@ -310,7 +314,7 @@ func narrowTransactionDate(f QueryFilter) bool {
 
 func filterJoins(f QueryFilter, hasCase bool) string {
 	from := ""
-	if !hasCase && (f.Status != "" || f.Assignee != "") {
+	if !hasCase && caseFiltered(f) {
 		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
 	}
 	if f.Classification != "" {
@@ -319,8 +323,19 @@ func filterJoins(f QueryFilter, hasCase bool) string {
 	return from
 }
 
+// Case reasons produced by the conservative rule version. They are stored on
+// cases, so a reason filter needs the live cases join like status/assignee.
+var caseReasons = map[string]bool{
+	"missing_identity": true, "suspected_duplicate_cancel": true, "ambiguous_candidates": true, "suspected_duplicate_sale": true,
+	"no_identity_match": true, "no_strictly_earlier_sale": true, "insufficient_remaining_quantity": true,
+}
+
+func caseFiltered(f QueryFilter) bool {
+	return f.Status != "" || f.Reason != "" || f.Assignee != ""
+}
+
 func unfilteredTransactions(f QueryFilter) bool {
-	return f.Status == "" && f.Assignee == "" && f.Customer == "" && f.Stock == "" && f.Invoice == "" && f.Country == "" && f.Classification == "" && f.Kind == "" && f.DateFrom == "" && f.DateTo == ""
+	return !caseFiltered(f) && f.Customer == "" && f.Stock == "" && f.Invoice == "" && f.Country == "" && f.Classification == "" && f.Kind == "" && f.DateFrom == "" && f.DateTo == ""
 }
 
 func manifestTransactionCount(actor WorkflowActor, f QueryFilter) bool {
@@ -389,7 +404,7 @@ func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
 func queryScopeWhere(actor WorkflowActor, f QueryFilter, ownCases bool) (string, []any) {
 	parts := []string{"r.id=?", "r.status='published'", "d.status='published'"}
 	args := []any{f.RunID}
-	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
+	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.reason=?", f.Reason}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
 		if pair.value != "" {
 			parts = append(parts, pair.sql)
 			args = append(args, pair.value)
@@ -537,7 +552,7 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 	}
 	out = AllocationPage{Items: []AllocationRecord{}, Page: f.Page, PageSize: f.PageSize}
 	from := runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=a.cancel_id`
-	if actor.Role == "warehouse" || f.Status != "" || f.Assignee != "" {
+	if actor.Role == "warehouse" || caseFiltered(f) {
 		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
 	}
 	from += filterJoins(f, true)
@@ -545,7 +560,7 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 	countFrom := from
 	if !hasRowFilter(f) && f.Classification == "" {
 		countFrom = runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id`
-		if actor.Role == "warehouse" || f.Status != "" || f.Assignee != "" {
+		if actor.Role == "warehouse" || caseFiltered(f) {
 			countFrom += ` CROSS JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
 		}
 	}

@@ -43,7 +43,20 @@ func TestHTTP_TC16_CountrySortPaginationAndExportAgree(t *testing.T) {
 	if column < 0 || records[1][column] != first.Items[0].ID || records[3][column] != second.Items[0].ID {
 		t.Fatal("HTTP export sort differs from the displayed pages")
 	}
-	for _, query := range []string{"&sort=" + url.QueryEscape("invoice;DROP TABLE normalized_rows"), "&direction=sideways"} {
+	for _, query := range []string{"&sort=" + url.QueryEscape("invoice;DROP TABLE normalized_rows"), "&direction=sideways", "&reason=" + url.QueryEscape("x' OR 1=1 --")} {
 		expectHTTPStatus(t, f.request(t, finance, "GET", base+query, nil, nil), 422)
+	}
+	for _, endpoint := range []string{"cases", "transactions", "allocations", "exports"} {
+		path := "/api/" + endpoint + "?run_id=" + f.run + "&reason=invented"
+		expectHTTPStatus(t, f.request(t, finance, "GET", path, nil, nil), 422)
+	}
+	if page := read("&reason=ambiguous_candidates&page_size=2"); page.Total != 3 || len(page.Items) != 2 {
+		t.Fatal("HTTP reason filter must count only the three related cancellations")
+	}
+	w = f.request(t, finance, "GET", "/api/exports?run_id="+f.run+"&reason=ambiguous_candidates&page_size=2", nil, nil)
+	expectHTTPStatus(t, w, 200)
+	records, err = csv.NewReader(strings.NewReader(strings.TrimPrefix(w.Body.String(), "\ufeff"))).ReadAll()
+	if err != nil || len(records) != 4 {
+		t.Fatal("reason-filtered CSV must include all three cancellations irrespective of page size")
 	}
 }

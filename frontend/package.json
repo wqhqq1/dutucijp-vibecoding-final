@@ -6,9 +6,12 @@
  "scripts": {
   "test": "node --test --test-reporter=tap tests/requests.test.mjs",
   "build": "tsc --noEmit && vite build",
-  "dev": "vite --host localhost"
+  "dev": "vite --host localhost",
+  "dev:mock": "vite --mode mock",
+  "preview:mock": "vite preview --mode mock"
  },
  "dependencies": {
+  "@fontsource/ibm-plex-mono": "5.3.0",
   "qrcode": "1.5.4",
   "react": "19.3.1",
   "react-dom": "19.3.1"

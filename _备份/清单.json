@@ -1,11 +1,16 @@
 {
-  "format_version": 5,
-  "kind": "software-awaiting-human-acceptance-not-final-submission",
-  "actual_time": "2026-10-17T20:32:12.477959+08:00",
-  "local_head": "30b29823eeae4ac0d0c2bef67b3b8c447a1fe5cf",
-  "native_main_commit_count": 58,
-  "software_commit": "6ead220ccf425ab7c3b8a29ded13fe2278e8ea3b",
-  "base_remote_head": "96ed6a3fd9474a81b4d1941ea30f1064858b8dd4",
+  "format_version": 6,
+  "kind": "daily-closing-not-final-submission",
+  "actual_time": "2026-10-17T22:23:25.661604+08:00",
+  "local_head": "84cdaa0fcc63b48228c3b3454a25b0767b2dddb8",
+  "software_commit": "b9d8d8d148d72cefb0421b9a7b4b67d39a8dd7ac",
+  "native_main_commit_count": 60,
+  "native_refs": [
+    "refs/heads/delivery/teacher-portable-demo 3ac3cacca5f16d48abcee275b51413eccfce40e0",
+    "refs/heads/experiment/fr18-disposable-20261015-210730 79ff9b2b1ceceb232238ac79a5a54a837997bed6",
+    "refs/heads/main 84cdaa0fcc63b48228c3b3454a25b0767b2dddb8"
+  ],
+  "base_remote_head": "2987383780d79f2bbd3a42d640987847ef24e736",
   "source_files": [
     {
       "path": ".agents/skills/run-app/SKILL.md",
@@ -240,12 +245,12 @@
     {
       "path": "backend/internal/store/query.go",
       "mode": "100644",
-      "git_blob_sha": "3f508819cd9cb93819a6d2470bb824a7a1bea788"
+      "git_blob_sha": "100286491aeeed82413df51e1ddde19262f1fed5"
     },
     {
       "path": "backend/internal/store/query_test.go",
       "mode": "100644",
-      "git_blob_sha": "4382d05c162244bf55f4d5cdf3179a3bd31b0518"
+      "git_blob_sha": "3eb2655c07757fdf92f984da9d87254696e5a88f"
     },
     {
       "path": "backend/internal/store/schema.sql",
@@ -305,7 +310,7 @@
     {
       "path": "backend/internal/web/frontend_test.go",
       "mode": "100644",
-      "git_blob_sha": "159449d7ea12ebd5082c606b73068cff2295a4c7"
+      "git_blob_sha": "c5b29d9da994aeec18af6f28eea5b771403a0b4c"
     },
     {
       "path": "backend/internal/web/jobs.go",
@@ -330,7 +335,7 @@
     {
       "path": "backend/internal/web/server.go",
       "mode": "100644",
-      "git_blob_sha": "4529848d216032c1516c75533ac525ca8854a6f0"
+      "git_blob_sha": "14db518099ecfc8acb93f9973ca110c71abc3c85"
     },
     {
       "path": "backend/internal/web/setup_http_test.go",
@@ -340,12 +345,17 @@
     {
       "path": "backend/internal/web/transaction_query_test.go",
       "mode": "100644",
-      "git_blob_sha": "eada6404081c07dbcfa61f2579f6815681a4dbef"
+      "git_blob_sha": "9a5771669d4b5033d607857705e8799d299909e7"
     },
     {
       "path": "build.ps1",
       "mode": "100644",
       "git_blob_sha": "287edd5c1d3d242e323b542acdf8d8d038e5e37d"
+    },
+    {
+      "path": "frontend/dev/mock-api.ts",
+      "mode": "100644",
+      "git_blob_sha": "d31315a66136e92ee8095fcc6707567a6495d179"
     },
     {
       "path": "frontend/index.html",
@@ -355,17 +365,17 @@
     {
       "path": "frontend/package-lock.json",
       "mode": "100644",
-      "git_blob_sha": "f2a9f910be34a14862a8f7e4b5fa7a0dd2a159f2"
+      "git_blob_sha": "9394cd9013c6f05f7df7566458b604a28558f647"
     },
     {
       "path": "frontend/package.json",
       "mode": "100644",
-      "git_blob_sha": "3a2ad4f032a3ac3b958b2fc9a8166df183837d17"
+      "git_blob_sha": "88b566cdfee29961c319aefca0c93967d443eadf"
     },
     {
       "path": "frontend/src/main.tsx",
       "mode": "100644",
-      "git_blob_sha": "93b9e5089c39c019bc307bf4fb09c8cb59108740"
+      "git_blob_sha": "a2af41fd452f39cca17a8068d649090579dca90d"
     },
     {
       "path": "frontend/src/requests.ts",
@@ -375,7 +385,7 @@
     {
       "path": "frontend/src/style.css",
       "mode": "100644",
-      "git_blob_sha": "0c7fd185311f13f454943bfbc7f27da0fac5fcd6"
+      "git_blob_sha": "72c3d61298b1c88b0d28cba3ead47447bfe8525a"
     },
     {
       "path": "frontend/src/vite-env.d.ts",
@@ -391,6 +401,11 @@
       "path": "frontend/tsconfig.json",
       "mode": "100644",
       "git_blob_sha": "351710a834b8d73329c10677c8805d110fcf0100"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "mode": "100644",
+      "git_blob_sha": "0f906344c876d7e5516bbe42aa18dfb611a9c5c0"
     },
     {
       "path": "portable/build_bundle.py",
@@ -685,12 +700,17 @@
     {
       "path": "四段式任务草稿-中期后合并.md",
       "mode": "100644",
-      "git_blob_sha": "7da02f68b9e810400c29da746ec9f9ad080a6f1b"
+      "git_blob_sha": "244e5245eae143743ba649ea82dddf8771885909"
+    },
+    {
+      "path": "四段式任务草稿-前端设计优化交接.md",
+      "mode": "100644",
+      "git_blob_sha": "2deff5ec2ba1aa7f738d598f77cf9a3747bee825"
     },
     {
       "path": "四段式任务草稿.md",
       "mode": "100644",
-      "git_blob_sha": "3a766772642c5631cc3fbb9f79a5b679176d22d2"
+      "git_blob_sha": "d2dab99de7122faf798623ee549f520d9667d559"
     },
     {
       "path": "四段式任务草稿补充-v1.2汇报调整.md",
@@ -710,12 +730,12 @@
     {
       "path": "怎么做.md",
       "mode": "100644",
-      "git_blob_sha": "7b8871ac5b0508dd07d9be3438985ac100335b5d"
+      "git_blob_sha": "55ce04d53774068d39767acf3a6ebb5b5f076e45"
     },
     {
       "path": "怎么算做对.md",
       "mode": "100644",
-      "git_blob_sha": "07b18f9a5e8d7857cc09077016003fc686d3e065"
+      "git_blob_sha": "a90bae3c9ddbc82a3932d5c70a0979e7dc3d5bde"
     },
     {
       "path": "执行交接说明.md",
@@ -4448,6 +4468,176 @@
       "git_blob_sha": "1e8eddbb2be628ace35a75f51da496a316ed3a2d"
     },
     {
+      "path": "每日工作记录/2026-10-17/前端设计优化/Codex交接-差异原因与排版第二轮.md",
+      "mode": "100644",
+      "git_blob_sha": "ea04bf18013f29bf62fbdaa174846da351d58672"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/Codex第二轮集成结果.md",
+      "mode": "100644",
+      "git_blob_sha": "d9237b79ea8e728253b632d39e11f25596c5049d"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/cdp-results.json",
+      "mode": "100644",
+      "git_blob_sha": "be67bf439b3a7563ba617525266d4b481a3325a5"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/前端设计优化交接.md",
+      "mode": "100644",
+      "git_blob_sha": "e50f522d8aa070c3209a6b7bc071660150af5dab"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/after-state.json",
+      "mode": "100644",
+      "git_blob_sha": "c4ef20486057836070d0067993d71fd58381dce7"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/before-state.json",
+      "mode": "100644",
+      "git_blob_sha": "c4ef20486057836070d0067993d71fd58381dce7"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/build-output.txt",
+      "mode": "100644",
+      "git_blob_sha": "5b17a182a77b15dba50d4eeb999a512ccac1ec0a"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/frontend.tap.txt",
+      "mode": "100644",
+      "git_blob_sha": "658948c5a25c85fd1a3ccaabb9e2c53020d9ec08"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/go.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "5eab96a558256b30580f027fb7ea909d04b09f7c"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/integration-result.json",
+      "mode": "100644",
+      "git_blob_sha": "78c12f9a501191786851d5add0aafbe11c2b61e9"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/isolated-smoke.json",
+      "mode": "100644",
+      "git_blob_sha": "804ce5c81e6cb2a76b49a4c88ef9a83f53fd0f63"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/python.txt",
+      "mode": "100644",
+      "git_blob_sha": "26bb02804d0569a691f7528e93bbafc4040ce003"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/reason-http-test.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "efbcbf68d52e1b013cb1e164dfbb87dae40b11c0"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/原始输出/第二轮集成/test-summary.json",
+      "mode": "100644",
+      "git_blob_sha": "00092365cf3d9363cd57c5cb00385c31f7a42ca1"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/01-登录-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "44917a0641838bf2abb78efc9a3225b3b2a01024"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/02-首次配置选择账户-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "0fdacaae6bc99f04b4dcc1cc3cff334331a77aee"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/03-首次配置设置密码-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "f5c66cddfc2f7716c7245548f89b0183ffa251dd"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/04-差异处理-财务-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "5c9fd3b84404bbcbedd3f5be2f9caf2478c94f39"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/05-差异证据抽屉-财务派单-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "ea7a98213a611b045ef64e86a22e7e42c252de1f"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/06-差异处理-仓库-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "ce5b17ccb75e510466906775bf4c5a8b35fb8970"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/07-差异证据抽屉-仓库核查-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "6eea2ca3c339225f1fb9c2ad06b4be3d4ba639a9"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/08-差异关闭后-仓库-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "c82048c41e59813d0abd60fe487e55482f905906"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/09-交易检索-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "29de0284433dd0a4d60617a71605724aaf40dcfd"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/10-配对明细-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "e8e3bba363511834d08f6426e35277eac6ad6b7d"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/11-数据任务进行中-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "e4d8663a6c6efb107058c400f8693bf464dd4851"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/12-数据任务完成-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "aa8f41e40bdf982e4fb8c4251199b5265d6893a5"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/13-账户安全-桌面.png",
+      "mode": "100644",
+      "git_blob_sha": "33a58d761f37699cd091ebeafbc5ec9e0420e69b"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/14-差异处理-平板.png",
+      "mode": "100644",
+      "git_blob_sha": "b1b0a1f75dc30ea6993803f8ee567658507d8968"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/15-差异处理-手机.png",
+      "mode": "100644",
+      "git_blob_sha": "b09656d980005858c0ac9409b295ec79bd6eb122"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/16-差异证据抽屉-手机.png",
+      "mode": "100644",
+      "git_blob_sha": "8250e79e8657ba81ba8b10f401b16148836cf530"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/17-登录-手机.png",
+      "mode": "100644",
+      "git_blob_sha": "27b6068feda0e5a82ae912bdad0c37253e232cfe"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/截图/18-交易检索-手机.png",
+      "mode": "100644",
+      "git_blob_sha": "f24e8eb4acc6ee9ade8b664a07d927520fa33b45"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/页面检查脚本-cdp-check.mjs",
+      "mode": "100644",
+      "git_blob_sha": "4af9f4622a768e3b774a9c31a5b427fc6accc841"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/页面检查输出.txt",
+      "mode": "100644",
+      "git_blob_sha": "6bc1155b4cdf92a074a09d5976f57cdcf669c1fe"
+    },
+    {
       "path": "每日工作记录/2026-10-17/原始输出/交易检索/baseline.json",
       "mode": "100644",
       "git_blob_sha": "4371375064294dcf206c18dfa22652af1f4bb5ef"
@@ -4935,7 +5125,7 @@
     {
       "path": "每日工作记录/2026-10-17/工作说明.md",
       "mode": "100644",
-      "git_blob_sha": "f789b8fc35f20b7b32f14c902367be1916876fa4"
+      "git_blob_sha": "b7715f5912999b7365fac68bf0f47ea0c6ea4f20"
     },
     {
       "path": "每日工作记录/2026-10-17/截图/01-国家筛选与日期降序.png",
@@ -4955,7 +5145,12 @@
     {
       "path": "每日工作记录/2026-10-17/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "1fcdb9fc398eaadb81c653bc40060e85ecded78a"
+      "git_blob_sha": "bee447df82bf497c61025b6fd5a241ec356cb680"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/收工与后续待办.md",
+      "mode": "100644",
+      "git_blob_sha": "b4e5df61c477fce9136ca618be16d4039ace3f0a"
     },
     {
       "path": "每日工作记录/2026-10-17/真实问题与取舍.md",
@@ -4970,7 +5165,7 @@
     {
       "path": "每日工作记录/2026-10-17/进度跟进报告.md",
       "mode": "100644",
-      "git_blob_sha": "f53404f1fddc232575a8b12850847566d406a140"
+      "git_blob_sha": "29323fc213bdf35ef4946a59d66f4a069157b57a"
     },
     {
       "path": "测试Demo.cmd",
@@ -4985,7 +5180,7 @@
     {
       "path": "要做什么.md",
       "mode": "100644",
-      "git_blob_sha": "9a9956382f703daec9686403419de59f60888261"
+      "git_blob_sha": "769ccc20421336b631183dc3c51d6c9f5f1b871e"
     },
     {
       "path": "规划校验记录.md",
@@ -5065,7 +5260,7 @@
     {
       "path": "运行说明.md",
       "mode": "100644",
-      "git_blob_sha": "b35e3adeae4fa40cd7ec2527641dc9d61f5402f8"
+      "git_blob_sha": "e444964577a46b88462fca5d0e8de8ab82bdaa65"
     },
     {
       "path": "选题自查表.md",
@@ -5094,29 +5289,74 @@
         "sha256": "d628093cbb9c9435391795c42377b342ac781d4e06faf040c2fd0a00a523d4ac"
       }
     ],
-    "increment_path": "_备份/软件验收-20261017/原生历史增量.bundle",
-    "increment_bytes": 583858,
-    "increment_sha256": "c4b9f717577271f93e50b20c89a5be1502f35b02ef54e33b8330041b5bfad9d4",
-    "increment_git_blob_sha": "58c3b217ff57a219fab8a4103661aeb62db85b47",
+    "increment_path": "_备份/收工-20261017/原生历史增量.bundle",
+    "increment_bytes": 2500420,
+    "increment_sha256": "d2396e31dd8e3fca2a7380fc1a3b2aff8534dde3f6301ef90cbfe8dfd159c176",
+    "increment_git_blob_sha": "b3f9d3ff0bb9f50d41e630f73f161a8120ca1007",
     "increment_verify": "passed",
-    "note": "按base_parts顺序拼接旧完整bundle，克隆后fetch本增量的HEAD；既有完整历史及源码6ead220的实际恢复结果保留，本轮只补新增历史，不重复整套恢复。"
+    "increment_revisions": "--all ^da50e92cb4797413a58504e07e7874219d456a9d",
+    "restore": "Concatenate base_parts in order, clone the base bundle, then fetch the increment HEAD and check out FETCH_HEAD. Native branches not changed since the base remain in that full bundle; native_refs records exact local branch tips."
   },
-  "software_status": {
-    "unique_tests": 130,
+  "latest_tests": {
+    "go": 101,
+    "python": 25,
+    "frontend": 6,
+    "total": 132,
     "failed": 0,
     "skipped": 0,
-    "nfr01_seconds_single": 1.7444502,
-    "nfr02_seconds_single": 67.3385582,
-    "nfr03_seconds_reused_same_core": 5.5834541,
-    "nfr04_requests": 300,
-    "nfr04_failures": 0,
-    "nfr04_p95_ms": 149.0449,
-    "uk_category_p95_ms": 304.451,
-    "human_software_acceptance": "pending",
-    "physical_second_machine": "pending",
-    "final_report_presentation_package": "not_created_pending_user_acceptance",
-    "midterm_files_modified": false
+    "rerun_at_closing": false
   },
+  "runtime": {
+    "runtime_id": "personal-demo",
+    "index_sha256": "1a98bf912574a65e8dfefaceee2a5a06b7eb5c3a5cfc357c2154d1c9e934abb6",
+    "assets": {
+      "/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff": {
+        "sha256": "328d50b6ece9ca25c46eea3e885ba497f6237f2fb84ef7b92f88e14a1a25e381",
+        "bytes": 13144,
+        "content_type": "font/woff"
+      },
+      "/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2": {
+        "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
+        "bytes": 14708,
+        "content_type": "font/woff2"
+      },
+      "/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff": {
+        "sha256": "09f018c58556e5801ecc49d5b5275dcff4c73311c2af6b88e31c51d76d076a9d",
+        "bytes": 13156,
+        "content_type": "font/woff"
+      },
+      "/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2": {
+        "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
+        "bytes": 14888,
+        "content_type": "font/woff2"
+      },
+      "/assets/index-DpGLKcvL.js": {
+        "sha256": "fff23005d1934ab3f664c794ebd9100bb16d451250cbd41fd664fc0346208e7f",
+        "bytes": 287574,
+        "content_type": "text/javascript"
+      },
+      "/assets/index-k7Kn9fox.css": {
+        "sha256": "fc7b546db2b1081ca43a18ba41b18ac9ed32173b249a5f8122fd76c4b39da88d",
+        "bytes": 26779,
+        "content_type": "text/css"
+      }
+    },
+    "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+    "unauthenticated_business_status": 401,
+    "note": "Unknown reason 422 is checked with a fully configured synthetic HTTP identity in the regression fixture; unauthenticated requests must remain 401.",
+    "actual_time": "2026-10-17T22:15:07.402879+08:00",
+    "binary": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\frontend-round2-integrated-20261017\\recon.exe",
+    "binary_sha256": "78e46697ae9a34c9778f14b6f72b94d10237192226569b022c836b3d7ccbcf0e",
+    "account_and_business_fingerprints_unchanged": true,
+    "real_authenticated_browser_validation": "pending_user_testing",
+    "real_browser_csp_validation": "not_performed_this_round",
+    "official_all_reason_filter_performance": "not_measured",
+    "github_backup": "authorized_in_progress_receipt_records_result",
+    "final_materials_created": false,
+    "teacher_runtime_updated": true
+  },
+  "software_acceptance": "pending_user",
+  "final_materials_created": false,
   "excluded_untracked": [
     "tools/build_midterm_v12.py",
     "中期汇报v1.2.pdf",

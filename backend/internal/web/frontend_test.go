@@ -2,6 +2,7 @@ package web
 
 import (
 	"io/fs"
+	"mime"
 	"net/http/httptest"
 	"testing"
 )
@@ -18,5 +19,13 @@ func TestFrontendEntryDoesNotRedirectIndexToItself(t *testing.T) {
 	}
 	if recorder.Code != expected || recorder.Header().Get("Location") != "" {
 		t.Fatalf("root must serve HTML or explicit build prerequisite, status=%d", recorder.Code)
+	}
+}
+
+func TestBundledFontTypesDoNotDependOnHostRegistry(t *testing.T) {
+	for ext, want := range map[string]string{".woff2": "font/woff2", ".woff": "font/woff"} {
+		if got := mime.TypeByExtension(ext); got != want {
+			t.Fatalf("%s served as %q, want %q", ext, got, want)
+		}
 	}
 }

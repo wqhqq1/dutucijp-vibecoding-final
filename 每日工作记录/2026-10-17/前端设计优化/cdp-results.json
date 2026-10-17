@@ -1,0 +1,267 @@
+[
+  {
+    "name": "desktop login",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [
+      "log[network]: Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/auth/setup/accounts"
+    ]
+  },
+  {
+    "name": "desktop first setup list",
+    "ok": true,
+    "note": "accounts=2",
+    "problems": [
+      "log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/auth/setup/accounts"
+    ]
+  },
+  {
+    "name": "desktop setup password step",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me"
+    ]
+  },
+  {
+    "name": "desktop cases (finance)",
+    "ok": true,
+    "note": "rows=50 pager=第 1 页 / 共 3 页",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1"
+    ]
+  },
+  {
+    "name": "cases filter + next page keeps server paging",
+    "ok": true,
+    "note": "draft=\"条件已修改，点击查询后生效\" state=\"已应用 1 个筛选条件\" export=/api/exports?run_id=mock-run-1&page=2&page_size=50&status=pending",
+    "problems": [],
+    "requests": [
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50&status=pending",
+      "GET /api/cases?run_id=mock-run-1&page=2&page_size=50&status=pending"
+    ]
+  },
+  {
+    "name": "clear filters is draft-only",
+    "ok": true,
+    "note": "no-request-after-clear=true",
+    "problems": [],
+    "requests": []
+  },
+  {
+    "name": "desktop drawer (finance, unassigned)",
+    "ok": true,
+    "note": "after assign: 差异原因当前规则下无合格候选状态待处理责任人warehouse取消数量19精确单价0.46",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/cases/mock-case-42/evidence?page=1&page_size=50",
+      "GET /api/cases/mock-case-42/audit",
+      "POST /api/cases/mock-case-42/assign",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/cases/mock-case-42/evidence?page=1&page_size=50",
+      "GET /api/cases/mock-case-42/audit"
+    ]
+  },
+  {
+    "name": "desktop drawer (warehouse, in progress, candidates + closure)",
+    "ok": true,
+    "note": "candidates=2 pages=single page",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/cases/mock-case-25/evidence?page=1&page_size=50",
+      "GET /api/cases/mock-case-25/audit"
+    ]
+  },
+  {
+    "name": "close case requires conclusion and saves",
+    "ok": true,
+    "note": "已关闭",
+    "problems": [],
+    "requests": [
+      "POST /api/cases/mock-case-25/close",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/cases/mock-case-25/evidence?page=1&page_size=50",
+      "GET /api/cases/mock-case-25/audit"
+    ]
+  },
+  {
+    "name": "desktop transactions sort desc",
+    "ok": true,
+    "note": "first=mock-s0-r001285",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/transactions?run_id=mock-run-1&page=1&page_size=50&sort=source&direction=asc",
+      "GET /api/transactions?run_id=mock-run-1&page=1&page_size=50&sort=source&direction=desc"
+    ]
+  },
+  {
+    "name": "jump to page",
+    "ok": true,
+    "note": "第 7 页",
+    "problems": [],
+    "requests": [
+      "GET /api/transactions?run_id=mock-run-1&page=7&page_size=50&sort=source&direction=desc"
+    ]
+  },
+  {
+    "name": "desktop allocations",
+    "ok": true,
+    "note": "pageReset=第 1 页 / 共 3 页",
+    "problems": [],
+    "requests": [
+      "GET /api/allocations?run_id=mock-run-1&page=1&page_size=50"
+    ]
+  },
+  {
+    "name": "desktop data job",
+    "ok": true,
+    "note": "已完成 · 已发布",
+    "problems": [],
+    "requests": [
+      "POST /api/jobs",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/runs",
+      "GET /api/overview?run_id=mock-run-1"
+    ]
+  },
+  {
+    "name": "desktop security",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [],
+    "requests": []
+  },
+  {
+    "name": "tablet cases",
+    "ok": true,
+    "note": "overflowX=-15",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/runs",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1"
+    ]
+  },
+  {
+    "name": "mobile cases",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/runs",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1"
+    ]
+  },
+  {
+    "name": "mobile drawer",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/cases/mock-case-24/evidence?page=1&page_size=50",
+      "GET /api/cases/mock-case-24/audit"
+    ]
+  },
+  {
+    "name": "mobile login",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [
+      "log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/auth/setup/accounts"
+    ]
+  },
+  {
+    "name": "mobile transactions filters",
+    "ok": true,
+    "note": "overflowX=0",
+    "problems": [],
+    "requests": [
+      "GET /api/health",
+      "GET /api/auth/me",
+      "GET /api/runs",
+      "GET /api/users",
+      "GET /api/jobs/mock-job-1",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/runs",
+      "GET /api/cases?run_id=mock-run-1&page=1&page_size=50",
+      "GET /api/overview?run_id=mock-run-1",
+      "GET /api/transactions?run_id=mock-run-1&page=1&page_size=50&sort=source&direction=asc"
+    ]
+  },
+  {
+    "name": "logout clears to login",
+    "ok": true,
+    "note": "ok",
+    "problems": [],
+    "requests": [
+      "POST /api/auth/logout",
+      "GET /api/auth/setup/accounts"
+    ]
+  }
+]

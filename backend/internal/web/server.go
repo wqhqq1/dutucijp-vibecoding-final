@@ -8,6 +8,7 @@ import (
 	"errors"
 	"io"
 	"io/fs"
+	"mime"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -20,6 +21,13 @@ import (
 
 //go:embed assets/*
 var assets embed.FS
+
+// The bundled ledger font ships as woff/woff2, which Go's built-in MIME table
+// lacks; register them so the type never depends on the host registry.
+func init() {
+	_ = mime.AddExtensionType(".woff2", "font/woff2")
+	_ = mime.AddExtensionType(".woff", "font/woff")
+}
 
 const cookieName = "recon_session"
 
@@ -482,7 +490,7 @@ func page(c *gin.Context) (store.PageRequest, error) {
 }
 func filter(c *gin.Context) (store.QueryFilter, error) {
 	p, e := page(c)
-	f := store.QueryFilter{RunID: c.Query("run_id"), Status: c.Query("status"), Assignee: c.Query("assignee"), Customer: c.Query("customer"), Stock: c.Query("stock"), Invoice: c.Query("invoice"), Country: c.Query("country"), Sort: c.Query("sort"), Direction: c.Query("direction"), Classification: c.Query("classification"), Kind: c.Query("kind"), DateFrom: c.Query("date_from"), DateTo: c.Query("date_to"), Page: p.Page, PageSize: p.PageSize}
+	f := store.QueryFilter{RunID: c.Query("run_id"), Status: c.Query("status"), Reason: c.Query("reason"), Assignee: c.Query("assignee"), Customer: c.Query("customer"), Stock: c.Query("stock"), Invoice: c.Query("invoice"), Country: c.Query("country"), Sort: c.Query("sort"), Direction: c.Query("direction"), Classification: c.Query("classification"), Kind: c.Query("kind"), DateFrom: c.Query("date_from"), DateTo: c.Query("date_to"), Page: p.Page, PageSize: p.PageSize}
 	return f, e
 }
 func (s *Server) runs(c *gin.Context) {

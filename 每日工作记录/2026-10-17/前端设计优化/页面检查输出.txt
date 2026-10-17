@@ -1,0 +1,28 @@
+PASS desktop login | overflowX=0 | PROBLEMS: log[network]: Failed to load resource: the server responded with a status of 404 (Not Found) ; log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)
+PASS desktop first setup list | accounts=2 | PROBLEMS: log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)
+PASS desktop setup password step | overflowX=0
+PASS desktop cases (finance) | rows=50 pager=第 1 页 / 共 3 页
+PASS cases filter + next page keeps server paging | draft="条件已修改，点击查询后生效" state="已应用 1 个筛选条件" export=/api/exports?run_id=mock-run-1&page=2&page_size=50&status=pending
+PASS clear filters is draft-only | no-request-after-clear=true
+PASS desktop drawer (finance, unassigned) | after assign: 差异原因当前规则下无合格候选状态待处理责任人warehouse取消数量19精确单价0.46
+PASS desktop drawer (warehouse, in progress, candidates + closure) | candidates=2 pages=single page
+PASS close case requires conclusion and saves | 已关闭
+PASS desktop transactions sort desc | first=mock-s0-r001285
+PASS jump to page | 第 7 页
+PASS desktop allocations | pageReset=第 1 页 / 共 3 页
+PASS desktop data job | 已完成 · 已发布
+PASS desktop security | overflowX=0
+PASS tablet cases | overflowX=-15
+PASS mobile cases | overflowX=0
+PASS mobile drawer | overflowX=0
+PASS mobile login | overflowX=0 | PROBLEMS: log[network]: Failed to load resource: the server responded with a status of 401 (Unauthorized)
+PASS mobile transactions filters | overflowX=0
+PASS logout clears to login | ok
+api requests sample: GET /api/cases?run_id=mock-run-1&page=1&page_size=50
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50&status=pending
+  GET /api/cases?run_id=mock-run-1&page=2&page_size=50&status=pending
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50
+  GET /api/cases?run_id=mock-run-1&page=1&page_size=50

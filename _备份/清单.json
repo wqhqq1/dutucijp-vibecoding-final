@@ -1,15 +1,15 @@
 {
   "format_version": 7,
   "kind": "complete_midterm_backup_not_final_submission",
-  "actual_time": "2026-10-18T20:22:37.881981+08:00",
-  "local_head": "909c4833e2df4914769eb12f8f5470df0efec184",
-  "native_main_commits": 73,
+  "actual_time": "2026-10-18T20:32:13.512850+08:00",
+  "local_head": "4c9290a8a813adf6924fd886fedabc8f433f1929",
+  "native_main_commits": 74,
   "native_refs": [
     "refs/heads/delivery/teacher-portable-demo 3ac3cacca5f16d48abcee275b51413eccfce40e0",
     "refs/heads/experiment/fr18-disposable-20261015-210730 79ff9b2b1ceceb232238ac79a5a54a837997bed6",
-    "refs/heads/main 909c4833e2df4914769eb12f8f5470df0efec184"
+    "refs/heads/main 4c9290a8a813adf6924fd886fedabc8f433f1929"
   ],
-  "base_remote_head": "a6a4086524a2999add9f4268f86799c2867bc3e9",
+  "base_remote_head": "6d57c185371e450a38a33011cafd7c2eff4d92cb",
   "source_files": [
     {
       "path": ".agents/skills/run-app/SKILL.md",
@@ -5357,9 +5357,19 @@
       "git_blob_sha": "81ad4bf46f326798023996aec8d26812e2bbec76"
     },
     {
+      "path": "每日工作记录/2026-10-18/中期完整打包/同步与清理.md",
+      "mode": "100644",
+      "git_blob_sha": "d613591e6d64ca6ff48b9dcc0680b14853aba37f"
+    },
+    {
       "path": "每日工作记录/2026-10-18/中期完整打包/打包与交接.md",
       "mode": "100644",
       "git_blob_sha": "60316600681e83dae7ef9c7ea55d0202ea9f5a1e"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期完整打包/旧包与缓存清理回执.json",
+      "mode": "100644",
+      "git_blob_sha": "d8c2da1db1dd783f3ecfe0b495bb9b83defc73e4"
     },
     {
       "path": "每日工作记录/2026-10-18/中期完整打包/根入口核对.txt",
@@ -6029,9 +6039,9 @@
     "base_bundle_sha256": "be6c6c160f560779559bdd5d8a952924581ce5cb39ea028a07bc1fe6c3a40d8a",
     "base_bundle_restore_and_fsck": "passed",
     "increment_path": "_备份/中期完整包-20261018/原生历史增量.bundle",
-    "increment_bytes": 73029,
-    "increment_sha256": "185d462718d82782b1d65f5723c57e26b0465ff253184fd4953e440f9732e026",
-    "increment_git_blob_sha": "58305a290c42b2f553a84580c7265e6cd1552c20",
+    "increment_bytes": 76410,
+    "increment_sha256": "98d7c02ba072ebe14600fc61857618f4c2eb470d5e5660234aec04e946cb37f5",
+    "increment_git_blob_sha": "0eb1b3c230a73e6b927b4a3c5da20308bdcece65",
     "increment_verify": "passed",
     "restore": "Reassemble and unzip the package; git clone its 项目存档.bundle, then git fetch 原生历史增量.bundle HEAD and check out FETCH_HEAD for later archive/cleanup records."
   },

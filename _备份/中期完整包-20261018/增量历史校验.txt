@@ -1,12 +1,12 @@
 The bundle contains these 5 refs:
 3ac3cacca5f16d48abcee275b51413eccfce40e0 refs/heads/delivery/teacher-portable-demo
 79ff9b2b1ceceb232238ac79a5a54a837997bed6 refs/heads/experiment/fr18-disposable-20261015-210730
-909c4833e2df4914769eb12f8f5470df0efec184 refs/heads/main
-909c4833e2df4914769eb12f8f5470df0efec184 HEAD
+4c9290a8a813adf6924fd886fedabc8f433f1929 refs/heads/main
+4c9290a8a813adf6924fd886fedabc8f433f1929 HEAD
 3ac3cacca5f16d48abcee275b51413eccfce40e0 worktrees/教师独立Demo工作区/HEAD
 The bundle requires these 3 refs:
 5df378c7897114c2fa91df4e08974b3eaebba232 
 e3657cfd8d7fb6a6ffa932943fba99e7c8475203 
 376253ab9abba6ee9abcc585104176cc6565468d 
 The bundle uses this hash algorithm: sha1
-E:/软件编程大作业/退货对账与差异处理系统/.backup/midterm-sync-909c483/post-package-history.bundle is okay
+E:/软件编程大作业/退货对账与差异处理系统/.backup/midterm-sync-4c9290a/post-package-history.bundle is okay

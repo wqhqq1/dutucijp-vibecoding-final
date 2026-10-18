@@ -1,0 +1,207 @@
+{
+  "actual_time": "2026-10-18T20:31:20.2177622+08:00",
+  "first_remote_commit": "6d57c185371e450a38a33011cafd7c2eff4d92cb",
+  "latest_zip": "E:\\软件编程大作业\\中期提交包-20261018-最新版\\软件编程-中期-20251101030-王麒皓-20261018-201804.zip",
+  "latest_zip_sha256": "5e5f5adca47dad13a9f0009240f0b9060f9e55ad87a18d8fc5ee4d3f1707cdd7",
+  "scope": "superseded exports and regenerable caches after verified replacement backup",
+  "targets": [
+    {
+      "path": "E:\\软件编程大作业\\中期提交包-20261016-原样演示版",
+      "status": "deleted",
+      "bytes": 59173004,
+      "files": 674
+    },
+    {
+      "path": "E:\\软件编程大作业\\中期提交包-20261016-定稿",
+      "status": "deleted",
+      "bytes": 59178814,
+      "files": 675
+    },
+    {
+      "path": "E:\\软件编程大作业\\中期提交包-教师独立运行-20261016",
+      "status": "deleted",
+      "bytes": 171052830,
+      "files": 950
+    },
+    {
+      "path": "E:\\软件编程大作业\\教师独立Demo-最终程序包",
+      "status": "deleted",
+      "bytes": 57132877,
+      "files": 430
+    },
+    {
+      "path": "E:\\软件编程大作业\\教师独立Demo验收-二次空目录",
+      "status": "deleted",
+      "bytes": 6270,
+      "files": 13
+    },
+    {
+      "path": "E:\\软件编程大作业\\教师独立Demo验收-最终版本",
+      "status": "deleted",
+      "bytes": 6930,
+      "files": 14
+    },
+    {
+      "path": "E:\\软件编程大作业\\教师独立Demo验收-空目录",
+      "status": "deleted",
+      "bytes": 5951,
+      "files": 13
+    },
+    {
+      "path": "E:\\软件编程大作业\\中期提交包-20261018-最新版\\解包核验",
+      "status": "deleted",
+      "bytes": 114112460,
+      "files": 1424
+    },
+    {
+      "path": "E:\\软件编程大作业\\中期提交包-20261018-最新版\\历史还原核验",
+      "status": "deleted",
+      "bytes": 66958871,
+      "files": 1202
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\midterm-package-smoke-20261018",
+      "status": "deleted",
+      "bytes": 300739,
+      "files": 8
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\teacher-independent-run-audit-20261016",
+      "status": "deleted",
+      "bytes": 32962306,
+      "files": 676
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\history-restore-20261017",
+      "status": "deleted",
+      "bytes": 14840150,
+      "files": 33
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\midterm-package-20261016",
+      "status": "deleted",
+      "bytes": 2768159,
+      "files": 12
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\closing-upload-84cdaa0",
+      "status": "deleted",
+      "bytes": 8008054,
+      "files": 64
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\daily-upload-95c5663",
+      "status": "deleted",
+      "bytes": 1433124,
+      "files": 85
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\merge-upload-7b3b350",
+      "status": "deleted",
+      "bytes": 1941462,
+      "files": 143
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\merged-plan-da50e92",
+      "status": "deleted",
+      "bytes": 28215951,
+      "files": 12
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\midterm-upload-e3657cf",
+      "status": "deleted",
+      "bytes": 49795309,
+      "files": 684
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\progress20261016-upload-4a6ae5e",
+      "status": "deleted",
+      "bytes": 10054273,
+      "files": 577
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\progress20261016-upload-94cdd36",
+      "status": "deleted",
+      "bytes": 10044380,
+      "files": 577
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\software-progress-upload-30b2982",
+      "status": "deleted",
+      "bytes": 4861345,
+      "files": 385
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\v12-review-upload-d3b3700",
+      "status": "deleted",
+      "bytes": 18584827,
+      "files": 653
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\workflow-upload-c39912c",
+      "status": "deleted",
+      "bytes": 8634693,
+      "files": 453
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\midterm-sync-909c483",
+      "status": "deleted",
+      "bytes": 96919474,
+      "files": 198
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\项目存档.bundle",
+      "status": "deleted",
+      "bytes": 6331174,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\development-increment-20261017-closing.bundle",
+      "status": "deleted",
+      "bytes": 348393,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-midterm-native.bundle",
+      "status": "deleted",
+      "bytes": 13951724,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-progress-verified.bundle",
+      "status": "deleted",
+      "bytes": 2600592,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-v12-review-verified.bundle",
+      "status": "deleted",
+      "bytes": 6331174,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\remote-workflow-verified.bundle",
+      "status": "deleted",
+      "bytes": 2466746,
+      "files": 1
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\software-acceptance-20261017.bundle",
+      "status": "deleted",
+      "bytes": 14248714,
+      "files": 1
+    }
+  ],
+  "deleted_targets": 31,
+  "deleted_bytes": 863270770,
+  "E_free_before": 573148680192,
+  "E_free_after": 574032515072,
+  "C_deleted_bytes": 0,
+  "protected": [
+    "latest ZIP and expanded material",
+    "registered worktrees and native Git history",
+    "current software and all user instances/credentials",
+    "original data and actual evidence",
+    "official-v1.2 audit and untracked draft snapshot"
+  ]
+}

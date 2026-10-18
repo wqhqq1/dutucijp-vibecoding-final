@@ -53,13 +53,24 @@ func manualEligible(cancel, sale model.Row) (int64, decimal.Decimal, bool) {
 // ConfirmCandidate re-reads source identity, ownership, version and balance while
 // holding SQLite's cross-process write lock. Any failure also rolls back audit.
 func (s *Store) ConfirmCandidate(ctx context.Context, actor WorkflowActor, caseID, saleID string, version int) (out ManualConfirmation, err error) {
+	err = s.immediate(ctx, func(conn *sql.Conn) error {
+		out, err = confirmCandidateTx(ctx, conn, actor, caseID, saleID, version)
+		return err
+	})
+	if err != nil {
+		out = ManualConfirmation{}
+	}
+	return
+}
+
+func confirmCandidateTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, caseID, saleID string, version int) (out ManualConfirmation, err error) {
 	if !actor.valid() {
 		return out, workflowError("unauthenticated", "需要可信服务端身份", WorkflowCase{})
 	}
 	if strings.TrimSpace(saleID) == "" {
 		return out, workflowError("invalid_input", "请选择销售候选", WorkflowCase{})
 	}
-	err = s.immediate(ctx, func(conn *sql.Conn) error {
+	err = func() error {
 		before, err := readWorkflowCase(ctx, conn, caseID)
 		if err != nil {
 			return err
@@ -115,6 +126,9 @@ func (s *Store) ConfirmCandidate(ctx context.Context, actor WorkflowActor, caseI
 		if remaining < quantity {
 			return workflowError("insufficient_remaining", "当前可退余量不足，请刷新候选", before)
 		}
+		if err = checkDuplicateCapacity(ctx, conn, before.RunID, saleID, quantity); err != nil {
+			return err
+		}
 		balanceResult, err := conn.ExecContext(ctx, `UPDATE sale_balances SET allocated=allocated+?,remaining=remaining-? WHERE run_id=? AND sale_id=? AND original=? AND allocated=? AND remaining=? AND remaining>=?`, quantity, quantity, before.RunID, saleID, original, allocated, remaining, quantity)
 		if err != nil {
 			return err
@@ -162,7 +176,7 @@ func (s *Store) ConfirmCandidate(ctx context.Context, actor WorkflowActor, caseI
 		}
 		out = ManualConfirmation{Case: after, Allocation: AllocationRecord{RunID: before.RunID, CancelID: before.CancelID, SaleID: saleID, Quantity: quantity, Amount: amount, Method: "manual", Actor: actor.ID, RuleVersion: before.RuleVersion, CancelSheet: cancel.Sheet, CancelSourceRow: cancel.SourceRow, SaleSheet: sale.Sheet, SaleSourceRow: sale.SourceRow}}
 		return nil
-	})
+	}()
 	if err != nil {
 		out = ManualConfirmation{}
 	}

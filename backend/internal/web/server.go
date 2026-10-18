@@ -164,6 +164,13 @@ func (s *Server) Handler() http.Handler {
 			respond(c, out, e)
 		})
 		r.POST("/api/auth/passkeys/"+name+"/finish", func(c *gin.Context) {
+			// Selection cookies intentionally are not authenticated sessions, so
+			// enforce their begin-issued CSRF token here as well as Origin above.
+			if !isRegister && !s.Auth.CheckCSRF(token(c), c.GetHeader("X-CSRF-Token")) {
+				c.AbortWithStatusJSON(403, gin.H{"code": "invalid_csrf", "message": "会话校验失败，请重新选择Passkey"})
+				return
+			}
+			c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 1024*1024)
 			g, e := s.Auth.FinishPasskey(c, token(c), c.Query("challenge_id"), c.Request, isRegister, c.ClientIP())
 			s.grant(c, g, e)
 		})
@@ -175,6 +182,7 @@ func (s *Server) Handler() http.Handler {
 	})
 	r.POST("/api/auth/recovery/reissue", func(c *gin.Context) { g, e := s.Auth.ReissueRecovery(c, token(c)); s.grant(c, g, e) })
 	business := r.Group("/api", s.requireBusiness)
+	s.registerReview(business)
 	business.GET("/runs", s.runs)
 	business.GET("/overview", s.overview)
 	business.GET("/users", func(c *gin.Context) {
@@ -540,6 +548,23 @@ func (s *Server) overview(c *gin.Context) {
 		return
 	}
 	out["cases"] = map[string]int{"total": total, "pending": pending, "in_progress": progress, "closed": closed}
+	var reviewed, unallocated int
+	reviewQuery := `SELECT count(*) FROM review_confirmations v JOIN cases c ON c.run_id=v.run_id AND c.cancel_id=v.cancel_id WHERE v.run_id=?`
+	unallocatedQuery := `SELECT count(*) FROM decisions d LEFT JOIN allocations a ON a.run_id=d.run_id AND a.cancel_id=d.cancel_id JOIN cases c ON c.run_id=d.run_id AND c.cancel_id=d.cancel_id WHERE d.run_id=? AND a.cancel_id IS NULL`
+	if a.Role == "warehouse" {
+		reviewQuery += " AND c.assignee=?"
+		unallocatedQuery += " AND c.assignee=?"
+	}
+	if e = s.Store.DB.QueryRowContext(c, reviewQuery, args...).Scan(&reviewed); e != nil {
+		respond(c, nil, e)
+		return
+	}
+	if e = s.Store.DB.QueryRowContext(c, unallocatedQuery, args...).Scan(&unallocated); e != nil {
+		respond(c, nil, e)
+		return
+	}
+	out["reviewed_allocations"] = reviewed
+	out["currently_unallocated"] = unallocated
 	if a.Role != "warehouse" {
 		var raw string
 		if e = s.Store.DB.QueryRowContext(c, "SELECT summary_json FROM runs WHERE id=?", run).Scan(&raw); e == nil {

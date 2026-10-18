@@ -569,8 +569,13 @@ func (s *Service) LoginPassword(ctx context.Context, id, password, source string
 	return g, err
 }
 func (s *Service) Logout(ctx context.Context, token string) error {
-	_, e := s.DB.ExecContext(ctx, "DELETE FROM auth_sessions WHERE hash=?", Digest(token))
-	return e
+	return s.atomic(ctx, func(c *sql.Conn) error {
+		if _, e := c.ExecContext(ctx, "DELETE FROM auth_challenges WHERE session_hash=?", Digest(token)); e != nil {
+			return e
+		}
+		_, e := c.ExecContext(ctx, "DELETE FROM auth_sessions WHERE hash=?", Digest(token))
+		return e
+	})
 }
 func (s *Service) Complete(ctx context.Context, token string, saved bool) (g Grant, err error) {
 	if !saved {

@@ -19,6 +19,9 @@ type PasskeyBegin struct {
 }
 
 func (s *Service) BeginPasskey(ctx context.Context, token, userID string, register bool) (out PasskeyBegin, err error) {
+	if !register && userID == "" {
+		return s.beginPasskeySelection(ctx, token)
+	}
 	err = s.atomic(ctx, func(c *sql.Conn) error {
 		var a account
 		var v Session
@@ -53,7 +56,7 @@ func (s *Service) BeginPasskey(ctx context.Context, token, userID string, regist
 		}
 		var data *webauthn.SessionData
 		if register {
-			out.Options, data, e = s.WA.BeginRegistration(a, webauthn.WithAuthenticatorSelection(protocol.AuthenticatorSelection{UserVerification: protocol.VerificationRequired}))
+			out.Options, data, e = s.WA.BeginRegistration(a, webauthn.WithAuthenticatorSelection(protocol.AuthenticatorSelection{UserVerification: protocol.VerificationRequired}), webauthn.WithResidentKeyRequirement(protocol.ResidentKeyRequirementRequired))
 		} else {
 			out.Options, data, e = s.WA.BeginLogin(a, webauthn.WithUserVerification(protocol.VerificationRequired))
 		}
@@ -84,6 +87,16 @@ func (s *Service) BeginPasskey(ctx context.Context, token, userID string, regist
 }
 
 func (s *Service) FinishPasskey(ctx context.Context, token, challengeID string, request *http.Request, register bool, source string) (g Grant, err error) {
+	if !register {
+		var selection bool
+		err = s.DB.QueryRowContext(ctx, `SELECT EXISTS(SELECT 1 FROM auth_challenges WHERE id=? AND session_hash=? AND purpose='passkey_selection' AND user_id='' AND version=0)`, challengeID, Digest(token)).Scan(&selection)
+		if err != nil {
+			return g, err
+		}
+		if selection {
+			return s.finishPasskeySelection(ctx, token, challengeID, request, source)
+		}
+	}
 	v, err := s.Current(ctx, token, false)
 	if err != nil {
 		return g, err

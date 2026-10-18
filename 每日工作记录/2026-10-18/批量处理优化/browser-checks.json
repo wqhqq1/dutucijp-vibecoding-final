@@ -1,0 +1,145 @@
+{
+  "simulation": true,
+  "distribution": {
+    "total": 137,
+    "clear": 56,
+    "pending": 57,
+    "review": 24
+  },
+  "selected_all": 113,
+  "excluded": 1,
+  "preview": 112,
+  "focus_in_dialog": true,
+  "escape_closed": true,
+  "restored_focus": "查看批量详情",
+  "retry_summary": "共 49 条。整单和共享销售余量的项目关联校验，同组任一项冲突时整组跳过。\n\n0\n可提交\n49\n将跳过\n0\n失败",
+  "completed_commit_button_absent": true,
+  "modal_error": "Failed to fetch",
+  "busy_close_disabled": true,
+  "busy_escape_kept_dialog": true,
+  "assignment_result": "1\n成功\n0\n已跳过\n0\n失败",
+  "tablet": {
+    "body": 805,
+    "root": 805,
+    "viewport": 820
+  },
+  "mobile": {
+    "body": 375,
+    "root": 375,
+    "viewport": 390
+  },
+  "before_group_change": "已选择 21 条\n选择本页\n选择当前筛选全部 137 条\n清除选择",
+  "after_group_change": "已选择 0 条\n选择本页\n选择当前筛选全部 137 条\n清除选择",
+  "reason_groups": [
+    "当前筛选全部组",
+    "多个合格候选 · 20条／7条有推荐",
+    "缺客户或国家 · 20条／6条有推荐",
+    "可退余量不足 · 20条／7条有推荐",
+    "无更早销售 · 20条／8条有推荐",
+    "候选销售疑似重复 · 19条／7条有推荐",
+    "无同身份销售 · 19条／7条有推荐",
+    "取消行疑似重复 · 19条／7条有推荐"
+  ],
+  "console_errors": [
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:11:18.636Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:12:04.488Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:12:12.885Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:12:13.224Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:12:57.458Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:12:57.527Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:02.323Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:02.648Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:08.951Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:09.355Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:09.641Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:09.976Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:15.856Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:13:16.120Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    },
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. nearest-mock-case-136",
+      "timestamp": "2026-10-18T06:14:48.266Z",
+      "url": "http://127.0.0.1:18741/@vite/client"
+    }
+  ],
+  "final_tied_row_count": 1,
+  "final_tied_choice": "",
+  "final_tied_options": [
+    "请选择配对方案",
+    "按时间推荐 · 489202 · mock-s0-r001218",
+    "按时间推荐 · 模拟较近销售 · mock-s0-r001218-newer"
+  ],
+  "final_console_errors": [],
+  "production_console_errors": [],
+  "final_production_console_errors": []
+}

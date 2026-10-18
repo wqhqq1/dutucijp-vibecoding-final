@@ -20,6 +20,8 @@ type PageRequest struct {
 	PageSize int `json:"page_size"`
 }
 type QueryFilter struct {
+	ReviewGroupBy  string `json:"review_group_by,omitempty"`
+	ReviewGroupKey string `json:"review_group_key,omitempty"`
 	RunID          string `json:"run_id"`
 	Status         string `json:"status"`
 	Reason         string `json:"reason"`
@@ -48,9 +50,10 @@ type TransactionRecord struct {
 }
 type CandidateRecord struct {
 	TransactionRecord
-	Original  int64 `json:"original"`
-	Allocated int64 `json:"allocated"`
-	Remaining int64 `json:"current_remaining"`
+	Original       int64             `json:"original"`
+	Allocated      int64             `json:"allocated"`
+	Remaining      int64             `json:"current_remaining"`
+	DuplicateGroup *DuplicateBalance `json:"duplicate_group,omitempty"`
 }
 type DecisionEvidence struct {
 	CandidateRecord
@@ -59,18 +62,21 @@ type DecisionEvidence struct {
 	Reason              string `json:"reason"`
 }
 type AllocationRecord struct {
-	RunID           string `json:"run_id"`
-	CancelID        string `json:"cancel_id"`
-	SaleID          string `json:"sale_id"`
-	Quantity        int64  `json:"quantity"`
-	Amount          string `json:"amount"`
-	Method          string `json:"method"`
-	Actor           string `json:"actor"`
-	RuleVersion     string `json:"rule_version"`
-	CancelSheet     string `json:"cancel_sheet"`
-	CancelSourceRow int    `json:"cancel_source_row"`
-	SaleSheet       string `json:"sale_sheet"`
-	SaleSourceRow   int    `json:"sale_source_row"`
+	BatchID            string `json:"batch_id,omitempty"`
+	RecommendationKind string `json:"recommendation_kind,omitempty"`
+	PolicyVersion      string `json:"policy_version,omitempty"`
+	RunID              string `json:"run_id"`
+	CancelID           string `json:"cancel_id"`
+	SaleID             string `json:"sale_id"`
+	Quantity           int64  `json:"quantity"`
+	Amount             string `json:"amount"`
+	Method             string `json:"method"`
+	Actor              string `json:"actor"`
+	RuleVersion        string `json:"rule_version"`
+	CancelSheet        string `json:"cancel_sheet"`
+	CancelSourceRow    int    `json:"cancel_source_row"`
+	SaleSheet          string `json:"sale_sheet"`
+	SaleSourceRow      int    `json:"sale_source_row"`
 }
 type CasePage struct {
 	Items    []WorkflowCase `json:"items"`
@@ -101,7 +107,16 @@ type CaseEvidencePage struct {
 	Cancel           TransactionRecord  `json:"cancel"`
 	DecisionEvidence []DecisionEvidence `json:"decision_evidence"`
 	Candidates       CandidatePage      `json:"candidates"`
+	Confirmation     *CaseConfirmation  `json:"confirmation,omitempty"`
 	Caveat           string             `json:"caveat"`
+}
+
+// A saved allocation remains visible even when its sale has no eligible balance
+// left or is outside the current candidate page. Authorization is inherited from
+// CaseEvidence's ownership check; this never broadens the candidate query.
+type CaseConfirmation struct {
+	Allocation AllocationRecord `json:"allocation"`
+	Sale       CandidateRecord  `json:"sale"`
 }
 
 // EnsureQueryIndexes is an idempotent startup migration. It changes no business
@@ -583,6 +598,15 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 		out.Items = append(out.Items, a)
 	}
 	err = rows.Err()
+	rows.Close()
+	if err != nil {
+		return
+	}
+	for i := range out.Items {
+		if err = s.allocationReviewTrace(ctx, &out.Items[i]); err != nil {
+			return
+		}
+	}
 	return
 }
 
@@ -591,10 +615,13 @@ const candidateFrom = ` FROM cases cc JOIN runs r ON r.id=cc.run_id JOIN dataset
  JOIN normalized_rows n ON n.dataset_id=d.id AND n.customer=cr.customer AND n.stock=cr.stock AND n.price=cr.price AND n.country=cr.country
  JOIN source_rows sr ON sr.id=n.source_id JOIN sale_balances b ON b.run_id=r.id AND b.sale_id=n.id`
 const candidateWhere = ` WHERE cc.id=? AND r.status='published' AND d.status='published' AND cr.kind='cancel' AND cr.quantity<0 AND cr.quantity>-9223372036854775808
- AND cr.excluded='' AND cr.customer<>'' AND cr.country<>'' AND cr.stock<>'' AND n.kind='sale' AND n.excluded='' AND n.quantity>0 AND n.source_time<cr.source_time AND b.remaining>=-cr.quantity`
+ AND cr.excluded='' AND cr.customer<>'' AND cr.country<>'' AND cr.stock<>'' AND n.kind='sale' AND n.excluded='' AND n.quantity>0 AND n.source_time<cr.source_time AND b.remaining>=-cr.quantity
+ AND NOT EXISTS(SELECT 1 FROM duplicate_sale_members dm JOIN duplicate_sale_groups dg ON dg.run_id=dm.run_id AND dg.id=dm.group_id WHERE dm.run_id=r.id AND dm.sale_id=n.id AND (dg.canonical_id<>n.id OR dg.capacity-(SELECT coalesce(sum(db.allocated),0) FROM duplicate_sale_members mm JOIN sale_balances db ON db.run_id=mm.run_id AND db.sale_id=mm.sale_id WHERE mm.run_id=dg.run_id AND mm.group_id=dg.id)<-cr.quantity))`
 
 func (s *Store) ListCandidates(ctx context.Context, actor WorkflowActor, caseID string, p PageRequest) (out CandidatePage, err error) {
-	if _, err = s.WorkflowCase(ctx, actor, caseID); err != nil {
+	c, caseErr := s.WorkflowCase(ctx, actor, caseID)
+	if caseErr != nil {
+		err = caseErr
 		return
 	}
 	p, err = normalizePage(p)
@@ -619,6 +646,16 @@ func (s *Store) ListCandidates(ctx context.Context, actor WorkflowActor, caseID 
 		out.Items = append(out.Items, c)
 	}
 	err = rows.Err()
+	rows.Close()
+	if err != nil {
+		return
+	}
+	for i := range out.Items {
+		out.Items[i].DuplicateGroup, err = s.duplicateBalance(ctx, c.RunID, out.Items[i].ID)
+		if err != nil {
+			return
+		}
+	}
 	return
 }
 
@@ -654,6 +691,32 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 	err = rows.Err()
 	rows.Close()
 	if err != nil {
+		return
+	}
+	confirmation := CaseConfirmation{}
+	a := &confirmation.Allocation
+	err = s.DB.QueryRowContext(ctx, `SELECT run_id,cancel_id,sale_id,quantity,amount,method,coalesce(actor,'') FROM allocations WHERE run_id=? AND cancel_id=?`, out.Case.RunID, out.Case.CancelID).Scan(&a.RunID, &a.CancelID, &a.SaleID, &a.Quantity, &a.Amount, &a.Method, &a.Actor)
+	if err == nil {
+		sale, e := readManualRow(ctx, s.DB, out.Case.DatasetID, a.SaleID)
+		if e != nil {
+			return out, e
+		}
+		confirmation.Sale.TransactionRecord = out.Cancel
+		confirmation.Sale.Row = sale
+		if err = s.allocationReviewTrace(ctx, a); err != nil {
+			return
+		}
+		if confirmation.Sale.DuplicateGroup, err = s.duplicateBalance(ctx, a.RunID, a.SaleID); err != nil {
+			return
+		}
+		err = s.DB.QueryRowContext(ctx, `SELECT original,allocated,remaining FROM sale_balances WHERE run_id=? AND sale_id=?`, a.RunID, a.SaleID).Scan(&confirmation.Sale.Original, &confirmation.Sale.Allocated, &confirmation.Sale.Remaining)
+		if err != nil {
+			return
+		}
+		a.RuleVersion, a.CancelSheet, a.CancelSourceRow = out.Case.RuleVersion, out.Cancel.Sheet, out.Cancel.SourceRow
+		a.SaleSheet, a.SaleSourceRow = sale.Sheet, sale.SourceRow
+		out.Confirmation = &confirmation
+	} else if !errors.Is(err, sql.ErrNoRows) {
 		return
 	}
 	out.Candidates, err = s.ListCandidates(ctx, actor, caseID, p)

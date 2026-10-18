@@ -1,0 +1,12 @@
+{
+  "previous_state": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-c466f05234c3cbd6",
+  "new_state": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-passkey-selection-8c2e6e85d471a665",
+  "official_raw_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "previous_state_preserved": true,
+  "actual_time": "2026-10-18T09:29:12.160852+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "binary_backup": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\20261018-passkey-selection-ae034b98\\before-passkey-selection.exe",
+  "sha256": "080aa9ed6089ae47516d9490a686d7d4055335895789a88d45d0f8b768791702",
+  "manifest_files": 251,
+  "activated_at": "2026-10-18T09:33:48.773785+08:00"
+}

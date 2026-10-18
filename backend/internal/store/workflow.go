@@ -164,6 +164,17 @@ func (s *Store) WorkflowCase(ctx context.Context, actor WorkflowActor, id string
 }
 
 func (s *Store) AssignCase(ctx context.Context, actor, assignee WorkflowActor, id string) (out WorkflowCase, err error) {
+	err = s.immediate(ctx, func(conn *sql.Conn) error {
+		out, err = assignCaseTx(ctx, conn, actor, assignee, id)
+		return err
+	})
+	if err != nil {
+		out = WorkflowCase{}
+	}
+	return
+}
+
+func assignCaseTx(ctx context.Context, conn *sql.Conn, actor, assignee WorkflowActor, id string) (out WorkflowCase, err error) {
 	if !actor.valid() {
 		return out, workflowError("unauthenticated", "需要可信服务端身份", out)
 	}
@@ -173,7 +184,7 @@ func (s *Store) AssignCase(ctx context.Context, actor, assignee WorkflowActor, i
 	if !assignee.valid() {
 		return out, workflowError("invalid_assignee", "需要有效的处理人身份", out)
 	}
-	err = s.immediate(ctx, func(conn *sql.Conn) error {
+	err = func() error {
 		before, err := readWorkflowCase(ctx, conn, id)
 		if err != nil {
 			return err
@@ -198,7 +209,7 @@ func (s *Store) AssignCase(ctx context.Context, actor, assignee WorkflowActor, i
 		}
 		out = after
 		return nil
-	})
+	}()
 	if err != nil {
 		out = WorkflowCase{}
 	}
@@ -207,10 +218,21 @@ func (s *Store) AssignCase(ctx context.Context, actor, assignee WorkflowActor, i
 
 // TransitionCase deliberately has no arbitrary edit operation or reopen path.
 func (s *Store) TransitionCase(ctx context.Context, actor WorkflowActor, id, target string, version int, conclusion string) (out WorkflowCase, err error) {
+	err = s.immediate(ctx, func(conn *sql.Conn) error {
+		out, err = transitionCaseTx(ctx, conn, actor, id, target, version, conclusion)
+		return err
+	})
+	if err != nil {
+		out = WorkflowCase{}
+	}
+	return
+}
+
+func transitionCaseTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, id, target string, version int, conclusion string) (out WorkflowCase, err error) {
 	if !actor.valid() {
 		return out, workflowError("unauthenticated", "需要可信服务端身份", out)
 	}
-	err = s.immediate(ctx, func(conn *sql.Conn) error {
+	err = func() error {
 		before, err := readWorkflowCase(ctx, conn, id)
 		if err != nil {
 			return err
@@ -254,7 +276,7 @@ func (s *Store) TransitionCase(ctx context.Context, actor WorkflowActor, id, tar
 		}
 		out = after
 		return nil
-	})
+	}()
 	if err != nil {
 		out = WorkflowCase{}
 	}

@@ -1,0 +1,12 @@
+{
+  "actual_time": "2026-10-18T14:17:17.4043164+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "sha256": "6593957e5e2feda81bae001226cebf141d5006d86efd1f890575158ff0f8ae45",
+  "backup_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\batch-ui-20261018-140926\\final",
+  "manifest_files_verified": 251,
+  "database_sha256_before": "3eb8a47a1aacdef0cc47fecfdf1c340737882c695129ce2599e70762da426882",
+  "database_sha256_after": "3eb8a47a1aacdef0cc47fecfdf1c340737882c695129ce2599e70762da426882",
+  "selection_unchanged": true,
+  "database_untouched": true,
+  "production_service_left_stopped": true
+}

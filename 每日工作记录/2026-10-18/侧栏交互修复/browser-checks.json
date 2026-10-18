@@ -1,0 +1,23 @@
+{
+  "successNotice": "已确认销售 mock-s0-r000318，分配数量 12。仍可填写核查结论，完成后关闭差异。\n×",
+  "mainNotices": 0,
+  "draft": {
+    "editable": true,
+    "value": "测试草稿：确认后可继续编辑，来源与数量已核对。"
+  },
+  "disabledCandidates": 3,
+  "closed": {
+    "conclusion": "关闭结论\n\n测试草稿：确认后可继续编辑，来源与数量已核对。\n\n此差异已关闭，不能修改或重新开启。",
+    "editableFields": 0
+  },
+  "pagination": {
+    "page": "上一页候选\n第 1 页 / 共 2 页\n下一页候选",
+    "confirmation": "已确认销售\nmock-s0-r000305\n\n已分配 11 件 · 精确金额 95.37 · 操作人 warehouse\n\n此取消行已完成配对，其余候选不可再选。仍可编辑下方核查结论，完成后关闭差异。",
+    "disabledOnFirstPage": 50,
+    "draft": "翻页测试草稿"
+  },
+  "reopened": {
+    "confirmation": "已确认销售\nmock-s0-r000305\n\n已分配 11 件 · 精确金额 95.37 · 操作人 warehouse\n\n此取消行已完成配对，其余候选不可再选。仍可编辑下方核查结论，完成后关闭差异。",
+    "disabledOnFirstPage": 50
+  }
+}

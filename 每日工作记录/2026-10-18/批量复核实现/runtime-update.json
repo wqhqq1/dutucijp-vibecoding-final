@@ -1,0 +1,14 @@
+{
+  "actual_time": "2026-10-18T12:46:04.947298+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "sha256": "b3a5d1abb0526d552eb31e3d92b3344f2234165f0e12797c752b06d19a39350a",
+  "backup_binary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\review-batch-20261018-123809\\before-review-batch.exe",
+  "manifest_files_verified": 251,
+  "active_build": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\review-batch-20261018-123809\\recon.exe",
+  "selected_state_unchanged": true,
+  "business_database_sha256_before": "e4d05e159b285aac703421c18ac1d651eb379e2e3a6e2fcfdafc0add8876cfb7",
+  "business_database_sha256_after": "e4d05e159b285aac703421c18ac1d651eb379e2e3a6e2fcfdafc0add8876cfb7",
+  "runtime_database_untouched": true,
+  "server_left_stopped": true,
+  "notice": "Only local software files and build selection updated; no account, factor or business workflow was reset. No final submission package created."
+}

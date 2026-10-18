@@ -60,6 +60,35 @@ CREATE TABLE IF NOT EXISTS audit_events (
 );
 CREATE INDEX IF NOT EXISTS cases_workflow ON cases(run_id,status,assignee);
 CREATE INDEX IF NOT EXISTS audit_case ON audit_events(case_id,id);
+CREATE TABLE IF NOT EXISTS review_sets (
+ id TEXT PRIMARY KEY,run_id TEXT NOT NULL REFERENCES runs(id),actor TEXT NOT NULL,
+ policy_version TEXT NOT NULL,created_at TEXT NOT NULL,body_json TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS review_sets_actor ON review_sets(run_id,actor,created_at);
+CREATE TABLE IF NOT EXISTS review_batches (
+ id TEXT PRIMARY KEY,run_id TEXT NOT NULL REFERENCES runs(id),actor TEXT NOT NULL,
+ created_at TEXT NOT NULL,status TEXT NOT NULL,body_json TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS review_batches_actor ON review_batches(actor,created_at);
+CREATE TABLE IF NOT EXISTS review_batch_groups (
+ batch_id TEXT NOT NULL REFERENCES review_batches(id),group_id INTEGER NOT NULL,
+ status TEXT NOT NULL,body_json TEXT NOT NULL,result_json TEXT NOT NULL DEFAULT '{}',
+ PRIMARY KEY(batch_id,group_id)
+);
+CREATE TABLE IF NOT EXISTS duplicate_sale_groups (
+ run_id TEXT NOT NULL REFERENCES runs(id),id TEXT NOT NULL,canonical_id TEXT NOT NULL,
+ capacity INTEGER NOT NULL CHECK(capacity>0),actor TEXT NOT NULL,batch_id TEXT NOT NULL,
+ PRIMARY KEY(run_id,id)
+);
+CREATE TABLE IF NOT EXISTS duplicate_sale_members (
+ run_id TEXT NOT NULL,sale_id TEXT NOT NULL,group_id TEXT NOT NULL,
+ PRIMARY KEY(run_id,sale_id),FOREIGN KEY(run_id,group_id) REFERENCES duplicate_sale_groups(run_id,id)
+);
+CREATE TABLE IF NOT EXISTS review_confirmations (
+ run_id TEXT NOT NULL,cancel_id TEXT NOT NULL,batch_id TEXT NOT NULL,
+ recommendation_kind TEXT NOT NULL,policy_version TEXT NOT NULL,evidence_json TEXT NOT NULL,
+ PRIMARY KEY(run_id,cancel_id),FOREIGN KEY(run_id,cancel_id) REFERENCES allocations(run_id,cancel_id)
+);
 CREATE TRIGGER IF NOT EXISTS audit_no_update BEFORE UPDATE ON audit_events
 BEGIN SELECT RAISE(ABORT,'audit events are append-only'); END;
 CREATE TRIGGER IF NOT EXISTS audit_no_delete BEFORE DELETE ON audit_events

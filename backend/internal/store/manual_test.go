@@ -104,6 +104,55 @@ func TestTC22_ManualAuditFailureRollsBackEverything(t *testing.T) {
 	t.Log("TC-22 fault injection: audit INSERT denied; allocation absent, remaining=6, allocated=0, case version=3, audit count=2; entire transaction rolled back")
 }
 
+func TestTC22_ConfirmationVisibleOutsideCandidatesAndOwnerCanClose(t *testing.T) {
+	s, _, caseID, _ := queryFixture(t)
+	ctx := context.Background()
+	c := assignWorkflow(t, s, caseID)
+	c, err := s.TransitionCase(ctx, testOwner, c.ID, "in_progress", c.Version, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	initial, err := s.CaseEvidence(ctx, testOwner, c.ID, PageRequest{PageSize: 50})
+	if err != nil || initial.Confirmation != nil || initial.Candidates.Total != 123 {
+		t.Fatalf("unexpected initial evidence: %+v %v", initial, err)
+	}
+	confirmed, err := s.ConfirmCandidate(ctx, testOwner, c.ID, "0:124", c.Version)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// A separate connection pool reads persisted state, never UI/audit caches.
+	reopened := openTest(t, s.path)
+	for _, page := range []int{1, 2, 4} {
+		evidence, err := reopened.CaseEvidence(ctx, testOwner, c.ID, PageRequest{Page: page, PageSize: 50})
+		if err != nil || evidence.Confirmation == nil {
+			t.Fatalf("page %d lost saved confirmation: %v", page, err)
+		}
+		got := evidence.Confirmation
+		if got.Allocation != confirmed.Allocation || got.Sale.ID != "0:124" || got.Sale.Remaining != 2 || got.Sale.SourceRow != 124 || evidence.Candidates.Total != 122 || evidence.Case.Status != "in_progress" {
+			t.Fatalf("page %d bad persisted evidence: %+v", page, evidence)
+		}
+		for _, candidate := range evidence.Candidates.Items {
+			if candidate.ID == got.Sale.ID {
+				t.Fatal("insufficient saved sale leaked into eligible candidate page")
+			}
+		}
+	}
+	_, err = reopened.CaseEvidence(ctx, testOther, c.ID, PageRequest{})
+	requireWorkflowCode(t, err, "forbidden")
+	_, err = reopened.ConfirmCandidate(ctx, testOwner, c.ID, "0:2", confirmed.Case.Version)
+	requireWorkflowCode(t, err, "already_allocated")
+	closed, err := reopened.TransitionCase(ctx, testOwner, c.ID, "closed", confirmed.Case.Version, "确认后仍可填写核查结论")
+	if err != nil || closed.Conclusion != "确认后仍可填写核查结论" {
+		t.Fatalf("owner cannot close after confirmation: %+v %v", closed, err)
+	}
+	evidence, err := reopened.CaseEvidence(ctx, testOwner, c.ID, PageRequest{})
+	if err != nil || evidence.Confirmation == nil || evidence.Case.Status != "closed" {
+		t.Fatalf("closed evidence lost confirmation: %+v %v", evidence, err)
+	}
+	_, err = reopened.TransitionCase(ctx, testOwner, c.ID, "closed", closed.Version, "禁止改写已关闭结论")
+	requireWorkflowCode(t, err, "closed")
+}
+
 func TestTC22_ManualRejectsPermissionStateVersionIdentity(t *testing.T) {
 	for _, tc := range []struct {
 		name, sql, code string

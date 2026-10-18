@@ -1,0 +1,65 @@
+{
+  "actual_time": "2026-10-18T14:17:05.6519928+08:00",
+  "isolated": true,
+  "health": {
+    "application": "returns-recon",
+    "runtime_id": "batch-ui-final-smoke"
+  },
+  "origin": "http://localhost:18742",
+  "html_status": 200,
+  "csp": [
+    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+  ],
+  "assets": [
+    {
+      "path": "/assets/index-CuVZgYIc.js",
+      "status": 200,
+      "content_type": [
+        "text/javascript; charset=utf-8"
+      ],
+      "bytes": 317843
+    },
+    {
+      "path": "/assets/index-C--YramS.css",
+      "status": 200,
+      "content_type": [
+        "text/css; charset=utf-8"
+      ],
+      "bytes": 36187
+    },
+    {
+      "path": "/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff",
+      "status": 200,
+      "content_type": [
+        "font/woff"
+      ],
+      "bytes": 13144
+    },
+    {
+      "path": "/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2",
+      "status": 200,
+      "content_type": [
+        "font/woff2"
+      ],
+      "bytes": 14708
+    },
+    {
+      "path": "/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff",
+      "status": 200,
+      "content_type": [
+        "font/woff"
+      ],
+      "bytes": 13156
+    },
+    {
+      "path": "/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2",
+      "status": 200,
+      "content_type": [
+        "font/woff2"
+      ],
+      "bytes": 14888
+    }
+  ],
+  "unauthenticated_review_status": 401,
+  "current_production_bundle_has_mock": false
+}

@@ -1,0 +1,118 @@
+{
+  "actual_time": "2026-10-18T12:40:30+0800",
+  "boundary": "Read-only Python file URI snapshots; compare all original business table rows before review against source after unexpected main-file SHA change. No auth tables or credentials selected; hashes and counts only.",
+  "tables": {
+    "datasets": {
+      "source": {
+        "rows": 1,
+        "sha256": "53f28ba27bcb8646a71a7efacb8758e1dc92a9272967e124e2818d44dae5ddbc"
+      },
+      "before_review_backup": {
+        "rows": 1,
+        "sha256": "53f28ba27bcb8646a71a7efacb8758e1dc92a9272967e124e2818d44dae5ddbc"
+      },
+      "identical": true
+    },
+    "source_rows": {
+      "source": {
+        "rows": 1067371,
+        "sha256": "2a161a8776879e5e4d0ece6ec73b39c9b7985ca248477a6b584c2e1dd3cd3533"
+      },
+      "before_review_backup": {
+        "rows": 1067371,
+        "sha256": "2a161a8776879e5e4d0ece6ec73b39c9b7985ca248477a6b584c2e1dd3cd3533"
+      },
+      "identical": true
+    },
+    "normalized_rows": {
+      "source": {
+        "rows": 1067371,
+        "sha256": "41ce03a345e8520223286b97afbb6df953f782e7dea0115a5ccb37ac1d3646f6"
+      },
+      "before_review_backup": {
+        "rows": 1067371,
+        "sha256": "41ce03a345e8520223286b97afbb6df953f782e7dea0115a5ccb37ac1d3646f6"
+      },
+      "identical": true
+    },
+    "runs": {
+      "source": {
+        "rows": 1,
+        "sha256": "38875b77ee330d58a458e15f3eb633d91a37c7da4f37aca1b1f20bc620edfc8b"
+      },
+      "before_review_backup": {
+        "rows": 1,
+        "sha256": "38875b77ee330d58a458e15f3eb633d91a37c7da4f37aca1b1f20bc620edfc8b"
+      },
+      "identical": true
+    },
+    "decisions": {
+      "source": {
+        "rows": 19164,
+        "sha256": "e826c26c55556b8b957e767dd85c9cc3e53ffae603cba1e44898ec7d71e361e4"
+      },
+      "before_review_backup": {
+        "rows": 19164,
+        "sha256": "e826c26c55556b8b957e767dd85c9cc3e53ffae603cba1e44898ec7d71e361e4"
+      },
+      "identical": true
+    },
+    "sale_balances": {
+      "source": {
+        "rows": 1019654,
+        "sha256": "c0f85d26917987ceaa5b88924f112a3145618a19d2e00edbc391c4a3dcee2072"
+      },
+      "before_review_backup": {
+        "rows": 1019654,
+        "sha256": "c0f85d26917987ceaa5b88924f112a3145618a19d2e00edbc391c4a3dcee2072"
+      },
+      "identical": true
+    },
+    "allocations": {
+      "source": {
+        "rows": 9714,
+        "sha256": "9baf16d36fb54b6e822e626c0f4db7cb838b6ea3f5cdf130664f48b4a2423a4d"
+      },
+      "before_review_backup": {
+        "rows": 9714,
+        "sha256": "9baf16d36fb54b6e822e626c0f4db7cb838b6ea3f5cdf130664f48b4a2423a4d"
+      },
+      "identical": true
+    },
+    "candidate_evidence": {
+      "source": {
+        "rows": 22101,
+        "sha256": "733b8b2433f8060cc215cfbc61bf0d596b6e860118c18ee0fd706fd02730950c"
+      },
+      "before_review_backup": {
+        "rows": 22101,
+        "sha256": "733b8b2433f8060cc215cfbc61bf0d596b6e860118c18ee0fd706fd02730950c"
+      },
+      "identical": true
+    },
+    "cases": {
+      "source": {
+        "rows": 9450,
+        "sha256": "661ea065aaae8ac81dcef7f6baa9e3e5d3c8b96135a0553950fb97feec2335f8"
+      },
+      "before_review_backup": {
+        "rows": 9450,
+        "sha256": "661ea065aaae8ac81dcef7f6baa9e3e5d3c8b96135a0553950fb97feec2335f8"
+      },
+      "identical": true
+    },
+    "audit_events": {
+      "source": {
+        "rows": 3,
+        "sha256": "4610d7e4a3f1010fd94c2de80ab7e24a4204d5bb742650c7de8b86ffc25a0d8e"
+      },
+      "before_review_backup": {
+        "rows": 3,
+        "sha256": "4610d7e4a3f1010fd94c2de80ab7e24a4204d5bb742650c7de8b86ffc25a0d8e"
+      },
+      "identical": true
+    }
+  },
+  "all_business_tables_identical": true,
+  "elapsed_seconds": 22.25
+}

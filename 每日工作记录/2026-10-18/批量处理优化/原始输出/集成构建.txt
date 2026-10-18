@@ -1,0 +1,26 @@
+**********************
+PowerShell transcript start
+Start time: 20261018140900
+Username: DESKTOP-WQH\wqhqq
+RunAs User: DESKTOP-WQH\wqhqq
+Configuration Name: 
+Machine: DESKTOP-WQH (Microsoft Windows NT 10.0.26340.0)
+Host Application: C:\Users\wqhqq\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$optBuildRoot=Join-Path $env:LOCALAPPDATA ('dutucijp-vibecoding-final/builds/batch-ui-'+(Get-Date -Format yyyyMMdd-HHmmss)); $optRecord='每日工作记录/2026-10-18/批量处理优化'; Start-Transcript -Path (Join-Path $optRecord '集成构建.txt') -Force | Out-Null; try { ./build.ps1 -OutputDirectory $optBuildRoot } finally { Stop-Transcript | Out-Null }; Copy-Item -LiteralPath (Join-Path $optBuildRoot 'build.json') -Destination (Join-Path $optRecord 'production-build.json') -Force
+Process ID: 38424
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26340
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+PS>TerminatingError(): "Locked frontend install failed"
+**********************
+PowerShell transcript end
+End time: 20261018140909
+**********************

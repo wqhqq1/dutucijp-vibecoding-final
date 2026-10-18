@@ -196,7 +196,7 @@ func run() error {
 		return err
 	}
 	ctx := context.Background()
-	original, err := sql.Open("sqlite", filepath.ToSlash(*source)+"?mode=ro&_pragma=query_only(1)")
+	original, err := store.OpenReadOnlySource(*source)
 	if err != nil {
 		return err
 	}

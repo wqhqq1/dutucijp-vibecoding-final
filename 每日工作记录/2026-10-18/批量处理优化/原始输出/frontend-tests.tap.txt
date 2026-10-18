@@ -1,0 +1,50 @@
+
+> returns-reconciliation-ui@0.1.0 test
+> node --test --test-reporter=tap tests/requests.test.mjs
+
+TAP version 13
+# Subtest: the first server page is available while the overview is still pending
+ok 1 - the first server page is available while the overview is still pending
+  ---
+  duration_ms: 3.0863
+  type: 'test'
+  ...
+# Subtest: changing query cancels the old request and discards a late response
+ok 2 - changing query cancels the old request and discards a late response
+  ---
+  duration_ms: 0.6335
+  type: 'test'
+  ...
+# Subtest: logout cancellation suppresses both pending data and pending failures
+ok 3 - logout cancellation suppresses both pending data and pending failures
+  ---
+  duration_ms: 0.4517
+  type: 'test'
+  ...
+# Subtest: overview failure does not discard a successful table response
+ok 4 - overview failure does not discard a successful table response
+  ---
+  duration_ms: 1.1147
+  type: 'test'
+  ...
+# Subtest: cancelling transport abort errors never produces a failure notice
+ok 5 - cancelling transport abort errors never produces a failure notice
+  ---
+  duration_ms: 0.7539
+  type: 'test'
+  ...
+# Subtest: synchronous request failure leaves a useful terminal state
+ok 6 - synchronous request failure leaves a useful terminal state
+  ---
+  duration_ms: 0.2669
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 110.8276

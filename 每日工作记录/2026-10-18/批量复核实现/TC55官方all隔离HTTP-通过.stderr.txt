@@ -1,0 +1,10 @@
+phase=source_hash
+phase=online_backup
+phase=open_and_migrate
+phase=initial_counts_and_decision_digest
+phase=generate_review
+phase=preview
+phase=synthetic_http_auth_setup
+phase=commit_with_concurrent_authenticated_http_queries
+phase=independent_invariants
+phase=idempotent_replay

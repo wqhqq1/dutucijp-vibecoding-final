@@ -1,0 +1,38 @@
+{
+  "actual_time": "2026-10-18T12:45:36.1272533+08:00",
+  "health": {
+    "application": "returns-recon",
+    "runtime_id": "review-batch-smoke"
+  },
+  "html_status": 200,
+  "assets": [
+    {
+      "status": 200,
+      "asset": "/assets/index-C3VBGuX8.js",
+      "bytes": 310023
+    },
+    {
+      "status": 200,
+      "asset": "/assets/index-D_6cTsEB.css",
+      "bytes": 32021
+    }
+  ],
+  "setup_accounts": [
+    [
+      {
+        "id": "finance",
+        "role": "finance"
+      },
+      {
+        "id": "warehouse",
+        "role": "warehouse"
+      },
+      {
+        "id": "admin",
+        "role": "admin"
+      }
+    ]
+  ],
+  "unauthenticated_review_status": 401,
+  "simulated_state_only": true
+}

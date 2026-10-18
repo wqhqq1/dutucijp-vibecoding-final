@@ -1,0 +1,13 @@
+{
+  "actual_time": "2026-10-18T13:06:47.825574+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "sha256": "935815053b5bc6d314a4676a54cfab330344372982109eafe9dface394371698",
+  "backup_binary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\review-labels-20261018-130534\\before-chinese-labels.exe",
+  "manifest_files_verified": 251,
+  "selection_unchanged": true,
+  "database_sha256_before": "4748a21aae02623c1df8bd0dc539e238535925827ca17adc5b6fecb202951492",
+  "database_sha256_after": "4748a21aae02623c1df8bd0dc539e238535925827ca17adc5b6fecb202951492",
+  "database_untouched": true,
+  "server_left_stopped": true,
+  "change": "Chinese display labels only; API code values and business behavior unchanged"
+}

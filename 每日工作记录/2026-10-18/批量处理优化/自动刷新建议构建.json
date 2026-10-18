@@ -1,0 +1,12 @@
+{
+  "actual_time": "2026-10-18T15:12:48.2551311+08:00",
+  "source_commit": "ac298f6",
+  "binary": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\batch-auto-refresh-20261018-151244\\recon.exe",
+  "sha256": "5a0d5af77fe41b6f911350ac56c09f4cbbb1ab3bfacc91d54df64ac28d2828b3",
+  "demo_binary": "teacher-demo/app/recon.exe",
+  "backup_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\batch-auto-refresh-20261018-151244",
+  "frontend_js": "index-ByrbxPwb.js",
+  "tests_run": false,
+  "runtime_selection_changed": false,
+  "production_service_left_stopped": true
+}

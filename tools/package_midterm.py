@@ -12,7 +12,7 @@ from urllib.parse import unquote,urlsplit
 def sha(b):return hashlib.sha256(b).hexdigest()
 def run(*args,cwd):return subprocess.check_output(args,cwd=cwd,stderr=subprocess.STDOUT)
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--output-root',type=Path,required=True);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--output-root',type=Path,required=True);ap.add_argument('--portable-root',type=Path,required=True);args=ap.parse_args()
     root=Path(__file__).resolve().parents[1]
     now=datetime.now(timezone(timedelta(hours=8)))
     if now.strftime('%m-%d') in ('10-22','11-17'):raise SystemExit('Reserved presentation day; packaging not allowed')
@@ -58,6 +58,31 @@ def main():
             if re.search(rb'gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|-----BEGIN (?:RSA |EC )?PRIVATE KEY-----',b):raise SystemExit('Credential pattern found in '+p)
         dest=stage/p;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(b)
         inventory[p]={'bytes':len(b),'sha256':sha(b),'git_blob_sha':s}
+    # Copy only runtime files named by the existing public portable manifest.
+    # Private state, caches and extra files are never recursively copied.
+    portable=args.portable_root.resolve()
+    portable_manifest_path=portable/'portable-manifest.json'
+    portable_manifest=json.loads(portable_manifest_path.read_text(encoding='utf-8-sig'))
+    for rel,entry in portable_manifest['files'].items():
+        q=PurePosixPath(rel)
+        if q.is_absolute() or '..' in q.parts or any(x in q.parts for x in ['private-auth','state','data','.runtime','__pycache__']):
+            raise SystemExit('Unexpected runtime path: '+rel)
+        if q.suffix.lower() in ['.sqlite','.db','.key','.pem'] or q.name.startswith(('initialization-','.env')):
+            raise SystemExit('Private runtime file refused: '+rel)
+        source=portable/rel
+        if source.is_symlink() or not source.resolve().is_relative_to(portable):raise SystemExit('Runtime path escapes root: '+rel)
+        b=source.read_bytes()
+        if len(b)!=entry['bytes'] or sha(b)!=entry['sha256']:raise SystemExit('Portable file hash mismatch: '+rel)
+        dest=stage/'teacher-demo'/rel;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(b)
+        inventory['teacher-demo/'+rel]={'bytes':len(b),'sha256':sha(b),'origin':'verified-portable-manifest'}
+    b=portable_manifest_path.read_bytes();(stage/'teacher-demo/portable-manifest.json').write_bytes(b)
+    inventory['teacher-demo/portable-manifest.json']={'bytes':len(b),'sha256':sha(b),'origin':'public-portable-manifest'}
+    for name,source in [('launcher.py',root/'portable/launcher.py'),('project/tools/fetch_data.py',root/'tools/fetch_data.py'),('project/tools/prepare.py',root/'tools/prepare.py')]:
+        packaged=stage/'teacher-demo'/('portable/'+name if name=='launcher.py' else name)
+        if packaged.read_bytes()!=source.read_bytes():raise SystemExit('Portable source differs from project: '+name)
+    build=json.loads((root/'每日工作记录/2026-10-18/批量处理优化/自动刷新建议构建.json').read_text(encoding='utf-8-sig'))
+    if sha((stage/'teacher-demo/app/recon.exe').read_bytes())!=build['sha256']:raise SystemExit('Portable binary is not the accepted latest build')
+    subprocess.run([str(stage/'teacher-demo/python/python.exe'),str(stage/'teacher-demo/portable/launcher.py'),'check'],cwd=stage,check=True,capture_output=True)
     # Verify all submitted presentation bytes against both pinned Git and the live originals.
     presentation_paths=[p for p,s in selected if p in ['中期汇报.pptx','中期汇报.pdf','中期汇报讲稿.md'] or p.startswith('中期汇报网页版/')]
     for p in presentation_paths:
@@ -86,7 +111,7 @@ def main():
     native_count=int(git('rev-list','--count','HEAD'))
     assert int(git('rev-list','--count','HEAD',cwd=restored))==native_count
     inventory['项目存档.bundle']={'bytes':bundle.stat().st_size,'sha256':sha(bundle.read_bytes()),'native_commits':native_count}
-    manifest={'kind':'midterm_materials_v1.2','actual_time':now.isoformat(),'source_head':head,'native_commit_count':native_count,'presentation_content_changed':False,'presentation_files':presentation_paths,'web_local_references_verified':web_checks,'files':inventory,'excluded_tracked_paths':[p for p,s in rows if not allowed(p)],'untracked_files_not_used':[p for p in git('ls-files','--others','--exclude-standard','-z').decode().split('\0') if p],'excludes':['teacher originals','official raw workbook and private CSV exports','runtime databases and authentication material','dependencies and caches','historical presentation baselines (available in Git bundle)','unadopted presentation drafts'],'note':'Current midterm materials, not a final acceptance or a claim of personal rehearsal. No invented test or submission status. Manifest excludes its own bytes; ZIP hash is in the external receipt.'}
+    manifest={'kind':'midterm_materials_v1.2_with_independent_software','actual_time':now.isoformat(),'source_head':head,'native_commit_count':native_count,'presentation_content_changed':False,'presentation_files':presentation_paths,'web_local_references_verified':web_checks,'files':inventory,'portable_binary_sha256':build['sha256'],'portable_runtime_files':len(portable_manifest['files'])+1,'first_start_requires_internet':True,'minimum_free_space_gib':8,'excluded_tracked_paths':[p for p,s in rows if not allowed(p)],'untracked_files_not_used':[p for p in git('ls-files','--others','--exclude-standard','-z').decode().split('\0') if p],'excludes':['teacher originals','official raw workbook and private CSV exports','runtime databases and authentication material','development dependencies and caches (bundled runtime dependencies explicitly included)','historical presentation baselines (available in Git bundle)','unadopted presentation drafts'],'note':'Current midterm materials, not a final acceptance or a claim of personal rehearsal. Report is the earlier 10-18 evidence snapshot; current packaging status is recorded here and in the index. No invented test or submission status. Manifest excludes its own bytes; ZIP hash is in the external receipt.'}
     (stage/'中期打包清单.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     archive=out/('软件编程-中期-20251101030-王麒皓-'+now.strftime('%Y%m%d-%H%M%S')+'.zip')
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
@@ -101,6 +126,7 @@ def main():
     for p,e in inventory.items():assert sha((unpack/'中期材料'/p).read_bytes())==e['sha256'],p
     assert (unpack/'中期材料/中期打包清单.json').read_bytes()==(stage/'中期打包清单.json').read_bytes()
     for p in presentation_paths:assert sha((root/p).read_bytes())==inventory[p]['sha256']
+    subprocess.run([str(unpack/'中期材料/teacher-demo/python/python.exe'),str(unpack/'中期材料/teacher-demo/portable/launcher.py'),'check'],cwd=unpack/'中期材料',check=True,capture_output=True)
     receipt={'actual_time':datetime.now(timezone(timedelta(hours=8))).isoformat(),'kind':manifest['kind'],'source_head':head,'native_commits_restored':native_count,'zip':str(archive),'zip_bytes':archive.stat().st_size,'zip_sha256':sha(archive.read_bytes()),'bundle':str(bundle),'bundle_bytes':bundle.stat().st_size,'bundle_sha256':sha(bundle.read_bytes()),'bundle_verify_exit':verify.returncode,'bundle_restore_and_fsck':'passed','archive_integrity_and_all_file_hashes':'passed','presentation_all_bytes_unchanged':True,'presentation_hashes':{p:inventory[p]['sha256'] for p in presentation_paths},'web_reference_count':len(web_checks),'file_count':len(inventory)+1,'course_universal_20MiB_limit':False,'local_submission_or_email_sent':False}
     (out/'中期打包回执.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     receipt_copy=root/'.backup-receipts'/('midterm-'+now.strftime('%Y%m%d-%H%M%S')+'.json');receipt_copy.parent.mkdir(exist_ok=True);receipt_copy.write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

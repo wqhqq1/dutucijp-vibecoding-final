@@ -181,6 +181,11 @@ table.mini{width:100%;border-collapse:collapse;font-size:19px;margin-top:6px}
 .rule .id small{display:block;font:500 15px var(--sans);color:var(--muted);margin-top:2px}
 .rule p{font-size:23px;line-height:1.5}
 .rule p b{color:var(--teal)}
+.rules.tight{gap:10px}.rules.tight .rule{padding:11px 18px}.rules.tight .rule p{font-size:21px}
+.simtag.sm{font-size:12px;padding:1px 7px;right:8px;top:8px;bottom:auto}
+.simtag{position:absolute;right:12px;bottom:44px;background:var(--todo);color:#fff;font:700 15px var(--sans);padding:3px 10px;border-radius:3px;box-shadow:0 0 0 3px rgba(176,83,44,.18)}
+.rule.new{border-left-color:var(--todo)}.rule.new .id{color:var(--todo);font-size:18px}
+.rules.tight .why{font-size:20px;padding:15px 22px}
 .why{background:var(--teal);color:#eef3f1;border-radius:6px;padding:18px 22px;font-size:21.5px;line-height:1.55}
 .why b{color:#f0b694;font-family:var(--serif)}
 /* architecture */
@@ -202,7 +207,7 @@ table.mini{width:100%;border-collapse:collapse;font-size:19px;margin-top:6px}
 /* test table */
 table.tt{width:100%;border-collapse:collapse;font-size:18.5px;line-height:1.42}
 .tt th{font-size:14px;letter-spacing:.1em;color:var(--muted);text-align:left;font-weight:600;padding:0 12px 9px;border-bottom:2px solid var(--ink)}
-.tt td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tt td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
 .tt td:first-child{width:150px;font-weight:700;color:var(--teal)}
 .tt td:first-child small{display:block;font:500 14px var(--mono);color:var(--muted);margin-top:2px}
 .tt td:last-child{width:70px;font-family:var(--mono);color:var(--teal-2);text-align:center}
@@ -313,7 +318,7 @@ aside.notes{display:none}
     </dl>
   </div>
   <div class="ledger">1,067,371</div>
-  <div class="foot"><span class="ev">证据</span><span class="src">提交索引.md（采用课程 v1.2）；数据 DOI 10.24432/C5CG6D；材料状态截至 2026-10-16，尚未冻结</span><span class="pg">00 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">提交索引.md（采用课程 v1.2）；数据 DOI 10.24432/C5CG6D；软件与证据截至 2026-10-18（源码 e2aa569），尚未冻结</span><span class="pg">00 / 09</span></div>
   <aside class="notes">
     <p>老师好，我是王麒皓，题目是 VC-R-03 退货对账与差异处理系统，数据用 UCI Online Retail II。</p>
     <p class="hint">背景大数字 1,067,371 = 官方两张工作表的原始行数。按课程 v1.2 组织材料；已开工学生可选版本，提交索引里写明“v1.2”。</p>
@@ -327,20 +332,22 @@ aside.notes{display:none}
     <ul class="lines">
       <li class="reveal">三类用户：<b>财务</b>派单，<b>仓库</b>核查本人差异，<b>管理员</b>看全局。</li>
       <li class="reveal">难点：取消行<b>没有原单号</b>，过去靠表格逐行筛、手写备注，处理过程追不到。</li>
-      <li class="reveal">系统把候选、责任人、状态、结论连成一条记录；<b>交易是官方事实</b>，配对是规则推断，处理是课程模拟。</li>
+      <li class="reveal">系统把候选、责任人、状态、结论连成一条记录，同类差异可按建议<b>批量复核</b>；<b>交易是官方事实</b>，配对是规则推断，处理是课程模拟。</li>
     </ul>
-    <figure class="fig reveal" data-src="证据原图/1015-01-财务差异总览.jpg" data-orig="每日工作记录/2026-10-15/截图/FR12-16浏览器验收/01-财务差异总览.jpg">
-      <div class="crop" style="--W:1585;--x:226;--y:110;--w:1359;--h:704;--mx:1214;--my:228;--mw:316;--mh:90">
-        <img src="证据原图/1015-01-财务差异总览.jpg" alt="财务差异总览">
-        <div class="mark below"><span>year1 初始差异 4,991</span></div>
+    <figure class="fig reveal" data-src="证据原图/1018M-01-财务差异总览-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/01-财务差异总览-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:236;--y:0;--w:1204;--h:612;--mx:297;--my:270;--mw:1067;--mh:86">
+        <img src="证据原图/1018M-01-财务差异总览-模拟数据.png" alt="财务差异总览（模拟数据）">
+        <div class="mark below" style=""><span>差异总数与三种状态</span></div>
+        <div class="mark left" style="--mx:272;--my:500;--mw:1117;--mh:105"><span>推荐复核与批量处理（10-18 新增）</span></div>
+        <span class="simtag">最新界面 · 模拟数据</span>
       </div>
-      <figcaption>01-财务差异总览.jpg · 2026-10-15 时点 Chrome 实拍 · 点击看原图</figcaption>
+      <figcaption>01-财务差异总览 · 10-18 最新前端（ac298f6）模拟预览 · 点击看原图</figcaption>
     </figure>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md 使用者与目标；截图 2026-10-15/FR12-16浏览器验收/01（旧时点，非当前首屏计时）</span><span class="pg">01 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md 使用者与目标；界面图 2026-10-18 截图/中期汇报界面-模拟数据/01（最新前端，模拟数据）</span><span class="pg">01 / 09</span></div>
   <aside class="notes">
-    <p>系统给三类人用：财务派单，仓库核查自己的差异，管理员看全局。难点是取消行<strong>没有原订单号</strong>，过去只能在表格里逐行筛、手写备注，处理过程追不到。系统把候选、责任人、状态和结论连成一条记录。交易是官方事实，配对是规则推断，处理记录是课程模拟。</p>
-    <p class="hint">右图是 10-15 时点的财务总览：year1 初始差异 4,991，当时 1 条已关闭；不代表今天的工单状态，也不是优化后的首屏计时。“替代表格＋备注”是设计目标，没有用户访谈证据。</p>
+    <p>系统给三类人用：财务派单，仓库核查自己的差异，管理员看全局。难点是取消行<strong>没有原订单号</strong>，过去靠表格逐行筛，处理过程追不到。系统把候选、责任人、状态和结论连成一条记录，同类差异还能按建议批量复核。交易是官方事实，配对是规则推断，处理记录是课程模拟。</p>
+    <p class="hint">右图是最新前端（ac298f6）在开发模拟预览里的财务总览，数字 137 / 96 / 18 / 23 全是模拟数据，只示意界面；不需登录、不连真实库。真实数字见第 2、6 页。“替代表格＋备注”是设计目标，没有用户访谈证据。</p>
   </aside>
 </section>
 
@@ -367,73 +374,77 @@ aside.notes{display:none}
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1040px 1fr;gap:30px;min-height:0">
-      <figure class="fig reveal" data-src="证据原图/1016-02-全量来源与分类守恒.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/02-全量来源与分类守恒.jpg">
-        <div class="crop" style="--W:1865;--x:250;--y:128;--w:1590;--h:420;--mx:256;--my:466;--mw:812;--mh:32">
-          <img src="证据原图/1016-02-全量来源与分类守恒.jpg" alt="全量来源与分类守恒">
-          <div class="mark left"><span>原始 = 接纳 + 排除；取消三类守恒</span></div>
-          <div class="mark side" style="--mx:262;--my:150;--mw:338;--mh:40"><span>范围 all</span></div>
-        </div>
-        <figcaption>02-全量来源与分类守恒.jpg · 2026-10-16 Chrome 实拍 · 点击看原图</figcaption>
-      </figure>
-      <p class="side-note reveal">all 接纳取消 <b>19,164</b> = 自动 9,714 ＋ 疑似 6,275 ＋ 无合格原单 3,175。<br>这是分类分母，不是“配对正确”的分母。</p>
+      <figure class="fig reveal" data-src="证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/02-来源守恒与原因筛选-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:272;--y:140;--w:1118;--h:295;--mx:297;--my:152;--mw:1067;--mh:44">
+        <img src="证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png" alt="来源守恒与原因筛选（模拟数据）">
+        <div class="mark below left" style=""><span>来源守恒展开：原始 = 接纳 + 排除；三类分类</span></div>
+        <div class="mark" style="--mx:1069;--my:395;--mw:299;--mh:37"><span>七种原因可筛选</span></div>
+        <span class="simtag">最新界面 · 模拟数据</span>
+      </div>
+      <figcaption>02-来源守恒与原因筛选 · 10-18 最新前端（ac298f6）模拟预览 · 点击看原图</figcaption>
+    </figure>
+      <p class="side-note reveal">原始可识别取消 19,494 = 接纳 <b>19,164</b> ＋ 排除 330。<br>接纳取消 19,164 = 自动 9,714 ＋ 疑似 6,275 ＋ 无合格原单 3,175。<br>这是分类分母，不是“配对正确”的分母。</p>
     </div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">资料/官方数据只读核查.md；要做什么.md CR-01–CR-06；2026-10-15 原始输出/性能子代理/官方all准备清单.json；截图 v12中期复核/02</span><span class="pg">02 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">官方数据只读核查.md；要做什么.md CR-01–06；10-15 官方all准备清单.json；实际运行结果.txt 第一节；界面图 10-18 模拟数据/02</span><span class="pg">02 / 09</span></div>
   <aside class="notes">
     <p>数据来自 UCI 官方，DOI 写在页上，一个 Excel 两张年度表，原件只读。8 个原始列里，<strong>Invoice 以 C 开头就是取消</strong>。全量 106 万 7 千多行，排除 2 万 8 千多行，主要是两表重叠的副本和非正价格；缺客户的行保留，但不自动配对。</p>
-    <p class="hint">year1 = Year 2009-2010 整张表；两表日期有重叠，跨表八字段全同的按出现次数对齐，次表副本排除并链接原记录（CR-05）。243,007 是 all 中缺客户的标记行数（含销售），不是排除数。清洗版本 cr-1.0.1。</p>
+    <p class="hint">year1 = Year 2009-2010 整张表；两表日期有重叠，跨表八字段全同的按出现次数对齐，次表副本排除并链接原记录（CR-05）。243,007 是 all 中缺客户的标记行数（含销售），不是排除数。清洗版本 cr-1.0.1。取消分母不悄悄换：原始可识别取消 19,494，其中 330 行在清洗中排除，余 19,164 进入分类；无法识别单号的排除行不猜作取消。</p>
   </aside>
 </section>
 
 <!-- ============ 第3页 ============ -->
 <section class="slide" data-title="三、项目范围与需求" data-sec="25">
   <div class="head"><h2>三、项目范围与需求</h2><div class="no"><b>03</b>系统应当 · 暂不做</div></div>
-  <div class="main cols" style="grid-template-columns:1fr 470px">
+  <div class="main cols" style="grid-template-columns:1fr 600px;gap:36px">
     <ul class="lines sm" style="gap:20px">
       <li class="reveal"><span class="k">FR-01</span>　系统应当读取官方工作簿，记录出处、SHA-256、工作表和源行号，并验证原件未被改动。</li>
       <li class="reveal"><span class="k">FR-05</span>　取消行缺身份、无候选、多候选或时间不合法时，系统应当<b>不自动确认</b>，生成写明原因的待核查差异。</li>
-      <li class="reveal"><span class="k">FR-09·10</span>　财务派单时系统应当记录操作人和时间；已有责任人时<b>拒绝再派</b>并显示现责任人。</li>
+      <li class="reveal"><span class="k">FR-09·10</span>　财务单条或跨页批量派单时，系统应当记录操作人和时间；已有责任人时<b>拒绝再派</b>，批量中逐条跳过并写明原因。</li>
       <li class="reveal"><span class="k">NR-01</span>　暂不做：自动调账、实际退款或任何资金操作——系统只给推断、核查和记录。</li>
     </ul>
-    <figure class="fig reveal" data-src="证据原图/1016-05-派单成功版本2.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/05-派单成功版本2.jpg">
-      <div class="crop" style="--W:1865;--x:1170;--y:24;--w:660;--h:846;--mx:1190;--my:742;--mw:300;--mh:64">
-        <img src="证据原图/1016-05-派单成功版本2.jpg" alt="派单成功版本2">
-        <div class="mark left"><span>FR-09 操作人 + 时间 + 版本</span></div>
-        <div class="mark below" style="--mx:1505;--my:168;--mw:318;--mh:30"><span>责任人 finance</span></div>
+    <figure class="fig reveal" data-src="证据原图/1018M-05-派单成功版本1-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/05-派单成功版本1-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:645;--y:0;--w:760;--h:520;--mx:653;--my:104;--mw:744;--mh:46">
+        <img src="证据原图/1018M-05-派单成功版本1-模拟数据.png" alt="派单成功（模拟数据）">
+        <div class="mark below left" style=""><span>派单已保存 · 版本 0 → 1</span></div>
+        <div class="mark below" style="--mx:836;--my:284;--mw:182;--mh:66"><span>责任人 warehouse</span></div>
+        <span class="simtag">最新界面 · 模拟数据</span>
       </div>
-      <figcaption>05-派单成功版本2.jpg · 2026-10-16 实拍 · 点击看原图</figcaption>
+      <figcaption>05-派单成功版本1 · 10-18 最新前端（ac298f6）模拟预览 · 点击看原图</figcaption>
     </figure>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md FR-01、FR-05、FR-09、FR-10、NR-01（共 18 条 FR、4 条 NR）；截图 v12中期复核/05</span><span class="pg">03 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md FR-01、FR-05、FR-09、FR-10、NR-01（共 18 条 FR、4 条 NR；10-18 修订）；界面图 10-18 模拟数据/05</span><span class="pg">03 / 09</span></div>
   <aside class="notes">
-    <p>需求都写成“系统应当……”。FR-01，读官方原件并记下来源和源行号；FR-05，缺身份、多候选或时间不对时<strong>不自动确认</strong>，生成写明原因的差异；FR-09 和 FR-10，派单记下操作人和时间，已有责任人就拒绝再派。暂时不做的是自动调账和实际退款。</p>
-    <p class="hint">规格共 FR-01–FR-18、NR-01–NR-04，48 条 TC；规模数字是本项目原计划目标，不是 v1.2 统一课程下限。右图：派单后 0:182 版本 1→2，操作历史记 finance 与时间。</p>
+    <p>需求都写成“系统应当……”。FR-01，读官方原件并记下来源和源行号；FR-05，缺身份、多候选或时间不对时<strong>不自动确认</strong>，生成写明原因的差异；FR-09 和 FR-10，派单记下操作人和时间，已有责任人就拒绝再派，批量时逐条跳过。暂时不做的是自动调账和实际退款。</p>
+    <p class="hint">规格共 FR-01–FR-18、NR-01–NR-04；用例原计划 TC-01–48，10-18 为推荐与批量复核补 TC-49–55，编号不重排。规模数字是本项目原计划目标，不是 v1.2 统一课程下限。右图是最新前端的模拟数据：派单后版本 0→1、责任人 warehouse；真实 0:182 派单（v1→2，finance）实拍在 v12中期复核/05。</p>
   </aside>
 </section>
 
 <!-- ============ 第4页 ============ -->
 <section class="slide" data-title="四、关键规则与决定" data-sec="25">
-  <div class="head"><h2>四、关键规则与决定</h2><div class="no"><b>04</b>三条改变结果的规则</div></div>
-  <div class="main cols" style="grid-template-columns:1fr 455px;gap:40px;padding-top:28px">
-    <div class="rules">
+  <div class="head"><h2>四、关键规则与决定</h2><div class="no"><b>04</b>四条改变结果的规则</div></div>
+  <div class="main cols" style="grid-template-columns:1fr 455px;gap:40px;padding-top:24px">
+    <div class="rules tight">
       <div class="rule reveal"><div class="id">R-02<small>合格候选</small></div><p>客户、商品、精确单价、国家一致；销售<b>严格早于</b>取消；剩余量 ≥ 取消量。缺客户或国家不自动配对。</p></div>
-      <div class="rule reveal"><div class="id">FR-06<small>唯一才自动</small></div><p>只有<b>唯一</b>合格候选才自动配对，部分退货扣余量；多候选不因数量相等或时间先后挑一个（NR-04）。</p></div>
-      <div class="rule reveal"><div class="id">R-04<small>顺序状态</small></div><p>待处理 → 处理中 → 已关闭；关闭必须写<b>非空结论</b>，资料不足可结案，但不制造配对。</p></div>
-      <div class="why reveal"><b>为什么保守</b>　数据没有原单关联号，配错会把退款记到错误的销售上、事后难发现，所以宁可留给人核查。代价：all 自动配对覆盖 9,714 / 19,164 ≈ 50.69%——是覆盖率，不是准确率。</div>
+      <div class="rule reveal"><div class="id">FR-06<small>唯一才自动</small></div><p>首轮只有<b>唯一</b>合格候选才自动配对，部分退货扣余量；多候选不因数量相等或时间先后挑一个。</p></div>
+      <div class="rule reveal"><div class="id">R-04<small>顺序状态</small></div><p>待处理 → 处理中 → 已关闭；关闭必须写<b>非空结论</b>，已关闭只读。</p></div>
+      <div class="rule reveal new"><div class="id">复核建议<small>review-1.0.0</small></div><p>重复归组、整单、最近一笔只是<b>建议</b>，人工复核后才生效；重复组只计一次余量，冲突整组跳过，不改首轮结果。</p></div>
+      <div class="why reveal"><b>为什么保守</b>　数据没有原单关联号，配错会把退款记到错误的销售上、事后难发现，所以首轮宁可留给人核查。代价：all 首轮覆盖 9,714 / 19,164 ≈ 50.69%——是覆盖率，不是准确率。</div>
     </div>
-    <figure class="fig reveal" data-src="证据原图/1016-03-多候选不自动配对.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/03-多候选不自动配对.jpg">
-      <div class="crop" style="--W:1865;--x:1170;--y:50;--w:660;--h:870;--mx:1186;--my:690;--mw:630;--mh:172">
-        <img src="证据原图/1016-03-多候选不自动配对.jpg" alt="多候选不自动配对">
-        <div class="mark left"><span>2 条合格候选 → 不自动挑</span></div>
-        <div class="mark below" style="--mx:1190;--my:170;--mw:630;--mh:76"><span>仍待处理 · 取消 12 · 单价 2.1</span></div>
+    <figure class="fig reveal" data-src="证据原图/1018M-04-候选对比未自动挑选-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/04-候选对比未自动挑选-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:640;--y:20;--w:770;--h:880;--mx:653;--my:282;--mw:729;--mh:78">
+        <img src="证据原图/1018M-04-候选对比未自动挑选-模拟数据.png" alt="候选对比（模拟数据）">
+        <div class="mark below left" style=""><span>3 条合格候选逐字段对比</span></div>
+        <div class="mark" style="--mx:768;--my:690;--mw:614;--mh:48"><span>未派单处理前均不可选，系统不自动挑</span></div>
+        <span class="simtag">最新界面 · 模拟数据</span>
       </div>
-      <figcaption>03-多候选不自动配对.jpg · 0:1378 · 点击看原图</figcaption>
+      <figcaption>04-候选对比未自动挑选 · 10-18 最新前端（ac298f6）模拟预览 · 点击看原图</figcaption>
     </figure>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md R-02、R-03、R-04、FR-06、NR-04；决定记录.md；TC-10/12/15/21/24；截图 v12中期复核/03</span><span class="pg">04 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md R-02、R-03、R-04、R-07、FR-06、NR-04 及 10-18 批量复核扩展；决定记录.md；TC-10/12/15/21/24、49–53；界面图 10-18 模拟/04；0:1378 实拍 v12中期复核/03</span><span class="pg">04 / 09</span></div>
   <aside class="notes">
-    <p>三条规则。R-02：客户、商品、精确单价、国家一致，销售严格在先、余量够，才算候选。FR-06：只有<strong>唯一候选</strong>才自动配；右图两条合格候选，就留给人看。R-04：状态按序，关闭必须写结论。保守的原因是没有原单号，配错的代价比留给人核查大。</p>
-    <p class="hint">R-03：一条取消最多分给一条销售，累计不超原量（TC-13/14）。year1 覆盖率 5,214 / 10,205 ≈ 51.09%。覆盖率只说明多少取消被自动配上，没有真值，不能叫准确率。0:1378 在 all 范围，本轮只查看，未做人工确认。</p>
+    <p>四条规则。R-02：客户、商品、单价、国家一致，销售严格在先、余量够，才算候选。FR-06：首轮只有<strong>唯一候选</strong>才自动配；右图三条合格候选并排对比，系统不挑，留给人看。R-04：状态按序，关闭要写结论。新加的复核建议，比如整单、最近一笔，<strong>只是建议，人确认后才生效</strong>。因为没有原单号，配错代价更大。</p>
+    <p class="hint">R-03：一条取消最多分给一条销售，累计不超原量（TC-13/14）。year1 首轮覆盖率 5,214 / 10,205 ≈ 51.09%。覆盖率只说明多少取消被自动配上，没有真值，不能叫准确率。复核建议：原始八字段完全相同的销售归一组、最早源行为代表、源行不删，组容量只算一次；最近时间并列不预选；整单和共享余量组件原子提交（TC-49–53）。0:1378 在 all 范围，10-16 只查看，未做人工确认。</p>
   </aside>
 </section>
 
@@ -444,50 +455,50 @@ aside.notes{display:none}
     <div class="arch reveal">
       <div class="n src"><h3>官方 xlsx</h3><code>项目外只读 · SHA 校验</code><p>两张年度表，八个原始列</p></div><i>→</i>
       <div class="n"><h3>Python 准备</h3><code>tools/prepare.py</code><p>CR-01–06 清洗、源行号、排除原因与守恒验算</p></div><i>→</i>
-      <div class="n"><h3>Go · Gin 服务</h3><code>backend/internal/<br>reconcile · store · auth</code><p>R-02 配对、派单/状态工作流、会话与权限</p></div><i>→</i>
-      <div class="n"><h3>SQLite</h3><code>运行库在项目外</code><p>交易、差异、工单、审计；版本号防并发</p></div><i>→</i>
-      <div class="n"><h3>React 页面</h3><code>frontend/src</code><p>总览、证据、交易检索、CSV；筛选分页在服务端</p></div>
+      <div class="n"><h3>Go · Gin 服务</h3><code>backend/internal/<br>reconcile · store · auth</code><p>首轮配对、复核建议与批次、状态工作流、会话权限</p></div><i>→</i>
+      <div class="n"><h3>SQLite</h3><code>运行库在项目外</code><p>交易、差异、分配余量、审计；版本号防并发</p></div><i>→</i>
+      <div class="n"><h3>React 页面</h3><code>frontend/src</code><p>总览、证据对比、批量工作台、检索、CSV；筛选分页在服务端</p></div>
     </div>
     <div class="facts">
-      <div class="box reveal"><h4>输入 / 输出</h4><p>输入：官方 xlsx ＋ 范围 <b>benchmark / year1 / all</b>。<br>输出：差异工单、候选证据、操作审计、筛选 CSV。</p></div>
-      <div class="box reveal"><h4>角色 / 安全</h4><p><b>财务</b>看全部并派单，<b>仓库</b>只看本人差异，<b>管理员</b>管全局；身份取自服务端会话，账户须先完成强密码＋Passkey/TOTP。</p></div>
+      <div class="box reveal"><h4>输入 / 输出</h4><p>输入：官方 xlsx ＋ 范围 <b>benchmark / year1 / all</b>。<br>输出：差异工单、候选证据、复核批次、操作审计、筛选 CSV。</p></div>
+      <div class="box reveal"><h4>角色 / 安全</h4><p><b>财务</b>看全部并派单，<b>仓库</b>只看本人差异，<b>管理员</b>管全局；先完成强密码＋Passkey/TOTP，Passkey 登录时由所选凭据识别账户。</p></div>
       <div class="box reveal"><h4>入口 / 复现</h4><p><span class="k">启动Demo.cmd</span> → localhost:8080<br><span class="k">./reproduce.ps1 -Scope year1|all</span> 从空验证库复现；<span class="k">./test.ps1</span> 跑自动测试。</p></div>
     </div>
-    <div class="layers reveal"><span><b>官方事实</b>交易行、八个原始列、源行号（只读）</span><span><b>规则推断</b>候选、自动配对、差异原因（conservative-1.0.0）</span><span><b>课程模拟</b>派单、结论、审计（演示账户操作）</span></div>
+    <div class="layers reveal"><span><b>官方事实</b>交易行、八个原始列、源行号（只读）</span><span><b>规则推断</b>首轮配对与差异原因（conservative-1.0.0）；复核建议（review-1.0.0）</span><span><b>课程模拟</b>派单、确认、结论、批量复核与审计（演示/隔离账户）</span></div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">怎么做.md；运行说明.md；backend/、frontend/、tools/ 目录；决定记录.md D-04 技术选择</span><span class="pg">05 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">怎么做.md；运行说明.md；backend/、frontend/、tools/ 目录；决定记录.md D-04；2026-10-18 批量复核实现、Passkey选择登录记录</span><span class="pg">05 / 09</span></div>
   <aside class="notes">
-    <p>结构分四层。Python 读官方 Excel，清洗成带源行号的记录；Go 和 Gin 负责配对规则、派单状态和权限；SQLite 保存差异、工单和审计；React 页面做总览、证据和交易检索，筛选分页都在服务端。所有账户先完成强密码和 Passkey 才能进业务页面，角色由服务端会话决定。系统只给推断和记录，不碰资金。</p>
-    <p class="hint">技术取舍（D-04）：比较过 FastAPI、Rust、C#、Java，选 Go＋Gin＋SQLite 看重单文件部署和全量并行；没做同条件对比，不说快几倍。工程备查：截至 d3b3700 主线 43 次提交均以 FR 编号开头；实验分支 79ff9b2 未合入；快照 746a7e1 已用 bundle 恢复复现；run-app 技能由新 Codex CLI 进程显式调用、退出码 0（v12中期复核/16 图，是输出摘录的浏览器展示）。</p>
+    <p>结构分四层。Python 读官方 Excel，清洗成带源行号的记录；Go 和 Gin 负责首轮配对、复核建议、派单状态和权限；SQLite 保存差异、余量和审计；React 页面做总览、证据对比、批量工作台和交易检索，筛选分页都在服务端。所有账户先完成强密码和 Passkey 才能进业务页面，角色由服务端会话决定。系统只给推断和记录，不碰资金。</p>
+    <p class="hint">技术取舍（D-04）：比较过 FastAPI、Rust、C#、Java，选 Go＋Gin＋SQLite 看重单文件部署和全量并行；没做同条件对比，不说快几倍。工程备查：截至 e2aa569 主线 68 个原生提交均以 FR 编号开头（关键：6ead220 性能与首次引导、b9d8d8d 原因筛选、bc97763 推荐批量复核、eb499f9 工作台修订、ac298f6 自动刷新建议）；实验分支 79ff9b2 未合入；快照 746a7e1 已用 bundle 恢复复现；run-app 技能由新 Codex CLI 进程显式调用、退出码 0（v12中期复核/16 图，是输出摘录的浏览器展示）。</p>
   </aside>
 </section>
 
 <!-- ============ 第6页 ============ -->
 <section class="slide" data-title="六、当前运行结果" data-sec="35">
-  <div class="head"><h2>六、当前运行结果</h2><div class="no"><b>06</b>一条走通的最小流程</div></div>
-  <div class="main cols" style="grid-template-columns:1fr 520px">
+  <div class="head"><h2>六、当前运行结果</h2><div class="no"><b>06</b>首轮结果 → 人工复核批量</div></div>
+  <div class="main cols" style="grid-template-columns:1fr 700px;gap:36px">
     <div>
-      <ul class="lines sm" style="gap:20px">
-        <li class="reveal">范围与版本：<span class="k">year1 · cr-1.0.1 · conservative-1.0.0</span>；finance 账户 Passkey 登录，2026-10-16 实操。</li>
-        <li class="reveal">输入：取消行 <span class="k">0:182</span>（数量 4，单价 4.25）；同条件销售 <span class="k">0:191</span> 不严格在先 → 合格候选 <b>0</b>。</li>
-        <li class="reveal">输出：派单 → 开始 → 带结论关闭，<b>v1 → v4、三条审计</b>，未新增配对；year1 现为 4,988 待处理 / 0 处理中 / 3 关闭。</li>
+      <ul class="lines sm" style="gap:16px">
+        <li class="reveal"><b>首轮</b>　官方 all · <span class="k">cr-1.0.1 · conservative-1.0.0</span>：接纳取消 19,164 → 自动 <b>9,714</b> / 疑似 6,275 / 无合格原单 3,175，生成初始差异 <b>9,450</b>。</li>
+        <li class="reveal"><b>复核</b>　<span class="k">review-1.0.0</span>，官方 all 隔离副本、合成财务账户（10-18）：选 5,451 条 → 成功 <b>5,237</b> / 跳过 214 / 事务失败 <b>0</b>；分配 9,714 → 14,951，每条成功写 4 条审计，重放无新增。</li>
+        <li class="reveal"><b>边界</b>　这是模拟复核成果，不是本人或真实企业审核；首轮分类与 50.69% 不变。成功项按建议分：唯一 8、重复 56、整单 1,601、最近 3,572，都不是准确率。</li>
       </ul>
-      <p class="cap2 reveal" style="margin:18px 0 0 54px">all 范围初始差异 9,450（第 2 页图）本轮只查看、未操作，与 year1 工单数分开看。</p>
+      <p class="cap2 reveal" style="margin:16px 0 0 54px">单条主流程 0:182 是 10-16 旧实例实录，见第 7 页；10-18 起 Demo 换成只含 all 的新实例，台上状态以本人实际操作为准。</p>
       <button class="demo-btn reveal" data-demo style="margin-left:54px"><span class="dot"></span>实机演示<small>localhost:8080</small></button>
     </div>
-    <figure class="fig reveal" data-src="证据原图/1016-10-关闭结论与完整审计.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.jpg">
-      <div class="crop" style="--W:1865;--x:1185;--y:352;--w:622;--h:750;--mx:1192;--my:356;--mw:608;--mh:42">
-        <img src="证据原图/1016-10-关闭结论与完整审计.jpg" alt="关闭结论与完整审计">
-        <div class="mark below"><span>销售 0:191 不严格在先</span></div>
-        <div class="mark left" style="--mx:1192;--my:800;--mw:300;--mh:244"><span>v1→v2→v3→v4 三条审计</span></div>
+    <figure class="fig reveal" data-src="证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/10-批量预览可提交与将跳过-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:220;--y:45;--w:1000;--h:690;--mx:241;--my:146;--mw:943;--mh:67">
+        <img src="证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png" alt="批量预览（模拟数据）">
+        <div class="mark below"><span>预览：可提交 / 将跳过分开，提交前不占余量</span></div>
+        <span class="simtag">最新界面 · 模拟数据，数字不是左侧运行</span>
       </div>
-      <figcaption>10-关闭结论与完整审计.jpg · 2026-10-16 实拍 · 点击看原图</figcaption>
+      <figcaption>10-批量预览 · 10-18 最新前端（ac298f6）模拟预览 · 点击看原图</figcaption>
     </figure>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">截图 v12中期复核/04、05、07、09、10；原始输出/v12中期复核/补验与截图清单.json；交易为官方数据，处理为课程模拟</span><span class="pg">06 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">实际运行结果.txt 一、二节；10-18 TC55官方all隔离HTTP-通过.json、TC55官方全量隔离验证说明.md；模拟界面图 10</span><span class="pg">06 / 09</span></div>
   <aside class="notes">
-    <p>这是今天的真实运行，范围 year1。取消行 0:182，数量 4、单价 4.25；同条件的销售 0:191 <strong>不严格早于取消</strong>，合格候选是 0。以 finance 账户派单、开始处理，写明资料不足后关闭，版本 1 到 4，三条审计，没有新增配对。year1 现在 4988 待处理、3 关闭；全量的 9450 是另一个范围，不混在一起。</p>
-    <p class="hint">3 条关闭 = 10-15 的 0:180、0:181 两条旧结案 ＋ 今天的 0:182。本轮是 finance 单角色闭环（自派自处理），不冒充新一次跨角色验证；跨角色画面见 10-15 截图。冷启动后服务新进程首页 200、未登录业务 401，year1 仍 4,988 / 0 / 3（15 图）。点“实机演示”或按 D 打开路线。</p>
+    <p>运行结果分两层。首轮在官方全量上：一万九千多条接纳取消，自动配上 9714 条，其余进人工核查，初始差异 9450 条。新加的复核建议，在全量的<strong>隔离副本</strong>上用合成财务账户批量复核：选 5451 条，成功 5237，跳过 214，事务失败 0，分配从 9714 增加到 14951。这是模拟复核，不是我本人审核，<strong>也不改首轮的 50.69%</strong>。右边是模拟数据界面，只看预览怎样分类。</p>
+    <p class="hint">跳过 214 = 容量不足 139 ＋ 未明确选择 74 ＋ 整单方案未完整一致 1。关闭 1 → 5,238，审计 3 → 20,951（新增 5,237 × 4）；91 个重复组、187 个来源成员保留；初始分类与 summary 散列不变，源库 SHA 前后相同。耗时：生成 2.17 s、预览 1.05 s、提交 13.04 s；提交窗口内 4 路 300 次查询 0 失败、P95 52.3 ms，是 TC55 局部诊断，不是正式 NFR04。预览和建议都不占余量、不写业务表。单条主流程（10-16 旧实例）：0:182 派单 → 开始 → 资料不足结案，v1→v4、三条审计、无配对；year1 当时 4,988 / 0 / 3。旧实例保留在本机，未迁入新实例。</p>
   </aside>
 </section>
 
@@ -503,29 +514,30 @@ aside.notes{display:none}
           <tr><td>边界<small>TC-20 · FR-10</small></td><td>0:182 已派 finance，再点“再次派单”</td><td>拒绝并显示现责任人，版本不变</td><td><span class="ok">✓</span> 提示“已有责任人：finance”，仍 v2</td><td>06</td></tr>
           <tr><td>边界<small>TC-24 · FR-13</small></td><td>0:182 处理中，结论留空点“保存结论并关闭”</td><td>拒绝，状态和版本不变</td><td><span class="ok">✓</span> 提示“关闭前必须填写非空白结论”，仍处理中 v3、两条审计</td><td>08</td></tr>
           <tr><td>边界<small>TC-10 · R-02</small></td><td>all 范围 0:1378 取消 12 件，0:1271、0:1368 两条合格候选</td><td>不自动挑选，保留待核查</td><td><span class="ok">✓</span> 仍待处理 v1，两条候选各余 12</td><td>03</td></tr>
+          <tr><td>批量边界<small>TC-53 · 54 · 55</small></td><td>官方 all 隔离副本选 5,451 条，含余量冲突、未明确选择、整单不完整；提交后再重放</td><td>冲突组整组跳过、其余继续；成功项四条审计；重放不重复写</td><td><span class="ok">✓</span> 成功 5,237 / 跳过 214 / 失败 0；余量守恒，重放无新增</td><td>JSON</td></tr>
         </tbody>
       </table>
-      <p class="cap2">自动回归：76 Go 顶层 ＋ 15 Python ＋ 6 前端 = <b>97 项 0 失败 0 跳过</b>；四项性能底线通过。上表为浏览器实操，图为页面实拍。</p>
+      <p class="cap2">自动回归：10-18 统一 130 Go ＋ 25 Python ＋ 6 前端 = <b>161 项 0 失败 0 跳过</b>；之后修订 131 Go ＋ 6 前端通过；15:12 末次“自动刷新建议”只构建、未测试。前四行为 10-16 旧实例浏览器实操，实拍原图见证据列编号（v12中期复核）；第五行为隔离副本自动验证；下方三图是最新界面的模拟数据重现。</p>
     </div>
     <div class="thumbs">
-      <figure class="fig reveal" data-src="证据原图/1016-10-关闭结论与完整审计.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/10-关闭结论与完整审计.jpg">
-        <div class="crop" style="--W:1865;--x:1186;--y:762;--w:620;--h:282"><img src="证据原图/1016-10-关闭结论与完整审计.jpg" alt="三条审计"></div>
-        <figcaption>主流程 · 10 图操作历史</figcaption>
+      <figure class="fig reveal" data-src="证据原图/1018M-08-已关闭结论与操作历史-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/08-已关闭结论与操作历史-模拟数据.png">
+        <div class="crop" style="--W:1440;--x:640;--y:418;--w:770;--h:236;--mx:653;--my:418;--mw:729;--mh:135"><img src="证据原图/1018M-08-已关闭结论与操作历史-模拟数据.png" alt="主流程 · 已结案只读 + 操作历史 v1→v3"><div class="mark below left"><span>已结案：不能修改或重开</span></div><span class="simtag sm">模拟数据</span></div>
+        <figcaption>主流程 · 已结案只读 + 操作历史 v1→v3</figcaption>
       </figure>
-      <figure class="fig reveal" data-src="证据原图/1016-06-重复派单被拒绝.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/06-重复派单被拒绝.jpg">
-        <div class="crop" style="--W:1865;--x:262;--y:62;--w:620;--h:282;--mx:266;--my:116;--mw:200;--mh:42"><img src="证据原图/1016-06-重复派单被拒绝.jpg" alt="重复派单被拒绝"><div class="mark below left"><span>重复派单被拒</span></div></div>
-        <figcaption>边界 · 06 图</figcaption>
+      <figure class="fig reveal" data-src="证据原图/1018M-06-再次派单被拒-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/06-再次派单被拒-模拟数据.png">
+        <div class="crop" style="--W:1440;--x:640;--y:20;--w:770;--h:236;--mx:653;--my:104;--mw:744;--mh:46"><img src="证据原图/1018M-06-再次派单被拒-模拟数据.png" alt="边界 · 再次派单被拒"><div class="mark below left"><span>已有责任人，仍为版本 1</span></div><span class="simtag sm">模拟数据</span></div>
+        <figcaption>边界 · 再次派单被拒</figcaption>
       </figure>
-      <figure class="fig reveal" data-src="证据原图/1016-08-空结论拒绝且仍为版本3.jpg" data-orig="每日工作记录/2026-10-16/截图/v12中期复核/08-空结论拒绝且仍为版本3.jpg">
-        <div class="crop" style="--W:1865;--x:262;--y:62;--w:620;--h:282;--mx:266;--my:116;--mw:200;--mh:42"><img src="证据原图/1016-08-空结论拒绝且仍为版本3.jpg" alt="空结论拒绝"><div class="mark below left"><span>空结论被拒</span></div></div>
-        <figcaption>边界 · 08 图</figcaption>
+      <figure class="fig reveal" data-src="证据原图/1018M-07-空结论被拒-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/07-空结论被拒-模拟数据.png">
+        <div class="crop" style="--W:1440;--x:640;--y:20;--w:770;--h:236;--mx:653;--my:104;--mw:744;--mh:46"><img src="证据原图/1018M-07-空结论被拒-模拟数据.png" alt="边界 · 空结论不能关闭"><div class="mark below left"><span>空结论被拒，仍处理中 版本 2</span></div><span class="simtag sm">模拟数据</span></div>
+        <figcaption>边界 · 空结论不能关闭</figcaption>
       </figure>
     </div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">怎么算做对.md TC-10/19/20/24；测试记录.md；截图 v12中期复核/03、06、08、09、10；2026-10-16 原始输出/辅导收工回归/summary.json</span><span class="pg">07 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">怎么算做对.md TC-10/19/20/24/53–55；测试记录.md；实拍 v12中期复核/03·06·08·09·10；10-18 回归与 TC55 JSON；模拟界面图 06–08</span><span class="pg">07 / 09</span></div>
   <aside class="notes">
-    <p>测试看表。主流程就是刚才的 0:182：预期按序结案、不造配对，实际 v4 加三条审计。边界一，已派给 finance 再派，预期拒绝，实际提示已有责任人，版本仍是 2。边界二，处理中不填结论就关闭，被拒绝，仍是处理中版本 3。多候选 0:1378 也没有自动挑。另外 <strong>97 项自动测试 0 失败</strong>。</p>
-    <p class="hint">97 项是自动回归的统计口径，不等于每项都由本人亲手跑；10-15 本人亲跑截图为当时版本的 71 Go＋13 Python。时间条件 TC-12 在 0:182 上可见：0:191 不严格在先，不算候选。分页边界：客户 13526 共 54 条，分 50＋4 两页、末页“下一页”禁用（11/12 图）；不存在商品返回空结果（14 图）。</p>
+    <p>测试看表。主流程是 0:182：预期按序结案、不造配对，实际 v4 加三条审计。已派单再派，被拒，版本仍是 2；不填结论就关闭，被拒，仍是版本 3；多候选 0:1378 没有自动挑。批量这边，冲突的组整组跳过，其余照常成功，重放不重复写。最近一次统一回归 <strong>161 项 0 失败</strong>。</p>
+    <p class="hint">161 项是 10-18 12:44 一次统一回归；之后“已关闭隐藏”修订有 131 Go＋6 前端通过、另复跑 3 项相关 Go，Python 25 项复用；跨轮去重 162 项不是一次统一回归，15:12 末次版本未测试。10-16 时为 97 项（76 Go＋15 Python＋6 前端）。这些是代理运行的自动回归，不等于本人亲跑；10-15 本人亲跑截图为当时版本的 71 Go＋13 Python。Passkey 选择登录：三角色合成 ES256 凭据的协议与 HTTP 边界通过，真实设备流程待本人验证。时间条件 TC-12 在 0:182 上可见：0:191 不严格在先，不算候选。分页边界（10-16 year1）：客户 13526 共 54 条，分 50＋4 两页、末页“下一页”禁用（11/12 图）；不存在商品返回空结果（14 图）。</p>
   </aside>
 </section>
 
@@ -533,15 +545,16 @@ aside.notes{display:none}
 <section class="slide" data-title="八、问题与修正" data-sec="35">
   <div class="head"><h2>八、问题与修正</h2><div class="no"><b>08</b>首次全量太慢 · 并发查询失败</div></div>
   <div class="main cols" style="grid-template-columns:560px 1fr">
-    <ul class="lines sm" style="gap:22px">
+    <ul class="lines sm" style="gap:18px">
       <li class="reveal"><b>发现</b>：10-15 正式测量，全量首次 198.84 s，超 90 s 底线；后台任务中 300 次查询 <b>228 次失败</b>。</li>
-      <li class="reveal"><b>修正</b>：提交 <span class="k">97b790a</span> 改来源索引分页、有界批量事务和首次查询；同条件各测三次。</li>
-      <li class="reveal"><b>结果与代价</b>：最慢 72.34 s，查询 0 失败；导入控制更复杂。45 s / 5 s 优选<b>未达</b>，已停止优化。</li>
+      <li class="reveal"><b>修正</b>：提交 <span class="k">97b790a</span> 改来源索引分页、有界批量事务和首次查询；10-16 同条件三次最慢 72.34 s，10-17 收尾单次 67.34 s。</li>
+      <li class="reveal"><b>代价</b>：导入控制更复杂；45 s / 5 s 优选<b>未达</b>，已停止追优。</li>
+      <li class="reveal"><b>同类新问题</b>：10-18 推荐查询首次 CPU 超 122 s 未完成 → 改为按取消键驱动＋身份索引，all 隔离生成 2.17 s。</li>
     </ul>
     <div class="chart reveal">
       <h3>官方全量 · 首次完整流程（秒）</h3>
-      <p class="cap">准备＋导入＋索引＋计算＋验算＋持久化；10-16 取三次中最慢一次</p>
-      <svg viewBox="0 0 860 250" role="img" aria-label="首次全量耗时：10-15为198.84秒，10-16为72.34秒；必须底线90秒，优选目标45秒">
+      <p class="cap">准备＋导入＋索引＋计算＋验算＋持久化；10-16 取三次中最慢，10-17 为收尾单次</p>
+      <svg viewBox="0 0 860 250" role="img" aria-label="首次全量耗时：10-15为198.84秒，10-16为72.34秒，10-17为67.34秒；必须底线90秒，优选目标45秒">
         <g font-size="15" fill="#7b8a8f">
           <line x1="150" y1="20" x2="150" y2="200" stroke="#d6cfbf"/>
           <text x="150" y="226" text-anchor="middle">0</text>
@@ -551,58 +564,61 @@ aside.notes{display:none}
           <line x1="750" y1="20" x2="750" y2="200" stroke="#ece7da"/><text x="750" y="226" text-anchor="middle">200</text>
         </g>
         <g font-size="17" fill="#3d5560" text-anchor="end">
-          <text x="138" y="72">10-15 修正前</text>
-          <text x="138" y="158">10-16 修正后</text>
+          <text x="138" y="58">10-15 修正前</text>
+          <text x="138" y="118">10-16 修正后</text>
+          <text x="138" y="178">10-17 收尾</text>
         </g>
-        <rect class="bar" x="150" y="44" width="596.5" height="40" rx="4" fill="#9aa6a8"><title>10-15 首次全量 198.841174 秒（未达 90 秒底线，保留为历史）</title></rect>
-        <text x="756" y="71" font-size="20" font-weight="700" fill="#13303c">198.84</text>
-        <rect class="bar" x="150" y="130" width="217" height="40" rx="4" fill="#1f6f78"><title>10-16 三次：72.3367 / 71.9752 / 71.9158 秒，必须底线 90 秒通过</title></rect>
-        <text x="357" y="157" font-size="20" font-weight="700" fill="#fff" text-anchor="end">72.34</text>
+        <rect class="bar" x="150" y="34" width="596.5" height="36" rx="4" fill="#9aa6a8"><title>10-15 首次全量 198.841174 秒（未达 90 秒底线，保留为历史）</title></rect>
+        <text x="756" y="59" font-size="20" font-weight="700" fill="#13303c">198.84</text>
+        <rect class="bar" x="150" y="94" width="217" height="36" rx="4" fill="#1f6f78"><title>10-16 三次：72.3367 / 71.9752 / 71.9158 秒，必须底线 90 秒通过</title></rect>
+        <text x="357" y="119" font-size="20" font-weight="700" fill="#fff" text-anchor="end">72.34</text>
+        <rect class="bar" x="150" y="154" width="202" height="36" rx="4" fill="#17394a"><title>10-17 收尾单次 67.3385582 秒，必须底线 90 秒通过，45 秒优选未达</title></rect>
+        <text x="342" y="179" font-size="20" font-weight="700" fill="#fff" text-anchor="end">67.34</text>
         <line x1="420" y1="14" x2="420" y2="200" stroke="#2d7a56" stroke-width="2.5" stroke-dasharray="6 5"/>
         <text x="426" y="28" font-size="15" fill="#2d7a56" font-weight="700">必须 ≤ 90</text>
-        <line x1="285" y1="100" x2="285" y2="200" stroke="#b0532c" stroke-width="2" stroke-dasharray="3 4"/>
-        <text x="291" y="116" font-size="15" fill="#b0532c" font-weight="700">优选 45（未达）</text>
+        <line x1="285" y1="80" x2="285" y2="200" stroke="#b0532c" stroke-width="2" stroke-dasharray="3 4"/>
+        <text x="291" y="88" font-size="15" fill="#b0532c" font-weight="700">优选 45（未达）</text>
       </svg>
       <div class="tiles">
-        <div class="tile"><div class="lab">后台任务中查询（300 次）</div><div class="val">0<small>失败</small></div><div class="lim">修正前 228 失败 · P95 11.72 ms <span class="tag ok">≤ 500</span></div></div>
-        <div class="tile"><div class="lab">全量重算并落库</div><div class="val">10.96<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 15 s</span> <span class="tag todo">优选 5</span></div></div>
-        <div class="tile"><div class="lab">一万行完整流程</div><div class="val">1.84<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 5 s</span></div></div>
+        <div class="tile"><div class="lab">后台任务中十路查询（300 次）</div><div class="val">0<small>失败</small></div><div class="lim">修正前 228 失败；10-17 P95 149 ms <span class="tag ok">≤ 500</span></div></div>
+        <div class="tile"><div class="lab">全量重算并落库</div><div class="val">5.58<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 15 s</span> <span class="tag todo">优选 5</span></div></div>
+        <div class="tile"><div class="lab">一万行完整流程</div><div class="val">1.74<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 5 s</span></div></div>
       </div>
     </div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">提交 97b790a；2026-10-15 性能核查说明.md（修正前）；2026-10-16 原始输出/正式NFR01-03、正式NFR04/summary.json；决定记录.md D-18、D-19</span><span class="pg">08 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">提交 97b790a；10-15 性能核查说明.md（修正前）；10-16 正式NFR01-03、NFR04；10-17 收尾与首次引导.md；10-18 批量复核实现/实现与交接.md</span><span class="pg">08 / 09</span></div>
   <aside class="notes">
-    <p>一个真实问题：10 月 15 日正式测量时，全量首次要 198 秒，超过 90 秒底线；后台任务时 300 次查询失败 228 次。改成来源索引分页和有界批量事务后，同条件三次最慢 72 秒，查询 0 失败、P95 11.7 毫秒。代价是导入控制更复杂；<strong>45 秒和 5 秒的优选目标没到</strong>，已决定停止优化。</p>
-    <p class="hint">三次首次全量：72.34 / 71.98 / 71.92 s；重算最大 10.96 s；一万行最大 1.84 s；10 路共 300 次真实认证 HTTP。旧失败 198.841174 s 原样保留。AI 工具：开发与验证主要用 Codex，本网页版汇报用 Claude Code 制作；各自用途和关键结果的核验方式写进报告。</p>
+    <p>一个真实问题：10 月 15 日正式测量，全量首次要 198 秒，超过 90 秒底线；后台任务时 300 次查询失败 228 次。改成来源索引分页和有界批量事务后，10 月 16 日三次最慢 72 秒，17 日收尾单次 67 秒，查询 0 失败。代价是导入控制更复杂；<strong>45 秒和 5 秒的优选没到</strong>，已停止追优。18 日推荐查询也慢过一次，改成按取消键驱动后 2 秒左右。</p>
+    <p class="hint">图中三根柱口径相同、时点不同：10-16 三次 72.34 / 71.98 / 71.92 s 为正式三轮；10-17 的 NFR01 1.74 s、NFR02 67.34 s 是收尾单次，NFR03 5.58 s 复用同核心源码候选 3 的单次证据，不写成三轮。NFR04 十路 300 次全部落在真实后台任务窗内，整体 P95 149.04 ms；UK 类 P95 304.45 ms，未达每类 ≤ 200 ms 优选。10-16 时 P95 11.72 ms 为当时版本，两次不混比。旧失败 198.841174 s 原样保留。另一个真实问题：只读诊断曾因普通路径 mode=ro 未生效，关闭时 checkpoint 使源库物理 SHA 变化，该轮记失败；改用 file URI 并检查驱动只读后复验 SHA 一致。最新原因筛选与末次自动刷新未重测全量性能。AI 工具：开发与验证主要用 Codex，Claude Code 参与前端界面与本汇报；用途与核验方式写进报告。</p>
   </aside>
 </section>
 
 <!-- ============ 第9页 ============ -->
 <section class="slide" data-title="九、剩余工作与计划" data-sec="30">
   <div class="head"><h2>九、剩余工作与计划</h2><div class="no"><b>09</b>中期后 · 10-23 至 11-17</div></div>
-  <div class="main rows" style="gap:34px">
-    <ul class="lines sm" style="gap:14px">
-      <li class="reveal"><b>剩余</b>：FR-12 全量人工核查、FR-16 完整导出、R-07 重复边界、FR-17 最终复测、FR-18 从零复现与另机验证。</li>
-      <li class="reveal"><b>风险</b>：另一台机器环境兼容（11-11 留修复）；45 s / 5 s 优选未达，不再追加优化。</li>
-      <li class="reveal"><b>完成条件</b>：11-16 前报告 8–12 页、最终包能解包并从 bundle 恢复、本人预演后冻结；11-17 留空。</li>
+  <div class="main rows" style="gap:30px">
+    <ul class="lines sm" style="gap:12px">
+      <li class="reveal"><b>剩余</b>：按反馈与本人验收只修实际问题；受影响测试与 NFR 复核；真实候选确认、账户恢复、另一台物理机验证；最终报告、汇报与完整提交包。</li>
+      <li class="reveal"><b>风险</b>：另机环境兼容；隔离模拟复核不能代替本人审核；45 s / 5 s 及 UK 类 200 ms 优选未达，不再追优。</li>
+      <li class="reveal"><b>完成条件</b>：11-15 前本人预演并修正；11-16 冻结代码、数据、材料与完整包；11-17 留空。</li>
     </ul>
-    <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;flex-direction:column;gap:30px">
       <div class="tl reveal">
-        <div><b>10-23</b><p>整理中期反馈；两年度全量复核</p></div>
-        <div><b>10-24–25</b><p>R-07 重复边界；FR-12 全量人工核查</p></div>
-        <div><b>10-26–27</b><p>FR-16 完整导出与权限；FR-02 进度</p></div>
-        <div><b>10-28–31</b><p>FR-17 最终性能复测；独立审查</p></div>
-        <div><b>11-01–08</b><p>规格一致性；本人验收；FR-18 从零复现</p></div>
-        <div><b>11-09–12</b><p>另一台机器验证与兼容修复</p></div>
-        <div class="rest"><b>11-13–16</b><p>报告、打包、预演、冻结发送；11-17 留空</p></div>
+        <div><b>10-23</b><p>整理中期反馈与本人验收意见</p></div>
+        <div><b>修复</b><p>只修实际问题；受影响测试与 NFR 复核</p></div>
+        <div><b>人工</b><p>真实候选确认、账户恢复、另机验证</p></div>
+        <div><b>报告</b><p>最终报告：功能、规则、测试、结果与 AI 核验</p></div>
+        <div><b>交付</b><p>最终汇报；含软件与全部材料的完整包</p></div>
+        <div><b>11-15</b><p>本人正常 / 异常预演，必要修正</p></div>
+        <div class="rest"><b>11-16</b><p>冻结，本人发送；11-17 留空</p></div>
       </div>
-      <div class="ask reveal"><b>请老师帮</b>没有原单关联号时，“保守推断＋资料不足结案”的口径是否认可？</div>
+      <div class="ask reveal"><b>请老师帮</b>首轮只保守自动；整单、最近一笔只作建议，人工复核后才生效——这个口径是否认可？</div>
     </div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">执行计划.md 第六节“中期后的计划”；四段式任务草稿.md 10-23–11-17；决定记录.md D-19。以上均为计划</span><span class="pg">09 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">执行计划.md 第六节（中期后合并计划，不分日期）与冻结门槛；四段式任务草稿-中期后合并.md；2026-10-17 收工与后续待办.md。以上均为计划</span><span class="pg">09 / 09</span></div>
   <aside class="notes">
-    <p>中期后按编号推进：10 月下旬 FR-12 全量人工核查、FR-16 完整导出；月底性能复测和独立审查；11 月初 FR-18 从 bundle 零起复现、另机验证；13 到 16 日报告、预演、冻结，17 日留空。想请老师确认：<strong>没有原单号时，保守推断加资料不足结案是否认可</strong>。</p>
-    <p class="hint">排期取自执行计划第六节和每日任务草稿，均为计划，不是已发生的结果。11-17 与 10-22 一样只用已冻结版本，不开发、不补测。</p>
+    <p>中期后先整理老师反馈和我对软件的验收意见，只修实际问题，再补受影响的测试和性能复核；然后做真实候选确认、账户恢复和另一台电脑验证；软件认可后做最终报告、汇报和完整包。11 月 15 日前预演，16 日冻结，17 日留空。想请老师确认：<strong>首轮只保守自动，整单和最近一笔只作建议、人确认后才生效</strong>，这个口径是否认可。</p>
+    <p class="hint">中期后计划已合并、不再逐日分配（执行计划第六节）；中间几步按依赖排序，没有写具体日期。只列 10-23 起的工作。11-17 与 10-22 一样只用已冻结版本，不开发、不补测。TOTP 真机按本人决定跳过。</p>
   </aside>
 </section>
 
@@ -627,14 +643,14 @@ aside.notes{display:none}
     <code data-copy="启动Demo.cmd" title="点击复制">未启动？双击项目根目录 启动Demo.cmd</code>
   </div>
   <ol>
-    <li><b>finance 用 Passkey 登录</b><em>本人在台前完成登录；保持 localhost 地址，避免 Passkey 失配</em></li>
-    <li><b>year1 总览与来源守恒</b><em>当前 4,988 待处理 / 0 处理中 / 3 关闭；展开“查看来源、行数守恒与初始配对口径” → 525,461 = 521,770 + 3,691</em></li>
-    <li><b>打开 0:182（主流程结果）</b><em>已关闭 v4：资料不足结论 + 派单 / 开始 / 关闭三条审计；销售 0:191 不严格在先，合格候选 0</em></li>
-    <li><b>已关闭不能再改（边界，只读可见）</b><em>0:182 面板显示“此差异已关闭，不能修改或重新开启”；重复派单、空结论两条边界用第 7 页实拍原图讲，不在演示库重复写入</em></li>
-    <li><b>切到 all，打开 0:1378（多候选）</b><em>两条合格候选 0:1271 / 0:1368 各余 12，仍待处理；只查看，不派单、不确认</em></li>
-    <li><b>交易检索：客户 13526</b><em>共 54 条，服务端分页 50 + 4，末页“下一页”禁用</em></li>
+    <li><b>选择 Passkey 登录（不填账户）</b><em>本人在台前选 finance 凭据，验证后自动进入对应账户；保持 localhost 地址。前提：本人已在 10-18 新实例完成强密码、Passkey 与恢复码，台上不做首次配置</em></li>
+    <li><b>all 总览与来源守恒</b><em>展开“查看来源、行数守恒与初始配对口径” → 1,067,371 = 1,038,818 + 28,553；初始差异 9,450。各状态数以本人实际操作后的页面为准</em></li>
+    <li><b>按差异原因筛选</b><em>七种原因均为中文；选“多个合格候选”后查询，列表只剩该原因，分页在服务端</em></li>
+    <li><b>打开 0:1378（多候选）</b><em>候选逐字段对比：0:1271 / 0:1368 两条合格（10-16 实拍各余 12）；只看，不确认、不派单</em></li>
+    <li><b>打开批量工作台，只预览</b><em>三类建议快照 → 选几条 → 预览“可提交 / 将跳过” → 点“调整选择”退出。预览和建议不占余量、不写业务表；不点“确认提交”</em></li>
+    <li><b>交易检索</b><em>按客户或商品筛选、换排序、跳页；服务端每页 50 条</em></li>
   </ol>
-  <p class="warn" style="margin-top:24px">注意：每次操作都会在演示库留下真实记录。台上不新关闭待处理差异、不重开已结案记录；“两个年度全部”数据任务约 72 秒，不在 2 分钟追问里现跑。10-22 当天只做正常登录和预设查看，不修补、不重建。</p>
+  <p class="warn" style="margin-top:24px">注意：派单、确认、结案和批量提交都会在演示库留下真实记录，台上不做。新实例没有 0:182 结案记录，单条主流程和重复派单、空结论两条边界用第 7 页表格讲（实拍原图在 v12中期复核）。“两个年度全部”数据任务约 70 秒，不在 2 分钟追问里现跑。10-22 当天只做正常登录和预设查看，不修补、不重建。</p>
 </div>
 <div class="toast" id="toast"></div>
 

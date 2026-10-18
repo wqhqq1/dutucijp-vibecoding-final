@@ -1,0 +1,96 @@
+{
+  "actual_time": "2026-10-18T12:37:13+08:00",
+  "boundary": "TC55 fixed simulated finance on fresh online backup; official two-year all scope. Separate synthetic auth DB enables real authenticated HTTP GET diagnostics; source/copy business auth history untouched. No same-database write-session validation, formal NFR04/NFR02/NFR03 claim, real-order accuracy claim, or human acceptance. Only aggregate outcomes and file hashes are emitted.",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-passkey-selection-8c2e6e85d471a665\\local\\dutucijp-vibecoding-final\\state\\business.sqlite",
+  "isolated_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-final-20261018-123700\\business.sqlite",
+  "source_sha256_before": "382df0b6830c8e638c35bafc3a83138e9a545e96f982f7094d3f3743509bf71e",
+  "source_sha256_after": "e4d05e159b285aac703421c18ac1d651eb379e2e3a6e2fcfdafc0add8876cfb7",
+  "source_unchanged": false,
+  "official_workbook_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "phase_seconds": {
+    "commit": 13.2223116,
+    "generate_review": 2.1817612,
+    "idempotent_replay": 0.2344133,
+    "independent_validation": 3.8206561,
+    "online_backup": 5.5027383,
+    "open_and_migrate": 0.0082341,
+    "preview": 0.9827268,
+    "synthetic_http_auth_setup": 0.1644804,
+    "total": 28.5459981
+  },
+  "recommendation_coverage": {
+    "default_chosen": 5377,
+    "distinct_basket_proposals": 782,
+    "distinct_duplicate_proposals": 100,
+    "items": 9450,
+    "items_with_basket": 1651,
+    "items_with_duplicate": 56,
+    "items_with_nearest": 5387,
+    "items_with_unique": 8,
+    "options_basket": 1651,
+    "options_duplicate": 56,
+    "options_nearest": 5467,
+    "options_unique": 8,
+    "unchosen_with_options": 74
+  },
+  "before_counts": {
+    "allocation_quantity": 367985,
+    "allocations": 9714,
+    "audit_events": 3,
+    "cases": 9450,
+    "closed_cases": 1,
+    "sale_balances": 1019654
+  },
+  "after_counts": {
+    "allocation_quantity": 424022,
+    "allocations": 14951,
+    "audit_events": 20951,
+    "cases": 9450,
+    "closed_cases": 5238,
+    "sale_balances": 1019654
+  },
+  "batch": {
+    "failed": 0,
+    "groups": {
+      "skipped": 121,
+      "succeeded": 4169
+    },
+    "item_codes": {
+      "incomplete_basket": 1,
+      "insufficient_remaining": 139,
+      "invalid_candidate": 74
+    },
+    "skipped": 214,
+    "status": "completed",
+    "succeeded": 5237,
+    "total": 5451
+  },
+  "concurrent_http_queries": {
+    "boundary": "Four workers, 300 actual HTTP GETs through production Host/session/finance scope and transaction queries. Separate fresh synthetic authentication DB; copied business auth history untouched. No same-database write-session validation; transaction revocation is covered separately by HTTP integration tests. Requests paced across completed batch groups to cover the commit window. Local TC55 diagnostic, not formal NFR04 or NFR02/03 or browser-visible timing.",
+    "workers": 4,
+    "attempted": 300,
+    "succeeded": 300,
+    "failed": 0,
+    "started_during_commit": 300,
+    "p95_milliseconds": 53.035,
+    "maximum_milliseconds": 61.934,
+    "last_request_start_seconds_from_commit_start": 13.1427184
+  },
+  "independent_checks": {
+    "all_accepted_sales_have_balance": true,
+    "allocations_have_balances": true,
+    "balances_match_allocation_sums": true,
+    "commit_replay_idempotent": true,
+    "concurrent_authenticated_http_queries_zero_failures": true,
+    "duplicate_group_capacity": true,
+    "every_allocation_exact_identity_time_quantity_price_amount": true,
+    "initial_decisions_unchanged": true,
+    "initial_summary_unchanged": true,
+    "preview_does_not_reserve_or_write_business": true,
+    "recommendations_do_not_reserve_or_write_business": true,
+    "source_balance_original_and_equation": true,
+    "successful_approvals_have_allocation_close_and_four_audits": true
+  },
+  "passed": false,
+  "failure": "source database hash changed or unavailable"
+}

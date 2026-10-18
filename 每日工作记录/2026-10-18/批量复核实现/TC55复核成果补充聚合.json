@@ -1,0 +1,16 @@
+{
+  "boundary": "Read-only aggregate follow-up on the successful isolated backup, not original business database.",
+  "activated_duplicate_groups": 91,
+  "duplicate_source_members_preserved": 187,
+  "successful_confirmation_kinds": {
+    "basket": 1601,
+    "duplicate": 56,
+    "nearest": 3572,
+    "unique": 8
+  },
+  "initial_classifications": {
+    "matched": 9714,
+    "no_original": 3175,
+    "suspected": 6275
+  }
+}

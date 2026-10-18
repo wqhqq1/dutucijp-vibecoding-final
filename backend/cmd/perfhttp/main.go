@@ -8,7 +8,6 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/sha256"
-	"database/sql"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
@@ -218,7 +217,7 @@ func digest(path string) (string, error) {
 }
 
 func readonlyBackup(ctx context.Context, source, destination string) error {
-	db, err := sql.Open("sqlite", filepath.ToSlash(source)+"?mode=ro&_pragma=query_only(1)")
+	db, err := store.OpenReadOnlySource(source)
 	if err != nil {
 		return err
 	}

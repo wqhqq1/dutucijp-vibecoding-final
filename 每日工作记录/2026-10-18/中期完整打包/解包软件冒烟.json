@@ -1,0 +1,17 @@
+{
+  "runtime_id": "packaged-midterm-smoke",
+  "home_status": 200,
+  "root_launcher_check": "passed",
+  "embedded_assets_equal_current_dist": true,
+  "assets": {
+    "/assets/index-ByrbxPwb.js": "cde57b7695e88c20ef8f68fc0714b3f0f1e05abbb2e139a81ca162bd4100c868",
+    "/assets/index-C784j-Gp.css": "b3b20fd6f939e84fdfb8fd1130c41625a8e55aca8c07fc6c37603933a3c1a116"
+  },
+  "fonts_verified": 4,
+  "unauthenticated_business_status": 401,
+  "new_setup_accounts_count": 3,
+  "csp_retained": true,
+  "official_data_first_start_rerun": false,
+  "real_user_authentication_performed": false,
+  "business_workflow_tests_rerun": false
+}

@@ -1,0 +1,15 @@
+{
+  "actual_time": "2026-10-18T09:00:50.2539080+08:00",
+  "health": {
+    "application": "returns-recon",
+    "runtime_id": "70882a484dd3627bdba4a8e43358baed"
+  },
+  "http_status": 200,
+  "updated_asset_loaded": true,
+  "production_contains_no_mock": true,
+  "binary_sha256": "c3c681e59f8b3ef89966dffa370ba996428df693e118dbffd90f5668eee5cb2a",
+  "process": {
+    "ProcessId": 36260,
+    "ExecutablePath": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe"
+  }
+}

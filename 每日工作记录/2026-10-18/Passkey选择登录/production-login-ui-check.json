@@ -1,0 +1,15 @@
+{
+  "url": "http://localhost:8080/",
+  "passkeyEnabled": true,
+  "inputs": [
+    {
+      "type": "text",
+      "value": ""
+    },
+    {
+      "type": "password",
+      "value": ""
+    }
+  ],
+  "hint": "无需填写账户或密码。选择已保存的Passkey，验证后自动登录对应账户。"
+}

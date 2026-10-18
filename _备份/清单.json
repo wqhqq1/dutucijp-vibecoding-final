@@ -1,16 +1,15 @@
 {
-  "format_version": 6,
-  "kind": "daily-closing-not-final-submission",
-  "actual_time": "2026-10-17T22:23:25.661604+08:00",
-  "local_head": "84cdaa0fcc63b48228c3b3454a25b0767b2dddb8",
-  "software_commit": "b9d8d8d148d72cefb0421b9a7b4b67d39a8dd7ac",
-  "native_main_commit_count": 60,
+  "format_version": 7,
+  "kind": "complete_midterm_backup_not_final_submission",
+  "actual_time": "2026-10-18T20:22:37.881981+08:00",
+  "local_head": "909c4833e2df4914769eb12f8f5470df0efec184",
+  "native_main_commits": 73,
   "native_refs": [
     "refs/heads/delivery/teacher-portable-demo 3ac3cacca5f16d48abcee275b51413eccfce40e0",
     "refs/heads/experiment/fr18-disposable-20261015-210730 79ff9b2b1ceceb232238ac79a5a54a837997bed6",
-    "refs/heads/main 84cdaa0fcc63b48228c3b3454a25b0767b2dddb8"
+    "refs/heads/main 909c4833e2df4914769eb12f8f5470df0efec184"
   ],
-  "base_remote_head": "2987383780d79f2bbd3a42d640987847ef24e736",
+  "base_remote_head": "a6a4086524a2999add9f4268f86799c2867bc3e9",
   "source_files": [
     {
       "path": ".agents/skills/run-app/SKILL.md",
@@ -35,7 +34,7 @@
     {
       "path": ".gitattributes",
       "mode": "100644",
-      "git_blob_sha": "810df5e9088aff1e986e038f08447ba81239038a"
+      "git_blob_sha": "ccc88293d0a5d93f12b236b5d788ca1a63a94ffe"
     },
     {
       "path": ".gitignore",
@@ -45,17 +44,17 @@
     {
       "path": "AGENTS.md",
       "mode": "100644",
-      "git_blob_sha": "ac9d43d48825407cf7e4656ac0fb70e78b459c92"
+      "git_blob_sha": "f48be9a3fe3b549c5cb48a09f7efa2adf1e0bd36"
     },
     {
       "path": "README.md",
       "mode": "100644",
-      "git_blob_sha": "ee8eb687bcd068eeb006070fb3a853d76e2a64b4"
+      "git_blob_sha": "842618ab1b43651f7240eb40fe13ada7b55473cb"
     },
     {
       "path": "backend/cmd/perfhttp/main.go",
       "mode": "100644",
-      "git_blob_sha": "e9503ce9e76d6eefaad1774c4a85bedb955f8998"
+      "git_blob_sha": "262bea120f6bce709d986dc2e3bd6718b678ab79"
     },
     {
       "path": "backend/cmd/perfhttp/main_test.go",
@@ -70,7 +69,7 @@
     {
       "path": "backend/cmd/queryverify/main.go",
       "mode": "100644",
-      "git_blob_sha": "719e4c676e28853d2ec92ed5f4f95c3d4cd12af7"
+      "git_blob_sha": "2351787552c42afbcd79fb8ad3234e17628cb71d"
     },
     {
       "path": "backend/cmd/recon/main.go",
@@ -103,9 +102,19 @@
       "git_blob_sha": "43bc71ab19bc1418d7666aeb3118402af68c66f4"
     },
     {
+      "path": "backend/cmd/reviewverify/main.go",
+      "mode": "100644",
+      "git_blob_sha": "26530a7cb9cdbf368e978478a4b6375145cb7445"
+    },
+    {
+      "path": "backend/cmd/reviewverify/main_test.go",
+      "mode": "100644",
+      "git_blob_sha": "fda628c79e2ad80c750f69d65abbb49f67db7192"
+    },
+    {
       "path": "backend/cmd/transactionverify/main.go",
       "mode": "100644",
-      "git_blob_sha": "87332405c4f74754d7e60f618db2749aad7477bd"
+      "git_blob_sha": "e697beb22bc3602056ef8f6e5ae2f6ced1cd0468"
     },
     {
       "path": "backend/cmd/transactionverify/main_test.go",
@@ -130,7 +139,7 @@
     {
       "path": "backend/internal/auth/auth.go",
       "mode": "100644",
-      "git_blob_sha": "9b516952c5cd56d59c7dabdc80105013f1c86060"
+      "git_blob_sha": "75b200e8cca4ba6df7b0a2c518341003c6538b84"
     },
     {
       "path": "backend/internal/auth/factors.go",
@@ -140,7 +149,17 @@
     {
       "path": "backend/internal/auth/passkey.go",
       "mode": "100644",
-      "git_blob_sha": "886394f3cdec4a5aa7b7a3daa70c434e536a8cce"
+      "git_blob_sha": "42d679e27d57abadbb8acd50e9b524a26707d549"
+    },
+    {
+      "path": "backend/internal/auth/passkey_selection.go",
+      "mode": "100644",
+      "git_blob_sha": "a4246177d01ff7ed656d1d5188189f45051ad1e0"
+    },
+    {
+      "path": "backend/internal/auth/passkey_selection_test.go",
+      "mode": "100644",
+      "git_blob_sha": "045870a61fc9439a8f5d56ef6fd15397ce50f75f"
     },
     {
       "path": "backend/internal/auth/private_other.go",
@@ -213,6 +232,11 @@
       "git_blob_sha": "96a03cb2e31b69c566f41ae4fc68421f8140736b"
     },
     {
+      "path": "backend/internal/store/batch.go",
+      "mode": "100644",
+      "git_blob_sha": "d6554ede9a015aedb5c227a3e2691aac5e6afb55"
+    },
+    {
       "path": "backend/internal/store/bulk_import_test.go",
       "mode": "100644",
       "git_blob_sha": "864f010866fffeb690bcc88eea3c8c8744ea3988"
@@ -223,6 +247,11 @@
       "git_blob_sha": "09016bf7ddeff986e901c63c39a926cc66569286"
     },
     {
+      "path": "backend/internal/store/duplicate_balance.go",
+      "mode": "100644",
+      "git_blob_sha": "8001f075bd0124430ac6b087882d0c53ef2c7853"
+    },
+    {
       "path": "backend/internal/store/evidence.go",
       "mode": "100644",
       "git_blob_sha": "2ce239d4df4e09570b72b00a8128a6306612f79f"
@@ -230,12 +259,12 @@
     {
       "path": "backend/internal/store/manual.go",
       "mode": "100644",
-      "git_blob_sha": "da5194be409d7884cfe0d77153c710ed9c29fde5"
+      "git_blob_sha": "88977de942a2be8d38b150518ac55db74293f239"
     },
     {
       "path": "backend/internal/store/manual_test.go",
       "mode": "100644",
-      "git_blob_sha": "ef647468b18f8defbfbf2386ba5a5145f0c2e792"
+      "git_blob_sha": "cdc011c80befb843507cb074ef6534058f999936"
     },
     {
       "path": "backend/internal/store/phase.go",
@@ -245,7 +274,7 @@
     {
       "path": "backend/internal/store/query.go",
       "mode": "100644",
-      "git_blob_sha": "100286491aeeed82413df51e1ddde19262f1fed5"
+      "git_blob_sha": "dd6010f7fed3a139cf11667ee3d252ebb0a0cc56"
     },
     {
       "path": "backend/internal/store/query_test.go",
@@ -253,9 +282,44 @@
       "git_blob_sha": "3eb2655c07757fdf92f984da9d87254696e5a88f"
     },
     {
+      "path": "backend/internal/store/read_only.go",
+      "mode": "100644",
+      "git_blob_sha": "7bb453f22515c94783072bef1be6b8c706b7b78a"
+    },
+    {
+      "path": "backend/internal/store/review.go",
+      "mode": "100644",
+      "git_blob_sha": "19b4cd90591997b381123405e50f5165d0f44616"
+    },
+    {
+      "path": "backend/internal/store/review_batch_test.go",
+      "mode": "100644",
+      "git_blob_sha": "48ae9c8215fc1f4b2abc9cd6aecdc1c402fccb6b"
+    },
+    {
+      "path": "backend/internal/store/review_capacity_test.go",
+      "mode": "100644",
+      "git_blob_sha": "f98f71d0fe1c434828173ac5f5a0ec539b55bcc7"
+    },
+    {
+      "path": "backend/internal/store/review_fixture_test.go",
+      "mode": "100644",
+      "git_blob_sha": "02142fe61e198a9560878fec1d8a8b047740359c"
+    },
+    {
+      "path": "backend/internal/store/review_pool_test.go",
+      "mode": "100644",
+      "git_blob_sha": "ea9fb9e0d158cc4faa7893c5bdb92bd35eb83d93"
+    },
+    {
+      "path": "backend/internal/store/review_recommendation_test.go",
+      "mode": "100644",
+      "git_blob_sha": "4b18eeb514c1169f6023370a882a7d0e32587d24"
+    },
+    {
       "path": "backend/internal/store/schema.sql",
       "mode": "100644",
-      "git_blob_sha": "c7c2d2d677ccd96cff2294bb44a6fa568eb14afc"
+      "git_blob_sha": "f2c730f5ffcf089d13acd012b11865dbe444c042"
     },
     {
       "path": "backend/internal/store/store.go",
@@ -290,7 +354,7 @@
     {
       "path": "backend/internal/store/workflow.go",
       "mode": "100644",
-      "git_blob_sha": "3545a981e09a3274b8ab07523bfd64648bea152a"
+      "git_blob_sha": "047059594a796d724e10f769afc8494f7b69ae07"
     },
     {
       "path": "backend/internal/store/workflow_test.go",
@@ -308,6 +372,11 @@
       "git_blob_sha": "6ac765d522bf370d44e26d854e9a740aed45e3c6"
     },
     {
+      "path": "backend/internal/web/batch_view_test.go",
+      "mode": "100644",
+      "git_blob_sha": "a84cd64358f15015517f16edf4b5b8ea59092df4"
+    },
+    {
       "path": "backend/internal/web/frontend_test.go",
       "mode": "100644",
       "git_blob_sha": "c5b29d9da994aeec18af6f28eea5b771403a0b4c"
@@ -323,9 +392,24 @@
       "git_blob_sha": "b8ab1954408d3c09fadc81257ea832535c43f85c"
     },
     {
+      "path": "backend/internal/web/passkey_selection_test.go",
+      "mode": "100644",
+      "git_blob_sha": "9036f3b720755e75457bc110e65523dfab2c6d1e"
+    },
+    {
       "path": "backend/internal/web/portable_test.go",
       "mode": "100644",
       "git_blob_sha": "db5a58000505d945257680af55048ffe1dc9134f"
+    },
+    {
+      "path": "backend/internal/web/review.go",
+      "mode": "100644",
+      "git_blob_sha": "ae2b99fb7b68fe9b468d84990b04e5936b6af3fc"
+    },
+    {
+      "path": "backend/internal/web/review_http_test.go",
+      "mode": "100644",
+      "git_blob_sha": "db385bfbc999b99e3bacd521a7c5e6550a8805a5"
     },
     {
       "path": "backend/internal/web/security_http_test.go",
@@ -335,7 +419,7 @@
     {
       "path": "backend/internal/web/server.go",
       "mode": "100644",
-      "git_blob_sha": "14db518099ecfc8acb93f9973ca110c71abc3c85"
+      "git_blob_sha": "ab92959ff4f9f3a0b2dbbbaa6ac82d85d024b4e1"
     },
     {
       "path": "backend/internal/web/setup_http_test.go",
@@ -355,7 +439,7 @@
     {
       "path": "frontend/dev/mock-api.ts",
       "mode": "100644",
-      "git_blob_sha": "d31315a66136e92ee8095fcc6707567a6495d179"
+      "git_blob_sha": "17ad7a2d87658afab57bd67c53022b3002f3bcd1"
     },
     {
       "path": "frontend/index.html",
@@ -373,9 +457,19 @@
       "git_blob_sha": "88b566cdfee29961c319aefca0c93967d443eadf"
     },
     {
+      "path": "frontend/src/ReviewPanel.tsx",
+      "mode": "100644",
+      "git_blob_sha": "2a1bfd6558a2d0029821729009ee524ecf23c6c8"
+    },
+    {
+      "path": "frontend/src/labels.ts",
+      "mode": "100644",
+      "git_blob_sha": "a39a41a229d7ae44ae992672302d6c790bc45916"
+    },
+    {
       "path": "frontend/src/main.tsx",
       "mode": "100644",
-      "git_blob_sha": "a2af41fd452f39cca17a8068d649090579dca90d"
+      "git_blob_sha": "18b209044d61a2025b409d4c78140c7ad726c635"
     },
     {
       "path": "frontend/src/requests.ts",
@@ -385,7 +479,7 @@
     {
       "path": "frontend/src/style.css",
       "mode": "100644",
-      "git_blob_sha": "72c3d61298b1c88b0d28cba3ead47447bfe8525a"
+      "git_blob_sha": "9a7621082e0d16bb84f1e5ef884245808cb00642"
     },
     {
       "path": "frontend/src/vite-env.d.ts",
@@ -495,7 +589,7 @@
     {
       "path": "tools/build_midterm_talk.py",
       "mode": "100644",
-      "git_blob_sha": "80e1d8f40c76f2ed298c65617e272726ed25ea87"
+      "git_blob_sha": "8ea769a3e6adfe2d43e7341cc924d8cd469a6e73"
     },
     {
       "path": "tools/cleanup-verification-20261017.manifest.json",
@@ -570,7 +664,7 @@
     {
       "path": "tools/package_midterm.py",
       "mode": "100644",
-      "git_blob_sha": "a0607f5a14332ce465403713a84890fc3895d6bd"
+      "git_blob_sha": "d496bb50b614eb4cd5006b408fad5a9b8b4746e0"
     },
     {
       "path": "tools/package_review.py",
@@ -591,6 +685,11 @@
       "path": "tools/prepare_demo.py",
       "mode": "100644",
       "git_blob_sha": "598a5b6f3551c15b23e763d0e1cba02aed1df91f"
+    },
+    {
+      "path": "tools/refresh_midterm_materials.py",
+      "mode": "100644",
+      "git_blob_sha": "76d0accb2944c5b4d6a8219568a401df52a0b5fd"
     },
     {
       "path": "tools/requirements.txt",
@@ -615,67 +714,72 @@
     {
       "path": "中期打包说明.md",
       "mode": "100644",
-      "git_blob_sha": "d4eec75b33038a65b2a729fe694e4c173c0478d4"
+      "git_blob_sha": "9d70a7add0411e2ec9e9b8d0c2dc1ae02d530246"
     },
     {
       "path": "中期汇报.pdf",
       "mode": "100644",
-      "git_blob_sha": "0032e3e8d8e4e0e64e3d22de9bf9cb3599b9c726"
+      "git_blob_sha": "60d5ff650706127a9b8568177585c56f13a6f241"
     },
     {
       "path": "中期汇报.pptx",
       "mode": "100644",
-      "git_blob_sha": "091d746992d567e657f07c0fb81e15c6bfcabd83"
+      "git_blob_sha": "3316e158c423d4314a59adc6b517adf0f782cc8a"
     },
     {
       "path": "中期汇报网页版/index.html",
       "mode": "100644",
-      "git_blob_sha": "179424b45018520c0169782da20a3c271aff80a8"
+      "git_blob_sha": "7ac43cf48aa2f280afb12b765321d40c2df5d04c"
     },
     {
-      "path": "中期汇报网页版/证据原图/1015-01-财务差异总览.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-01-财务差异总览-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "755bd4dc8e5d9a87047cbf026d8d170816125180"
+      "git_blob_sha": "28ae9b8452abb04a33cab435d2718ce018b5cd30"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-02-全量来源与分类守恒.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "f932cc01640a0c0beb5b2850fc9fa032121fb988"
+      "git_blob_sha": "4df39a4b2fabd16009e80189ddbeaa343346c034"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-03-多候选不自动配对.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-04-候选对比未自动挑选-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "7840386d8e894e6a649e7ce180710d9ebaf6224c"
+      "git_blob_sha": "fb91efc7ff548f48281cbba8e46031a5bcc19148"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-05-派单成功版本2.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-05-派单成功版本1-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "f14c19e341d0a8d98433486ea08502a403d84e26"
+      "git_blob_sha": "98767b6138057019d86f0d5423c2f937fad474d3"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-06-重复派单被拒绝.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-06-再次派单被拒-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "b9f122ba2cf421571a5750eda16c27ad3a7a3d61"
+      "git_blob_sha": "9bf80ea5cfb2ebbb188bf51ebb87778a99667a73"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-08-空结论拒绝且仍为版本3.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-07-空结论被拒-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "78a43b5f8bb359f41ade5ebb874ad956bbd5dffb"
+      "git_blob_sha": "27d9dcf9b3b072104a3793f9260ddf75a3b147f2"
     },
     {
-      "path": "中期汇报网页版/证据原图/1016-10-关闭结论与完整审计.jpg",
+      "path": "中期汇报网页版/证据原图/1018M-08-已关闭结论与操作历史-模拟数据.png",
       "mode": "100644",
-      "git_blob_sha": "0cf1e42eb4d28bfbdee2a19fa9baff905061ea33"
+      "git_blob_sha": "aa48579c8f86d3f1878681384bdb49bb2306ddcb"
+    },
+    {
+      "path": "中期汇报网页版/证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "764e4631ebb8b56ec1259b64a63d9b2823b93c1f"
     },
     {
       "path": "中期汇报讲稿.md",
       "mode": "100644",
-      "git_blob_sha": "b61266324f12792f3c2d73d8c4b862a5055b57aa"
+      "git_blob_sha": "8a3be92862ce0e15384925dfc9ad5eb51dfdff1a"
     },
     {
       "path": "中期项目报告.md",
       "mode": "100644",
-      "git_blob_sha": "8b6dd22023cc8145113aa2b36a4fe214f770ec81"
+      "git_blob_sha": "327276d7ffbf4ca7afb80d5608a7ae38c73025aa"
     },
     {
       "path": "停止Demo.cmd",
@@ -700,7 +804,7 @@
     {
       "path": "四段式任务草稿-中期后合并.md",
       "mode": "100644",
-      "git_blob_sha": "244e5245eae143743ba649ea82dddf8771885909"
+      "git_blob_sha": "916474f50c954777a1f74b91eef40912341f4202"
     },
     {
       "path": "四段式任务草稿-前端设计优化交接.md",
@@ -710,7 +814,7 @@
     {
       "path": "四段式任务草稿.md",
       "mode": "100644",
-      "git_blob_sha": "d2dab99de7122faf798623ee549f520d9667d559"
+      "git_blob_sha": "51c50e8d28dc51417aa8f4af0db0d75cce8ac320"
     },
     {
       "path": "四段式任务草稿补充-v1.2汇报调整.md",
@@ -720,22 +824,22 @@
     {
       "path": "大作业报告.docx",
       "mode": "100644",
-      "git_blob_sha": "ca596c5eb3a994a36b6dddf20dabcdc8e81b21be"
+      "git_blob_sha": "87cf78cf0523143656ae368be1fde7f3a7611bb1"
     },
     {
       "path": "实际运行结果.txt",
       "mode": "100644",
-      "git_blob_sha": "3786df9402088ecba4fe5ba43462814b4e99a6d7"
+      "git_blob_sha": "98f5405b2196c3911540f81f09244503c82ce2d9"
     },
     {
       "path": "怎么做.md",
       "mode": "100644",
-      "git_blob_sha": "55ce04d53774068d39767acf3a6ebb5b5f076e45"
+      "git_blob_sha": "c1d370fe4725a226a34feb50b474850618c640af"
     },
     {
       "path": "怎么算做对.md",
       "mode": "100644",
-      "git_blob_sha": "a90bae3c9ddbc82a3932d5c70a0979e7dc3d5bde"
+      "git_blob_sha": "803c075e111d1278a30c96900974396ca61759b5"
     },
     {
       "path": "执行交接说明.md",
@@ -750,12 +854,12 @@
     {
       "path": "提交索引.md",
       "mode": "100644",
-      "git_blob_sha": "1465cce78c3266e67a98ab69e7fe8229866de1c4"
+      "git_blob_sha": "2ccbda00b7b8848aaa8daf47bfea76bc4c76fe58"
     },
     {
       "path": "教师独立运行说明.md",
       "mode": "100644",
-      "git_blob_sha": "83582baec8181a63a85d0de09b2b3c34390482f5"
+      "git_blob_sha": "e05568f0067b7534a99facc3d322321cf4a80934"
     },
     {
       "path": "本人验收步骤.md",
@@ -765,7 +869,7 @@
     {
       "path": "材料清单.md",
       "mode": "100644",
-      "git_blob_sha": "7cd56b213021a3e1141d8c93fba42543c3074812"
+      "git_blob_sha": "7f83d4c72d3db24fa120083c065110747dabc339"
     },
     {
       "path": "每日工作记录/2026-10-14/今天做了什么.md",
@@ -5168,6 +5272,511 @@
       "git_blob_sha": "29323fc213bdf35ef4946a59d66f4a069157b57a"
     },
     {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/Demo未设置账户.jpg",
+      "mode": "100644",
+      "git_blob_sha": "f1c106e6dfa1f5687107457a0858ca56a8ca8264"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/Passkey无账户登录入口.jpg",
+      "mode": "100644",
+      "git_blob_sha": "e78cd38b72dc8761261e597ee76dbb075abdab9c"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/Passkey选择登录入口.jpg",
+      "mode": "100644",
+      "git_blob_sha": "07e4d5fde75378b5c05a4978eb3c2d2af5e61549"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/demo-reset-plan.json",
+      "mode": "100644",
+      "git_blob_sha": "1d2fb0e75477bbd9a413f1bff24c2fa8cd4244ad"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/fresh-demo-verification.json",
+      "mode": "100644",
+      "git_blob_sha": "021a7c509f9a1c42b2ba0e3c9bcdb1a9dce76a70"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/frontend-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "c7c31eba6bcf80ce90bc2edd1d05d93183f01fd5"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/frontend-tests.txt",
+      "mode": "100644",
+      "git_blob_sha": "d7bb7ef91554b1fad918febcba8973eb47d85c11"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/go-regression.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "d16b8669661d25e29f4f1562d3e97e87e7cdc056"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/go-summary.json",
+      "mode": "100644",
+      "git_blob_sha": "229af705c0b486c279675d3e5d17730d2d8f4c93"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/login-ui-check.json",
+      "mode": "100644",
+      "git_blob_sha": "9eb9cb5acf76025ee865495d6ae24669df33b568"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/production-build.json",
+      "mode": "100644",
+      "git_blob_sha": "a9588346f1d26fc4c0e1e9530cda9b4e42529db4"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/production-login-ui-check.json",
+      "mode": "100644",
+      "git_blob_sha": "70298d31e143e4942b3b1a0cbdcaf9f206a06afe"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/runtime-health.json",
+      "mode": "100644",
+      "git_blob_sha": "3b5ef4ad411158383723a1d9c6fa39b019264ea4"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/runtime-update.json",
+      "mode": "100644",
+      "git_blob_sha": "6cf57924b70196459c369c5952f080b85aaacf49"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/Passkey选择登录/修复与Demo重置.md",
+      "mode": "100644",
+      "git_blob_sha": "1464b50d73f75ce60a84d40d2333c1d6c8b3b932"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期PPT刷新/PPT刷新与交接.md",
+      "mode": "100644",
+      "git_blob_sha": "bcad1636ec55414f6a7577c80c410fe5762e0fa2"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期完整打包/中期打包回执.json",
+      "mode": "100644",
+      "git_blob_sha": "81ad4bf46f326798023996aec8d26812e2bbec76"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期完整打包/打包与交接.md",
+      "mode": "100644",
+      "git_blob_sha": "60316600681e83dae7ef9c7ea55d0202ea9f5a1e"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期完整打包/根入口核对.txt",
+      "mode": "100644",
+      "git_blob_sha": "f71bebd910865d2606a5c439a44b366c56017f16"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期完整打包/解包软件冒烟.json",
+      "mode": "100644",
+      "git_blob_sha": "f07d5584004a31c9c285d704117f23dda98653fc"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期材料刷新/刷新与交接.md",
+      "mode": "100644",
+      "git_blob_sha": "b05a85e8ed2351c9045790152ead6ff0f8873d02"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期材料刷新/刷新核对.json",
+      "mode": "100644",
+      "git_blob_sha": "5833b9e4a2f35934877b5bc702f9f74a85bd494f"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/中期材料刷新/采用测试证据摘要.json",
+      "mode": "100644",
+      "git_blob_sha": "ed5d9e8bf14e8abd885be02d583655be9d0b3b71"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/browser-checks.json",
+      "mode": "100644",
+      "git_blob_sha": "91d563e56249f0643f6a8d9dd2e3e783a3c2e3f1"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/frontend-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "9c08139b80db829602fcb79e32f285fc059bc5a7"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/frontend-tests.txt",
+      "mode": "100644",
+      "git_blob_sha": "1777bdbe0df50e05df8fa30b71c453c787a3d6d1"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/go-regression.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "a2204fc643023e999ee4819f2c7d59d23394b81a"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/go-summary.json",
+      "mode": "100644",
+      "git_blob_sha": "9e56fd2da6437d6c1cc9c637f4b8cea6621af444"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/production-build.json",
+      "mode": "100644",
+      "git_blob_sha": "0bf80ce85087da6b5a05d82d81052ae945880c14"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/runtime-health.json",
+      "mode": "100644",
+      "git_blob_sha": "13c9fd975e2a150fde585064bf736f98469cd96f"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/runtime-update.json",
+      "mode": "100644",
+      "git_blob_sha": "0670284acc49f4f203957e292114bbde07dd0674"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/两候选确认效果.jpg",
+      "mode": "100644",
+      "git_blob_sha": "685904f527e7c45bea1da971cf890c3114afdd09"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/侧栏顶部确认警告.jpg",
+      "mode": "100644",
+      "git_blob_sha": "d1351e46d75060910b227bb070c22c2ce42713ff"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/四候选确认结果.jpg",
+      "mode": "100644",
+      "git_blob_sha": "3910546d60aee0e860b52dcb37dd45a62fd6e644"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/确认后结论仍可编辑.jpg",
+      "mode": "100644",
+      "git_blob_sha": "aa5427c5d8b82c12548ff8523ed4cb036ec2eaa5"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/侧栏交互修复/确认结果与候选对比.jpg",
+      "mode": "100644",
+      "git_blob_sha": "40753139c951d240c02acc601b8d810aa93e0498"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/01-财务差异总览-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "28ae9b8452abb04a33cab435d2718ce018b5cd30"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/02-来源守恒与原因筛选-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "4df39a4b2fabd16009e80189ddbeaa343346c034"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/03-待派单多候选-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "d6e812de93b258e8c8d28d16a40210710ed550be"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/04-候选对比未自动挑选-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "fb91efc7ff548f48281cbba8e46031a5bcc19148"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/05-派单成功版本1-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "98767b6138057019d86f0d5423c2f937fad474d3"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/06-再次派单被拒-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "9bf80ea5cfb2ebbb188bf51ebb87778a99667a73"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/07-空结论被拒-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "27d9dcf9b3b072104a3793f9260ddf75a3b147f2"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/08-已关闭结论与操作历史-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "aa48579c8f86d3f1878681384bdb49bb2306ddcb"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/09-已关闭不能修改-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "02fba56c916d24aea739ddd1bb62636bb2d444e7"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/10-批量预览可提交与将跳过-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "764e4631ebb8b56ec1259b64a63d9b2823b93c1f"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/11-批量提交结果-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "8094b1124fbfd90564fcaa530a1f92cbab0e85c9"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/说明.md",
+      "mode": "100644",
+      "git_blob_sha": "bb2438345de6d41bc133eb4053d009afc5e4ccea"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/采集脚本-lib.mjs",
+      "mode": "100644",
+      "git_blob_sha": "71ceec2f9c8978cc980e1d74de11b3c83f6562da"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/采集脚本-批量.mjs",
+      "mode": "100644",
+      "git_blob_sha": "4c391387a436421c0394746f56214502f83b796d"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/采集脚本-流程.mjs",
+      "mode": "100644",
+      "git_blob_sha": "34172d5079c14866798bc75ad553c208015caade"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/执行交接.md",
+      "mode": "100644",
+      "git_blob_sha": "7d5ea69442ef33156de1631e377773e131eeab7b"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/01-预览-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "ca235878104916725d2dc691fd3b8831dabe5955"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/02-提交结果-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "0915056fa2e9d198cf3239e86000de2221de51d5"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/03-手机预览-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "c1b219f525ac7bc6bcade4a5bc41655eddd468e9"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/04-手机结果-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "5d811262f6fb86d01a517c9133217c9c07fcdff1"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/05-平板布局-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "d8c765156ca37fd1b3bd44dfb1e1aeeb05aff261"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/06-三阶段工作台-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "1e2b15947a0bdf5d5558c6846cd00b1d1a18fb1c"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/07-最近并列-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "17417c51b2c12495fc7906aa0a5493607c4983bb"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/Codex接续与验证.md",
+      "mode": "100644",
+      "git_blob_sha": "9c2b8388a73e2dbc73bd3829a81e7f93813804d5"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/browser-checks.json",
+      "mode": "100644",
+      "git_blob_sha": "f16341ae5bd1dadb6466bd8d537d9f6d4aa48e61"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/production-build-final.json",
+      "mode": "100644",
+      "git_blob_sha": "d668723a46c34ea1a6033f2f906f75ece627a9d3"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/production-build.json",
+      "mode": "100644",
+      "git_blob_sha": "5d8824b74d200c446e397a692c9c549cc1e42ad9"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/production-smoke-final.json",
+      "mode": "100644",
+      "git_blob_sha": "c4af8a11759a91bae610e360502bceb7eb32b47b"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/production-smoke.json",
+      "mode": "100644",
+      "git_blob_sha": "70eb933173465a75e6459015dacb44a1888e19fe"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/runtime-update.json",
+      "mode": "100644",
+      "git_blob_sha": "3321257b86d0cd969ba758e12aef2405e75dc0e2"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/smoke-config.json",
+      "mode": "100644",
+      "git_blob_sha": "e4ff18c7554ee05634205eb8e4d3ad5847c96a96"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/smoke.ps1",
+      "mode": "100644",
+      "git_blob_sha": "505156561746f6653c1316248747b0b3c6f28253"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/原始输出/frontend-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "3e89f9f18ce2fde19ad1fe7b17987bb926ca3238"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/原始输出/frontend-tests.tap.txt",
+      "mode": "100644",
+      "git_blob_sha": "8ffc61da4b9d8e30faf9eaf3ae1b5186fabfe7b3"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/原始输出/集成构建-复验.txt",
+      "mode": "100644",
+      "git_blob_sha": "3594d33ac86b63572ea770a0a332f75370b5c39f"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/原始输出/集成构建.txt",
+      "mode": "100644",
+      "git_blob_sha": "b6445d5dd04e9a11ae9c0abe3431d0504f112302"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/执行交接.md",
+      "mode": "100644",
+      "git_blob_sha": "3f72fb488ac43e7f9e143b9a01213d60628bfd52"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/批量工作台修订-已关闭隐藏与动画.md",
+      "mode": "100644",
+      "git_blob_sha": "5f886dd1493babc194232bcf90acb6418a978114"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/最新Claude修订合并.md",
+      "mode": "100644",
+      "git_blob_sha": "b8c883a33ebc7d21d8633fb90a7ccc9fbfbd612c"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/自动刷新建议构建.json",
+      "mode": "100644",
+      "git_blob_sha": "848c720cb697dcc6cb608baf71de1ee0924137e3"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55复核成果补充聚合.json",
+      "mode": "100644",
+      "git_blob_sha": "cd6c90e4c61194346cefb6aa38f4d7e7c4d9207a"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方all隔离HTTP-通过.json",
+      "mode": "100644",
+      "git_blob_sha": "687d5e56b18178e9de5afd9a7faa79221d728af1"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方all隔离HTTP-通过.stderr.txt",
+      "mode": "100644",
+      "git_blob_sha": "cb309af43b75bf98cb72de6bf27bf06993b31c38"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方all隔离HTTP-首次完成但源SHA变化.json",
+      "mode": "100644",
+      "git_blob_sha": "ccf1f7b0f247f13d2df15c4adee89be51941e3bb"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方all隔离HTTP-首次完成但源SHA变化.stderr.txt",
+      "mode": "100644",
+      "git_blob_sha": "cb309af43b75bf98cb72de6bf27bf06993b31c38"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方全量隔离验证说明.md",
+      "mode": "100644",
+      "git_blob_sha": "689bf60e39204fa0fb5aea8caa665973d04299d1"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/frontend-tests.tap.txt",
+      "mode": "100644",
+      "git_blob_sha": "dda71341955608603011fb018622754f995784bd"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/go-regression.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "92f2254a53779aa410dad77c648901c10235689e"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/labels-build.json",
+      "mode": "100644",
+      "git_blob_sha": "b73b28f18e46d92575c52d183558c0a882cd8dfb"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/labels-runtime-update.json",
+      "mode": "100644",
+      "git_blob_sha": "245148c6e10e5f2bec64dc390204654adfafefc3"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/production-build.json",
+      "mode": "100644",
+      "git_blob_sha": "7004b0319ad6802dadf8cf503f3417c2f83122ee"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/production-smoke.json",
+      "mode": "100644",
+      "git_blob_sha": "f47c5730ad4ea489f33efa8a90881886b0819af4"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/python-tests.txt",
+      "mode": "100644",
+      "git_blob_sha": "7637271a292bd13529d32947768c7ce42073ece8"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/regression-summary.json",
+      "mode": "100644",
+      "git_blob_sha": "d5c8231686812bc9c468172a3798328698a0422b"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/runtime-update.json",
+      "mode": "100644",
+      "git_blob_sha": "2d583dc3a55ad4d268376dd36c260fa9ed787662"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/tc55-attempt1.json",
+      "mode": "100644",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/tc55-attempt1.stderr.txt",
+      "mode": "100644",
+      "git_blob_sha": "f2e3bea6523f740fc96ec4803cd2fdd7e7f240fb"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/分类中文显示-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "5ed65d5b0e80e4a85a5a3c1e7ceefc88c05450c4"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/分类中文显示修复.md",
+      "mode": "100644",
+      "git_blob_sha": "7a877b5e9f0b9a6f7694d8db5cf9a10dce66c5da"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/实现与交接.md",
+      "mode": "100644",
+      "git_blob_sha": "d225ba8cc2a1945d81029bb10f740d49fd4b7be6"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/批量结果-模拟数据.png",
+      "mode": "100644",
+      "git_blob_sha": "b5ad32e11b45cd4454be036be9e9744f042b8085"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/源checkpoint前后业务逻辑完整比对.json",
+      "mode": "100644",
+      "git_blob_sha": "a625a6bf459298f7e557367cb26b6053d87af3e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/缓存清理/执行回执.json",
+      "mode": "100644",
+      "git_blob_sha": "34bc362447af33a4f820b6629d9f3be81bc13637"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/缓存清理/清理范围.json",
+      "mode": "100644",
+      "git_blob_sha": "5e88877d2c0a86ad10d799033b596844c194dc39"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/缓存清理/清理记录.md",
+      "mode": "100644",
+      "git_blob_sha": "d16545b1e56ac8d6508c43f8de4e9c1d6a3e2c35"
+    },
+    {
       "path": "测试Demo.cmd",
       "mode": "100644",
       "git_blob_sha": "c834c6c9572f7a7743eaa5cb2435b8b3c2558eaf"
@@ -5175,12 +5784,12 @@
     {
       "path": "测试记录.md",
       "mode": "100644",
-      "git_blob_sha": "c9e4d43cdf072788873aa84f429a6a3ff38e0a29"
+      "git_blob_sha": "c03421bc8f6fbc567b4d1b3bfa4c506bd6d47ae8"
     },
     {
       "path": "要做什么.md",
       "mode": "100644",
-      "git_blob_sha": "769ccc20421336b631183dc3c51d6c9f5f1b871e"
+      "git_blob_sha": "2b83e2a1f9826cbe79d66f85c0ba78bc6b2bd114"
     },
     {
       "path": "规划校验记录.md",
@@ -5193,6 +5802,11 @@
       "git_blob_sha": "7fc31359f89d698f2242e3aac7dba6845bb12b16"
     },
     {
+      "path": "资料/Claude中期PPT最新事实交接-20261018.md",
+      "mode": "100644",
+      "git_blob_sha": "ec975d6d826ae2d5fcf94671c3a4b016c2aa4b40"
+    },
+    {
       "path": "资料/Hook启用前核对.md",
       "mode": "100644",
       "git_blob_sha": "c5d327a1d832d6076ce7fd15fb0fb41b0fa807e8"
@@ -5201,6 +5815,21 @@
       "path": "资料/中期汇报v1.2审阅与调整任务.md",
       "mode": "100644",
       "git_blob_sha": "218a63d64dc88ddf995efdabc474995305e37154"
+    },
+    {
+      "path": "资料/中期汇报基线-20261016-v1.2/中期汇报-v1.2-1016.pdf",
+      "mode": "100644",
+      "git_blob_sha": "0032e3e8d8e4e0e64e3d22de9bf9cb3599b9c726"
+    },
+    {
+      "path": "资料/中期汇报基线-20261016-v1.2/中期汇报-v1.2-1016.pptx",
+      "mode": "100644",
+      "git_blob_sha": "091d746992d567e657f07c0fb81e15c6bfcabd83"
+    },
+    {
+      "path": "资料/中期汇报基线-20261016-v1.2/中期汇报讲稿-v1.2-1016.md",
+      "mode": "100644",
+      "git_blob_sha": "b61266324f12792f3c2d73d8c4b862a5055b57aa"
     },
     {
       "path": "资料/中期汇报基线-20261016/中期汇报-PPT版.pdf",
@@ -5243,6 +5872,11 @@
       "git_blob_sha": "4fefa55112bd061ab8b436fa933a7cb009057bec"
     },
     {
+      "path": "资料/第三方许可/IBM-Plex-Mono-OFL.txt",
+      "mode": "100644",
+      "git_blob_sha": "83eac8278b2e427a72ce3622a53cdb7a56e55b05"
+    },
+    {
       "path": "资料/计划历史/四段式任务草稿-合并前-20261016.md",
       "mode": "100644",
       "git_blob_sha": "1d11bc5d853471a697d6434f4bf6b3a9fb11f73d"
@@ -5255,109 +5889,156 @@
     {
       "path": "软件验收清单.md",
       "mode": "100644",
-      "git_blob_sha": "75a2ab561296c73497a9c408e74187410d906b62"
+      "git_blob_sha": "98015362918d7a1de5bdf7a72e5f5b303537a211"
     },
     {
       "path": "运行说明.md",
       "mode": "100644",
-      "git_blob_sha": "e444964577a46b88462fca5d0e8de8ab82bdaa65"
+      "git_blob_sha": "9a47299f15fb7027b0f344e97cb3e2633e46855b"
     },
     {
       "path": "选题自查表.md",
       "mode": "100644",
-      "git_blob_sha": "0ba77e1b1301b09edd38431bf6c5f4b9c325b9ee"
+      "git_blob_sha": "5a127117833f7a870978c3f31ec3db7501f5f0fa"
     }
   ],
-  "history": {
-    "base_native_head": "da50e92cb4797413a58504e07e7874219d456a9d",
-    "base_bundle_sha256": "8da372135ea018aa01258f915e3172d1c4610c49657a1646c73b009d874e9804",
-    "base_bundle_bytes": 14032616,
-    "base_parts": [
-      {
-        "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part001",
-        "bytes": 6291456,
-        "sha256": "f69a5114e896013eba56a29e1852a4e5a2cba0d7502326cb5474cd2e4f9b1d7d"
-      },
-      {
-        "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part002",
-        "bytes": 6291456,
-        "sha256": "77413dc687cdf859462577212d786f55732b992ed48e7484e14415e505d3447c"
-      },
-      {
-        "path": "_备份/中期后合并计划-20261016/项目历史.bundle.part003",
-        "bytes": 1449704,
-        "sha256": "d628093cbb9c9435391795c42377b342ac781d4e06faf040c2fd0a00a523d4ac"
-      }
-    ],
-    "increment_path": "_备份/收工-20261017/原生历史增量.bundle",
-    "increment_bytes": 2500420,
-    "increment_sha256": "d2396e31dd8e3fca2a7380fc1a3b2aff8534dde3f6301ef90cbfe8dfd159c176",
-    "increment_git_blob_sha": "b3f9d3ff0bb9f50d41e630f73f161a8120ca1007",
-    "increment_verify": "passed",
-    "increment_revisions": "--all ^da50e92cb4797413a58504e07e7874219d456a9d",
-    "restore": "Concatenate base_parts in order, clone the base bundle, then fetch the increment HEAD and check out FETCH_HEAD. Native branches not changed since the base remain in that full bundle; native_refs records exact local branch tips."
-  },
-  "latest_tests": {
-    "go": 101,
-    "python": 25,
-    "frontend": 6,
-    "total": 132,
-    "failed": 0,
-    "skipped": 0,
-    "rerun_at_closing": false
-  },
-  "runtime": {
-    "runtime_id": "personal-demo",
-    "index_sha256": "1a98bf912574a65e8dfefaceee2a5a06b7eb5c3a5cfc357c2154d1c9e934abb6",
-    "assets": {
-      "/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff": {
-        "sha256": "328d50b6ece9ca25c46eea3e885ba497f6237f2fb84ef7b92f88e14a1a25e381",
-        "bytes": 13144,
-        "content_type": "font/woff"
-      },
-      "/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2": {
-        "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
-        "bytes": 14708,
-        "content_type": "font/woff2"
-      },
-      "/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff": {
-        "sha256": "09f018c58556e5801ecc49d5b5275dcff4c73311c2af6b88e31c51d76d076a9d",
-        "bytes": 13156,
-        "content_type": "font/woff"
-      },
-      "/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2": {
-        "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
-        "bytes": 14888,
-        "content_type": "font/woff2"
-      },
-      "/assets/index-DpGLKcvL.js": {
-        "sha256": "fff23005d1934ab3f664c794ebd9100bb16d451250cbd41fd664fc0346208e7f",
-        "bytes": 287574,
-        "content_type": "text/javascript"
-      },
-      "/assets/index-k7Kn9fox.css": {
-        "sha256": "fc7b546db2b1081ca43a18ba41b18ac9ed32173b249a5f8122fd76c4b39da88d",
-        "bytes": 26779,
-        "content_type": "text/css"
-      }
+  "package": {
+    "actual_time": "2026-10-18T20:18:27.222263+08:00",
+    "kind": "midterm_materials_v1.2_with_independent_software",
+    "source_head": "376253ab9abba6ee9abcc585104176cc6565468d",
+    "native_commits_restored": 72,
+    "zip": "E:\\软件编程大作业\\中期提交包-20261018-最新版\\软件编程-中期-20251101030-王麒皓-20261018-201804.zip",
+    "zip_bytes": 74519669,
+    "zip_sha256": "5e5f5adca47dad13a9f0009240f0b9060f9e55ad87a18d8fc5ee4d3f1707cdd7",
+    "bundle": "E:\\软件编程大作业\\中期提交包-20261018-最新版\\中期材料\\项目存档.bundle",
+    "bundle_bytes": 25525359,
+    "bundle_sha256": "be6c6c160f560779559bdd5d8a952924581ce5cb39ea028a07bc1fe6c3a40d8a",
+    "bundle_verify_exit": 0,
+    "bundle_restore_and_fsck": "passed",
+    "archive_integrity_and_all_file_hashes": "passed",
+    "presentation_all_bytes_unchanged": true,
+    "presentation_hashes": {
+      "中期汇报.pdf": "61cd77ff993b3913fcfe62184de8982fe3f4e19efa2c289dd7aecb9599230a98",
+      "中期汇报.pptx": "58c0d5df7a164484d618104e9613ab6b81748a06b151ade2c6dac649d1e4880a",
+      "中期汇报网页版/index.html": "fda9dd2303de3605f2eb292507375d0103728903c3ba6322a8a71e8bc444fdb3",
+      "中期汇报网页版/证据原图/1018M-01-财务差异总览-模拟数据.png": "4865fc81495660d92f7d682f3970740cb7e81b1a1e3b818da7646cac9d1ece5b",
+      "中期汇报网页版/证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png": "79ed0044b99c76103f07e02b84a59088b692e8b5251ff6ca2c2aaa5185b1eae3",
+      "中期汇报网页版/证据原图/1018M-04-候选对比未自动挑选-模拟数据.png": "860bb24d17aa827257e8ed8415a21942eeac1ed42bf80edbe622aaf5a176b5ed",
+      "中期汇报网页版/证据原图/1018M-05-派单成功版本1-模拟数据.png": "1f180973faa8faebfe39d63e034cee224d14bdc84a848b783df971d04b12c9e8",
+      "中期汇报网页版/证据原图/1018M-06-再次派单被拒-模拟数据.png": "8142a3a531360b280e295d826d74f56b5ae712f54057ced204e50bf631cc4f01",
+      "中期汇报网页版/证据原图/1018M-07-空结论被拒-模拟数据.png": "39d3d3536bf54a743c77a3d17f4b39545fe248775f33c3a2689692d8ec08d54f",
+      "中期汇报网页版/证据原图/1018M-08-已关闭结论与操作历史-模拟数据.png": "53cfe502eeca8dc82b278df060cbea60196706ed2558cfbacef35c6377118faa",
+      "中期汇报网页版/证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png": "9adf32b1aefb63e0e00f2115e6ddca0c9d6d068ae7af4145f820772304fd9fb4",
+      "中期汇报讲稿.md": "35d4bc5fa39da2bdc6689a2735360448cba3271203c886bd9d50ce0bfd62dba1"
     },
-    "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
-    "unauthenticated_business_status": 401,
-    "note": "Unknown reason 422 is checked with a fully configured synthetic HTTP identity in the regression fixture; unauthenticated requests must remain 401.",
-    "actual_time": "2026-10-17T22:15:07.402879+08:00",
-    "binary": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\frontend-round2-integrated-20261017\\recon.exe",
-    "binary_sha256": "78e46697ae9a34c9778f14b6f72b94d10237192226569b022c836b3d7ccbcf0e",
-    "account_and_business_fingerprints_unchanged": true,
-    "real_authenticated_browser_validation": "pending_user_testing",
-    "real_browser_csp_validation": "not_performed_this_round",
-    "official_all_reason_filter_performance": "not_measured",
-    "github_backup": "authorized_in_progress_receipt_records_result",
-    "final_materials_created": false,
-    "teacher_runtime_updated": true
+    "web_reference_count": 24,
+    "file_count": 1424,
+    "course_universal_20MiB_limit": false,
+    "local_submission_or_email_sent": false
+  },
+  "parts": [
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part001",
+      "filename": "完整中期包.zip.part001",
+      "bytes": 6291456,
+      "sha256": "12ba2a7ab1d16f828b8fb43576b779c592d1abdf590c394a2d1baeefe5088f0e",
+      "git_blob_sha": "8b0ca1108746f9cfa911db9af14117ae1763cd5a"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part002",
+      "filename": "完整中期包.zip.part002",
+      "bytes": 6291456,
+      "sha256": "753e624da63a1ec12fc71f9b9c5a13907877b4a9db3d6faf51290896ce665c34",
+      "git_blob_sha": "ece759b434e58a3e81dcab0618c2b94e0f95d738"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part003",
+      "filename": "完整中期包.zip.part003",
+      "bytes": 6291456,
+      "sha256": "ff95c2c079a079c113c76e79aae5e35eea9b582a5cc96d0d33db9e081a05d802",
+      "git_blob_sha": "62373420ac08089c52223097b6eb274addb822f4"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part004",
+      "filename": "完整中期包.zip.part004",
+      "bytes": 6291456,
+      "sha256": "10fda53bf563dbe3bc3fe113d2cc9f742fe2eb32e5d1d4c0f62704ba52979479",
+      "git_blob_sha": "bb96eb7bced1a006ac3cd401728dabb1f1810889"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part005",
+      "filename": "完整中期包.zip.part005",
+      "bytes": 6291456,
+      "sha256": "167dc18bc7c23ecb1b7ccb82a748cdbdca5d2a0a6ee5e2169b3d26980e4b46f0",
+      "git_blob_sha": "3f61705c4dc01ed73a5b859d6365e8e9ebed452b"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part006",
+      "filename": "完整中期包.zip.part006",
+      "bytes": 6291456,
+      "sha256": "397ee0f464c082b659e99bb7fc1a7638066f7db6f189beebea04b869470eaad9",
+      "git_blob_sha": "1486f7a4b9e09d599a5b2e1e5349d6ba6de8a8d2"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part007",
+      "filename": "完整中期包.zip.part007",
+      "bytes": 6291456,
+      "sha256": "bb2213bbd15eb12bf8145ca6febc6ba66bd9314ea3bef11561785dfbfc95e02b",
+      "git_blob_sha": "70c632cb035ad0f73becaf3e7f1b044f5c028303"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part008",
+      "filename": "完整中期包.zip.part008",
+      "bytes": 6291456,
+      "sha256": "31c444380054f5d8b6728351ea5d8e5753297a0460007418f6b3392af696ddd1",
+      "git_blob_sha": "6a0c73f817e196d26d46991bd1edbac6d66fad61"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part009",
+      "filename": "完整中期包.zip.part009",
+      "bytes": 6291456,
+      "sha256": "da664cca5cc81a1a36bde1843213e141bad8edf840d54ffa1757d2973544973b",
+      "git_blob_sha": "cfdb5308d51f7f0984a896820f435b54a5a0df4f"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part010",
+      "filename": "完整中期包.zip.part010",
+      "bytes": 6291456,
+      "sha256": "dba437fe3f89fd3fb89812233639ed67dcf06cbea58d53fafbfcae0ac9921964",
+      "git_blob_sha": "a4ecc4d679db798ae23b06a2756d651593559bd2"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part011",
+      "filename": "完整中期包.zip.part011",
+      "bytes": 6291456,
+      "sha256": "187ba6f2335690c4d429344fba2d0eaba1f274b43693163ae257d3c5afa4ed8a",
+      "git_blob_sha": "4606e0d037edf10021156e0e9865cd908991bb93"
+    },
+    {
+      "path": "_备份/中期完整包-20261018/完整中期包.zip.part012",
+      "filename": "完整中期包.zip.part012",
+      "bytes": 5313653,
+      "sha256": "99ddb3577685458cd26ae75124dbc341f7622a95424a137fb5299a9a6a50912a",
+      "git_blob_sha": "988d0a42a3ae8f1fa116576795713f4d79e8b4c9"
+    }
+  ],
+  "parts_concatenation_sha256": "5e5f5adca47dad13a9f0009240f0b9060f9e55ad87a18d8fc5ee4d3f1707cdd7",
+  "history": {
+    "base_bundle_in_zip": "中期材料/项目存档.bundle",
+    "base_native_head": "376253ab9abba6ee9abcc585104176cc6565468d",
+    "base_bundle_sha256": "be6c6c160f560779559bdd5d8a952924581ce5cb39ea028a07bc1fe6c3a40d8a",
+    "base_bundle_restore_and_fsck": "passed",
+    "increment_path": "_备份/中期完整包-20261018/原生历史增量.bundle",
+    "increment_bytes": 73029,
+    "increment_sha256": "185d462718d82782b1d65f5723c57e26b0465ff253184fd4953e440f9732e026",
+    "increment_git_blob_sha": "58305a290c42b2f553a84580c7265e6cd1552c20",
+    "increment_verify": "passed",
+    "restore": "Reassemble and unzip the package; git clone its 项目存档.bundle, then git fetch 原生历史增量.bundle HEAD and check out FETCH_HEAD for later archive/cleanup records."
   },
   "software_acceptance": "pending_user",
-  "final_materials_created": false,
-  "excluded_untracked": [
+  "real_device_or_second_machine_validation": "not_claimed",
+  "course_submission_sent": false,
+  "untracked_excluded": [
     "tools/build_midterm_v12.py",
     "中期汇报v1.2.pdf",
     "中期汇报v1.2讲稿.md",
@@ -5374,6 +6055,14 @@
     "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/09.png",
     "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/contact-1.jpg",
     "每日工作记录/2026-10-16/截图/FR18-v12逐页渲染/contact-2.jpg",
+    "每日工作记录/2026-10-18/自动匹配算法分析/baseline-stats.json",
+    "每日工作记录/2026-10-18/自动匹配算法分析/basket-simulation.json",
+    "每日工作记录/2026-10-18/自动匹配算法分析/diagnostic_stats.py",
+    "每日工作记录/2026-10-18/自动匹配算法分析/residual-simulation.json",
+    "每日工作记录/2026-10-18/自动匹配算法分析/simulate_basket.py",
+    "每日工作记录/2026-10-18/自动匹配算法分析/simulate_residual.py",
+    "每日工作记录/2026-10-18/自动匹配算法分析/方案A复现说明.md",
+    "每日工作记录/2026-10-18/自动匹配算法分析/自动匹配优化建议.md",
     "资料/教师独立运行核查.md"
   ]
 }

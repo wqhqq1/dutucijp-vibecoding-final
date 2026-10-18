@@ -1,0 +1,345 @@
+{
+  "manifest_sha256": "d394d24088c8dd0b7301f0929a8cc6523218efae7522a639d842b004f39ca7b1",
+  "total_bytes": 48766684545,
+  "c_bytes": 46397665882,
+  "protected": [
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\demos",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\raw",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\prepared",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\tools",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds",
+    "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo",
+    "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\closing-deployment-20261017",
+    "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate3-20261017",
+    "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-readonly-20261018-123920",
+    "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\performance-input-template-20261015-165942",
+    "E:\\软件编程大作业\\退货对账与差异处理系统\\.git",
+    "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo",
+    "E:\\软件编程大作业\\退货对账与差异处理系统\\每日工作记录",
+    "E:\\软件编程大作业\\退货对账与差异处理系统\\中期汇报网页版"
+  ],
+  "targets": [
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate1-20261017\\NFR03-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1924452352
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate1-20261017\\NFR03-1\\isolated.sqlite-shm",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 32768
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate1-20261017\\NFR03-1\\isolated.sqlite-wal",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-candidate2-20261017\\NFR03-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1924452352
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\astra-nfr03-profile1-20261017\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1924452352
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\closing-http-20261017\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 3397980160
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\closing-kind-cancel-20261017\\query.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1912627200
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\closing-nfr02-20261017\\NFR02-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1912627200
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\closing-nfr02-20261017\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR02-20261017-085349-68bbb271\\NFR02-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2429947904
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR02-20261017-085349-68bbb271\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\integrated-NFR03-20261017-085625-5c913487\\NFR03-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2441773056
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2134003712
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-formal\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\optimization-20261016-query2\\query.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2205687808
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-query-round1-20261017-103857\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 3397959680
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-query-round2-20261017-145747\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 3397980160
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2429947904
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR02-20261017\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round1-NFR03-20261017\\NFR03-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2441773056
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round2-NFR02-20261017\\NFR02-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2001629184
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round2-NFR02-20261017\\NFR02-1\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\preferred-round2-NFR03-20261017\\NFR03-1\\isolated.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2013454336
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\python-prepare-round1-all-20261017-103410-c0d867a2\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\python-prepare-round2-all-20261017-104346-a77bb286\\prepared\\5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6\\records.csv",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 349792719
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-20261018-123305\\business.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1912713216
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-20261018-123305\\business.sqlite-shm",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 32768
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-20261018-123305\\business.sqlite-wal",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 152472
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-20261018-123617\\business.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 1912713216
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-20261018-123617\\business.sqlite-shm",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 32768
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-20261018-123617\\business.sqlite-wal",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 152472
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-final-20261018-123700\\business.sqlite",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 2014650368
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-final-20261018-123700\\business.sqlite-shm",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 32768
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\review-tc55-http-final-20261018-123700\\business.sqlite-wal",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification",
+      "kind": "file",
+      "reason": "Completed isolated experiment data; source inputs and saved evidence retained",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\codex-midterm-render-7c1014ab31174049b32a911e57004ec0",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 44571
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\midterm-v12-chrome",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 7246499
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\pkgsim-204124",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 15641400
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\recon-cdp-a6xDRM",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 30384194
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\review-check-cWQbfH",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 164538953
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Temp\\review-check-u9XU9O",
+      "boundary": "C:\\Users\\wqhqq\\AppData\\Local\\Temp",
+      "kind": "directory",
+      "reason": "Dedicated completed project render/browser/package simulation temporary directory",
+      "bytes": 0
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\frontend-design-20261017\\cdp-profile",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 93499096
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\frontend-design-20261017\\cdp-profile2",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 78673607
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\frontend-design-20261017\\chrome-profile",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 10473638
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\frontend-design-20261017\\chrome-profile2",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 96819091
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\batch-polish-20261018\\chrome-profile",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 84760849
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\midterm-refresh-20261018\\renderer-runtime",
+      "boundary": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working",
+      "kind": "directory",
+      "reason": "Finished dedicated browser profile or disposable document renderer extraction",
+      "bytes": 2004792382
+    }
+  ]
+}

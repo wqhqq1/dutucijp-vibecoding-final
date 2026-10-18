@@ -1,5 +1,8 @@
 # Preserve original tool output bytes; CRLF is a valid native Windows line ending.
 每日工作记录/**/原始输出/** -text whitespace=cr-at-eol
+# Preserve the received Claude handoff, including its Markdown hard line breaks.
+每日工作记录/2026-10-18/批量处理优化/执行交接.md -text whitespace=-blank-at-eol,cr-at-eol
+每日工作记录/2026-10-18/批量处理优化/原始输出/集成构建.txt -text whitespace=-blank-at-eol,cr-at-eol
 每日工作记录/**/FR01-04复核输出校验.json text eol=lf
 
 # Keep generated Office, PDF and screenshot bytes unchanged in Git.

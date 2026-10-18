@@ -1,0 +1,11 @@
+{
+  "source": "Claude保存的批量工作台修订Go事件，仅解析旧输出，不重新运行",
+  "source_local_path": ".working\\batch-polish-20261018\\go-test.jsonl",
+  "source_sha256": "7c27777a6a054fd84405719252ae73f2712a4442dac7d5f08528baf355f6f463",
+  "go_top_level_passed": 131,
+  "go_top_level_failed": 0,
+  "go_top_level_skipped": 0,
+  "single_full_regression_total": 161,
+  "distinct_tests_with_reused_python": 162,
+  "latest_auto_refresh_tests_run": false
+}

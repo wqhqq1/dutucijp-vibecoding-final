@@ -1,0 +1,22 @@
+{
+  "health": {
+    "application": "returns-recon",
+    "runtime_id": "e4b63722dfccba388e3f9f736ad44582"
+  },
+  "setup_accounts": [
+    {
+      "id": "finance",
+      "role": "finance"
+    },
+    {
+      "id": "warehouse",
+      "role": "warehouse"
+    },
+    {
+      "id": "admin",
+      "role": "admin"
+    }
+  ],
+  "html_status": 200,
+  "updated_frontend": true
+}

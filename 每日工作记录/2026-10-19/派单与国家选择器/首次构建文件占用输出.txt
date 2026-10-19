@@ -1,0 +1,16 @@
+npm error code EPERM
+npm error syscall unlink
+npm error path E:\软件编程大作业\退货对账与差异处理系统\frontend\node_modules\@rolldown\binding-win32-x64-msvc\rolldown-binding.win32-x64-msvc.node
+npm error errno -4048
+npm error [Error: EPERM: operation not permitted, unlink 'E:\软件编程大作业\退货对账与差异处理系统\frontend\node_modules\@rolldown\binding-win32-x64-msvc\rolldown-binding.win32-x64-msvc.node'] {
+npm error   errno: -4048,
+npm error   code: 'EPERM',
+npm error   syscall: 'unlink',
+npm error   path: 'E:\\软件编程大作业\\退货对账与差异处理系统\\frontend\\node_modules\\@rolldown\\binding-win32-x64-msvc\\rolldown-binding.win32-x64-msvc.node'
+npm error }
+npm error
+npm error The operation was rejected by your operating system.
+npm error It's possible that the file was already in use (by a text editor or antivirus), or that you lack permissions to access it.
+npm error
+npm error If you believe this might be a permissions issue, please double-check the permissions of the file and its containing directories, or try running the command again as root/Administrator.
+npm error A complete log of this run can be found in: C:\Users\wqhqq\AppData\Local\npm-cache\_logs\2026-10-19T03_20_16_068Z-debug-0.log

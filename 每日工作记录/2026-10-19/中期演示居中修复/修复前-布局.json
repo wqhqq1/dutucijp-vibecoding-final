@@ -1,0 +1,26 @@
+{
+  "browser": "installed Chrome headless via Playwright",
+  "actual_time": "2026-10-19T10:35:36.189Z",
+  "errors": [],
+  "results": [
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "deck": {
+        "x": 288,
+        "y": 162,
+        "width": 1024,
+        "height": 576
+      },
+      "center_error": {
+        "x": 288,
+        "y": 66
+      },
+      "slide_count": 10,
+      "centered": false,
+      "fits": false
+    }
+  ]
+}

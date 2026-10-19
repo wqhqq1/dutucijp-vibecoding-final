@@ -1,0 +1,18 @@
+{
+  "runtime": "assignment-country-ui-qa",
+  "actual_time": "2026-10-19T11:26:43+0800",
+  "approved_request_account_states_observed": [
+    "new",
+    "password",
+    "password",
+    "factor",
+    "complete"
+  ],
+  "warehouse_configured_using_real_http_flow": true,
+  "old_batch_before_permission_change": "f4f500ae3ec94e2ae4a6490a220680a7c9801c38b11f9344f8949d9bd60af506",
+  "new_finance_countries": [
+    "France",
+    "United Kingdom"
+  ],
+  "formal_runtime_used": false
+}

@@ -1,0 +1,912 @@
+{
+  "go_top_level_passed": 150,
+  "go_test_failed": 0,
+  "go_test_skipped": 0,
+  "frontend_passed": 6,
+  "frontend_failed": 0,
+  "frontend_skipped": 0,
+  "production_mock_markers_absent": true,
+  "go_jsonl_sha256": "68bab2da377cdab3e0ec5ce425accf3a4ca51d64d2a914d2b166749669d8a133",
+  "tests": [
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC09_PartialReturn10Minus4",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC09_AmountPrecision",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC10_TwoCandidates",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC11_IdentityBoundaries",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC12_StrictlyEarlier",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC13_CumulativeReturns",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC14_OverReturnRejected",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC14_NoSplitAcrossSales",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC15_NoExactQuantityPreference",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC15_PrecisionCandidateBranch",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestTC07_DuplicateInvolvement",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestBoundedWorkersAndDeterministicOrder",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestInvalidAcceptedInputFailsClosed",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestConservationRejectsCorruptResult",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestCancelledCompute",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/reconcile",
+      "test": "TestCancellationOnlySchedulingRetainsOrdinarySalesAndExactPriceKeys",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/transactionverify",
+      "test": "TestRetainedBaselineMatchesProductionResults",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestSessionActivityDoesNotBlockReadersOrBypassRevocation",
+      "result": "pass",
+      "seconds": 0.24
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestSessionBusyRenewalCannotReviveIdleExpiredSession",
+      "result": "pass",
+      "seconds": 0.15
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC37_NewPasskeysRequireDiscoverableCredentials",
+      "result": "pass",
+      "seconds": 0.14
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestBalanceBatchCancellationRollsBackAndRetries",
+      "result": "pass",
+      "seconds": 0.75
+    },
+    {
+      "package": "returnsrecon/cmd/perfhttp",
+      "test": "TestWorkloadSelectionPreservesDefaultAndBalancesMatrix",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/perfhttp",
+      "test": "TestAcceptanceRequiresEveryRequestInRealHeavyWindow",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/perfhttp",
+      "test": "TestTransactionMatrixRejectsWrongPageFilterOrderOrCounts",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/reviewverify",
+      "test": "TestSourceFileURIIsActuallyReadOnlyAndPreservesWAL",
+      "result": "pass",
+      "seconds": 0.02
+    },
+    {
+      "package": "returnsrecon/cmd/reviewverify",
+      "test": "TestReadOnlySourceCannotCreateMissingFile",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestEmptyLegacyBalanceLayoutChangesOnlyInsideRun",
+      "result": "pass",
+      "seconds": 0.22
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestSparseConservationRejectsBothMissingAndPhantomAllocationBalances",
+      "result": "pass",
+      "seconds": 0.14
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC37_PasskeySelectionLogsInChosenCredentialOwner",
+      "result": "pass",
+      "seconds": 0.45
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestBulkImportRollsBackEarlierSQLChunks",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestWorkflowVerifyRejectsDefaultOrBusinessDatabaseBeforeOpening",
+      "result": "pass",
+      "seconds": 0.01
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestWorkflowVerificationMarkerBoundAndClaimedOnce",
+      "result": "pass",
+      "seconds": 0.02
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestUnsupportedBusinessCommandRejectedBeforeOpening",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestVerifyRequiresExplicitDatabaseBeforeOpeningStore",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/cmd/recon",
+      "test": "TestPortablePortValidationPrecedesDatabaseCreation",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestImportPartialBatchesStayUnpublishedAndRetryBuildsIndexes",
+      "result": "pass",
+      "seconds": 0.32
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC56_AccountManagementRoleBoundary",
+      "result": "pass",
+      "seconds": 0.46
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestComputeLoadPreservesMatchingFieldsAndRejectsBadSourceIDs",
+      "result": "pass",
+      "seconds": 0.44
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC56_AccountWritesRequireOriginAndCSRF",
+      "result": "pass",
+      "seconds": 0.29
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC56_AccountValidationAndImmutableIdentity",
+      "result": "pass",
+      "seconds": 0.14
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC56_NewAccountUsesActualFirstConfiguration",
+      "result": "pass",
+      "seconds": 0.27
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestSetBasedBalanceBatchesRollBackAndRetryWithoutLosingOrdinarySales",
+      "result": "pass",
+      "seconds": 0.77
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestSetBasedBalancesRejectCorruptionAfterGuardedUpdate",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestGroupedPersistenceConservationRejectsBalancedButWrongAllocation",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC57_ScopeChangeRevokesSessionAndBumpsBothVersions",
+      "result": "pass",
+      "seconds": 0.3
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualConfirmationAtomicQualifiedAndAudited",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualAuditFailureRollsBackEverything",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ConfirmationVisibleOutsideCandidatesAndOwnerCanClose",
+      "result": "pass",
+      "seconds": 0.12
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC57_ApprovedRequestTracksActualAccountSetupState",
+      "result": "pass",
+      "seconds": 0.38
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC57_UnfinishedAssigneePreventsScopeShrink",
+      "result": "pass",
+      "seconds": 0.35
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC22_ManualRejectsPermissionStateVersionIdentity",
+      "result": "pass",
+      "seconds": 0.63
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC23_ConcurrentManualAllocationCannotOverdraw",
+      "result": "pass",
+      "seconds": 0.07
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC23_ConcurrentSameCancelAndRepeatRejected",
+      "result": "pass",
+      "seconds": 0.11
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC58_FinanceSubsetAndPendingNameUniqueness",
+      "result": "pass",
+      "seconds": 0.36
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_TransactionCountrySortAndJumpPages",
+      "result": "pass",
+      "seconds": 0.11
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_ReversePagesMatchFullJoinedReference",
+      "result": "pass",
+      "seconds": 0.29
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC26_ImmutableCountsNeverReplaceLiveScopeChecks",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC58_ConcurrentApprovalCreatesExactlyOneUntouchedAccount",
+      "result": "pass",
+      "seconds": 0.41
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_ServerFilteringPaginationAndDateBoundaries",
+      "result": "pass",
+      "seconds": 0.1
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC17_CurrentCandidatesAllPagesAndOriginalEvidence",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC26_WarehouseCannotReadOtherCasesCandidatesOrTransactions",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC38_PasskeySelectionRejectsInvalidProofAndRevocation",
+      "result": "pass",
+      "seconds": 3.32
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC26_ConsumedCandidateStopsBeingUnrelatedEvidence",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC27_ExportCurrentFilteredScopeAndFormulaSafety",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestExportStreamFailureAndFormulaVariants",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestQueriesRejectUnpublishedRun",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC61_AccountAuditFailureRollsBackAllManagementWrites",
+      "result": "pass",
+      "seconds": 0.34
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC38_PasskeySelectionConcurrentConsumptionAndReplay",
+      "result": "pass",
+      "seconds": 0.19
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_SourceOrderAndCountAcrossSharedSourceRanges",
+      "result": "pass",
+      "seconds": 0.06
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC36_PasskeySelectionCannotSkipIncompleteSetup",
+      "result": "pass",
+      "seconds": 0.16
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_OptimizedListsMatchReferenceAfterWorkflowWrites",
+      "result": "pass",
+      "seconds": 0.16
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC16_CaseReasonFilterMatchesCaseRows",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC61_AppendOnlyAuditAndLegacyCredentialSessionCompatibility",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestTC55_BatchViewSeparatesReadyFromSkippedRows",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC53_SharedResourceConflictSkipsWholeComponentOnly",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC53_PreviewVersionConflictRollsBackSharedComponent",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC54_AuditFailureRollsBackWholeBasketAndOtherGroupSucceeds",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC54_ConcurrentCommitReopenAndRevokedReplay",
+      "result": "pass",
+      "seconds": 0.06
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC59_CountryListsPaginationAndCSV",
+      "result": "pass",
+      "seconds": 0.24
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC51_AllSelectionExclusionsFreezeAcrossPages",
+      "result": "pass",
+      "seconds": 0.08
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC53_BasketPartialSelectionIsRejected",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC44_PasskeySelectionRetainsAccountAndSourceRateLimits",
+      "result": "pass",
+      "seconds": 0.44
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC52_BulkAssignStartConfirmCloseAndClosedReadonly",
+      "result": "pass",
+      "seconds": 0.06
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC49_SingleConfirmationUsesApprovedGroupCapacity",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC59_CountryByIDCandidatesEvidenceAndAudit",
+      "result": "pass",
+      "seconds": 0.24
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC49_SeparatePoolsCannotOverdrawDifferentDuplicateMembers",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC49_BatchAndSingleEntryShareDuplicateCapacity",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC38_PasskeySelectionAuditFailureRollsBackAndAllowsRetry",
+      "result": "pass",
+      "seconds": 0.18
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC49_BatchDuplicateActivationAndAuditRollback",
+      "result": "pass",
+      "seconds": 0.08
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestReviewConcurrentSnapshotsReleaseReadConnections",
+      "result": "pass",
+      "seconds": 0.07
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC49_StrictEightFieldFingerprint",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC59_CountryOverviewReviewCountsAndGroups",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC50_NearestTieAndStrictDuplicateRecommendation",
+      "result": "pass",
+      "seconds": 0.21
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC33_AllRolesRequirePasswordFactorAndRecovery",
+      "result": "pass",
+      "seconds": 0.37
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC59_CountryScopeIntersectsWarehouseOwnership",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC60_AssigneeCountrySingleRejectAndBatchSkip",
+      "result": "pass",
+      "seconds": 0.17
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC34_PasswordBoundariesWeakListAndNFC",
+      "result": "pass",
+      "seconds": 0.24
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC50_BasketPrecedesNearestAndRejectsIncompleteEvidence",
+      "result": "pass",
+      "seconds": 0.36
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC50_ResidualUniqueSnapshotAndActorScope",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC60_CountryCrossPageBatchFreezesOnlyVisibleCases",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC18_IdempotencyPreservesSimulatedManualHistory",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC35_PasswordHashesAreSaltedAndNoPlaintextAudit",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC18_ConcurrentSameInputOnePublishedRun",
+      "result": "pass",
+      "seconds": 0.08
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC14_RejectLeavesNoPartialDatabaseAllocation",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestSourceAndDecisionEvidenceRetained",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestFailedPersistenceNeverPublishesAndCanRetry",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestPreparedTamperRefused",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC01TC08_VerifyDatasetSourceExclusionAndCorruption",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC61_CountryChangeRevokesSessionSnapshotBatchAndAdmittedWrite",
+      "result": "pass",
+      "seconds": 0.32
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC01_VerifyRejectsUnpublishedDataset",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC19_AssignmentAndAuditAtomic",
+      "result": "pass",
+      "seconds": 0.06
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC36_InterruptedSetupResumesAfterRestartWithoutBootstrapReuse",
+      "result": "pass",
+      "seconds": 0.37
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC20_DuplicateAndConcurrentAssignment",
+      "result": "pass",
+      "seconds": 0.09
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC21_RejectSkippedReverseStaleAndClosedWrites",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestTC24_ConclusionAndDurableHistoryWithoutInventedMatch",
+      "result": "pass",
+      "seconds": 0.05
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC40_TOTPOnlyVerifiedCurrentEnrollmentBecomesActive",
+      "result": "pass",
+      "seconds": 0.16
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowPermissionsAndPublishedBoundary",
+      "result": "pass",
+      "seconds": 0.03
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowAuditFailureRollsBackEveryAction",
+      "result": "pass",
+      "seconds": 0.09
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC61_GlobalJobsRequireAllCountryFinanceOrAdmin",
+      "result": "pass",
+      "seconds": 0.43
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestFrontendEntryDoesNotRedirectIndexToItself",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestBundledFontTypesDoNotDependOnHostRegistry",
+      "result": "pass",
+      "seconds": 0
+    },
+    {
+      "package": "returnsrecon/internal/store",
+      "test": "TestWorkflowOldSchemaMigrationPreservesHistory",
+      "result": "pass",
+      "seconds": 0.06
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC41_TOTPReplayWindowAndConcurrentConsumption",
+      "result": "pass",
+      "seconds": 0.48
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_AlreadyAdmittedJobRejectsRevokedSession",
+      "result": "pass",
+      "seconds": 0.37
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_ValidAdmittedJobCanStillQueue",
+      "result": "pass",
+      "seconds": 0.13
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestTC37_PasskeySelectionHTTPAnonymousChallengeAndCSRF",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC42_PasswordCannotConfigureNewFactorForCompletedAccount",
+      "result": "pass",
+      "seconds": 0.25
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestPortableInstanceAndCookieIsolation",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC52_ReviewScopedByTrustedActorAndWarehouseOwnership",
+      "result": "pass",
+      "seconds": 0.33
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC54_ReviewCSRFStrictBodiesAndRevokedCommitGuard",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC43_RecoveryCodeAtomicAndRestrictedUntilReenrolled",
+      "result": "pass",
+      "seconds": 0.67
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC25_TrustedSessionRejectsMissingOrForgedIdentity",
+      "result": "pass",
+      "seconds": 0.22
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC26_WarehouseScopeIncludesOnlyOwnCaseAndRelatedEvidence",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC27_FilteredCSVOnlyFinanceAndAdmin",
+      "result": "pass",
+      "seconds": 0.32
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC44_LastFactorAndPasswordChangeRevokeOldSessions",
+      "result": "pass",
+      "seconds": 0.8
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC33_AllRolesRestrictedUntilActualFactorAndRecoveryConfirmation",
+      "result": "pass",
+      "seconds": 0.41
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC46_OriginCSRFHostCookieAndRecoveryRevocation",
+      "result": "pass",
+      "seconds": 0.22
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC45_RateLimitAccountSourceWindowAndPrehash",
+      "result": "pass",
+      "seconds": 0.69
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC43_AlreadyAdmittedWriteRechecksRevokedSessionInsideTransaction",
+      "result": "pass",
+      "seconds": 0.4
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC46_SessionRotationCSRFIdleAndAbsoluteExpiry",
+      "result": "pass",
+      "seconds": 0.43
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestTC36_FirstSetupHTTPBoundaryAndAccountSelection",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/web",
+      "test": "TestHTTP_TC16_CountrySortPaginationAndExportAgree",
+      "result": "pass",
+      "seconds": 0.13
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC47_SetupCompetitionAndAuditFailureRollback",
+      "result": "pass",
+      "seconds": 0.43
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC48_MissingMasterKeyFailsAndSecretsAreNotAuditFields",
+      "result": "pass",
+      "seconds": 0.14
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC37_PasskeyRealProtocolRegistrationLoginAndZeroCounter",
+      "result": "pass",
+      "seconds": 0.16
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC38_PasskeyRejectsMalformedAssertionsAndChallengeReplay",
+      "result": "pass",
+      "seconds": 1.01
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC39_PasskeyRejectsOtherAccountHandleAndDuplicateCredential",
+      "result": "pass",
+      "seconds": 0.27
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC48_WindowsPrivateDACLRemovesLegacyEveryoneAccess",
+      "result": "pass",
+      "seconds": 0.04
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC36_FirstSetupWithoutLinkSurvivesDeadlineAndRestart",
+      "result": "pass",
+      "seconds": 0.23
+    },
+    {
+      "package": "returnsrecon/internal/auth",
+      "test": "TestTC36_FirstSetupCannotResetOrRaceExistingPassword",
+      "result": "pass",
+      "seconds": 0.25
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import (
 )
 
 type passkeySelection struct {
+	Origin   string               `json:"app_origin,omitempty"`
 	Session  webauthn.SessionData `json:"session"`
 	Versions map[string]int       `json:"versions"`
 }
@@ -22,13 +23,17 @@ type passkeySelection struct {
 // auth_sessions, so it cannot grant account configuration or business access.
 func (s *Service) beginPasskeySelection(ctx context.Context, previous string) (out PasskeyBegin, err error) {
 	err = s.atomic(ctx, func(c *sql.Conn) error {
-		options, data, e := s.WA.BeginDiscoverableLogin(webauthn.WithUserVerification(protocol.VerificationRequired))
+		wa, _, e := s.passkeyWA(ctx, c)
+		if e != nil {
+			return e
+		}
+		options, data, e := wa.BeginDiscoverableLogin(webauthn.WithUserVerification(protocol.VerificationRequired))
 		if e != nil {
 			return e
 		}
 		data.Expires = s.now().Add(2 * time.Minute)
-		selection := passkeySelection{Session: *data, Versions: map[string]int{}}
-		rows, e := c.QueryContext(ctx, `SELECT id,version FROM auth_users u WHERE EXISTS(SELECT 1 FROM auth_credentials k WHERE k.user_id=u.id)`)
+		selection := passkeySelection{Origin: s.passkeyOrigin(ctx), Session: *data, Versions: map[string]int{}}
+		rows, e := c.QueryContext(ctx, `SELECT id,version FROM auth_users u WHERE u.state<>'deleted' AND EXISTS(SELECT 1 FROM auth_credentials k WHERE k.user_id=u.id)`)
 		if e != nil {
 			return e
 		}
@@ -106,11 +111,15 @@ func (s *Service) finishPasskeySelection(ctx context.Context, token, challengeID
 		if e := decode(raw, &selection); e != nil {
 			return e
 		}
-		if selection.Session.UserVerification != protocol.VerificationRequired || len(selection.Session.UserID) != 0 || len(selection.Session.AllowedCredentialIDs) != 0 {
+		if !s.validChallengeOrigin(ctx, selection.Origin) || selection.Session.UserVerification != protocol.VerificationRequired || len(selection.Session.UserID) != 0 || len(selection.Session.AllowedCredentialIDs) != 0 {
 			return denied()
 		}
+		wa, rp, e := s.passkeyWA(ctx, c)
+		if e != nil {
+			return e
+		}
 		var selected account
-		user, credential, e := s.WA.ValidatePasskeyLogin(func(rawID, handle []byte) (webauthn.User, error) {
+		user, credential, e := wa.ValidatePasskeyLogin(func(rawID, handle []byte) (webauthn.User, error) {
 			var currentOwner string
 			if e := c.QueryRowContext(ctx, `SELECT user_id FROM auth_credentials WHERE id=?`, base64.RawURLEncoding.EncodeToString(rawID)).Scan(&currentOwner); e != nil || currentOwner != owner || !bytes.Equal(handle, []byte(currentOwner)) {
 				return nil, denied()
@@ -118,6 +127,10 @@ func (s *Service) finishPasskeySelection(ctx context.Context, token, challengeID
 			a, e := load(ctx, c, currentOwner)
 			if e != nil || selection.Versions[currentOwner] != a.Version {
 				return nil, denied()
+			}
+			a, e = filterCredentials(ctx, c, a, rp)
+			if e != nil {
+				return nil, e
 			}
 			selected = a
 			return a, nil
@@ -132,7 +145,7 @@ func (s *Service) finishPasskeySelection(ctx context.Context, token, challengeID
 		if n, e := result.RowsAffected(); e != nil || n != 1 {
 			return denied()
 		}
-		result, e = c.ExecContext(ctx, `UPDATE auth_credentials SET credential_json=? WHERE id=? AND user_id=?`, encode(credential), base64.RawURLEncoding.EncodeToString(credential.ID), selected.ID)
+		result, e = c.ExecContext(ctx, `UPDATE auth_credentials SET credential_json=? WHERE id=? AND user_id=?`, encodeCredential(credential, rp), base64.RawURLEncoding.EncodeToString(credential.ID), selected.ID)
 		if e != nil {
 			return e
 		}

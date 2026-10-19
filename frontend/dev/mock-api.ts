@@ -5,9 +5,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type {Connect,Plugin} from 'vite';
 import type {IncomingMessage,ServerResponse} from 'node:http';
+import {accountProfile,allows,handleAccounts,isAll,resetAccounts,setupAccounts,visibleUsers} from './mock-accounts.ts';
 
-type View='login'|'setup'|'setup-password'|'setup-factor'|'finance'|'warehouse';
-const views:View[]=['login','setup','setup-password','setup-factor','finance','warehouse'];
+// Business views sign in as one sample account each: admin, an all-country
+// finance account, a finance account limited to United Kingdom/France, and the
+// United Kingdom warehouse.
+type View='login'|'setup'|'setup-password'|'setup-factor'|'admin'|'finance'|'finance-uk'|'warehouse';
+const views:View[]=['login','setup','setup-password','setup-factor','admin','finance','finance-uk','warehouse'];
+const businessIDs:Partial<Record<View,string>>={admin:'admin',finance:'finance','finance-uk':'finance-uk',warehouse:'warehouse'};
 // Same policy as backend/internal/web/server.go, so the built bundle is checked
 // under the headers it will actually be served with.
 const csp="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
@@ -59,16 +64,21 @@ const reviewSets=new Map<string,any>();
 const reviewBatches=new Map<string,any>();
 const stages=[['queued','queued'],['running','preparing'],['running','importing'],['running','reconciling'],['succeeded','published']];
 
-function viewOf(req:IncomingMessage):View{const m=/(?:^|;\s*)mock_view=([\w-]+)/.exec(req.headers.cookie||'');return views.includes(m?.[1] as View)?m![1] as View:'finance'}
-function send(res:ServerResponse,status:number,body:unknown,cookie?:View){res.statusCode=status;res.setHeader('Content-Type','application/json; charset=utf-8');if(cookie)res.setHeader('Set-Cookie',`mock_view=${cookie}; Path=/; SameSite=Strict`);res.end(JSON.stringify(body))}
+function cookie(req:IncomingMessage,name:string){return new RegExp('(?:^|;\\s*)'+name+'=([^;]*)').exec(req.headers.cookie||'')?.[1]||''}
+function viewOf(req:IncomingMessage):View{const v=cookie(req,'mock_view') as View;return views.includes(v)?v:'finance'}
+// Test switches for loading states, kept in cookies so a reload keeps them:
+// mock_fail lists resources that answer 503 (countries, accounts, requests,
+// audit, users, write); mock_slow delays account routes by that many ms.
+function flagsOf(req:IncomingMessage){return {fail:new Set(decodeURIComponent(cookie(req,'mock_fail')).split(',').filter(Boolean)),slow:Math.min(15000,Number(cookie(req,'mock_slow'))||0)}}
+const flagCookies=(q:URLSearchParams)=>[`mock_fail=${encodeURIComponent(q.get('fail')||'')}; Path=/; SameSite=Strict`,`mock_slow=${Number(q.get('slow'))||0}; Path=/; SameSite=Strict`];
+function send(res:ServerResponse,status:number,body:unknown,cookie?:View,extra:string[]=[]){res.statusCode=status;res.setHeader('Content-Type','application/json; charset=utf-8');if(cookie||extra.length)res.setHeader('Set-Cookie',[...(cookie?[`mock_view=${cookie}; Path=/; SameSite=Strict`]:[]),...extra]);res.end(JSON.stringify(body))}
 function readBody(req:IncomingMessage){return new Promise<any>(resolve=>{let raw='';req.on('data',c=>raw+=c);req.on('end',()=>{try{resolve(raw?JSON.parse(raw):{})}catch{resolve({})}})})}
 function page<T>(items:T[],q:URLSearchParams){const p=Math.max(1,Number(q.get('page'))||1),size=50;return {items:items.slice((p-1)*size,p*size),total:items.length,page:p,page_size:size}}
-function sessionFor(v:View){
-  const base={csrf:'mock-csrf',has_totp:false,has_passkey:false};
-  if(v==='finance')return {...base,id:'finance',role:'finance',state:'complete',scope:'business',has_passkey:true};
-  if(v==='warehouse')return {...base,id:'warehouse',role:'warehouse',state:'complete',scope:'business',has_passkey:true};
-  if(v==='setup-password')return {...base,id:'admin',role:'admin',state:'new',scope:'setup'};
-  if(v==='setup-factor')return {...base,id:'admin',role:'admin',state:'password',scope:'setup'};
+function sessionFor(v:View,setupID='admin'){
+  const base={csrf:'mock-csrf',has_totp:false,has_passkey:false,permissions_version:1};
+  const id=businessIDs[v];
+  if(id){const p=accountProfile(id);if(!p)return null;return {...base,...p,state:'complete',scope:'business',has_passkey:true,can_manage_data_jobs:p.role==='admin'||(p.role==='finance'&&isAll(p))}}
+  if(v==='setup-password'||v==='setup-factor'){const p=accountProfile(setupID)||{id:setupID,role:'admin',display_name:setupID,country_scope:'all' as const,countries:[],permissions_version:1};return {...base,...p,state:v==='setup-password'?'new':'password',scope:'setup',can_manage_data_jobs:false}}
   return null;
 }
 const refuse=(res:ServerResponse,what:string)=>send(res,422,{code:'mock_preview',message:`模拟预览不执行${what}；请在真实部署中由本人操作。`});
@@ -76,20 +86,27 @@ const refuse=(res:ServerResponse,what:string)=>send(res,422,{code:'mock_preview'
 async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFunction){
   const url=new URL(req.url||'/','http://mock.local'),p=url.pathname,q=url.searchParams;
   if(p==='/__mock/badge.css'){res.setHeader('Content-Type','text/css');res.end(badgeCSS);return}
-  if(p==='/__mock/view'){const v=views.includes(q.get('v') as View)?q.get('v') as View:'finance';res.statusCode=302;res.setHeader('Set-Cookie',`mock_view=${v}; Path=/; SameSite=Strict`);res.setHeader('Location','/'+(q.get('next')?'?'+q.get('next'):''));res.end();return}
+  if(p==='/__mock/view'){const v=views.includes(q.get('v') as View)?q.get('v') as View:'finance';res.statusCode=302;res.setHeader('Set-Cookie',[`mock_view=${v}; Path=/; SameSite=Strict`,...flagCookies(q)]);res.setHeader('Location','/'+(q.get('next')?'?'+q.get('next'):''));res.end();return}
+  if(p==='/__mock/flags')return send(res,200,{fail:q.get('fail')||'',slow:Number(q.get('slow'))||0},undefined,flagCookies(q));
+  if(p==='/__mock/reset'){resetAccounts();return send(res,200,{reset:true})}
   if(!p.startsWith('/api/'))return next();
-  const v=viewOf(req),s=sessionFor(v),api=p.slice(4),body=req.method==='POST'?await readBody(req):{};
-  await new Promise(r=>setTimeout(r,120+Math.random()*180));
+  const v=viewOf(req),s=sessionFor(v,cookie(req,'mock_setup')||'admin'),api=p.slice(4),body=req.method==='POST'||req.method==='PATCH'||req.method==='PUT'?await readBody(req):{};
+  const flags=flagsOf(req),accountRoute=/^\/(countries|users|admin\/|warehouse-requests)/.test(api);
+  await new Promise(r=>setTimeout(r,(accountRoute&&flags.slow)||120+Math.random()*180));
+  if(accountRoute){const key=req.method!=='GET'?'write':api.startsWith('/admin/account-audit')?'audit':api.startsWith('/admin/accounts')?'accounts':api.startsWith('/warehouse-requests')?'requests':api.slice(1);if(flags.fail.has(key))return send(res,503,{code:'mock_failure',message:`模拟故障：${({write:'保存',audit:'操作记录',accounts:'账户列表',requests:'申请列表',countries:'国家列表',users:'责任人列表'} as Record<string,string>)[key]||key}暂时不可用（仅开发预览）`})}
   if(api==='/health')return send(res,200,{application:'returns-recon',runtime_id:'mock-preview'});
   if(api==='/auth/me')return s?send(res,200,s):send(res,401,{code:'unauthenticated',message:'未登录'});
-  if(api==='/auth/setup/accounts')return send(res,200,v==='setup'?[{id:'admin',role:'admin'},{id:'warehouse',role:'warehouse'}]:[]);
-  if(api==='/auth/setup/start')return send(res,200,{session:{...sessionFor('setup-password'),id:body.id}},'setup-password');
+  if(api==='/auth/setup/accounts')return send(res,200,v==='setup'?setupAccounts():[]);
+  if(api==='/auth/setup/start'){if(!setupAccounts().some(a=>a.id===body.id))return send(res,409,{code:'conflict',message:'该账户已设置密码，请使用密码登录续办'});return send(res,200,{session:sessionFor('setup-password',body.id)},'setup-password',[`mock_setup=${encodeURIComponent(body.id)}; Path=/; SameSite=Strict`])}
   if(api==='/auth/logout')return send(res,200,{},'login');
   if(api.startsWith('/auth/'))return refuse(res,'认证、密码或认证因素操作');
   if(!s||s.scope!=='business')return send(res,401,{code:'unauthenticated',message:'未登录'});
-  const finance=s.role!=='warehouse',visible=cases.filter(c=>finance||c.assignee===s.id);
+  const finance=s.role!=='warehouse',visible=cases.filter(c=>(finance||c.assignee===s.id)&&allows(s,txn(cases.indexOf(c)*9).country));
+  const openCases=(id:string)=>cases.filter(c=>c.assignee===id&&c.status!=='closed').map(c=>txn(cases.indexOf(c)*9).country);
+  const deletionCases=(id:string,remove:boolean)=>{const open=cases.filter(c=>c.assignee===id&&c.status!=='closed'),closed_cases=cases.filter(c=>c.assignee===id&&c.status==='closed').length;if(remove)for(const c of open){const before={...c};c.status='pending';c.assignee='';c.conclusion='';c.version++;audits.get(c.id)?.push({id:(audits.get(c.id)?.length||0)+1,actor:s.id,action:'account_deleted_unassign',occurred_at:new Date().toISOString(),before,after:{...c}})}return {open_cases:open.length,closed_cases}};
+  if(handleAccounts(api,req.method||'GET',body,s,(status,value)=>send(res,status,value),openCases,deletionCases))return;
   if(api==='/runs')return send(res,200,runs);
-  if(api==='/users')return send(res,200,[{id:'warehouse',role:'warehouse'},{id:'finance',role:'finance'},{id:'admin',role:'admin'}]);
+  if(api==='/users')return finance?send(res,200,visibleUsers(s)):send(res,403,{code:'forbidden',message:'需要财务或管理员权限'});
   // Sample UI fixtures only. Production transactions/authorization are verified
   // by the Go SQLite/HTTP tests; these routes never enter the production bundle.
   const reviewMatch=(it:any,f:any)=>['status','reason','assignee'].every(k=>!f[k]||it.case[k]===f[k])&&['customer','country','stock','invoice'].every(k=>!f[k]||it.cancel[k]===f[k]);
@@ -124,7 +141,7 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
   if(api==='/cases'){const st=q.get('status'),why=q.get('reason');if(why&&!reasons.includes(why))return send(res,422,{code:'invalid_input',message:'未知差异原因'});return send(res,200,page(visible.filter(c=>(!st||c.status===st)&&(!why||c.reason===why)),q))}
   if(api==='/allocations')return send(res,200,page(allocations,q));
   if(api==='/transactions'){
-    let rows=Array.from({length:TXN_TOTAL},(_,i)=>txn(i));
+    let rows=Array.from({length:TXN_TOTAL},(_,i)=>txn(i)).filter(r=>allows(s,r.country));
     for(const k of ['customer','stock','invoice','country'] as const){const f=q.get(k);if(f)rows=rows.filter(r=>r[k]===f)}
     const from=q.get('date_from'),to=q.get('date_to');if(from)rows=rows.filter(r=>r.time>=from);if(to)rows=rows.filter(r=>r.time<to);
     const sort=q.get('sort')||'source',dir=q.get('direction')==='desc'?-1:1,key=({date:'time',source:'source_row'} as Record<string,string>)[sort]||sort;
@@ -166,9 +183,9 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
     c.version++;list.push({id:list.length+1,actor:s.id,action:m[2],occurred_at:new Date().toISOString(),before,after:{status:c.status,version:c.version}});
     return send(res,200,c);
   }
-  if(finance&&api==='/jobs'&&req.method==='POST'){const id='mock-job-'+(jobs.size+1);jobs.set(id,{id,polls:0,scope:body.scope});return send(res,200,{id,status:'queued',stage:'queued',progress:{}})}
+  if(s.can_manage_data_jobs&&api==='/jobs'&&req.method==='POST'){const id='mock-job-'+(jobs.size+1);jobs.set(id,{id,polls:0,scope:body.scope});return send(res,200,{id,status:'queued',stage:'queued',progress:{}})}
   const j=/^\/jobs\/([^/]+)$/.exec(api);
-  if(finance&&j){const job=jobs.get(j[1]);if(!job)return send(res,404,{code:'not_found',message:'任务不存在'});const [status,stage]=stages[Math.min(job.polls++,stages.length-1)];const n=Math.min(job.polls,4);return send(res,200,{id:job.id,status,stage,run_id:run.run_id,progress:{input:{rows_read:n*321,accepted:n*310,excluded:n*11},matched:n*29,suspected:n*24}})}
+  if(s.can_manage_data_jobs&&j){const job=jobs.get(j[1]);if(!job)return send(res,404,{code:'not_found',message:'任务不存在'});const [status,stage]=stages[Math.min(job.polls++,stages.length-1)];const n=Math.min(job.polls,4);return send(res,200,{id:job.id,status,stage,run_id:run.run_id,progress:{input:{rows_read:n*321,accepted:n*310,excluded:n*11},matched:n*29,suspected:n*24}})}
   return send(res,404,{code:'not_found',message:'模拟预览没有此接口'});
 }
 

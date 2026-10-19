@@ -1,0 +1,118 @@
+test_TC01_existing_source_becomes_read_only_without_rewriting_receipt (test_fetch_data.SourceTests.test_TC01_existing_source_becomes_read_only_without_rewriting_receipt) ... ok
+test_TC01_inconsistent_provenance_rejected (test_fetch_data.SourceTests.test_TC01_inconsistent_provenance_rejected) ... ok
+test_TC01_tampered_original_rejected_without_overwrite (test_fetch_data.SourceTests.test_TC01_tampered_original_rejected_without_overwrite) ... ok
+test_busy_port_rejects_before_preparing_or_stopping (test_portable.PortableTests.test_busy_port_rejects_before_preparing_or_stopping) ... ok
+test_check_only_does_not_create_user_state (test_portable.PortableTests.test_check_only_does_not_create_user_state) ... ok
+test_child_environment_uses_isolated_state (test_portable.PortableTests.test_child_environment_uses_isolated_state) ... ok
+test_first_preparation_requires_eight_gib_before_any_download (test_portable.PortableTests.test_first_preparation_requires_eight_gib_before_any_download) ... ok
+test_manifest_verification_detects_changed_executable (test_portable.PortableTests.test_manifest_verification_detects_changed_executable) ... ok
+test_open_account_uses_page_without_reading_links_or_renewing (test_portable.PortableTests.test_open_account_uses_page_without_reading_links_or_renewing) ... ok
+test_partial_database_is_retained_and_rejected (test_portable.PortableTests.test_partial_database_is_retained_and_rejected) ... ok
+test_repeat_preparation_retains_completed_state (test_portable.PortableTests.test_repeat_preparation_retains_completed_state) ... ok
+test_TC02_scope_selected_before_cleaning (test_prepare.CleaningTests.test_TC02_scope_selected_before_cleaning) ... ok
+test_TC03_exact_XML_price_survives_beyond_binary_float_precision (test_prepare.CleaningTests.test_TC03_exact_XML_price_survives_beyond_binary_float_precision) ... ok
+test_TC03_header_and_alphanumeric_stock (test_prepare.CleaningTests.test_TC03_header_and_alphanumeric_stock) ... ok
+test_TC03_text_identifiers_preserve_leading_zeroes (test_prepare.CleaningTests.test_TC03_text_identifiers_preserve_leading_zeroes) ... ok
+test_TC04_invalid_price_quantity_and_case_insensitive_C (test_prepare.CleaningTests.test_TC04_invalid_price_quantity_and_case_insensitive_C) ... ok
+test_TC05_missing_identity_retained_description_uninvented (test_prepare.CleaningTests.test_TC05_missing_identity_retained_description_uninvented) ... ok
+test_TC06_cross_sheet_occurrence_alignment_2_and_3 (test_prepare.CleaningTests.test_TC06_cross_sheet_occurrence_alignment_2_and_3) ... ok
+test_TC07_same_sheet_duplicates_all_marked_not_deleted (test_prepare.CleaningTests.test_TC07_same_sheet_duplicates_all_marked_not_deleted) ... ok
+test_TC08_exclusion_priority_and_single_main_reason (test_prepare.CleaningTests.test_TC08_exclusion_priority_and_single_main_reason) ... ok
+test_preparation_restores_cycle_collection_after_success_and_failure (test_prepare.CleaningTests.test_preparation_restores_cycle_collection_after_success_and_failure) ... ok
+test_prepared_hash_tampering_rejected (test_prepare.CleaningTests.test_prepared_hash_tampering_rejected) ... ok
+test_shared_and_inline_rich_text_and_empty_numeric_lexemes_remain_exact (test_prepare.CleaningTests.test_shared_and_inline_rich_text_and_empty_numeric_lexemes_remain_exact) ... ok
+test_source_1904_calendar_and_nonstandard_cell_types_remain_exact (test_prepare.CleaningTests.test_source_1904_calendar_and_nonstandard_cell_types_remain_exact) ... ok
+test_unexpected_workbook_sheet_metadata_is_rejected (test_prepare.CleaningTests.test_unexpected_workbook_sheet_metadata_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 1.216s
+
+OK
+TAP version 13
+# Subtest: deletion signals only the revoked credentials and deduplicates IDs
+ok 1 - deletion signals only the revoked credentials and deduplicates IDs
+  ---
+  duration_ms: 1.1028
+  type: 'test'
+  ...
+# Subtest: unsupported providers and accounts without passkeys give manual cleanup guidance
+ok 2 - unsupported providers and accounts without passkeys give manual cleanup guidance
+  ---
+  duration_ms: 0.1263
+  type: 'test'
+  ...
+# Subtest: a rejected or synchronously throwing provider never reports account deletion failed
+ok 3 - a rejected or synchronously throwing provider never reports account deletion failed
+  ---
+  duration_ms: 0.2121
+  type: 'test'
+  ...
+# Subtest: partial success and a stalled provider remain bounded and accurately reported
+ok 4 - partial success and a stalled provider remain bounded and accurately reported
+  ---
+  duration_ms: 31.7258
+  type: 'test'
+  ...
+# Subtest: the first server page is available while the overview is still pending
+ok 5 - the first server page is available while the overview is still pending
+  ---
+  duration_ms: 2.1645
+  type: 'test'
+  ...
+# Subtest: changing query cancels the old request and discards a late response
+ok 6 - changing query cancels the old request and discards a late response
+  ---
+  duration_ms: 0.9171
+  type: 'test'
+  ...
+# Subtest: logout cancellation suppresses both pending data and pending failures
+ok 7 - logout cancellation suppresses both pending data and pending failures
+  ---
+  duration_ms: 0.3705
+  type: 'test'
+  ...
+# Subtest: overview failure does not discard a successful table response
+ok 8 - overview failure does not discard a successful table response
+  ---
+  duration_ms: 0.4185
+  type: 'test'
+  ...
+# Subtest: cancelling transport abort errors never produces a failure notice
+ok 9 - cancelling transport abort errors never produces a failure notice
+  ---
+  duration_ms: 0.3425
+  type: 'test'
+  ...
+# Subtest: synchronous request failure leaves a useful terminal state
+ok 10 - synchronous request failure leaves a useful terminal state
+  ---
+  duration_ms: 0.162
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.1477
+{
+  "actual_time": "2026-10-19T13:01:24.5367576+08:00",
+  "powershell_version": "7.6.5",
+  "go_exit": 0,
+  "python_exit": 0,
+  "frontend_exit": 0,
+  "go_top_level_passed": 156,
+  "go_top_level_failed": 0,
+  "go_top_level_skipped": 0,
+  "python_tests_ran": "25",
+  "frontend_passed": "10",
+  "go_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\go.jsonl",
+  "go_stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\go.stderr.txt",
+  "python_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\python.txt",
+  "python_stdout": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\python.stdout.txt",
+  "frontend_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\frontend.tap.txt",
+  "frontend_stderr": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\unified-tests\\frontend.stderr.txt"
+}

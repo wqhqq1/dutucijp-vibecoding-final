@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/shopspring/decimal"
+	"returnsrecon/internal/access"
 	"returnsrecon/internal/model"
 )
 
@@ -61,6 +62,7 @@ type ReviewItem struct {
 	Notice        string         `json:"notice,omitempty"`
 }
 type ReviewSet struct {
+	ScopeVersion  int            `json:"scope_version,omitempty"`
 	ID            string         `json:"id"`
 	RunID         string         `json:"run_id"`
 	Actor         WorkflowActor  `json:"actor"`
@@ -175,7 +177,7 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 	if e = conn.QueryRowContext(ctx, "SELECT r.dataset_id FROM runs r JOIN datasets d ON d.id=r.dataset_id WHERE r.id=? AND r.status='published' AND d.status='published'", run).Scan(&dataset); e != nil {
 		return out, workflowError("not_found", "运行尚未发布", WorkflowCase{})
 	}
-	out = ReviewSet{RunID: run, Actor: actor, PolicyVersion: ReviewPolicyVersion, CreatedAt: time.Now().Format(time.RFC3339Nano), Items: []ReviewItem{}, Counts: map[string]int{}}
+	out = ReviewSet{ScopeVersion: access.Version(ctx), RunID: run, Actor: actor, PolicyVersion: ReviewPolicyVersion, CreatedAt: time.Now().Format(time.RFC3339Nano), Items: []ReviewItem{}, Counts: map[string]int{}}
 	out.ID, e = newReviewID(run + "|" + actor.ID + "|" + out.CreatedAt)
 	if e != nil {
 		return out, e
@@ -217,6 +219,10 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 		if e != nil {
 			rows.Close()
 			return out, e
+		}
+		c.Country = cancels[c.CancelID].Country
+		if !access.Allows(ctx, c.Country) {
+			continue
 		}
 		itemByCancel[c.CancelID] = len(out.Items)
 		out.Items = append(out.Items, ReviewItem{Case: c, Cancel: cancels[c.CancelID], Options: []ReviewOption{}})
@@ -519,6 +525,12 @@ func (s *Store) reviewSet(ctx context.Context, actor WorkflowActor, id string) (
 		return
 	}
 	err = json.Unmarshal([]byte(body), &set)
+	if err != nil {
+		return ReviewSet{}, err
+	}
+	if !access.Compatible(ctx, set.ScopeVersion) {
+		return ReviewSet{}, workflowError("scope_changed", "负责国家已调整，请重新生成推荐", WorkflowCase{})
+	}
 	if !actor.valid() || set.Actor != actor {
 		return ReviewSet{}, workflowError("forbidden", "推荐快照不属于当前身份", WorkflowCase{})
 	}

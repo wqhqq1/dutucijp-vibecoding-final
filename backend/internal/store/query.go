@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"returnsrecon/internal/access"
 	"strconv"
 	"strings"
 	"time"
@@ -439,17 +440,23 @@ func queryScopeWhere(actor WorkflowActor, f QueryFilter, ownCases bool) (string,
 	return " WHERE " + strings.Join(parts, " AND "), args
 }
 
+func scopedQueryWhere(ctx context.Context, actor WorkflowActor, f QueryFilter, ownCases bool) (string, []any) {
+	where, args := queryScopeWhere(actor, f, ownCases)
+	suffix, countries := access.SQL(ctx, "n.country")
+	return where + suffix, append(args, countries...)
+}
+
 func (s *Store) ListTransactions(ctx context.Context, actor WorkflowActor, f QueryFilter) (out TransactionPage, err error) {
 	f, err = s.validateFilter(ctx, actor, f)
 	if err != nil {
 		return
 	}
 	out = TransactionPage{Items: []TransactionRecord{}, Page: f.Page, PageSize: f.PageSize}
-	where, args := queryWhere(actor, f)
-	ordered := manifestTransactionCount(actor, f)
+	where, args := scopedQueryWhere(ctx, actor, f, false)
+	ordered := access.Global(ctx) && manifestTransactionCount(actor, f)
 	countFrom := transactionKeyFrom(f, false)
 	keyFrom := transactionKeyFrom(f, true)
-	immutable := immutableTransactionScope(actor, f)
+	immutable := access.Global(ctx) && immutableTransactionScope(actor, f)
 	if immutable {
 		// Publication is checked above on every request. Bind the resolved dataset
 		// directly, avoiding a run/dataset lookup for each scanned input row.
@@ -526,10 +533,10 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 		return
 	}
 	out = CasePage{Items: []WorkflowCase{}, Page: f.Page, PageSize: f.PageSize}
-	where, args := queryScopeWhere(actor, f, true)
+	where, args := scopedQueryWhere(ctx, actor, f, true)
 	from := runFrom + ` CROSS JOIN cases c ON c.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id` + filterJoins(f, true)
 	countFrom := from
-	if !hasRowFilter(f) && f.Classification == "" {
+	if access.Global(ctx) && !hasRowFilter(f) && f.Classification == "" {
 		countFrom = runFrom + ` CROSS JOIN cases c ON c.run_id=r.id`
 	}
 	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
@@ -538,7 +545,7 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
 	rows, e := s.DB.QueryContext(ctx, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
  c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,
- d.source_hash,sr.sheet,sr.source_row,r.rule_version,d.cleaning_version`+from+` CROSS JOIN source_rows sr ON sr.id=n.source_id`+where+" ORDER BY "+sourceOrder("c")+",c.id LIMIT ? OFFSET ?", args...)
+ d.source_hash,sr.sheet,sr.source_row,r.rule_version,d.cleaning_version,n.country`+from+` CROSS JOIN source_rows sr ON sr.id=n.source_id`+where+" ORDER BY "+sourceOrder("c")+",c.id LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
@@ -548,10 +555,10 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 		var c WorkflowCase
 		if err = rows.Scan(&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason,
 			&c.Status, &c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy,
-			&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion); err != nil {
+			&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country); err != nil {
 			return
 		}
-		if err = authorizeWorkflowRead(actor, c); err != nil {
+		if err = authorizeWorkflowRead(ctx, actor, c); err != nil {
 			return
 		}
 		out.Items = append(out.Items, c)
@@ -571,9 +578,9 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
 	}
 	from += filterJoins(f, true)
-	where, args := queryScopeWhere(actor, f, true)
+	where, args := scopedQueryWhere(ctx, actor, f, true)
 	countFrom := from
-	if !hasRowFilter(f) && f.Classification == "" {
+	if access.Global(ctx) && !hasRowFilter(f) && f.Classification == "" {
 		countFrom = runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id`
 		if actor.Role == "warehouse" || caseFiltered(f) {
 			countFrom += ` CROSS JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
@@ -686,7 +693,9 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 			rows.Close()
 			return
 		}
-		out.DecisionEvidence = append(out.DecisionEvidence, item)
+		if access.Allows(ctx, item.Country) {
+			out.DecisionEvidence = append(out.DecisionEvidence, item)
+		}
 	}
 	err = rows.Err()
 	rows.Close()
@@ -700,6 +709,9 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 		sale, e := readManualRow(ctx, s.DB, out.Case.DatasetID, a.SaleID)
 		if e != nil {
 			return out, e
+		}
+		if !access.Allows(ctx, sale.Country) {
+			return CaseEvidencePage{}, workflowError("not_found", "证据不在当前权限范围", WorkflowCase{})
 		}
 		confirmation.Sale.TransactionRecord = out.Cancel
 		confirmation.Sale.Row = sale
@@ -747,7 +759,7 @@ func (s *Store) ExportCSV(ctx context.Context, actor WorkflowActor, f QueryFilte
 	if err != nil {
 		return err
 	}
-	where, args := queryWhere(actor, f)
+	where, args := scopedQueryWhere(ctx, actor, f, false)
 	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, true)+where+" ORDER BY "+transactionOrder(f), args...)
 	if err != nil {
 		return err

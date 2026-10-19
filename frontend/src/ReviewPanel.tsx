@@ -1,5 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {caseReasonLabel,recommendationUserLabel,recommendationExplain,roleLabel} from './labels';
+import {caseReasonLabel,recommendationUserLabel,recommendationExplain} from './labels';
+import {type Account} from './accounts';
+import AssigneePicker,{canAssign} from './AssigneePicker';
 
 type API=(path:string,body?:unknown,signal?:AbortSignal)=>Promise<any>;
 type Option={id:string;kind:string;sale_id:string;invoice:string;time:string;gap_seconds:number;remaining:number;warning?:string;basket_id?:string;basket_cases?:string[];duplicate?:{capacity:number;allocated:number;remaining:number;canonical_id:string;members:{sale_id:string;sheet:string;source_row:number}[]}};
@@ -16,7 +18,7 @@ const actionHelp:Record<string,string>={
 };
 const states:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',ready:'待提交',succeeded:'成功',skipped:'已跳过',failed:'失败'};
 const groupings:[string,string][]=[['invoice','退货单'],['customer','客户与国家'],['reason','差异原因'],['stock','商品']];
-type Props={api:API;runID:string;finance:boolean;filters:Record<string,string>;users:{id:string;role:string}[];onChanged:()=>void;onOpen:(c:Item['case'])=>void};
+type Props={api:API;runID:string;finance:boolean;filters:Record<string,string>;users:Account[];usersLoading?:boolean;usersError?:string;onRetryUsers:()=>void;onChanged:()=>void;onOpen:(c:Item['case'])=>void};
 
 function ConstraintBadge({option}:{option:Option|null}){
  if(!option)return <span className="muted">等待明确方案</span>;
@@ -98,11 +100,12 @@ function PreviewModal({batch,batchPage,busy,error,opener,onClose,onCommit,onRetr
  </dialog>
 }
 
-export default function ReviewPanel({api,runID,finance,filters,users,onChanged,onOpen}:Props){
+export default function ReviewPanel({api,runID,finance,filters,users,usersLoading,usersError,onRetryUsers,onChanged,onOpen}:Props){
  const [enabled,setEnabled]=useState(false),[mode,setMode]=useState('recommendations'),[setID,setSetID]=useState(''),[counts,setCounts]=useState<Record<string,number>>({}),[page,setPage]=useState(1),[data,setData]=useState<{items:Item[];total:number;readonly?:number}>({items:[],total:0});
  const [groupBy,setGroupBy]=useState('invoice'),[groupKey,setGroupKey]=useState<string|null>(null),[groups,setGroups]=useState<any[]>([]),[groupPage,setGroupPage]=useState(1),[groupTotal,setGroupTotal]=useState(0);
  const [all,setAll]=useState(false),[selected,setSelected]=useState<Set<string>>(new Set()),[excluded,setExcluded]=useState<Set<string>>(new Set()),[choices,setChoices]=useState<Record<string,string>>({});
- const [operation,setOperation]=useState('approve'),[assignee,setAssignee]=useState('warehouse'),[conclusion,setConclusion]=useState(''),[batch,setBatch]=useState<any>(null),[batchPage,setBatchPage]=useState(1),[busy,setBusy]=useState(false),[loading,setLoading]=useState(false),[error,setError]=useState('');
+ const [operation,setOperation]=useState('approve'),[assignee,setAssignee]=useState(''),[conclusion,setConclusion]=useState(''),[batch,setBatch]=useState<any>(null),[batchPage,setBatchPage]=useState(1),[busy,setBusy]=useState(false),[loading,setLoading]=useState(false),[error,setError]=useState('');
+ useEffect(()=>{setAssignee(current=>users.some(u=>u.id===current)?current:'')},[users]);
  const [showModal,setShowModal]=useState(false);
  const modalOpener=useRef<HTMLElement|null>(null);
  function closeModal(){setShowModal(false)}
@@ -135,7 +138,7 @@ export default function ReviewPanel({api,runID,finance,filters,users,onChanged,o
  const reviewCount=Math.max(0,(counts.total||0)-closedCount-(counts.recommended||0)-(counts.tied||0));
  const currentStep=batch?3:n?3:2;
  const needsConclusion=['approve','close'].includes(operation);
- const blockedReason=!n?'先在第 2 步勾选项目。':needsConclusion&&!conclusion.trim()?'填写共同核查结论后才能预览。':'';
+ const blockedReason=!n?'先在第 2 步勾选项目。':operation==='assign'&&(usersLoading||!!usersError||!users.some(u=>u.id===assignee&&canAssign(u,filters.country||undefined)))?'请先选择负责当前国家范围的派单人员。':needsConclusion&&!conclusion.trim()?'填写共同核查结论后才能预览。':'';
  const groupPages=Math.max(1,Math.ceil(groupTotal/50));
 
  return <section className="panel review-panel" aria-label="推荐复核与批量处理">
@@ -212,7 +215,7 @@ export default function ReviewPanel({api,runID,finance,filters,users,onChanged,o
     </div>
     <div className="review-bulk-actions">
      <label>批量操作<select value={operation} disabled={busy} onChange={e=>{setOperation(e.target.value);setBatch(null);setShowModal(false)}}>{Object.entries(actions).filter(([k])=>finance||k!=='assign').map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
-     {operation==='assign'&&<label>派给<select value={assignee} disabled={busy} onChange={e=>{setAssignee(e.target.value);setBatch(null);setShowModal(false)}}>{users.map(u=><option key={u.id} value={u.id}>{u.id} · {roleLabel(u.role)}</option>)}</select></label>}
+     {operation==='assign'&&<div className="review-assignee"><span>派给</span><AssigneePicker users={users} value={assignee} disabled={busy} loading={usersLoading} error={usersError} onRetry={onRetryUsers} country={filters.country||undefined} batch onChange={id=>{setAssignee(id);setBatch(null);setShowModal(false)}}/></div>}
      <p className="action-help">{actionHelp[operation]}不符合条件的项目会在预览中单独列为“将跳过”并说明原因。</p>
      {needsConclusion&&<label className="review-conclusion">共同核查结论<textarea value={conclusion} disabled={busy} onChange={e=>{setConclusion(e.target.value);setBatch(null);setShowModal(false)}} placeholder="说明复核依据；每条都会保存本结论，结案后不能修改。"/></label>}
      <div className="preview-action">

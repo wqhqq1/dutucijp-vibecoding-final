@@ -1,0 +1,13 @@
+{
+  "formal_runtime_used": false,
+  "target": "merge-ui-warehouse-uk",
+  "closed_case_preserved": true,
+  "unfinished_cases_returned": 2,
+  "authentication_material_removed": true,
+  "other_accounts_authentication_material_unchanged": true,
+  "saved_allocations_and_balance_fingerprints_unchanged": true,
+  "deletion_audit_count": 1,
+  "browser_signal_api_accepted_notifications": 1,
+  "notification_fixture_had_no_real_passkey_private_key": true,
+  "physical_device_deletion_verified": false
+}

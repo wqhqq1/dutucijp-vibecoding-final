@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"returnsrecon/internal/access"
 	"strings"
 	"time"
 )
@@ -38,20 +39,21 @@ type BatchGroup struct {
 	Message string      `json:"message,omitempty"`
 }
 type ReviewBatch struct {
-	ID         string        `json:"id"`
-	RunID      string        `json:"run_id"`
-	Actor      WorkflowActor `json:"actor"`
-	SetID      string        `json:"set_id"`
-	Action     string        `json:"action"`
-	Assignee   WorkflowActor `json:"assignee"`
-	Conclusion string        `json:"conclusion"`
-	CreatedAt  string        `json:"created_at"`
-	Status     string        `json:"status"`
-	Groups     []BatchGroup  `json:"groups"`
-	Total      int           `json:"total"`
-	Succeeded  int           `json:"succeeded"`
-	Skipped    int           `json:"skipped"`
-	Failed     int           `json:"failed"`
+	ScopeVersion int           `json:"scope_version,omitempty"`
+	ID           string        `json:"id"`
+	RunID        string        `json:"run_id"`
+	Actor        WorkflowActor `json:"actor"`
+	SetID        string        `json:"set_id"`
+	Action       string        `json:"action"`
+	Assignee     WorkflowActor `json:"assignee"`
+	Conclusion   string        `json:"conclusion"`
+	CreatedAt    string        `json:"created_at"`
+	Status       string        `json:"status"`
+	Groups       []BatchGroup  `json:"groups"`
+	Total        int           `json:"total"`
+	Succeeded    int           `json:"succeeded"`
+	Skipped      int           `json:"skipped"`
+	Failed       int           `json:"failed"`
 	// ReadOnly counts selected items already closed in the snapshot; they are
 	// left out of the batch instead of being listed as skipped.
 	ReadOnly int `json:"readonly"`
@@ -233,7 +235,7 @@ func (s *Store) PreviewBatch(ctx context.Context, a WorkflowActor, req BatchRequ
 		}
 		groups[r] = append(groups[r], it)
 	}
-	out = ReviewBatch{RunID: set.RunID, Actor: a, SetID: set.ID, Action: req.Action, Assignee: target, Conclusion: strings.TrimSpace(req.Conclusion), CreatedAt: time.Now().Format(time.RFC3339Nano), Status: "preview", Groups: []BatchGroup{}, Total: len(selected), ReadOnly: readOnly}
+	out = ReviewBatch{ScopeVersion: access.Version(ctx), RunID: set.RunID, Actor: a, SetID: set.ID, Action: req.Action, Assignee: target, Conclusion: strings.TrimSpace(req.Conclusion), CreatedAt: time.Now().Format(time.RFC3339Nano), Status: "preview", Groups: []BatchGroup{}, Total: len(selected), ReadOnly: readOnly}
 	out.ID, e = newReviewID(set.ID + "|" + out.CreatedAt)
 	if e != nil {
 		return out, e
@@ -297,7 +299,7 @@ func precheckBatchGroup(ctx context.Context, c *sql.Conn, b ReviewBatch, g Batch
 		if e != nil {
 			return e
 		}
-		if e = authorizeWorkflowRead(b.Actor, cur); e != nil {
+		if e = authorizeWorkflowRead(ctx, b.Actor, cur); e != nil {
 			return e
 		}
 		// Closed is final, so it explains a stale snapshot better than its version.
@@ -309,6 +311,9 @@ func precheckBatchGroup(ctx context.Context, c *sql.Conn, b ReviewBatch, g Batch
 		}
 		switch b.Action {
 		case "assign":
+			if e = authorizeCaseCountry(ctx, c, b.Actor, b.Assignee, cur); e != nil {
+				return e
+			}
 			if cur.Assignee != "" {
 				return workflowError("already_assigned", "已有责任人："+cur.Assignee, cur)
 			}
@@ -466,6 +471,9 @@ func (s *Store) Batch(ctx context.Context, a WorkflowActor, id string) (out Revi
 		return
 	}
 	out.Status = status
+	if !access.Compatible(ctx, out.ScopeVersion) {
+		return ReviewBatch{}, workflowError("scope_changed", "负责国家已调整，请重新生成推荐并预览", WorkflowCase{})
+	}
 	if !a.valid() || out.Actor != a {
 		return ReviewBatch{}, workflowError("forbidden", "批次不属于当前身份", WorkflowCase{})
 	}
@@ -509,7 +517,14 @@ func (s *Store) LatestBatch(ctx context.Context, a WorkflowActor, run string) (R
 	if e != nil {
 		return ReviewBatch{}, e
 	}
-	return s.Batch(ctx, a, id)
+	batch, err := s.Batch(ctx, a, id)
+	var stale *WorkflowError
+	if errors.As(err, &stale) && stale.Code == "scope_changed" {
+		// Restoring optional history must not block a freshly generated workbench.
+		// Direct ID access and commits retain the scope_changed rejection.
+		return ReviewBatch{}, nil
+	}
+	return batch, err
 }
 
 func (s *Store) CommitBatch(ctx context.Context, a WorkflowActor, id string) (ReviewBatch, error) {

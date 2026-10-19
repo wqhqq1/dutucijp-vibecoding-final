@@ -1,0 +1,129 @@
+{
+  "browser": "installed Chrome headless via Playwright",
+  "actual_time": "2026-10-19T10:36:07.950Z",
+  "errors": [],
+  "results": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "deck": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "center_error": {
+        "x": 0,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "deck": {
+        "x": 0,
+        "y": 40,
+        "width": 1280,
+        "height": 720
+      },
+      "center_error": {
+        "x": 0,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "deck": {
+        "x": 0,
+        "y": 96,
+        "width": 1024,
+        "height": 576
+      },
+      "center_error": {
+        "x": 0,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "viewport": {
+        "width": 2560,
+        "height": 1080
+      },
+      "deck": {
+        "x": 319.99993896484375,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "center_error": {
+        "x": -0.00006103515625,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deck": {
+        "x": 0,
+        "y": 312.3125,
+        "width": 390,
+        "height": 219.375
+      },
+      "center_error": {
+        "x": 0,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deck": {
+        "x": -0.00006103515625,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "center_error": {
+        "x": -0.00006103515625,
+        "y": 0
+      },
+      "slide_count": 10,
+      "centered": true,
+      "fits": true
+    },
+    {
+      "navigation": "10 slides traversed",
+      "print": {
+        "deck_position": "relative",
+        "deck_transform": "none",
+        "visible_slides": 10
+      }
+    }
+  ]
+}

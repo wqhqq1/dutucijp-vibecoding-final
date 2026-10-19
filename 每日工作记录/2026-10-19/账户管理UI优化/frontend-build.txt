@@ -1,0 +1,18 @@
+
+> returns-reconciliation-ui@0.1.0 build
+> tsc --noEmit && vite build
+
+[36mvite v8.3.4 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 51 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.41 kB │ gzip:   0.32 kB
+dist/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff    13.14 kB
+dist/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff    13.15 kB
+dist/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2   14.70 kB
+dist/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2   14.88 kB
+dist/assets/index-DTTNt-ty.css                              57.28 kB │ gzip:  12.22 kB
+dist/assets/index-CbrhRiX1.js                              361.39 kB │ gzip: 110.92 kB
+
+[32m✓ built in 137ms[39m

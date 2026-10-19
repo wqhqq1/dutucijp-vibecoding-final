@@ -4,7 +4,7 @@
  "version": "0.1.0",
  "type": "module",
  "scripts": {
-  "test": "node --test --test-reporter=tap tests/requests.test.mjs",
+  "test": "node --test --test-reporter=tap tests/requests.test.mjs tests/passkey-signals.test.mjs",
   "build": "tsc --noEmit && vite build",
   "dev": "vite --host localhost",
   "dev:mock": "vite --mode mock",

@@ -75,6 +75,9 @@ func confirmCandidateTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor
 		if err != nil {
 			return err
 		}
+		if err = authorizeWorkflowRead(ctx, actor, before); err != nil {
+			return err
+		}
 		if before.Assignee != actor.ID {
 			return workflowError("forbidden", "仅当前责任人可以确认候选", WorkflowCase{})
 		}

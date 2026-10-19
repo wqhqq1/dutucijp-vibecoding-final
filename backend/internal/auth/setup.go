@@ -3,25 +3,39 @@ package auth
 import (
 	"context"
 	"database/sql"
+	"returnsrecon/internal/access"
 )
 
 // SetupAccounts exposes only locally provisioned, untouched identities. It does
 // not create accounts or grant access to accounts with an existing password.
-func (s *Service) SetupAccounts(ctx context.Context) ([]Identity, error) {
+func (s *Service) SetupAccounts(ctx context.Context) ([]access.Profile, error) {
 	rows, err := s.DB.QueryContext(ctx, `SELECT id,role FROM auth_users WHERE state='new' AND password_hash='' ORDER BY CASE role WHEN 'finance' THEN 0 WHEN 'warehouse' THEN 1 ELSE 2 END,id`)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-	out := []Identity{}
+	ids := []string{}
 	for rows.Next() {
 		var identity Identity
 		if err = rows.Scan(&identity.ID, &identity.Role); err != nil {
+			rows.Close()
 			return nil, err
 		}
-		out = append(out, identity)
+		ids = append(ids, identity.ID)
 	}
-	return out, rows.Err()
+	err = rows.Err()
+	rows.Close()
+	if err != nil {
+		return nil, err
+	}
+	out := []access.Profile{}
+	for _, id := range ids {
+		p, e := access.Load(ctx, s.DB, id)
+		if e != nil {
+			return nil, e
+		}
+		out = append(out, p)
+	}
+	return out, nil
 }
 
 // StartSetup is the local first-use claim, protected by the HTTP origin/host

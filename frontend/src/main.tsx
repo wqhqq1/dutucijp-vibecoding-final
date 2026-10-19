@@ -2,13 +2,16 @@ import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import QRCode from 'qrcode';
 import ReviewPanel from './ReviewPanel';
+import AccountPanel from './AccountPanel';
+import AssigneePicker,{canAssign} from './AssigneePicker';
+import {accountName,countryLabel,countrySummary,type Account} from './accounts';
 import {caseReasons as reasons,caseReasonLabel,recommendationLabel} from './labels';
 import {startResourceRequest,type ResourceResult} from './requests';
 import '@fontsource/ibm-plex-mono/latin-400.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
 import './style.css';
 
-type Session={id:string;role:string;state:string;scope:string;has_totp:boolean;has_passkey:boolean;csrf:string};
+type Session=Account&{state:string;scope:string;has_totp:boolean;has_passkey:boolean;csrf:string;can_manage_data_jobs:boolean};
 type Case={id:string;run_id:string;cancel_id:string;reason:string;status:string;version:number;assignee:string;conclusion:string;source_row:number;sheet:string};
 type Row={id:string;invoice:string;stock:string;customer:string;country:string;price:string;quantity:number;time:string;sheet:string;source_row:number;current_remaining?:number;remaining_at_decision?:number;reason?:string;raw_json?:string;duplicate_group?:{original:number;allocated:number;remaining:number;members:{sale_id:string;sheet:string;source_row:number}[]}};
 type Page<T>={items:T[];total:number;page:number;page_size:number};
@@ -17,7 +20,7 @@ type Evidence={case:Case;cancel:Row;decision_evidence:Row[];candidates:Page<Row>
 type Run={run_id:string;scope:string;cleaning_version:string;rule_version:string};
 const labels:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',finance:'财务',warehouse:'仓库',admin:'管理员'};
 const evidenceReasons:Record<string,string>={qualified:'合格候选',suspected_duplicate_sale:'合格，但销售行疑似重复',remaining_quantity_too_small:'剩余数量不足',sale_not_strictly_earlier:'销售不早于取消'};
-const auditActions:Record<string,string>={assign:'派单',start:'开始处理',confirm_candidate:'人工确认候选',close:'关闭'};
+const auditActions:Record<string,string>={assign:'派单',start:'开始处理',confirm_candidate:'人工确认候选',close:'关闭',account_deleted_unassign:'账户删除，退回未派单'};
 const scopeLabels:Record<string,string>={benchmark:'首表固定一万行',year1:'首年度全部',all:'两个年度全部'};
 const emptyFilters={customer:'',stock:'',invoice:'',country:'',status:'',reason:'',assignee:'',date_from:'',date_to:'',sort:'source',direction:'asc'};
 const jobLabels:Record<string,string>={queued:'排队等待',running:'正在运行',succeeded:'已完成',failed:'未完成',preparing:'准备官方数据',importing:'导入并校验',reconciling:'对账与保存',published:'已发布',interrupted:'上次运行中断'};
@@ -27,7 +30,7 @@ let csrf='';
 function base64(v:ArrayBuffer){return btoa(String.fromCharCode(...new Uint8Array(v))).replaceAll('+','-').replaceAll('/','_').replaceAll('=','')}
 function binary(v:string){return Uint8Array.from(atob(v.replaceAll('-','+').replaceAll('_','/')+'='.repeat((4-v.length%4)%4)),c=>c.charCodeAt(0))}
 function credentialJSON(c:PublicKeyCredential){const response=c.response;const data:any={id:c.id,rawId:base64(c.rawId),type:c.type,clientExtensionResults:c.getClientExtensionResults(),authenticatorAttachment:c.authenticatorAttachment};if(response instanceof AuthenticatorAttestationResponse){data.response={clientDataJSON:base64(response.clientDataJSON),attestationObject:base64(response.attestationObject),transports:response.getTransports()}}else{const r=response as AuthenticatorAssertionResponse;data.response={clientDataJSON:base64(r.clientDataJSON),authenticatorData:base64(r.authenticatorData),signature:base64(r.signature),userHandle:r.userHandle?base64(r.userHandle):null}}return data}
-async function api(path:string,body?:unknown,signal?:AbortSignal){const r=await fetch('/api'+path,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:body===undefined?undefined:JSON.stringify(body),credentials:'same-origin',signal});const value=await r.json();if(!r.ok)throw new Error(value.message||value.code||'请求未完成');return value}
+async function api(path:string,body?:unknown,signal?:AbortSignal,method?:string){const r=await fetch('/api'+path,{method:method||(body===undefined?'GET':'POST'),headers:body===undefined?{}:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:body===undefined?undefined:JSON.stringify(body),credentials:'same-origin',signal});const value=await r.json();if(!r.ok)throw new Error(value.message||value.code||'请求未完成');return value}
 function useResource<T>(key:string,load:(signal:AbortSignal)=>Promise<T>):ResourceResult<T>{
  const [state,setState]=useState<{key:string;result:ResourceResult<T>}>({key:'',result:{loading:false}});
  // The key includes account, query and refresh generation. Hide an old result
@@ -70,26 +73,30 @@ function App(){
  const [existingLogin,setExistingLogin]=useState(false),[setupRevision,setSetupRevision]=useState(0);
  const [enrollment,setEnrollment]=useState<{secret:string;uri:string;qr:string}|null>(null),[codes,setCodes]=useState<string[]>([]),[saved,setSaved]=useState(false);
  const [runID,setRunID]=useState(''),[tab,setTab]=useState('cases'),[page,setPage]=useState(1);
- const [filters,setFilters]=useState(emptyFilters),[applied,setApplied]=useState(emptyFilters),[activeCase,setActiveCase]=useState<{id:string;page:number}|null>(null),[assignee,setAssignee]=useState('warehouse'),[conclusion,setConclusion]=useState(''),[job,setJob]=useState<any>(null),[scope,setScope]=useState('year1');
- const [revision,setRevision]=useState(0),[queryRevision,setQueryRevision]=useState(0),[overviewRevision,setOverviewRevision]=useState(0),[runsRevision,setRunsRevision]=useState(0),[detailRevision,setDetailRevision]=useState(0),[usersRevision,setUsersRevision]=useState(0);
+ const [filters,setFilters]=useState(emptyFilters),[applied,setApplied]=useState(emptyFilters),[activeCase,setActiveCase]=useState<{id:string;page:number}|null>(null),[assignee,setAssignee]=useState(''),[conclusion,setConclusion]=useState(''),[job,setJob]=useState<any>(null),[scope,setScope]=useState('year1');
+ const [revision,setRevision]=useState(0),[queryRevision,setQueryRevision]=useState(0),[overviewRevision,setOverviewRevision]=useState(0),[runsRevision,setRunsRevision]=useState(0),[detailRevision,setDetailRevision]=useState(0),[usersRevision,setUsersRevision]=useState(0),[countriesRevision,setCountriesRevision]=useState(0);
  const complete=session?.scope==='business'&&session.state==='complete';const finance=complete&&session.role!=='warehouse';
+ const canManageJobs=complete&&session.can_manage_data_jobs;
  const owner=complete?JSON.stringify([session.id,session.role,session.csrf]):'';
  const runtimeResource=useResource<{runtime_id:string}>('runtime-identity',signal=>api('/health',undefined,signal));
- const jobStorageKey=finance&&runtimeResource.value?.runtime_id?'recon-job:'+JSON.stringify([runtimeResource.value.runtime_id,session?.id,session?.role]):'';
- function resetWorkspace(){sessionEpoch.current++;jobGeneration.current++;jobIDRef.current='';detailCache.current=null;setCaseNotice(null);setCandidateChoice(null);setRunID('');setTab('cases');setPage(1);setFilters(emptyFilters);setApplied(emptyFilters);setActiveCase(null);conclusionKey.current='';setConclusion('');setAssignee('warehouse');setJob(null);setScope('year1');setMessage('');setError('')}
+ const jobStorageKey=canManageJobs&&runtimeResource.value?.runtime_id?'recon-job:'+JSON.stringify([runtimeResource.value.runtime_id,session?.id,session?.role]):'';
+ function resetWorkspace(){sessionEpoch.current++;jobGeneration.current++;jobIDRef.current='';detailCache.current=null;setCaseNotice(null);setCandidateChoice(null);setRunID('');setTab('cases');setPage(1);setFilters(emptyFilters);setApplied(emptyFilters);setActiveCase(null);conclusionKey.current='';setConclusion('');setAssignee('');setJob(null);setScope('year1');setMessage('');setError('')}
  function accept(value:any){if(value.session){if(session?.id!==value.session.id||session?.scope!==value.session.scope||session?.csrf!==value.session.csrf)resetWorkspace();csrf=value.session.csrf;setSession(value.session)}if(value.recovery_codes){setCodes(value.recovery_codes);setSaved(false)}setPassword('');setPasswordAgain('');setShowPassword(false);setOTP('');setRecoveryCode('');setEnrollment(null)}
  async function action(fn:()=>Promise<unknown>,caseID?:string){const epoch=sessionEpoch.current;setPendingActions(n=>n+1);if(caseID)setCaseNotice(null);else{setError('');setMessage('')}try{await fn()}catch(e){if(epoch===sessionEpoch.current){const error=e instanceof Error?e.message:'操作未完成';if(caseID)setCaseNotice({id:caseID,error});else setError(error)}}finally{setPendingActions(n=>n-1)}}
  function caseAction(fn:()=>Promise<unknown>){return action(fn,activeCase?.id)}
  async function me(){try{const s=await api('/auth/me');csrf=s.csrf;setSession(s)}catch{csrf='';setSession(null)}finally{setLoading(false)}}
  useEffect(()=>{const params=new URLSearchParams(location.hash.slice(1));const token=params.get('bootstrap');if(token){historyReplace();action(async()=>{const value=await api('/auth/bootstrap',{token});accept(value)}).finally(()=>setLoading(false))}else me()},[]);
- const setupResource=useResource<{id:string;role:string}[]>(!loading&&!session?'setup-accounts:'+setupRevision:'',signal=>api('/auth/setup/accounts',undefined,signal));
+ const setupResource=useResource<Account[]>(!loading&&!session?'setup-accounts:'+setupRevision:'',signal=>api('/auth/setup/accounts',undefined,signal));
  const setupAccounts=setupResource.value||[];
  const choosingSetup=!session&&!recover&&!existingLogin&&setupAccounts.length>0;
  function historyReplace(){window.history.replaceState(null,'',location.pathname)}
  function query(pageNumber=page){const q=new URLSearchParams({run_id:runID,page:String(pageNumber),page_size:'50'});Object.entries(applied).forEach(([k,v])=>{if(v&&(!['sort','direction'].includes(k)||tab==='transactions'))q.set(k,v)});return q.toString()}
  const runsResource=useResource<Run[]>(owner?JSON.stringify([owner,'runs',runsRevision]):'',signal=>api('/runs',undefined,signal));
- const usersResource=useResource<{id:string;role:string}[]>(finance?JSON.stringify([owner,'users',usersRevision]):'',signal=>api('/users',undefined,signal));
+ const usersResource=useResource<Account[]>(finance?JSON.stringify([owner,'users',usersRevision]):'',signal=>api('/users',undefined,signal));
+ const countriesResource=useResource<string[]>(owner?JSON.stringify([owner,'countries',countriesRevision]):'',signal=>api('/countries',undefined,signal));
  const runs=runsResource.value||[],users=usersResource.value||[];
+ useEffect(()=>{if(usersResource.value)setAssignee(current=>usersResource.value!.some(u=>u.id===current)?current:'')},[usersResource.value]);
+ useEffect(()=>{setAssignee('')},[activeCase?.id]);
  useEffect(()=>{if(runsResource.value)setRunID(current=>runsResource.value!.some(r=>r.run_id===current)?current:runsResource.value![0]?.run_id||'')},[runsResource.value]);
  const table=['cases','transactions','allocations'].includes(tab)?tab:'';
  const queryString=query();
@@ -125,9 +132,9 @@ function App(){
  useEffect(()=>{if(jobStorageKey&&job?.id)try{sessionStorage.setItem(jobStorageKey,job.id)}catch{}},[owner,jobStorageKey,job?.id]);
  const generated=()=>{const bytes=crypto.getRandomValues(new Uint8Array(16));const value=base64(bytes.buffer);setPassword(value);setPasswordAgain(value);setShowPassword(true)};
  const logout=()=>action(async()=>{await api('/auth/logout',{});try{if(jobStorageKey)sessionStorage.removeItem(jobStorageKey)}catch{}resetWorkspace();csrf='';setSession(null);setCodes([]);setSaved(false);setEnrollment(null);setPassword('');setPasswordAgain('');setOTP('');setRecoveryCode('');setID('');setRecover(false);setShowPassword(false);setExistingLogin(false);setSetupRevision(n=>n+1)});
- const tabTitles:Record<string,string>={cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全'};
- const tabHints:Record<string,string>={cases:'查看差异原因与证据，派单、核查并记录结论。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。'};
- const navItems:[string,string][]=[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(finance?[['jobs','数据任务'] as [string,string]]:[]),['security','账户安全']];
+ const tabTitles:Record<string,string>={cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全',accounts:'账户管理',requests:'仓库申请'};
+ const tabHints:Record<string,string>={cases:'查看差异原因与证据，派单、核查并记录结论。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。',accounts:'创建财务与仓库账户，设置负责国家并审批仓库申请。',requests:'申请负责国家内的仓库账户，查看管理员审批结果。'};
+ const navItems:[string,string][]=[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(canManageJobs?[['jobs','数据任务'] as [string,string]]:[]),...(session?.role==='admin'?[['accounts','账户管理'] as [string,string]]:session?.role==='finance'?[['requests','仓库申请'] as [string,string]]:[]),['security','账户安全']];
  const pageCount=Math.max(1,Math.ceil(data.total/50));
  const appliedCount=Object.entries(applied).filter(([k,v])=>v&&!['sort','direction'].includes(k)).length;
  const draftChanged=JSON.stringify(filters)!==JSON.stringify(applied);
@@ -144,7 +151,7 @@ function App(){
   <p className="muted">选择要使用的账户，设置密码后完成安全验证。这里仅显示尚未设置密码的账户。</p>
   <div className="setup-accounts">{setupAccounts.map(account=><button className="setup-account" key={account.id} disabled={busy} onClick={()=>action(async()=>accept(await api('/auth/setup/start',{id:account.id})))}>
    <span className="setup-role">{labels[account.role]}</span>
-   <span className="setup-id"><strong>{account.id}</strong><small>尚未设置密码</small></span>
+   <span className="setup-id"><strong>{account.display_name||account.id}</strong><small title={countryLabel(account)}>{account.id} · {countrySummary(account)} · 尚未设置密码</small></span>
    <span className="setup-go">开始配置</span>
   </button>)}</div>
   <p className="scope-note">直接选择即可开始，无需初始化链接，也没有15分钟截止时间。</p>
@@ -152,7 +159,7 @@ function App(){
  </section>;
  const security=<section className="security-panel">
   <h2>{session?.state==='new'?'为账户设置密码':'完成安全配置'}</h2>
-  <p className="muted">当前账户 <strong>{session?.id}</strong>（{labels[session?.role||'']}）。完成以下三步后即可使用。</p>
+  <p className="muted">当前账户 <strong>{session?accountName(session):''}</strong>{session?.display_name&&session.display_name!==session.id&&<> <span className="mono">{session.id}</span></>}（{labels[session?.role||'']}{session?' · '+countrySummary(session):''}）。完成以下三步后即可使用。</p>
   <ol className="steps"><li className={session?.state!=='new'?'done':''}><span>强密码</span></li><li className={session?.has_passkey||session?.has_totp?'done':''}><span>验证Passkey或认证器</span></li><li className={complete?'done':''}><span>保存恢复码</span></li></ol>
   {session?.state==='new'?<>
    <p className="muted">设置16至128个字符的密码，也可一键生成。请先保存密码，下一步绑定自己的Passkey或认证器。</p>
@@ -225,7 +232,7 @@ function App(){
  const dataTab=<>
   <div className="run-bar">
    <label className="run-select"><span>当前数据范围</span><select aria-label="当前数据运行" value={runID} onChange={e=>{setRunID(e.target.value);setPage(1);closeCase()}}>{runs.map(r=><option key={r.run_id} value={r.run_id}>{scopeName(r.scope)}（清洗 {r.cleaning_version}，规则 {r.rule_version}）</option>)}</select></label>
-   <span className={'view-scope '+(finance?'global':'assigned')}>{finance?'财务与管理员全局视图':'仅显示分派给你的差异及相关证据'}</span>
+   <span className={'view-scope '+(finance?'global':'assigned')} title={countryLabel(session!)}>{finance?'负责范围：'+countrySummary(session!,3):'仅显示分派给你的差异及相关证据 · '+countrySummary(session!,3)}</span>
   </div>
   {runsResource.error&&<div role="alert" className="notice error">运行列表加载失败：{runsResource.error}<button onClick={()=>setRunsRevision(n=>n+1)}>重试</button></div>}
   {runID&&<section className="overview" aria-label="当前运行差异统计">
@@ -239,11 +246,12 @@ function App(){
    <p className="caveat">{overview?.caveat||'匹配只表示规则推断。资料不足时保留原因，不制造关联。'}</p>
    {finance&&overview?.initial_reconciliation&&<details className="conservation"><summary>查看来源、行数守恒与初始配对口径</summary><p>原始 {overview.initial_reconciliation.input.raw} ＝ 接纳 {overview.initial_reconciliation.input.accepted} ＋ 排除 {overview.initial_reconciliation.input.excluded}；初始自动配对 {overview.initial_reconciliation.matched}，疑似 {overview.initial_reconciliation.suspected}，当前规则下无合格原单 {overview.initial_reconciliation.no_original}。人工确认保留初始分类。</p></details>}
   </section>}
-  {tab==='cases'&&runID&&<ReviewPanel key={owner+'|'+runID} api={api} runID={runID} finance={!!finance} filters={applied} users={users} onOpen={openCase} onChanged={()=>{setRevision(n=>n+1);setOverviewRevision(n=>n+1)}}/>}
+  {tab==='cases'&&runID&&<ReviewPanel key={owner+'|'+runID} api={api} runID={runID} finance={!!finance} filters={applied} users={users} usersLoading={usersResource.loading} usersError={usersResource.error} onRetryUsers={()=>setUsersRevision(n=>n+1)} onOpen={openCase} onChanged={()=>{setRevision(n=>n+1);setOverviewRevision(n=>n+1)}}/>}
   <section className="panel table-panel" aria-busy={dataResource.loading||runsResource.loading}>
    <form className="filters" onSubmit={e=>{e.preventDefault();setApplied({...filters});setPage(1);setQueryRevision(n=>n+1)}}>
     <div className="filter-grid">
-     {[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号'],['country','国家']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}
+     {[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}
+     <label>国家<select value={filters.country} onChange={e=>setFilters({...filters,country:e.target.value})} disabled={countriesResource.loading||!!countriesResource.error}><option value="">全部国家（本人范围内）</option>{filters.country&&!countriesResource.value?.includes(filters.country)&&<option value={filters.country}>{filters.country}</option>}{(countriesResource.value||[]).map(country=><option key={country} value={country}>{country}</option>)}</select>{countriesResource.loading&&<small role="status">正在读取国家…</small>}</label>
      <label>状态<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}><option value="">全部</option>{['pending','in_progress','closed'].map(x=><option key={x} value={x}>{labels[x]}</option>)}</select></label>
      <label className="wide">差异原因<select value={filters.reason} onChange={e=>setFilters({...filters,reason:e.target.value})}><option value="">全部原因</option>{Object.entries(reasons).map(([k,[v]])=><option key={k} value={k}>{v}</option>)}</select></label>
      <label>起始日期<input type="date" value={filters.date_from} onChange={e=>setFilters({...filters,date_from:e.target.value})}/></label>
@@ -253,6 +261,7 @@ function App(){
       <label>排序方向<select value={filters.direction} onChange={e=>setFilters({...filters,direction:e.target.value})}><option value="asc">升序</option><option value="desc">降序</option></select></label>
      </>}
     </div>
+    {countriesResource.error&&<p role="alert" className="inline-alert">国家选项加载失败：{countriesResource.error} <button type="button" className="text-button" onClick={()=>setCountriesRevision(n=>n+1)}>重试</button></p>}
     <div className="filter-actions">
      <span className={'filter-state'+(draftChanged?' changed':'')} role="status">{draftChanged?'条件已修改，点击查询后生效':appliedCount?`已应用 ${appliedCount} 个筛选条件`:'未设置筛选条件'}</span>
      <button type="button" className="secondary" disabled={busy} onClick={()=>setFilters(emptyFilters)}>清空条件</button>
@@ -328,8 +337,7 @@ function App(){
    </dl>
    <p className="caveat">{selected.caveat}</p>
    {(finance||(isAssignee&&selected.case.status==='pending'))&&<div className="drawer-actions">
-    {finance&&!selected.case.assignee&&<><select aria-label="选择责任人" value={assignee} onChange={e=>setAssignee(e.target.value)}>{users.map(x=><option key={x.id} value={x.id}>{x.id} · {labels[x.role]}</option>)}</select><button disabled={caseBusy||usersResource.loading||!users.length} onClick={()=>caseAction(()=>mutate('assign',{assignee}))}>派单</button></>}
-    {selected.case.assignee&&finance&&<button className="secondary" disabled={caseBusy} onClick={()=>caseAction(()=>mutate('assign',{assignee}))}>再次派单</button>}
+    {finance&&<><AssigneePicker key={selected.case.id} users={users} value={assignee} onChange={setAssignee} country={selected.cancel.country} disabled={caseBusy||selected.case.status==='closed'} loading={usersResource.loading} error={usersResource.error} onRetry={()=>setUsersRevision(n=>n+1)}/><button disabled={caseBusy||selected.case.status==='closed'||usersResource.loading||!!usersResource.error||!users.some(u=>u.id===assignee&&canAssign(u,selected.cancel.country))} onClick={()=>caseAction(()=>mutate('assign',{assignee}))}>{selected.case.assignee?'再次派单':'派单'}</button></>}
     {isAssignee&&selected.case.status==='pending'&&<button disabled={caseBusy} onClick={()=>caseAction(()=>mutate('start',{version:selected.case.version}))}>开始处理</button>}
    </div>}
    <h3>决策时证据</h3>
@@ -361,11 +369,11 @@ function App(){
   <main>
    <header className="topbar">
     <div className="title-block"><h1>{complete?tabTitles[tab]:(choosingSetup||session?.state==='new'?'首次配置':'安全登录')}</h1>{complete&&<p className="page-hint">{tabHints[tab]}</p>}</div>
-    <div className="account">{session&&<><span className="account-id"><span className="avatar" aria-hidden="true">{session.id.slice(0,1).toUpperCase()}</span><span>{session.id}<small>{labels[session.role]}</small></span></span><button className="secondary compact" disabled={busy} onClick={logout}>退出</button></>}</div>
+    <div className="account">{session&&<><span className="account-id"><span className="avatar" aria-hidden="true">{(session.display_name||session.id).slice(0,1).toUpperCase()}</span><span title={countryLabel(session)}>{accountName(session)}<small>{session.id} · {labels[session.role]} · {countrySummary(session)}</small></span></span><button className="secondary compact" disabled={busy} onClick={logout}>退出</button></>}</div>
    </header>
    {!activeCase&&<>{error&&<div role="alert" className="notice error">{error}<button onClick={()=>setError('')} aria-label="关闭错误">×</button></div>}{message&&<div role="status" className="notice">{message}</div>}{busy&&<p className="busy" role="status">正在处理，请稍候…</p>}</>}
    {!complete?<div className="auth-content">{choosingSetup?firstSetup:!session?loginPanel:session.scope==='login_factor'||session.scope==='login_passkey'?factorPanel:security}</div>
-   :<div className="workspace">{tab==='security'?securityTab:tab==='jobs'?jobsTab:dataTab}</div>}
+   :<div className="workspace">{tab==='accounts'||tab==='requests'?<AccountPanel key={owner} api={api} session={session!} onChanged={()=>{setUsersRevision(v=>v+1);setRevision(v=>v+1)}}/>:tab==='security'?securityTab:tab==='jobs'?jobsTab:dataTab}</div>}
   </main>
   {drawer}
  </div>

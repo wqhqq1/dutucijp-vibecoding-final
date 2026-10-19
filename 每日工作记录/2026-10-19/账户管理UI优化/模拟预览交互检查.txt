@@ -1,0 +1,24 @@
+PASS admin overview figures agree with the directory | kpi=8/3/4/22 charts=3
+PASS legend and coverage filter the directory | warehouse=4; France rows=4 (含全部国家账户)
+PASS create: empty fields, bad id, empty country selection show inline errors | 登录账户名须为3至64位，以小写字母或数字开头，只含小写字母、数字、点、下划线或连字符。 | 请至少选择一个国家，或改为全部国家。
+PASS create: duplicate id shows the server 409 and keeps the input | 该账户名已存在或已有待审批申请×
+PASS create: multi-country warehouse succeeds once, lands as 待首次配置 | 已创建仓库账户 伊比利亚退货仓（warehouse-iberia，Portugal、Spain）。当前为“待首次配置”：… POSTs=2
+PASS edit: id and role locked; name-only save keeps countries; scope warning shows | PATCH=PATCH /api/admin/accounts/warehouse-eu; 12 国保留; 移除国家后出现退出提示
+PASS edit: shrinking scope with open out-of-scope cases shows server conflict | error: 仍有新国家范围之外的未结案派单，请先完成这些工作×
+PASS approve: confirm step, account created as 待首次配置, repeat blocked | approve POST=1, repeat→409; 已批准并创建仓库账户 巴黎退货仓（warehouse-fr-paris）。账户现…
+PASS approved request timeline shows setup still pending | done:提交申请2026/10/18 04:50:56 | done:已批准并开户系统管理员 · 2026/10/19 10:51:00 | current:首次安全配置待首次配置
+PASS reject: reason required, rejection shown | 驳回原因北欧范围请拆分为单国申请（模拟）
+PASS new accounts appear in first-setup list and assignee pickers | steps=强密码>验证Passkey或认证器>保存恢复码; 当前账户 巴黎退货仓 warehouse-fr-paris（仓库 · France）。完成以下三步后即可使用。; finance-uk可派 6 人（含巴黎仓，不含伊比利亚仓）
+PASS batch assignee select lists new warehouse with compact countries | 10 options; 欧洲大陆联合退货仓（改名） · warehouse-eu · Austria、Belgium 等12国 · 仓库
+PASS limited finance: own countries only, no data-jobs nav, cannot request all | nav=差异处理/交易检索/配对明细/仓库申请/账户安全; 越界申请→403
+PASS limited finance: submit request, pending card appears, rejected reason readable | pending card; rejection="驳回原因临时账户请改用现有英国仓库，避免同一国家重复派单。"
+PASS partial failure: accounts down, requests and countries still usable; recovery | errors=1 pending kpi=2 request cards=2; 重试后名录恢复
+PASS write failure keeps input and shows server message | 模拟故障：保存暂时不可用（仅开发预览）×
+PASS slow load shows loading state, then content | 正在读取… | 正在读取… | 正在读取… | 正在读取账户…
+PASS logout while requests are in flight: no errors, no stale data | workspace gone, no exception
+PASS empty request list message | pending=2
+PASS keyboard: tabs, legend and coverage rows are focusable buttons with names | focusables=19; focus readout="10-19：6 次管理操作"
+PASS no page-level overflow at 1440px (admin, finance-uk, setup) | admin:0 开户申请:0 操作记录:0 finance-uk:0 setup:0
+PASS no page-level overflow at 820px (admin, finance-uk, setup) | admin:0 开户申请:0 操作记录:0 finance-uk:0 setup:0
+PASS no page-level overflow at 390px (admin, finance-uk, setup) | admin:0 开户申请:0 操作记录:0 finance-uk:0 setup:0
+total 23/23 PASS; problems 0

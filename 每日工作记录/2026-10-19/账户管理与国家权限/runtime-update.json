@@ -1,0 +1,30 @@
+{
+  "actual_time": "2026-10-19T08:06:38.819715+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "sha256": "65214810c1717d4a2a1eee3c9dcefcfc6d0b41ef380398f34349e0773ffc226b",
+  "backup": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\accounts-20261019\\before-accounts-update.exe",
+  "manifest_files_verified": 251,
+  "existing_runtime_id": "add3034f405376452823df23d377fc78",
+  "existing_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-8415ed9ed0ee0f63\\local\\dutucijp-vibecoding-final\\state\\business.sqlite",
+  "existing_accounts_credentials_and_recovery_unchanged": true,
+  "business_counts_unchanged": true,
+  "counts": {
+    "allocations": 14969,
+    "audit_events": 21620,
+    "auth_credentials": 3,
+    "auth_recovery": 30,
+    "auth_users": 3,
+    "cases": 9450,
+    "datasets": 1,
+    "normalized_rows": 1067371,
+    "runs": 1,
+    "sale_balances": 1019654,
+    "source_rows": 1067371
+  },
+  "launcher_pid": 23256,
+  "service_health": {
+    "application": "returns-recon",
+    "runtime_id": "add3034f405376452823df23d377fc78"
+  },
+  "midterm_packages_modified": false
+}

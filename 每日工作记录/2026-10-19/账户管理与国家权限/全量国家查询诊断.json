@@ -1,0 +1,105 @@
+{
+  "actual_time": "2026-10-19T07:57:12+08:00",
+  "boundary": "FR-19 official two-year all data, fresh online backup, synthetic real same-database accounts. Country reference SQL, HTTP pagination/CSV/overview/allocation counts, ten workers and 300 country-scoped GETs. No background job: not formal NFR04, NFR02/03 or human acceptance.",
+  "source": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-8415ed9ed0ee0f63\\local\\dutucijp-vibecoding-final\\state\\business.sqlite",
+  "database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\isolated.sqlite",
+  "source_sha256_before": "b423fcc43f368ef29c1714bf96a83ee298ba6b6704f63374a3a7871deb9f7654",
+  "source_sha256_after": "b423fcc43f368ef29c1714bf96a83ee298ba6b6704f63374a3a7871deb9f7654",
+  "source_unchanged": true,
+  "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+  "measurements": [
+    {
+      "country": "United Kingdom",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=1",
+      "expected": 981330,
+      "actual": 981330,
+      "milliseconds": 85.451
+    },
+    {
+      "country": "United Kingdom",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=2",
+      "expected": 981330,
+      "actual": 981330,
+      "milliseconds": 75.006
+    },
+    {
+      "country": "United Kingdom",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=19627",
+      "expected": 981330,
+      "actual": 981330,
+      "milliseconds": 474.233
+    },
+    {
+      "country": "United Kingdom",
+      "path": "/api/cases?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=1",
+      "expected": 8209,
+      "actual": 8209,
+      "milliseconds": 27.832
+    },
+    {
+      "country": "United Kingdom",
+      "path": "/api/allocations?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=1",
+      "expected": 12589,
+      "actual": 12589,
+      "milliseconds": 32.611
+    },
+    {
+      "country": "United Kingdom",
+      "path": "/api/exports?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&kind=cancel&page_size=1",
+      "expected": 16650,
+      "actual": 16650,
+      "milliseconds": 545.929
+    },
+    {
+      "country": "France",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=1",
+      "expected": 14330,
+      "actual": 14330,
+      "milliseconds": 4.165
+    },
+    {
+      "country": "France",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=2",
+      "expected": 14330,
+      "actual": 14330,
+      "milliseconds": 3.529
+    },
+    {
+      "country": "France",
+      "path": "/api/transactions?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=50&page=287",
+      "expected": 14330,
+      "actual": 14330,
+      "milliseconds": 222.847
+    },
+    {
+      "country": "France",
+      "path": "/api/cases?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=1",
+      "expected": 138,
+      "actual": 138,
+      "milliseconds": 20.498
+    },
+    {
+      "country": "France",
+      "path": "/api/allocations?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&page_size=1",
+      "expected": 318,
+      "actual": 318,
+      "milliseconds": 28.903
+    },
+    {
+      "country": "France",
+      "path": "/api/exports?run_id=e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9&kind=cancel&page_size=1",
+      "expected": 389,
+      "actual": 389,
+      "milliseconds": 355.437
+    }
+  ],
+  "workers": 10,
+  "attempted": 300,
+  "succeeded": 300,
+  "failed": 0,
+  "p95_milliseconds": 140.132,
+  "maximum_milliseconds": 171.561,
+  "total_seconds": 26.7831123,
+  "passed": true,
+  "serve_url": "http://localhost:18089"
+}

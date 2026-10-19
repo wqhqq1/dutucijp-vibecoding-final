@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"returnsrecon/internal/access"
 	"strings"
 	"time"
 )
@@ -33,6 +34,7 @@ func (a WorkflowActor) valid() bool {
 }
 
 type WorkflowCase struct {
+	Country         string `json:"country,omitempty"`
 	ID              string `json:"id"`
 	RunID           string `json:"run_id"`
 	DatasetID       string `json:"dataset_id"`
@@ -128,23 +130,26 @@ type rowQuerier interface {
 func readWorkflowCase(ctx context.Context, q rowQuerier, id string) (c WorkflowCase, err error) {
 	err = q.QueryRowContext(ctx, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
  c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,
- d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version
+	 d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version,n.country
  FROM cases c JOIN runs r ON r.id=c.run_id JOIN datasets d ON d.id=r.dataset_id
  JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id
  JOIN source_rows s ON s.id=n.source_id
  WHERE c.id=? AND r.status='published' AND d.status='published'`, id).Scan(
 		&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason, &c.Status,
 		&c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy,
-		&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion)
+		&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country)
 	if errors.Is(err, sql.ErrNoRows) {
 		err = workflowError("not_found", "差异不存在或运行尚未发布", WorkflowCase{})
 	}
 	return c, err
 }
 
-func authorizeWorkflowRead(actor WorkflowActor, c WorkflowCase) error {
+func authorizeWorkflowRead(ctx context.Context, actor WorkflowActor, c WorkflowCase) error {
 	if !actor.valid() {
 		return workflowError("unauthenticated", "需要可信服务端身份", WorkflowCase{})
+	}
+	if !access.Allows(ctx, c.Country) {
+		return workflowError("not_found", "差异不存在或不在当前权限范围", WorkflowCase{})
 	}
 	if actor.Role == "warehouse" && actor.ID != c.Assignee {
 		return workflowError("forbidden", "只能查看本人差异及操作历史", WorkflowCase{})
@@ -155,7 +160,7 @@ func authorizeWorkflowRead(actor WorkflowActor, c WorkflowCase) error {
 func (s *Store) WorkflowCase(ctx context.Context, actor WorkflowActor, id string) (WorkflowCase, error) {
 	c, err := readWorkflowCase(ctx, s.DB, id)
 	if err == nil {
-		err = authorizeWorkflowRead(actor, c)
+		err = authorizeWorkflowRead(ctx, actor, c)
 	}
 	if err != nil {
 		return WorkflowCase{}, err
@@ -187,6 +192,9 @@ func assignCaseTx(ctx context.Context, conn *sql.Conn, actor, assignee WorkflowA
 	err = func() error {
 		before, err := readWorkflowCase(ctx, conn, id)
 		if err != nil {
+			return err
+		}
+		if err = authorizeCaseCountry(ctx, conn, actor, assignee, before); err != nil {
 			return err
 		}
 		if before.Assignee != "" {
@@ -237,6 +245,9 @@ func transitionCaseTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, 
 		if err != nil {
 			return err
 		}
+		if err = authorizeWorkflowRead(ctx, actor, before); err != nil {
+			return err
+		}
 		if before.Assignee == "" || before.Assignee != actor.ID {
 			return workflowError("forbidden", "仅当前责任人可以处理", WorkflowCase{})
 		}
@@ -281,6 +292,21 @@ func transitionCaseTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, 
 		out = WorkflowCase{}
 	}
 	return out, err
+}
+
+// Resolve targets again under the write lock; a stale drop-down is not authority.
+func authorizeCaseCountry(ctx context.Context, conn *sql.Conn, actor, target WorkflowActor, c WorkflowCase) error {
+	if !access.Allows(ctx, c.Country) {
+		return workflowError("not_found", "差异不存在或不在当前权限范围", WorkflowCase{})
+	}
+	if _, trusted := access.From(ctx); !trusted {
+		return nil
+	}
+	p, e := access.Load(ctx, conn, target.ID)
+	if e != nil || p.Role != target.Role || !p.Allows(c.Country) {
+		return workflowError("forbidden", "责任人的负责国家不覆盖此差异", WorkflowCase{})
+	}
+	return nil
 }
 
 func recordWorkflowAudit(ctx context.Context, conn *sql.Conn, actor, action, at string, before, after WorkflowCase, result sql.Result) error {

@@ -1,0 +1,15 @@
+{
+  "actual_time": "2026-10-19T05:03:27.477Z",
+  "runtime": "account-deletion-ui-qa",
+  "wrong_confirmation_blocks_delete": true,
+  "cancel_preserves_account": true,
+  "admin_delete_control_absent": true,
+  "unfinished_cases_returned": 2,
+  "closed_case_preserved": 1,
+  "active_accounts_after": 6,
+  "signal_api_notifications_accepted": 1,
+  "used_inert_notification_fixture": true,
+  "physical_device_deletion_verified": false,
+  "deleted_account_request_history_preserved": true,
+  "console_errors": []
+}

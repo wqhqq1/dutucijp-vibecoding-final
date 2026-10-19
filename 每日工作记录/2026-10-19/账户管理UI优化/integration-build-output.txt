@@ -1,0 +1,30 @@
+
+added 56 packages, and audited 57 packages in 3s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> returns-reconciliation-ui@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 51 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.41 kB │ gzip:   0.32 kB
+dist/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff    13.14 kB
+dist/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff    13.15 kB
+dist/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2   14.70 kB
+dist/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2   14.88 kB
+dist/assets/index-DTTNt-ty.css                              57.28 kB │ gzip:  12.22 kB
+dist/assets/index-xB4j8IAC.js                              361.40 kB │ gzip: 110.94 kB
+
+✓ built in 132ms
+{
+  "actual_time": "2026-10-19T11:00:34.4712053+08:00",
+  "binary": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\accounts-ui-merge-20261019\\recon.exe",
+  "sha256": "f250e7131045ca3b4f20b59081dcfd8c76c8d681a39c51ca3c7caa4fb82a6844"
+}

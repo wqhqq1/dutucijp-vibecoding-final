@@ -1,0 +1,49 @@
+{
+  "actual_time": "2026-10-19T13:03:49.333334+08:00",
+  "binary": "E:\\软件编程大作业\\退货对账与差异处理系统\\teacher-demo\\app\\recon.exe",
+  "sha256": "6215ac2420a1512c27c84db4c42e1b7c0da4c5a4e75c6bee07478fb75aa044ef",
+  "backup": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019\\before-account-deletion-update",
+  "manifest_files_verified": 251,
+  "existing_runtime_id": "add3034f405376452823df23d377fc78",
+  "existing_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-teacher-demo\\instance-8415ed9ed0ee0f63\\local\\dutucijp-vibecoding-final\\state\\business.sqlite",
+  "before_counts": {
+    "allocations": 14969,
+    "audit_events": 21623,
+    "auth_credentials": 5,
+    "auth_recovery": 50,
+    "auth_users": 5,
+    "cases": 9450,
+    "datasets": 1,
+    "normalized_rows": 1067371,
+    "runs": 1,
+    "sale_balances": 1019654,
+    "source_rows": 1067371
+  },
+  "verified_at": "2026-10-19T13:05:32.781110+08:00",
+  "counts": {
+    "allocations": 14969,
+    "audit_events": 21623,
+    "auth_credentials": 5,
+    "auth_recovery": 50,
+    "auth_users": 5,
+    "cases": 9450,
+    "datasets": 1,
+    "normalized_rows": 1067371,
+    "runs": 1,
+    "sale_balances": 1019654,
+    "source_rows": 1067371
+  },
+  "existing_accounts_credentials_and_recovery_unchanged": true,
+  "business_counts_and_fingerprints_unchanged": true,
+  "service_health": {
+    "application": "returns-recon",
+    "runtime_id": "add3034f405376452823df23d377fc78"
+  },
+  "entry_assets": [
+    "/assets/index-uBLNXBFh.js",
+    "/assets/index-6q5ox9Vc.css"
+  ],
+  "midterm_packages_modified": false,
+  "qa_accounts_migrated_to_real_runtime": false,
+  "formal_accounts_deleted_by_agent": false
+}

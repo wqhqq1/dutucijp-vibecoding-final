@@ -15,6 +15,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"returnsrecon/internal/access"
 	"returnsrecon/internal/auth"
 	"returnsrecon/internal/store"
 )
@@ -177,11 +178,12 @@ func (s *Server) Handler() http.Handler {
 	}
 	r.POST("/api/auth/logout", func(c *gin.Context) {
 		e := s.Auth.Logout(c, token(c))
-		c.SetCookie(s.sessionCookieName(), "", -1, "/", "", false, true)
+		c.SetCookie(s.sessionCookieName(), "", -1, "/", "", strings.HasPrefix(c.GetString("approved_origin"), "https://"), true)
 		respond(c, map[string]bool{"logged_out": e == nil}, e)
 	})
 	r.POST("/api/auth/recovery/reissue", func(c *gin.Context) { g, e := s.Auth.ReissueRecovery(c, token(c)); s.grant(c, g, e) })
 	business := r.Group("/api", s.requireBusiness)
+	s.registerAccounts(business)
 	s.registerReview(business)
 	business.GET("/runs", s.runs)
 	business.GET("/overview", s.overview)
@@ -189,7 +191,7 @@ func (s *Server) Handler() http.Handler {
 		if !s.finance(c) {
 			return
 		}
-		v, e := s.Auth.Users(c)
+		v, e := s.visibleUsers(c)
 		respond(c, v, e)
 	})
 	business.GET("/transactions", func(c *gin.Context) {
@@ -314,7 +316,7 @@ func (s *Server) Handler() http.Handler {
 	business.GET("/audit", s.audit)
 	if s.Jobs != nil {
 		business.POST("/jobs", func(c *gin.Context) {
-			if !s.finance(c) {
+			if !s.manageData(c) {
 				return
 			}
 			var b struct {
@@ -326,7 +328,7 @@ func (s *Server) Handler() http.Handler {
 			}
 		})
 		business.GET("/jobs/:id", func(c *gin.Context) {
-			if !s.finance(c) {
+			if !s.manageData(c) {
 				return
 			}
 			v, e := s.Jobs.Get(c, c.Param("id"))
@@ -373,7 +375,7 @@ func token(c *gin.Context) string {
 }
 func (s *Server) cookie(c *gin.Context, t string) {
 	c.SetSameSite(http.SameSiteStrictMode)
-	c.SetCookie(s.sessionCookieName(), t, 8*3600, "/", "", false, true)
+	c.SetCookie(s.sessionCookieName(), t, 8*3600, "/", "", strings.HasPrefix(c.GetString("approved_origin"), "https://"), true)
 }
 func (s *Server) grant(c *gin.Context, g auth.Grant, e error) {
 	if e == nil {
@@ -427,23 +429,47 @@ func respond(c *gin.Context, value any, e error) {
 func (s *Server) boundary(c *gin.Context) {
 	c.Set("session_cookie_name", s.sessionCookieName())
 
-	expected, _ := url.Parse(s.Origin)
+	origins := []string{s.Origin}
+	if s.Auth != nil {
+		var e error
+		origins, e = s.Auth.ApprovedOrigins(c)
+		if e != nil {
+			respond(c, nil, e)
+			c.Abort()
+			return
+		}
+	}
 	host := strings.ToLower(c.Request.Host)
-	if host != expected.Host {
+	approved := ""
+	for _, origin := range origins {
+		u, _ := url.Parse(origin)
+		if host == u.Host {
+			if c.Request.TLS != nil && u.Scheme != "https" {
+				continue
+			}
+			approved = origin
+			if c.GetHeader("Origin") == origin {
+				break
+			}
+		}
+	}
+	if approved == "" {
 		if host == "127.0.0.1:8080" && (c.Request.Method == "GET" || c.Request.Method == "HEAD") {
 			c.Redirect(http.StatusTemporaryRedirect, s.Origin+c.Request.URL.RequestURI())
 		} else {
-			c.JSON(403, gin.H{"code": "invalid_host", "message": "请使用规范localhost入口"})
+			c.JSON(403, gin.H{"code": "invalid_host", "message": "请使用管理员批准的入口"})
 		}
 		c.Abort()
 		return
 	}
+	c.Set("approved_origin", approved)
+	c.Request = c.Request.WithContext(auth.WithPasskeyOrigin(c.Request.Context(), approved))
 	c.Header("Cache-Control", "no-store")
 	c.Header("X-Content-Type-Options", "nosniff")
 	c.Header("Referrer-Policy", "no-referrer")
 	c.Header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'")
 	if c.Request.Method != "GET" && c.Request.Method != "HEAD" && c.Request.Method != "OPTIONS" {
-		if c.GetHeader("Origin") != s.Origin {
+		if c.GetHeader("Origin") != approved {
 			c.AbortWithStatusJSON(403, gin.H{"code": "invalid_origin", "message": "拒绝跨来源操作"})
 			return
 		}
@@ -466,7 +492,8 @@ func (s *Server) requireBusiness(c *gin.Context) {
 	}
 	c.Set("principal", v)
 	trustedToken := token(c)
-	c.Request = c.Request.WithContext(store.WithWriteAuthorization(c.Request.Context(), func(ctx context.Context, conn *sql.Conn) error {
+	trustedContext := access.With(c.Request.Context(), v.Profile())
+	c.Request = c.Request.WithContext(store.WithWriteAuthorization(trustedContext, func(ctx context.Context, conn *sql.Conn) error {
 		return s.Auth.ValidateWrite(ctx, conn, trustedToken, v)
 	}))
 	c.Next()
@@ -479,6 +506,14 @@ func (s *Server) finance(c *gin.Context) bool {
 	a := actor(c)
 	if a.Role != "finance" && a.Role != "admin" {
 		respond(c, nil, &auth.Error{Code: "forbidden", Message: "需要财务或管理员权限", Status: 403})
+		return false
+	}
+	return true
+}
+func (s *Server) manageData(c *gin.Context) bool {
+	v := c.MustGet("principal").(auth.Session)
+	if !v.CanManageDataJobs {
+		respond(c, nil, &auth.Error{Code: "forbidden", Message: "只有管理员或负责全部国家的财务可操作全局数据任务", Status: 403})
 		return false
 	}
 	return true
@@ -536,12 +571,16 @@ func (s *Server) overview(c *gin.Context) {
 	}
 	out := map[string]any{"run_id": run, "caveat": "规则推断；没有真实原订单关联号。人工处理记录为课程模拟。"}
 	var total, pending, progress, closed int
-	query := "SELECT count(*),coalesce(sum(status='pending'),0),coalesce(sum(status='in_progress'),0),coalesce(sum(status='closed'),0) FROM cases WHERE run_id=?"
+	query := "SELECT count(*),coalesce(sum(c.status='pending'),0),coalesce(sum(c.status='in_progress'),0),coalesce(sum(c.status='closed'),0) FROM cases c JOIN runs r ON r.id=c.run_id JOIN normalized_rows n ON n.dataset_id=r.dataset_id AND n.id=c.cancel_id WHERE c.run_id=?"
 	args := []any{run}
 	if a.Role == "warehouse" {
-		query += " AND assignee=?"
+		query += " AND c.assignee=?"
 		args = append(args, a.ID)
 	}
+	suffix, countryArgs := access.SQL(c, "n.country")
+	query += suffix
+	baseArgs := append([]any{}, args...)
+	args = append(args, countryArgs...)
 	e := s.Store.DB.QueryRowContext(c, query, args...).Scan(&total, &pending, &progress, &closed)
 	if e != nil {
 		respond(c, nil, e)
@@ -555,6 +594,12 @@ func (s *Server) overview(c *gin.Context) {
 		reviewQuery += " AND c.assignee=?"
 		unallocatedQuery += " AND c.assignee=?"
 	}
+	caseCountry := ` AND EXISTS(SELECT 1 FROM runs rr JOIN normalized_rows n ON n.dataset_id=rr.dataset_id AND n.id=c.cancel_id WHERE rr.id=c.run_id` + suffix + `)`
+	if !access.Global(c) {
+		reviewQuery += caseCountry
+		unallocatedQuery += caseCountry
+	}
+	args = append(baseArgs, countryArgs...)
 	if e = s.Store.DB.QueryRowContext(c, reviewQuery, args...).Scan(&reviewed); e != nil {
 		respond(c, nil, e)
 		return
@@ -565,7 +610,7 @@ func (s *Server) overview(c *gin.Context) {
 	}
 	out["reviewed_allocations"] = reviewed
 	out["currently_unallocated"] = unallocated
-	if a.Role != "warehouse" {
+	if a.Role != "warehouse" && access.Global(c) {
 		var raw string
 		if e = s.Store.DB.QueryRowContext(c, "SELECT summary_json FROM runs WHERE id=?", run).Scan(&raw); e == nil {
 			var data any
@@ -584,7 +629,13 @@ func (s *Server) audit(c *gin.Context) {
 	if !s.finance(c) {
 		return
 	}
-	rows, e := s.Store.DB.QueryContext(c, "SELECT actor,action,method,result,occurred_at FROM auth_audit ORDER BY id DESC LIMIT 100")
+	query := "SELECT actor,action,method,result,occurred_at FROM auth_audit"
+	args := []any{}
+	if !access.Global(c) {
+		query += " WHERE actor=?"
+		args = append(args, actor(c).ID)
+	}
+	rows, e := s.Store.DB.QueryContext(c, query+" ORDER BY id DESC LIMIT 100", args...)
 	if e != nil {
 		respond(c, nil, e)
 		return

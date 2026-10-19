@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"returnsrecon/internal/access"
 	"strconv"
 	"strings"
 	"time"
@@ -64,14 +65,19 @@ type Identity struct {
 }
 type Session struct {
 	Identity
-	State      string `json:"state"`
-	Scope      string `json:"scope"`
-	Version    int    `json:"-"`
-	HasTOTP    bool   `json:"has_totp"`
-	HasPasskey bool   `json:"has_passkey"`
-	CSRF       string `json:"csrf"`
-	Fresh      int64  `json:"-"`
-	Seen       int64  `json:"-"`
+	DisplayName        string   `json:"display_name"`
+	CountryScope       string   `json:"country_scope"`
+	Countries          []string `json:"countries"`
+	PermissionsVersion int      `json:"permissions_version"`
+	CanManageDataJobs  bool     `json:"can_manage_data_jobs"`
+	State              string   `json:"state"`
+	Scope              string   `json:"scope"`
+	Version            int      `json:"-"`
+	HasTOTP            bool     `json:"has_totp"`
+	HasPasskey         bool     `json:"has_passkey"`
+	CSRF               string   `json:"csrf"`
+	Fresh              int64    `json:"-"`
+	Seen               int64    `json:"-"`
 }
 type Grant struct {
 	Token         string   `json:"-"`
@@ -80,6 +86,7 @@ type Grant struct {
 }
 type account struct {
 	Identity
+	DisplayName     string
 	Password, State string
 	Version         int
 	TOTP, Pending   []byte
@@ -87,9 +94,14 @@ type account struct {
 	Credentials     []webauthn.Credential
 }
 
-func (a account) WebAuthnID() []byte                         { return []byte(a.ID) }
-func (a account) WebAuthnName() string                       { return a.ID }
-func (a account) WebAuthnDisplayName() string                { return a.ID }
+func (a account) WebAuthnID() []byte   { return []byte(a.ID) }
+func (a account) WebAuthnName() string { return a.ID }
+func (a account) WebAuthnDisplayName() string {
+	if a.DisplayName != "" {
+		return a.DisplayName
+	}
+	return a.ID
+}
 func (a account) WebAuthnCredentials() []webauthn.Credential { return a.Credentials }
 
 func New(db *sql.DB, cfg Config) (*Service, error) {
@@ -222,7 +234,7 @@ type querier interface {
 }
 
 func load(ctx context.Context, q querier, id string) (a account, err error) {
-	err = q.QueryRowContext(ctx, "SELECT id,role,password_hash,state,version,totp_secret,pending_totp,last_step FROM auth_users WHERE id=?", id).Scan(&a.ID, &a.Role, &a.Password, &a.State, &a.Version, &a.TOTP, &a.Pending, &a.LastStep)
+	err = q.QueryRowContext(ctx, "SELECT u.id,u.role,u.password_hash,u.state,u.version,u.totp_secret,u.pending_totp,u.last_step,coalesce(nullif(p.display_name,''),u.id) FROM auth_users u LEFT JOIN auth_account_profiles p ON p.user_id=u.id WHERE u.id=? AND u.state<>'deleted'", id).Scan(&a.ID, &a.Role, &a.Password, &a.State, &a.Version, &a.TOTP, &a.Pending, &a.LastStep, &a.DisplayName)
 	if err != nil {
 		return a, err
 	}
@@ -264,21 +276,43 @@ func (s *Service) issue(ctx context.Context, c *sql.Conn, a account, scope strin
 	if _, err = c.ExecContext(ctx, "INSERT INTO auth_sessions(hash,user_id,scope,version,created,seen,expires,fresh) VALUES(?,?,?,?,?,?,?,?)", Digest(token), a.ID, scope, a.Version, now, now, now+lifetime, fresh); err != nil {
 		return g, err
 	}
-	return Grant{Token: token, Session: Session{Identity: a.Identity, State: a.State, Scope: scope, Version: a.Version, HasTOTP: len(a.TOTP) > 0, HasPasskey: len(a.Credentials) > 0, CSRF: s.csrf(token), Fresh: fresh}}, nil
+	v := Session{Identity: a.Identity, State: a.State, Scope: scope, Version: a.Version, HasTOTP: len(a.TOTP) > 0, HasPasskey: len(a.Credentials) > 0, CSRF: s.csrf(token), Fresh: fresh}
+	if err = s.profileSession(ctx, c, &v); err != nil {
+		return g, err
+	}
+	return Grant{Token: token, Session: v}, nil
 }
 func (s *Service) current(ctx context.Context, q querier, token string) (Session, error) {
 	var v Session
 	var seen, expires int64
 	err := q.QueryRowContext(ctx, `SELECT u.id,u.role,u.state,t.scope,u.version,t.fresh,t.seen,t.expires,
  coalesce(length(u.totp_secret),0)>0,EXISTS(SELECT 1 FROM auth_credentials k WHERE k.user_id=u.id)
- FROM auth_sessions t JOIN auth_users u ON u.id=t.user_id WHERE t.hash=? AND t.version=u.version`, Digest(token)).Scan(&v.ID, &v.Role, &v.State, &v.Scope, &v.Version, &v.Fresh, &seen, &expires, &v.HasTOTP, &v.HasPasskey)
+ FROM auth_sessions t JOIN auth_users u ON u.id=t.user_id WHERE t.hash=? AND t.version=u.version AND u.state<>'deleted'`, Digest(token)).Scan(&v.ID, &v.Role, &v.State, &v.Scope, &v.Version, &v.Fresh, &seen, &expires, &v.HasTOTP, &v.HasPasskey)
 	now := s.now().Unix()
 	if err != nil || now >= expires || now-seen >= 1800 {
 		return v, denied()
 	}
 	v.CSRF = s.csrf(token)
 	v.Seen = seen
+	if err = s.profileSession(ctx, q, &v); err != nil {
+		return Session{}, err
+	}
 	return v, nil
+}
+func (s *Service) profileSession(ctx context.Context, q access.Querier, v *Session) error {
+	p, e := access.Load(ctx, q, v.ID)
+	if e != nil {
+		return e
+	}
+	v.DisplayName = p.DisplayName
+	v.CountryScope = p.CountryScope
+	v.Countries = p.Countries
+	v.PermissionsVersion = p.PermissionsVersion
+	v.CanManageDataJobs = p.CanManageJobs()
+	return nil
+}
+func (v Session) Profile() access.Profile {
+	return access.Profile{ID: v.ID, Role: v.Role, DisplayName: v.DisplayName, CountryScope: v.CountryScope, Countries: v.Countries, PermissionsVersion: v.PermissionsVersion}
 }
 func (s *Service) Current(ctx context.Context, token string, business bool) (Session, error) {
 	v, e := s.current(ctx, s.DB, token)
@@ -649,20 +683,37 @@ func (s *Service) decrypt(data []byte) (string, error) {
 	plain, e := g.Open(nil, data[:g.NonceSize()], data[g.NonceSize():], []byte("totp-v1"))
 	return string(plain), e
 }
-func (s *Service) Users(ctx context.Context) ([]Identity, error) {
-	rows, e := s.DB.QueryContext(ctx, "SELECT id,role FROM auth_users ORDER BY id")
+func (s *Service) Users(ctx context.Context) ([]access.Profile, error) {
+	rows, e := s.DB.QueryContext(ctx, "SELECT id FROM auth_users WHERE state<>'deleted' ORDER BY id")
 	if e != nil {
 		return nil, e
 	}
-	defer rows.Close()
-	out := []Identity{}
+	ids := []string{}
 	for rows.Next() {
-		var v Identity
-		if e = rows.Scan(&v.ID, &v.Role); e != nil {
+		var id string
+		if e = rows.Scan(&id); e != nil {
+			rows.Close()
 			return nil, e
 		}
-		out = append(out, v)
+		ids = append(ids, id)
 	}
-	return out, rows.Err()
+	e = rows.Err()
+	rows.Close()
+	if e != nil {
+		return nil, e
+	}
+	out := []access.Profile{}
+	for _, id := range ids {
+		p, e := access.Load(ctx, s.DB, id)
+		if errors.Is(e, sql.ErrNoRows) {
+			// A concurrent deletion may have retired an ID from the first query.
+			continue
+		}
+		if e != nil {
+			return nil, e
+		}
+		out = append(out, p)
+	}
+	return out, nil
 }
 func parseInt(v string) int64 { i, _ := strconv.ParseInt(v, 10, 64); return i }

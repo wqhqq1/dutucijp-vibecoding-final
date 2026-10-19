@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: deletion signals only the revoked credentials and deduplicates IDs
+ok 1 - deletion signals only the revoked credentials and deduplicates IDs
+  ---
+  duration_ms: 1.1028
+  type: 'test'
+  ...
+# Subtest: unsupported providers and accounts without passkeys give manual cleanup guidance
+ok 2 - unsupported providers and accounts without passkeys give manual cleanup guidance
+  ---
+  duration_ms: 0.1263
+  type: 'test'
+  ...
+# Subtest: a rejected or synchronously throwing provider never reports account deletion failed
+ok 3 - a rejected or synchronously throwing provider never reports account deletion failed
+  ---
+  duration_ms: 0.2121
+  type: 'test'
+  ...
+# Subtest: partial success and a stalled provider remain bounded and accurately reported
+ok 4 - partial success and a stalled provider remain bounded and accurately reported
+  ---
+  duration_ms: 31.7258
+  type: 'test'
+  ...
+# Subtest: the first server page is available while the overview is still pending
+ok 5 - the first server page is available while the overview is still pending
+  ---
+  duration_ms: 2.1645
+  type: 'test'
+  ...
+# Subtest: changing query cancels the old request and discards a late response
+ok 6 - changing query cancels the old request and discards a late response
+  ---
+  duration_ms: 0.9171
+  type: 'test'
+  ...
+# Subtest: logout cancellation suppresses both pending data and pending failures
+ok 7 - logout cancellation suppresses both pending data and pending failures
+  ---
+  duration_ms: 0.3705
+  type: 'test'
+  ...
+# Subtest: overview failure does not discard a successful table response
+ok 8 - overview failure does not discard a successful table response
+  ---
+  duration_ms: 0.4185
+  type: 'test'
+  ...
+# Subtest: cancelling transport abort errors never produces a failure notice
+ok 9 - cancelling transport abort errors never produces a failure notice
+  ---
+  duration_ms: 0.3425
+  type: 'test'
+  ...
+# Subtest: synchronous request failure leaves a useful terminal state
+ok 10 - synchronous request failure leaves a useful terminal state
+  ---
+  duration_ms: 0.162
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.1477

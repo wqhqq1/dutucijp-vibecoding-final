@@ -1,0 +1,12 @@
+{
+  "actual_time": "2026-10-19T10:23:21.225Z",
+  "runtime": "passkey-domains-ui-qa",
+  "formal_runtime_used": false,
+  "admin_domain_tab_visible": true,
+  "base_localhost_origin_preserved": true,
+  "http_external_origin_rejected": true,
+  "https_origin_saved": "https://recon.example.com:8443",
+  "reload_preserved_config": true,
+  "console_errors": [],
+  "real_dns_tls_proxy_or_physical_passkey_tested": false
+}

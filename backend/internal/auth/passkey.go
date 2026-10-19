@@ -54,11 +54,22 @@ func (s *Service) BeginPasskey(ctx context.Context, token, userID string, regist
 		if e != nil {
 			return e
 		}
+		wa, rp, e := s.passkeyWA(ctx, c)
+		if e != nil {
+			return e
+		}
+		a, e = filterCredentials(ctx, c, a, rp)
+		if e != nil {
+			return e
+		}
+		if !register && len(a.Credentials) == 0 {
+			return denied()
+		}
 		var data *webauthn.SessionData
 		if register {
-			out.Options, data, e = s.WA.BeginRegistration(a, webauthn.WithAuthenticatorSelection(protocol.AuthenticatorSelection{UserVerification: protocol.VerificationRequired}), webauthn.WithResidentKeyRequirement(protocol.ResidentKeyRequirementRequired))
+			out.Options, data, e = wa.BeginRegistration(a, webauthn.WithAuthenticatorSelection(protocol.AuthenticatorSelection{UserVerification: protocol.VerificationRequired}), webauthn.WithResidentKeyRequirement(protocol.ResidentKeyRequirementRequired))
 		} else {
-			out.Options, data, e = s.WA.BeginLogin(a, webauthn.WithUserVerification(protocol.VerificationRequired))
+			out.Options, data, e = wa.BeginLogin(a, webauthn.WithUserVerification(protocol.VerificationRequired))
 		}
 		if e != nil {
 			return e
@@ -72,7 +83,7 @@ func (s *Service) BeginPasskey(ctx context.Context, token, userID string, regist
 		if _, e = c.ExecContext(ctx, "DELETE FROM auth_challenges WHERE session_hash=? AND purpose=?", Digest(token), purpose); e != nil {
 			return e
 		}
-		if _, e = c.ExecContext(ctx, "INSERT INTO auth_challenges VALUES(?,?,?,?,?,?,?)", id, a.ID, Digest(token), purpose, a.Version, encode(data), data.Expires.Unix()); e != nil {
+		if _, e = c.ExecContext(ctx, "INSERT INTO auth_challenges VALUES(?,?,?,?,?,?,?)", id, a.ID, Digest(token), purpose, a.Version, encode(passkeySession{*data, s.passkeyOrigin(ctx)}), data.Expires.Unix()); e != nil {
 			return e
 		}
 		out.Token = token
@@ -124,22 +135,30 @@ func (s *Service) FinishPasskey(ctx context.Context, token, challengeID string, 
 		if e != nil {
 			return denied()
 		}
-		var data webauthn.SessionData
+		var data passkeySession
 		if e = decode(raw, &data); e != nil {
 			return e
 		}
-		if data.UserVerification != protocol.VerificationRequired {
+		if data.UserVerification != protocol.VerificationRequired || !s.validChallengeOrigin(ctx, data.Origin) {
 			return denied()
 		}
 		a, e := load(ctx, c, v.ID)
 		if e != nil {
 			return e
 		}
+		wa, rp, e := s.passkeyWA(ctx, c)
+		if e != nil {
+			return e
+		}
+		a, e = filterCredentials(ctx, c, a, rp)
+		if e != nil {
+			return e
+		}
 		var credential *webauthn.Credential
 		if register {
-			credential, e = s.WA.FinishRegistration(a, data, request)
+			credential, e = wa.FinishRegistration(a, data.SessionData, request)
 		} else {
-			credential, e = s.WA.FinishLogin(a, data, request)
+			credential, e = wa.FinishLogin(a, data.SessionData, request)
 		}
 		if e != nil {
 			return denied()
@@ -157,14 +176,14 @@ func (s *Service) FinishPasskey(ctx context.Context, token, challengeID string, 
 		}
 		id := base64.RawURLEncoding.EncodeToString(credential.ID)
 		if register {
-			if _, e = c.ExecContext(ctx, "INSERT INTO auth_credentials(id,user_id,credential_json) VALUES(?,?,?)", id, a.ID, encode(credential)); e != nil {
+			if _, e = c.ExecContext(ctx, "INSERT INTO auth_credentials(id,user_id,credential_json) VALUES(?,?,?)", id, a.ID, encodeCredential(credential, rp)); e != nil {
 				return invalid("凭据已登记，不能重复或跨账户使用")
 			}
 			a.Credentials = append(a.Credentials, *credential)
 			g, e = s.markFactor(ctx, c, a, "passkey")
 			return e
 		}
-		result, e = c.ExecContext(ctx, "UPDATE auth_credentials SET credential_json=? WHERE id=? AND user_id=?", encode(credential), id, a.ID)
+		result, e = c.ExecContext(ctx, "UPDATE auth_credentials SET credential_json=? WHERE id=? AND user_id=?", encodeCredential(credential, rp), id, a.ID)
 		if e != nil {
 			return e
 		}

@@ -22,7 +22,7 @@ try {
     $goExit = Invoke-TestProcess -FilePath $goExe -Arguments 'test -count=1 -json ./...' -WorkingDirectory (Join-Path $PSScriptRoot 'backend') -StdoutPath $goOutput -StderrPath $goStderr
     $frontendOutput = Join-Path $OutputDir 'frontend.tap.txt'
     $frontendStderr = Join-Path $OutputDir 'frontend.stderr.txt'
-    $frontendExit = Invoke-TestProcess -FilePath $nodeExe -Arguments '--test --test-reporter=tap tests/requests.test.mjs' -WorkingDirectory (Join-Path $PSScriptRoot 'frontend') -StdoutPath $frontendOutput -StderrPath $frontendStderr
+    $frontendExit = Invoke-TestProcess -FilePath $nodeExe -Arguments '--test --test-reporter=tap tests/requests.test.mjs tests/passkey-signals.test.mjs' -WorkingDirectory (Join-Path $PSScriptRoot 'frontend') -StdoutPath $frontendOutput -StderrPath $frontendStderr
     $frontendText = Get-Content -LiteralPath $frontendOutput -Raw -Encoding UTF8
     $frontendPassed = [regex]::Match($frontendText, '(?m)^# pass (\d+)').Groups[1].Value
     $events = @(Get-Content -LiteralPath $goOutput -Encoding UTF8 | ForEach-Object { try { $_ | ConvertFrom-Json -ErrorAction Stop } catch { } })

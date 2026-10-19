@@ -1,0 +1,104 @@
+{
+  "actual_time": "2026-10-19T18:50:06.2272961+08:00",
+  "after_verified_remote_commit": "f47c1475db09397a4c661e0602f99fb991289e7e",
+  "targets": [
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\isolated.sqlite",
+      "status": "deleted",
+      "bytes": 2163900416,
+      "files": 1
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\isolated.sqlite-shm",
+      "status": "deleted",
+      "bytes": 32768,
+      "files": 1
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\isolated.sqlite-wal",
+      "status": "deleted",
+      "bytes": 10279432,
+      "files": 1
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\accountverify.exe",
+      "status": "deleted",
+      "bytes": 36352000,
+      "files": 1
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\verification\\account-fr19-20261019-075704\\synthetic-secrets",
+      "status": "deleted",
+      "bytes": 1305,
+      "files": 3
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\accounts-20261019",
+      "status": "deleted",
+      "bytes": 220078198,
+      "files": 11
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\accounts-ui-merge-20261019",
+      "status": "deleted",
+      "bytes": 73709993,
+      "files": 32
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\assignment-country-ui-20261019",
+      "status": "deleted",
+      "bytes": 101362814,
+      "files": 34
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\assignment-country-ui-final-20261019",
+      "status": "deleted",
+      "bytes": 66887878,
+      "files": 16
+    },
+    {
+      "path": "C:\\Users\\wqhqq\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\dutucijp-vibecoding-final\\builds\\account-deletion-20261019",
+      "status": "deleted",
+      "bytes": 67651951,
+      "files": 24
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\account-ui-20261019\\chrome-profile",
+      "status": "deleted",
+      "bytes": 99306873,
+      "files": 1440
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\midterm-center-20261019\\browser-before",
+      "status": "deleted",
+      "bytes": 5650338,
+      "files": 158
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.working\\midterm-center-20261019\\browser-after",
+      "status": "deleted",
+      "bytes": 7766536,
+      "files": 179
+    },
+    {
+      "path": "E:\\软件编程大作业\\退货对账与差异处理系统\\.backup\\midterm-sync-ad106a8",
+      "status": "deleted",
+      "bytes": 85087810,
+      "files": 155
+    }
+  ],
+  "deleted_targets": 14,
+  "deleted_bytes": 2938068312,
+  "C_deleted_bytes": 2740256755,
+  "C_free_before": 89604788224,
+  "C_free_after": 92345323520,
+  "E_free_before": 573897551872,
+  "E_free_after": 574098997248,
+  "preserved": [
+    "current Demo and actual business/authentication databases",
+    "latest passkey-domains build and rollback copy",
+    "original data and Git history/worktrees",
+    "latest midterm ZIP and expanded materials",
+    "raw accounts test logs, archived evidence and untracked user drafts"
+  ]
+}

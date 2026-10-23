@@ -34,23 +34,30 @@ func (a WorkflowActor) valid() bool {
 }
 
 type WorkflowCase struct {
-	Country         string `json:"country,omitempty"`
-	ID              string `json:"id"`
-	RunID           string `json:"run_id"`
-	DatasetID       string `json:"dataset_id"`
-	CancelID        string `json:"cancel_id"`
-	Reason          string `json:"reason"`
-	Status          string `json:"status"`
-	Assignee        string `json:"assignee"`
-	Version         int    `json:"version"`
-	Conclusion      string `json:"conclusion"`
-	AssignedAt      string `json:"assigned_at"`
-	AssignedBy      string `json:"assigned_by"`
-	SourceHash      string `json:"source_hash"`
-	Sheet           string `json:"sheet"`
-	SourceRow       int    `json:"source_row"`
-	RuleVersion     string `json:"rule_version"`
-	CleaningVersion string `json:"cleaning_version"`
+	Generation       int    `json:"generation"`
+	Current          bool   `json:"is_current"`
+	PreviousCaseID   string `json:"previous_case_id"`
+	Outcome          string `json:"outcome"`
+	Waiting          bool   `json:"waiting"`
+	MissingMaterials string `json:"missing_materials"`
+	NextStep         string `json:"next_step"`
+	Country          string `json:"country,omitempty"`
+	ID               string `json:"id"`
+	RunID            string `json:"run_id"`
+	DatasetID        string `json:"dataset_id"`
+	CancelID         string `json:"cancel_id"`
+	Reason           string `json:"reason"`
+	Status           string `json:"status"`
+	Assignee         string `json:"assignee"`
+	Version          int    `json:"version"`
+	Conclusion       string `json:"conclusion"`
+	AssignedAt       string `json:"assigned_at"`
+	AssignedBy       string `json:"assigned_by"`
+	SourceHash       string `json:"source_hash"`
+	Sheet            string `json:"sheet"`
+	SourceRow        int    `json:"source_row"`
+	RuleVersion      string `json:"rule_version"`
+	CleaningVersion  string `json:"cleaning_version"`
 }
 
 type WorkflowError struct {
@@ -130,14 +137,19 @@ type rowQuerier interface {
 func readWorkflowCase(ctx context.Context, q rowQuerier, id string) (c WorkflowCase, err error) {
 	err = q.QueryRowContext(ctx, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
  c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,
-	 d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version,n.country
+	 d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version,
+ CASE WHEN c.is_current=0 THEN coalesce(json_extract(cs.row_json,'$.country'),n.country) ELSE coalesce(br.country,n.country) END,
+ c.generation,c.is_current,c.previous_case_id,c.outcome,c.waiting,c.missing_materials,c.next_step
  FROM cases c JOIN runs r ON r.id=c.run_id JOIN datasets d ON d.id=r.dataset_id
  JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id
  JOIN source_rows s ON s.id=n.source_id
+ LEFT JOIN business_rows br ON br.run_id=c.run_id AND br.id=c.cancel_id
+ LEFT JOIN case_snapshots cs ON cs.case_id=c.id
  WHERE c.id=? AND r.status='published' AND d.status='published'`, id).Scan(
 		&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason, &c.Status,
 		&c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy,
-		&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country)
+		&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country,
+		&c.Generation, &c.Current, &c.PreviousCaseID, &c.Outcome, &c.Waiting, &c.MissingMaterials, &c.NextStep)
 	if errors.Is(err, sql.ErrNoRows) {
 		err = workflowError("not_found", "差异不存在或运行尚未发布", WorkflowCase{})
 	}
@@ -269,6 +281,9 @@ func transitionCaseTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, 
 			if strings.TrimSpace(conclusion) == "" {
 				return workflowError("empty_conclusion", "关闭前必须填写非空白结论", before)
 			}
+			if err = closeAllowed(ctx, conn, before); err != nil {
+				return err
+			}
 		default:
 			return workflowError("invalid_transition", "只能待处理→处理中→已关闭，禁止跳级或逆向流转", before)
 		}
@@ -276,9 +291,10 @@ func transitionCaseTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor, 
 		after.Status, after.Version = target, before.Version+1
 		if action == "close" {
 			after.Conclusion = strings.TrimSpace(conclusion)
+			after.Outcome = "matched"
 		}
-		result, err := conn.ExecContext(ctx, `UPDATE cases SET status=?,version=version+1,conclusion=?
- WHERE id=? AND status=? AND assignee=? AND version=?`, target, after.Conclusion, id, before.Status, actor.ID, before.Version)
+		result, err := conn.ExecContext(ctx, `UPDATE cases SET status=?,version=version+1,conclusion=?,outcome=?,waiting=0
+ WHERE id=? AND status=? AND assignee=? AND version=?`, target, after.Conclusion, after.Outcome, id, before.Status, actor.ID, before.Version)
 		if err != nil {
 			return err
 		}
@@ -355,6 +371,9 @@ func (s *Store) WorkflowHistory(ctx context.Context, actor WorkflowActor, id str
 		var before, after string
 		if err = rows.Scan(&a.ID, &a.Actor, &a.Action, &a.OccurredAt, &before, &after); err != nil {
 			return nil, err
+		}
+		if !auditJSONVisible(ctx, []byte(before)) || !auditJSONVisible(ctx, []byte(after)) {
+			continue
 		}
 		if err = json.Unmarshal([]byte(before), &a.Before); err != nil {
 			return nil, fmt.Errorf("decode audit before: %w", err)

@@ -37,6 +37,11 @@ func (s *Server) registerReview(r *gin.RouterGroup) {
 			return
 		}
 		v, e := s.Store.ListReview(c, a, id, store.QueryFilter{PageSize: 1}, false)
+		var changed *store.WorkflowError
+		if errors.As(e, &changed) && changed.Code == "materials_changed" {
+			respond(c, gin.H{"id": ""}, nil)
+			return
+		}
 		respond(c, gin.H{"id": id, "policy_version": v.PolicyVersion, "counts": v.Counts}, e)
 	})
 	r.GET("/review-sets/:id", func(c *gin.Context) {

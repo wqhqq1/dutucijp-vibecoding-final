@@ -26,7 +26,7 @@ func (s *Store) duplicateBalance(ctx context.Context, run, sale string) (*Duplic
 	}
 	d.Remaining = d.Original - d.Allocated
 	d.Members = []DuplicateMember{}
-	rows, e := s.DB.QueryContext(ctx, `SELECT m.sale_id,s.sheet,s.source_row FROM duplicate_sale_members m JOIN runs r ON r.id=m.run_id JOIN normalized_rows n ON n.dataset_id=r.dataset_id AND n.id=m.sale_id JOIN source_rows s ON s.id=n.source_id WHERE m.run_id=? AND m.group_id=? ORDER BY s.sheet_index,s.source_row`, run, d.ID)
+	rows, e := s.DB.QueryContext(ctx, businessSQL(ctx, s.DB, run, `SELECT m.sale_id,s.sheet,s.source_row FROM duplicate_sale_members m JOIN runs r ON r.id=m.run_id JOIN normalized_rows n ON n.dataset_id=r.dataset_id AND n.id=m.sale_id JOIN source_rows s ON s.id=n.source_id WHERE m.run_id=? AND m.group_id=? ORDER BY s.sheet_index,s.source_row`), run, d.ID)
 	if e != nil {
 		return nil, e
 	}

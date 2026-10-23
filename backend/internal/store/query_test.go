@@ -228,7 +228,12 @@ func TestTC26_ImmutableCountsNeverReplaceLiveScopeChecks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	_, err = s.TransitionCase(ctx, testOwner, c.ID, "closed", c.Version, "核对后资料不足")
+	confirmed, ce := s.ConfirmCandidate(ctx, testOwner, c.ID, "0:2", c.Version)
+	if ce != nil {
+		t.Fatal(ce)
+	}
+	c = confirmed.Case
+	_, err = s.TransitionCase(ctx, testOwner, c.ID, "closed", c.Version, "已核实并配对")
 	if err != nil {
 		t.Fatal(err)
 	}

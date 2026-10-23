@@ -169,7 +169,12 @@ func TestTC21_RejectSkippedReverseStaleAndClosedWrites(t *testing.T) {
 	assertWorkflowRejected(t, s, id, "invalid_transition", transition("pending", c.Version, ""))
 	assertWorkflowRejected(t, s, id, "invalid_transition", transition("in_progress", c.Version, ""))
 	assertWorkflowRejected(t, s, id, "version_conflict", transition("closed", 2, "资料不足"))
-	c, err = s.TransitionCase(context.Background(), testOwner, id, "closed", c.Version, "资料不足，无法确定原销售，说明后结案。")
+	confirmation, ce := s.ConfirmCandidate(context.Background(), testOwner, id, "0:2", c.Version)
+	if ce != nil {
+		t.Fatal(ce)
+	}
+	c = confirmation.Case
+	c, err = s.TransitionCase(context.Background(), testOwner, id, "closed", c.Version, "已核实原销售并确认配对。")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,16 +195,18 @@ func TestTC24_ConclusionAndDurableHistoryWithoutInventedMatch(t *testing.T) {
 	for _, blank := range []string{"", " \t\r\n", "\u3000\u00a0"} {
 		assertWorkflowRejected(t, s, id, "empty_conclusion", func() error { _, err := s.TransitionCase(ctx, testOwner, id, "closed", c.Version, blank); return err })
 	}
-	const note = "资料不足，两个候选均合格但无法确定原销售；不制造关联，说明后结案。"
-	c, err = s.TransitionCase(ctx, testOwner, id, "closed", c.Version, note)
-	if err != nil || c.Status != "closed" || c.Version != 4 || c.Conclusion != note {
+	const note = "资料不足，两个候选均合格但无法确定原销售，继续待补充。"
+	result, re := s.RemediateCase(ctx, testOwner, id, RemediationRequest{Version: c.Version, RequestID: "test-wait-materials", Action: "wait_materials", Evidence: note, MissingMaterials: "原销售凭证", NextStep: "向仓库核实原始销售单"})
+	err = re
+	c = result.Case
+	if err != nil || c.Status != "in_progress" || c.Version != 4 || !c.Waiting {
 		t.Fatalf("closed=%+v err=%v", c, err)
 	}
 	history, err := s.WorkflowHistory(ctx, testOwner, id)
 	if err != nil || len(history) != 3 {
 		t.Fatalf("history=%+v err=%v", history, err)
 	}
-	for i, action := range []string{"assign", "start", "close"} {
+	for i, action := range []string{"assign", "start", "wait_materials"} {
 		a := history[i]
 		if a.Action != action || a.After.Version != i+2 || a.Before.Version != i+1 || a.Before.ID != id || a.After.ID != id || a.After.CancelID != "0:4" || a.After.SourceRow != 4 || a.After.DatasetID != m.DatasetID || a.After.SourceHash != m.SourceHash {
 			t.Fatalf("bad audit: %+v", a)
@@ -225,7 +232,7 @@ func TestTC24_ConclusionAndDurableHistoryWithoutInventedMatch(t *testing.T) {
 	if _, err = s.DB.Exec("DELETE FROM audit_events WHERE case_id=?", id); err == nil {
 		t.Fatal("audit delete was accepted")
 	}
-	t.Logf("pending(v1) -> assigned pending(v2) -> in_progress(v3) -> closed(v4); audits=3; allocations=0; durable/reused=true; conclusion=%s", c.Conclusion)
+	t.Logf("pending(v1) -> assigned pending(v2) -> in_progress(v3) -> waiting in_progress(v4); audits=3; allocations=0; durable/reused=true; conclusion=%s", c.Conclusion)
 }
 
 func TestWorkflowPermissionsAndPublishedBoundary(t *testing.T) {
@@ -274,6 +281,12 @@ func TestWorkflowAuditFailureRollsBackEveryAction(t *testing.T) {
 			if action == "close" {
 				if _, err := s.TransitionCase(context.Background(), testOwner, id, "in_progress", 2, ""); err != nil {
 					t.Fatal(err)
+				}
+			}
+			if action == "close" {
+				current := workflowCurrent(t, s, id)
+				if _, e := s.ConfirmCandidate(context.Background(), testOwner, id, "0:2", current.Version); e != nil {
+					t.Fatal(e)
 				}
 			}
 			before := workflowCurrent(t, s, id)

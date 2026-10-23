@@ -304,7 +304,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
    </div>
   </section>
   <div className="account-tabs" role="tablist" aria-label="账户管理分区">
-   {[['directory','账户名录',accounts.value?String(accountList.length):''],['requests','开户申请',pending?`${pending} 待审批`:''],['audit','操作记录',''],['domains','Passkey 域名','']].map(([key,name,extra])=><button type="button" role="tab" key={key} id={'tab-'+key} aria-selected={tab===key} aria-controls={'panel-'+key} className={'account-tab'+(key==='requests'&&pending?' has-pending':'')} onClick={()=>setTab(key)}>{name}{extra&&<span className="tab-count">{extra}</span>}</button>)}
+   {[['directory','账户名录',accounts.value?String(accountList.length):''],['requests','开户申请',pending?`${pending} 待审批`:''],['audit','操作记录',''],['domains','许可入口','']].map(([key,name,extra])=><button type="button" role="tab" key={key} id={'tab-'+key} aria-selected={tab===key} aria-controls={'panel-'+key} className={'account-tab'+(key==='requests'&&pending?' has-pending':'')} onClick={()=>setTab(key)}>{name}{extra&&<span className="tab-count">{extra}</span>}</button>)}
   </div>
   <div role="tabpanel" id={'panel-'+tab} aria-labelledby={'tab-'+tab} className="account-tabpanel">
    {tab==='directory'?<div className="accounts-split">{directoryPanel}{editor}</div>:tab==='requests'?requestsPanel:tab==='domains'?<PasskeyDomainsPanel api={api} onChanged={()=>{reload('audit');onChanged()}}/>:auditPanel}

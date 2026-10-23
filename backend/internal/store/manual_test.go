@@ -27,6 +27,10 @@ func manualFixture(t *testing.T, twoCancels bool) (*Store, []WorkflowCase) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// FR-20: this fixture models a sale already verified as independent, before manual matching.
+	if _, err = s.DB.Exec("INSERT INTO duplicate_verifications VALUES(?,'0:2','independent','','test-only-verification')", r.RunID); err != nil {
+		t.Fatal(err)
+	}
 	cases := []WorkflowCase{}
 	for _, row := range rows[1:] {
 		c := assignWorkflow(t, s, ID(r.RunID+"|"+row.ID))

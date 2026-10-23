@@ -23,11 +23,16 @@ type PasskeyDomains struct {
 }
 type originContextKey struct{}
 
+func isIPHost(host string) bool { return net.ParseIP(host) != nil }
+
 // WithPasskeyOrigin is set by the trusted HTTP boundary, never by form data.
 func WithPasskeyOrigin(ctx context.Context, origin string) context.Context {
 	return context.WithValue(ctx, originContextKey{}, origin)
 }
 func (s *Service) passkeyOrigin(ctx context.Context) string {
+	if p := s.nativeProof(ctx); p != nil {
+		return p.Binding.Origin
+	}
 	if v, ok := ctx.Value(originContextKey{}).(string); ok {
 		return v
 	}
@@ -40,31 +45,42 @@ func NormalizePasskeyOrigin(raw string) (string, error) {
 	}
 	u, e := url.Parse(raw)
 	if e != nil || u == nil || u.Opaque != "" || u.User != nil || u.RawQuery != "" || u.ForceQuery || u.Fragment != "" || (u.Path != "" && u.Path != "/") || u.RawPath != "" {
-		return "", invalid("请填写完整 HTTPS 入口，不含路径、参数、通配符或用户信息")
+		return "", invalid("请填写完整 HTTP 或 HTTPS 入口，不含路径、参数、通配符或用户信息")
 	}
-	host, e := idna.Lookup.ToASCII(strings.ToLower(u.Hostname()))
-	if e != nil || host == "" || len(host) > 253 || strings.HasSuffix(host, ".") || net.ParseIP(host) != nil {
-		return "", invalid("请使用有效域名，不能使用 IP 地址")
+	host := strings.ToLower(u.Hostname())
+	ip := net.ParseIP(host)
+	if ip == nil && strings.Trim(host, "0123456789.") == "" {
+		return "", invalid("IP 地址格式不正确")
 	}
-	if host != "localhost" {
+	if ip != nil {
+		host = ip.String()
+	} else {
+		host, e = idna.Lookup.ToASCII(host)
+	}
+	if e != nil || host == "" || len(host) > 253 || strings.HasSuffix(host, ".") {
+		return "", invalid("请使用有效主机名或 IP 地址")
+	}
+	if ip == nil && host != "localhost" {
 		suffix, _ := publicsuffix.PublicSuffix(host)
 		if !strings.Contains(host, ".") || suffix == host {
 			return "", invalid("请使用完整站点域名，不能使用公共后缀")
 		}
 	}
-	for _, label := range strings.Split(host, ".") {
-		if len(label) == 0 || len(label) > 63 || label[0] == '-' || label[len(label)-1] == '-' {
-			return "", invalid("域名格式不正确")
-		}
-		for _, c := range label {
-			if !(c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c == '-') {
+	if ip == nil {
+		for _, label := range strings.Split(host, ".") {
+			if len(label) == 0 || len(label) > 63 || label[0] == '-' || label[len(label)-1] == '-' {
 				return "", invalid("域名格式不正确")
+			}
+			for _, c := range label {
+				if !(c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c == '-') {
+					return "", invalid("域名格式不正确")
+				}
 			}
 		}
 	}
 	scheme := strings.ToLower(u.Scheme)
-	if scheme != "https" && (scheme != "http" || host != "localhost") {
-		return "", invalid("外网域名必须使用 HTTPS；只有 localhost 可使用 HTTP")
+	if scheme != "https" && scheme != "http" {
+		return "", invalid("许可入口必须使用 HTTP 或 HTTPS")
 	}
 	port := u.Port()
 	if strings.HasSuffix(u.Host, ":") {
@@ -81,7 +97,9 @@ func NormalizePasskeyOrigin(raw string) (string, error) {
 		}
 	}
 	if port != "" {
-		host += ":" + port
+		host = net.JoinHostPort(host, port)
+	} else if strings.Contains(host, ":") {
+		host = "[" + host + "]"
 	}
 	return scheme + "://" + host, nil
 }
@@ -163,6 +181,13 @@ func (s *Service) ApprovedOrigins(ctx context.Context) ([]string, error) {
 	return append([]string{s.Origin}, p.Origins...), nil
 }
 func (s *Service) passkeyWA(ctx context.Context, q querier) (*webauthn.WebAuthn, string, error) {
+	if p := s.nativeProof(ctx); p != nil {
+		if e := s.validateNativeBinding(ctx, q); e != nil {
+			return nil, "", e
+		}
+		wa, e := webauthn.New(&webauthn.Config{RPDisplayName: "退货对账与差异处理系统", RPID: p.Binding.RPID, RPOrigins: []string{p.Binding.Origin}, AuthenticatorSelection: protocol.AuthenticatorSelection{UserVerification: protocol.VerificationRequired}})
+		return wa, p.Binding.RPID, e
+	}
 	origin := s.passkeyOrigin(ctx)
 	p, e := s.passkeyDomains(ctx, q)
 	if e != nil {
@@ -235,7 +260,8 @@ func filterCredentials(ctx context.Context, q querier, a account, rp string) (ac
 
 type passkeySession struct {
 	webauthn.SessionData
-	Origin string `json:"app_origin,omitempty"`
+	Origin string              `json:"app_origin,omitempty"`
+	Native *NativeProofBinding `json:"native_binding,omitempty"`
 }
 
 func (s *Service) validChallengeOrigin(ctx context.Context, origin string) bool {

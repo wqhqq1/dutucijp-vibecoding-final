@@ -44,7 +44,7 @@ func (s *Store) VerifyWorkflow(ctx context.Context, runID string) (report Workfl
 	admin := WorkflowActor{"verification-admin", "admin"}
 	owner := WorkflowActor{"verification-warehouse-a", "warehouse"}
 	other := WorkflowActor{"verification-warehouse-b", "warehouse"}
-	report.Scope = "isolated copy of official transactions; workflow identities/actions/conclusions are simulated; FR-14 is not implemented"
+	report.Scope = "isolated copy of official transactions; workflow identities/actions/conclusions are simulated; full authentication is tested separately; no authentication bypass"
 	var id string
 	err = s.DB.QueryRowContext(ctx, `SELECT id FROM cases WHERE run_id=? AND status='pending' AND (assignee IS NULL OR assignee='') ORDER BY (cancel_id='0:100124') DESC,id LIMIT 1`, runID).Scan(&id)
 	if err != nil {
@@ -113,11 +113,11 @@ func (s *Store) VerifyWorkflow(ctx context.Context, runID string) (report Workfl
 			_, e := s.TransitionCase(ctx, owner, id, "closed", c.Version, " \t\u3000")
 			return e
 		}},
-		{"close_with_explanation", owner.ID, "ok", func(c WorkflowCase) error {
-			_, e := s.TransitionCase(ctx, owner, id, "closed", c.Version, "隔离课程演示核查：现有资料不足以确定原销售，保留原候选和来源；说明后结案，不制造关联。")
+		{"save_waiting_materials", owner.ID, "ok", func(c WorkflowCase) error {
+			_, e := s.RemediateCase(ctx, owner, id, RemediationRequest{Version: c.Version, RequestID: "workflow-verification-wait", Action: "wait_materials", Evidence: "隔离验证：现有资料不足，待补充而不制造关联", MissingMaterials: "原销售凭证", NextStep: "联系责任仓库核对原销售"})
 			return e
 		}},
-		{"modify_after_close", owner.ID, "closed", func(c WorkflowCase) error {
+		{"cannot_close_waiting", owner.ID, "unresolved", func(c WorkflowCase) error {
 			_, e := s.TransitionCase(ctx, owner, id, "closed", c.Version, "尝试改写")
 			return e
 		}},

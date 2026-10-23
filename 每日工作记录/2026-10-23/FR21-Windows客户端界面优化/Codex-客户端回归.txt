@@ -1,0 +1,32 @@
+PASS 源时间编辑保留小数精度且改回原值保持原字符串
+PASS 完整HTTP/HTTPS地址及端口规范化
+PASS 拒绝不完整地址/协议/凭据/路径/查询/片段
+PASS 原输入的点段路径不能绕过入口校验
+PASS 真实HTTP保留动态Cookie并发送Origin和写CSRF
+PASS 读请求可取消且写计数归零
+PASS HTTP JSON错误保留状态/代码/消息/载荷
+PASS 非JSON成功/失败响应给出可读错误
+PASS 写断线不自动重试且计数释放
+PASS 在途写计数直至响应完成
+PASS 新BackendClient不继承另一个实例Cookie
+PASS CSV导出保留Origin并正确返回字节
+PASS CSV导出非JSON错误给出可读错误
+PASS 重定向不自动跟随到其他服务
+PASS 无请求体DELETE仍携带写CSRF且不重试HTTP失败
+PASS 连接探测正确并只持久化规范化入口
+PASS 错误入口/不兼容配置保留连接会话与已保存设置
+PASS 切换后端清空Cookie/CSRF/会话/恢复码/运行并失效旧读令牌
+PASS 在途写阻止后端切换且不探测目标
+PASS 探测期间新发起写操作仍阻止最终切换
+PASS 旧代次Guard异常不覆盖新页面反馈且Busy释放
+PASS 当前代次失败释放Busy并提示写结果核查
+PASS 登录后读取运行失败仍通知界面会话并释放Busy
+PASS 旧代次登录结果不恢复会话
+PASS 退出后清空客户端Cookie/CSRF/会话并保持后端设置
+PASS 切换页面取消旧运行读取不发布旧结果
+PASS 设置保存失败保留旧API/会话/设置一致性
+PASS 合成Passkey流程使用begin上下文和finish查询转义
+PASS Passkey迟到begin代次失效不调用设备或发布CSRF
+PASS 合成设备迟到返回跨后端切换不发送finish
+PASS Passkey迟到finish保留写切换锁且代次失效不登录
+RESULT 31/31 passed; 0 failed

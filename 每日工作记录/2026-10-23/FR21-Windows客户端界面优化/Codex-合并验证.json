@@ -1,0 +1,12 @@
+{
+  "actual_time": "2026-10-23T14:19:15.9392696+08:00",
+  "files": 511,
+  "bytes": 182362387,
+  "exe_sha256": "af60251bf151271f089d9a7801f70d625162b72445b094e8f46dd313d742f2cd",
+  "assembly_sha256": "f71dcc015db9b913fed5c6e9316e120290cf9ea2d911e57baa516c50d592fb41",
+  "powershell_51_build": true,
+  "client_tests_pass": 31,
+  "ui_host_build": true,
+  "backend_changed": false,
+  "official_account_or_database_changed": false
+}

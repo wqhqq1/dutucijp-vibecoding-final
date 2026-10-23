@@ -1,0 +1,164 @@
+{
+  "actual_time": "2026-10-20T12:31:10+08:00",
+  "boundary": "FR20 fixed simulated recheck on fresh full official two-year online backup. No invented official business evidence, no changed source or existing business/auth database. Separate fresh synthetic authentication supports actual production-handler HTTP diagnostics. Not formal NFR or human/device acceptance. Only aggregate counts, timings, file hashes, and metadata are emitted.",
+  "source_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\closing-deployment-20261017\\before-update.sqlite",
+  "isolated_database": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr20-opt-round2-fresh-20261020-123106\\business.sqlite",
+  "source_sha256_before": "7d3fe2d371b307fcdd77d8086dc5a455945e0c9bd254b866af85f2dbf5585aab",
+  "source_sha256_after": "7d3fe2d371b307fcdd77d8086dc5a455945e0c9bd254b866af85f2dbf5585aab",
+  "source_unchanged": true,
+  "official_workbook_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "run_id": "e6efd769679e75a52373ed76dd5c8df761bf7cfb698ce68bac1ca87ac8705fc9",
+  "dataset_id": "5cc1981e8ffcb8274b1f31711b6d383e69f7ea383e43f8dbe606696b8b9068e6",
+  "phase_seconds": {
+    "additional_api_ambiguous_candidates_including_commit": 0.002543,
+    "candidates": 0.0045286,
+    "case_evidence": 0.0027314,
+    "case_list": 0.0066125,
+    "csv_filtered_stream": 0.007086,
+    "final_validation": 6.3226417999999995,
+    "first_store_equal_correction_with_initialization_and_commit": 0.0051137,
+    "generate_review_after_projection": 6.8006672,
+    "online_backup": 9.7447326,
+    "open_and_migrate": 0.2727651,
+    "overview": 0.089594,
+    "query_country_filter_country_sort": 3.2391341,
+    "query_date_filter_sort": 0.0266814,
+    "query_source_deep_page": 1.3225751,
+    "query_source_desc": 0.0026337,
+    "query_source_first": 0.0015913,
+    "query_stock_filter_date_sort": 0.0019995,
+    "subsequent_api_correct_return_including_commit": 0.0045092,
+    "subsequent_api_recheck_including_commit": 0.0031953,
+    "synthetic_http_auth_setup": 0.2253009,
+    "total": 39.9192051
+  },
+  "before_counts": {
+    "accepted_cancels": 19164,
+    "accepted_sales": 1019654,
+    "allocated_quantity": 367997,
+    "allocations": 9715,
+    "balances": 1019654,
+    "business_rows": 0,
+    "cases": 9450,
+    "closed_cases": 1,
+    "effective_rows": 1067371,
+    "normalized_rows": 1067371,
+    "remaining_quantity": 10871349,
+    "remediation_events": 0,
+    "source_sheets": 2,
+    "sparse_mode": 0
+  },
+  "after_counts": {
+    "accepted_cancels": 19164,
+    "accepted_sales": 1019654,
+    "allocated_quantity": 367997,
+    "allocations": 9715,
+    "balances": 1019654,
+    "business_rows": 1,
+    "cases": 9450,
+    "closed_cases": 1,
+    "effective_rows": 1067371,
+    "normalized_rows": 1067371,
+    "remaining_quantity": 10871349,
+    "remediation_events": 3,
+    "source_sheets": 2,
+    "sparse_mode": 1
+  },
+  "checks": {
+    "accepted_cancels_unchanged": true,
+    "accepted_sales_unchanged": true,
+    "allocated_quantity_unchanged": true,
+    "allocations_unchanged": true,
+    "balance_and_capacity_invariants": true,
+    "balances_unchanged": true,
+    "cases_unchanged": true,
+    "closed_cases_unchanged": true,
+    "full_effective_row_count": true,
+    "http_load_explicitly_deferred": true,
+    "initial_decisions_unchanged": true,
+    "initial_summary_unchanged": true,
+    "normalized_rows_unchanged": true,
+    "remaining_quantity_unchanged": true,
+    "retry_same_revision": true,
+    "source_driver_file_read_only": true,
+    "source_sheets_unchanged": true
+  },
+  "isolated_recheck": {
+    "action": "correct_return",
+    "after_reason": "missing_identity",
+    "after_status": "in_progress",
+    "before_reason": "missing_identity",
+    "evidence_boundary": "Only the original stock value was assigned to itself. No business fields or supporting documents were invented; original missing identity remains unresolved.",
+    "excluded": 0,
+    "matched": 0,
+    "new_problems": 0,
+    "revision": 1,
+    "simulated_actor": "isolated-fr20-http-simulated-finance"
+  },
+  "store_query_probes": {
+    "authenticated_api_boundary": "Both POSTs use the production handler, CSRF, normal strong-password/TOTP-created synthetic identity, and transaction-bound authentication recheck. These are subsequent operations after first Store initialization. Only this synthetic identity's records were appended to the isolated copy; original authentication rows were not overwritten.",
+    "case_evidence": {
+      "candidate_count": 0,
+      "effective_present": true,
+      "events": 3,
+      "original_preserved": true,
+      "related_cases": 1
+    },
+    "case_list": {
+      "items": 1,
+      "total": 1
+    },
+    "country_filter_country_sort": {
+      "items": 50,
+      "success": true,
+      "total": 981330
+    },
+    "date_filter_sort": {
+      "items": 50,
+      "success": true,
+      "total": 6216
+    },
+    "overview": {
+      "keys": 8,
+      "success": true
+    },
+    "review": {
+      "items": 9450,
+      "policy_version": "review-1.0.0",
+      "revision": 3
+    },
+    "source_deep_page": {
+      "items": 50,
+      "success": true,
+      "total": 1067371
+    },
+    "source_desc": {
+      "items": 50,
+      "success": true,
+      "total": 1067371
+    },
+    "source_first": {
+      "items": 50,
+      "success": true,
+      "total": 1067371
+    },
+    "stock_filter_date_sort": {
+      "items": 50,
+      "success": true,
+      "total": 104
+    }
+  },
+  "concurrent_http_diagnostic": {
+    "boundary": "Explicit --skip-http-load: 300-request load was deferred; no HTTP load pass or latency is claimed.",
+    "workers": 0,
+    "attempted": 0,
+    "succeeded": 0,
+    "failed": 0,
+    "p95_milliseconds": 0,
+    "maximum_milliseconds": 0,
+    "classes": null
+  },
+  "passed": false,
+  "failure": "additional API ambiguous_candidates: production remediation HTTP status 422: invalid_input (单价须为正的精确十进制数)",
+  "resumed_existing_isolated_projection": false
+}

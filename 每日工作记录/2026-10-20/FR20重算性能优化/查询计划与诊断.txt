@@ -1,0 +1,63 @@
+=== RUN   TestTemporaryFR20Plan
+    remediation_plan_test.go:23: page_keys
+    remediation_plan_test.go:23: 2 0 0 CO-ROUTINE projected_row_query_source
+    remediation_plan_test.go:23: 3 2 0 COMPOUND QUERY
+    remediation_plan_test.go:23: 4 3 0 LEFT-MOST SUBQUERY
+    remediation_plan_test.go:23: 8 4 62 SEARCH base USING INDEX row_query_source (dataset_id=?)
+    remediation_plan_test.go:23: 11 4 0 SCALAR SUBQUERY 6
+    remediation_plan_test.go:23: 16 11 39 SEARCH runs USING INDEX sqlite_autoindex_runs_1 (id=?)
+    remediation_plan_test.go:23: 29 4 0 CORRELATED SCALAR SUBQUERY 7
+    remediation_plan_test.go:23: 33 29 39 SEARCH changed USING COVERING INDEX business_row_key (run_id=? AND id=?)
+    remediation_plan_test.go:23: 59 3 0 UNION ALL
+    remediation_plan_test.go:23: 63 59 61 SEARCH business_rows USING INDEX business_source_order (run_id=?)
+    remediation_plan_test.go:23: 92 0 59 SCAN n
+    remediation_plan_test.go:23: 117 0 0 USE TEMP B-TREE FOR ORDER BY
+    remediation_plan_test.go:23: page_full
+    remediation_plan_test.go:23: 3 0 0 MATERIALIZE page
+    remediation_plan_test.go:23: 5 3 0 CO-ROUTINE projected_row_query_source
+    remediation_plan_test.go:23: 6 5 0 COMPOUND QUERY
+    remediation_plan_test.go:23: 7 6 0 LEFT-MOST SUBQUERY
+    remediation_plan_test.go:23: 11 7 62 SEARCH base USING INDEX row_query_source (dataset_id=?)
+    remediation_plan_test.go:23: 14 7 0 SCALAR SUBQUERY 6
+    remediation_plan_test.go:23: 19 14 39 SEARCH runs USING INDEX sqlite_autoindex_runs_1 (id=?)
+    remediation_plan_test.go:23: 32 7 0 CORRELATED SCALAR SUBQUERY 7
+    remediation_plan_test.go:23: 36 32 39 SEARCH changed USING COVERING INDEX business_row_key (run_id=? AND id=?)
+    remediation_plan_test.go:23: 62 6 0 UNION ALL
+    remediation_plan_test.go:23: 66 62 61 SEARCH business_rows USING INDEX business_source_order (run_id=?)
+    remediation_plan_test.go:23: 96 3 59 SCAN n
+    remediation_plan_test.go:23: 123 3 0 USE TEMP B-TREE FOR ORDER BY
+    remediation_plan_test.go:23: 134 0 0 MATERIALIZE normalized_rows
+    remediation_plan_test.go:23: 136 134 0 COMPOUND QUERY
+    remediation_plan_test.go:23: 137 136 0 LEFT-MOST SUBQUERY
+    remediation_plan_test.go:23: 140 137 62 SEARCH base USING INDEX row_customer (dataset_id=?)
+    remediation_plan_test.go:23: 143 137 0 SCALAR SUBQUERY 1
+    remediation_plan_test.go:23: 148 143 39 SEARCH runs USING INDEX sqlite_autoindex_runs_1 (id=?)
+    remediation_plan_test.go:23: 161 137 0 CORRELATED SCALAR SUBQUERY 2
+    remediation_plan_test.go:23: 165 161 39 SEARCH changed USING COVERING INDEX business_row_key (run_id=? AND id=?)
+    remediation_plan_test.go:23: 193 136 0 UNION ALL
+    remediation_plan_test.go:23: 196 193 61 SEARCH business_rows USING INDEX business_source_order (run_id=?)
+    remediation_plan_test.go:23: 224 0 59 SCAN page
+    remediation_plan_test.go:23: 238 0 46 SEARCH n USING AUTOMATIC COVERING INDEX (dataset_id=? AND id=?)
+    remediation_plan_test.go:23: 263 0 0 USE TEMP B-TREE FOR ORDER BY
+    remediation_plan_test.go:23: cases
+    remediation_plan_test.go:23: 3 0 0 MATERIALIZE n_present
+    remediation_plan_test.go:23: 5 3 0 SCAN CONSTANT ROW
+    remediation_plan_test.go:23: 17 0 46 SEARCH r USING INDEX sqlite_autoindex_runs_1 (id=?)
+    remediation_plan_test.go:23: 23 0 53 SEARCH c USING COVERING INDEX cases_current (run_id=?)
+    remediation_plan_test.go:23: 27 0 44 SEARCH n_original USING COVERING INDEX sqlite_autoindex_normalized_rows_1 (dataset_id=? AND id=?) LEFT-JOIN
+    remediation_plan_test.go:23: 36 0 16 SCAN n_present
+    remediation_plan_test.go:23: 38 0 52 SEARCH n_override USING COVERING INDEX business_dataset (run_id=? AND dataset_id=? AND id=?) LEFT-JOIN
+    remediation_plan_test.go:23: new_page_keys
+    remediation_plan_test.go:23: 7 0 0 MERGE (UNION ALL)
+    remediation_plan_test.go:23: 9 7 0 LEFT
+    remediation_plan_test.go:23: 13 9 54 SEARCH page_original USING COVERING INDEX row_query_source (dataset_id=?)
+    remediation_plan_test.go:23: 18 9 0 CORRELATED SCALAR SUBQUERY 10
+    remediation_plan_test.go:23: 22 18 39 SEARCH changed USING COVERING INDEX business_row_key (run_id=? AND id=?)
+    remediation_plan_test.go:23: 40 7 0 RIGHT
+    remediation_plan_test.go:23: 45 40 61 SEARCH page_override USING INDEX business_source_order (run_id=?)
+    remediation_plan_test.go:24: source list 3.6558ms 1067371 50
+    remediation_plan_test.go:25: case list 4.289ms 9450 50
+    remediation_plan_test.go:26: overview 66.221ms
+--- PASS: TestTemporaryFR20Plan (0.09s)
+PASS
+ok  	returnsrecon/internal/store	0.872s

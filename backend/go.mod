@@ -7,6 +7,7 @@ require (
 	github.com/go-webauthn/webauthn v0.18.2
 	github.com/gofrs/flock v0.13.1
 	github.com/pquerna/otp v1.5.0
+	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3
 	github.com/shopspring/decimal v1.5.0
 	golang.org/x/crypto v0.58.0
 	golang.org/x/net v0.60.0

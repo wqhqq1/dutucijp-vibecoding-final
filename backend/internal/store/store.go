@@ -108,6 +108,10 @@ func Open(path string) (*Store, error) {
 		db.Close()
 		return nil, err
 	}
+	if err = s.migrateRemediation(context.Background()); err != nil {
+		db.Close()
+		return nil, err
+	}
 	if err = s.EnsureQueryIndexes(context.Background()); err != nil {
 		db.Close()
 		return nil, err

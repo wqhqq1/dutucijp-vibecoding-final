@@ -1,0 +1,1 @@
+Portable files verified. First preparation requires official-source internet access; no runtime was created.

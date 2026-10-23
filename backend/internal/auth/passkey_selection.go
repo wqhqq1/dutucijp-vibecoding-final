@@ -14,6 +14,7 @@ import (
 )
 
 type passkeySelection struct {
+	Native   *NativeProofBinding  `json:"native_binding,omitempty"`
 	Origin   string               `json:"app_origin,omitempty"`
 	Session  webauthn.SessionData `json:"session"`
 	Versions map[string]int       `json:"versions"`
@@ -32,7 +33,7 @@ func (s *Service) beginPasskeySelection(ctx context.Context, previous string) (o
 			return e
 		}
 		data.Expires = s.now().Add(2 * time.Minute)
-		selection := passkeySelection{Origin: s.passkeyOrigin(ctx), Session: *data, Versions: map[string]int{}}
+		selection := passkeySelection{Origin: s.passkeyOrigin(ctx), Native: s.nativeProof(ctx), Session: *data, Versions: map[string]int{}}
 		rows, e := c.QueryContext(ctx, `SELECT id,version FROM auth_users u WHERE u.state<>'deleted' AND EXISTS(SELECT 1 FROM auth_credentials k WHERE k.user_id=u.id)`)
 		if e != nil {
 			return e
@@ -111,7 +112,7 @@ func (s *Service) finishPasskeySelection(ctx context.Context, token, challengeID
 		if e := decode(raw, &selection); e != nil {
 			return e
 		}
-		if !s.validChallengeOrigin(ctx, selection.Origin) || selection.Session.UserVerification != protocol.VerificationRequired || len(selection.Session.UserID) != 0 || len(selection.Session.AllowedCredentialIDs) != 0 {
+		if !s.validNativeProof(ctx, selection.Native) || !s.validChallengeOrigin(ctx, selection.Origin) || selection.Session.UserVerification != protocol.VerificationRequired || len(selection.Session.UserID) != 0 || len(selection.Session.AllowedCredentialIDs) != 0 {
 			return denied()
 		}
 		wa, rp, e := s.passkeyWA(ctx, c)

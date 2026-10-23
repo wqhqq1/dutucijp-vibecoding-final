@@ -83,7 +83,7 @@ func (s *Service) BeginPasskey(ctx context.Context, token, userID string, regist
 		if _, e = c.ExecContext(ctx, "DELETE FROM auth_challenges WHERE session_hash=? AND purpose=?", Digest(token), purpose); e != nil {
 			return e
 		}
-		if _, e = c.ExecContext(ctx, "INSERT INTO auth_challenges VALUES(?,?,?,?,?,?,?)", id, a.ID, Digest(token), purpose, a.Version, encode(passkeySession{*data, s.passkeyOrigin(ctx)}), data.Expires.Unix()); e != nil {
+		if _, e = c.ExecContext(ctx, "INSERT INTO auth_challenges VALUES(?,?,?,?,?,?,?)", id, a.ID, Digest(token), purpose, a.Version, encode(passkeySession{*data, s.passkeyOrigin(ctx), s.nativeProof(ctx)}), data.Expires.Unix()); e != nil {
 			return e
 		}
 		out.Token = token
@@ -139,7 +139,7 @@ func (s *Service) FinishPasskey(ctx context.Context, token, challengeID string, 
 		if e = decode(raw, &data); e != nil {
 			return e
 		}
-		if data.UserVerification != protocol.VerificationRequired || !s.validChallengeOrigin(ctx, data.Origin) {
+		if data.UserVerification != protocol.VerificationRequired || !s.validChallengeOrigin(ctx, data.Origin) || !s.validNativeProof(ctx, data.Native) {
 			return denied()
 		}
 		a, e := load(ctx, c, v.ID)

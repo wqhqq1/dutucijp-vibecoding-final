@@ -1,0 +1,44 @@
+{
+  "actual_time": "2026-10-23T11:37:13.0504848\u002B08:00",
+  "scope": "Official two-year disposable copy; production C# networking/state and real Go HTTP. Synthetic test account with normal setup. No physical authenticator or full UI acceptance.",
+  "backend_id": "QhxOP4w4Y3LyhiZewl9Xt0hLDG3d0O7bgiv-9GkCEvI",
+  "results": [
+    {
+      "check": "normal setup/password/TOTP/recovery acknowledgement",
+      "passed": true
+    },
+    {
+      "check": "first page",
+      "passed": true,
+      "rows": 50,
+      "total": 1067371,
+      "milliseconds": 4.2554
+    },
+    {
+      "check": "invoice descending",
+      "passed": true,
+      "rows": 50,
+      "total": 1067371,
+      "milliseconds": 3.7854
+    },
+    {
+      "check": "deep page",
+      "passed": true,
+      "rows": 50,
+      "total": 1067371,
+      "milliseconds": 7.2516
+    },
+    {
+      "check": "country filter",
+      "passed": true,
+      "rows": 50,
+      "total": 981330,
+      "milliseconds": 353.7215
+    },
+    {
+      "check": "overview/case evidence/recommendations/filtered CSV",
+      "passed": true,
+      "csv_bytes": 1145051
+    }
+  ]
+}

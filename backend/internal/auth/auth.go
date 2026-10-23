@@ -114,6 +114,9 @@ func New(db *sql.DB, cfg Config) (*Service, error) {
 	if _, err := db.Exec(schema); err != nil {
 		return nil, err
 	}
+	if err := ensureNativeIdentity(db, cfg.Origin); err != nil {
+		return nil, err
+	}
 	if err := PrivateDirectory(cfg.SecretDir); err != nil {
 		return nil, err
 	}

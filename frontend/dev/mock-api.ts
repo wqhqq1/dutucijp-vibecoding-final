@@ -42,7 +42,7 @@ function candidateFor(index:number,cancel:ReturnType<typeof txn>,offset:number){
     time:new Date(Date.parse(cancel.time+'Z')-(offset+1)*3600000).toISOString().slice(0,19),
     kind:'sale',quantity:remaining+(offset%3),original:remaining+(offset%3),allocated:offset%3,current_remaining:remaining};
 }
-type MockCase={id:string;run_id:string;cancel_id:string;reason:string;status:string;version:number;assignee:string;conclusion:string;source_row:number;sheet:string};
+type MockCase={id:string;run_id:string;cancel_id:string;reason:string;status:string;version:number;assignee:string;conclusion:string;source_row:number;sheet:string;waiting?:boolean;missing_materials?:string;next_step?:string};
 const cases:MockCase[]=Array.from({length:137},(_,i)=>{
   const t=txn(i*9),status=i<23?'closed':i<41?'in_progress':'pending';
   return {id:'mock-case-'+(i+1),run_id:run.run_id,cancel_id:t.id,reason:reasons[i%reasons.length],status,version:status==='closed'?3:status==='in_progress'?2:i%3===0?1:0,
@@ -138,7 +138,7 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
   const batchRoute=/^\/case-batches\/([^/]+)(\/commit)?$/.exec(api);
   if(batchRoute){const batch=reviewBatches.get(batchRoute[1]);if(!batch||batch.actor!==s.id)return send(res,404,{message:'模拟批次不存在'});if(batchRoute[2]){for(const it of batch.items){if(it.status!=='ready')continue;const c=visible.find(x=>x.id===it.case_id);if(!c||c.version!==it.version){it.status='skipped';it.message='版本已变化';continue}if(batch.action==='assign')c.assignee=batch.assignee;else if(batch.action==='start')c.status='in_progress';else if(batch.action==='close'||batch.action==='approve'){c.status='closed';c.conclusion=batch.conclusion;c.assignee||=s.id}c.version++;it.status='succeeded';it.message='模拟处理完成'}batch.status='completed'}return send(res,200,mockBatchView(batch,q))}
   if(api==='/overview'){const n=(st:string)=>visible.filter(c=>c.status===st).length;return send(res,200,{run_id:q.get('run_id'),caveat:'规则推断；没有真实原订单关联号。人工处理记录为课程模拟。（此处为模拟数据）',cases:{total:visible.length,pending:n('pending'),in_progress:n('in_progress'),closed:n('closed')},...(finance?{initial_reconciliation:{input:{raw:TXN_TOTAL+41,accepted:TXN_TOTAL,excluded:41},matched:118,suspected:96,no_original:41}}:{})})}
-  if(api==='/cases'){const st=q.get('status'),why=q.get('reason');if(why&&!reasons.includes(why))return send(res,422,{code:'invalid_input',message:'未知差异原因'});return send(res,200,page(visible.filter(c=>(!st||c.status===st)&&(!why||c.reason===why)),q))}
+  if(api==='/cases'){const st=q.get('status'),why=q.get('reason'),waiting=q.get('waiting');if(why&&!reasons.includes(why))return send(res,422,{code:'invalid_input',message:'未知差异原因'});return send(res,200,page(visible.filter(c=>(!st||c.status===st)&&(!why||c.reason===why)&&(!waiting||(waiting==='1')===!!c.waiting)),q))}
   if(api==='/allocations')return send(res,200,page(allocations,q));
   if(api==='/transactions'){
     let rows=Array.from({length:TXN_TOTAL},(_,i)=>txn(i)).filter(r=>allows(s,r.country));
@@ -148,7 +148,7 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
     rows.sort((a:any,b:any)=>(a[key]>b[key]?1:a[key]<b[key]?-1:0)*dir);return send(res,200,page(rows,q));
   }
   if(api==='/exports'){res.setHeader('Content-Type','text/csv; charset=utf-8');res.end('mock_preview,模拟数据\n');return}
-  const m=/^\/cases\/([^/]+)\/(evidence|audit|assign|start|close|confirm-match)$/.exec(api);
+  const m=/^\/cases\/([^/]+)\/(evidence|audit|assign|start|close|confirm-match|remediations)$/.exec(api);
   const c=m&&visible.find(x=>x.id===m[1]);
   if(m&&!c)return send(res,404,{code:'not_found',message:'差异不存在或无权查看'});
   if(m&&c){
@@ -160,7 +160,7 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
       const original=Array.from({length:total},(_,i)=>candidateFor(index,cancel,i));
       const all=original.map(x=>x.id===confirmation?.allocation.sale_id?confirmation.sale:x).filter(x=>x.current_remaining>=Math.abs(cancel.quantity));
       const decision=none&&c.reason!=='missing_identity'?[0,1].map(i=>{const t=txn(index*9+1+i);return {...t,original:Math.abs(t.quantity),allocated:0,current_remaining:i,remaining_at_decision:i,eligible_at_decision:false,reason:c.reason==='no_strictly_earlier_sale'?'sale_not_strictly_earlier':'remaining_quantity_too_small'}}):original.slice(0,Math.min(2,total)).map((x,i)=>({...x,current_remaining:x.id===confirmation?.allocation.sale_id?confirmation.sale.current_remaining:x.current_remaining,remaining_at_decision:x.original,eligible_at_decision:true,reason:c.reason==='suspected_duplicate_sale'&&i===0?'suspected_duplicate_sale':'qualified'}));
-      return send(res,200,{case:c,cancel,decision_evidence:decision,candidates:page(all,q),confirmation,caveat:'规则推断；没有真实原订单关联号。人工处理记录为课程模拟。（此处为模拟数据）'});
+      return send(res,200,{case:{generation:1,...c},cancel,original_cancel:cancel,effective_cancel:cancel,related_cases:[{generation:1,...c}],remediations:[],decision_evidence:decision,candidates:page(all,q),confirmation,caveat:'规则推断；没有真实原订单关联号。人工处理记录为课程模拟。（此处为模拟数据）'});
     }
     if(m[2]==='audit')return send(res,200,list);
     if(c.status==='closed')return send(res,409,{code:'closed',message:'已关闭差异不能修改'});
@@ -169,9 +169,15 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
     if(m[2]==='assign'&&c.assignee)return send(res,409,{code:'already_assigned',message:'已有责任人：'+c.assignee});
     if(['close','confirm-match'].includes(m[2])&&c.status!=='in_progress')return send(res,409,{code:'invalid_transition',message:'开始处理后才能继续操作'});
     const before={status:c.status,version:c.version};
+    if(m[2]==='remediations'){
+      if(body.action!=='wait_materials')return refuse(res,'真实业务资料修正与重算（仅隔离Go/HTTP测试执行）');
+      if(c.status!=='in_progress'||!body.evidence?.trim()||!body.missing_materials?.trim()||!body.next_step?.trim())return send(res,422,{message:'请开始处理并填写依据、缺少材料和下一步'});
+      c.waiting=true;c.missing_materials=body.missing_materials;c.next_step=body.next_step;c.version++;
+      return send(res,200,{case:c,message:'模拟数据：已保存待补充信息，未执行真实业务写入。'});
+    }
     if(m[2]==='assign'){c.assignee=body.assignee||'warehouse'}
     else if(m[2]==='start'){c.status='in_progress'}
-    else if(m[2]==='close'){if(!String(body.conclusion||'').trim())return send(res,422,{code:'invalid_input',message:'请填写核查结论'});c.status='closed';c.conclusion=body.conclusion}
+    else if(m[2]==='close'){if(!confirmations.has(c.id))return send(res,409,{code:'unresolved',message:'未解决问题须补充资料或保存待补充信息'});if(!String(body.conclusion||'').trim())return send(res,422,{code:'invalid_input',message:'请填写核查结论'});c.status='closed';c.conclusion=body.conclusion}
     else if(m[2]==='confirm-match'){
       if(confirmations.has(c.id))return send(res,409,{code:'already_allocated',message:'该取消行已经分配'});
       const saleIndex=Number(String(body.sale_row_id).split('-r')[1])-2;

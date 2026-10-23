@@ -50,6 +50,7 @@ func (s *Server) Handler() http.Handler {
 		c.AbortWithStatusJSON(500, gin.H{"code": "internal_error", "message": "请求未完成"})
 	}), s.boundary)
 	r.GET("/api/health", func(c *gin.Context) { c.JSON(200, gin.H{"application": "returns-recon", "runtime_id": s.RuntimeID}) })
+	s.registerNativePasskeys(r)
 	r.GET("/api/auth/me", func(c *gin.Context) { v, e := s.Auth.Current(c, token(c), false); respond(c, v, e) })
 	r.GET("/api/auth/setup/accounts", func(c *gin.Context) { v, e := s.Auth.SetupAccounts(c); respond(c, v, e) })
 	r.POST("/api/auth/setup/start", func(c *gin.Context) {
@@ -283,6 +284,14 @@ func (s *Server) Handler() http.Handler {
 			v, e := s.Store.TransitionCase(c, actor(c), c.Param("id"), "closed", b.Version, b.Conclusion)
 			respond(c, v, e)
 		}
+	})
+	business.POST("/cases/:id/remediations", func(c *gin.Context) {
+		var req store.RemediationRequest
+		if !bind(c, &req) {
+			return
+		}
+		v, e := s.Store.RemediateCase(c, actor(c), c.Param("id"), req)
+		respond(c, v, e)
 	})
 	business.POST("/cases/:id/confirm-match", func(c *gin.Context) {
 		var b struct {
@@ -533,7 +542,7 @@ func page(c *gin.Context) (store.PageRequest, error) {
 }
 func filter(c *gin.Context) (store.QueryFilter, error) {
 	p, e := page(c)
-	f := store.QueryFilter{RunID: c.Query("run_id"), Status: c.Query("status"), Reason: c.Query("reason"), Assignee: c.Query("assignee"), Customer: c.Query("customer"), Stock: c.Query("stock"), Invoice: c.Query("invoice"), Country: c.Query("country"), Sort: c.Query("sort"), Direction: c.Query("direction"), Classification: c.Query("classification"), Kind: c.Query("kind"), DateFrom: c.Query("date_from"), DateTo: c.Query("date_to"), Page: p.Page, PageSize: p.PageSize}
+	f := store.QueryFilter{Waiting: c.Query("waiting"), RunID: c.Query("run_id"), Status: c.Query("status"), Reason: c.Query("reason"), Assignee: c.Query("assignee"), Customer: c.Query("customer"), Stock: c.Query("stock"), Invoice: c.Query("invoice"), Country: c.Query("country"), Sort: c.Query("sort"), Direction: c.Query("direction"), Classification: c.Query("classification"), Kind: c.Query("kind"), DateFrom: c.Query("date_from"), DateTo: c.Query("date_to"), Page: p.Page, PageSize: p.PageSize}
 	return f, e
 }
 func (s *Server) runs(c *gin.Context) {
@@ -556,69 +565,12 @@ func (s *Server) runs(c *gin.Context) {
 }
 func (s *Server) overview(c *gin.Context) {
 	run := c.Query("run_id")
-	a := actor(c)
 	if run == "" {
 		respond(c, nil, &auth.Error{Code: "invalid_input", Message: "必须指定当前运行版本", Status: 422})
 		return
 	}
-	var published int
-	if e := s.Store.DB.QueryRowContext(c, "SELECT 1 FROM runs r JOIN datasets d ON d.id=r.dataset_id WHERE r.id=? AND r.status='published' AND d.status='published'", run).Scan(&published); e != nil {
-		if errors.Is(e, sql.ErrNoRows) {
-			e = &auth.Error{Code: "not_found", Message: "运行不存在或尚未发布", Status: 404}
-		}
-		respond(c, nil, e)
-		return
-	}
-	out := map[string]any{"run_id": run, "caveat": "规则推断；没有真实原订单关联号。人工处理记录为课程模拟。"}
-	var total, pending, progress, closed int
-	query := "SELECT count(*),coalesce(sum(c.status='pending'),0),coalesce(sum(c.status='in_progress'),0),coalesce(sum(c.status='closed'),0) FROM cases c JOIN runs r ON r.id=c.run_id JOIN normalized_rows n ON n.dataset_id=r.dataset_id AND n.id=c.cancel_id WHERE c.run_id=?"
-	args := []any{run}
-	if a.Role == "warehouse" {
-		query += " AND c.assignee=?"
-		args = append(args, a.ID)
-	}
-	suffix, countryArgs := access.SQL(c, "n.country")
-	query += suffix
-	baseArgs := append([]any{}, args...)
-	args = append(args, countryArgs...)
-	e := s.Store.DB.QueryRowContext(c, query, args...).Scan(&total, &pending, &progress, &closed)
-	if e != nil {
-		respond(c, nil, e)
-		return
-	}
-	out["cases"] = map[string]int{"total": total, "pending": pending, "in_progress": progress, "closed": closed}
-	var reviewed, unallocated int
-	reviewQuery := `SELECT count(*) FROM review_confirmations v JOIN cases c ON c.run_id=v.run_id AND c.cancel_id=v.cancel_id WHERE v.run_id=?`
-	unallocatedQuery := `SELECT count(*) FROM decisions d LEFT JOIN allocations a ON a.run_id=d.run_id AND a.cancel_id=d.cancel_id JOIN cases c ON c.run_id=d.run_id AND c.cancel_id=d.cancel_id WHERE d.run_id=? AND a.cancel_id IS NULL`
-	if a.Role == "warehouse" {
-		reviewQuery += " AND c.assignee=?"
-		unallocatedQuery += " AND c.assignee=?"
-	}
-	caseCountry := ` AND EXISTS(SELECT 1 FROM runs rr JOIN normalized_rows n ON n.dataset_id=rr.dataset_id AND n.id=c.cancel_id WHERE rr.id=c.run_id` + suffix + `)`
-	if !access.Global(c) {
-		reviewQuery += caseCountry
-		unallocatedQuery += caseCountry
-	}
-	args = append(baseArgs, countryArgs...)
-	if e = s.Store.DB.QueryRowContext(c, reviewQuery, args...).Scan(&reviewed); e != nil {
-		respond(c, nil, e)
-		return
-	}
-	if e = s.Store.DB.QueryRowContext(c, unallocatedQuery, args...).Scan(&unallocated); e != nil {
-		respond(c, nil, e)
-		return
-	}
-	out["reviewed_allocations"] = reviewed
-	out["currently_unallocated"] = unallocated
-	if a.Role != "warehouse" && access.Global(c) {
-		var raw string
-		if e = s.Store.DB.QueryRowContext(c, "SELECT summary_json FROM runs WHERE id=?", run).Scan(&raw); e == nil {
-			var data any
-			e = json.Unmarshal([]byte(raw), &data)
-			out["initial_reconciliation"] = data
-		}
-	}
-	respond(c, out, e)
+	v, e := s.Store.BusinessOverview(c, actor(c), run)
+	respond(c, v, e)
 }
 func (s *Server) audit(c *gin.Context) {
 	if id := c.Query("case_id"); id != "" {

@@ -62,6 +62,8 @@ type ReviewItem struct {
 	Notice        string         `json:"notice,omitempty"`
 }
 type ReviewSet struct {
+	RemediationRevision int `json:"remediation_revision"`
+
 	ScopeVersion  int            `json:"scope_version,omitempty"`
 	ID            string         `json:"id"`
 	RunID         string         `json:"run_id"`
@@ -178,13 +180,17 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 		return out, workflowError("not_found", "运行尚未发布", WorkflowCase{})
 	}
 	out = ReviewSet{ScopeVersion: access.Version(ctx), RunID: run, Actor: actor, PolicyVersion: ReviewPolicyVersion, CreatedAt: time.Now().Format(time.RFC3339Nano), Items: []ReviewItem{}, Counts: map[string]int{}}
+	out.RemediationRevision, _, e = remediationRevision(ctx, conn, run)
+	if e != nil {
+		return out, e
+	}
 	out.ID, e = newReviewID(run + "|" + actor.ID + "|" + out.CreatedAt)
 	if e != nil {
 		return out, e
 	}
 	cancels := map[string]model.Row{}
 	invoices := map[string][]model.Row{}
-	rows, e := conn.QueryContext(ctx, `SELECT n.id,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,s.sheet,s.sheet_index,s.source_row FROM normalized_rows n JOIN source_rows s ON s.id=n.source_id WHERE n.dataset_id=? AND (n.kind='cancel' OR upper(substr(n.invoice,1,1))='C')`, dataset)
+	rows, e := conn.QueryContext(ctx, businessSQL(ctx, conn, run, `SELECT n.id,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,s.sheet,s.sheet_index,s.source_row FROM normalized_rows n JOIN source_rows s ON s.id=n.source_id WHERE n.dataset_id=? AND (n.kind='cancel' OR upper(substr(n.invoice,1,1))='C')`), dataset)
 	if e != nil {
 		return out, e
 	}
@@ -202,20 +208,20 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 	if e != nil {
 		return out, e
 	}
-	caseQuery := `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version FROM cases c JOIN runs r ON r.id=c.run_id JOIN datasets d ON d.id=r.dataset_id JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id JOIN source_rows s ON s.id=n.source_id WHERE c.run_id=?`
+	caseQuery := `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,d.source_hash,s.sheet,s.source_row,r.rule_version,d.cleaning_version,c.generation,c.is_current,c.previous_case_id,c.outcome,c.waiting,c.missing_materials,c.next_step FROM cases c JOIN runs r ON r.id=c.run_id JOIN datasets d ON d.id=r.dataset_id JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id JOIN source_rows s ON s.id=n.source_id WHERE c.run_id=? AND c.is_current=1`
 	args := []any{run}
 	if actor.Role == "warehouse" {
 		caseQuery += " AND c.assignee=?"
 		args = append(args, actor.ID)
 	}
-	rows, e = conn.QueryContext(ctx, caseQuery, args...)
+	rows, e = conn.QueryContext(ctx, businessSQL(ctx, conn, run, caseQuery), args...)
 	if e != nil {
 		return out, e
 	}
 	itemByCancel := map[string]int{}
 	for rows.Next() {
 		var c WorkflowCase
-		e = rows.Scan(&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason, &c.Status, &c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy, &c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion)
+		e = rows.Scan(&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason, &c.Status, &c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy, &c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Generation, &c.Current, &c.PreviousCaseID, &c.Outcome, &c.Waiting, &c.MissingMaterials, &c.NextStep)
 		if e != nil {
 			rows.Close()
 			return out, e
@@ -257,7 +263,25 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 	sales := map[string]*reviewSale{}
 	byKey := map[string][]*reviewSale{}
 	fingerprints := map[string][]*reviewSale{}
-	rows, e = conn.QueryContext(ctx, `WITH keys AS (SELECT DISTINCT customer,stock,country FROM normalized_rows INDEXED BY row_lookup WHERE dataset_id=? AND kind='cancel' AND excluded='') SELECT n.id,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,s.sheet,s.sheet_index,s.source_row,s.raw_json,b.original,b.allocated,b.remaining FROM keys k CROSS JOIN normalized_rows n INDEXED BY row_identity ON k.customer=n.customer AND k.stock=n.stock AND k.country=n.country CROSS JOIN source_rows s ON s.id=n.source_id CROSS JOIN sale_balances b ON b.run_id=? AND b.sale_id=n.id WHERE n.dataset_id=? AND n.kind='sale' AND n.excluded=''`, dataset, run, dataset)
+	independent := map[string]bool{}
+	verifiedRows, ve := conn.QueryContext(ctx, "SELECT row_id FROM duplicate_verifications WHERE run_id=? AND disposition='independent'", run)
+	if ve != nil {
+		return out, ve
+	}
+	for verifiedRows.Next() {
+		var id string
+		if ve = verifiedRows.Scan(&id); ve != nil {
+			verifiedRows.Close()
+			return out, ve
+		}
+		independent[id] = true
+	}
+	ve = verifiedRows.Err()
+	verifiedRows.Close()
+	if ve != nil {
+		return out, ve
+	}
+	rows, e = conn.QueryContext(ctx, businessSQL(ctx, conn, run, `WITH keys AS (SELECT DISTINCT customer,stock,country FROM normalized_rows INDEXED BY row_lookup WHERE dataset_id=? AND kind='cancel' AND excluded='') SELECT n.id,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,s.sheet,s.sheet_index,s.source_row,s.raw_json,b.original,b.allocated,b.remaining FROM keys k CROSS JOIN normalized_rows n INDEXED BY row_identity ON k.customer=n.customer AND k.stock=n.stock AND k.country=n.country CROSS JOIN source_rows s ON s.id=n.source_id CROSS JOIN sale_balances b ON b.run_id=? AND b.sale_id=n.id WHERE n.dataset_id=? AND n.kind='sale' AND n.excluded=''`), dataset, run, dataset)
 	if e != nil {
 		return out, e
 	}
@@ -271,7 +295,7 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 		}
 		sales[r.ID] = r
 		byKey[reviewKey(r.Row)] = append(byKey[reviewKey(r.Row)], r)
-		if fp, fe := rawFingerprint(raw); fe == nil {
+		if fp, fe := rawFingerprint(raw); fe == nil && !independent[r.ID] {
 			fingerprints[fp] = append(fingerprints[fp], r)
 		}
 	}
@@ -294,6 +318,38 @@ func (s *Store) GenerateReviewSet(ctx context.Context, actor WorkflowActor, run 
 		for _, r := range group {
 			r.Duplicate = d
 		}
+	}
+	// Explicitly confirmed groups, including supplemental sources, override raw proposals.
+	confirmed := map[string]*DuplicateProposal{}
+	groupRows, ge := conn.QueryContext(ctx, "SELECT g.id,g.canonical_id,g.capacity,m.sale_id FROM duplicate_sale_groups g JOIN duplicate_sale_members m ON m.run_id=g.run_id AND m.group_id=g.id WHERE g.run_id=? ORDER BY g.id,m.sale_id", run)
+	if ge != nil {
+		return out, ge
+	}
+	for groupRows.Next() {
+		var gid, canonical, sid string
+		var cap int64
+		if ge = groupRows.Scan(&gid, &canonical, &cap, &sid); ge != nil {
+			groupRows.Close()
+			return out, ge
+		}
+		d := confirmed[gid]
+		if d == nil {
+			d = &DuplicateProposal{ID: gid, CanonicalID: canonical, Capacity: cap, Members: []DuplicateMember{}}
+			confirmed[gid] = d
+		}
+		if sale := sales[sid]; sale != nil {
+			d.Allocated += sale.Allocated
+			d.Members = append(d.Members, DuplicateMember{sid, sale.Sheet, sale.SourceRow})
+			sale.Duplicate = d
+		}
+	}
+	ge = groupRows.Err()
+	groupRows.Close()
+	if ge != nil {
+		return out, ge
+	}
+	for _, d := range confirmed {
+		d.Remaining = d.Capacity - d.Allocated
 	}
 	choices := map[string][]*reviewSale{}
 	for i := range out.Items {
@@ -528,6 +584,13 @@ func (s *Store) reviewSet(ctx context.Context, actor WorkflowActor, id string) (
 	if err != nil {
 		return ReviewSet{}, err
 	}
+	revision, _, e := remediationRevision(ctx, s.DB, set.RunID)
+	if e != nil {
+		return ReviewSet{}, e
+	}
+	if revision != set.RemediationRevision {
+		return ReviewSet{}, workflowError("materials_changed", "补充资料已变化，请重新生成推荐", WorkflowCase{})
+	}
 	if !access.Compatible(ctx, set.ScopeVersion) {
 		return ReviewSet{}, workflowError("scope_changed", "负责国家已调整，请重新生成推荐", WorkflowCase{})
 	}
@@ -563,7 +626,7 @@ func reviewFilterMatches(it ReviewItem, f QueryFilter, onlyRecommended bool) boo
 	if onlyRecommended && len(it.Options) == 0 {
 		return false
 	}
-	return (f.Status == "" || f.Status == c.Status) && (f.Reason == "" || f.Reason == c.Reason) && (f.Assignee == "" || f.Assignee == c.Assignee) && (f.Customer == "" || f.Customer == r.Customer) && (f.Country == "" || f.Country == r.Country) && (f.Stock == "" || f.Stock == r.Stock) && (f.Invoice == "" || f.Invoice == r.Invoice) && (f.DateFrom == "" || r.Time >= f.DateFrom) && (f.DateTo == "" || r.Time < f.DateTo)
+	return (f.Waiting == "" || (f.Waiting == "1") == c.Waiting) && (f.Status == "" || f.Status == c.Status) && (f.Reason == "" || f.Reason == c.Reason) && (f.Assignee == "" || f.Assignee == c.Assignee) && (f.Customer == "" || f.Customer == r.Customer) && (f.Country == "" || f.Country == r.Country) && (f.Stock == "" || f.Stock == r.Stock) && (f.Invoice == "" || f.Invoice == r.Invoice) && (f.DateFrom == "" || r.Time >= f.DateFrom) && (f.DateTo == "" || r.Time < f.DateTo)
 }
 func (s *Store) ListReview(ctx context.Context, a WorkflowActor, id string, f QueryFilter, recommended bool) (out ReviewPage, err error) {
 	set, e := s.reviewSet(ctx, a, id)

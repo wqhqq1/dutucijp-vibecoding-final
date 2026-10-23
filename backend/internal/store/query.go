@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"regexp"
 	"returnsrecon/internal/access"
 	"strconv"
 	"strings"
@@ -21,6 +22,10 @@ type PageRequest struct {
 	PageSize int `json:"page_size"`
 }
 type QueryFilter struct {
+	Waiting        string `json:"waiting,omitempty"`
+	businessActive bool
+	businessSparse bool
+
 	ReviewGroupBy  string `json:"review_group_by,omitempty"`
 	ReviewGroupKey string `json:"review_group_key,omitempty"`
 	RunID          string `json:"run_id"`
@@ -104,12 +109,19 @@ type CandidatePage struct {
 	Total    int               `json:"total"`
 }
 type CaseEvidencePage struct {
-	Case             WorkflowCase       `json:"case"`
-	Cancel           TransactionRecord  `json:"cancel"`
-	DecisionEvidence []DecisionEvidence `json:"decision_evidence"`
-	Candidates       CandidatePage      `json:"candidates"`
-	Confirmation     *CaseConfirmation  `json:"confirmation,omitempty"`
-	Caveat           string             `json:"caveat"`
+	OriginalCancel    *model.Row         `json:"original_cancel,omitempty"`
+	EffectiveCancel   *model.Row         `json:"effective_cancel,omitempty"`
+	CurrentAssessment model.Decision     `json:"current_assessment"`
+	RoundAssessment   *model.Decision    `json:"round_assessment,omitempty"`
+	Remediations      []RemediationEvent `json:"remediations"`
+	RelatedCases      []WorkflowCase     `json:"related_cases"`
+	DuplicateRows     []model.Row        `json:"duplicate_rows"`
+	Case              WorkflowCase       `json:"case"`
+	Cancel            TransactionRecord  `json:"cancel"`
+	DecisionEvidence  []DecisionEvidence `json:"decision_evidence"`
+	Candidates        CandidatePage      `json:"candidates"`
+	Confirmation      *CaseConfirmation  `json:"confirmation,omitempty"`
+	Caveat            string             `json:"caveat"`
 }
 
 // A saved allocation remains visible even when its sale has no eligible balance
@@ -199,6 +211,9 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 	if f.RunID == "" {
 		return f, workflowError("invalid_input", "必须指定当前运行版本", WorkflowCase{})
 	}
+	if f.Waiting != "" && f.Waiting != "0" && f.Waiting != "1" {
+		return f, workflowError("invalid_input", "待补充筛选不合法", WorkflowCase{})
+	}
 	p, err := normalizePage(PageRequest{f.Page, f.PageSize})
 	if err != nil {
 		return f, err
@@ -241,10 +256,13 @@ func (s *Store) validateFilter(ctx context.Context, actor WorkflowActor, f Query
 	if errors.Is(err, sql.ErrNoRows) {
 		err = workflowError("not_found", "运行不存在或尚未发布", WorkflowCase{})
 	}
+	if err == nil {
+		_, f.businessActive, f.businessSparse, err = remediationState(ctx, s.DB, f.RunID)
+	}
 	return f, err
 }
 
-const transactionColumns = `n.id,sr.sheet_index,sr.sheet,sr.source_row,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,n.duplicate_of,d.id,d.scope,d.source_hash,r.rule_version,d.cleaning_version`
+const transactionColumns = `n.id,sr.sheet_index,sr.sheet,sr.source_row,n.invoice,n.stock,n.description,n.quantity,n.source_time,n.price,n.customer,n.country,n.kind,n.excluded,n.flags,n.duplicate_of,d.id,d.scope,CASE WHEN substr(n.id,1,7)='manual:' THEN sr.source_hash ELSE d.source_hash END,r.rule_version,d.cleaning_version`
 const runFrom = ` FROM runs r JOIN datasets d ON d.id=r.dataset_id`
 
 // Exports and permission-scoped keys use only the relations their filters need.
@@ -310,6 +328,10 @@ func immutableTransactionScope(actor WorkflowActor, f QueryFilter) bool {
 func immutableTransactionWhere(f QueryFilter) (string, []any) {
 	parts := []string{"n.dataset_id=?"}
 	args := []any{f.datasetID}
+	if f.businessActive {
+		parts = []string{"1=1"}
+		args = []any{}
+	}
 	for _, pair := range []struct{ sql, value string }{{"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
 		if pair.value != "" {
 			parts = append(parts, pair.sql)
@@ -331,7 +353,7 @@ func narrowTransactionDate(f QueryFilter) bool {
 func filterJoins(f QueryFilter, hasCase bool) string {
 	from := ""
 	if !hasCase && caseFiltered(f) {
-		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id`
+		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=n.id AND c.is_current=1`
 	}
 	if f.Classification != "" {
 		from += ` JOIN decisions dc ON dc.run_id=r.id AND dc.cancel_id=n.id`
@@ -347,7 +369,7 @@ var caseReasons = map[string]bool{
 }
 
 func caseFiltered(f QueryFilter) bool {
-	return f.Status != "" || f.Reason != "" || f.Assignee != ""
+	return f.Waiting != "" || f.Status != "" || f.Reason != "" || f.Assignee != ""
 }
 
 func unfilteredTransactions(f QueryFilter) bool {
@@ -409,6 +431,47 @@ func transactionOrder(f QueryFilter) string {
 	return transactionSortColumns[f.Sort] + direction + ",n.id" + direction
 }
 
+// Sort the compact keys directly in both indexed branches. Ordering a UNION
+// view by an outer expression otherwise reads every full row into a temp sort.
+func sparseTransactionKeys(f QueryFilter, from, where string) string {
+	columns, order := "", ""
+	direction := " ASC"
+	if f.Direction == "desc" {
+		direction = " DESC"
+	}
+	if f.Sort == "" || f.Sort == "source" {
+		terms := strings.Split(rowSourceOrder("n.id"), ",CAST")
+		columns = "," + terms[0] + " AS page_order_1,CAST" + terms[1] + " AS page_order_2"
+		order = "page_order_1" + direction + ",page_order_2" + direction + ",id" + direction
+	} else {
+		columns = "," + transactionSortColumns[f.Sort] + " AS page_order_1"
+		order = "page_order_1" + direction + ",id" + direction
+	}
+	columns = "n.dataset_id AS dataset_id,n.id AS id" + columns
+	return sparseTransactionBranch(f, from, where, columns, true) + " UNION ALL " + sparseTransactionBranch(f, from, where, columns, false) + " ORDER BY " + order + " LIMIT ? OFFSET ?"
+}
+
+func sparseTransactionBranch(f QueryFilter, from, where, columns string, original bool) string {
+	run := "'" + strings.ReplaceAll(f.RunID, "'", "''") + "'"
+	dataset := "'" + strings.ReplaceAll(f.datasetID, "'", "''") + "'"
+	predicate := where + " AND n.dataset_id=" + dataset
+	alias := "page_override"
+	if original {
+		alias = "page_original"
+		from = strings.Replace(from, "normalized_rows n", "main.normalized_rows n", 1)
+		predicate += " AND NOT EXISTS(SELECT 1 FROM business_rows changed WHERE changed.run_id=" + run + " AND changed.id=n.id)"
+	} else {
+		from = strings.Replace(from, "normalized_rows n", "business_rows n", 1)
+		for _, pair := range businessIndexes {
+			from = strings.ReplaceAll(from, " INDEXED BY "+pair[0], " INDEXED BY "+pair[1])
+		}
+		predicate += " AND n.run_id=" + run
+	}
+	query := "SELECT " + columns + from + predicate
+	query = regexp.MustCompile(`\bn\.`).ReplaceAllString(query, alias+".")
+	return strings.Replace(query, " n ", " "+alias+" ", 1)
+}
+
 func hasRowFilter(f QueryFilter) bool {
 	return f.Customer != "" || f.Stock != "" || f.Invoice != "" || f.Country != "" || f.Kind != "" || f.DateFrom != "" || f.DateTo != ""
 }
@@ -419,6 +482,12 @@ func queryWhere(actor WorkflowActor, f QueryFilter) (string, []any) {
 
 func queryScopeWhere(actor WorkflowActor, f QueryFilter, ownCases bool) (string, []any) {
 	parts := []string{"r.id=?", "r.status='published'", "d.status='published'"}
+	if caseFiltered(f) || (ownCases && actor.Role == "warehouse") {
+		parts = append(parts, "c.is_current=1")
+	}
+	if f.Waiting != "" {
+		parts = append(parts, "c.waiting="+f.Waiting)
+	}
 	args := []any{f.RunID}
 	for _, pair := range []struct{ sql, value string }{{"c.status=?", f.Status}, {"c.reason=?", f.Reason}, {"c.assignee=?", f.Assignee}, {"n.customer=?", f.Customer}, {"n.stock=?", f.Stock}, {"n.invoice=?", f.Invoice}, {"n.country=?", f.Country}, {"dc.classification=?", f.Classification}, {"n.kind=?", f.Kind}, {"n.source_time>=?", f.DateFrom}, {"n.source_time<?", f.DateTo}} {
 		if pair.value != "" {
@@ -466,20 +535,27 @@ func (s *Store) ListTransactions(ctx context.Context, actor WorkflowActor, f Que
 	}
 	countSQL := "SELECT count(*)" + countFrom + where
 	countArgs := args
+	if f.businessActive && f.businessSparse {
+		countSQL = "SELECT (" + sparseTransactionBranch(f, countFrom, where, "count(*)", true) + ")+(" + sparseTransactionBranch(f, countFrom, where, "count(*)", false) + ")"
+		countArgs = append(append([]any{}, args...), args...)
+	}
 	if ordered {
 		// Import verifies the immutable manifest's raw count before publication.
 		// Read that persisted count, not an account cache or a full-row COUNT.
 		countSQL = `SELECT json_extract(d.manifest_json,'$.stats.raw')` + runFrom + ` WHERE r.id=? AND r.status='published' AND d.status='published'`
 		countArgs = []any{f.RunID}
+		if f.businessActive {
+			countSQL = `SELECT json_extract(d.manifest_json,'$.stats.raw')+(SELECT count(*) FROM supplemental_sources ss WHERE ss.run_id=r.id)` + runFrom + ` WHERE r.id=? AND r.status='published' AND d.status='published'`
+		}
 	}
 	countKey, boundedKey := immutableCountKey(f)
-	cacheCount := immutable && !ordered && boundedKey
+	cacheCount := !f.businessActive && immutable && !ordered && boundedKey
 	cached := false
 	if cacheCount {
 		out.Total, cached = s.transactionCounts.get(countKey)
 	}
 	if !cached {
-		if err = s.DB.QueryRowContext(ctx, countSQL, countArgs...).Scan(&out.Total); err != nil {
+		if err = s.businessQueryRow(ctx, f.RunID, countSQL, countArgs...).Scan(&out.Total); err != nil {
 			return
 		}
 		if cacheCount {
@@ -509,8 +585,18 @@ func (s *Store) ListTransactions(ctx context.Context, actor WorkflowActor, f Que
 		}
 	}
 	keys := "SELECT n.dataset_id,n.id" + keyFrom + where + " ORDER BY " + transactionOrder(pageOrder) + " LIMIT ? OFFSET ?"
+	if f.businessSparse && f.businessActive {
+		keyFilter := f
+		keyFilter.Direction = pageOrder.Direction
+		keys = sparseTransactionKeys(keyFilter, keyFrom, where)
+		args = append(append([]any{}, args...), args...)
+	}
 	args = append(args, limit, offset, f.RunID)
-	rows, e := s.DB.QueryContext(ctx, "WITH page AS MATERIALIZED ("+keys+") SELECT "+transactionColumns+` FROM page CROSS JOIN normalized_rows n ON n.dataset_id=page.dataset_id AND n.id=page.id CROSS JOIN source_rows sr ON sr.id=n.source_id CROSS JOIN datasets d ON d.id=n.dataset_id CROSS JOIN runs r ON r.id=? ORDER BY `+transactionOrder(f), args...)
+	// Page hydration has a distinct alias from its key branches so effective ID
+	// lookups can resolve original/override fields without touching other scopes.
+	pageSelect := strings.ReplaceAll(transactionColumns, "n.", "page_row.")
+	pageOrderSQL := strings.ReplaceAll(transactionOrder(f), "n.", "page_row.")
+	rows, e := s.businessQuery(ctx, f.RunID, "WITH page AS MATERIALIZED ("+keys+") SELECT "+pageSelect+` FROM page CROSS JOIN normalized_rows page_row ON page_row.dataset_id=page.dataset_id AND page_row.id=page.id CROSS JOIN source_rows sr ON sr.id=page_row.source_id CROSS JOIN datasets d ON d.id=page_row.dataset_id CROSS JOIN runs r ON r.id=? ORDER BY `+pageOrderSQL, args...)
 	if e != nil {
 		err = e
 		return
@@ -534,18 +620,19 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 	}
 	out = CasePage{Items: []WorkflowCase{}, Page: f.Page, PageSize: f.PageSize}
 	where, args := scopedQueryWhere(ctx, actor, f, true)
+	where += " AND c.is_current=1"
 	from := runFrom + ` CROSS JOIN cases c ON c.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=c.cancel_id` + filterJoins(f, true)
 	countFrom := from
 	if access.Global(ctx) && !hasRowFilter(f) && f.Classification == "" {
 		countFrom = runFrom + ` CROSS JOIN cases c ON c.run_id=r.id`
 	}
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
+	if err = s.businessQueryRow(ctx, f.RunID, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
 		return
 	}
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
+	rows, e := s.businessQuery(ctx, f.RunID, `SELECT c.id,c.run_id,r.dataset_id,c.cancel_id,c.reason,
  c.status,coalesce(c.assignee,''),c.version,c.conclusion,c.assigned_at,c.assigned_by,
- d.source_hash,sr.sheet,sr.source_row,r.rule_version,d.cleaning_version,n.country`+from+` CROSS JOIN source_rows sr ON sr.id=n.source_id`+where+" ORDER BY "+sourceOrder("c")+",c.id LIMIT ? OFFSET ?", args...)
+ d.source_hash,sr.sheet,sr.source_row,r.rule_version,d.cleaning_version,n.country,c.generation,c.is_current,c.previous_case_id,c.outcome,c.waiting,c.missing_materials,c.next_step`+from+` CROSS JOIN source_rows sr ON sr.id=n.source_id`+where+" ORDER BY "+sourceOrder("c")+",c.id LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
@@ -555,7 +642,7 @@ func (s *Store) ListCases(ctx context.Context, actor WorkflowActor, f QueryFilte
 		var c WorkflowCase
 		if err = rows.Scan(&c.ID, &c.RunID, &c.DatasetID, &c.CancelID, &c.Reason,
 			&c.Status, &c.Assignee, &c.Version, &c.Conclusion, &c.AssignedAt, &c.AssignedBy,
-			&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country); err != nil {
+			&c.SourceHash, &c.Sheet, &c.SourceRow, &c.RuleVersion, &c.CleaningVersion, &c.Country, &c.Generation, &c.Current, &c.PreviousCaseID, &c.Outcome, &c.Waiting, &c.MissingMaterials, &c.NextStep); err != nil {
 			return
 		}
 		if err = authorizeWorkflowRead(ctx, actor, c); err != nil {
@@ -575,7 +662,7 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 	out = AllocationPage{Items: []AllocationRecord{}, Page: f.Page, PageSize: f.PageSize}
 	from := runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id CROSS JOIN normalized_rows n ON n.dataset_id=d.id AND n.id=a.cancel_id`
 	if actor.Role == "warehouse" || caseFiltered(f) {
-		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
+		from += ` JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id AND c.is_current=1`
 	}
 	from += filterJoins(f, true)
 	where, args := scopedQueryWhere(ctx, actor, f, true)
@@ -583,15 +670,15 @@ func (s *Store) ListAllocations(ctx context.Context, actor WorkflowActor, f Quer
 	if access.Global(ctx) && !hasRowFilter(f) && f.Classification == "" {
 		countFrom = runFrom + ` CROSS JOIN allocations a ON a.run_id=r.id`
 		if actor.Role == "warehouse" || caseFiltered(f) {
-			countFrom += ` CROSS JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id`
+			countFrom += ` CROSS JOIN cases c ON c.run_id=r.id AND c.cancel_id=a.cancel_id AND c.is_current=1`
 		}
 	}
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
+	if err = s.businessQueryRow(ctx, f.RunID, "SELECT count(*)"+countFrom+where, args...).Scan(&out.Total); err != nil {
 		return
 	}
 	from += ` CROSS JOIN source_rows sr ON sr.id=n.source_id CROSS JOIN normalized_rows sn ON sn.dataset_id=d.id AND sn.id=a.sale_id CROSS JOIN source_rows ss ON ss.id=sn.source_id`
 	args = append(args, f.PageSize, (f.Page-1)*f.PageSize)
-	rows, e := s.DB.QueryContext(ctx, `SELECT a.run_id,a.cancel_id,a.sale_id,a.quantity,a.amount,a.method,coalesce(a.actor,''),r.rule_version,sr.sheet,sr.source_row,ss.sheet,ss.source_row`+from+where+" ORDER BY "+sourceOrder("a")+" LIMIT ? OFFSET ?", args...)
+	rows, e := s.businessQuery(ctx, f.RunID, `SELECT a.run_id,a.cancel_id,a.sale_id,a.quantity,a.amount,a.method,coalesce(a.actor,''),r.rule_version,sr.sheet,sr.source_row,ss.sheet,ss.source_row`+from+where+" ORDER BY "+sourceOrder("a")+" LIMIT ? OFFSET ?", args...)
 	if e != nil {
 		err = e
 		return
@@ -631,15 +718,42 @@ func (s *Store) ListCandidates(ctx context.Context, actor WorkflowActor, caseID 
 		err = caseErr
 		return
 	}
+	if !c.Current {
+		return CandidatePage{Items: []CandidateRecord{}, Page: 1, PageSize: 50}, nil
+	}
 	p, err = normalizePage(p)
 	if err != nil {
 		return
 	}
 	out = CandidatePage{Items: []CandidateRecord{}, Page: p.Page, PageSize: p.PageSize}
-	if err = s.DB.QueryRowContext(ctx, "SELECT count(*)"+candidateFrom+candidateWhere, caseID).Scan(&out.Total); err != nil {
+	cancel, readErr := readBusinessRow(ctx, s.DB, c.RunID, c.DatasetID, c.CancelID)
+	if readErr != nil {
+		return out, readErr
+	}
+	if !cancel.HasIdentity() || cancel.Excluded != "" {
+		return out, nil
+	}
+	countSQL := "SELECT count(*)" + candidateFrom + candidateWhere
+	pageSQL := "SELECT " + transactionColumns + ",b.original,b.allocated,b.remaining" + candidateFrom + candidateWhere + " ORDER BY sr.sheet_index,sr.source_row,n.id LIMIT ? OFFSET ?"
+	countArgs := []any{caseID}
+	pageArgs := []any{caseID, p.PageSize, (p.Page - 1) * p.PageSize}
+	_, active, sparse, stateErr := remediationState(ctx, s.DB, c.RunID)
+	if stateErr != nil {
+		return out, stateErr
+	}
+	if active && sparse {
+		f := QueryFilter{RunID: c.RunID, datasetID: c.DatasetID}
+		from := strings.Replace(candidateFrom, "normalized_rows n ON", "normalized_rows n INDEXED BY row_identity ON", 1)
+		countSQL = "SELECT (" + sparseTransactionBranch(f, from, candidateWhere, "count(*)", true) + ")+(" + sparseTransactionBranch(f, from, candidateWhere, "count(*)", false) + ")"
+		columns := transactionColumns + ",b.original,b.allocated,b.remaining"
+		pageSQL = sparseTransactionBranch(f, from, candidateWhere, columns, true) + " UNION ALL " + sparseTransactionBranch(f, from, candidateWhere, columns, false) + " ORDER BY 2,4,1 LIMIT ? OFFSET ?"
+		countArgs = []any{caseID, caseID}
+		pageArgs = []any{caseID, caseID, p.PageSize, (p.Page - 1) * p.PageSize}
+	}
+	if err = s.businessQueryRow(ctx, c.RunID, countSQL, countArgs...).Scan(&out.Total); err != nil {
 		return
 	}
-	rows, e := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+",b.original,b.allocated,b.remaining"+candidateFrom+candidateWhere+" ORDER BY sr.sheet_index,sr.source_row,n.id LIMIT ? OFFSET ?", caseID, p.PageSize, (p.Page-1)*p.PageSize)
+	rows, e := s.businessQuery(ctx, c.RunID, pageSQL, pageArgs...)
 	if e != nil {
 		err = e
 		return
@@ -670,7 +784,7 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 	if out.Case, err = s.WorkflowCase(ctx, actor, caseID); err != nil {
 		return
 	}
-	r, err := readManualRow(ctx, s.DB, out.Case.DatasetID, out.Case.CancelID)
+	r, err := readBusinessRow(ctx, s.DB, out.Case.RunID, out.Case.DatasetID, out.Case.CancelID)
 	if err != nil {
 		return
 	}
@@ -706,7 +820,7 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 	a := &confirmation.Allocation
 	err = s.DB.QueryRowContext(ctx, `SELECT run_id,cancel_id,sale_id,quantity,amount,method,coalesce(actor,'') FROM allocations WHERE run_id=? AND cancel_id=?`, out.Case.RunID, out.Case.CancelID).Scan(&a.RunID, &a.CancelID, &a.SaleID, &a.Quantity, &a.Amount, &a.Method, &a.Actor)
 	if err == nil {
-		sale, e := readManualRow(ctx, s.DB, out.Case.DatasetID, a.SaleID)
+		sale, e := readBusinessRow(ctx, s.DB, out.Case.RunID, out.Case.DatasetID, a.SaleID)
 		if e != nil {
 			return out, e
 		}
@@ -733,6 +847,9 @@ func (s *Store) CaseEvidence(ctx context.Context, actor WorkflowActor, caseID st
 	}
 	out.Candidates, err = s.ListCandidates(ctx, actor, caseID, p)
 	out.Caveat = "规则推断；决策时证据仅支撑原分类，当前合格候选分页列出；确认时仍需重新校验。没有真实原订单关联号。"
+	if err == nil {
+		err = s.remediationEvidence(ctx, actor, &out)
+	}
 	return
 }
 
@@ -760,7 +877,7 @@ func (s *Store) ExportCSV(ctx context.Context, actor WorkflowActor, f QueryFilte
 		return err
 	}
 	where, args := scopedQueryWhere(ctx, actor, f, false)
-	rows, err := s.DB.QueryContext(ctx, "SELECT "+transactionColumns+transactionQueryFrom(f, true)+where+" ORDER BY "+transactionOrder(f), args...)
+	rows, err := s.businessQuery(ctx, f.RunID, "SELECT "+transactionColumns+transactionQueryFrom(f, true)+where+" ORDER BY "+transactionOrder(f), args...)
 	if err != nil {
 		return err
 	}

@@ -1,0 +1,136 @@
+<!-- Native take on the web "reconciliation ledger": ink text, one teal accent, three fixed
+     case-state tones and a vermilion seal for the brand mark and the closed-case stamp.
+     Embedded and merged by LedgerTheme.Ensure() before the main window is built, so the
+     release client and the isolated UI host share one definition. Brushes are reached through
+     Styles with ThemeResource setters so they follow the in-app theme (Root.RequestedTheme),
+     not the system theme. No StaticResource references: the dictionary parses standalone. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ResourceDictionary.ThemeDictionaries>
+  <ResourceDictionary x:Key="Light">
+   <SolidColorBrush x:Key="SealBrush" Color="#B33B2C"/>
+   <SolidColorBrush x:Key="SealWashBrush" Color="#F8E6E2"/>
+   <SolidColorBrush x:Key="LedgerRuleBrush" Color="#192B3B"/>
+   <SolidColorBrush x:Key="TonePendingForeground" Color="#7A4E08"/>
+   <SolidColorBrush x:Key="TonePendingBackground" Color="#FAF0DC"/>
+   <SolidColorBrush x:Key="ToneProgressForeground" Color="#1F4F78"/>
+   <SolidColorBrush x:Key="ToneProgressBackground" Color="#E4EEF6"/>
+   <SolidColorBrush x:Key="ToneDoneForeground" Color="#285A3D"/>
+   <SolidColorBrush x:Key="ToneDoneBackground" Color="#E2EFE7"/>
+   <SolidColorBrush x:Key="ToneDangerForeground" Color="#8A3124"/>
+   <SolidColorBrush x:Key="ToneDangerBackground" Color="#FBEBE7"/>
+   <SolidColorBrush x:Key="ToneNeutralForeground" Color="#3E5262"/>
+   <SolidColorBrush x:Key="ToneNeutralBackground" Color="#EBEFEE"/>
+   <SolidColorBrush x:Key="DiffCellBackground" Color="#FAF0DC"/>
+  </ResourceDictionary>
+  <ResourceDictionary x:Key="Default">
+   <SolidColorBrush x:Key="SealBrush" Color="#E58D7F"/>
+   <SolidColorBrush x:Key="SealWashBrush" Color="#3B2420"/>
+   <SolidColorBrush x:Key="LedgerRuleBrush" Color="#DDE7E4"/>
+   <SolidColorBrush x:Key="TonePendingForeground" Color="#F0C37A"/>
+   <SolidColorBrush x:Key="TonePendingBackground" Color="#3A2E17"/>
+   <SolidColorBrush x:Key="ToneProgressForeground" Color="#9CC7EC"/>
+   <SolidColorBrush x:Key="ToneProgressBackground" Color="#1D3042"/>
+   <SolidColorBrush x:Key="ToneDoneForeground" Color="#9AD3B0"/>
+   <SolidColorBrush x:Key="ToneDoneBackground" Color="#1C3427"/>
+   <SolidColorBrush x:Key="ToneDangerForeground" Color="#F0A496"/>
+   <SolidColorBrush x:Key="ToneDangerBackground" Color="#3E2320"/>
+   <SolidColorBrush x:Key="ToneNeutralForeground" Color="#C3CFD6"/>
+   <SolidColorBrush x:Key="ToneNeutralBackground" Color="#2C3338"/>
+   <SolidColorBrush x:Key="DiffCellBackground" Color="#3A2E17"/>
+  </ResourceDictionary>
+  <ResourceDictionary x:Key="HighContrast">
+   <SolidColorBrush x:Key="SealBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+   <SolidColorBrush x:Key="SealWashBrush" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="LedgerRuleBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="TonePendingForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="TonePendingBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="ToneProgressForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="ToneProgressBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="ToneDoneForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="ToneDoneBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="ToneDangerForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="ToneDangerBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="ToneNeutralForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+   <SolidColorBrush x:Key="ToneNeutralBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+   <SolidColorBrush x:Key="DiffCellBackground" Color="{ThemeResource SystemColorHighlightColor}"/>
+  </ResourceDictionary>
+ </ResourceDictionary.ThemeDictionaries>
+
+ <!-- Teal accent from the web client; Dark1 fills accent buttons in light theme, Light2 in dark. -->
+ <Color x:Key="SystemAccentColor">#0D6870</Color>
+ <Color x:Key="SystemAccentColorLight1">#2F8890</Color>
+ <Color x:Key="SystemAccentColorLight2">#6CB8BD</Color>
+ <Color x:Key="SystemAccentColorLight3">#A5D6D8</Color>
+ <Color x:Key="SystemAccentColorDark1">#0B5E66</Color>
+ <Color x:Key="SystemAccentColorDark2">#084A51</Color>
+ <Color x:Key="SystemAccentColorDark3">#05363B</Color>
+ <FontFamily x:Key="LedgerMonoFont">Cascadia Mono, Consolas</FontFamily>
+
+ <Style x:Key="LedgerCardStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+  <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+  <Setter Property="BorderThickness" Value="1"/>
+  <Setter Property="CornerRadius" Value="8"/>
+  <Setter Property="Padding" Value="20,16"/>
+ </Style>
+ <Style x:Key="LedgerTableStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+  <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+  <Setter Property="BorderThickness" Value="1"/>
+  <Setter Property="CornerRadius" Value="8"/>
+ </Style>
+ <Style x:Key="LedgerTableHeaderStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}"/>
+  <Setter Property="BorderBrush" Value="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+  <Setter Property="BorderThickness" Value="0,0,0,1"/>
+  <Setter Property="CornerRadius" Value="8,8,0,0"/>
+ </Style>
+ <Style x:Key="LedgerDividerStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+ </Style>
+ <Style x:Key="LedgerRuleStyle" TargetType="Border">
+  <Setter Property="BorderBrush" Value="{ThemeResource LedgerRuleBrush}"/>
+ </Style>
+ <Style x:Key="MutedTextStyle" TargetType="TextBlock">
+  <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}"/>
+ </Style>
+ <Style x:Key="MutedCaptionStyle" TargetType="TextBlock">
+  <Setter Property="FontSize" Value="12"/>
+  <Setter Property="LineHeight" Value="16"/>
+  <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}"/>
+ </Style>
+ <Style x:Key="MetricValueStyle" TargetType="TextBlock">
+  <Setter Property="FontFamily" Value="Cascadia Mono, Consolas"/>
+  <Setter Property="FontSize" Value="26"/>
+  <Setter Property="FontWeight" Value="SemiBold"/>
+  <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}"/>
+ </Style>
+ <Style x:Key="SealStampStyle" TargetType="Border">
+  <Setter Property="BorderBrush" Value="{ThemeResource SealBrush}"/>
+  <Setter Property="Background" Value="{ThemeResource SealWashBrush}"/>
+  <Setter Property="BorderThickness" Value="2"/>
+  <Setter Property="CornerRadius" Value="4"/>
+  <Setter Property="Padding" Value="10,2"/>
+ </Style>
+ <Style x:Key="SealTextStyle" TargetType="TextBlock">
+  <Setter Property="Foreground" Value="{ThemeResource SealBrush}"/>
+  <Setter Property="FontWeight" Value="Bold"/>
+ </Style>
+ <Style x:Key="BrandMarkStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource SealBrush}"/>
+  <Setter Property="CornerRadius" Value="4"/>
+ </Style>
+ <Style x:Key="DiffCellStyle" TargetType="Border">
+  <Setter Property="Background" Value="{ThemeResource DiffCellBackground}"/>
+ </Style>
+ <Style x:Key="TonePendingBadge" TargetType="Border"><Setter Property="Background" Value="{ThemeResource TonePendingBackground}"/></Style>
+ <Style x:Key="TonePendingText" TargetType="TextBlock"><Setter Property="Foreground" Value="{ThemeResource TonePendingForeground}"/></Style>
+ <Style x:Key="ToneProgressBadge" TargetType="Border"><Setter Property="Background" Value="{ThemeResource ToneProgressBackground}"/></Style>
+ <Style x:Key="ToneProgressText" TargetType="TextBlock"><Setter Property="Foreground" Value="{ThemeResource ToneProgressForeground}"/></Style>
+ <Style x:Key="ToneDoneBadge" TargetType="Border"><Setter Property="Background" Value="{ThemeResource ToneDoneBackground}"/></Style>
+ <Style x:Key="ToneDoneText" TargetType="TextBlock"><Setter Property="Foreground" Value="{ThemeResource ToneDoneForeground}"/></Style>
+ <Style x:Key="ToneDangerBadge" TargetType="Border"><Setter Property="Background" Value="{ThemeResource ToneDangerBackground}"/></Style>
+ <Style x:Key="ToneDangerText" TargetType="TextBlock"><Setter Property="Foreground" Value="{ThemeResource ToneDangerForeground}"/></Style>
+ <Style x:Key="ToneNeutralBadge" TargetType="Border"><Setter Property="Background" Value="{ThemeResource ToneNeutralBackground}"/></Style>
+ <Style x:Key="ToneNeutralText" TargetType="TextBlock"><Setter Property="Foreground" Value="{ThemeResource ToneNeutralForeground}"/></Style>
+</ResourceDictionary>

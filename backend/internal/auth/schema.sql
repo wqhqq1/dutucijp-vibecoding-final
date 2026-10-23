@@ -49,6 +49,10 @@ CREATE TABLE IF NOT EXISTS auth_challenges (
 CREATE TABLE IF NOT EXISTS auth_passkey_domains (
  id INTEGER PRIMARY KEY CHECK(id=1),origins_json TEXT NOT NULL,version INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS auth_client_identity (
+ id INTEGER PRIMARY KEY CHECK(id=1),backend_id TEXT NOT NULL,
+ rp_id TEXT NOT NULL,logical_origin TEXT NOT NULL
+);
 INSERT OR IGNORE INTO auth_passkey_domains(id,origins_json,version) VALUES(1,'[]',1);
 CREATE TABLE IF NOT EXISTS auth_recovery (
  hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES auth_users(id)

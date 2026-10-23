@@ -54,4 +54,6 @@ Thumbs.db
 __pycache__/
 *.pyc
 *.heavy.lock
+desktop/**/bin/
+desktop/**/obj/
 *.exe

@@ -1,0 +1,14 @@
+{
+  "actual_time": "2026-10-20T09:10:45.620634+08:00",
+  "go_passed": 187,
+  "go_failed": 0,
+  "go_skipped": 0,
+  "python_passed": 25,
+  "frontend_passed": 11,
+  "frontend_build": "passed",
+  "portable_manifest_check": "passed, 251 files",
+  "go_command": "go test -count=1 -json ./...",
+  "go_output": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\builds\\fr20-20261020\\go-final.jsonl",
+  "python_frontend_command": "./test.ps1 -OutputDir %LOCALAPPDATA%/dutucijp-vibecoding-final/verification/fr20-unified-20261020",
+  "initial_go_failure": "旧迁移夹具要求LF；schema写回CRLF导致1项失败，恢复原换行后单项及187项Go全回归通过。旧失败输出保留。"
+}

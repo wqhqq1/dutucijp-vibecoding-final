@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import QRCode from 'qrcode';
 import ReviewPanel from './ReviewPanel';
+import RemediationPanel,{outcomeLabels} from './RemediationPanel';
 import AccountPanel from './AccountPanel';
 import AssigneePicker,{canAssign} from './AssigneePicker';
 import {accountName,countryLabel,countrySummary,type Account} from './accounts';
@@ -12,17 +13,17 @@ import '@fontsource/ibm-plex-mono/latin-500.css';
 import './style.css';
 
 type Session=Account&{state:string;scope:string;has_totp:boolean;has_passkey:boolean;csrf:string;can_manage_data_jobs:boolean};
-type Case={id:string;run_id:string;cancel_id:string;reason:string;status:string;version:number;assignee:string;conclusion:string;source_row:number;sheet:string};
+type Case={generation?:number;is_current?:boolean;outcome?:string;waiting?:boolean;missing_materials?:string;next_step?:string;id:string;run_id:string;cancel_id:string;reason:string;status:string;version:number;assignee:string;conclusion:string;source_row:number;sheet:string};
 type Row={id:string;invoice:string;stock:string;customer:string;country:string;price:string;quantity:number;time:string;sheet:string;source_row:number;current_remaining?:number;remaining_at_decision?:number;reason?:string;raw_json?:string;duplicate_group?:{original:number;allocated:number;remaining:number;members:{sale_id:string;sheet:string;source_row:number}[]}};
 type Page<T>={items:T[];total:number;page:number;page_size:number};
 type Confirmation={allocation:{sale_id:string;quantity:number;amount:string;actor:string;batch_id?:string;recommendation_kind?:string;policy_version?:string};sale:Row};
-type Evidence={case:Case;cancel:Row;decision_evidence:Row[];candidates:Page<Row>;confirmation?:Confirmation;caveat:string};
+type Evidence={original_cancel?:Row;effective_cancel?:Row;duplicate_rows?:Row[];related_cases?:Case[];remediations?:{id:string;action:string;evidence:string;actor:string;occurred_at:string;before:Row;after:Row}[];current_assessment?:{reason:string;candidate_count_lower_bound:number};case:Case;cancel:Row;decision_evidence:Row[];candidates:Page<Row>;confirmation?:Confirmation;caveat:string};
 type Run={run_id:string;scope:string;cleaning_version:string;rule_version:string};
 const labels:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',finance:'财务',warehouse:'仓库',admin:'管理员'};
 const evidenceReasons:Record<string,string>={qualified:'合格候选',suspected_duplicate_sale:'合格，但销售行疑似重复',remaining_quantity_too_small:'剩余数量不足',sale_not_strictly_earlier:'销售不早于取消'};
-const auditActions:Record<string,string>={assign:'派单',start:'开始处理',confirm_candidate:'人工确认候选',close:'关闭',account_deleted_unassign:'账户删除，退回未派单'};
+const auditActions:Record<string,string>={correct_return:'核实修正退货',supplement_sale:'补录销售',verify_duplicate:'核实重复',wait_materials:'保存待补充',recheck:'重新核查',reassess:'重算',remediation_match:'补充后配对',reclassified:'流转新问题',verified_duplicate:'核实重复排除',created_from_reassessment:'重算生成问题',assign:'派单',start:'开始处理',confirm_candidate:'人工确认候选',close:'关闭',account_deleted_unassign:'账户删除，退回未派单'};
 const scopeLabels:Record<string,string>={benchmark:'首表固定一万行',year1:'首年度全部',all:'两个年度全部'};
-const emptyFilters={customer:'',stock:'',invoice:'',country:'',status:'',reason:'',assignee:'',date_from:'',date_to:'',sort:'source',direction:'asc'};
+const emptyFilters={waiting:'',customer:'',stock:'',invoice:'',country:'',status:'',reason:'',assignee:'',date_from:'',date_to:'',sort:'source',direction:'asc'};
 const jobLabels:Record<string,string>={queued:'排队等待',running:'正在运行',succeeded:'已完成',failed:'未完成',preparing:'准备官方数据',importing:'导入并校验',reconciling:'对账与保存',published:'已发布',interrupted:'上次运行中断'};
 const jobCountLabels:Record<string,string>={rows:'已读取原始行',rows_read:'已读取原始行',raw:'原始行',accepted:'接纳行',excluded:'排除行',accepted_sales:'接纳销售',accepted_cancels:'接纳取消',matched:'初始自动配对',suspected:'疑似',no_original:'当前规则下无合格原单'};
 const emptyPage:Page<any>={items:[],total:0,page:1,page_size:50};
@@ -124,7 +125,7 @@ function App(){
  function closeCase(){setActiveCase(null);detailCache.current=null;setCaseNotice(null);setCandidateChoice(null);conclusionKey.current='';setConclusion('')}
  async function mutate(kind:string,body:any,sale?:Row){if(!selected)return;const epoch=sessionEpoch.current;const result=await api('/cases/'+selected.case.id+'/'+kind,body);if(epoch!==sessionEpoch.current)return;
   if(detailCache.current?.id===selected.case.id){const next={...selected,case:result.case||result};if(kind==='confirm-match'&&sale&&result.allocation)next.confirmation={allocation:result.allocation,sale:{...sale,current_remaining:(sale.current_remaining??0)-result.allocation.quantity}};detailCache.current={owner,id:selected.case.id,value:next}}
-  setRevision(n=>n+1);setCaseNotice({id:selected.case.id,message:kind==='confirm-match'?`已确认销售 ${sale?.id||body.sale_row_id}，分配数量 ${result.allocation?.quantity??Math.abs(selected.cancel.quantity)}。仍可填写核查结论，完成后关闭差异。`:kind==='start'?'已开始处理，可以确认候选并填写核查结论。':kind==='close'?'结论已保存，差异已关闭。已关闭差异按规则只读。':'派单已保存。'})}
+  setRevision(n=>n+1);setCaseNotice({id:selected.case.id,message:kind==='confirm-match'?`已确认销售 ${sale?.id||body.sale_row_id}，分配数量 ${result.allocation?.quantity??Math.abs(selected.cancel.quantity)}。仍可填写核查结论，完成后关闭差异。`:kind==='start'?'已开始处理，可以确认候选并填写核查结论。':kind==='remediations'?result.message:kind==='close'?'结论已保存，差异已关闭。已关闭差异按规则只读。':'派单已保存。'})}
  function acceptJob(value:any){jobIDRef.current=value.id;setJob(value);if(value.status==='succeeded'){setRunsRevision(n=>n+1);setRunID(value.run_id);setPage(1);setActiveCase(null);setRevision(n=>n+1)}}
  async function createJob(){const epoch=sessionEpoch.current,generation=++jobGeneration.current;const value=await api('/jobs',{scope});if(epoch===sessionEpoch.current&&generation===jobGeneration.current)acceptJob(value)}
  const jobProgress={...(job?.progress||{}),...(job?.progress?.input||job?.progress?.stats||{})};
@@ -133,7 +134,7 @@ function App(){
  const generated=()=>{const bytes=crypto.getRandomValues(new Uint8Array(16));const value=base64(bytes.buffer);setPassword(value);setPasswordAgain(value);setShowPassword(true)};
  const logout=()=>action(async()=>{await api('/auth/logout',{});try{if(jobStorageKey)sessionStorage.removeItem(jobStorageKey)}catch{}resetWorkspace();csrf='';setSession(null);setCodes([]);setSaved(false);setEnrollment(null);setPassword('');setPasswordAgain('');setOTP('');setRecoveryCode('');setID('');setRecover(false);setShowPassword(false);setExistingLogin(false);setSetupRevision(n=>n+1)});
  const tabTitles:Record<string,string>={cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全',accounts:'账户管理',requests:'仓库申请'};
- const tabHints:Record<string,string>={cases:'查看差异原因与证据，派单、核查并记录结论。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。',accounts:'创建财务与仓库账户，设置负责国家并审批仓库申请。',requests:'申请负责国家内的仓库账户，查看管理员审批结果。'};
+ const tabHints:Record<string,string>={cases:'按差异原因核实补充，重算后完成配对或流转新问题。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。',accounts:'创建财务与仓库账户，设置负责国家并审批仓库申请。',requests:'申请负责国家内的仓库账户，查看管理员审批结果。'};
  const navItems:[string,string][]=[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(canManageJobs?[['jobs','数据任务'] as [string,string]]:[]),...(session?.role==='admin'?[['accounts','账户管理'] as [string,string]]:session?.role==='finance'?[['requests','仓库申请'] as [string,string]]:[]),['security','账户安全']];
  const pageCount=Math.max(1,Math.ceil(data.total/50));
  const appliedCount=Object.entries(applied).filter(([k,v])=>v&&!['sort','direction'].includes(k)).length;
@@ -242,7 +243,7 @@ function App(){
     <dl className="metrics">{[['total','差异总数',overview.cases.total],['pending','待处理',overview.cases.pending],['in_progress','处理中',overview.cases.in_progress],['closed','已关闭',overview.cases.closed]].map(([key,k,v])=><div key={String(key)} className={'metric '+key}><dt>{k}</dt><dd>{count(v)}</dd></div>)}</dl>
     {caseShare.length>0&&<svg className="share-bar" viewBox="0 0 100 6" preserveAspectRatio="none" role="img" aria-label={`待处理${caseCounts.pending}，处理中${caseCounts.in_progress}，已关闭${caseCounts.closed}，共${caseCounts.total}`}>{caseShare.map(s=><rect key={s.key} className={s.key} x={s.x} y={0} width={s.w} height={6}/>)}</svg>}
    </>}
-   {overview&&<p className="muted">当前尚未配对 {count(overview.currently_unallocated??0)} 条 · 人工批量复核配对 {count(overview.reviewed_allocations??0)} 条；初始自动配对口径另列。</p>}
+   {overview&&<p className="muted">待解决且尚未配对 {count(overview.currently_unallocated??0)} 条 · 待补充 {count(overview.cases.waiting??0)} 条 · 补录销售 {count(overview.supplemental_sales??0)} 条 · 核实重复排除 {count(overview.remediation?.verified_duplicate??0)} 条 · 人工批量复核配对 {count(overview.reviewed_allocations??0)} 条；初始自动配对口径另列。</p>}
    <p className="caveat">{overview?.caveat||'匹配只表示规则推断。资料不足时保留原因，不制造关联。'}</p>
    {finance&&overview?.initial_reconciliation&&<details className="conservation"><summary>查看来源、行数守恒与初始配对口径</summary><p>原始 {overview.initial_reconciliation.input.raw} ＝ 接纳 {overview.initial_reconciliation.input.accepted} ＋ 排除 {overview.initial_reconciliation.input.excluded}；初始自动配对 {overview.initial_reconciliation.matched}，疑似 {overview.initial_reconciliation.suspected}，当前规则下无合格原单 {overview.initial_reconciliation.no_original}。人工确认保留初始分类。</p></details>}
   </section>}
@@ -253,6 +254,7 @@ function App(){
      {[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}
      <label>国家<select value={filters.country} onChange={e=>setFilters({...filters,country:e.target.value})} disabled={countriesResource.loading||!!countriesResource.error}><option value="">全部国家（本人范围内）</option>{filters.country&&!countriesResource.value?.includes(filters.country)&&<option value={filters.country}>{filters.country}</option>}{(countriesResource.value||[]).map(country=><option key={country} value={country}>{country}</option>)}</select>{countriesResource.loading&&<small role="status">正在读取国家…</small>}</label>
      <label>状态<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}><option value="">全部</option>{['pending','in_progress','closed'].map(x=><option key={x} value={x}>{labels[x]}</option>)}</select></label>
+     <label>补充进度<select value={filters.waiting} onChange={e=>setFilters({...filters,waiting:e.target.value})}><option value="">全部进度</option><option value="1">待补充</option><option value="0">其他进度</option></select></label>
      <label className="wide">差异原因<select value={filters.reason} onChange={e=>setFilters({...filters,reason:e.target.value})}><option value="">全部原因</option>{Object.entries(reasons).map(([k,[v]])=><option key={k} value={k}>{v}</option>)}</select></label>
      <label>起始日期<input type="date" value={filters.date_from} onChange={e=>setFilters({...filters,date_from:e.target.value})}/></label>
      <label>结束日期 不含<input type="date" value={filters.date_to} onChange={e=>setFilters({...filters,date_to:e.target.value})}/></label>
@@ -281,7 +283,7 @@ function App(){
      <td><span className="mono">{x.cancel_id}</span><small>{x.sheet}{x.source_row?` · 原行 ${x.source_row}`:''}</small></td>
      <td className="reason-cell"><span title={reasons[x.reason]?.[1]}>{reasonName(x.reason)}</span></td>
      <td>{x.assignee||<span className="unassigned">待派单</span>}</td>
-     <td><span className={'status '+x.status}>{labels[x.status]}</span></td>
+     <td><span className={'status '+x.status}>{x.outcome?(outcomeLabels[x.outcome]||labels[x.status]):x.waiting?'待补充':labels[x.status]}</span></td>
      <td className="num">{x.version}</td>
      <td className="act"><button className="row-action" disabled={busy} onClick={()=>openCase(x)}>查看与处理</button></td>
     </>:tab==='transactions'?<>
@@ -340,6 +342,7 @@ function App(){
     {finance&&<><AssigneePicker key={selected.case.id} users={users} value={assignee} onChange={setAssignee} country={selected.cancel.country} disabled={caseBusy||selected.case.status==='closed'} loading={usersResource.loading} error={usersResource.error} onRetry={()=>setUsersRevision(n=>n+1)}/><button disabled={caseBusy||selected.case.status==='closed'||usersResource.loading||!!usersResource.error||!users.some(u=>u.id===assignee&&canAssign(u,selected.cancel.country))} onClick={()=>caseAction(()=>mutate('assign',{assignee}))}>{selected.case.assignee?'再次派单':'派单'}</button></>}
     {isAssignee&&selected.case.status==='pending'&&<button disabled={caseBusy} onClick={()=>caseAction(()=>mutate('start',{version:selected.case.version}))}>开始处理</button>}
    </div>}
+   <RemediationPanel key={selected.case.id+':'+selected.case.version} data={selected} canEdit={isAssignee&&selected.case.status==='in_progress'&&!selected.confirmation} busy={caseBusy} countries={countriesResource.value||[]} onSubmit={body=>caseAction(()=>mutate('remediations',body))} onOpen={c=>openCase(c as Case)}/>
    <h3>决策时证据</h3>
    <p className="muted">只保存支撑原决策的有限证据，不等于全部当前候选。</p>
    {selected.decision_evidence.length?<div className="evidence-list">{selected.decision_evidence.map(x=><div className="evidence-line" key={x.id}><span>销售 <span className="mono">{x.id}</span></span><span className="num-pair"><small>当时余量</small>{x.remaining_at_decision}</span><span className="num-pair"><small>现在余量</small>{x.current_remaining}</span><span className="evidence-reason">{x.reason&&(evidenceReasons[x.reason]||<span className="raw-code">{x.reason}</span>)}</span></div>)}</div>:<p className="muted empty-inline">本差异没有合格的决策时候选证据。</p>}
@@ -348,8 +351,8 @@ function App(){
    {selected.candidates.total===0&&<p className="muted empty-inline">当前规则下没有合格候选。</p>}
    <CandidateComparison rows={selected.candidates.items} confirmation={selected.confirmation} canConfirm={isAssignee&&selected.case.status==='in_progress'} disabled={caseBusy} onChoose={row=>{setCaseNotice(null);setCandidateChoice({id:selected.case.id,row,version:selected.case.version})}}/>
    {selected.candidates.total>50&&<div className="button-row candidate-pages"><button className="secondary" disabled={caseBusy||selected.candidates.page<=1} onClick={()=>openCase(selected.case,selected.candidates.page-1)}>上一页候选</button><span>第 {selected.candidates.page} 页 / 共 {Math.ceil(selected.candidates.total/50)} 页</span><button className="secondary" disabled={caseBusy||selected.candidates.page*50>=selected.candidates.total} onClick={()=>openCase(selected.case,selected.candidates.page+1)}>下一页候选</button></div>}
-   {isAssignee&&selected.case.status==='in_progress'&&<form className="closure" onSubmit={e=>{e.preventDefault();caseAction(()=>mutate('close',{version:selected.case.version,conclusion}))}}><label>核查结论<textarea value={conclusion} onChange={e=>setConclusion(e.target.value)} placeholder="说明核查依据；资料不足可说明原因后结案，不制造关联。"/></label><small>确认候选后仍可编辑结论；点击下方按钮将结案，结案后按规则不能修改。</small><div className="button-row"><button disabled={caseBusy}>保存结论并关闭</button></div></form>}
-   {selected.case.status==='closed'&&<div className="closed-conclusion"><h3>关闭结论</h3><p>{selected.case.conclusion}</p><p className="muted">此差异已关闭，不能修改或重新开启。</p></div>}
+   {isAssignee&&selected.case.status==='in_progress'&&!!selected.confirmation&&<form className="closure" onSubmit={e=>{e.preventDefault();caseAction(()=>mutate('close',{version:selected.case.version,conclusion}))}}><label>核查结论<textarea value={conclusion} onChange={e=>setConclusion(e.target.value)} placeholder="填写已确认配对的核查依据与结论。"/></label><small>确认候选后仍可编辑结论；点击下方按钮将结案，结案后按规则不能修改。</small><div className="button-row"><button disabled={caseBusy}>保存结论并关闭</button></div></form>}
+   {selected.case.status==='closed'&&<div className="closed-conclusion"><h3>{selected.case.outcome?(outcomeLabels[selected.case.outcome]||'办理结论'):'历史结案'}</h3><p>{selected.case.conclusion}</p><p className="muted">此差异已关闭，不能修改或重新开启。</p></div>}
    <h3>操作历史</h3>
    {auditResource.loading&&<p role="status" className="muted">正在加载操作历史…</p>}
    {!auditResource.loading&&!auditResource.error&&history.length===0&&<p className="muted empty-inline">暂无操作记录。</p>}

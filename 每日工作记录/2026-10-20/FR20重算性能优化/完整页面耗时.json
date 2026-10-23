@@ -1,0 +1,21 @@
+{
+  "actual_time": "2026-10-20T12:30:48.7972000+08:00",
+  "boundary": "Official two-year full isolated copy, production frontend and handler, normal strong password/TOTP-created simulated identity. Three non-idempotent recheck clicks; measured until version increments and list, evidence, overview, audit loading messages disappear. Includes browser automation/snapshot overhead. Diagnostic adapter copies only normal simulated auth sessions into the isolated business copy; no production auth relaxation.",
+  "elapsed_milliseconds": [
+    2642,
+    2268,
+    2163
+  ],
+  "maximum_milliseconds": 2642,
+  "mean_milliseconds": 2357.67,
+  "full_input_rows": 1067371,
+  "completed": [
+    true,
+    true,
+    true
+  ],
+  "errors": 0,
+  "astra_condition_triggered": false,
+  "background_queue_condition_triggered": false,
+  "external_diagnostic_directory": "C:\\Users\\wqhqq\\AppData\\Local\\dutucijp-vibecoding-final\\verification\\fr20-browser-20261020-122552"
+}

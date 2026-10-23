@@ -1,0 +1,21 @@
+{
+  "actual_time": "2026-10-23T11:54:12.2597369+08:00",
+  "go_top_level_pass": 209,
+  "go_fail": 0,
+  "go_skip": 0,
+  "go_vet_pass": true,
+  "frontend_tests": 11,
+  "client_network_state_tests": 31,
+  "openapi_paths": 60,
+  "openapi_operations": 64,
+  "api_response_request_contract_shapes": 87,
+  "official_rows": 1067371,
+  "client_files": 511,
+  "client_bytes": 182297271,
+  "self_contained_runtime": "Microsoft.NETCore.App 9.0.18 / Windows App SDK 1.7.260224002 / VC143 CRT x64",
+  "physical_passkey_tested": false,
+  "physical_other_machine_tested": false,
+  "full_native_business_acceptance": false,
+  "scaling_screen_reader_matrix_complete": false,
+  "go_packages_without_tests": 9
+}

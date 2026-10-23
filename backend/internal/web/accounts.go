@@ -71,7 +71,7 @@ func (s *Server) registerAccounts(r *gin.RouterGroup) {
 	})
 	r.GET("/countries", func(c *gin.Context) {
 		suffix, args := access.SQL(c, "n.country")
-		rows, e := s.Store.DB.QueryContext(c, `SELECT DISTINCT n.country FROM normalized_rows n JOIN datasets d ON d.id=n.dataset_id WHERE d.status='published' AND n.country<>''`+suffix+` ORDER BY n.country`, args...)
+		rows, e := s.Store.DB.QueryContext(c, `SELECT DISTINCT n.country FROM (SELECT dataset_id,country FROM normalized_rows UNION SELECT dataset_id,country FROM business_rows) n JOIN datasets d ON d.id=n.dataset_id WHERE d.status='published' AND n.country<>''`+suffix+` ORDER BY n.country`, args...)
 		if e != nil {
 			respond(c, nil, e)
 			return

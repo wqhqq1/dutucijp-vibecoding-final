@@ -7,14 +7,14 @@ import (
 )
 
 func TestTC67_PasskeyOriginValidation(t *testing.T) {
-	good := map[string]string{"Recon.Example.com": "https://recon.example.com", "https://recon.example.com:443/": "https://recon.example.com", "http://localhost:18089": "http://localhost:18089", "https://recon.example.com:8443": "https://recon.example.com:8443", "https://仓库.example.com": "https://xn--5mqv79a.example.com"}
+	good := map[string]string{"Recon.Example.com": "https://recon.example.com", "https://recon.example.com:443/": "https://recon.example.com", "http://localhost:18089": "http://localhost:18089", "https://recon.example.com:8443": "https://recon.example.com:8443", "https://仓库.example.com": "https://xn--5mqv79a.example.com", "http://recon.example.com": "http://recon.example.com", "https://127.0.0.1": "https://127.0.0.1", "http://192.0.2.12:8080/": "http://192.0.2.12:8080", "https://[::1]": "https://[::1]", "http://[2001:db8::1]:80": "http://[2001:db8::1]"}
 	for raw, want := range good {
 		got, e := NormalizePasskeyOrigin(raw)
 		if e != nil || got != want {
 			t.Errorf("%q got %q %v want %q", raw, got, e, want)
 		}
 	}
-	for _, raw := range []string{"http://recon.example.com", "https://*.example.com", "https://127.0.0.1", "https://[::1]", "https://com", "https://co.uk", "https://example.com/path", "https://a@example.com", "https://example.com?x=1", "https://example.com#x", "https://example.com:0", "https://example.com:65536", "https://example.com:", "https://example.com.", "https://bad_domain.example", "https://-bad.example.com", "javascript:alert(1)", "https://example.com\\@evil.example"} {
+	for _, raw := range []string{"ftp://192.0.2.12", "http://[::gg]", "http://127.0.0.999", "http://[::1]:0", "https://*.example.com", "https://com", "https://co.uk", "https://example.com/path", "https://a@example.com", "https://example.com?x=1", "https://example.com#x", "https://example.com:0", "https://example.com:65536", "https://example.com:", "https://example.com.", "https://bad_domain.example", "https://-bad.example.com", "javascript:alert(1)", "https://example.com\\@evil.example"} {
 		if _, e := NormalizePasskeyOrigin(raw); e == nil {
 			t.Errorf("accepted invalid %q", raw)
 		}

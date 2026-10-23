@@ -1,0 +1,6 @@
+
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  Reconciliation.Windows -> E:\软件编程大作业\退货对账与差异处理系统\desktop\Windows\bin\x64\Release\net9.0-windows10.0.22621.0\win-x64\Reconciliation.Windows.dll
+  Reconciliation.Windows -> E:\软件编程大作业\退货对账与差异处理系统\dist\windows-x64\
+免安装客户端：E:\软件编程大作业\退货对账与差异处理系统\dist\windows-x64\Reconciliation.Windows.exe

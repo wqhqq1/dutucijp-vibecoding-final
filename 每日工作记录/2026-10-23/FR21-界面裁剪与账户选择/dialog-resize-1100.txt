@@ -1,0 +1,5 @@
+Isolated synthetic UI host. Not official data or a real authentication device test.
+PASS x64 MakeCredential/GetAssertion layout, cancellation offset and SDK option versions.
+PASS open dialog follows window resize.
+Loaded dialog-resize; 
+PASS responsive panel bounds and pending/setup counts; logical width 627.5555419921875

@@ -24,6 +24,7 @@ func serveCommand(command string, args []string) error {
 	project := flags.String("project", ".", "project source directory for data worker")
 	secretDir := flags.String("secrets", "", "private authentication directory (default beside database)")
 	port := flags.Int("port", 8080, "loopback HTTP port")
+	listenHost := flags.String("listen-host", "127.0.0.1", "IP interface to bind (explicit opt-in for LAN)")
 	python := flags.String("python", "", "explicit bundled Python for data jobs")
 	runtimeID := flags.String("runtime-id", "", "public instance identity for the launcher")
 	renew := flags.String("renew", "", "renew bootstrap only for an untouched new account")
@@ -35,6 +36,9 @@ func serveCommand(command string, args []string) error {
 	}
 	if *port < 1024 || *port > 65535 {
 		return fmt.Errorf("port must be between 1024 and 65535")
+	}
+	if net.ParseIP(*listenHost) == nil {
+		return fmt.Errorf("listen-host must be an IPv4 or IPv6 interface address")
 	}
 	if *runtimeID == "" {
 		absoluteDB, e := filepath.Abs(*dbPath)
@@ -99,7 +103,7 @@ func serveCommand(command string, args []string) error {
 		sessionCookie = fmt.Sprintf("recon_session_%d", *port)
 	}
 	handler := (&web.Server{Store: s, Auth: security, Origin: origin, Jobs: jobs, CookieName: sessionCookie, RuntimeID: *runtimeID}).Handler()
-	listener, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", *port))
+	listener, err := net.Listen("tcp", net.JoinHostPort(*listenHost, fmt.Sprint(*port)))
 	if err != nil {
 		return err
 	}

@@ -39,6 +39,8 @@ type BatchGroup struct {
 	Message string      `json:"message,omitempty"`
 }
 type ReviewBatch struct {
+	RemediationRevision int `json:"remediation_revision"`
+
 	ScopeVersion int           `json:"scope_version,omitempty"`
 	ID           string        `json:"id"`
 	RunID        string        `json:"run_id"`
@@ -235,7 +237,7 @@ func (s *Store) PreviewBatch(ctx context.Context, a WorkflowActor, req BatchRequ
 		}
 		groups[r] = append(groups[r], it)
 	}
-	out = ReviewBatch{ScopeVersion: access.Version(ctx), RunID: set.RunID, Actor: a, SetID: set.ID, Action: req.Action, Assignee: target, Conclusion: strings.TrimSpace(req.Conclusion), CreatedAt: time.Now().Format(time.RFC3339Nano), Status: "preview", Groups: []BatchGroup{}, Total: len(selected), ReadOnly: readOnly}
+	out = ReviewBatch{RemediationRevision: set.RemediationRevision, ScopeVersion: access.Version(ctx), RunID: set.RunID, Actor: a, SetID: set.ID, Action: req.Action, Assignee: target, Conclusion: strings.TrimSpace(req.Conclusion), CreatedAt: time.Now().Format(time.RFC3339Nano), Status: "preview", Groups: []BatchGroup{}, Total: len(selected), ReadOnly: readOnly}
 	out.ID, e = newReviewID(set.ID + "|" + out.CreatedAt)
 	if e != nil {
 		return out, e
@@ -287,6 +289,13 @@ func (s *Store) PreviewBatch(ctx context.Context, a WorkflowActor, req BatchRequ
 }
 
 func precheckBatchGroup(ctx context.Context, c *sql.Conn, b ReviewBatch, g BatchGroup) error {
+	revision, _, err := remediationRevision(ctx, c, b.RunID)
+	if err != nil {
+		return err
+	}
+	if revision != b.RemediationRevision {
+		return workflowError("materials_changed", "补充资料已变化，请重新生成推荐和预览", WorkflowCase{})
+	}
 	demand := map[string]int64{}
 	capacity := map[string]int64{}
 	members := map[string]bool{}
@@ -338,6 +347,11 @@ func precheckBatchGroup(ctx context.Context, c *sql.Conn, b ReviewBatch, g Batch
 				return workflowError("invalid_transition", "请先开始处理", cur)
 			}
 		}
+		if b.Action == "close" {
+			if e = closeAllowed(ctx, c, cur); e != nil {
+				return e
+			}
+		}
 		if !batchHasMatch(b.Action) {
 			continue
 		}
@@ -375,11 +389,11 @@ func precheckBatchGroup(ctx context.Context, c *sql.Conn, b ReviewBatch, g Batch
 		if existing != 0 {
 			return workflowError("already_allocated", "退货已经配对", cur)
 		}
-		cancel, e := readManualRow(ctx, c, cur.DatasetID, cur.CancelID)
+		cancel, e := readBusinessRow(ctx, c, cur.RunID, cur.DatasetID, cur.CancelID)
 		if e != nil {
 			return e
 		}
-		sale, e := readManualRow(ctx, c, cur.DatasetID, o.SaleID)
+		sale, e := readBusinessRow(ctx, c, cur.RunID, cur.DatasetID, o.SaleID)
 		if e != nil {
 			return e
 		}
@@ -431,6 +445,18 @@ func activateDuplicate(ctx context.Context, c *sql.Conn, run, actor, batch strin
 	if len(d.Members) < 2 || d.Capacity <= 0 {
 		return workflowError("invalid_candidate", "重复组证据不完整", WorkflowCase{})
 	}
+	var canonical string
+	var capacity int64
+	e := c.QueryRowContext(ctx, "SELECT canonical_id,capacity FROM duplicate_sale_groups WHERE run_id=? AND id=?", run, d.ID).Scan(&canonical, &capacity)
+	if e == nil {
+		if canonical != d.CanonicalID || capacity != d.Capacity {
+			return workflowError("invalid_candidate", "已确认重复组证据已变化", WorkflowCase{})
+		}
+		return checkDuplicateCapacity(ctx, c, run, canonical, 0)
+	}
+	if !errors.Is(e, sql.ErrNoRows) {
+		return e
+	}
 	var dataset string
 	if e := c.QueryRowContext(ctx, "SELECT dataset_id FROM runs WHERE id=?", run).Scan(&dataset); e != nil {
 		return e
@@ -438,7 +464,7 @@ func activateDuplicate(ctx context.Context, c *sql.Conn, run, actor, batch strin
 	for _, m := range d.Members {
 		var raw string
 		var qty int64
-		if e := c.QueryRowContext(ctx, `SELECT s.raw_json,n.quantity FROM normalized_rows n JOIN source_rows s ON s.id=n.source_id WHERE n.dataset_id=? AND n.id=? AND n.kind='sale' AND n.excluded=''`, dataset, m.SaleID).Scan(&raw, &qty); e != nil {
+		if e := c.QueryRowContext(ctx, businessSQL(ctx, c, run, `SELECT s.raw_json,n.quantity FROM normalized_rows n JOIN source_rows s ON s.id=n.source_id WHERE n.dataset_id=? AND n.id=? AND n.kind='sale' AND n.excluded=''`), dataset, m.SaleID).Scan(&raw, &qty); e != nil {
 			return e
 		}
 		fp, e := rawFingerprint(raw)

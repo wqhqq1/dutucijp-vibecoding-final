@@ -98,11 +98,11 @@ func confirmCandidateTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor
 		if !errors.Is(err, sql.ErrNoRows) {
 			return err
 		}
-		cancel, err := readManualRow(ctx, conn, before.DatasetID, before.CancelID)
+		cancel, err := readBusinessRow(ctx, conn, before.RunID, before.DatasetID, before.CancelID)
 		if err != nil {
 			return err
 		}
-		sale, err := readManualRow(ctx, conn, before.DatasetID, saleID)
+		sale, err := readBusinessRow(ctx, conn, before.RunID, before.DatasetID, saleID)
 		if errors.Is(err, sql.ErrNoRows) {
 			return workflowError("ineligible_candidate", "当前数据版本中不存在该候选", before)
 		}
@@ -110,11 +110,20 @@ func confirmCandidateTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor
 			return err
 		}
 		quantity, price, ok := manualEligible(cancel, sale)
-		if !ok {
+		if !ok || cancel.Duplicate() {
 			return workflowError("ineligible_candidate", "客户、商品、精确单价、国家、时间或数量不符合规则", before)
 		}
+		if sale.Duplicate() {
+			var count int
+			if e := conn.QueryRowContext(ctx, "SELECT (SELECT count(*) FROM duplicate_sale_members WHERE run_id=? AND sale_id=?)+(SELECT count(*) FROM duplicate_verifications WHERE run_id=? AND row_id=? AND disposition='independent')", before.RunID, sale.ID, before.RunID, sale.ID).Scan(&count); e != nil {
+				return e
+			}
+			if count == 0 {
+				return workflowError("ineligible_candidate", "销售疑似重复，请先核实重复或独立业务", before)
+			}
+		}
 		var decisionQuantity, original, allocated, remaining int64
-		if err = conn.QueryRowContext(ctx, "SELECT quantity FROM decisions WHERE run_id=? AND cancel_id=?", before.RunID, before.CancelID).Scan(&decisionQuantity); err != nil {
+		if err = conn.QueryRowContext(ctx, businessSQL(ctx, conn, before.RunID, "SELECT quantity FROM decisions WHERE run_id=? AND cancel_id=?"), before.RunID, before.CancelID).Scan(&decisionQuantity); err != nil {
 			return err
 		}
 		if err = conn.QueryRowContext(ctx, "SELECT original,allocated,remaining FROM sale_balances WHERE run_id=? AND sale_id=?", before.RunID, saleID).Scan(&original, &allocated, &remaining); errors.Is(err, sql.ErrNoRows) {

@@ -14,7 +14,7 @@ const actionHelp:Record<string,string>={
  assign:'把未派单的待处理项目派给所选责任人。',
  start:'把本人负责的待处理项目改为处理中。',
  confirm:'对本人处理中的项目按所选方案确认配对，不结案。',
- close:'对本人处理中的项目保存结论并结案，不新增配对。',
+ close:'对本人已配对的处理中项目保存结论并结案；未解决项目需打开详情补充资料。',
 };
 const states:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',ready:'待提交',succeeded:'成功',skipped:'已跳过',failed:'失败'};
 const groupings:[string,string][]=[['invoice','退货单'],['customer','客户与国家'],['reason','差异原因'],['stock','商品']];
@@ -185,7 +185,7 @@ export default function ReviewPanel({api,runID,finance,filters,users,usersLoadin
       </details>
       <details className="distribution-card distribution-review">
        <summary><span className="distribution-icon" aria-hidden="true">○</span><strong>{reviewCount} 条</strong><span>保留核查</span></summary>
-       <p>没有合格销售建议或已有配对，需要打开详情逐条核查；仍可批量派单、开始或结案。</p>
+       <p>没有合格销售建议或已有配对，需要打开详情逐条核查；可批量派单、开始；未解决项目需打开详情补充资料。</p>
       </details>
      </div>
      <small className="muted">按退货行去重，统计本运行中当前账户可见的整个快照，不随筛选变化。{closedCount>0&&`已关闭 ${closedCount} 条只读，不进入工作台。`}未复核的建议不占余量；重新生成会读取最新状态。</small>

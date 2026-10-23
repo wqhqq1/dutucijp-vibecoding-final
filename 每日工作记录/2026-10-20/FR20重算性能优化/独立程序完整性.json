@@ -1,0 +1,7 @@
+{
+  "actual_time": "2026-10-20T12:36:08.6999095+08:00",
+  "files_verified": 251,
+  "binary_sha256": "e2cb362105c7427ac325552942211dc59b5d3403f722fe8879148efd224dbf1c",
+  "command": "teacher-demo/python/python.exe teacher-demo/portable/launcher.py check",
+  "result": "Portable files verified; no runtime created"
+}

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-23",
+  "timezone": "Asia/Shanghai",
+  "client_tests": "38/38 passed",
+  "ui_scenarios": "20/20 passed",
+  "modal_center_checks": 14,
+  "max_recorded_center_error_logical_pixels": 0.222,
+  "logical_window_widths": [
+    640,
+    1100
+  ],
+  "manifest_files": 511,
+  "bytes": 182397747,
+  "hashes": [
+    {
+      "Path": "E:\\软件编程大作业\\退货对账与差异处理系统\\dist\\windows-x64\\Reconciliation.Windows.exe",
+      "Hash": "810F76B983F5E795924305B4361DF093546E02016E22BCB2131607258A1AB50A"
+    },
+    {
+      "Path": "E:\\软件编程大作业\\退货对账与差异处理系统\\dist\\windows-x64\\Reconciliation.Windows.dll",
+      "Hash": "D28518FFC78A9239510CCADF9637E62D6A93170E3410A33B02114F3033FAFDD1"
+    }
+  ],
+  "verification": "all file length and sha256 checks passed",
+  "formal_backend_contacted": false,
+  "formal_business_data_modified": false,
+  "million_record_test": "synthetic virtual pagination counts, not official data or a performance measurement"
+}

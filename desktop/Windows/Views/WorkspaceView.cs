@@ -46,7 +46,7 @@ public sealed class WorkspaceView : UserControl
             ("customer", "客户编号"),
             ("stock", "商品编号"),
             ("invoice", "单号"),
-            ("country", "国家"),
+            ("country", "国家/地区"),
             ("date_from", "开始日期 yyyy-MM-dd"),
             ("date_to", "结束日期 yyyy-MM-dd")
         }
@@ -79,7 +79,7 @@ public sealed class WorkspaceView : UserControl
         Choice("reason", "差异原因", new[] { ("", "全部原因") }.Concat(Labels.CaseReasons.Select(x => (x, Labels.Of(x)))).ToArray());
         if (key == "transactions")
         {
-            Choice("sort", "排序依据", ("source", "来源顺序"), ("date", "交易时间"), ("invoice", "单号"), ("customer", "客户"), ("stock", "商品"), ("country", "国家"));
+            Choice("sort", "排序依据", ("source", "来源顺序"), ("date", "交易时间"), ("invoice", "单号"), ("customer", "客户"), ("stock", "商品"), ("country", "国家/地区"));
             Choice("direction", "排序方向", ("asc", "升序"), ("desc", "降序"));
             Choice("kind", "交易类型", ("", "全部"), ("sale", "销售"), ("cancel", "取消"));
             Choice("classification", "分类", ("", "全部"), ("matched", "已配对"), ("suspected", "疑似"), ("no_original", "无合格原单"));
@@ -111,7 +111,7 @@ public sealed class WorkspaceView : UserControl
             "transactions" => "检索两个年度的源交易；单价与时间保持原始精度，筛选与排序均由服务端执行。",
             "allocations" => "已确认的退货与销售配对，含数量、精确金额与确认方式。",
             "audit" => "最近的业务操作记录，点击一行查看操作前后内容。",
-            _ => "按国家权限查看全部差异，点击一行进入核查、补充资料与处理。"
+            _ => "按国家/地区权限查看全部差异，点击一行进入核查、补充资料与处理。"
         }, actions.ToArray()));
         if (key != "audit")
         {
@@ -188,7 +188,7 @@ public sealed class WorkspaceView : UserControl
             pager.Update(page, total);
             Column[] cols = kind switch
             {
-                "transactions" => [new("id", "来源ID", 120, ColumnKind.Mono), new("invoice", "单号", 130, ColumnKind.Mono), new("time", "交易时间", 230, ColumnKind.Mono), new("customer", "客户", 90, ColumnKind.Mono), new("stock", "商品", 100, ColumnKind.Mono), new("quantity", "数量", 70, ColumnKind.Number), new("price", "精确单价", 200, ColumnKind.Number), new("country", "国家", 140)],
+                "transactions" => [new("id", "来源ID", 120, ColumnKind.Mono), new("invoice", "单号", 130, ColumnKind.Mono), new("time", "交易时间", 230, ColumnKind.Mono), new("customer", "客户", 90, ColumnKind.Mono), new("stock", "商品", 100, ColumnKind.Mono), new("quantity", "数量", 70, ColumnKind.Number), new("price", "精确单价", 200, ColumnKind.Number), new("country", "国家/地区", 140)],
                 "allocations" => [new("cancel_id", "取消来源", 130, ColumnKind.Mono), new("sale_id", "销售来源", 130, ColumnKind.Mono), new("quantity", "数量", 80, ColumnKind.Number), new("amount", "精确金额", 220, ColumnKind.Number), new("method", "方式", 120), new("actor", "操作人", 140)],
                 "audit" => [new("occurred_at", "时间", 230, ColumnKind.Mono), new("actor", "操作人"), new("action", "操作"), new("method", "方式"), new("result", "结果")],
                 _ => [new("cancel_id", "来源记录", 130, ColumnKind.Mono), new("reason", "差异原因", 200), new("status", "状态", 100, ColumnKind.Status), new("assignee", "责任人", 140), new("version", "版本", 60, ColumnKind.Number), new("source_row", "原行", 90, ColumnKind.Number)]

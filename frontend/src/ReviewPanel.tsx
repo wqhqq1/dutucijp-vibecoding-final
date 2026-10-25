@@ -17,7 +17,7 @@ const actionHelp:Record<string,string>={
  close:'对本人已配对的处理中项目保存结论并结案；未解决项目需打开详情补充资料。',
 };
 const states:Record<string,string>={pending:'待处理',in_progress:'处理中',closed:'已关闭',ready:'待提交',succeeded:'成功',skipped:'已跳过',failed:'失败'};
-const groupings:[string,string][]=[['invoice','退货单'],['customer','客户与国家'],['reason','差异原因'],['stock','商品']];
+const groupings:[string,string][]=[['invoice','退货单'],['customer','客户与国家/地区'],['reason','差异原因'],['stock','商品']];
 type Props={api:API;runID:string;finance:boolean;filters:Record<string,string>;users:Account[];usersLoading?:boolean;usersError?:string;onRetryUsers:()=>void;onChanged:()=>void;onOpen:(c:Item['case'])=>void};
 
 function ConstraintBadge({option}:{option:Option|null}){
@@ -138,7 +138,7 @@ export default function ReviewPanel({api,runID,finance,filters,users,usersLoadin
  const reviewCount=Math.max(0,(counts.total||0)-closedCount-(counts.recommended||0)-(counts.tied||0));
  const currentStep=batch?3:n?3:2;
  const needsConclusion=['approve','close'].includes(operation);
- const blockedReason=!n?'先在第 2 步勾选项目。':operation==='assign'&&(usersLoading||!!usersError||!users.some(u=>u.id===assignee&&canAssign(u,filters.country||undefined)))?'请先选择负责当前国家范围的派单人员。':needsConclusion&&!conclusion.trim()?'填写共同核查结论后才能预览。':'';
+ const blockedReason=!n?'先在第 2 步勾选项目。':operation==='assign'&&(usersLoading||!!usersError||!users.some(u=>u.id===assignee&&canAssign(u,filters.country||undefined)))?'请先选择负责当前国家/地区范围的派单人员。':needsConclusion&&!conclusion.trim()?'填写共同核查结论后才能预览。':'';
  const groupPages=Math.max(1,Math.ceil(groupTotal/50));
 
  return <section className="panel review-panel" aria-label="推荐复核与批量处理">

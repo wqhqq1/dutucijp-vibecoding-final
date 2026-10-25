@@ -320,7 +320,7 @@ func authorizeCaseCountry(ctx context.Context, conn *sql.Conn, actor, target Wor
 	}
 	p, e := access.Load(ctx, conn, target.ID)
 	if e != nil || p.Role != target.Role || !p.Allows(c.Country) {
-		return workflowError("forbidden", "责任人的负责国家不覆盖此差异", WorkflowCase{})
+		return workflowError("forbidden", "责任人的负责国家/地区不覆盖此差异", WorkflowCase{})
 	}
 	return nil
 }

@@ -2,7 +2,7 @@
 
 2026-10-23，Asia/Shanghai。本人要求“读取合并claude最新执行交接”。已完整读取本目录Claude的执行交接.md，核对工作区基线7515e19及实际desktop改动；改动已经在同一工作区，无需跨分支cherry-pick。保留Claude原记录和原始截图，不将其历史测试声明改写成本轮自测。
 
-接纳主题资源、原生外壳/导航/账户卡片、公共布局、表格、状态徽章、候选详情、批量操作条、账户国家复选、登录安全引导、主题切换及测试宿主PerMonitorV2清单。核对核心接口路径、请求体、版本、请求号、分页、写锁与代次屏蔽；ViewModel、BackendClient、Models、Go后端和API规范没有改动。隐藏操作输入清空、全部国家提交空数组、单条派单不默认选择第一人均与已有接口约定相符。
+接纳主题资源、原生外壳/导航/账户卡片、公共布局、表格、状态徽章、候选详情、批量操作条、账户国家/地区复选、登录安全引导、主题切换及测试宿主PerMonitorV2清单。核对核心接口路径、请求体、版本、请求号、分页、写锁与代次屏蔽；ViewModel、BackendClient、Models、Go后端和API规范没有改动。隐藏操作输入清空、全部国家/地区提交空数组、单条派单不默认选择第一人均与已有接口约定相符。
 
 另补修复：desktop/Windows/build.ps1保留中文内容并添加UTF-8 BOM，使Windows PowerShell 5.1能够解析。实际用系统WindowsPowerShell/v1.0/powershell.exe调用整个发布脚本成功，不再仅依赖先前记录中的PowerShell 7。发布同时复制.NET、Windows App SDK、VC++ CRT、PRI/XBF及许可，生成新清单；未将Claude不含CRT/清单的临时publish直接当作交付物。
 

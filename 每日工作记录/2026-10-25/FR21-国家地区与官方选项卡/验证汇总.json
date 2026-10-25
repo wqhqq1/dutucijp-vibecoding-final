@@ -1,0 +1,29 @@
+{
+  "go_top_level_passed": 209,
+  "go_failed": 0,
+  "go_skipped": 0,
+  "frontend_tests": 11,
+  "client_tests": 38,
+  "ui_scenarios": 18,
+  "windows_manifest_files": 511,
+  "windows_bytes": 182398259,
+  "teacher_manifest_files": 251,
+  "openapi_change": "Chinese terminology only; schema fields and values unchanged",
+  "preserved_original_files": [
+    "每日工作记录\\2026-10-16\\截图\\v12中期复核\\12-筛选第二页4条且末页禁用.txt",
+    "每日工作记录\\2026-10-16\\截图\\v12中期复核\\11-客户13526筛选54条首页.txt",
+    "每日工作记录\\2026-10-25\\FR21-国家地区与官方选项卡\\验证汇总.json",
+    "每日工作记录\\2026-10-25\\FR21-国家地区与官方选项卡\\术语替换范围.json",
+    "资料\\中期汇报基线-20261016-v1.2\\中期汇报讲稿-v1.2-1016.md",
+    "资料\\中期汇报基线-20261016\\中期汇报讲稿-网页版.md",
+    "资料\\中期汇报基线-20261016\\中期汇报讲稿-PPT版.md",
+    "每日工作记录\\2026-10-23\\FR21-界面裁剪与账户选择\\client-tests.txt",
+    "每日工作记录\\2026-10-16\\原始输出\\v12中期复核\\技能新进程调用事件.jsonl",
+    "每日工作记录\\2026-10-17\\原始输出\\交易检索\\browser-optimized.json",
+    "每日工作记录\\2026-10-23\\FR21-国家范围与弹窗居中\\client-tests.txt",
+    "每日工作记录\\2026-10-19\\账户管理UI优化\\模拟预览交互检查.txt",
+    "每日工作记录\\2026-10-19\\中期演示居中修复\\中期包替换回执.json",
+    "每日工作记录\\2026-10-20\\FR20时间选择器\\浏览器组件检查.json",
+    "每日工作记录\\2026-10-18\\批量处理优化\\browser-checks.json"
+  ]
+}

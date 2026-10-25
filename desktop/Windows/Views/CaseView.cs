@@ -117,7 +117,7 @@ public sealed class CaseView : UserControl
         if (c.S("status") == "pending" && c.S("assignee") == "" && vm.Session!.Role != "warehouse")
         {
             var assignee = UI.AssigneePicker(vm, countries: () => Task.FromResult(new[] { (data["effective_cancel"] ?? data["cancel"]).S("country") }));
-            p.Add(UI.Muted("尚未派单。选择负责此国家的处理人后派单。"), assignee, UI.Primary(vm, "派单", async () =>
+            p.Add(UI.Muted("尚未派单。选择负责此国家/地区的处理人后派单。"), assignee, UI.Primary(vm, "派单", async () =>
             {
                 await assignee.ValidateSelection();
                 await Mutate("assign", new { assignee = assignee.Text.Trim() });
@@ -163,7 +163,7 @@ public sealed class CaseView : UserControl
             heading.Spacing = 12;
             if (chosen)
                 heading.Children.Add(UI.Badge("已确认", Tone.Done));
-            var info = UI.Stack(heading, UI.Mono($"客户 {sale.S("customer")} · 商品 {sale.S("stock")} · 国家 {sale.S("country")}\n时间 {sale.S("time")} · 数量 {sale.S("quantity")} · 精确单价 {sale.S("price")} · 当前余量 {sale.S("current_remaining")}", 13));
+            var info = UI.Stack(heading, UI.Mono($"客户 {sale.S("customer")} · 商品 {sale.S("stock")} · 国家/地区 {sale.S("country")}\n时间 {sale.S("time")} · 数量 {sale.S("quantity")} · 精确单价 {sale.S("price")} · 当前余量 {sale.S("current_remaining")}", 13));
             info.Spacing = 6;
             if (sale["duplicate_group"] is JsonNode group && group is not JsonValue)
                 info.Children.Add(new Expander { Header = "重复组", Content = UI.Details(group), HorizontalAlignment = HorizontalAlignment.Stretch, HorizontalContentAlignment = HorizontalAlignment.Stretch });
@@ -202,7 +202,7 @@ public sealed class CaseView : UserControl
             ("customer", "客户"),
             ("stock", "商品"),
             ("price", "精确单价"),
-            ("country", "国家"),
+            ("country", "国家/地区"),
             ("quantity", "数量"),
             ("current_remaining", "当前余量")
         };
@@ -278,7 +278,7 @@ public sealed class CaseView : UserControl
                 var keys = mode == "correct_return" ? new[]
                 {
                     ("customer", "客户编号"),
-                    ("country", "国家"),
+                    ("country", "国家/地区"),
                     ("stock", "商品编号"),
                     ("price", "精确单价"),
                     ("quantity", "数量（正整数）")
@@ -291,7 +291,7 @@ public sealed class CaseView : UserControl
                     ("line_ref", "凭证明细号"),
                     ("description", "商品说明"),
                     ("customer", "客户编号"),
-                    ("country", "国家"),
+                    ("country", "国家/地区"),
                     ("stock", "商品编号"),
                     ("price", "精确单价"),
                     ("quantity", "销售数量")

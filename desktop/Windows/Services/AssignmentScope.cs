@@ -59,7 +59,7 @@ public static class AssignmentScope
             }
 
             if (count <= 0 || count > total - offset)
-                throw new InvalidDataException("无法核对批量国家范围，请刷新。");
+                throw new InvalidDataException("无法核对批量国家/地区范围，请刷新。");
             if (count > excluded.Values.Count(c => c == country))
                 result.Add(country);
             offset += count;

@@ -522,7 +522,7 @@ func (s *Server) finance(c *gin.Context) bool {
 func (s *Server) manageData(c *gin.Context) bool {
 	v := c.MustGet("principal").(auth.Session)
 	if !v.CanManageDataJobs {
-		respond(c, nil, &auth.Error{Code: "forbidden", Message: "只有管理员或负责全部国家的财务可操作全局数据任务", Status: 403})
+		respond(c, nil, &auth.Error{Code: "forbidden", Message: "只有管理员或负责全部国家/地区的财务可操作全局数据任务", Status: 403})
 		return false
 	}
 	return true

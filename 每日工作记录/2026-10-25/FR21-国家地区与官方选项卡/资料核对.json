@@ -1,0 +1,9 @@
+{
+  "ppt_pages": 10,
+  "ppt_unchanged_images": 8,
+  "ppt_notes": "exact terminology-only change",
+  "pdf_pages": 10,
+  "pdf_semantics": "exact terminology-only change after whitespace normalization",
+  "docx_changed_part": "word/document.xml",
+  "docx_rendered_pages": 4
+}

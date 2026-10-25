@@ -52,10 +52,10 @@ function ChartPending({resource}:{resource:Resource<unknown>}){return resource.e
 
 function CountryChips({account,max=3}:{account:Account;max?:number}){
  const [open,setOpen]=useState(false);
- if(allCountries(account))return <span className="country-chips"><span className="country-chip all">全部国家</span></span>;
+ if(allCountries(account))return <span className="country-chips"><span className="country-chip all">全部国家/地区</span></span>;
  const list=account.countries||[],shown=open?list:list.slice(0,max);
- if(!list.length)return <span className="muted">未指定国家</span>;
- return <span className="country-chips">{shown.map(c=><span key={c} className="country-chip">{c}</span>)}{list.length>max&&<button type="button" className="country-chip more" aria-expanded={open} aria-label={open?'收起国家列表':`另有 ${list.length-max} 个国家：${list.slice(max).join('、')}`} onClick={()=>setOpen(!open)}>{open?'收起':`+${list.length-max}`}</button>}</span>;
+ if(!list.length)return <span className="muted">未指定国家/地区</span>;
+ return <span className="country-chips">{shown.map(c=><span key={c} className="country-chip">{c}</span>)}{list.length>max&&<button type="button" className="country-chip more" aria-expanded={open} aria-label={open?'收起国家/地区列表':`另有 ${list.length-max} 个国家/地区：${list.slice(max).join('、')}`} onClick={()=>setOpen(!open)}>{open?'收起':`+${list.length-max}`}</button>}</span>;
 }
 
 function SetupMeter({state}:{state?:string}){
@@ -70,21 +70,21 @@ function CountryPicker({canAll,scope,selected,countries,resource,limit,error,onS
  const [query,setQuery]=useState('');
  const options=[...new Set([...countries,...selected])],filtered=options.filter(c=>matches(query,c));
  return <fieldset className={'country-picker'+(error?' has-error':'')} aria-describedby={error?'country-error':undefined}>
-  <legend>负责国家</legend>
+  <legend>负责国家/地区</legend>
   {canAll?<div className="scope-choice">
-   <label className={'choice-card'+(scope==='all'?' is-chosen':'')}><input type="radio" name="country-scope" checked={scope==='all'} onChange={()=>onScope('all')}/><span><strong>全部国家</strong><small>国家范围不设限制，仍遵守账户角色权限</small></span></label>
-   <label className={'choice-card'+(scope==='selected'?' is-chosen':'')}><input type="radio" name="country-scope" checked={scope==='selected'} onChange={()=>onScope('selected')}/><span><strong>指定国家</strong><small>按所选国家限制业务范围，仍遵守角色权限</small></span></label>
+   <label className={'choice-card'+(scope==='all'?' is-chosen':'')}><input type="radio" name="country-scope" checked={scope==='all'} onChange={()=>onScope('all')}/><span><strong>全部国家/地区</strong><small>国家/地区范围不设限制，仍遵守账户角色权限</small></span></label>
+   <label className={'choice-card'+(scope==='selected'?' is-chosen':'')}><input type="radio" name="country-scope" checked={scope==='selected'} onChange={()=>onScope('selected')}/><span><strong>指定国家/地区</strong><small>按所选国家/地区限制业务范围，仍遵守角色权限</small></span></label>
   </div>:<p className="picker-note">你的负责范围是 {limit}，只能在此范围内选择。</p>}
   {scope==='selected'&&<div className="picker-body">
-   <div className="picked" aria-live="polite">{selected.length?<><span className="picked-count">已选 {selected.length} 个</span>{selected.map(c=><button type="button" key={c} className="country-chip removable" aria-label={'移除 '+c} onClick={()=>onChange(selected.filter(x=>x!==c))}>{c}<span aria-hidden="true">×</span></button>)}</>:<span className="muted">尚未选择国家</span>}</div>
-   <LoadState resource={resource} what="国家列表" onRetry={onRetry}/>
+   <div className="picked" aria-live="polite">{selected.length?<><span className="picked-count">已选 {selected.length} 个</span>{selected.map(c=><button type="button" key={c} className="country-chip removable" aria-label={'移除 '+c} onClick={()=>onChange(selected.filter(x=>x!==c))}>{c}<span aria-hidden="true">×</span></button>)}</>:<span className="muted">尚未选择国家/地区</span>}</div>
+   <LoadState resource={resource} what="国家/地区列表" onRetry={onRetry}/>
    {options.length>0&&<>
-    <div className="picker-tools">{options.length>8&&<input type="search" aria-label="搜索国家" placeholder="搜索国家" value={query} onChange={e=>setQuery(e.target.value)}/>}
+    <div className="picker-tools">{options.length>8&&<input type="search" aria-label="搜索国家/地区" placeholder="搜索国家/地区" value={query} onChange={e=>setQuery(e.target.value)}/>}
      <button type="button" className="text-button" disabled={!filtered.length} onClick={()=>onChange([...new Set([...selected,...filtered])])}>{query?'选中搜索结果':'全选'}</button>
      <button type="button" className="text-button" disabled={!selected.length} onClick={()=>onChange([])}>清空</button></div>
-    <div className="country-options">{filtered.map(c=><label className="checkbox" key={c}><input type="checkbox" checked={selected.includes(c)} onChange={e=>onChange(e.target.checked?[...selected,c]:selected.filter(x=>x!==c))}/>{c}</label>)}{!filtered.length&&<p className="muted">没有匹配的国家。</p>}</div>
+    <div className="country-options">{filtered.map(c=><label className="checkbox" key={c}><input type="checkbox" checked={selected.includes(c)} onChange={e=>onChange(e.target.checked?[...selected,c]:selected.filter(x=>x!==c))}/>{c}</label>)}{!filtered.length&&<p className="muted">没有匹配的国家/地区。</p>}</div>
    </>}
-   {!resource.loading&&!resource.error&&!options.length&&<p className="muted">当前没有可选国家，请先发布业务数据{canAll?'，或使用全部国家':''}。</p>}
+   {!resource.loading&&!resource.error&&!options.length&&<p className="muted">当前没有可选国家/地区，请先发布业务数据{canAll?'，或使用全部国家/地区':''}。</p>}
   </div>}
   {error&&<p id="country-error" className="field-error">{error}</p>}
  </fieldset>;
@@ -129,7 +129,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
   if(!editing&&!idPattern.test(form.id))errors.id='登录账户名须为3至64位，以小写字母或数字开头，只含小写字母、数字、点、下划线或连字符。';
   const name=form.display_name.trim();
   if(!name)errors.display_name='请填写显示名称。';else if([...name].length>64)errors.display_name='显示名称最多64个字符。';
-  if(form.country_scope==='selected'&&!form.countries.length)errors.countries=canAll?'请至少选择一个国家，或改为全部国家。':'请至少选择一个国家；你的账户不能申请全部国家。';
+  if(form.country_scope==='selected'&&!form.countries.length)errors.countries=canAll?'请至少选择一个国家/地区，或改为全部国家/地区。':'请至少选择一个国家/地区；你的账户不能申请全部国家/地区。';
   setFieldErrors(errors);return !Object.keys(errors).length;
  }
  function submit(e:React.FormEvent){
@@ -138,7 +138,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
   const target={id:editing?.id||form.id,role:editing?.role||(admin?form.role:'warehouse'),display_name,country_scope:scope,countries:list};
   void run('form',async()=>{
    if(editing){const changed=scopeChanged;const v=await api('/admin/accounts/'+encodeURIComponent(editing.id),{display_name,country_scope:scope,countries:list},undefined,'PATCH');if(mounted.current){setEditing(v);setForm(f=>({...f,display_name:v.display_name,country_scope:allCountries(v)?'all':'selected',countries:v.countries||[]}))}
-    return `已保存 ${accountName(v)}（${v.id}）。`+(changed?'负责国家已变化：该账户的旧会话已退出，旧推荐和批次需重新生成。':'')}
+    return `已保存 ${accountName(v)}（${v.id}）。`+(changed?'负责国家/地区已变化：该账户的旧会话已退出，旧推荐和批次需重新生成。':'')}
    if(admin){const v=await api('/admin/accounts',target);if(mounted.current)setForm(blank());return `已创建${roles[v.role]}账户 ${accountName(v)}（${v.id}，${countrySummary(v)}）。当前为“待首次配置”：使用者需在登录页的首次配置入口设置强密码，再验证Passkey或认证器并保存恢复码。`}
    const v=await api('/warehouse-requests',{...target,reason:form.reason.trim()});if(mounted.current){setForm(blank());setRequestFilter('')}
    return `已提交 ${v.display_name}（${v.account_id}）的开户申请，等待管理员审批。审批前该账户名被占用，申请提交后不能修改。`;
@@ -164,7 +164,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
  // ---- sections --------------------------------------------------------------
  const editor=<section ref={editorRef} className={'panel account-editor'+(editing?' is-editing':'')} aria-labelledby="account-editor-title" aria-busy={busy}>
   <div className="section-head"><h2 id="account-editor-title">{editing?'编辑账户':admin?'新建账户':'申请新的仓库账户'}</h2>{editing&&<button type="button" className="text-button" disabled={busy} onClick={startCreate}>改为新建账户</button>}</div>
-  <p className="muted editor-intro">{editing?'可修改显示名称和负责国家。':admin?'创建后账户为“待首次配置”，由使用者自己设置强密码并完成安全验证。':'管理员批准后立即创建账户，使用者随后完成首次安全配置。'}</p>
+  <p className="muted editor-intro">{editing?'可修改显示名称和负责国家/地区。':admin?'创建后账户为“待首次配置”，由使用者自己设置强密码并完成安全验证。':'管理员批准后立即创建账户，使用者随后完成首次安全配置。'}</p>
   <form className="account-form" noValidate onSubmit={submit}>
    <fieldset disabled={busy} className="account-fields">
     {editing?<dl className="locked-facts">
@@ -184,7 +184,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
     <CountryPicker canAll={canAll} scope={canAll?form.country_scope:'selected'} selected={form.countries} countries={countryList} resource={countries} limit={countryLabel(session)} error={fieldErrors.countries}
      onScope={scope=>setForm({...form,country_scope:scope,countries:scope==='all'?[]:form.countries})} onChange={list=>setForm({...form,countries:list})} onRetry={()=>reload('countries')}/>
     {!admin&&<label>申请理由（可选）<textarea value={form.reason} maxLength={1000} onChange={e=>setForm({...form,reason:e.target.value})} placeholder="说明新仓库账户的用途，管理员审批时可见"/><small className="counter">{form.reason.length} / 1000</small></label>}
-    {scopeChanged&&<div className="change-warning" role="note"><strong>负责国家将改变</strong>保存后该账户的已登录会话会退出，旧推荐和批次失效需重建。范围外仍有未结案派单时，系统会拒绝缩小范围。</div>}
+    {scopeChanged&&<div className="change-warning" role="note"><strong>负责国家/地区将改变</strong>保存后该账户的已登录会话会退出，旧推荐和批次失效需重建。范围外仍有未结案派单时，系统会拒绝缩小范围。</div>}
     {notice('form')}
     <div className="button-row editor-actions"><button>{working==="form"?'正在保存…':editing?'保存修改':admin?'创建账户':'提交申请'}</button>{editing&&<button type="button" className="secondary" onClick={startCreate}>取消编辑</button>}</div>
    </fieldset>
@@ -195,15 +195,15 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
   {notice('directory')}
   <div className="section-head"><h2 id="directory-title">账户名录</h2><button type="button" className="secondary compact" disabled={accounts.loading} onClick={()=>reload('accounts','countries')}>{accounts.loading&&accounts.value?'正在刷新…':'刷新'}</button></div>
   <div className="directory-tools">
-   <input type="search" aria-label="搜索账户" placeholder="搜索显示名、登录名或国家" value={query} onChange={e=>setQuery(e.target.value)}/>
+   <input type="search" aria-label="搜索账户" placeholder="搜索显示名、登录名或国家/地区" value={query} onChange={e=>setQuery(e.target.value)}/>
    <div className="segmented" role="group" aria-label="按角色筛选">{[['','全部',accountList.length],['finance','财务',roleCounts('finance')],['warehouse','仓库',roleCounts('warehouse')],['admin','管理员',roleCounts('admin')]].map(([key,name,n])=><button type="button" key={key} aria-pressed={roleFilter===key} onClick={()=>setRoleFilter(String(key))}>{name} <span className="seg-count">{n}</span></button>)}</div>
    <select aria-label="按配置状态筛选" value={stateFilter} onChange={e=>setStateFilter(e.target.value)}><option value="">全部配置状态</option>{setupStates.map(([k,name])=><option key={k} value={k}>{name}</option>)}</select>
-   <select aria-label="按负责国家筛选" value={countryFilter} onChange={e=>setCountryFilter(e.target.value)}><option value="">全部负责国家</option>{[...new Set([...countryList,...accountList.flatMap(a=>a.countries||[])])].sort((a,b)=>a.localeCompare(b)).map(c=><option key={c} value={c}>{c}</option>)}</select>
+   <select aria-label="按负责国家/地区筛选" value={countryFilter} onChange={e=>setCountryFilter(e.target.value)}><option value="">全部负责国家/地区</option>{[...new Set([...countryList,...accountList.flatMap(a=>a.countries||[])])].sort((a,b)=>a.localeCompare(b)).map(c=><option key={c} value={c}>{c}</option>)}</select>
   </div>
-  {(countryFilter||directoryFiltered)&&<div className="active-filters">{countryFilter&&<span className="filter-chip">负责 {countryFilter}（含全部国家账户）<button type="button" aria-label="取消国家筛选" onClick={()=>setCountryFilter('')}>×</button></span>}<span className="muted">显示 {directory.length} / {accountList.length} 个账户</span><button type="button" className="text-button" onClick={()=>{setQuery('');setRoleFilter('');setStateFilter('');setCountryFilter('')}}>清除筛选</button></div>}
+  {(countryFilter||directoryFiltered)&&<div className="active-filters">{countryFilter&&<span className="filter-chip">负责 {countryFilter}（含全部国家/地区账户）<button type="button" aria-label="取消国家/地区筛选" onClick={()=>setCountryFilter('')}>×</button></span>}<span className="muted">显示 {directory.length} / {accountList.length} 个账户</span><button type="button" className="text-button" onClick={()=>{setQuery('');setRoleFilter('');setStateFilter('');setCountryFilter('')}}>清除筛选</button></div>}
   {accounts.error&&!accounts.value?<p className="muted empty-inline">账户名录未加载，请使用页面顶部的重试。</p>:<LoadState resource={accounts} what="账户" onRetry={()=>reload('accounts')}/>}
   {accounts.value&&<div className={'table-scroll'+(accounts.loading?' is-loading':'')}><table className="data-table account-table">
-   <thead><tr><th>账户与角色</th><th>负责国家</th><th>安全配置</th><th className="act"><span className="sr-only">操作</span></th></tr></thead>
+   <thead><tr><th>账户与角色</th><th>负责国家/地区</th><th>安全配置</th><th className="act"><span className="sr-only">操作</span></th></tr></thead>
    <tbody>{directory.map(a=><tr key={a.id} className={editing?.id===a.id?'is-editing':undefined}>
     <td className="account-cell"><strong>{accountName(a)}</strong><span className="account-meta">{a.display_name&&a.display_name!==a.id&&<span className="mono">{a.id}</span>}<span className={'role-pill '+a.role}>{roles[a.role]||a.role}</span></span></td>
     <td className="countries-cell"><CountryChips account={a}/></td>
@@ -222,7 +222,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
    <header><div className="request-title"><h3 id={'req-'+r.id}>{r.display_name}</h3><span className="mono">{r.account_id}</span></div><span className={'request-status '+r.status}>{label(requestStates,r.status)}</span></header>
    <dl className="request-facts">
     <div><dt>申请人</dt><dd>{requester?<>{accountName(requester)}<small className="mono">{r.requester}</small></>:<span className="mono">{r.requester}</span>}</dd></div>
-    <div><dt>负责国家</dt><dd><CountryChips account={{id:r.account_id,role:'warehouse',country_scope:r.country_scope,countries:r.countries}}/></dd></div>
+    <div><dt>负责国家/地区</dt><dd><CountryChips account={{id:r.account_id,role:'warehouse',country_scope:r.country_scope,countries:r.countries}}/></dd></div>
    </dl>
    {r.reason?<blockquote className="request-reason">{r.reason}</blockquote>:<p className="muted request-no-reason">未填写申请理由。</p>}
    <ol className="request-timeline" aria-label="办理进度">
@@ -235,7 +235,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
      <p>将立即创建仓库账户 <strong>{r.display_name}</strong>（<span className="mono">{r.account_id}</span>，{countrySummary({id:r.account_id,role:'warehouse',country_scope:r.country_scope,countries:r.countries})}）。账户仍需使用者完成首次安全配置。</p>
      <div className="button-row"><button type="button" disabled={busy} onClick={()=>void run('requests',async()=>{await api('/warehouse-requests/'+encodeURIComponent(r.id)+'/approve',{});if(mounted.current)setConfirming('');return `已批准并创建仓库账户 ${r.display_name}（${r.account_id}）。账户现为“待首次配置”，使用者需在登录页首次配置入口设置强密码，并验证Passkey或认证器、保存恢复码后才能使用。`},'request:'+r.id)}>{busy?'正在开户…':'确认批准并开户'}</button><button type="button" className="secondary" disabled={busy} onClick={()=>setConfirming('')}>取消</button></div>
     </div>:rejecting===r.id?<div className="request-reject">
-     <label>驳回原因（申请人可见）<textarea autoFocus value={rejections[r.id]||''} maxLength={1000} onChange={e=>setRejections({...rejections,[r.id]:e.target.value})} placeholder="说明需要调整的地方，例如国家范围或账户用途"/><small className="counter">{(rejections[r.id]||'').length} / 1000</small></label>
+     <label>驳回原因（申请人可见）<textarea autoFocus value={rejections[r.id]||''} maxLength={1000} onChange={e=>setRejections({...rejections,[r.id]:e.target.value})} placeholder="说明需要调整的地方，例如国家/地区范围或账户用途"/><small className="counter">{(rejections[r.id]||'').length} / 1000</small></label>
      <div className="button-row"><button type="button" disabled={busy||!rejections[r.id]?.trim()} onClick={()=>void run('requests',async()=>{await api('/warehouse-requests/'+encodeURIComponent(r.id)+'/reject',{reason:rejections[r.id].trim()});if(mounted.current)setRejecting('');return `已驳回 ${r.display_name}（${r.account_id}）的申请，申请人可重新提交。`},'request:'+r.id)}>{busy?'正在驳回…':'确认驳回'}</button><button type="button" className="secondary" disabled={busy} onClick={()=>setRejecting('')}>取消</button></div>
     </div>:<div className="button-row request-actions"><button type="button" disabled={busy} onClick={()=>{setRejecting('');setConfirming(r.id)}}>批准并创建账户</button><button type="button" className="secondary" disabled={busy} onClick={()=>{setConfirming('');setRejecting(r.id)}}>驳回…</button></div>)}
    {notice('request:'+r.id)}
@@ -248,7 +248,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
   {notice('requests')}
   <div className="directory-tools">
    <div className="segmented" role="group" aria-label="按审批状态筛选">{[['','全部',requestList.length],...requestStates.map(([k,name])=>[k,name,requestCounts(k)])].map(([key,name,n])=><button type="button" key={String(key)} aria-pressed={requestFilter===key} onClick={()=>{setRequestFilter(String(key));setRequestLimit(20)}}>{name} <span className="seg-count">{n}</span></button>)}</div>
-   {requestList.length>5&&<input type="search" aria-label="搜索申请" placeholder="搜索账户、申请人、国家或理由" value={requestQuery} onChange={e=>{setRequestQuery(e.target.value);setRequestLimit(20)}}/>}
+   {requestList.length>5&&<input type="search" aria-label="搜索申请" placeholder="搜索账户、申请人、国家/地区或理由" value={requestQuery} onChange={e=>{setRequestQuery(e.target.value);setRequestLimit(20)}}/>}
   </div>
   <LoadState resource={requests} what="申请" onRetry={()=>reload('requests')}/>
   {requests.value&&<div className={'request-list'+(requests.loading?' is-loading':'')}>
@@ -260,7 +260,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
 
  const change=(a:Audit)=>{
   const b=a.before||{},n=a.after||{},parts:string[]=[];
-  if(a.action==='update'){if(b.display_name!==n.display_name)parts.push(`显示名称 ${b.display_name||'—'} → ${n.display_name}`);if(countryLabel(b)!==countryLabel(n))parts.push(`负责国家 ${countrySummary(b,3)} → ${countrySummary(n,3)}`)}
+  if(a.action==='update'){if(b.display_name!==n.display_name)parts.push(`显示名称 ${b.display_name||'—'} → ${n.display_name}`);if(countryLabel(b)!==countryLabel(n))parts.push(`负责国家/地区 ${countrySummary(b,3)} → ${countrySummary(n,3)}`)}
   else if(a.action==='create'||a.action==='request')parts.push(`${roles[n.role]||'仓库'} · ${n.display_name||''} · ${countrySummary(n.role?n:{...n,role:'warehouse'},3)}`);
   else if(a.action==='rejected'&&n.rejection_reason)parts.push('原因：'+n.rejection_reason);
   else if(a.action==='passkey_domains')parts.push(`批准入口 ${(n.origins||[]).length} 个；旧本机入口保留`);
@@ -282,7 +282,7 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
  if(!admin){
   return <div className="accounts-workspace">
    <section className="account-overview finance-overview" aria-label="负责范围与申请概况">
-    <div className="panel scope-card"><h2>我的负责范围</h2><CountryChips account={session} max={8}/><p className="muted">交易、差异、统计、导出和派单都限于这些国家。申请的仓库账户必须在此范围内。</p></div>
+    <div className="panel scope-card"><h2>我的负责范围</h2><CountryChips account={session} max={8}/><p className="muted">交易、差异、统计、导出和派单都限于这些国家/地区。申请的仓库账户必须在此范围内。</p></div>
     <figure className="panel chart-card"><figcaption><h3>我的申请</h3><span className="muted">点击图例筛选列表</span></figcaption>{requests.value?<StackedBar label="我的申请审批状态" segments={requestSegments} selected={requestFilter} onSelect={setRequestFilter}/>:<ChartPending resource={requests}/>}</figure>
    </section>
    <div className="accounts-split">{editor}{requestsPanel}</div>
@@ -290,17 +290,17 @@ export default function AccountPanel({api,session,onChanged}:{api:API;session:Ac
  }
  return <div className="accounts-workspace">
   <section className="account-overview" aria-label="账户概况">
-   {(accounts.error||countries.error)&&<div className="overview-errors">{accounts.error&&<LoadState resource={accounts} what="账户" onRetry={()=>reload('accounts')}/>}{countries.error&&<LoadState resource={countries} what="国家列表" onRetry={()=>reload('countries')}/>}</div>}
+   {(accounts.error||countries.error)&&<div className="overview-errors">{accounts.error&&<LoadState resource={accounts} what="账户" onRetry={()=>reload('accounts')}/>}{countries.error&&<LoadState resource={countries} what="国家/地区列表" onRetry={()=>reload('countries')}/>}</div>}
    <dl className="account-kpis">
     <div><dt>账户</dt><dd className={accounts.value?undefined:'is-missing'}>{fig(accounts.value&&accountList.length)}</dd><small>{accounts.value?`财务 ${roleCounts('finance')} · 仓库 ${roleCounts('warehouse')} · 管理员 ${roleCounts('admin')}`:accounts.error?'账户未加载':'正在读取…'}</small></div>
     <div className={pending?'is-attention':''}><dt>待审批申请</dt><dd>{fig(requests.value&&pending)}</dd>{pending>0?<button type="button" className="text-button" onClick={()=>{setTab('requests');setRequestFilter('pending')}}>去审批</button>:<small>{requests.error?'申请未加载':'没有待处理'}</small>}</div>
     <div><dt>未完成安全配置</dt><dd>{fig(accounts.value&&unfinished)}</dd><small>需账户使用者本人完成</small></div>
-    <div className={gaps.length?'is-attention':''}><dt>无仓库覆盖的国家</dt><dd>{fig(accounts.value&&countries.value&&gaps.length)}</dd><small>{countries.error?'国家列表未加载':`已发布 ${countryList.length} 个国家`}</small></div>
+    <div className={gaps.length?'is-attention':''}><dt>无仓库覆盖的国家/地区</dt><dd>{fig(accounts.value&&countries.value&&gaps.length)}</dd><small>{countries.error?'国家/地区列表未加载':`已发布 ${countryList.length} 个国家/地区`}</small></div>
    </dl>
    <div className="overview-charts">
     <div className="chart-stack"><figure className="panel chart-card"><figcaption><h3>安全配置进度</h3><span className="muted">点击图例筛选名录</span></figcaption>{accounts.value?<StackedBar label="账户安全配置进度" segments={setupSegments} selected={stateFilter} onSelect={k=>{setTab('directory');setStateFilter(k)}}/>:<ChartPending resource={accounts}/>}</figure>
     <figure className="panel chart-card"><figcaption><h3>角色构成</h3><span className="muted">点击图例筛选名录</span></figcaption>{accounts.value?<StackedBar label="账户角色构成" segments={roleSegments} selected={roleFilter} onSelect={k=>{setTab('directory');setRoleFilter(k)}}/>:<ChartPending resource={accounts}/>}</figure></div>
-    <figure className="panel chart-card coverage-card"><figcaption><h3>国家覆盖</h3><span className="muted">每个国家的限定财务 / 限定仓库账户数</span></figcaption>{accounts.value&&countries.value?<CountryCoverage countries={countryList} accounts={accountList} selected={countryFilter} onSelect={c=>{setTab('directory');setCountryFilter(c)}}/>:<ChartPending resource={countries.error?countries:accounts}/>}</figure>
+    <figure className="panel chart-card coverage-card"><figcaption><h3>国家/地区覆盖</h3><span className="muted">每个国家/地区的限定财务 / 限定仓库账户数</span></figcaption>{accounts.value&&countries.value?<CountryCoverage countries={countryList} accounts={accountList} selected={countryFilter} onSelect={c=>{setTab('directory');setCountryFilter(c)}}/>:<ChartPending resource={countries.error?countries:accounts}/>}</figure>
    </div>
   </section>
   <div className="account-tabs" role="tablist" aria-label="账户管理分区">

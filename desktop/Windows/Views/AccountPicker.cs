@@ -58,15 +58,15 @@ public sealed class AccountPicker : UserControl
             throw new OperationCanceledException("账户选择已变化，请重试。");
         var user = users.AsArray().FirstOrDefault(u => u.S("id") == id);
         if (user == null || !AccountDirectory.Covers(user, required))
-            throw new ArgumentException("请选择能覆盖全部所选记录国家的账户；当前账户不在可派单范围内。");
+            throw new ArgumentException("请选择能覆盖全部所选记录国家/地区的账户；当前账户不在可派单范围内。");
     }
 
     // A dedicated, bounded picker keeps long display names/country scopes readable.
     public ContentDialog CreateDialog()
     {
-        var query = UI.Field("搜索账户名、显示名或国家");
+        var query = UI.Field("搜索账户名、显示名或国家/地区");
         var role = UI.Select("角色", UI.Choices(("", "全部角色"), ("finance", "财务"), ("warehouse", "仓库"), ("admin", "管理员")));
-        var country = UI.Select("负责国家", [new Choice("", "全部国家范围")]);
+        var country = UI.Select("负责国家/地区", [new Choice("", "全部国家/地区范围")]);
         var count = UI.Muted("正在读取账户…");
         var rows = new ListView
         {
@@ -98,8 +98,8 @@ public sealed class AccountPicker : UserControl
         var gen = vm.Generation;
         void Filter()
         {
-            rows.ItemsSource = users.Where(u => AccountDirectory.Matches(u, query.Text, role.Value(), country.Value())).Select(u => new AccountOption(u.S("id"), $"{u.S("display_name")} · {u.S("id")}", $"{Labels.Of(u.S("role"))} · {Labels.Of(u.S("state"))} · {(u.S("country_scope") == "all" ? "全部国家" : UI.Format(u, "countries"))}")).ToArray();
-            count.Text = required == null ? $"共 {users.Length} 个账户 · 当前 {rows.Items.Count} 个匹配" : $"共 {userCount} 个账户 · {users.Length} 个覆盖所选国家 · 当前 {rows.Items.Count} 个匹配";
+            rows.ItemsSource = users.Where(u => AccountDirectory.Matches(u, query.Text, role.Value(), country.Value())).Select(u => new AccountOption(u.S("id"), $"{u.S("display_name")} · {u.S("id")}", $"{Labels.Of(u.S("role"))} · {Labels.Of(u.S("state"))} · {(u.S("country_scope") == "all" ? "全部国家/地区" : UI.Format(u, "countries"))}")).ToArray();
+            count.Text = required == null ? $"共 {users.Length} 个账户 · 当前 {rows.Items.Count} 个匹配" : $"共 {userCount} 个账户 · {users.Length} 个覆盖所选国家/地区 · 当前 {rows.Items.Count} 个匹配";
             dialog.IsPrimaryButtonEnabled = false;
             rows.SelectedItem = rows.Items.Cast<AccountOption>().FirstOrDefault(x => x.Id == Text);
         }
@@ -111,7 +111,7 @@ public sealed class AccountPicker : UserControl
         dialog.Opened += async (_, _) => await vm.Guard(async () =>
         {
             var ct = vm.Token;
-            count.Text = requiredCountries == null ? "正在读取账户…" : "正在核对所选国家范围…";
+            count.Text = requiredCountries == null ? "正在读取账户…" : "正在核对所选国家/地区范围…";
             required = requiredCountries == null ? null : await requiredCountries();
             if (gen != vm.Generation)
                 return;

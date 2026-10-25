@@ -592,7 +592,7 @@ func (s *Store) reviewSet(ctx context.Context, actor WorkflowActor, id string) (
 		return ReviewSet{}, workflowError("materials_changed", "补充资料已变化，请重新生成推荐", WorkflowCase{})
 	}
 	if !access.Compatible(ctx, set.ScopeVersion) {
-		return ReviewSet{}, workflowError("scope_changed", "负责国家已调整，请重新生成推荐", WorkflowCase{})
+		return ReviewSet{}, workflowError("scope_changed", "负责国家/地区已调整，请重新生成推荐", WorkflowCase{})
 	}
 	if !actor.valid() || set.Actor != actor {
 		return ReviewSet{}, workflowError("forbidden", "推荐快照不属于当前身份", WorkflowCase{})

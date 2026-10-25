@@ -1,0 +1,3 @@
+Slides 10
+Inspect result written to file: E:\软件编程大作业\退货对账与差异处理系统\.working\country-region-20261025\deck-draft.pptx.inspect.ndjson
+Validated deck-final.pptx

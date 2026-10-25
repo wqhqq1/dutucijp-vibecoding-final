@@ -1,0 +1,6 @@
+Isolated synthetic UI host. Not official data or a real authentication device test.
+PASS x64 MakeCredential/GetAssertion layout, cancellation offset and SDK option versions.
+PASS account picker search, role filter, selection and cancel preservation.
+Loaded account-picker; 
+Dialog center offset=(0.000,0.000); bounds=(24.000,67.500,579.000,678.000); viewport=627.000x813.000
+PASS responsive panel bounds and pending/setup counts; logical width 627

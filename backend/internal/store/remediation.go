@@ -516,7 +516,7 @@ func (s *Store) RemediateCase(ctx context.Context, actor WorkflowActor, id strin
 					return e
 				}
 				if !access.Allows(ctx, row.Country) {
-					return workflowError("forbidden", "修正后的国家不在当前权限范围", before)
+					return workflowError("forbidden", "修正后的国家/地区不在当前权限范围", before)
 				}
 				if e = updateBusinessRow(ctx, c, before.RunID, row); e != nil {
 					return e

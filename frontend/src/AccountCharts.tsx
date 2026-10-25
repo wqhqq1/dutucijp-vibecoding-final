@@ -45,19 +45,19 @@ export function CountryCoverage({countries,accounts,selected,onSelect}:{countrie
  const {rows,global,gaps}=coverage(countries,accounts);
  const max=Math.max(1,...rows.map(r=>Math.max(r.finance,r.warehouse)));
  const shown=expanded?rows:rows.slice(0,8);
- const readout=focus?`${focus.country}：限定财务 ${focus.finance} 个，限定仓库 ${focus.warehouse} 个`:`点击国家可筛选下方名录。全部国家账户：财务 ${global.finance} 个，仓库 ${global.warehouse} 个，覆盖所有国家，未计入条形。`;
- if(!rows.length)return <p className="muted empty-inline">尚无已发布国家，账户只能使用全部国家范围。</p>;
+ const readout=focus?`${focus.country}：限定财务 ${focus.finance} 个，限定仓库 ${focus.warehouse} 个`:`点击国家/地区可筛选下方名录。全部国家/地区账户：财务 ${global.finance} 个，仓库 ${global.warehouse} 个，覆盖所有国家/地区，未计入条形。`;
+ if(!rows.length)return <p className="muted empty-inline">尚无已发布国家/地区，账户只能使用全部国家/地区范围。</p>;
  return <div className="coverage">
-  <div className="coverage-head"><ul className="viz-legend" aria-label="国家覆盖图例"><li><span className="legend-item"><span className="swatch tone-finance" aria-hidden="true"/>限定财务</span></li><li><span className="legend-item"><span className="swatch tone-warehouse" aria-hidden="true"/>限定仓库</span></li></ul></div>
+  <div className="coverage-head"><ul className="viz-legend" aria-label="国家/地区覆盖图例"><li><span className="legend-item"><span className="swatch tone-finance" aria-hidden="true"/>限定财务</span></li><li><span className="legend-item"><span className="swatch tone-warehouse" aria-hidden="true"/>限定仓库</span></li></ul></div>
   <p className="viz-readout" aria-live="polite">{readout}</p>
   <ol className="coverage-rows">{shown.map(r=><li key={r.country}><button type="button" className={'coverage-row'+(gaps.includes(r.country)?' is-gap':'')} aria-pressed={selected===r.country} aria-label={`${r.country}，限定财务${r.finance}个，限定仓库${r.warehouse}个${gaps.includes(r.country)?'，暂无仓库覆盖':''}`} onClick={()=>onSelect(selected===r.country?'':r.country)} onMouseEnter={()=>setFocus(r)} onMouseLeave={()=>setFocus(null)} onFocus={()=>setFocus(r)} onBlur={()=>setFocus(null)}>
    <span className="coverage-name" title={r.country}>{r.country}</span>
    <svg className="coverage-bars" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><rect className="coverage-track" x={0} y={0} width={100} height={5}/><rect className="coverage-track" x={0} y={7} width={100} height={5}/>{r.finance>0&&<rect className="tone-finance" x={0} y={0} width={r.finance/max*100} height={5}/>}{r.warehouse>0&&<rect className="tone-warehouse" x={0} y={7} width={r.warehouse/max*100} height={5}/>}</svg>
    <span className="coverage-count">{r.finance}<span aria-hidden="true"> / </span>{r.warehouse}</span>
   </button></li>)}</ol>
-  {rows.length>8&&<button type="button" className="text-button" onClick={()=>setExpanded(!expanded)}>{expanded?'只显示前 8 个国家':`显示全部 ${rows.length} 个国家`}</button>}
-  {gaps.length>0&&<p className="coverage-gaps"><strong>{gaps.length} 个国家暂无仓库账户：</strong>{gaps.slice(0,6).join('、')}{gaps.length>6?` 等`:''}。可派给负责该国的财务或管理员，也可先创建仓库账户。</p>}
-  {!gaps.length&&<p className="coverage-ok">每个国家都至少有一个仓库账户可派单{global.warehouse?'（含全部国家仓库账户）':''}。</p>}
+  {rows.length>8&&<button type="button" className="text-button" onClick={()=>setExpanded(!expanded)}>{expanded?'只显示前 8 个国家/地区':`显示全部 ${rows.length} 个国家/地区`}</button>}
+  {gaps.length>0&&<p className="coverage-gaps"><strong>{gaps.length} 个国家/地区暂无仓库账户：</strong>{gaps.slice(0,6).join('、')}{gaps.length>6?` 等`:''}。可派给负责该国的财务或管理员，也可先创建仓库账户。</p>}
+  {!gaps.length&&<p className="coverage-ok">每个国家/地区都至少有一个仓库账户可派单{global.warehouse?'（含全部国家/地区仓库账户）':''}。</p>}
  </div>;
 }
 

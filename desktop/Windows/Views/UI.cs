@@ -264,6 +264,7 @@ public static class UI
         {
             Header = label,
             Text = value,
+            VerticalAlignment = VerticalAlignment.Bottom,
             MinWidth = 0,
             AcceptsReturn = multiline,
             TextWrapping = multiline ? TextWrapping.Wrap : TextWrapping.NoWrap
@@ -291,7 +292,8 @@ public static class UI
         {
             Header = label,
             MinWidth = 0,
-            HorizontalAlignment = HorizontalAlignment.Stretch
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Bottom
         };
         foreach (var choice in choices)
             c.Items.Add(choice);
@@ -683,22 +685,37 @@ public static class UI
     {
         var chosen = selected.ToHashSet();
         var all = available.Concat(chosen.Where(c => !available.Contains(c))).Distinct().ToArray();
-        var boxes = all.Select(c => new CheckBox { Content = c, IsChecked = chosen.Contains(c), MinWidth = 0, Margin = new Thickness(0, 0, 12, 0) }).ToArray();
-        var wrap = new VariableSizedWrapGrid
+        var boxes = all.Select(c =>
         {
-            Orientation = Orientation.Horizontal,
-            ItemWidth = 168
+            var box = new CheckBox
+            {
+                Content = Text(c),
+                Tag = c,
+                IsChecked = chosen.Contains(c),
+                MinWidth = 0,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch
+            };
+            AutomationProperties.SetName(box, c);
+            ToolTipService.SetToolTip(box, c);
+            return box;
+        }).ToArray();
+        var wrap = new AdaptiveColumns
+        {
+            MaxColumns = 3,
+            MinimumCellWidth = 210,
+            RowSpacing = 4
         };
         foreach (var b in boxes)
             wrap.Children.Add(b);
-        var view = all.Length == 0 ? (UIElement)Muted("当前没有可选国家。") : new ScrollViewer
+        var view = all.Length == 0 ? (UIElement)Muted("当前没有可选国家/地区。") : new ScrollViewer
         {
             Content = wrap,
             MaxHeight = 220,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto
         };
-        return (view, () => boxes.Where(b => b.IsChecked == true).Select(b => (string)b.Content).ToArray());
+        return (view, () => boxes.Where(b => b.IsChecked == true).Select(b => (string)b.Tag).ToArray());
     }
 
     /// <summary>ContentDialog in the window's current theme with the Fluent default style.</summary>

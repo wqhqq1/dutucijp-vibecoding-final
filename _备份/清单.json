@@ -1,15 +1,15 @@
 {
   "format_version": 9,
-  "kind": "daily_20261023_client_source_and_history_with_existing_midterm_backup_not_final_submission",
-  "actual_time": "2026-10-23T19:34:47.513711+08:00",
-  "local_head": "1359caaf5b193a048a480f80361e3427edeecdc4",
-  "native_main_commits": 92,
+  "kind": "daily_20261025_client_source_and_history_with_existing_midterm_backup_not_final_submission",
+  "actual_time": "2026-10-25T18:36:29.813010+08:00",
+  "local_head": "bf2de693874ed94c629130a95312112663848856",
+  "native_main_commits": 94,
   "native_refs": [
     "refs/heads/delivery/teacher-portable-demo 3ac3cacca5f16d48abcee275b51413eccfce40e0",
     "refs/heads/experiment/fr18-disposable-20261015-210730 79ff9b2b1ceceb232238ac79a5a54a837997bed6",
-    "refs/heads/main 1359caaf5b193a048a480f80361e3427edeecdc4"
+    "refs/heads/main bf2de693874ed94c629130a95312112663848856"
   ],
-  "base_remote_head": "e07ae422bf5dd3119b623ece7fcda18fe8492882",
+  "base_remote_head": "77cc36c1cffbc36924be2fe4b26a6ee14acf7f63",
   "source_files": [
     {
       "path": ".agents/skills/run-app/SKILL.md",
@@ -34,7 +34,7 @@
     {
       "path": ".gitattributes",
       "mode": "100644",
-      "git_blob_sha": "9cc384b4ceef86ecef36b6971bd73f2e7d838b6e"
+      "git_blob_sha": "9d723fc3ad34b0cf5da7839a868fa4deb6dfeedb"
     },
     {
       "path": ".gitignore",
@@ -44,12 +44,12 @@
     {
       "path": "AGENTS.md",
       "mode": "100644",
-      "git_blob_sha": "472f65ac0ddaea6c4ee850321883c932200fe0d1"
+      "git_blob_sha": "8bda3eb388c207f046ec72030d82bd16116ca6f9"
     },
     {
       "path": "README.md",
       "mode": "100644",
-      "git_blob_sha": "35afe8e3ad39892b82328e49dd3e544c4b646fd7"
+      "git_blob_sha": "d22eb094f71a023d9bec3752f910d60fa345c6ab"
     },
     {
       "path": "backend/cmd/accountverify/main.go",
@@ -154,7 +154,7 @@
     {
       "path": "backend/internal/apicontract/document.go",
       "mode": "100644",
-      "git_blob_sha": "e209ec48cf69af975f7600c543f2fe5fee6f731b"
+      "git_blob_sha": "b3a9fe695c254567ac39308b1ffe0744db65fd69"
     },
     {
       "path": "backend/internal/auth/account_deletion.go",
@@ -164,7 +164,7 @@
     {
       "path": "backend/internal/auth/accounts.go",
       "mode": "100644",
-      "git_blob_sha": "69f61770f1e33d78f139c7767cc1bb7d525ccf4e"
+      "git_blob_sha": "c54560ef6b7bc345a41926ce51d70208c196e6ec"
     },
     {
       "path": "backend/internal/auth/activity_test.go",
@@ -294,7 +294,7 @@
     {
       "path": "backend/internal/store/batch.go",
       "mode": "100644",
-      "git_blob_sha": "530ae6aaf7d5ea4135adcb8b34f531af0d720570"
+      "git_blob_sha": "4d9440edba517b88ed7a3601945f62c39e218ad9"
     },
     {
       "path": "backend/internal/store/bulk_import_test.go",
@@ -319,7 +319,7 @@
     {
       "path": "backend/internal/store/manual.go",
       "mode": "100644",
-      "git_blob_sha": "cf388eb99f862edd1b62f757f662ecb083ba48e6"
+      "git_blob_sha": "8f1c94f64f5f0d9154148aa0801a7be50f5d1037"
     },
     {
       "path": "backend/internal/store/manual_test.go",
@@ -349,7 +349,7 @@
     {
       "path": "backend/internal/store/remediation.go",
       "mode": "100644",
-      "git_blob_sha": "8ae74b1dbb8eab96dc958c3d4b327a3643a65c36"
+      "git_blob_sha": "3a3a5abaa8f8860585673e109286fd1ff9b6ec9e"
     },
     {
       "path": "backend/internal/store/remediation_queries.go",
@@ -374,7 +374,7 @@
     {
       "path": "backend/internal/store/review.go",
       "mode": "100644",
-      "git_blob_sha": "4832fba8084752590dbd2baf4a1994575917985d"
+      "git_blob_sha": "df0d861144d807c0189c0a8a3dc4f8c864e82933"
     },
     {
       "path": "backend/internal/store/review_batch_test.go",
@@ -439,7 +439,7 @@
     {
       "path": "backend/internal/store/workflow.go",
       "mode": "100644",
-      "git_blob_sha": "25aa9d81329e51d632ff709d00270427c51a4234"
+      "git_blob_sha": "30e39e6c8db51eb67ff8f9a280302cb3196b7a47"
     },
     {
       "path": "backend/internal/store/workflow_test.go",
@@ -484,7 +484,7 @@
     {
       "path": "backend/internal/web/countries_http_test.go",
       "mode": "100644",
-      "git_blob_sha": "080a4828755fd7c14684af9f74f28e8dfb712793"
+      "git_blob_sha": "9d98a1ba537dd28466b830e1a8d2e6f20e98cf65"
     },
     {
       "path": "backend/internal/web/frontend_test.go",
@@ -549,7 +549,7 @@
     {
       "path": "backend/internal/web/server.go",
       "mode": "100644",
-      "git_blob_sha": "675256827163ebc5a57081a01bcbd42058dff986"
+      "git_blob_sha": "b3bcd54b65ffbb8e7bdfbb3c1bc6badfffdeac33"
     },
     {
       "path": "backend/internal/web/setup_http_test.go",
@@ -574,7 +574,7 @@
     {
       "path": "desktop/Integration/README.md",
       "mode": "100644",
-      "git_blob_sha": "aa3dca2df5dcf6921398e93a4249e07b7cdfc038"
+      "git_blob_sha": "44eb58dc2936bdb004eea5d56bfc1ec8188272ef"
     },
     {
       "path": "desktop/Integration/Reconciliation.Integration.csproj",
@@ -589,12 +589,12 @@
     {
       "path": "desktop/Tests/Program.cs",
       "mode": "100644",
-      "git_blob_sha": "c6876fddfd777dba0a861df00d67441f9a9c4a48"
+      "git_blob_sha": "2ea1c8c918f5a054eba20816a5b525473e2db336"
     },
     {
       "path": "desktop/Tests/README.md",
       "mode": "100644",
-      "git_blob_sha": "85c4c3d85773d6fba2bfc60296c90e1597b1e5b4"
+      "git_blob_sha": "3d16bc5b803e83a4c6a0e5904729ce74f547ff29"
     },
     {
       "path": "desktop/Tests/Reconciliation.Client.Tests.csproj",
@@ -614,12 +614,12 @@
     {
       "path": "desktop/UITests/App.xaml.cs",
       "mode": "100644",
-      "git_blob_sha": "e0475255f54bc8408523a1635bf0b0d940a8e2c8"
+      "git_blob_sha": "a6f44841a468e1fedb05f508c332be3eddc086ea"
     },
     {
       "path": "desktop/UITests/README.md",
       "mode": "100644",
-      "git_blob_sha": "2275677c4704423dc7d3b4352d93ed9ebbda57aa"
+      "git_blob_sha": "f964456a9486fd6d626f964f35ae87680807fb45"
     },
     {
       "path": "desktop/UITests/Reconciliation.UI.Tests.csproj",
@@ -644,12 +644,12 @@
     {
       "path": "desktop/Windows/MainWindow.xaml.cs",
       "mode": "100644",
-      "git_blob_sha": "7be35e325e4a34ad804be610ec02726a2fc28592"
+      "git_blob_sha": "09e31dbf61273692dff928037064b758ecf0cd47"
     },
     {
       "path": "desktop/Windows/Models.cs",
       "mode": "100644",
-      "git_blob_sha": "56701d11f47081bf420f730cdc26b312e84fb7de"
+      "git_blob_sha": "2e8f16ee217606de068483b8a0dd5de319e41094"
     },
     {
       "path": "desktop/Windows/Notices/QRCoder.txt",
@@ -664,7 +664,7 @@
     {
       "path": "desktop/Windows/Services/AssignmentScope.cs",
       "mode": "100644",
-      "git_blob_sha": "782b98629972a629c036e9919ba4dd40fa95162a"
+      "git_blob_sha": "f266912b406af878106881393f3e8d5f55142379"
     },
     {
       "path": "desktop/Windows/Services/BackendClient.cs",
@@ -699,12 +699,12 @@
     {
       "path": "desktop/Windows/Views/AccountPicker.cs",
       "mode": "100644",
-      "git_blob_sha": "07f6598070ecbac92b473f32d3e008636a646460"
+      "git_blob_sha": "ff5fff5791ce95c212dfe92d1253b6a37eedcee4"
     },
     {
       "path": "desktop/Windows/Views/AccountsView.cs",
       "mode": "100644",
-      "git_blob_sha": "9c30244468a109449d6f5cf3bcccf2074656be69"
+      "git_blob_sha": "66d686c90a453b82a566e5ed3fd274062759f2ff"
     },
     {
       "path": "desktop/Windows/Views/AdaptivePanels.cs",
@@ -719,7 +719,7 @@
     {
       "path": "desktop/Windows/Views/CaseView.cs",
       "mode": "100644",
-      "git_blob_sha": "8c1a467b0a6cfb8269f2890a7087c759e1c3263d"
+      "git_blob_sha": "8d14ac760400e5ad4b4c706f44f98d2c63f513c9"
     },
     {
       "path": "desktop/Windows/Views/JobsView.cs",
@@ -729,7 +729,7 @@
     {
       "path": "desktop/Windows/Views/ReviewView.cs",
       "mode": "100644",
-      "git_blob_sha": "154be662728aa6bb1612731ea6f5d9c342abfa4b"
+      "git_blob_sha": "02144b31e990f6f7e3b01a010231a6a38ab762f1"
     },
     {
       "path": "desktop/Windows/Views/SettingsView.cs",
@@ -739,12 +739,12 @@
     {
       "path": "desktop/Windows/Views/UI.cs",
       "mode": "100644",
-      "git_blob_sha": "913112e47f1946d3a4257da73a5a5f73f5b02e92"
+      "git_blob_sha": "2f11d9171bed865b66de21c7ad815ceb53a65317"
     },
     {
       "path": "desktop/Windows/Views/WorkspaceView.cs",
       "mode": "100644",
-      "git_blob_sha": "cbb78ca174f2c7e90d5fc05627275e8b67b90107"
+      "git_blob_sha": "bca140f7944c4d1fdc02e442a628148d5e3a21a3"
     },
     {
       "path": "desktop/Windows/app.manifest",
@@ -774,32 +774,32 @@
     {
       "path": "desktop/功能对照表.md",
       "mode": "100644",
-      "git_blob_sha": "a1c9ac4f8f8c5c751495080a7c2925ed28060df6"
+      "git_blob_sha": "e9f0822f328509df4771e24165a8f1f1d19ec006"
     },
     {
       "path": "docs/api/openapi.json",
       "mode": "100644",
-      "git_blob_sha": "9f456bd09a11c5c4b3a5653588a75e6076d32e02"
+      "git_blob_sha": "1e37b78eb12afd483ca9341b5868025264587818"
     },
     {
       "path": "docs/api/openapi.yaml",
       "mode": "100644",
-      "git_blob_sha": "6c2c39f2ed494f2170e99fc691f4eaa0f7b5166a"
+      "git_blob_sha": "9bdcdd81c83a31b018ec5d42c09f51da6c449065"
     },
     {
       "path": "docs/api/接入指南.md",
       "mode": "100644",
-      "git_blob_sha": "0b4bae0536ef625012f199dbb44c1e1078c5b262"
+      "git_blob_sha": "67ce963f871adcea8d51eefca9cab3ea6983a2c1"
     },
     {
       "path": "frontend/dev/mock-accounts.ts",
       "mode": "100644",
-      "git_blob_sha": "1a2c26e9353c72fb4c7477ca5d7845fc897441df"
+      "git_blob_sha": "150a74a47b33a8b974247b393bb4666a9739eeef"
     },
     {
       "path": "frontend/dev/mock-api.ts",
       "mode": "100644",
-      "git_blob_sha": "82001848ef340f899f93b548edc15470480465cb"
+      "git_blob_sha": "94761b637b0fd06fd21cb9be9c0530de4225c090"
     },
     {
       "path": "frontend/index.html",
@@ -819,17 +819,17 @@
     {
       "path": "frontend/src/AccountCharts.tsx",
       "mode": "100644",
-      "git_blob_sha": "6808125670a83329216bf5676a8cc09d5ef719ef"
+      "git_blob_sha": "8670cc71c8a7389ba95d6dfa77d74f1dd74b62d2"
     },
     {
       "path": "frontend/src/AccountPanel.tsx",
       "mode": "100644",
-      "git_blob_sha": "b0003e9b97e69e3ef84f3b00aba0286428435ead"
+      "git_blob_sha": "1fe5924ada48819f4c33e9fe77f107a40068035b"
     },
     {
       "path": "frontend/src/AssigneePicker.tsx",
       "mode": "100644",
-      "git_blob_sha": "1912c2f5d5fe0c3d75058db47a89da717a3b976e"
+      "git_blob_sha": "adeb867811d00f9a322d8be1f29666055cba867f"
     },
     {
       "path": "frontend/src/DeleteAccountDialog.tsx",
@@ -844,27 +844,27 @@
     {
       "path": "frontend/src/RemediationPanel.tsx",
       "mode": "100644",
-      "git_blob_sha": "55ddf0c3d611f90cbc67b741b8e058fdef25296d"
+      "git_blob_sha": "3e5e8892a6feeaa6162d736a1499692ed3d04396"
     },
     {
       "path": "frontend/src/ReviewPanel.tsx",
       "mode": "100644",
-      "git_blob_sha": "9ff68c256bda09dc0895fe2f74c54c055b382ebb"
+      "git_blob_sha": "4dae9353060607dedf196d5e4c0daaa5b307b7a0"
     },
     {
       "path": "frontend/src/accounts.ts",
       "mode": "100644",
-      "git_blob_sha": "721fffe8fde9fbf31137ec7f8063b9cd1b638865"
+      "git_blob_sha": "3b5a5258ea0918e514014e6c89f4875014aebeea"
     },
     {
       "path": "frontend/src/labels.ts",
       "mode": "100644",
-      "git_blob_sha": "a39a41a229d7ae44ae992672302d6c790bc45916"
+      "git_blob_sha": "47600dd6e07c986b4193549cd221adc77fa536b0"
     },
     {
       "path": "frontend/src/main.tsx",
       "mode": "100644",
-      "git_blob_sha": "ab3ff78500deed99bc4eba8bcd5d07976252c616"
+      "git_blob_sha": "4cad4e5edfaa7d70fffda785a434acb1c1e792f1"
     },
     {
       "path": "frontend/src/passkey-signals.ts",
@@ -924,7 +924,7 @@
     {
       "path": "portable/另机结果回传模板.md",
       "mode": "100644",
-      "git_blob_sha": "8c11287838c16de52e9e57a853e464242e6932d5"
+      "git_blob_sha": "17ac0a6926e79fb7450d2fe4aaada36c21244705"
     },
     {
       "path": "prepare-demo.ps1",
@@ -974,7 +974,7 @@
     {
       "path": "tools/build_midterm_current_report.py",
       "mode": "100644",
-      "git_blob_sha": "ef2d340103891be8018f1dc0e72db5cc7968f25d"
+      "git_blob_sha": "2054f14fc63ceeea78d0b7dc8a3ebe730b25dc57"
     },
     {
       "path": "tools/build_midterm_report.py",
@@ -994,7 +994,7 @@
     {
       "path": "tools/build_midterm_talk.py",
       "mode": "100644",
-      "git_blob_sha": "8ea769a3e6adfe2d43e7341cc924d8cd469a6e73"
+      "git_blob_sha": "d1c428ca413553551be4154c0ed34c98c4b78e33"
     },
     {
       "path": "tools/cleanup-verification-20261017.manifest.json",
@@ -1094,7 +1094,7 @@
     {
       "path": "tools/refresh_midterm_materials.py",
       "mode": "100644",
-      "git_blob_sha": "76d0accb2944c5b4d6a8219568a401df52a0b5fd"
+      "git_blob_sha": "093e39c2ba9b5503c0cb311c7980d734631d57e0"
     },
     {
       "path": "tools/requirements.txt",
@@ -1124,17 +1124,17 @@
     {
       "path": "中期汇报.pdf",
       "mode": "100644",
-      "git_blob_sha": "9994f3f8a5d27d3344b158b059d423b886a8af1b"
+      "git_blob_sha": "38e8b3dd9d0d428575f56d6a1813aaebf8e05f91"
     },
     {
       "path": "中期汇报.pptx",
       "mode": "100644",
-      "git_blob_sha": "daea31526ba437447c0797f782728ae7ef7e58a3"
+      "git_blob_sha": "298cff74a00cb2435bb76199d02399888cc0ae63"
     },
     {
       "path": "中期汇报网页版/index.html",
       "mode": "100644",
-      "git_blob_sha": "bfea41e15296cbf698406effda80ab178c768751"
+      "git_blob_sha": "0aec3f146eba47f8347f7fa288f04a494513678d"
     },
     {
       "path": "中期汇报网页版/证据原图/1018M-01-财务差异总览-模拟数据.png",
@@ -1179,12 +1179,12 @@
     {
       "path": "中期汇报讲稿.md",
       "mode": "100644",
-      "git_blob_sha": "8a3be92862ce0e15384925dfc9ad5eb51dfdff1a"
+      "git_blob_sha": "d1138ecf2f2a0894790ef954384feda11b419f10"
     },
     {
       "path": "中期项目报告.md",
       "mode": "100644",
-      "git_blob_sha": "327276d7ffbf4ca7afb80d5608a7ae38c73025aa"
+      "git_blob_sha": "a6edfba0af20a2ee90512e995b837a8ef51d295d"
     },
     {
       "path": "停止Demo.cmd",
@@ -1209,12 +1209,12 @@
     {
       "path": "四段式任务草稿-Claude账户管理UI优化交接.md",
       "mode": "100644",
-      "git_blob_sha": "a7c125a0d058a424214beda4902718ca203529ec"
+      "git_blob_sha": "4f886976ded9e4df49dada9a0d01d066eded6e55"
     },
     {
       "path": "四段式任务草稿-中期后合并.md",
       "mode": "100644",
-      "git_blob_sha": "b621d0b62f015b259f1ca4bcd73a0a46a9b59153"
+      "git_blob_sha": "9cf5378c190d1f9b40160cdb43a5c54942bd34e7"
     },
     {
       "path": "四段式任务草稿-前端设计优化交接.md",
@@ -1224,7 +1224,7 @@
     {
       "path": "四段式任务草稿.md",
       "mode": "100644",
-      "git_blob_sha": "51c50e8d28dc51417aa8f4af0db0d75cce8ac320"
+      "git_blob_sha": "6ab50d7c8ffffd038383a64776487b6964864564"
     },
     {
       "path": "四段式任务草稿补充-v1.2汇报调整.md",
@@ -1234,7 +1234,7 @@
     {
       "path": "大作业报告.docx",
       "mode": "100644",
-      "git_blob_sha": "87cf78cf0523143656ae368be1fde7f3a7611bb1"
+      "git_blob_sha": "9565190bf476aac0581c4a0b4b457678d1e357ec"
     },
     {
       "path": "实际运行结果.txt",
@@ -1244,12 +1244,12 @@
     {
       "path": "怎么做.md",
       "mode": "100644",
-      "git_blob_sha": "5c0f212d2d7e4bbcff002460ea2a0a724e98ed70"
+      "git_blob_sha": "871434c974ad2820e704777ee0220e36a9270275"
     },
     {
       "path": "怎么算做对.md",
       "mode": "100644",
-      "git_blob_sha": "c42a567858ef511aaccb5a7b1924494836b83b92"
+      "git_blob_sha": "df8c97f2d012ea46b10a378385838ddba7854244"
     },
     {
       "path": "执行交接说明.md",
@@ -1314,12 +1314,12 @@
     {
       "path": "每日工作记录/2026-10-15/10-15与10-16任务执行合并报告.md",
       "mode": "100644",
-      "git_blob_sha": "6d39f9c69127c49027f585c4cb202dabd0272199"
+      "git_blob_sha": "98bbe31d3a8a3f2d074485ccde12efa24a73cc6a"
     },
     {
       "path": "每日工作记录/2026-10-15/FR01-04复核记录.md",
       "mode": "100644",
-      "git_blob_sha": "9ea4f6119bcfd1ed83a87da886b410c7d0bcc645"
+      "git_blob_sha": "f64656920f8f466f192211e7d4e7de8b6d241e23"
     },
     {
       "path": "每日工作记录/2026-10-15/FR01-04复核输出校验.json",
@@ -1339,7 +1339,7 @@
     {
       "path": "每日工作记录/2026-10-15/FR12-16数量与状态独立审查.md",
       "mode": "100644",
-      "git_blob_sha": "d1f72054777df4e509668ba548c58c4525e8c26e"
+      "git_blob_sha": "4e8ede3e42643d78a7456f0b83869ea22dc5ccc7"
     },
     {
       "path": "每日工作记录/2026-10-15/FR12-18原始输出校验.json",
@@ -1349,7 +1349,7 @@
     {
       "path": "每日工作记录/2026-10-15/FR12-18执行记录.md",
       "mode": "100644",
-      "git_blob_sha": "9a7e013f8522688b4a4cd15b94c59b5c2ede1a09"
+      "git_blob_sha": "f1db84cd868f6de6503b0f06acd4d4c771803ab7"
     },
     {
       "path": "每日工作记录/2026-10-15/FR14-demo仓库重置.md",
@@ -3029,7 +3029,7 @@
     {
       "path": "每日工作记录/2026-10-15/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "940a58286c3e9ca8596f4f31d447de98f614f0dc"
+      "git_blob_sha": "c6bb36129fc812b517e81f477d467c072968eaba"
     },
     {
       "path": "每日工作记录/2026-10-15/执行记录.md",
@@ -3969,22 +3969,22 @@
     {
       "path": "每日工作记录/2026-10-17/FR07-FR14独立复审.md",
       "mode": "100644",
-      "git_blob_sha": "4f6cf079280cf00318fc62f942ef52649d7f7ea6"
+      "git_blob_sha": "e40b2f5a9c8e44f91d83a521c3931c6f002ecfd6"
     },
     {
       "path": "每日工作记录/2026-10-17/FR07交易检索后端性能专项.md",
       "mode": "100644",
-      "git_blob_sha": "1871b36444dadab3a6a4006dff82c2568427cdd0"
+      "git_blob_sha": "094e238e1eaeb590a5d8e3085462e64c6ba56c9a"
     },
     {
       "path": "每日工作记录/2026-10-17/FR07页面复核与部署.md",
       "mode": "100644",
-      "git_blob_sha": "d0446f9c7063c31d2899a0d7b031cf38a6271458"
+      "git_blob_sha": "35c30afad73d2aaa09f3cb6a1e3b6ebac400540c"
     },
     {
       "path": "每日工作记录/2026-10-17/FR17-18整合回归与静态检查.md",
       "mode": "100644",
-      "git_blob_sha": "1e793b7e300db4c9c2cebf0d1afdd3eead711958"
+      "git_blob_sha": "b9bd9e03f940c6a975a167fc1ec694fe1bdfefdd"
     },
     {
       "path": "每日工作记录/2026-10-17/FR17交易矩阵HTTP验证工具.md",
@@ -4984,7 +4984,7 @@
     {
       "path": "每日工作记录/2026-10-17/前端设计优化/Codex交接-差异原因与排版第二轮.md",
       "mode": "100644",
-      "git_blob_sha": "ea04bf18013f29bf62fbdaa174846da351d58672"
+      "git_blob_sha": "fc69dcedad8352452ce133cee929ee953ecaa24f"
     },
     {
       "path": "每日工作记录/2026-10-17/前端设计优化/Codex第二轮集成结果.md",
@@ -5654,12 +5654,12 @@
     {
       "path": "每日工作记录/2026-10-17/截图索引.md",
       "mode": "100644",
-      "git_blob_sha": "668a0ad65c6d65ebf0d215803c482d53f811a6e2"
+      "git_blob_sha": "b5b7f677bd6337e45bf15408ef00ad37daf9ac7e"
     },
     {
       "path": "每日工作记录/2026-10-17/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "bee447df82bf497c61025b6fd5a241ec356cb680"
+      "git_blob_sha": "78596a474338e4a52674f76291a84f1e7f0d325e"
     },
     {
       "path": "每日工作记录/2026-10-17/收工与后续待办.md",
@@ -5679,7 +5679,7 @@
     {
       "path": "每日工作记录/2026-10-17/进度跟进报告.md",
       "mode": "100644",
-      "git_blob_sha": "29323fc213bdf35ef4946a59d66f4a069157b57a"
+      "git_blob_sha": "8ba2619400b03ba7fcb4460caa4a5e0e08b85621"
     },
     {
       "path": "每日工作记录/2026-10-18/Passkey选择登录/Demo未设置账户.jpg",
@@ -5949,7 +5949,7 @@
     {
       "path": "每日工作记录/2026-10-18/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "7d5ea69442ef33156de1631e377773e131eeab7b"
+      "git_blob_sha": "8e7abd6d9b8338941e83292510629515bd6f9c52"
     },
     {
       "path": "每日工作记录/2026-10-18/批量处理优化/01-预览-模拟数据.png",
@@ -6054,7 +6054,7 @@
     {
       "path": "每日工作记录/2026-10-18/批量处理优化/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "3f72fb488ac43e7f9e143b9a01213d60628bfd52"
+      "git_blob_sha": "1d7bce682097352cd0f8573670a95c268b0cce8b"
     },
     {
       "path": "每日工作记录/2026-10-18/批量处理优化/批量工作台修订-已关闭隐藏与动画.md",
@@ -6099,7 +6099,7 @@
     {
       "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方全量隔离验证说明.md",
       "mode": "100644",
-      "git_blob_sha": "689bf60e39204fa0fb5aea8caa665973d04299d1"
+      "git_blob_sha": "04e9fcf54c16f5eea63f17d765bdd028a72f849b"
     },
     {
       "path": "每日工作记录/2026-10-18/批量复核实现/frontend-tests.tap.txt",
@@ -6169,7 +6169,7 @@
     {
       "path": "每日工作记录/2026-10-18/批量复核实现/实现与交接.md",
       "mode": "100644",
-      "git_blob_sha": "d225ba8cc2a1945d81029bb10f740d49fd4b7be6"
+      "git_blob_sha": "9f13fe2a2bcfc582a5a0605bac9d8980a9b6240d"
     },
     {
       "path": "每日工作记录/2026-10-18/批量复核实现/批量结果-模拟数据.png",
@@ -6394,7 +6394,7 @@
     {
       "path": "每日工作记录/2026-10-19/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "5dbbfbbbebcc01e68aa06741f2c5039079cab9bf"
+      "git_blob_sha": "da734318db7aa8daaef9e1ec8d94c6fc533e66bc"
     },
     {
       "path": "每日工作记录/2026-10-19/派单与国家选择器/runtime-update.json",
@@ -6419,7 +6419,7 @@
     {
       "path": "每日工作记录/2026-10-19/派单与国家选择器/实现与交接.md",
       "mode": "100644",
-      "git_blob_sha": "8c6d5ccb1e30bd14924ac9cd103b7eb5f09bc364"
+      "git_blob_sha": "f434d2ba71e9afa66da9a1813abfe753435ed790"
     },
     {
       "path": "每日工作记录/2026-10-19/派单与国家选择器/嵌入资源测试.txt",
@@ -6484,12 +6484,12 @@
     {
       "path": "每日工作记录/2026-10-19/账户管理UI优化/Claude交接.md",
       "mode": "100644",
-      "git_blob_sha": "9daffa497543a330df70ba28943dbcdc778b3f6b"
+      "git_blob_sha": "1ad758de6bc8cd6248bac01d916017c9a71672f5"
     },
     {
       "path": "每日工作记录/2026-10-19/账户管理UI优化/Codex集成结果.md",
       "mode": "100644",
-      "git_blob_sha": "81f5177ce6aaf1458057dfe6788fdfa18fe66c29"
+      "git_blob_sha": "6156d75fec8d16070fe39b5235d8bb523ed71759"
     },
     {
       "path": "每日工作记录/2026-10-19/账户管理UI优化/dev-typecheck.txt",
@@ -6589,7 +6589,7 @@
     {
       "path": "每日工作记录/2026-10-19/账户管理与国家权限/实现与交接.md",
       "mode": "100644",
-      "git_blob_sha": "4639a519250d844ebc936b763212352c14987c11"
+      "git_blob_sha": "0ea4112f149d99934ab4bd387962a7cdd426abaf"
     },
     {
       "path": "每日工作记录/2026-10-19/账户管理与国家权限/新账户首次配置-隔离验收.png",
@@ -6624,7 +6624,7 @@
     {
       "path": "每日工作记录/2026-10-19/进度跟进报告.md",
       "mode": "100644",
-      "git_blob_sha": "a7ac4440468a4c5cd0b919a16d865eef0a606701"
+      "git_blob_sha": "7c848fc44761a9427927bac6832bd88f7d37db0c"
     },
     {
       "path": "每日工作记录/2026-10-20/FR20差异补充与重算/回归结果.json",
@@ -6644,7 +6644,7 @@
     {
       "path": "每日工作记录/2026-10-20/FR20差异补充与重算/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "d92a555a9d29f0a10acc61763c046d8036ad885d"
+      "git_blob_sha": "b499a419dd52eacd4ce2007a44f19a92657eea0c"
     },
     {
       "path": "每日工作记录/2026-10-20/FR20差异补充与重算/本地程序更新.json",
@@ -6719,7 +6719,7 @@
     {
       "path": "每日工作记录/2026-10-20/FR20重算性能优化/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "7d6eb7461c351e158055baf0d962e26b842a24d9"
+      "git_blob_sha": "51b10e9d79ce2a8fcb233293ef61151410276c8c"
     },
     {
       "path": "每日工作记录/2026-10-20/FR20重算性能优化/本地程序更新.json",
@@ -6809,7 +6809,7 @@
     {
       "path": "每日工作记录/2026-10-23/FR21-Windows客户端/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "a5412c8538bd81a15dd3046083359dc9d968968b"
+      "git_blob_sha": "21914f560f2d25c0edb416a95aa09962c763c703"
     },
     {
       "path": "每日工作记录/2026-10-23/FR21-Windows客户端/验证汇总.json",
@@ -6869,7 +6869,7 @@
     {
       "path": "每日工作记录/2026-10-23/FR21-Windows客户端界面优化/Codex合并交接.md",
       "mode": "100644",
-      "git_blob_sha": "50826beb8ac1ba935577ece6a9dc25ec50604f8c"
+      "git_blob_sha": "97230737e597785af72e36dc18f2ed6c8504495b"
     },
     {
       "path": "每日工作记录/2026-10-23/FR21-Windows客户端界面优化/截图/HiDPI-发布版-清晰-物理像素.png",
@@ -6999,7 +6999,7 @@
     {
       "path": "每日工作记录/2026-10-23/FR21-Windows客户端界面优化/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "ab2e030b6b6a41ec2c0681a3147a168f670fd3c2"
+      "git_blob_sha": "5338463ca7e131554f6770e1a378421009e9dc9e"
     },
     {
       "path": "每日工作记录/2026-10-23/FR21-国家范围与弹窗居中/account-picker-1100.txt",
@@ -7364,7 +7364,7 @@
     {
       "path": "每日工作记录/2026-10-23/FR21-国家范围与弹窗居中/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "cdaea48cfc2962a400e8fe6a5cc6c8c37a88160d"
+      "git_blob_sha": "e43d4a6b1be806600bac641b290faa0bbe8ae9ff"
     },
     {
       "path": "每日工作记录/2026-10-23/FR21-国家范围与弹窗居中/验证汇总.json",
@@ -7614,7 +7614,7 @@
     {
       "path": "每日工作记录/2026-10-23/FR21-界面裁剪与账户选择/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "7716900650d2210b3ff7228723179fa302b3cda8"
+      "git_blob_sha": "13917c420e7acd4a706afe256e315d169f798262"
     },
     {
       "path": "每日工作记录/2026-10-23/FR21-界面裁剪与账户选择/验证汇总.json",
@@ -7624,12 +7624,402 @@
     {
       "path": "每日工作记录/2026-10-23/执行交接.md",
       "mode": "100644",
-      "git_blob_sha": "d74b5bf3082a7ce08836862da44a3456e99364b8"
+      "git_blob_sha": "f3def45b9b6b8373b83b60228c24b89cbed1c01e"
     },
     {
       "path": "每日工作记录/2026-10-23/进度跟进报告.md",
       "mode": "100644",
-      "git_blob_sha": "87855b622e6d5fa0c82947ea072cd65acb40f8d7"
+      "git_blob_sha": "177338a8426c03ee36ad69d3ee914b32bc46510b"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/PPT导出.txt",
+      "mode": "100644",
+      "git_blob_sha": "dd3c2b06ebcf43bb95924abc18d1a01a05461d20"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/PPT验证.json",
+      "mode": "100644",
+      "git_blob_sha": "93a7d2631606ee0db9ec330a6d966edc8cf68915"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/Windows发布清单.json",
+      "mode": "100644",
+      "git_blob_sha": "10501d1bff7146b583d37ced2cff1d013a321e6a"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/account-picker-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "7c659537d3e1e27f8aa946804a72025c142311c6"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/account-picker-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "caf4d4d7e9ed63065a7ebbc3090b1ab793faa587"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/account-tabs-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "b33d735b54e32278e348e5b46d839c4c41206970"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/account-tabs-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "8924b6c150d690ad915a3991c600bf85791f072e"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/batch-results-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "5ffc2805cf3e4ce7402f41d1c22445850be85225"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/batch-results-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "7902ea40a480a506d6ee6ab57d28aa4c3cf290f3"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/batch-scope-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "a675ed6b3a113d4eaaa504c5c28451838505ce6f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/batch-scope-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "0bdd279def2df120ebfdfdf7b59a14db49be2ad2"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/case-assignment-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "0ba3a9995fc49896be79dc531b4d3995de56401c"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/case-assignment-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "2479df5339f2dfebe5f5d0649450328b847e8b3b"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/client-tests.txt",
+      "mode": "100644",
+      "git_blob_sha": "8ee621b7460ddf8198eb273e68259800c4da9667"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/country-picker-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "f7f7fc24ef8ee49b3f803ecb444c1e6ebde322a8"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/country-picker-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "b45a282fff4d1ca566d74c6ea9a6b334194867e2"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/edit-account-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "59deb5f4deecd017de305fd5d4683ec3b705ea59"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/edit-account-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "67776d147393982f4ffabe603c47656c92902281"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/filters-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "ee9e272f5557106270937989285c4af0ca17586b"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/filters-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "a917d8f23ff0af52d4f8011a22732dbd60483b89"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/frontend-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "b851da69ed19fb7a4f463544ae20f200e7b32c5d"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/frontend-tests.txt",
+      "mode": "100644",
+      "git_blob_sha": "5e15446cc3c173b0eb4596cca81cf6e84a9adcce"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/go-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/go-stderr.txt",
+      "mode": "100644",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/go-tests.jsonl",
+      "mode": "100644",
+      "git_blob_sha": "35460353999d4c9490800875c2dad019bcf6c2ad"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/publish-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "d8d00d0c1132dbfb9043f10566dd8e631a20161e"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/requests-1100.txt",
+      "mode": "100644",
+      "git_blob_sha": "362f1d78cb8ef72b6d7a9224c33039373770fc02"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/requests-640.txt",
+      "mode": "100644",
+      "git_blob_sha": "75deb82994fe4c346b7e3ac3c9ecabe9652f4c75"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/ui-build.txt",
+      "mode": "100644",
+      "git_blob_sha": "061fed5061dd60f6f46e96e9d4c095acfb0e459d"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "4bf5d81145220840da075fc74a784a1045684e41"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "6d600f3ecb63070ad7b4255a87701d90a987c1ef"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "269f82ed5c058fc46c53a0071a03533f9781948c"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-picker-640.png",
+      "mode": "100644",
+      "git_blob_sha": "5ba57964183f4510c3c7a44495d3cb543b10d43d"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-tabs-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "84a77e46bdc7adfc9c67fdd7f8ee6d0ea1288eaa"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/account-tabs-640.png",
+      "mode": "100644",
+      "git_blob_sha": "bbe0681135ca630619262caf961834d31bcceb90"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "f01e920bc13bde566bac306ca0b6d17c85c25076"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "bc2664863f826b055745fb6be2d86b009f6ee508"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "40b714b7c1c63aa33ff5c590a4a648220cdc67b9"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-results-640.png",
+      "mode": "100644",
+      "git_blob_sha": "1e107c648d3f67634273530b9900b4737cf67687"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "5159031f5917910baa49aa0815982a3ee806b670"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "e699ef797d392f2d2ed11469d159e69416c808d1"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "8a7e9011deec2ff7679ca7175ded5748d340f98e"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/batch-scope-640.png",
+      "mode": "100644",
+      "git_blob_sha": "50e72ae8a79a76ad3fd00a5fd3b6bc6cffc176bc"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "834842cdd0406a97d325833552fe2fc654b09473"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "6d22cf6c8b7e743a1e58a44d1cb23dd5fceebb54"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "6cf50dd445149e0414db07c32a5407f70ca0b877"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/case-assignment-640.png",
+      "mode": "100644",
+      "git_blob_sha": "c1bf80ee707f80a42ce5be9ac55d7b4b5fd52e19"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "e189c54f557e65440098df0382c8165a9377f25d"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "5056395592bc6a663608c6a2f5b25e37d2462fc7"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "8172caf5605e2ba353c6d23049e0636775863ac8"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/country-picker-640.png",
+      "mode": "100644",
+      "git_blob_sha": "fcdf6521ce737f035215e09447307d01afa0a424"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-1100-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "04940dabf5e4079f3678914800b7c6a50152b9e8"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-1100-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "6debed14f3c4cbc014d562c5b0d1579e4cf671e5"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "e38c6a6b35b4b6143511e8fadc268ca28adb21e9"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-640-popup1.png",
+      "mode": "100644",
+      "git_blob_sha": "a1fdc5cb415c2aa5a098676a80a504471381b8c4"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-640-popup2.png",
+      "mode": "100644",
+      "git_blob_sha": "bbbdf20d51ff39a79eb04d90c9fcf6509164106f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/edit-account-640.png",
+      "mode": "100644",
+      "git_blob_sha": "536cd3f595e7f83f063a02ce78eb17909bb9ae1b"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/filters-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "125e19fe97ee434fcd02f9ca92e62a4de19e0062"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/filters-640.png",
+      "mode": "100644",
+      "git_blob_sha": "b66e4365b8ad0f2e44bf0acf1506b063d3797332"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/requests-1100.png",
+      "mode": "100644",
+      "git_blob_sha": "1a7be5876e0aba9fc18412c92fffb40dc06b91ac"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/截图/requests-640.png",
+      "mode": "100644",
+      "git_blob_sha": "62122fe2577b0acef3ebf0a7e68b684fb0f3333e"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/执行交接.md",
+      "mode": "100644",
+      "git_blob_sha": "4c8cfeba16189b7061e3897624d493d160f65d53"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/报告渲染.txt",
+      "mode": "100644",
+      "git_blob_sha": "f9f4b832f5c66e37894ef9cc5ce8495b05873238"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/术语替换范围.json",
+      "mode": "100644",
+      "git_blob_sha": "7210d5d5abf6bee822714c012c21d6ac9e968d1b"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/资料核对.json",
+      "mode": "100644",
+      "git_blob_sha": "e6da4a996a3c0906200626e1bc6cf5f675f9c15f"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/FR21-国家地区与官方选项卡/验证汇总.json",
+      "mode": "100644",
+      "git_blob_sha": "3804e5ab103ca380e971f85e369aec49fc203e5d"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/执行交接.md",
+      "mode": "100644",
+      "git_blob_sha": "2e2d40b5fe5290505247e072a3eae643028b7d24"
+    },
+    {
+      "path": "每日工作记录/2026-10-25/进度跟进报告.md",
+      "mode": "100644",
+      "git_blob_sha": "48654ecd38cc925cb0874ca5f91fae570378adaa"
     },
     {
       "path": "测试Demo.cmd",
@@ -7639,12 +8029,12 @@
     {
       "path": "测试记录.md",
       "mode": "100644",
-      "git_blob_sha": "c03421bc8f6fbc567b4d1b3bfa4c506bd6d47ae8"
+      "git_blob_sha": "8e41de3cf2fde7113d922879a1e25682f3eb29bd"
     },
     {
       "path": "要做什么.md",
       "mode": "100644",
-      "git_blob_sha": "b7f7a57a2ec9af0a74a01e57156c61f757eecb65"
+      "git_blob_sha": "f1a9bb2a704daba8bb2c00ef9d2df076c62691e3"
     },
     {
       "path": "规划校验记录.md",
@@ -7734,7 +8124,7 @@
     {
       "path": "资料/计划历史/四段式任务草稿-合并前-20261016.md",
       "mode": "100644",
-      "git_blob_sha": "1d11bc5d853471a697d6434f4bf6b3a9fb11f73d"
+      "git_blob_sha": "8adb5813b7359094961f5243b41f0c919f9dfe65"
     },
     {
       "path": "资料/认证方案依据.md",
@@ -7744,12 +8134,12 @@
     {
       "path": "软件验收清单.md",
       "mode": "100644",
-      "git_blob_sha": "63c580d14a019c9a9080102477ad723657f9aff0"
+      "git_blob_sha": "f983315236bc10ab8bab1f00f7cfac5c0fad0599"
     },
     {
       "path": "运行说明.md",
       "mode": "100644",
-      "git_blob_sha": "028f2a71b9e95cc7fcd1b3832c0e1c71b2d9ef8c"
+      "git_blob_sha": "e8f33a78aeed162c871dc5e3ed886ccd8d759f82"
     },
     {
       "path": "选题自查表.md",
@@ -7913,36 +8303,43 @@
     "base_bundle_sha256": "be6c6c160f560779559bdd5d8a952924581ce5cb39ea028a07bc1fe6c3a40d8a",
     "base_bundle_restore_and_fsck": "passed",
     "increment_path": "_备份/中期完整包-20261018/原生历史增量.bundle",
-    "increment_bytes": 19184452,
-    "increment_sha256": "544b63966bde20525b7f33ffe0a3367f24a312887375fe5612a973d4c46d4279",
+    "increment_bytes": 28940330,
+    "increment_sha256": "2c50910b649574cf5f057a16f06d598dc0e319470e8e181778b610616e31e526",
     "increment_parts": [
       {
         "path": "_备份/中期完整包-20261018/原生历史增量.bundle.part001",
         "filename": "原生历史增量.bundle.part001",
         "bytes": 6291456,
-        "sha256": "b3b37c6b6599d8da24bcfcaf2a80d75103a8a72c86bdf5745a868daf88af6606",
-        "git_blob_sha": "894a70e6421cdc0956e1cc8c9185ff4d98b695d3"
+        "sha256": "3364b7ad55028087d6a3a43520d54ba7f4363d137e49bd0abf2f0d2cdaa39921",
+        "git_blob_sha": "ec06f20f074fc2708e3f5e6ec4547a26d07808ff"
       },
       {
         "path": "_备份/中期完整包-20261018/原生历史增量.bundle.part002",
         "filename": "原生历史增量.bundle.part002",
         "bytes": 6291456,
-        "sha256": "82f61f752b7f27fb66d0d8532fb5f0465ab1d67ba3fc7d966169c9d664ee9232",
-        "git_blob_sha": "6149abb43a284905c722a147fa5279d0218e4eda"
+        "sha256": "f0caefe927d003f50f0d52cabef0538470989457b852d9f4c77a1b9e6cc109b7",
+        "git_blob_sha": "ed5c6d0acea05bfd8d342b09baa9cca6fb4df73e"
       },
       {
         "path": "_备份/中期完整包-20261018/原生历史增量.bundle.part003",
         "filename": "原生历史增量.bundle.part003",
         "bytes": 6291456,
-        "sha256": "e5779a74f5337993fafaecfb18a4094cbe4f4046d7dce64213e428cefd9f5c32",
-        "git_blob_sha": "2f456220bb34a85254786605992026a3ab7e6aff"
+        "sha256": "e9d19fb7a6c65fad3b43ee3772c9ee364360f75797b5f58e322177675f28eb46",
+        "git_blob_sha": "d52d0e758d58b09932836e5d1b7236eb4d92d114"
       },
       {
         "path": "_备份/中期完整包-20261018/原生历史增量.bundle.part004",
         "filename": "原生历史增量.bundle.part004",
-        "bytes": 310084,
-        "sha256": "dd18051dd1de2e997771116172c335460fda79bf419d3aa2eb817d757a546d65",
-        "git_blob_sha": "ecb30d17d656c6e45b63855141a992b948a88feb"
+        "bytes": 6291456,
+        "sha256": "9b971794f1e43460f7eab5998bb96fcc2c2bf2886c3f62c6b56c42fe968190a8",
+        "git_blob_sha": "bf9c1b708a923f0dbe2680a09bed27cb7149ecd3"
+      },
+      {
+        "path": "_备份/中期完整包-20261018/原生历史增量.bundle.part005",
+        "filename": "原生历史增量.bundle.part005",
+        "bytes": 3774506,
+        "sha256": "c07314d43cce64de57f3b345f0cb0357d76b4e540652941b0d81413df78a3346",
+        "git_blob_sha": "ac9236d0adb2a2b1fa30e40ee7881941fa4a69cf"
       }
     ],
     "increment_verify": "passed",

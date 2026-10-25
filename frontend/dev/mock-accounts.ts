@@ -31,7 +31,7 @@ function seedRequests():Request[]{const base={reviewed_by:'',reviewed_at:'',reje
  {...base,id:'mock-req-4',requester:'finance',account_id:'warehouse-nordic',display_name:'北欧联合仓',...sel('Denmark','Sweden','Norway','Finland','Iceland'),reason:'',status:'pending',created_at:ago(20)},
  {...base,id:'mock-req-3',requester:'finance-uk',account_id:'warehouse-fr-paris',display_name:'巴黎退货仓',...sel('France'),reason:'法国差异目前全部派给英国仓库，跨国核查需要额外沟通。\n申请一个法国本地仓库账户，专门处理France范围内的取消记录。',status:'pending',created_at:ago(30)},
  {...base,id:'mock-req-2',requester:'finance',account_id:'warehouse-sg',display_name:'warehouse-sg',...sel('Singapore'),reason:'新加坡样例数据核查。',status:'approved',created_at:ago(100),reviewed_by:'admin',reviewed_at:ago(96)},
- {...base,id:'mock-req-1',requester:'finance-uk',account_id:'warehouse-uk-temp',display_name:'英国临时仓',...sel('United Kingdom'),reason:'临时使用。',status:'rejected',created_at:ago(200),reviewed_by:'admin',reviewed_at:ago(190),rejection_reason:'临时账户请改用现有英国仓库，避免同一国家重复派单。'},
+ {...base,id:'mock-req-1',requester:'finance-uk',account_id:'warehouse-uk-temp',display_name:'英国临时仓',...sel('United Kingdom'),reason:'临时使用。',status:'rejected',created_at:ago(200),reviewed_by:'admin',reviewed_at:ago(190),rejection_reason:'临时账户请改用现有英国仓库，避免同一国家/地区重复派单。'},
 ]}
 function seedAudit(list:Account[],reqs:Request[]):Audit[]{
  const out:Audit[]=[];let id=0;const push=(hours:number,actor:string,action:string,target:string,after:unknown,before:unknown=null,request='')=>out.push({id:++id,actor,action,target,request_id:request,before,after,occurred_at:ago(hours)});
@@ -75,9 +75,9 @@ function validate(input:any,reply:Reply):Profile|null{
  if(p.role!=='finance'&&p.role!=='warehouse'){invalid(reply,'只能创建财务或仓库账户');return null}
  if(!p.display_name||[...p.display_name].length>64){invalid(reply,'显示名称须为1至64个字符且不含控制字符');return null}
  if(!p.country_scope)p.country_scope=p.countries.length?'selected':'all';
- if(p.country_scope==='all'){if(p.countries.length){invalid(reply,'全部国家范围不能同时指定国家');return null}return p}
- if(p.country_scope!=='selected'||!p.countries.length){invalid(reply,'请选择至少一个负责国家，或选择全部国家');return null}
- if(p.countries.some(c=>!allCountryNames.includes(c))){invalid(reply,'请选择已发布数据中的国家；尚未导入数据时可先使用全部国家');return null}
+ if(p.country_scope==='all'){if(p.countries.length){invalid(reply,'全部国家/地区范围不能同时指定国家/地区');return null}return p}
+ if(p.country_scope!=='selected'||!p.countries.length){invalid(reply,'请选择至少一个负责国家/地区，或选择全部国家/地区');return null}
+ if(p.countries.some(c=>!allCountryNames.includes(c))){invalid(reply,'请选择已发布数据中的国家/地区；尚未导入数据时可先使用全部国家/地区');return null}
  return p;
 }
 function available(id:string,except='',reply:Reply){if(accounts.some(a=>a.id===id)||requests.some(r=>r.account_id===id&&r.status==='pending'&&r.id!==except)){conflict(reply,'该账户名已存在或已有待审批申请');return false}return true}
@@ -118,7 +118,7 @@ export function handleAccounts(api:string,method:string,body:any,session:Profile
    if(body.id&&body.id!==old.id||body.role&&body.role!==old.role){invalid(reply,'不能修改登录账户名或角色');return true}
    const p=validate({...body,id:old.id,role:old.role},reply);if(!p)return true;
    const changed=old.country_scope!==p.country_scope||old.countries.join()!==p.countries.join();
-   if(changed&&!isAll(p)&&openCases(old.id).some(c=>!p.countries.includes(c))){conflict(reply,'仍有新国家范围之外的未结案派单，请先完成这些工作');return true}
+   if(changed&&!isAll(p)&&openCases(old.id).some(c=>!p.countries.includes(c))){conflict(reply,'仍有新国家/地区范围之外的未结案派单，请先完成这些工作');return true}
    const before=view(old);Object.assign(old,{display_name:p.display_name,country_scope:p.country_scope,countries:p.countries,permissions_version:old.permissions_version+(changed?1:0)});
    record(session.id,'update',old.id,before,view(old));reply(200,view(old));return true
   }
@@ -144,7 +144,7 @@ export function handleAccounts(api:string,method:string,body:any,session:Profile
   const before={...r};
   if(review[2]==='approve'){
    const p=validate({id:r.account_id,role:'warehouse',display_name:r.display_name,country_scope:r.country_scope,countries:r.countries},reply);if(!p)return true;
-   const owner=accountProfile(r.requester);if(!owner||owner.role!=='finance'||!contains(owner,p)){conflict(reply,'申请人当前国家权限已不再覆盖申请范围，请驳回后重新申请');return true}
+   const owner=accountProfile(r.requester);if(!owner||owner.role!=='finance'||!contains(owner,p)){conflict(reply,'申请人当前国家/地区权限已不再覆盖申请范围，请驳回后重新申请');return true}
    if(!available(p.id,r.id,reply))return true;
    accounts.push({...p,state:'new'});r.status='approved';
   }else{

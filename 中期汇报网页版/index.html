@@ -425,7 +425,7 @@ aside.notes{display:none}
   <div class="head"><h2>四、关键规则与决定</h2><div class="no"><b>04</b>四条改变结果的规则</div></div>
   <div class="main cols" style="grid-template-columns:1fr 455px;gap:40px;padding-top:24px">
     <div class="rules tight">
-      <div class="rule reveal"><div class="id">R-02<small>合格候选</small></div><p>客户、商品、精确单价、国家一致；销售<b>严格早于</b>取消；剩余量 ≥ 取消量。缺客户或国家不自动配对。</p></div>
+      <div class="rule reveal"><div class="id">R-02<small>合格候选</small></div><p>客户、商品、精确单价、国家/地区一致；销售<b>严格早于</b>取消；剩余量 ≥ 取消量。缺客户或国家/地区不自动配对。</p></div>
       <div class="rule reveal"><div class="id">FR-06<small>唯一才自动</small></div><p>首轮只有<b>唯一</b>合格候选才自动配对，部分退货扣余量；多候选不因数量相等或时间先后挑一个。</p></div>
       <div class="rule reveal"><div class="id">R-04<small>顺序状态</small></div><p>待处理 → 处理中 → 已关闭；关闭必须写<b>非空结论</b>，已关闭只读。</p></div>
       <div class="rule reveal new"><div class="id">复核建议<small>review-1.0.0</small></div><p>重复归组、整单、最近一笔只是<b>建议</b>，人工复核后才生效；重复组只计一次余量，冲突整组跳过，不改首轮结果。</p></div>
@@ -443,7 +443,7 @@ aside.notes{display:none}
   </div>
   <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md R-02、R-03、R-04、R-07、FR-06、NR-04 及 10-18 批量复核扩展；决定记录.md；TC-10/12/15/21/24、49–53；界面图 10-18 模拟/04；0:1378 实拍 v12中期复核/03</span><span class="pg">04 / 09</span></div>
   <aside class="notes">
-    <p>四条规则。R-02：客户、商品、单价、国家一致，销售严格在先、余量够，才算候选。FR-06：首轮只有<strong>唯一候选</strong>才自动配；右图三条合格候选并排对比，系统不挑，留给人看。R-04：状态按序，关闭要写结论。新加的复核建议，比如整单、最近一笔，<strong>只是建议，人确认后才生效</strong>。因为没有原单号，配错代价更大。</p>
+    <p>四条规则。R-02：客户、商品、单价、国家/地区一致，销售严格在先、余量够，才算候选。FR-06：首轮只有<strong>唯一候选</strong>才自动配；右图三条合格候选并排对比，系统不挑，留给人看。R-04：状态按序，关闭要写结论。新加的复核建议，比如整单、最近一笔，<strong>只是建议，人确认后才生效</strong>。因为没有原单号，配错代价更大。</p>
     <p class="hint">R-03：一条取消最多分给一条销售，累计不超原量（TC-13/14）。year1 首轮覆盖率 5,214 / 10,205 ≈ 51.09%。覆盖率只说明多少取消被自动配上，没有真值，不能叫准确率。复核建议：原始八字段完全相同的销售归一组、最早源行为代表、源行不删，组容量只算一次；最近时间并列不预选；整单和共享余量组件原子提交（TC-49–53）。0:1378 在 all 范围，10-16 只查看，未做人工确认。</p>
   </aside>
 </section>
@@ -598,15 +598,15 @@ aside.notes{display:none}
   <div class="head"><h2>九、剩余工作与计划</h2><div class="no"><b>09</b>中期后 · 10-23 至 11-06</div></div>
   <div class="main rows" style="gap:30px">
     <ul class="lines sm" style="gap:12px">
-      <li class="reveal"><b>功能</b>：完善多财务与多仓库账户、国家分工及申请审批；增加差异资料核实、销售凭证补录、补充后重算与关联问题流转。</li>
-      <li class="reveal"><b>安全</b>：国家范围贯穿查询与派单；删除账户保留已结案历史；批准 Passkey 域名并兼容旧入口与凭据。</li>
-      <li class="reveal"><b>体验</b>：优化人员搜索、国家选择和配置进度；缩短补充重算至页面刷新的等待；退货与销售时间可直接选择。</li>
+      <li class="reveal"><b>功能</b>：完善多财务与多仓库账户、国家/地区分工及申请审批；增加差异资料核实、销售凭证补录、补充后重算与关联问题流转。</li>
+      <li class="reveal"><b>安全</b>：国家/地区范围贯穿查询与派单；删除账户保留已结案历史；批准 Passkey 域名并兼容旧入口与凭据。</li>
+      <li class="reveal"><b>体验</b>：优化人员搜索、国家/地区选择和配置进度；缩短补充重算至页面刷新的等待；退货与销售时间可直接选择。</li>
     </ul>
     <div style="display:flex;flex-direction:column;gap:30px">
       <div class="tl reveal">
         <div><b>10-23</b><p>多账户管理：财务/仓库开户、名称与概况</p></div>
-        <div><b>10-25</b><p>国家分工：范围隔离、仓库申请与审批</p></div>
-        <div><b>10-27</b><p>管理交互：人员搜索、国家筛选、配置进度</p></div>
+        <div><b>10-25</b><p>国家/地区分工：范围隔离、仓库申请与审批</p></div>
+        <div><b>10-27</b><p>管理交互：人员搜索、国家/地区筛选、配置进度</p></div>
         <div><b>10-29</b><p>账户安全：删除与退回派单、域名兼容</p></div>
         <div><b>11-01</b><p>差异补充：资料核实、补录与问题流转</p></div>
         <div><b>11-03</b><p>重算提速：稀疏覆盖与查询优化</p></div>
@@ -614,10 +614,10 @@ aside.notes{display:none}
       </div>
     </div>
   </div>
-  <div class="foot"><span class="ev">证据</span><span class="src">后续改进方案：FR-19 多账户/国家权限与账户安全；FR-20 差异补充、重算提速与时间选择。日期为计划节点。</span><span class="pg">09 / 09</span></div>
+  <div class="foot"><span class="ev">证据</span><span class="src">后续改进方案：FR-19 多账户/国家/地区权限与账户安全；FR-20 差异补充、重算提速与时间选择。日期为计划节点。</span><span class="pg">09 / 09</span></div>
   <aside class="notes">
-    <p>10 月 23 日至 11 月 6 日，计划先完善多账户、国家分工和仓库申请审批，再改进人员选择、申请进度及账户安全；之后补齐差异资料核实、补充重算和新问题流转，优化重算后的页面刷新，最后完善退货和销售时间选择及精度校验。原始数据、已配对历史、权限和审计规则保持。</p>
-    <p class="hint">七个节点依次覆盖账户管理、国家分工、管理交互、账户安全、差异补充、重算提速和时间选择。批准域名后仍需配置实际 DNS、TLS 与代理；不同域名的 Passkey 分别绑定，旧入口继续兼容。</p>
+    <p>10 月 23 日至 11 月 6 日，计划先完善多账户、国家/地区分工和仓库申请审批，再改进人员选择、申请进度及账户安全；之后补齐差异资料核实、补充重算和新问题流转，优化重算后的页面刷新，最后完善退货和销售时间选择及精度校验。原始数据、已配对历史、权限和审计规则保持。</p>
+    <p class="hint">七个节点依次覆盖账户管理、国家/地区分工、管理交互、账户安全、差异补充、重算提速和时间选择。批准域名后仍需配置实际 DNS、TLS 与代理；不同域名的 Passkey 分别绑定，旧入口继续兼容。</p>
   </aside>
 </section>
 

@@ -93,7 +93,7 @@ async function handle(req:IncomingMessage,res:ServerResponse,next:Connect.NextFu
   const v=viewOf(req),s=sessionFor(v,cookie(req,'mock_setup')||'admin'),api=p.slice(4),body=req.method==='POST'||req.method==='PATCH'||req.method==='PUT'?await readBody(req):{};
   const flags=flagsOf(req),accountRoute=/^\/(countries|users|admin\/|warehouse-requests)/.test(api);
   await new Promise(r=>setTimeout(r,(accountRoute&&flags.slow)||120+Math.random()*180));
-  if(accountRoute){const key=req.method!=='GET'?'write':api.startsWith('/admin/account-audit')?'audit':api.startsWith('/admin/accounts')?'accounts':api.startsWith('/warehouse-requests')?'requests':api.slice(1);if(flags.fail.has(key))return send(res,503,{code:'mock_failure',message:`模拟故障：${({write:'保存',audit:'操作记录',accounts:'账户列表',requests:'申请列表',countries:'国家列表',users:'责任人列表'} as Record<string,string>)[key]||key}暂时不可用（仅开发预览）`})}
+  if(accountRoute){const key=req.method!=='GET'?'write':api.startsWith('/admin/account-audit')?'audit':api.startsWith('/admin/accounts')?'accounts':api.startsWith('/warehouse-requests')?'requests':api.slice(1);if(flags.fail.has(key))return send(res,503,{code:'mock_failure',message:`模拟故障：${({write:'保存',audit:'操作记录',accounts:'账户列表',requests:'申请列表',countries:'国家/地区列表',users:'责任人列表'} as Record<string,string>)[key]||key}暂时不可用（仅开发预览）`})}
   if(api==='/health')return send(res,200,{application:'returns-recon',runtime_id:'mock-preview'});
   if(api==='/auth/me')return s?send(res,200,s):send(res,401,{code:'unauthenticated',message:'未登录'});
   if(api==='/auth/setup/accounts')return send(res,200,v==='setup'?setupAccounts():[]);

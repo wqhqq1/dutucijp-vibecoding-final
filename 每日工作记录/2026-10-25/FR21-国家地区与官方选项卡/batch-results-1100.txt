@@ -1,0 +1,5 @@
+Isolated synthetic UI host. Not official data or a real authentication device test.
+PASS x64 MakeCredential/GetAssertion layout, cancellation offset and SDK option versions.
+Loaded batch-results; 
+Dialog center offset=(0.000,0.250); bounds=(103.500,148.500,880.000,516.500); viewport=1087.000x813.000
+PASS responsive panel bounds and pending/setup counts; logical width 1087

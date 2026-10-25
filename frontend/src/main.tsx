@@ -42,7 +42,7 @@ function useResource<T>(key:string,load:(signal:AbortSignal)=>Promise<T>):Resour
 function CandidateComparison({rows,confirmation,canConfirm,disabled,onChoose}:{rows:Row[];confirmation?:Confirmation;canConfirm:boolean;disabled:boolean;onChoose:(row:Row)=>void}){
  const selectedID=confirmation?.allocation.sale_id;
  const compared=confirmation?[confirmation.sale,...rows.filter(x=>x.id!==selectedID)]:rows;
- const fields:[keyof Row,string][]=[['invoice','单号'],['time','销售时间'],['customer','客户'],['stock','商品'],['price','单价'],['country','国家'],['quantity','数量'],['current_remaining','当前余量']];
+ const fields:[keyof Row,string][]=[['invoice','单号'],['time','销售时间'],['customer','客户'],['stock','商品'],['price','单价'],['country','国家/地区'],['quantity','数量'],['current_remaining','当前余量']];
  const differs=(key:keyof Row)=>new Set(compared.map(x=>String(x[key]??''))).size>1;
  const value=(row:Row,key:keyof Row)=>key==='time'?row.time?.replace('T',' ').replace(/\.0+$/,''):key==='current_remaining'&&row.duplicate_group?<>{row.current_remaining}<small>重复组余量 {row.duplicate_group.remaining}／容量 {row.duplicate_group.original}</small></>:String(row[key]??'—');
  const selection=(row:Row)=>row.id===selectedID?<span className="confirmation-label">已确认</span>:<button className="secondary" disabled={disabled||!!confirmation||!canConfirm} title={confirmation?'本取消行已确认销售，不能再选择其他候选':!canConfirm?'仅当前责任人在处理中可确认候选':undefined} onClick={()=>onChoose(row)}>{confirmation?'不可再选':canConfirm?'确认候选':'暂不可选'}</button>;
@@ -134,12 +134,12 @@ function App(){
  const generated=()=>{const bytes=crypto.getRandomValues(new Uint8Array(16));const value=base64(bytes.buffer);setPassword(value);setPasswordAgain(value);setShowPassword(true)};
  const logout=()=>action(async()=>{await api('/auth/logout',{});try{if(jobStorageKey)sessionStorage.removeItem(jobStorageKey)}catch{}resetWorkspace();csrf='';setSession(null);setCodes([]);setSaved(false);setEnrollment(null);setPassword('');setPasswordAgain('');setOTP('');setRecoveryCode('');setID('');setRecover(false);setShowPassword(false);setExistingLogin(false);setSetupRevision(n=>n+1)});
  const tabTitles:Record<string,string>={cases:'差异处理',transactions:'交易检索',allocations:'配对明细',jobs:'数据任务',security:'账户安全',accounts:'账户管理',requests:'仓库申请'};
- const tabHints:Record<string,string>={cases:'按差异原因核实补充，重算后完成配对或流转新问题。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。',accounts:'创建财务与仓库账户，设置负责国家并审批仓库申请。',requests:'申请负责国家内的仓库账户，查看管理员审批结果。'};
+ const tabHints:Record<string,string>={cases:'按差异原因核实补充，重算后完成配对或流转新问题。',transactions:'在当前运行中按条件检索原始交易，排序和分页由服务端执行。',allocations:'查看取消与销售之间已保存的数量分配。',jobs:'准备官方数据并运行对账，完成后发布为新运行。',security:'管理密码、Passkey、认证器与恢复码。',accounts:'创建财务与仓库账户，设置负责国家/地区并审批仓库申请。',requests:'申请负责国家/地区内的仓库账户，查看管理员审批结果。'};
  const navItems:[string,string][]=[['cases','差异处理'],['transactions','交易检索'],['allocations','配对明细'],...(canManageJobs?[['jobs','数据任务'] as [string,string]]:[]),...(session?.role==='admin'?[['accounts','账户管理'] as [string,string]]:session?.role==='finance'?[['requests','仓库申请'] as [string,string]]:[]),['security','账户安全']];
  const pageCount=Math.max(1,Math.ceil(data.total/50));
  const appliedCount=Object.entries(applied).filter(([k,v])=>v&&!['sort','direction'].includes(k)).length;
  const draftChanged=JSON.stringify(filters)!==JSON.stringify(applied);
- const columns:[string,string][]=tab==='cases'?[['源记录',''],['差异原因',''],['责任人',''],['状态',''],['版本','num'],['操作','act']]:tab==='transactions'?[['源记录',''],['单号',''],['交易时间',''],['客户',''],['商品',''],['数量','num'],['单价','num'],['国家','']]:[['取消源记录',''],['销售源记录',''],['数量','num'],['精确金额','num'],['方式',''],['操作人','']];
+ const columns:[string,string][]=tab==='cases'?[['源记录',''],['差异原因',''],['责任人',''],['状态',''],['版本','num'],['操作','act']]:tab==='transactions'?[['源记录',''],['单号',''],['交易时间',''],['客户',''],['商品',''],['数量','num'],['单价','num'],['国家/地区','']]:[['取消源记录',''],['销售源记录',''],['数量','num'],['精确金额','num'],['方式',''],['操作人','']];
  const caseCounts=overview?.cases;
  const caseShare=caseCounts&&caseCounts.total>0?[['pending',caseCounts.pending],['in_progress',caseCounts.in_progress],['closed',caseCounts.closed]].reduce<{key:string;x:number;w:number}[]>((acc,[key,value])=>{const x=acc.length?acc[acc.length-1].x+acc[acc.length-1].w:0;acc.push({key:String(key),x,w:Number(value)/caseCounts.total*100});return acc},[]):[];
  const count=(v:unknown)=>typeof v==='number'?v.toLocaleString('zh-CN'):String(v??'—');
@@ -252,18 +252,18 @@ function App(){
    <form className="filters" onSubmit={e=>{e.preventDefault();setApplied({...filters});setPage(1);setQueryRevision(n=>n+1)}}>
     <div className="filter-grid">
      {[['customer','客户编号'],['stock','商品编码'],['invoice','交易单号']].map(([k,v])=><label key={k}>{v}<input value={filters[k as keyof typeof filters]} onChange={e=>setFilters({...filters,[k]:e.target.value})}/></label>)}
-     <label>国家<select value={filters.country} onChange={e=>setFilters({...filters,country:e.target.value})} disabled={countriesResource.loading||!!countriesResource.error}><option value="">全部国家（本人范围内）</option>{filters.country&&!countriesResource.value?.includes(filters.country)&&<option value={filters.country}>{filters.country}</option>}{(countriesResource.value||[]).map(country=><option key={country} value={country}>{country}</option>)}</select>{countriesResource.loading&&<small role="status">正在读取国家…</small>}</label>
+     <label>国家/地区<select value={filters.country} onChange={e=>setFilters({...filters,country:e.target.value})} disabled={countriesResource.loading||!!countriesResource.error}><option value="">全部国家/地区（本人范围内）</option>{filters.country&&!countriesResource.value?.includes(filters.country)&&<option value={filters.country}>{filters.country}</option>}{(countriesResource.value||[]).map(country=><option key={country} value={country}>{country}</option>)}</select>{countriesResource.loading&&<small role="status">正在读取国家/地区…</small>}</label>
      <label>状态<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}><option value="">全部</option>{['pending','in_progress','closed'].map(x=><option key={x} value={x}>{labels[x]}</option>)}</select></label>
      <label>补充进度<select value={filters.waiting} onChange={e=>setFilters({...filters,waiting:e.target.value})}><option value="">全部进度</option><option value="1">待补充</option><option value="0">其他进度</option></select></label>
      <label className="wide">差异原因<select value={filters.reason} onChange={e=>setFilters({...filters,reason:e.target.value})}><option value="">全部原因</option>{Object.entries(reasons).map(([k,[v]])=><option key={k} value={k}>{v}</option>)}</select></label>
      <label>起始日期<input type="date" value={filters.date_from} onChange={e=>setFilters({...filters,date_from:e.target.value})}/></label>
      <label>结束日期 不含<input type="date" value={filters.date_to} onChange={e=>setFilters({...filters,date_to:e.target.value})}/></label>
      {tab==='transactions'&&<>
-      <label>排序字段<select value={filters.sort} onChange={e=>setFilters({...filters,sort:e.target.value})}>{[['source','来源顺序'],['date','交易时间'],['invoice','交易单号'],['customer','客户编号'],['stock','商品编码'],['country','国家']].map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
+      <label>排序字段<select value={filters.sort} onChange={e=>setFilters({...filters,sort:e.target.value})}>{[['source','来源顺序'],['date','交易时间'],['invoice','交易单号'],['customer','客户编号'],['stock','商品编码'],['country','国家/地区']].map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
       <label>排序方向<select value={filters.direction} onChange={e=>setFilters({...filters,direction:e.target.value})}><option value="asc">升序</option><option value="desc">降序</option></select></label>
      </>}
     </div>
-    {countriesResource.error&&<p role="alert" className="inline-alert">国家选项加载失败：{countriesResource.error} <button type="button" className="text-button" onClick={()=>setCountriesRevision(n=>n+1)}>重试</button></p>}
+    {countriesResource.error&&<p role="alert" className="inline-alert">国家/地区选项加载失败：{countriesResource.error} <button type="button" className="text-button" onClick={()=>setCountriesRevision(n=>n+1)}>重试</button></p>}
     <div className="filter-actions">
      <span className={'filter-state'+(draftChanged?' changed':'')} role="status">{draftChanged?'条件已修改，点击查询后生效':appliedCount?`已应用 ${appliedCount} 个筛选条件`:'未设置筛选条件'}</span>
      <button type="button" className="secondary" disabled={busy} onClick={()=>setFilters(emptyFilters)}>清空条件</button>

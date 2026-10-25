@@ -58,7 +58,7 @@ public static class Labels
 {
     static readonly Dictionary<string, string> Map = new()
     {
-        ["missing_identity"] = "缺客户或国家",
+        ["missing_identity"] = "缺客户或国家/地区",
         ["suspected_duplicate_cancel"] = "取消行疑似重复",
         ["ambiguous_candidates"] = "多个合格候选",
         ["suspected_duplicate_sale"] = "候选销售疑似重复",
@@ -118,7 +118,7 @@ public static class Labels
         ["customer"] = "客户编号",
         ["stock"] = "商品编号",
         ["description"] = "商品说明",
-        ["country"] = "国家",
+        ["country"] = "国家/地区",
         ["price"] = "精确单价",
         ["quantity"] = "数量",
         ["time"] = "原始时间",
@@ -171,8 +171,8 @@ public static class Labels
         ["waiting"] = "是否待补充",
         ["display_name"] = "显示名",
         ["role"] = "角色",
-        ["countries"] = "负责国家",
-        ["country_scope"] = "国家范围",
+        ["countries"] = "负责国家/地区",
+        ["country_scope"] = "国家/地区范围",
         ["state"] = "配置状态",
         ["total"] = "总计",
         ["items"] = "项目",

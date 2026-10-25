@@ -125,7 +125,7 @@ public sealed partial class MainWindow : Window
     {
         var s = VM.Session;
         AccountText.Text = s == null ? "尚未登录" : s.Name;
-        AccountScope.Text = s == null ? (VM.Configuration == null ? "请先连接后端" : "请完成安全登录") : $"{Labels.Of(s.Role)} · {(s.CountryScope == "selected" ? string.Join("、", s.Countries) : "全部国家")}";
+        AccountScope.Text = s == null ? (VM.Configuration == null ? "请先连接后端" : "请完成安全登录") : $"{Labels.Of(s.Role)} · {(s.CountryScope == "selected" ? string.Join("、", s.Countries) : "全部国家/地区")}";
         AccountPicture.Initials = s == null ? "" : s.Name[..1];
         ToolTipService.SetToolTip(AccountCard, s == null ? null : $"{s.Name}（{s.Id}）\n{AccountScope.Text}");
         LogoutButton.Visibility = s == null ? Visibility.Collapsed : Visibility.Visible;

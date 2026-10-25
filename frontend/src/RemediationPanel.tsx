@@ -4,7 +4,7 @@ import {caseReasonLabel} from './labels';
 type Row={id:string;invoice:string;customer:string;country:string;stock:string;price:string;time:string;quantity:number;description?:string;kind?:string;sheet:string;source_row:number};
 type Case={id:string;cancel_id:string;status:string;version:number;reason:string;assignee:string;generation?:number;outcome?:string;waiting?:boolean;missing_materials?:string;next_step?:string};
 type Evidence={case:Case;cancel:Row;original_cancel?:Row;effective_cancel?:Row;duplicate_rows?:Row[];related_cases?:Case[];remediations?:{id:string;action:string;evidence:string;actor:string;occurred_at:string;before:Row;after:Row}[];current_assessment?:{reason:string;candidate_count_lower_bound:number}};
-const fields:[string,string][]=[['customer','客户编号'],['country','国家'],['stock','商品编号'],['price','精确单价'],['time','退货时间'],['quantity','退货数量']];
+const fields:[string,string][]=[['customer','客户编号'],['country','国家/地区'],['stock','商品编号'],['price','精确单价'],['time','退货时间'],['quantity','退货数量']];
 const actionLabels:Record<string,string>={correct_return:'核实修正退货',supplement_sale:'补录销售原单',verify_duplicate:'核实疑似重复',wait_materials:'保存待补充信息',recheck:'按当前资料重新核查'};
 export const outcomeLabels:Record<string,string>={reclassified:'已流转',matched:'已配对办结',verified_duplicate:'核实重复，业务排除',legacy_closed:'历史结案'};
 const rowValues=(r:Row):Record<string,string>=>({customer:r.customer,country:r.country,stock:r.stock,price:r.price,time:r.time,quantity:String(Math.abs(r.quantity))});

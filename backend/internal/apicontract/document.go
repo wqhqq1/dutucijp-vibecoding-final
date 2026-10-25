@@ -156,7 +156,7 @@ func Document() M {
 		{"get", "/runs", "已发布数据运行", "business", nil, arr(ref("Run")), nil},
 		{"get", "/overview", "当前负责范围的统计", "business", nil, ref("Overview"), []string{"run_id"}},
 		{"get", "/users", "可见派单人员", "finance", nil, schema([]access.Profile{}), nil},
-		{"get", "/countries", "可见国家列表", "business", nil, arr(str()), nil},
+		{"get", "/countries", "可见国家/地区列表", "business", nil, arr(str()), nil},
 		{"get", "/transactions", "交易筛选排序分页", "business", nil, schema(store.TransactionPage{}), filterQuery},
 		{"get", "/allocations", "配对明细筛选分页", "business", nil, schema(store.AllocationPage{}), filterQuery},
 		{"get", "/cases", "当前差异筛选分页", "business", nil, schema(store.CasePage{}), filterQuery},
@@ -164,7 +164,7 @@ func Document() M {
 		{"get", "/cases/{id}/evidence", "原始及有效值、候选、决策和补充证据", "business", nil, schema(store.CaseEvidencePage{}), pageQuery},
 		{"get", "/cases/{id}/candidates", "当前候选分页", "business", nil, schema(store.CandidatePage{}), pageQuery},
 		{"get", "/cases/{id}/audit", "差异操作历史", "business", nil, schema([]store.WorkflowAudit{}), nil},
-		{"post", "/cases/{id}/assign", "派给有国家权限的责任人", "finance", object(M{"assignee": str()}, "assignee"), caseSchema, nil},
+		{"post", "/cases/{id}/assign", "派给有国家/地区权限的责任人", "finance", object(M{"assignee": str()}, "assignee"), caseSchema, nil},
 		{"post", "/cases/{id}/start", "开始自己负责的差异", "owner", version, caseSchema, nil},
 		{"post", "/cases/{id}/close", "已解决差异填写结论并关闭", "owner", object(M{"version": num(), "conclusion": str()}, "version", "conclusion"), caseSchema, nil},
 		{"post", "/cases/{id}/confirm-match", "人工确认候选及数量分配", "owner", object(M{"version": num(), "sale_row_id": str()}, "version", "sale_row_id"), schema(store.ManualConfirmation{}), nil},
@@ -175,7 +175,7 @@ func Document() M {
 		{"get", "/jobs/{id}", "轮询数据任务", "data-manager", nil, ref("Job"), nil},
 		{"get", "/admin/accounts", "账户名录", "admin", nil, arr(account), nil},
 		{"post", "/admin/accounts", "创建待首次配置的账户", "admin", schema(auth.AccountInput{}), account, nil},
-		{"patch", "/admin/accounts/{id}", "更新显示名和国家权限", "admin", object(M{"display_name": str(), "country_scope": M{"enum": []string{"all", "selected"}}, "countries": arr(str())}, "display_name", "country_scope", "countries"), account, nil},
+		{"patch", "/admin/accounts/{id}", "更新显示名和国家/地区权限", "admin", object(M{"display_name": str(), "country_scope": M{"enum": []string{"all", "selected"}}, "countries": arr(str())}, "display_name", "country_scope", "countries"), account, nil},
 		{"get", "/admin/accounts/{id}/deletion-preview", "删除影响预览", "admin", nil, schema(auth.AccountDeletion{}), nil},
 		{"delete", "/admin/accounts/{id}", "删除账户、撤销凭据并退回未办结派单", "admin", empty, schema(auth.AccountDeletion{}), nil},
 		{"get", "/admin/account-audit", "账户管理审计", "admin", nil, M{"type": "array", "items": M{"type": "object", "additionalProperties": true}}, nil},
@@ -274,7 +274,7 @@ func Document() M {
 		paths[full].(M)[e.method] = op
 	}
 	r.schemas["Problem"] = M{"type": "object", "properties": M{"code": str(), "message": str(), "existing_assignee": str(), "current_version": num()}, "required": []string{"message"}, "additionalProperties": true}
-	return M{"openapi": "3.1.0", "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema", "info": M{"title": "退货对账与差异处理 API", "version": "1.0.0", "description": "Go 共用后端的现行协议。金额为精确字符串，来源时间不转换时区。角色及国家范围由服务端执行。原生认证的逻辑身份与连接入口分别绑定。"}, "servers": []any{M{"url": "http://localhost:8080", "description": "示例；客户端使用管理员批准的实际完整入口"}}, "paths": paths, "components": M{"schemas": r.schemas, "securitySchemes": M{"SessionCookie": M{"type": "apiKey", "in": "cookie", "name": "recon_session", "description": "默认8080端口名称；其他端口为 recon_session_<port>。应接收实际 Set-Cookie，禁止硬编码或从JSON提取会话。"}}}}
+	return M{"openapi": "3.1.0", "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema", "info": M{"title": "退货对账与差异处理 API", "version": "1.0.0", "description": "Go 共用后端的现行协议。金额为精确字符串，来源时间不转换时区。角色及国家/地区范围由服务端执行。原生认证的逻辑身份与连接入口分别绑定。"}, "servers": []any{M{"url": "http://localhost:8080", "description": "示例；客户端使用管理员批准的实际完整入口"}}, "paths": paths, "components": M{"schemas": r.schemas, "securitySchemes": M{"SessionCookie": M{"type": "apiKey", "in": "cookie", "name": "recon_session", "description": "默认8080端口名称；其他端口为 recon_session_<port>。应接收实际 Set-Cookie，禁止硬编码或从JSON提取会话。"}}}}
 }
 
 func batchInput(s M, schemas M) M {

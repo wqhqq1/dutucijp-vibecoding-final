@@ -51,7 +51,7 @@ public sealed class ReviewView : UserControl
         foreach (var(k, label)in new[]
         {
             ("customer", "客户"),
-            ("country", "国家"),
+            ("country", "国家/地区"),
             ("stock", "商品"),
             ("invoice", "退货单"),
             ("date_from", "开始日期 yyyy-MM-dd"),
@@ -239,7 +239,7 @@ public sealed class ReviewView : UserControl
         else
         {
             if (selected.Count != selectedCountries.Count)
-                throw new InvalidOperationException("所选记录的国家未加载，请重新选择。");
+                throw new InvalidOperationException("所选记录的国家/地区未加载，请重新选择。");
             countries = selectedCountries.Values.Distinct().ToArray();
         }
 

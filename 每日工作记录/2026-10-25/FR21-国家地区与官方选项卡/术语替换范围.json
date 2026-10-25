@@ -1,0 +1,478 @@
+{
+  "changed": [
+    {
+      "path": "README.md",
+      "before_sha256": "7ec1f95c1c6924875013afb413ccf77722f050a93412cb6a4431b5d5eb08ad39",
+      "after_sha256": "e75a6f9788f63329d4b31295ba9787bd3e301206d6e55303bb37cdd10f92f997"
+    },
+    {
+      "path": "AGENTS.md",
+      "before_sha256": "26f1e0b376ebf197e355b3bab3c02177c3e00a39f29934b6600f23f633851940",
+      "after_sha256": "5a1dd3bd32f49d6a94bc1f2ec0750f67f39802b2956f5a6f8cb6873ab2f71249"
+    },
+    {
+      "path": "desktop/功能对照表.md",
+      "before_sha256": "1e3e3e708bddeb5d3bf0e96fb40bf34cc95862578cb9fda8c40c6c013ae31e54",
+      "after_sha256": "8a0ffa7ffc5cb5558d144be4ae073295edb411b6868d672fa04d8f7b7a2ba8e3"
+    },
+    {
+      "path": "portable/另机结果回传模板.md",
+      "before_sha256": "3b1a4ddf6a3c1239493a15dc069f65c4e3aabcfe3ce1f521559b5d9131e683ee",
+      "after_sha256": "4e8f0469703f12fa6b88d34c04e7a7d0f1d6ef99560de3c41017a48c628dc9e9"
+    },
+    {
+      "path": "docs/api/openapi.json",
+      "before_sha256": "c8ae09a11d4046f8b7ffbb0fafc5c0022037b96e56cf51562f311966b1db7f86",
+      "after_sha256": "5c0a000c67f194824a22beabb2eba6967fad671e38626545e6e47d53e055606e"
+    },
+    {
+      "path": "tools/build_midterm_v12.py",
+      "before_sha256": "0a795de610d1ca618fa3c1038ae846c3647b1ec671abffbcc1bba5bb549cd42a",
+      "after_sha256": "8cfaf70da1a911605affa6887633a0d9a407ef1a6c6f1e48bdf97ee017554b51"
+    },
+    {
+      "path": "tools/build_midterm_talk.py",
+      "before_sha256": "cd42501551350023bd97690ed02b6a127208330b1a8b4c415092e8f5990daba9",
+      "after_sha256": "6e4f33a0fecc5c405495a941114175ccf17f95c1f67c626d77788ffffcfea66a"
+    },
+    {
+      "path": "tools/build_midterm_current_report.py",
+      "before_sha256": "c2ce9687dd14a5464ce4524f3c575060b91ecb273ee6609bc25ddcd67e13680f",
+      "after_sha256": "f468bb23a96f1decc8d81983db4e98750c46e32d51a2c4f8842bb5dab5b69718"
+    },
+    {
+      "path": "docs/api/openapi.yaml",
+      "before_sha256": "6e90eb4b97d9618abae0b8d6b9e0e30413e8cd02820f10760d5e7de014e70237",
+      "after_sha256": "b81b97952614682b9abd84431d492af5796b3406002bce6f6b6512f65160c5aa"
+    },
+    {
+      "path": "desktop/UITests/README.md",
+      "before_sha256": "a280e16f7f70d3ec63744a3a30535dd60ced6d1a9f2ec3d9b10923229a779cc6",
+      "after_sha256": "968e1850d345f5c6ea1604109df7cf95b264a645abbfdf68a67351d8a129e4e9"
+    },
+    {
+      "path": "docs/api/接入指南.md",
+      "before_sha256": "cb59394b64dc99f0e2090c176010ad29ff9d739bed684a25c462824f20a65b84",
+      "after_sha256": "6073087d647de2c5394f59befe281f6bada86ceff843d0f18f99f042d61f453d"
+    },
+    {
+      "path": "backend/internal/web/server.go",
+      "before_sha256": "f28bbf46ab80e1479d1d2ba86c58382b937811f44ed0a6ef0e76e3369d3a9ba4",
+      "after_sha256": "2c15cb48846e021404cd57aaf77ae43c9d71e8298a539ae8fc5c954b845959b6"
+    },
+    {
+      "path": "frontend/dev/mock-api.ts",
+      "before_sha256": "5c1c415969914f1f7f03093145fbffddb9db7c1c2f8881a2b08425d6aa88e5b4",
+      "after_sha256": "29d650271ed7b403ce029105738ffd220a1b24b2149a62b1b498076b615c8387"
+    },
+    {
+      "path": "desktop/UITests/App.xaml.cs",
+      "before_sha256": "c77179c9c05d788a327fa49d9c2b8ebeae55bcc0e7cf8e27965faf602786ff40",
+      "after_sha256": "ea72ec6fb156039c67f642f26e7441dcb929a1379f7a152c151e619fae2dab2a"
+    },
+    {
+      "path": "frontend/dev/mock-accounts.ts",
+      "before_sha256": "ffd217d1a4ed9b5dd975ac1e3804bd68312a4a96811ef7cc420c9f16de5bb4ee",
+      "after_sha256": "f560c43d2b8b363c4f1b3d73597c56ccf7b6980a977be98109e475981197cacb"
+    },
+    {
+      "path": "中期项目报告.md",
+      "before_sha256": "2a8f84d7f449379cd4c85a4df537bb2a4272c94aadf272a792589888c9e2e318",
+      "after_sha256": "6688201a497af062acc8ac5aa5740549dc599849e8bb68fe045ce23ee1f07940"
+    },
+    {
+      "path": "中期汇报讲稿.md",
+      "before_sha256": "35d4bc5fa39da2bdc6689a2735360448cba3271203c886bd9d50ce0bfd62dba1",
+      "after_sha256": "1634eb5a45ed603cab71546711b3d1a806e0e4ff4e8dc94f4c2476e72a0e93e4"
+    },
+    {
+      "path": "四段式任务草稿-中期后合并.md",
+      "before_sha256": "2ae68ebfb1a4de815652e1f7bf2e7b3252929504f64a8cfcba3b66683e8dc00d",
+      "after_sha256": "b8365b5c91a4c7d0a3ae0d539dc26b44a06a87bbeace227e0536a5241d90e2de"
+    },
+    {
+      "path": "desktop/Tests/Program.cs",
+      "before_sha256": "be54f241dc7977b40a391c2fbbe4a418ef74d1a45d4ff46f7f4bbf2d93173df8",
+      "after_sha256": "9a4b030d50a185c591579d80b66011ee7175dfd2b9a84aa2fba84374f87c9a29"
+    },
+    {
+      "path": "四段式任务草稿-Claude账户管理UI优化交接.md",
+      "before_sha256": "3379d5e252c2f02a8b4c8b20ec4152e182683911c885fbc0b6da553500e061f8",
+      "after_sha256": "6e7ce663135ef09459c7e72ef69a991fb24646fef19ddfaa4b82c066a94ec643"
+    },
+    {
+      "path": "backend/internal/web/countries_http_test.go",
+      "before_sha256": "1a59a76e2be5803e975c5665c6afb4afdc40c9acab12e4dfb8eba462c9ab734f",
+      "after_sha256": "babd884e4a4ad7c5155f46703dbaf8ba51e310827634f58158ca40a8bdd820ad"
+    },
+    {
+      "path": "中期汇报网页版/index.html",
+      "before_sha256": "f7167c7e5332a4aeb0e550e13e19fa6eb0ba424fa792ff8fe2f41a149374e214",
+      "after_sha256": "1f85e7f967415b681e616c579eacfea3f712ba4524ea7f0528aa68389a21d8c2"
+    },
+    {
+      "path": "tools/refresh_midterm_materials.py",
+      "before_sha256": "a7c55d483605d29ebecd2ac393dcf457ecd36c6ec1763316d8169e8b94c92205",
+      "after_sha256": "12b9dd79980c60dde7487516a60ce066936d34584116b0dca949a786a8245cbc"
+    },
+    {
+      "path": "四段式任务草稿.md",
+      "before_sha256": "8c8e360ce49e6cb6d27cdf112685012e5dc61fb0e4dce87bea11eb4c592d45f4",
+      "after_sha256": "5caabfc1c4b0805a4698786a5492654b31396bd344695bcc2cfcab762ad5f87e"
+    },
+    {
+      "path": "desktop/Tests/README.md",
+      "before_sha256": "18331e25b2ca135c411fa821f3d60014eb7c71809a3171624532007db6849773",
+      "after_sha256": "81244503e621b21ec03c149112dcf0d956eff4256c39d79bdc8932f916b059d1"
+    },
+    {
+      "path": "怎么算做对.md",
+      "before_sha256": "0a4032a2d5c0955c1d0f7a81a34b497f6e863126a92e7c4cae5602d08e112957",
+      "after_sha256": "85295b7f4c843ce3c03ad38550ca90f9ff0d0ccac173a3d9d689a8bd69c7eae9"
+    },
+    {
+      "path": "desktop/Windows/Views/WorkspaceView.cs",
+      "before_sha256": "995deb72c06520973b8cd6ca2e9e339827d9da31d3331220bacf19dccfaaae15",
+      "after_sha256": "cff0d8d4967dfbdfe6c8dd79ad000a827916e079e95da06a2c1578f683452625"
+    },
+    {
+      "path": "怎么做.md",
+      "before_sha256": "f4e8fbe521716abb143447e0dc0cf87b7da0c09a77cab8bef1e1a9d42f4808f6",
+      "after_sha256": "0cc30d88706233a2722004f684a675de49a533335672c24bd25a0c6cd3f9b58c"
+    },
+    {
+      "path": "desktop/Windows/Views/UI.cs",
+      "before_sha256": "90395c69a1f2efe0c56d0b5b6aa5db65596957ece657139285fcb0f81ab4addb",
+      "after_sha256": "1e68be93d52ac42e32f5223e5f1a7743299d5d30c8b3b35480bfd241c842558c"
+    },
+    {
+      "path": "frontend/src/AccountCharts.tsx",
+      "before_sha256": "7ecd3e21b31090fc116e13ac6e3dcd62f06646e9a5b91fe572e4193930e2e430",
+      "after_sha256": "03f7a0d4bcfd1f5ba0b6bc2565b51aee15f78b21cde10a28ea2e7c76a1156c58"
+    },
+    {
+      "path": "frontend/src/AccountPanel.tsx",
+      "before_sha256": "381623095b214581f5d44a18f024335688d252054c2191a9a05d4111a2533059",
+      "after_sha256": "6e4f804352884f390c06c30fcc32ea58c8e1b8a641a7cfc07891e7c8fd1a1644"
+    },
+    {
+      "path": "desktop/Integration/README.md",
+      "before_sha256": "9a1a0cdb568d7629c77bc29b0e936327282d566f1a1b3d247813f039f742c2be",
+      "after_sha256": "1b42a8c20cdd8226cf2c4fee6207b338ddd9e7e7839a5dc6bb1994fa6b09fef3"
+    },
+    {
+      "path": "frontend/src/accounts.ts",
+      "before_sha256": "ac2948155516a930c2365892198caab2de0b5e5ed19304c8586bab615f5f4443",
+      "after_sha256": "c2ba780c105dce682b06a4e064352281f957dbbbbdb7f70d02af363f8af9b06f"
+    },
+    {
+      "path": "desktop/Windows/Views/ReviewView.cs",
+      "before_sha256": "be03d396746098182225e5694d53567f1e5e3cd26e7cdba8143e67fd11d95b0c",
+      "after_sha256": "e8292d80d5ec904077b50550a1908ee5db03e9123525dba0d9f4abdeb0fae649"
+    },
+    {
+      "path": "backend/internal/auth/accounts.go",
+      "before_sha256": "b8597e3468a8ece5ed3df9814b9829a4a3a481f85a43fa9df1e918a5cea72bc2",
+      "after_sha256": "b6f1ea1292a48e25581eada6af1fd4df9a329062447b2399eb500b90b9119395"
+    },
+    {
+      "path": "desktop/Windows/Models.cs",
+      "before_sha256": "d14c2b18d9ffc5c1e77321514501ed8b4d9eecdd0fa5f1bb336bbee9c8674393",
+      "after_sha256": "22f2bb00910f37de3c08fe59ce1a791dde548b130005d2c584bd3bbacf50f478"
+    },
+    {
+      "path": "desktop/Windows/Views/CaseView.cs",
+      "before_sha256": "9712520c34befdeddf010e1811be5bbcc806cb114ea68447a04562a625c1c2f0",
+      "after_sha256": "1583e6577caca12f17c181d4bf44a3fc33395c3d59e39be31ffe10738dc574a5"
+    },
+    {
+      "path": "desktop/Windows/MainWindow.xaml.cs",
+      "before_sha256": "7870eca3ea39fc3dbfaddc625a58eb5721222068617c534ce10e860bbb0fdee6",
+      "after_sha256": "a0fe90dd9246f24e6866906e5d2c3ba44a13d10374443239932053ffb82706d1"
+    },
+    {
+      "path": "frontend/src/AssigneePicker.tsx",
+      "before_sha256": "918f06b373bacd075837ad522bd7f4f91fa2ba674b7d5846238acb5327fe4fbb",
+      "after_sha256": "50acb81f4d72f50a0414963b57bf971aaac0b38a1b657f025ca1a3f2a2a54b9b"
+    },
+    {
+      "path": "backend/internal/apicontract/document.go",
+      "before_sha256": "6e067e211baf4287b1ef89d65ca876b0175f099a2dd200c2bd08bc519cacc53b",
+      "after_sha256": "c6dbead1acaf65e892646b51b7975260a8c0195cc6b1f5e13968b8fc2bf79826"
+    },
+    {
+      "path": "desktop/Windows/Views/AccountsView.cs",
+      "before_sha256": "eaeafeca162d101304e06318b4ea0dc1f5b0f40cadf6b96772e233a28566bd73",
+      "after_sha256": "6234215c893b805e3c72ff3cf0b3b13737614a726cf5baea83a4398230dc148f"
+    },
+    {
+      "path": "desktop/Windows/Views/AccountPicker.cs",
+      "before_sha256": "7b4ffdb032a412a70d4464d49e06026aee4454cc7dd15ac258f591d3dd1d25bf",
+      "after_sha256": "3c3a462fd81d775eeb92de6ec50d3dd736183e1cc2150635b9585549bb2dfd8b"
+    },
+    {
+      "path": "frontend/src/labels.ts",
+      "before_sha256": "40dc92d9008e2fecd5d705d0e0e6da36cf65204c66fc0b819b0acb14bb74e6c6",
+      "after_sha256": "0f8a95eb1a2a3d61140f1a34c25732ca73170e13caeb30719ddb1cc2310380d0"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/进度跟进报告.md",
+      "before_sha256": "c2c8d1d2f08e2ea427d5ae7d5d3e62a617b9d9f9a21bbc5ebe5dd54c5330aa92",
+      "after_sha256": "5345296b5c02f0a4fcb0c213d5fa969544292f1e29d524ca88c37e856b894d44"
+    },
+    {
+      "path": "运行说明.md",
+      "before_sha256": "ec9816d155f3a0f557cdc86905ffdac819a976061a115db2bb615b3fbb088993",
+      "after_sha256": "4b2ea2b5bc4b05f0b823bffb1f858e238581a4720fd1a77532f4902a02a96f09"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "before_sha256": "b17597b910cc7c908f9b12599de87e3c1d0cb8f3ae8452cd33b081d4e48cb178",
+      "after_sha256": "08b9c1509e3f7d5257a71096a17f73b90d20a479b82ed9822dab886d41e35c10"
+    },
+    {
+      "path": "backend/internal/store/review.go",
+      "before_sha256": "37901b4740b4a899dd9e911ae090883b71cc25fd17595d5103a71944d2f73135",
+      "after_sha256": "593ab0c6ef37b59139df8316abf14b65875d18257f5d0ab7220eef4a95c8e42e"
+    },
+    {
+      "path": "软件验收清单.md",
+      "before_sha256": "f114d85c5db8db34721fc242390c7933a210afc3577596f16b84575aa22f6fa5",
+      "after_sha256": "a47bb64075ae7819668e1d8dd79fac154c4e4bbdef0d545c817e8e2e12b39f2e"
+    },
+    {
+      "path": "backend/internal/store/batch.go",
+      "before_sha256": "e3bcbc2129ea9e7c0dfacaeeb15ab63f7758cfc6c8930f6aed1282ecdba11e06",
+      "after_sha256": "2d97bb80905a86e20d8978d0ae62acb758be1083a5a0dea783cf40e6bbe2909f"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/进度跟进报告.md",
+      "before_sha256": "8165f4996830eb2de44c43dd0fc4e7386bc146ba036802d4ff9384317a8917b0",
+      "after_sha256": "7f508b16fc7721c01bc61130460ec1cb7bfb54e43f1ff31c70cd9335272eb73c"
+    },
+    {
+      "path": "backend/internal/store/workflow.go",
+      "before_sha256": "6427faa223412e647f33e1bb1bb275dc1fef2a526bf8d0ab9dbe0789fb4be994",
+      "after_sha256": "2c007b2c143c36a869395df68674faa509bc2d45c23681e59e6e71c4f59075aa"
+    },
+    {
+      "path": "backend/internal/store/manual.go",
+      "before_sha256": "eb887701ac741deadb4248871b6f282c927ef7c94c5a6275585f1ee2e303bca1",
+      "after_sha256": "4d9b9f9a21d6aaa0b17d5b661aa813b74ebe4e23dfd0ded2308c06d6f90d40e0"
+    },
+    {
+      "path": "backend/internal/store/remediation.go",
+      "before_sha256": "33e6f3412bdda6418a9dd5088ba16238cc4f5221c1a1272f8f8b9998fa5c5b78",
+      "after_sha256": "ca9cb8c59be2c05eb773345814ea909316ac5755b8340666cc32de9c7b8ba82b"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/执行交接.md",
+      "before_sha256": "55090530010ef1aed0a1aa0de074e12c19205816ef1a7644db6cfa6db77ba478",
+      "after_sha256": "e45d04712870ef313f247a3e9a4fb491a22054075040af4fd5e2b878a1ee4267"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/截图索引.md",
+      "before_sha256": "e3d2b166be0d42fe896a8b05ed4bc61f2c2ff80eafb241bf0cd9d6b3e6029fa3",
+      "after_sha256": "a3217e2d060468eebe39890a4d0add7fd522e69f455edc6bfb45029b93d99fe4"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/FR07-FR14独立复审.md",
+      "before_sha256": "be3bed4c365c9e15618b18c94a9d7ee216fbcbb5e6b9153971ad97f8a921d5f8",
+      "after_sha256": "949aa2f9cf21a37ece9b81b181716780750a93f5af4b41eac4d7a6bc13c5042e"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/FR17-18整合回归与静态检查.md",
+      "before_sha256": "737f2f5978946e785236509f1be095ba78d6882a1c5c9d1f937a2d88ac8d6057",
+      "after_sha256": "dc5dbd7d544d5e7f58c626ad096e33e2d576eb3a4ff2ec5caca47b1d6da3f32d"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/执行交接.md",
+      "before_sha256": "b3596774a9f4057cbf7f468164955000ab1f8abd2965ba4241aa3f484fb63abc",
+      "after_sha256": "f0535be931f3fb983c3e59d99a47672825d7b965c45fe04a4bdb3643f57c85e9"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/FR07页面复核与部署.md",
+      "before_sha256": "7b47f742a5993834f0195182ba12289de2d8b21c1c91f067cd98f6cac71e78f6",
+      "after_sha256": "8ad543c3cb7dea2753452043763635d89249f42852ed73c424286ad8e0ecc76d"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/FR07交易检索后端性能专项.md",
+      "before_sha256": "f233ab9e7ea227cbb23841ed3d2050704dd240ea5bdf79a275d15fc03960b7a2",
+      "after_sha256": "4ffcc20379ac6fba6a3806534fbbe991e5d4816273fdc230cbecf51c813db163"
+    },
+    {
+      "path": "frontend/src/RemediationPanel.tsx",
+      "before_sha256": "3f9177bf95e58488212097feba30566759a3dc7262d91163a86be8d93d685af1",
+      "after_sha256": "154c282298f4a828c43ca741067824a8ac33d7cc2c3844e4da994cb64bc770b3"
+    },
+    {
+      "path": "frontend/src/ReviewPanel.tsx",
+      "before_sha256": "bbd4bb6c8f31af02cf786ddce8dae3c6fcdfb406e84458d6ab37cda1145b7c31",
+      "after_sha256": "745b7207591790f42a5151640d789fdc6c9d83ac1d9fa530a013afbcb7b8a48b"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/FR21-Windows客户端/执行交接.md",
+      "before_sha256": "73d2daeb0b719dd898892f2039d8b7ff4d2bf06ad93d21c0f449cf40ab6bb03e",
+      "after_sha256": "7211765c596ee7397a48589a46ff1742c093a13f59c34359a6670895de2ebd2f"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/10-15与10-16任务执行合并报告.md",
+      "before_sha256": "6509f47fe787c934ae7d14bd0f60c15b74d0c43d1ae7ea42998e440af9a6ce84",
+      "after_sha256": "1df7ae8d4c7eabbc49b1ef2e183777d191226dbede88fc557c31b56af8d9b6b0"
+    },
+    {
+      "path": "desktop/Windows/Services/AssignmentScope.cs",
+      "before_sha256": "8e6a713b358b882dd7735ed062b4a46fd7e83bd893922ea0981b1777c0917cf2",
+      "after_sha256": "be06b95ba20140444c00241a540d88c98a05291f99e825e6d660219255322562"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR01-04复核记录.md",
+      "before_sha256": "2f428fd404af4d34af2bdf84c89aeac28af098716815fae6c2bf92159de1bf41",
+      "after_sha256": "97370a7260d35402eb6ff010f1c7faaa76ce297b6a5961f3e1d528c2adbb411a"
+    },
+    {
+      "path": "资料/计划历史/四段式任务草稿-合并前-20261016.md",
+      "before_sha256": "353192a050e9df07da81d91c13e7125d9de8ad762b65d6604d04aeb6cdaa4ab5",
+      "after_sha256": "f974f7d9b17f3fe8f4ccc8c4c2006fc6368f5f7a8898082fb430519aa901e915"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR12-16数量与状态独立审查.md",
+      "before_sha256": "e29504262d9145a2222f4c6a66d3bc079e1671cc6df340325f729d0eb03e5395",
+      "after_sha256": "13d7b0b5aa31c9e84679241f6207e43890ed81cd6e7738270a565aa2bab2cd9b"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/FR21-界面裁剪与账户选择/执行交接.md",
+      "before_sha256": "80b961f0fe8a58060b572493469a866f883db7956dda39292a39ea91af280cf3",
+      "after_sha256": "07bcb506347e71df34e198a2cb6dcc8fb3d3c8cb76100a761873bdd3bf7ee3cb"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/FR12-18执行记录.md",
+      "before_sha256": "65e341ec0017ed11c834b4f3436c0e04ecb488d7fd10348711fd3bf504920285",
+      "after_sha256": "7bc27bb27a4ebb58a7f2bea31aebd687d17dd1084017f351a1577cb1f73389fe"
+    },
+    {
+      "path": "每日工作记录/2026-10-15/执行交接.md",
+      "before_sha256": "e214c87e7c10a99c57f8ace8e99cdd82f110f4b8d102c50df6f6626e45aee558",
+      "after_sha256": "ac75ae8759fb17aae3d122abf2b3fb07237cac3c1e95129ffc648b650c2ab0fe"
+    },
+    {
+      "path": "每日工作记录/2026-10-20/FR20重算性能优化/执行交接.md",
+      "before_sha256": "3bdad7e251ce74e697d8daf4891ffca88a606d9514ee061f1616212dff446f74",
+      "after_sha256": "561fc587c311c998357fdef8434ee442dcb78589ffa68945023e3a6c489c6fdf"
+    },
+    {
+      "path": "要做什么.md",
+      "before_sha256": "dc216ce233d98394903bcfcab4640b6195a5462a6cfa88e1914ed9674e518f35",
+      "after_sha256": "e4b6c1fc9d52053b102f2bd4bf0658aed00fc84af72711a5df5bf616a3d4bc75"
+    },
+    {
+      "path": "测试记录.md",
+      "before_sha256": "3352126806627de18173339d9e4e1f51d2ecad643213d96bad4a792158fa7819",
+      "after_sha256": "2670af95e5b5e525f94a51ab0f719f8dcf591428f5fc6d286c57a884b830a846"
+    },
+    {
+      "path": "每日工作记录/2026-10-20/FR20差异补充与重算/执行交接.md",
+      "before_sha256": "9c11a99cadd70820fa8734c019aa4c34eff785e836f27d377b1ea15612c5456b",
+      "after_sha256": "a078c8d9b7ad352e0e886c6436352ba084a3bf16253c5d11f4d5b3174547dd9e"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/进度跟进报告.md",
+      "before_sha256": "355fb331361056a56bf30f4e848584472f5fcfe97988b22e6bb4ef8e9b590d96",
+      "after_sha256": "d9d7adf33798cf75240a1d9f1a594d41504c51cadd8d3061d39b61f6c5a91688"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/账户管理与国家权限/实现与交接.md",
+      "before_sha256": "f1646c7f36b1eacd4ed82160eeef1f08d579112951d259f43c30577eaac4249d",
+      "after_sha256": "bd521f133ccf9fa00099342c0761c3b219f613366e62b2a81f57f4a0f239da75"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/FR21-国家范围与弹窗居中/执行交接.md",
+      "before_sha256": "4b76b78f940b3691d833094b1bb72297bcde89eb5a149e38adfc3c02916b6e20",
+      "after_sha256": "f4fa497cf6735145edd61960b52769dfb4ec41830fcc5b3909e05d0340438873"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/账户管理UI优化/Codex集成结果.md",
+      "before_sha256": "037697c1b066303fd29355aae99c90f9a62960269aa7c3dc81afa632c8c654af",
+      "after_sha256": "3f9ed7f4809bf4f394a2c01f3ec3f8764f02903e8134da221a4249998f281a2c"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/账户管理UI优化/Claude交接.md",
+      "before_sha256": "a2140179da8073a94dd89f61a833d85f5057fe187199c3818f27d9c46783768e",
+      "after_sha256": "4cdb8317ce73023c7e37d37f5f50493154725b36e20a64307ae8260821e7aa9a"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/派单与国家选择器/实现与交接.md",
+      "before_sha256": "dc091ab2a5d50a54ab9505512c80cc4fdad83d9510a455d6e0eb8ec0e4519ddd",
+      "after_sha256": "240a6ffb65983060785ddc6f8ddd2f26f06b3e40846093d1bae3e5481a78664f"
+    },
+    {
+      "path": "每日工作记录/2026-10-19/执行交接.md",
+      "before_sha256": "6501925c7f2bc9c88ed67a0a3b43a8cb60784831b66f6bf261df47264471a866",
+      "after_sha256": "853cb869f36a3adddb723b6d879aa380b3801a497628050760c58cb406dede9e"
+    },
+    {
+      "path": "每日工作记录/2026-10-17/前端设计优化/Codex交接-差异原因与排版第二轮.md",
+      "before_sha256": "a3c43dad9d02361866293efdf7ad6265261ee4acc422ee259cd73a88f9e2609b",
+      "after_sha256": "ac9d12d0e5c12be4cef44558151a3d92125c0eb8a022d003d70802e5fe9960a1"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/FR21-Windows客户端界面优化/执行交接.md",
+      "before_sha256": "3e4e9dedd6c4a86ff51a98fb73c6e0d242bf65f49b8c076056743e75d05b87e9",
+      "after_sha256": "252b73dceb6e639e97a7f481080b33ece2d64d9a4f22a38f7987117c85acc278"
+    },
+    {
+      "path": "每日工作记录/2026-10-23/FR21-Windows客户端界面优化/Codex合并交接.md",
+      "before_sha256": "ed9de04144614b365372c764f3c83d6c2d3c7b861435003e698967b91f01565f",
+      "after_sha256": "05e7f298862a10611fef172f90f45557c56180babfef445b53b1a89b67176009"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/自动匹配算法分析/自动匹配优化建议.md",
+      "before_sha256": "cee328d6b772fa70675500c53bc3348ff795c876a19cceb5e7d4305111460c2d",
+      "after_sha256": "a024269e3c9593ad5844d02cc0f41dcd1eba8f956d4b652d83abca1fb92d5461"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/自动匹配算法分析/方案A复现说明.md",
+      "before_sha256": "841979bdb0c2632fec940254cc92213956e7102321bda97285aa7b9216fc207e",
+      "after_sha256": "662e9d07f95600f1dfd5ad85fd5c68fd00ab683a6e802b302e33b450720788bc"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/执行交接.md",
+      "before_sha256": "371a9d4c74f4bf108c96c0f9d2072cd1469b5ca0e3f8e929cf4b5b63491ab377",
+      "after_sha256": "a0e778e8a17b163a8ea401db5a03d8a531df400d2bc3998871f28b103d93961a"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量处理优化/执行交接.md",
+      "before_sha256": "6000f0a4834ac3fa46ccffe9bdc4a787e16818aa2cc1b223a4a190ba0d659e66",
+      "after_sha256": "130c378dfad17e1c373b257c09e36dada71c8ebf9d8b8bd08599745ad755887c"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/实现与交接.md",
+      "before_sha256": "05649168a65a39e8594b3a23ffc440cad2398ccb7e8290947474ffa16ad5ccd3",
+      "after_sha256": "fcca4d5693cc2262b297c794ecfea848e57b9808e16abcc913ba6edb1245712b"
+    },
+    {
+      "path": "每日工作记录/2026-10-18/批量复核实现/TC55官方全量隔离验证说明.md",
+      "before_sha256": "1041b3fade9ba8fdff57f8fefc8a112b5b342d739c489e0ba8c465074b7105da",
+      "after_sha256": "c2ffbc5ec3eb02a9944d3fea8f89c7119a33b56439c2ed221c180358e16d4581"
+    }
+  ],
+  "original_evidence_preserved": [
+    "资料/中期汇报基线-20261016-v1.2/中期汇报讲稿-v1.2-1016.md",
+    "资料/中期汇报基线-20261016/中期汇报讲稿-网页版.md",
+    "资料/中期汇报基线-20261016/中期汇报讲稿-PPT版.md",
+    "每日工作记录/2026-10-20/FR20时间选择器/浏览器组件检查.json",
+    "每日工作记录/2026-10-16/截图/v12中期复核/12-筛选第二页4条且末页禁用.txt",
+    "每日工作记录/2026-10-16/截图/v12中期复核/11-客户13526筛选54条首页.txt",
+    "每日工作记录/2026-10-23/FR21-界面裁剪与账户选择/client-tests.txt",
+    "每日工作记录/2026-10-19/账户管理UI优化/模拟预览交互检查.txt",
+    "每日工作记录/2026-10-16/原始输出/v12中期复核/技能新进程调用事件.jsonl",
+    "每日工作记录/2026-10-23/FR21-国家范围与弹窗居中/client-tests.txt",
+    "每日工作记录/2026-10-17/原始输出/交易检索/browser-optimized.json",
+    "每日工作记录/2026-10-19/中期演示居中修复/中期包替换回执.json",
+    "每日工作记录/2026-10-18/批量处理优化/browser-checks.json"
+  ],
+  "path_segments_preserved": [
+    "账户管理与国家权限",
+    "FR21-国家范围与弹窗居中"
+  ]
+}

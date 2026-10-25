@@ -111,7 +111,7 @@ func confirmCandidateTx(ctx context.Context, conn *sql.Conn, actor WorkflowActor
 		}
 		quantity, price, ok := manualEligible(cancel, sale)
 		if !ok || cancel.Duplicate() {
-			return workflowError("ineligible_candidate", "客户、商品、精确单价、国家、时间或数量不符合规则", before)
+			return workflowError("ineligible_candidate", "客户、商品、精确单价、国家/地区、时间或数量不符合规则", before)
 		}
 		if sale.Duplicate() {
 			var count int

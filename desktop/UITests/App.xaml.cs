@@ -175,6 +175,57 @@ public partial class TestApp : Application
                     throw new Exception("Batch incompatible account visible");
                 File.AppendAllText(Evidence, "PASS cross-page, all-page and excluded country selection; typed bypass blocked before preview POST.\n");
             }
+            else if (screen == "account-tabs")
+            {
+                window.ShowScreen("accounts");
+                await Task.Delay(500);
+                var selector = Find<SelectorBar>(root).Single();
+                if (selector.Items.Count != 4 || Find<InfoBadge>(selector).Count(x => x.Visibility == Visibility.Visible && x.Value == 1) != 2)
+                    throw new Exception("Native account tabs/badges");
+                foreach (string key in new[]
+                {
+                    "requests",
+                    "origins",
+                    "audit",
+                    "directory"
+                }
+
+                )
+                {
+                    selector.SelectedItem = selector.Items.First(x => x.Tag?.ToString() == key);
+                    await Task.Delay(300);
+                    if (selector.Items.Count(x => x.IsSelected) != 1 || selector.SelectedItem.Tag?.ToString() != key || vm.Error != "")
+                        throw new Exception("Account tab navigation: " + key);
+                }
+
+                File.AppendAllText(Evidence, "PASS official SelectorBar switches all four tabs and retains both numeric badges.\n");
+            }
+            else if (screen == "country-picker")
+            {
+                var names = new[]
+                {
+                    "United Arab Emirates",
+                    "South Georgia and the South Sandwich Islands",
+                    "United Kingdom",
+                    "France"
+                };
+                const string retained = "Retained region outside current source list";
+                var(picker, selected) = Reconciliation.Windows.Views.UI.CountryPicker(names, new[] { retained });
+                var dialog = Reconciliation.Windows.Views.UI.Dialog("负责国家/地区 · 长名称布局验证", picker);
+                dialog.CloseButtonText = "关闭";
+                _ = dialog.ShowAsync();
+                await Task.Delay(400);
+                var boxes = Find<CheckBox>(dialog).Where(x => x.Tag is string).ToArray();
+                boxes.First(x => x.Tag?.ToString() == names[1]).IsChecked = true;
+                if (!selected().Order().SequenceEqual(new[] { retained, names[1] }.Order()))
+                    throw new Exception("Country source values changed");
+                var longBox = boxes.First(x => x.Tag?.ToString() == names[1]);
+                var label = (TextBlock)longBox.Content;
+                var p = label.TransformToVisual(longBox).TransformPoint(new global::Windows.Foundation.Point());
+                if (label.ActualHeight < label.FontSize * 2 || p.X + label.ActualWidth > longBox.ActualWidth + 1 || label.IsTextTrimmed)
+                    throw new Exception("Long country label did not wrap within checkbox");
+                File.AppendAllText(Evidence, $"PASS long country/region wraps {label.ActualWidth:F2}x{label.ActualHeight:F2}; exact source and retained selection preserved.\n");
+            }
             else if (screen == "case")
                 window.OpenCase("case-ui");
             else if (screen == "settings")
@@ -211,7 +262,7 @@ public partial class TestApp : Application
                     var dialog = picker.CreateDialog();
                     var showing = dialog.ShowAsync();
                     await Task.Delay(600);
-                    var search = Find<TextBox>(dialog).First(x => x.Header?.ToString() == "搜索账户名、显示名或国家");
+                    var search = Find<TextBox>(dialog).First(x => x.Header?.ToString() == "搜索账户名、显示名或国家/地区");
                     var role = Find<ComboBox>(dialog).First(x => x.Header?.ToString() == "角色");
                     var list = Find<ListView>(dialog).Single();
                     search.Text = "warehouse-pending";
@@ -242,7 +293,7 @@ public partial class TestApp : Application
                     _ = page!.GetType().GetMethod("Edit", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.Invoke(page, new object? [] { Fixture.Profile });
                     await Task.Delay(300);
                     var dialog = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(root.XamlRoot).SelectMany(x => Find<ContentDialog>(x.Child)).Single();
-                    var scope = Find<ComboBox>(dialog).First(x => x.Header?.ToString() == "国家范围");
+                    var scope = Find<ComboBox>(dialog).First(x => x.Header?.ToString() == "国家/地区范围");
                     scope.SelectedItem = scope.Items.OfType<Reconciliation.Windows.Views.Choice>().First(x => x.ID == "selected");
                 }
 

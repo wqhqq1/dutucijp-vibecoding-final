@@ -13,7 +13,8 @@ public sealed class AccountsView : UserControl
     JsonArray accounts = [], requests = [], countries = [];
     string tab = "directory";
     long request;
-    readonly Dictionary<string, (Microsoft.UI.Xaml.Controls.Primitives.ToggleButton Button, InfoBadge Badge)> tabs = [];
+    readonly SelectorBar tabBar = new();
+    readonly Dictionary<string, (SelectorBarItem Item, InfoBadge Badge)> tabs = [];
     void AttentionChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Attention")
@@ -24,7 +25,6 @@ public sealed class AccountsView : UserControl
     {
         foreach (var(key, item)in tabs)
         {
-            item.Button.IsChecked = key == tab;
             int count = key == "requests" ? vm.PendingRequests : key == "directory" ? vm.UnconfiguredAccounts : 0;
             item.Badge.Value = count;
             item.Badge.Visibility = count == 0 ? Visibility.Collapsed : Visibility.Visible;
@@ -37,8 +37,7 @@ public sealed class AccountsView : UserControl
         mode = kind;
         if (mode == "requests")
             tab = "requests";
-        header.Children.Add(UI.PageHeader(mode == "accounts" ? "账户管理" : "仓库开户申请", mode == "accounts" ? "创建和维护财务、仓库账户及负责国家，审批开户申请，管理统一许可入口。" : "为负责国家申请新的仓库账户，查看审批进度。", UI.Button(vm, "刷新", Load, Glyph.Refresh)));
-        var tabBar = UI.Flow();
+        header.Children.Add(UI.PageHeader(mode == "accounts" ? "账户管理" : "仓库开户申请", mode == "accounts" ? "创建和维护财务、仓库账户及负责国家/地区，审批开户申请，管理统一许可入口。" : "为负责国家/地区申请新的仓库账户，查看审批进度。", UI.Button(vm, "刷新", Load, Glyph.Refresh)));
         foreach (var(key, label)in mode == "accounts" ? new[]
         {
             ("directory", "账户名录"),
@@ -58,23 +57,37 @@ public sealed class AccountsView : UserControl
             {
                 Visibility = Visibility.Collapsed
             };
-            var button = new Microsoft.UI.Xaml.Controls.Primitives.ToggleButton
+            var item = new SelectorBarItem
             {
-                Content = UI.Flow(UI.Text(label), badge),
-                IsChecked = key == tab
+                Child = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 8,
+                    Margin = new Thickness(12, 10, 12, 7),
+                    Children =
+                    {
+                        UI.Text(label),
+                        badge
+                    }
+                },
+                Tag = key
             };
-            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(button, label);
-            button.Click += async (_, _) =>
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(item, label);
+            tabs[key] = (item, badge);
+            tabBar.Items.Add(item);
+        }
+
+        tabBar.SelectedItem = tabs[tab].Item;
+        tabBar.SelectionChanged += async (_, _) =>
+        {
+            if (tabBar.SelectedItem?.Tag is string key && key != tab)
             {
                 tab = key;
                 UpdateTabs();
                 await vm.Guard(Load);
-            };
-            tabs[key] = (button, badge);
-            tabBar.Children.Add(button);
-        }
-
-        header.Children.Add(tabBar);
+            }
+        };
+        header.Children.Add(new ScrollViewer { Content = tabBar, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Disabled });
         UpdateTabs();
         Content = UI.Layout(header, body);
         Loaded += async (_, _) =>
@@ -126,7 +139,7 @@ public sealed class AccountsView : UserControl
     {
         int Count(Func<JsonNode?, bool> f) => accounts.Count(f);
         var figures = UI.Metrics(("账户总数", accounts.Count.ToString(), Tone.Neutral), ("财务", Count(n => n.S("role") == "finance").ToString(), Tone.Neutral), ("仓库", Count(n => n.S("role") == "warehouse").ToString(), Tone.Neutral), ("管理员", Count(n => n.S("role") == "admin").ToString(), Tone.Neutral), ("待配置", Count(n => n.S("state") != "complete" && n.S("state") != "deleted").ToString(), Tone.Pending), ("已配置", Count(n => n.S("state") == "complete").ToString(), Tone.Done));
-        var query = UI.Field("搜索账户名、显示名或国家");
+        var query = UI.Field("搜索账户名、显示名或国家/地区");
         var roleFilter = UI.Select("角色", UI.Choices(("", "全部"), ("finance", "财务"), ("warehouse", "仓库"), ("admin", "管理员")));
         var stateFilter = UI.Select("配置状态", UI.Choices(("", "全部"), ("new", "未设密码"), ("password", "待绑定因素"), ("factor", "待保存恢复码"), ("complete", "已配置")));
         var list = UI.Host();
@@ -142,7 +155,7 @@ public sealed class AccountsView : UserControl
                 rows.Add(n.DeepClone());
             }
 
-            list.Content = UI.Table(rows, [new("id", "账户", 150, ColumnKind.Mono), new("display_name", "显示名", 160), new("role", "角色", 90), new("state", "配置状态", 120, ColumnKind.Status), new("countries", "负责国家", 260)], n => _ = vm.Guard(() => Edit(n)));
+            list.Content = UI.Table(rows, [new("id", "账户", 150, ColumnKind.Mono), new("display_name", "显示名", 160), new("role", "角色", 90), new("state", "配置状态", 120, ColumnKind.Status), new("countries", "负责国家/地区", 260)], n => _ = vm.Guard(() => Edit(n)));
         }
 
         query.TextChanged += (_, _) => Filter();
@@ -152,7 +165,7 @@ public sealed class AccountsView : UserControl
         var create = UI.Primary(vm, "创建账户", () => Edit(null), Glyph.Add);
         create.VerticalAlignment = VerticalAlignment.Bottom;
         var filters = UI.Columns(4, query, roleFilter, stateFilter, create);
-        body.Content = UI.Layout(UI.Stack(figures, filters, UI.Muted("负责国家为空表示全部国家。点击一行编辑或删除账户。", true)), list);
+        body.Content = UI.Layout(UI.Stack(figures, filters, UI.Muted("负责国家/地区为空表示全部国家/地区。点击一行编辑或删除账户。", true)), list);
     }
 
     async Task Edit(JsonNode? account)
@@ -164,16 +177,16 @@ public sealed class AccountsView : UserControl
         var name = UI.Field("显示名称", account.S("display_name"));
         var role = UI.Select("角色", UI.Choices(("finance", "财务"), ("warehouse", "仓库"), ("admin", "管理员")), account.S("role"));
         role.IsEnabled = !editing;
-        var scope = UI.Select("国家范围", UI.Choices(("all", "全部国家"), ("selected", "指定国家")), account.S("country_scope"));
+        var scope = UI.Select("国家/地区范围", UI.Choices(("all", "全部国家/地区"), ("selected", "指定国家/地区")), account.S("country_scope"));
         var(picker, chosen) = UI.CountryPicker(CountryValues, account.A("countries").Select(x => x!.ToString()));
-        var countryArea = UI.Stack(UI.Muted("负责国家", true), picker);
+        var countryArea = UI.Stack(UI.Muted("负责国家/地区", true), picker);
         countryArea.Spacing = 6;
         void Scope() => countryArea.Visibility = scope.Value() == "selected" ? Visibility.Visible : Visibility.Collapsed;
         scope.SelectionChanged += (_, _) => Scope();
         Scope();
         var form = UI.Stack(UI.Columns(2, id, name, role, scope), countryArea);
         if (editing)
-            form.Children.Add(UI.Muted("登录名和角色不可修改；修改国家会撤销该账户原会话。", true));
+            form.Children.Add(UI.Muted("登录名和角色不可修改；修改国家/地区会撤销该账户原会话。", true));
         form.MinWidth = 0;
         var dialog = UI.Dialog(editing ? "编辑账户" : "创建账户", form);
         dialog.PrimaryButtonText = "保存";
@@ -237,7 +250,7 @@ public sealed class AccountsView : UserControl
             foreach (var r in requests)
                 if (filter.Value() == "" || r.S("status") == filter.Value())
                     rows.Add(r!.DeepClone());
-            table.Content = UI.Table(rows, [new("account_id", "账户名", 160, ColumnKind.Mono), new("display_name", "显示名", 150), new("requester", "申请人", 150), new("status", "状态", 110, ColumnKind.Status), new("countries", "国家", 240)], n => _ = vm.Guard(() => ReviewRequest(n)));
+            table.Content = UI.Table(rows, [new("account_id", "账户名", 160, ColumnKind.Mono), new("display_name", "显示名", 150), new("requester", "申请人", 150), new("status", "状态", 110, ColumnKind.Status), new("countries", "国家/地区", 240)], n => _ = vm.Guard(() => ReviewRequest(n)));
         }
 
         filter.SelectionChanged += (_, _) => Show();
@@ -252,9 +265,9 @@ public sealed class AccountsView : UserControl
     {
         var id = UI.Field("新仓库账户名");
         var name = UI.Field("显示名");
-        var scope = UI.Select("国家范围", UI.Choices(("selected", "指定国家"), ("all", "全部国家")));
+        var scope = UI.Select("国家/地区范围", UI.Choices(("selected", "指定国家/地区"), ("all", "全部国家/地区")));
         var(picker, chosen) = UI.CountryPicker(CountryValues, vm.Session!.Countries);
-        var countryArea = UI.Stack(UI.Muted("国家（须在本人负责范围内）", true), picker);
+        var countryArea = UI.Stack(UI.Muted("国家/地区（须在本人负责范围内）", true), picker);
         countryArea.Spacing = 6;
         void Scope() => countryArea.Visibility = scope.Value() == "selected" ? Visibility.Visible : Visibility.Collapsed;
         scope.SelectionChanged += (_, _) => Scope();

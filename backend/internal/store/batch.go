@@ -498,7 +498,7 @@ func (s *Store) Batch(ctx context.Context, a WorkflowActor, id string) (out Revi
 	}
 	out.Status = status
 	if !access.Compatible(ctx, out.ScopeVersion) {
-		return ReviewBatch{}, workflowError("scope_changed", "负责国家已调整，请重新生成推荐并预览", WorkflowCase{})
+		return ReviewBatch{}, workflowError("scope_changed", "负责国家/地区已调整，请重新生成推荐并预览", WorkflowCase{})
 	}
 	if !a.valid() || out.Actor != a {
 		return ReviewBatch{}, workflowError("forbidden", "批次不属于当前身份", WorkflowCase{})

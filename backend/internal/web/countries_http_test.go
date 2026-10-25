@@ -31,7 +31,7 @@ func countryHTTPSet(t *testing.T, f *httpSecurityFixture, admin *httpSecurityCli
 		scope = "all"
 		countries = []string{}
 	}
-	w := f.request(t, admin, "PATCH", "/api/admin/accounts/"+id, map[string]any{"display_name": "隔离国家测试账户", "country_scope": scope, "countries": countries}, nil)
+	w := f.request(t, admin, "PATCH", "/api/admin/accounts/"+id, map[string]any{"display_name": "隔离国家/地区测试账户", "country_scope": scope, "countries": countries}, nil)
 	expectHTTPStatus(t, w, 200)
 }
 

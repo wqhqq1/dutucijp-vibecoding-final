@@ -79,24 +79,24 @@ func validateAccount(ctx context.Context, q access.Querier, in AccountInput) (ac
 	}
 	if p.CountryScope == "all" {
 		if len(p.Countries) > 0 {
-			return p, invalid("全部国家范围不能同时指定国家")
+			return p, invalid("全部国家/地区范围不能同时指定国家/地区")
 		}
 		return p, nil
 	}
 	if p.CountryScope != "selected" || len(p.Countries) == 0 || len(p.Countries) > 256 {
-		return p, invalid("请选择至少一个负责国家，或选择全部国家")
+		return p, invalid("请选择至少一个负责国家/地区，或选择全部国家/地区")
 	}
 	for _, country := range p.Countries {
 		var exists bool
 		if country == "" {
-			return p, invalid("负责国家不能为空")
+			return p, invalid("负责国家/地区不能为空")
 		}
 		e := q.QueryRowContext(ctx, `SELECT EXISTS(SELECT 1 FROM normalized_rows n JOIN datasets d ON d.id=n.dataset_id WHERE d.status='published' AND n.country=?)`, country).Scan(&exists)
 		if e != nil {
 			return p, e
 		}
 		if !exists {
-			return p, invalid("请选择已发布数据中的国家；尚未导入数据时可先使用全部国家")
+			return p, invalid("请选择已发布数据中的国家/地区；尚未导入数据时可先使用全部国家/地区")
 		}
 	}
 	return p, nil
@@ -198,7 +198,7 @@ func (s *Service) UpdateAccount(ctx context.Context, token, id string, in Accoun
 					return e
 				}
 				if count > 0 {
-					return conflict("仍有新国家范围之外的未结案派单，请先完成这些工作")
+					return conflict("仍有新国家/地区范围之外的未结案派单，请先完成这些工作")
 				}
 			}
 			p.PermissionsVersion++
@@ -362,7 +362,7 @@ func (s *Service) ReviewWarehouse(ctx context.Context, token, id string, approve
 				return e
 			}
 			if owner.Role != "finance" || !owner.Contains(p) {
-				return conflict("申请人当前国家权限已不再覆盖申请范围，请驳回后重新申请")
+				return conflict("申请人当前国家/地区权限已不再覆盖申请范围，请驳回后重新申请")
 			}
 			if e = availableAccount(ctx, c, p.ID, id); e != nil {
 				return e

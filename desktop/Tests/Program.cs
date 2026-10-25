@@ -257,7 +257,7 @@ await Check("Passkey迟到finish保留写切换锁且代次失效不登录", asy
     Assert(vm.Api.Csrf==""&&vm.Configuration?.BackendId=="backend-B","backend switch cleanup");NativeWebAuthn.Reset();
 });
 
-await Check("账户选择搜索角色国家与待办状态计算", () => {
+await Check("账户选择搜索角色国家/地区与待办状态计算", () => {
     var user=Json.Node(new{id="user-0042",display_name="测试仓库",role="warehouse",state="new",country_scope="selected",countries=new[]{"United Kingdom"}});
     Assert(AccountDirectory.Matches(user,"0042","warehouse","United Kingdom"),"ID/role/country");
     Assert(AccountDirectory.Matches(user,"测试仓库","",""),"display name");
@@ -282,7 +282,7 @@ await Check("旧后端迟到角标不污染新后端", async () => {
     try {await refresh;}catch(OperationCanceledException){}catch(ObjectDisposedException){}
     Assert(vm.PendingRequests==0&&vm.UnconfiguredAccounts==0,"stale count published");
 });
-await Check("派单覆盖单国多国缺国家且查询选择不受限制", () => {
+await Check("派单覆盖单国多国缺国家/地区且查询选择不受限制", () => {
     var uk=Json.Node(new{id="uk-only",role="warehouse",country_scope="selected",countries=new[]{"United Kingdom"}});
     Assert(AccountDirectory.Covers(uk,["United Kingdom"]),"own country");
     Assert(!AccountDirectory.Covers(uk,["France"])&&!AccountDirectory.Covers(uk,["United Kingdom","France"]),"must cover every selected country");
@@ -309,8 +309,8 @@ async Task VerifyCountrySelection((string Country,int Count)[] groups, Dictionar
     Assert(actual.SequenceEqual(expected),"all-page selection countries "+string.Join(',',actual));
     Assert(requests<=maxRequests,"country discovery loaded per-record pages");
 }
-await Check("百万条全选仅按国家计数跳页不加载全量",()=>VerifyCountrySelection([("France",600000),("United Kingdom",400000)],[],["France","United Kingdom"],4));
-await Check("全选排除完整国家并保留未排尽缺国家记录",()=>VerifyCountrySelection([("",3),("France",2),("United Kingdom",2)],new(){{"fr-1","France"},{"fr-2","France"},{"empty-1",""}},["","United Kingdom"],10));
-await Check("全选排除全部缺国家及法国后仅剩英国",()=>VerifyCountrySelection([("",3),("France",2),("United Kingdom",2)],new(){{"fr-1","France"},{"fr-2","France"},{"empty-1",""},{"empty-2",""},{"empty-3",""}},["United Kingdom"],10));
+await Check("百万条全选仅按国家/地区计数跳页不加载全量",()=>VerifyCountrySelection([("France",600000),("United Kingdom",400000)],[],["France","United Kingdom"],4));
+await Check("全选排除完整国家/地区并保留未排尽缺国家/地区记录",()=>VerifyCountrySelection([("",3),("France",2),("United Kingdom",2)],new(){{"fr-1","France"},{"fr-2","France"},{"empty-1",""}},["","United Kingdom"],10));
+await Check("全选排除全部缺国家/地区及法国后仅剩英国",()=>VerifyCountrySelection([("",3),("France",2),("United Kingdom",2)],new(){{"fr-1","France"},{"fr-2","France"},{"empty-1",""},{"empty-2",""},{"empty-3",""}},["United Kingdom"],10));
 Console.WriteLine($"RESULT {results.Count(r=>r.Passed)}/{results.Count} passed; {results.Count(r=>!r.Passed)} failed");
 Environment.ExitCode=results.Any(r=>!r.Passed)?1:0;

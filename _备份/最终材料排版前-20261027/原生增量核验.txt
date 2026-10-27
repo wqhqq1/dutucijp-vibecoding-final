@@ -1,0 +1,6 @@
+The bundle contains this ref:
+1841607328455f99b464ebe6ab5127988c861bd7 HEAD
+The bundle requires this ref:
+bf2de693874ed94c629130a95312112663848856 
+The bundle uses this hash algorithm: sha1
+E:/软件编程大作业/退货对账与差异处理系统/.backup/materials-sync-20261027-1841607/材料原生增量.bundle is okay

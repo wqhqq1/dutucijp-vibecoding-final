@@ -1,0 +1,34 @@
+{
+  "kind": "final-materials-awaiting-layout-no-final-zip",
+  "local_head": "1841607328455f99b464ebe6ab5127988c861bd7",
+  "base_native_head": "bf2de693874ed94c629130a95312112663848856",
+  "native_main_commits": 98,
+  "base_remote_head": "348106002951d430d9b7a8fd658de2d7f748e347",
+  "parts": [
+    {
+      "path": "_备份/最终材料排版前-20261027/材料原生增量.bundle.part001",
+      "filename": "材料原生增量.bundle.part001",
+      "bytes": 6291456,
+      "sha256": "678dc4d5dc8c8b78000ad63a35906113b3b8d647c0c193730df48482d77f755a",
+      "git_blob_sha": "027afb1702de4112a3746625ed5f56dbd9e93970"
+    },
+    {
+      "path": "_备份/最终材料排版前-20261027/材料原生增量.bundle.part002",
+      "filename": "材料原生增量.bundle.part002",
+      "bytes": 6291456,
+      "sha256": "e773801a79a9ee1cc16d8e508c7775c68946ab499a940d45a28d4eb9ebdbc99f",
+      "git_blob_sha": "0351c291ce98e602e34cc4e84a546e0913dc92f3"
+    },
+    {
+      "path": "_备份/最终材料排版前-20261027/材料原生增量.bundle.part003",
+      "filename": "材料原生增量.bundle.part003",
+      "bytes": 117567,
+      "sha256": "b1ea3619fbaffa2d74305816c4b4ea8efaca6729bc29ce9b2bee01da50c24622",
+      "git_blob_sha": "29468a9a3bb02042c2b8410ea46e51078a792a0a"
+    }
+  ],
+  "history_increment_sha256": "8dc6651e6e14350274734212613909c110bff28c637190f597215441a52219fe",
+  "final_zip_published": false,
+  "final_package": "awaiting user layout completion",
+  "course_submission_sent": false
+}

@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最终汇报（v1.2）· 退货对账与差异处理系统</title>
+<style>
+:root{
+  --paper:#f5f2ea; --paper-2:#ece7da; --card:#fffdf8;
+  --ink:#13303c; --ink-2:#3d5560; --muted:#7b8a8f; --rule:#d6cfbf;
+  --teal:#17394a; --teal-2:#1f6f78; --teal-soft:#dbe9e8;
+  --pass:#2d7a56; --pass-soft:#e1efe6;
+  --todo:#b0532c; --todo-soft:#f6e3d8;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;
+  --mono:"Cascadia Mono","Cascadia Code",Consolas,"Noto Sans SC",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0f2530;overflow:hidden;font-family:var(--sans);color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#deck{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--paper);color:var(--ink);padding:64px 88px 0;display:none;flex-direction:column;overflow:hidden;
+  background-image:linear-gradient(90deg,transparent 0 63px,rgba(176,83,44,.18) 63px 64px,transparent 64px 68px,rgba(176,83,44,.18) 68px 69px,transparent 69px)}
+.slide.active{display:flex;animation:enter .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.slide.active .reveal{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.slide.active .reveal:nth-child(2){animation-delay:.08s}.slide.active .reveal:nth-child(3){animation-delay:.16s}.slide.active .reveal:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* header */
+.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;position:relative}
+.head::after{content:"";position:absolute;left:0;right:0;bottom:-6px;border-bottom:1px solid var(--ink)}
+.head h2{font-family:var(--serif);font-weight:800;font-size:52px;letter-spacing:.02em;line-height:1.1}
+.head .no{font-family:var(--mono);font-size:18px;color:var(--muted);text-align:right;line-height:1.5}
+.head .no b{display:block;font-size:44px;color:var(--teal-2);font-weight:600;letter-spacing:-.02em}
+
+/* body */
+.main{flex:1;display:grid;gap:44px;padding-top:34px;min-height:0}
+.cols{grid-template-columns:540px 1fr}
+.rows{grid-template-rows:auto 1fr}
+.lines{list-style:none;display:flex;flex-direction:column;gap:22px;counter-reset:l}
+.lines li{counter-increment:l;font-size:27px;line-height:1.5;padding-left:54px;position:relative;color:var(--ink)}
+.lines li::before{content:counter(l,decimal-leading-zero);position:absolute;left:0;top:5px;font-family:var(--mono);font-size:17px;color:var(--teal-2);border:1px solid var(--teal-2);border-radius:3px;padding:1px 6px}
+.lines li b{color:var(--teal);font-weight:700}
+.lines.row3{flex-direction:row;gap:28px}.lines.row3 li{flex:1}
+.k{font-family:var(--mono);font-size:.92em;letter-spacing:-.01em}
+.tag{display:inline-block;font-size:.66em;font-weight:700;padding:2px 9px 3px;border-radius:3px;vertical-align:3px;margin-left:4px;letter-spacing:.04em}
+.tag.ok{color:var(--pass);background:var(--pass-soft)}.tag.todo{color:var(--todo);background:var(--todo-soft)}
+.tag.ok::before{content:"✓ "}.tag.todo::before{content:"○ "}
+
+/* footer */
+.foot{height:76px;flex:none;display:flex;align-items:center;gap:16px;border-top:1px solid var(--rule);margin-top:26px;font-size:18px;color:var(--ink-2)}
+.foot .ev{font-family:var(--serif);font-weight:700;color:var(--todo);border:1.5px solid var(--todo);padding:2px 10px;border-radius:2px;transform:rotate(-2deg);flex:none}
+.foot .src{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.foot .pg{font-family:var(--mono);color:var(--muted);flex:none}
+
+/* evidence figure */
+.fig{position:relative;background:var(--card);border:1px solid var(--rule);box-shadow:0 18px 40px -22px rgba(19,48,60,.45);border-radius:6px;overflow:hidden;cursor:zoom-in;align-self:start}
+.fig figcaption{position:absolute;left:0;bottom:0;right:0;padding:7px 12px;font-size:14px;color:#fff;background:linear-gradient(transparent,rgba(15,37,48,.82));font-family:var(--mono);pointer-events:none}
+.crop{position:relative;overflow:hidden;aspect-ratio:calc(var(--w)/var(--h));width:100%}
+.crop img{position:absolute;display:block;width:calc(var(--W)/var(--w)*100%);left:calc(var(--x)/var(--w)*-100%);top:calc(var(--y)/var(--h)*-100%);max-width:none}
+.mark{position:absolute;border:3px solid var(--todo);border-radius:6px;box-shadow:0 0 0 4px rgba(176,83,44,.18);
+  left:calc((var(--mx) - var(--x))/var(--w)*100%);top:calc((var(--my) - var(--y))/var(--h)*100%);width:calc(var(--mw)/var(--w)*100%);height:calc(var(--mh)/var(--h)*100%)}
+.mark span{position:absolute;right:-3px;bottom:100%;margin-bottom:6px;background:var(--todo);color:#fff;font-size:14px;font-weight:700;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.mark.below span{bottom:auto;top:100%;margin:6px 0 0}
+.mark.left span{right:auto;left:-3px}
+.mark.side span{right:auto;left:100%;bottom:auto;top:50%;transform:translateY(-50%);margin:0 0 0 10px}
+
+/* cover */
+.slide.cover{padding:0;background:var(--teal);color:#eef3f1;background-image:none}
+.cover .inner{position:absolute;inset:0;padding:86px 110px;display:grid;grid-template-columns:1fr 580px;gap:50px}
+.cover .eyebrow{font-family:var(--mono);letter-spacing:.32em;font-size:16px;color:#8fb8b6}
+.cover h1{font-family:var(--serif);font-weight:900;font-size:96px;line-height:1.12;margin:30px 0 0;color:#fff;letter-spacing:.03em}
+.cover .sub{margin-top:30px;font-size:24px;color:#b8cfcc;line-height:1.7}
+.cover dl{align-self:center;border-top:2px solid #e8efe9;border-bottom:2px solid #e8efe9}
+.cover dl div{display:grid;grid-template-columns:120px 1fr;padding:24px 0;border-bottom:1px solid rgba(232,239,233,.25);align-items:baseline}
+.cover dl div:last-child{border-bottom:0}
+.cover dt{font-size:17px;color:#8fb8b6;letter-spacing:.2em}
+.cover dd{font-size:28px;white-space:nowrap;font-weight:600;color:#fff}
+.cover .ledger{position:absolute;left:110px;bottom:150px;font-family:var(--mono);color:rgba(255,255,255,.1);font-size:150px;font-weight:700;letter-spacing:-.04em;line-height:1;pointer-events:none}
+.cover .foot{position:absolute;left:110px;right:110px;bottom:34px;border-top-color:rgba(232,239,233,.3);color:#b8cfcc;margin:0}
+.cover .foot .ev{color:#f0b694;border-color:#f0b694}
+
+/* table */
+table.scale{width:100%;border-collapse:collapse;font-size:25px}
+.scale th{font-size:17px;letter-spacing:.14em;color:var(--muted);text-align:left;font-weight:600;padding:0 18px 12px;border-bottom:2px solid var(--ink)}
+.scale td{padding:13px 18px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.scale td:nth-child(1){font-weight:700;width:260px}
+.scale td:nth-child(2){font-family:var(--mono);color:var(--muted);width:240px}
+.scale td:nth-child(3) .big{font-family:var(--serif);font-weight:800;font-size:34px;color:var(--teal);margin-right:10px}
+.scale td:nth-child(4){width:260px;text-align:right}
+.scale tr:hover td{background:rgba(31,111,120,.05)}
+.scale .note{color:var(--ink-2);font-size:21px}
+
+/* modules strip */
+.mods{display:flex;gap:10px;margin-top:4px}
+.mods span{flex:1;text-align:center;font-size:19px;padding:10px 0;border:1px solid var(--teal-2);color:var(--teal);border-radius:4px;background:var(--teal-soft)}
+
+/* chart */
+.chart{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:26px 30px 18px;box-shadow:0 18px 40px -22px rgba(19,48,60,.45);align-self:start}
+.chart h3{font-family:var(--serif);font-size:24px;margin-bottom:4px}
+.chart .cap{font-size:16px;color:var(--muted);margin-bottom:6px}
+.chart svg{width:100%;height:auto;display:block}
+.chart svg text{font-family:var(--sans)}
+.bar{transition:opacity .2s}.bar:hover{opacity:.82}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.tile{border:1px solid var(--rule);border-radius:6px;padding:14px 16px;background:var(--paper)}
+.tile .lab{font-size:15px;color:var(--muted)}
+.tile .val{font-family:var(--serif);font-weight:800;font-size:36px;color:var(--teal);line-height:1.25}
+.tile .val small{font-size:18px;font-weight:600;margin-left:3px}
+.tile .lim{font-size:15px;color:var(--ink-2)}
+
+/* flow chips */
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.flow span{background:var(--card);border:1px solid var(--teal-2);color:var(--teal);font-size:20px;font-weight:600;padding:6px 14px;border-radius:999px}
+.flow i{font-style:normal;color:var(--teal-2);font-size:20px}
+.demo-btn{display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:var(--todo);color:#fff;border:0;border-radius:6px;padding:14px 22px;font:700 22px var(--sans);cursor:pointer;box-shadow:0 10px 24px -12px rgba(176,83,44,.8)}
+.demo-btn:hover{filter:brightness(1.08)}
+.demo-btn .dot{width:12px;height:12px;border-radius:50%;background:#ccc;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.demo-btn .dot.on{background:#7be3a6}.demo-btn .dot.off{background:#ffd27a}
+.demo-btn small{font:500 15px var(--mono);opacity:.85}
+
+/* terminal */
+.term{background:#0f1f26;color:#cfe3df;border-radius:6px;padding:20px 26px;font:16px/1.55 var(--mono);box-shadow:0 18px 40px -22px rgba(0,0,0,.6);align-self:start;white-space:pre;overflow:hidden}
+.term .p{color:#7fb7b0}.term .h{color:#f0b694}.term .g{color:#6c8a90}.term .y{color:#ffd27a}
+.term .ann{display:inline-block;margin-left:8px;color:#0f1f26;background:#f0b694;padding:0 8px;border-radius:3px;font-weight:700;font-family:var(--sans);font-size:14px}
+.term .ann.ok{background:#7be3a6}
+
+/* file cards */
+.files{display:flex;flex-direction:column;gap:16px;align-self:start}
+.file{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(19,48,60,.5)}
+.file .fh{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--paper-2);font:600 16px var(--mono);color:var(--ink-2)}
+.file pre{padding:14px 18px;font:15.5px/1.6 var(--mono);color:var(--ink);white-space:pre-wrap}
+.file pre .c{color:var(--muted)}.file pre .s{color:var(--teal-2)}
+.stamp{font:700 15px var(--sans);padding:2px 10px;border-radius:3px}
+.stamp.ok{color:var(--pass);background:var(--pass-soft)}.stamp.todo{color:var(--todo);background:var(--todo-soft)}
+
+/* failure cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;flex:1;min-height:0}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 18px 40px -24px rgba(19,48,60,.5)}
+.card .ct{padding:20px 22px 0}
+.card .n{font:600 15px var(--mono);color:var(--todo);letter-spacing:.1em}
+.card h3{font-family:var(--serif);font-size:30px;margin:6px 0 12px}
+.card dl{display:grid;grid-template-columns:62px 1fr;row-gap:6px;font-size:19.5px;line-height:1.45}
+.card dt{color:var(--muted);font-size:16px;padding-top:3px}
+.card .fig{margin:20px 22px 22px;border-radius:4px;align-self:stretch}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(7,1fr);gap:0;align-self:start;margin-top:4px}
+.tl div{position:relative;padding:44px 12px 0 0}
+.tl div::before{content:"";position:absolute;left:0;right:0;top:15px;border-top:3px solid var(--rule)}
+.tl div::after{content:"";position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:50%;background:var(--paper);border:3px solid var(--teal-2)}
+.tl .done::before{border-top-color:var(--teal-2)}.tl .done::after{background:var(--teal-2)}
+.tl .rest::after{border-color:var(--todo);border-style:dashed}
+.tl b{display:block;font:700 25px var(--mono);color:var(--teal)}
+.tl .rest b{color:var(--todo)}
+.tl p{font-size:20px;line-height:1.5;color:var(--ink-2);margin-top:6px}
+.ask{margin-top:6px;background:var(--teal);color:#fff;border-radius:6px;padding:22px 26px;font-size:27px;display:flex;gap:18px;align-items:center}
+.ask b{font-family:var(--serif);color:#f0b694;font-size:20px;flex:none;border:1.5px solid #f0b694;padding:2px 10px;border-radius:3px}
+
+/* v1.2: compact lines, field chips, mini tables */
+.lines.sm{gap:16px}.lines.sm li{font-size:23.5px;line-height:1.5}
+.lines.sm li::before{top:3px}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 22px;box-shadow:0 14px 30px -22px rgba(19,48,60,.5)}
+.box h4{font:600 15px var(--mono);color:var(--muted);letter-spacing:.12em;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips code{font:600 17px var(--mono);background:var(--teal-soft);color:var(--teal);padding:4px 10px;border-radius:4px;border:1px solid rgba(31,111,120,.35)}
+.chips code.c{background:var(--todo-soft);color:var(--todo);border-color:rgba(176,83,44,.4)}
+table.mini{width:100%;border-collapse:collapse;font-size:19px;margin-top:6px}
+.mini th{font-size:14px;letter-spacing:.08em;color:var(--muted);text-align:right;font-weight:600;padding:0 8px 8px;border-bottom:2px solid var(--ink)}
+.mini th:first-child,.mini td:first-child{text-align:left}
+.mini td{padding:9px 8px;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono)}
+.mini td:first-child{font-family:var(--sans);font-weight:700}
+.mini td small{display:block;font:400 13px var(--sans);color:var(--muted)}
+.side-note{font-size:19px;line-height:1.6;color:var(--ink-2);align-self:center}
+.side-note b{color:var(--teal)}
+/* rules */
+.rules{display:flex;flex-direction:column;gap:14px}
+.rule{display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:start;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--teal-2);border-radius:6px;padding:14px 18px}
+.rule .id{font:700 20px var(--mono);color:var(--teal-2);line-height:1.3}
+.rule .id small{display:block;font:500 15px var(--sans);color:var(--muted);margin-top:2px}
+.rule p{font-size:23px;line-height:1.5}
+.rule p b{color:var(--teal)}
+.rules.tight{gap:10px}.rules.tight .rule{padding:11px 18px}.rules.tight .rule p{font-size:21px}
+.simtag.sm{font-size:12px;padding:1px 7px;right:8px;top:8px;bottom:auto}
+.simtag{position:absolute;right:12px;bottom:44px;background:var(--todo);color:#fff;font:700 15px var(--sans);padding:3px 10px;border-radius:3px;box-shadow:0 0 0 3px rgba(176,83,44,.18)}
+.rule.new{border-left-color:var(--todo)}.rule.new .id{color:var(--todo);font-size:18px}
+.rules.tight .why{font-size:20px;padding:15px 22px}
+.why{background:var(--teal);color:#eef3f1;border-radius:6px;padding:18px 22px;font-size:21.5px;line-height:1.55}
+.why b{color:#f0b694;font-family:var(--serif)}
+/* architecture */
+.arch{display:grid;grid-template-columns:1fr 34px 1.15fr 34px 1.3fr 34px 1fr 34px 1.15fr;align-items:stretch}
+.arch .n{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--teal-2);border-radius:6px;padding:16px 16px 14px;box-shadow:0 14px 30px -22px rgba(19,48,60,.5)}
+.arch .n.src{border-top-color:var(--muted)}
+.arch .n h3{font-family:var(--serif);font-size:26px;line-height:1.25}
+.arch .n code{display:block;font:14px/1.5 var(--mono);color:var(--teal-2);margin:6px 0 8px;word-break:break-all}
+.arch .n p{font-size:19px;line-height:1.5;color:var(--ink-2)}
+.arch i{display:grid;place-items:center;font-style:normal;color:var(--teal-2);font-size:26px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.facts .box p{font-size:21px;line-height:1.65}
+.facts .box{padding:22px 26px}
+.facts .box p b{color:var(--teal)}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.layers span{padding:14px 20px;font-size:19px;color:var(--ink-2);background:var(--paper-2);border-right:1px solid var(--rule)}
+.layers span:last-child{border-right:0}
+.layers b{display:block;font-family:var(--serif);font-size:22px;color:var(--teal);margin-bottom:2px}
+/* test table */
+table.tt{width:100%;border-collapse:collapse;font-size:18.5px;line-height:1.42}
+.tt th{font-size:14px;letter-spacing:.1em;color:var(--muted);text-align:left;font-weight:600;padding:0 12px 9px;border-bottom:2px solid var(--ink)}
+.tt td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tt td:first-child{width:150px;font-weight:700;color:var(--teal)}
+.tt td:first-child small{display:block;font:500 14px var(--mono);color:var(--muted);margin-top:2px}
+.tt td:last-child{width:70px;font-family:var(--mono);color:var(--teal-2);text-align:center}
+.tt tr.mainrow td:first-child{color:var(--pass)}
+.tt .ok{color:var(--pass);font-weight:700}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.thumbs .fig{align-self:stretch}
+.cap2{font-size:16px;color:var(--ink-2);margin-top:8px}
+
+/* chrome (not in print) */
+#progress{position:fixed;left:0;bottom:0;height:4px;background:#f0b694;transition:width .35s;z-index:5}
+#hud{position:fixed;right:16px;bottom:14px;display:flex;gap:8px;z-index:6;opacity:.0;transition:opacity .3s}
+body:hover #hud{opacity:1}
+#hud button{background:rgba(15,37,48,.78);color:#dfe9e6;border:1px solid rgba(255,255,255,.18);border-radius:6px;font:13px var(--sans);padding:7px 11px;cursor:pointer}
+#hud button:hover{background:#1f6f78}
+.overlay{position:fixed;inset:0;background:rgba(9,22,28,.92);z-index:20;display:none;color:#e8efed}
+.overlay.open{display:block}
+#lightbox{display:none;place-items:center;cursor:zoom-out;padding:36px}
+#lightbox.open{display:grid}
+#lightbox img{max-width:94vw;max-height:84vh;box-shadow:0 20px 60px rgba(0,0,0,.6);background:#fff}
+#lightbox p{margin-top:14px;font:14px var(--mono);color:#9fbcb8;text-align:center}
+#overview{overflow:auto;padding:40px}
+#overview .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px}
+#overview .th{cursor:pointer;border-radius:6px;overflow:hidden;outline:2px solid transparent}
+#overview .th:hover,#overview .th.cur{outline-color:#f0b694}
+#overview .th .box{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--paper)}
+#overview .th .box>.slide{display:flex;transform:scale(var(--s));transform-origin:0 0;width:1600px;height:900px;animation:none}
+#overview .th p{padding:8px 4px;font-size:14px}
+#demo-panel{padding:60px 80px;overflow:auto;background:#0f2530}
+#demo-panel h2{font-family:var(--serif);font-size:38px;margin-bottom:6px}
+#demo-panel .lead{color:#9fbcb8;margin-bottom:26px;font-size:17px}
+#demo-panel ol{counter-reset:d;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 34px;max-width:1300px}
+#demo-panel li{counter-increment:d;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:16px 18px 16px 62px;position:relative;font-size:18px;line-height:1.55}
+#demo-panel li::before{content:counter(d);position:absolute;left:18px;top:14px;width:30px;height:30px;border-radius:50%;background:#f0b694;color:#0f1f26;font:700 16px/30px var(--mono);text-align:center}
+#demo-panel li b{color:#fff}#demo-panel li em{font-style:normal;color:#9fbcb8;font-size:15px;display:block;margin-top:4px}
+#demo-panel .acts{display:flex;gap:14px;margin:26px 0}
+#demo-panel .acts button,#demo-panel .acts code{font:600 17px var(--sans);padding:12px 18px;border-radius:6px;border:0;cursor:pointer}
+#demo-panel .acts button{background:#b0532c;color:#fff}
+#demo-panel .acts code{background:rgba(255,255,255,.08);color:#ffd27a;font-family:var(--mono);cursor:copy}
+#demo-panel .warn{color:#ffd27a;font-size:15px;max-width:1300px;line-height:1.6}
+.toast{position:fixed;left:50%;top:22px;transform:translateX(-50%);background:#1f6f78;color:#fff;padding:9px 18px;border-radius:6px;font-size:15px;z-index:30;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.blank #deck{visibility:hidden}
+.static *{animation:none!important}
+.static #progress,.static #hud{display:none}
+
+/* presenter */
+body.presenter{overflow:auto;background:#0d1d24;color:#dfe9e6}
+body.presenter #viewport,body.presenter #hud,body.presenter #progress{display:none}
+#pv{display:none;height:100vh;padding:18px;gap:18px;grid-template-columns:1.55fr 1fr;grid-template-rows:auto 1fr auto}
+body.presenter #pv{display:grid}
+#pv .bar{grid-column:1/-1;display:flex;align-items:center;gap:22px;font-family:var(--mono)}
+#pv .clock{font-size:46px;font-weight:700;color:#fff}
+#pv .clock small{font-size:20px;color:#7fb7b0;margin-left:8px}
+#pv .meter{flex:1;height:10px;background:#21363f;border-radius:5px;position:relative;overflow:hidden}
+#pv .meter i{position:absolute;inset:0 auto 0 0;background:#1f6f78;border-radius:5px}
+#pv .meter i.late{background:#b0532c}
+#pv .st{font-size:22px}
+#pv .st.late{color:#f0b694}
+#pv .bar button{background:#21363f;color:#dfe9e6;border:1px solid #35505a;border-radius:6px;font:15px var(--sans);padding:8px 14px;cursor:pointer}
+#pv .bar button:hover{background:#1f6f78}
+#pv .bar button.hot{background:#b0532c;border-color:#b0532c}
+#pv .now,#pv .next{position:relative;background:#000;border-radius:8px;overflow:hidden}
+#pv .now{grid-row:2;aspect-ratio:16/9;align-self:start}
+#pv .plan{grid-row:3;display:flex;gap:6px;font:13px var(--sans)}
+#pv .plan span{flex:var(--f);min-width:58px;background:#17303a;border-radius:4px;padding:8px 6px;color:#9fbcb8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#pv .plan span.done{background:#1f4b52;color:#dfe9e6}
+#pv .plan span.cur{background:#b0532c;color:#fff}
+#pv .stage{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0}
+#pv .stage .slide{display:flex;animation:none}
+#pv .side{display:flex;flex-direction:column;gap:14px;min-height:0;grid-row:2/4}
+#pv .next{aspect-ratio:16/9;flex:none}
+#pv .next::after{content:"下一页";position:absolute;left:10px;top:8px;background:rgba(0,0,0,.6);padding:2px 8px;border-radius:4px;font-size:13px}
+#pv .notes{flex:1;overflow:auto;background:#13262e;border-radius:8px;padding:20px 24px;font-size:22px;line-height:1.75;color:#eef4f2}
+#pv .notes h4{font:600 15px var(--mono);color:#7fb7b0;margin-bottom:10px;letter-spacing:.06em}
+#pv .notes .hint{margin-top:16px;font-size:16px;color:#9fbcb8;line-height:1.6;border-top:1px solid #2a434c;padding-top:12px}
+#pv .notes strong{color:#ffd27a;font-weight:600}
+aside.notes{display:none}
+
+@media print{
+  @page{size:1600px 900px;margin:0}
+  html,body{overflow:visible;background:#fff;height:auto}
+  #viewport{position:static;display:block}
+  #deck{transform:none!important;width:1600px;height:auto}
+  .slide{position:relative;display:flex!important;width:1600px;height:900px;break-after:page;animation:none!important}
+  .slide *{animation:none!important}
+  #hud,#progress,.overlay,.toast,.demo-btn,#pv{display:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="deck">
+
+<!-- ============ 封面 ============ -->
+<section class="slide cover" data-title="封面" data-sec="10">
+  <div class="inner">
+    <div>
+      <p class="eyebrow">FINAL REVIEW · VC-R-03 · 课程材料 v1.2</p>
+      <h1>退货对账<br>与差异处理系统</h1>
+      <p class="sub">取消交易没有原单号——<br>规则给候选，人来核查，过程可追溯。</p>
+    </div>
+    <dl>
+      <div><dt>题号</dt><dd>VC-R-03</dd></div>
+      <div><dt>姓名</dt><dd>王麒皓</dd></div>
+      <div><dt>学号班级</dt><dd>20251101030 · 机国际2502</dd></div>
+      <div><dt>数据集</dt><dd>UCI Online Retail II</dd></div>
+    </dl>
+  </div>
+  <div class="ledger">1,067,371</div>
+  <div class="foot"><span class="ev">证据</span><span class="src">提交索引.md（采用课程 v1.2）；数据 DOI 10.24432/C5CG6D；软件 585d6d5；材料更新 2026-10-27；完整交付入口见提交索引</span><span class="pg">00 / 09</span></div>
+  <aside class="notes"><p>老师好，我是王麒皓。我的项目是退货对账与差异处理系统，使用UCI两年度全量数据，已形成网页和Windows客户端的共同业务入口。</p><p class="hint">VC-R-03；课程v1.2。数据原始1,067,371行；本人借助工具完成规则、数据、流程与界面审核。</p></aside>
+</section>
+
+<!-- ============ 第1页 ============ -->
+<section class="slide" data-title="一、业务场景与用户" data-sec="25">
+  <div class="head"><h2>一、业务场景与用户</h2><div class="no"><b>01</b>谁用 · 原来卡在哪</div></div>
+  <div class="main cols">
+    <ul class="lines">
+      <li class="reveal">三类用户：<b>财务</b>派单，<b>仓库</b>核查本人差异，<b>管理员</b>看全局。</li>
+      <li class="reveal">难点：取消行<b>没有原单号</b>，项目要解决候选难判断、核查分工和处理过程难追溯的问题。</li>
+      <li class="reveal">系统把候选、责任人、状态、结论连成一条记录，同类差异可按建议<b>批量复核</b>；<b>交易是官方事实</b>，配对是规则推断，处理是课程模拟。</li>
+    </ul>
+    <figure class="fig reveal" data-src="证据原图/1018M-01-财务差异总览-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/01-财务差异总览-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:236;--y:0;--w:1204;--h:612;--mx:297;--my:270;--mw:1067;--mh:86">
+        <img src="证据原图/1018M-01-财务差异总览-模拟数据.png" alt="财务差异总览（模拟数据）">
+        <div class="mark below" style=""><span>差异总数与三种状态</span></div>
+        <div class="mark left" style="--mx:272;--my:500;--mw:1117;--mh:105"><span>推荐复核与批量处理（10-18 新增）</span></div>
+        <span class="simtag">网页示意 · 模拟数据</span>
+      </div>
+      <figcaption>01-财务差异总览 · 10-18网页界面示意（模拟数据） · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md 使用者与目标；界面图 2026-10-18 截图/中期汇报界面-模拟数据/01（最新前端，模拟数据）</span><span class="pg">01 / 09</span></div>
+  <aside class="notes"><p>财务负责派单和复核，仓库处理自己范围内的问题，管理员维护账户与权限。取消交易没有原单关联号，所以系统要把候选证据、处理人、结论和历史连起来。官方交易是事实，配对是规则推断；系统不进行资金操作。</p><p class="hint">右图为历史网页模拟界面，仅示意布局。最终软件支持多财务、多仓库及国家/地区范围；完整需求见要做什么.md。</p></aside>
+</section>
+
+<!-- ============ 第2页 ============ -->
+<section class="slide" data-title="二、数据来源与准备" data-sec="25">
+  <div class="head"><h2>二、数据来源与准备</h2><div class="no"><b>02</b>官方原件 · 清洗 · 分母</div></div>
+  <div class="main rows" style="gap:22px;padding-top:28px">
+    <div style="display:grid;grid-template-columns:1fr 610px;gap:36px">
+      <ul class="lines sm">
+        <li class="reveal">来源：UCI Online Retail II，DOI <span class="k">10.24432/C5CG6D</span>，CC BY 4.0；一个 xlsx 两张年度表，原件只读、记 SHA-256。</li>
+        <li class="reveal">读取 8 个原始列（右）；<span class="k">Invoice</span> 以 C 开头即取消行；源行号 = 表序号:Excel 行号，可回查。</li>
+        <li class="reveal">清洗：排除 <b>28,553</b> = 跨表副本 22,523 ＋ 非正价格 6,029 ＋ 数量不合法 1；缺客户 243,007 行保留、标记、不自动配对。</li>
+      </ul>
+      <div class="box reveal">
+        <h4>实际列名（真实表头）</h4>
+        <div class="chips"><code class="c">Invoice</code><code>StockCode</code><code>Description</code><code>Quantity</code><code>InvoiceDate</code><code>Price</code><code>Customer ID</code><code>Country</code></div>
+        <table class="mini" style="margin-top:14px">
+          <thead><tr><th>范围</th><th>原始</th><th>接纳</th><th>排除</th><th>接纳取消</th></tr></thead>
+          <tbody>
+            <tr><td>year1<small>Year 2009-2010</small></td><td>525,461</td><td>521,770</td><td>3,691</td><td>10,205</td></tr>
+            <tr><td>all<small>两张工作表</small></td><td>1,067,371</td><td>1,038,818</td><td>28,553</td><td>19,164</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1040px 1fr;gap:30px;min-height:0">
+      <figure class="fig reveal" data-src="证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/02-来源守恒与原因筛选-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:272;--y:140;--w:1118;--h:295;--mx:297;--my:152;--mw:1067;--mh:44">
+        <img src="证据原图/1018M-02-来源守恒与原因筛选-模拟数据.png" alt="来源守恒与原因筛选（模拟数据）">
+        <div class="mark below left" style=""><span>来源守恒展开：原始 = 接纳 + 排除；三类分类</span></div>
+        <div class="mark" style="--mx:1069;--my:395;--mw:299;--mh:37"><span>七种原因可筛选</span></div>
+        <span class="simtag">网页示意 · 模拟数据</span>
+      </div>
+      <figcaption>02-来源守恒与原因筛选 · 10-18网页界面示意（模拟数据） · 点击看原图</figcaption>
+    </figure>
+      <p class="side-note reveal">原始可识别取消 19,494 = 接纳 <b>19,164</b> ＋ 排除 330。<br>接纳取消 19,164 = 自动 9,714 ＋ 疑似 6,275 ＋ 无合格原单 3,175。<br>这是分类分母，不是“配对正确”的分母。</p>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">官方数据只读核查.md；要做什么.md CR-01–06；10-15 官方all准备清单.json；实际运行结果.txt 第一节；界面图 10-18 模拟数据/02</span><span class="pg">02 / 09</span></div>
+  <aside class="notes">
+    <p>数据来自 UCI 官方，DOI 写在页上，一个 Excel 两张年度表，原件只读。8 个原始列里，<strong>Invoice 以 C 开头就是取消</strong>。全量 106 万 7 千多行，排除 2 万 8 千多行，主要是两表重叠的副本和非正价格；缺客户的行保留，但不自动配对。</p>
+    <p class="hint">year1 = Year 2009-2010 整张表；两表日期有重叠，跨表八字段全同的按出现次数对齐，次表副本排除并链接原记录（CR-05）。243,007 是 all 中缺客户的标记行数（含销售），不是排除数。清洗版本 cr-1.0.1。取消分母不悄悄换：原始可识别取消 19,494，其中 330 行在清洗中排除，余 19,164 进入分类；无法识别单号的排除行不猜作取消。</p>
+  </aside>
+</section>
+
+<!-- ============ 第3页 ============ -->
+<section class="slide" data-title="三、最终功能与客户端" data-sec="35">
+<div class="head"><h2>三、最终功能与客户端</h2><div class="no"><b>03</b>FR-01—21 · 网页与原生</div></div>
+<div class="main cols" style="grid-template-columns:600px 1fr">
+<ul class="lines sm">
+<li class="reveal"><b>基础业务</b>：官方全量、保守配对、检索导出、派单处理和审计。</li>
+<li class="reveal"><b>FR-19</b>：多财务/仓库账户，国家/地区范围与开户审批，删除后保留已办历史。</li>
+<li class="reveal"><b>FR-20</b>：核实修正、凭证补录、待补充及重核，保留原始事实与初次结果。</li>
+<li class="reveal"><b>FR-21</b>：WinUI 3 客户端共用 Go API；账户搜索、官方选项卡及数量角标。</li></ul>
+<figure class="fig reveal" style="background:#101010" data-src="证据原图/1025-WinUI账户管理-隔离验证.png">
+<img style="width:100%;height:100%;object-fit:contain" src="证据原图/1025-WinUI账户管理-隔离验证.png" alt="WinUI账户管理隔离界面验证">
+<figcaption>10-25 WinUI 3账户管理 · 隔离界面验证数据</figcaption></figure></div>
+<div class="foot"><span class="ev">证据</span><span class="src">最终项目报告第四节；desktop/功能对照表.md；10-25 FR21执行交接与界面原图</span><span class="pg">03 / 09</span></div>
+<aside class="notes"><p>在中期基础上，我补入三个方面。FR-19支持多账户、国家地区分工和开户审批；FR-20在资料不足时先核实补充再重新计算，并保留历史；FR-21提供Windows原生客户端，与网页共用后端权限和业务规则。右图展示最新账户管理界面。</p><p class="hint">图来自2026-10-25隔离WinUI验证；fixture账户与数字是验证数据。最新209 Go、11前端、38客户端和18隔离UI场景均有记录。</p></aside></section>
+
+<!-- ============ 第4页 ============ -->
+<section class="slide" data-title="四、关键规则与决定" data-sec="25">
+  <div class="head"><h2>四、关键规则与决定</h2><div class="no"><b>04</b>四条改变结果的规则</div></div>
+  <div class="main cols" style="grid-template-columns:1fr 455px;gap:40px;padding-top:24px">
+    <div class="rules tight">
+      <div class="rule reveal"><div class="id">R-02<small>合格候选</small></div><p>客户、商品、精确单价、国家/地区一致；销售<b>严格早于</b>取消；剩余量 ≥ 取消量。缺客户或国家/地区不自动配对。</p></div>
+      <div class="rule reveal"><div class="id">FR-06<small>唯一才自动</small></div><p>首轮只有<b>唯一</b>合格候选才自动配对，部分退货扣余量；多候选不因数量相等或时间先后挑一个。</p></div>
+      <div class="rule reveal"><div class="id">R-04<small>顺序状态</small></div><p>待处理 → 处理中 → 已关闭；关闭须有处理结论，已关闭只读；<b>未解决先补充重核</b>。</p></div>
+      <div class="rule reveal new"><div class="id">复核建议<small>review-1.0.0</small></div><p>重复归组、整单、最近一笔只是<b>建议</b>，人工复核后才生效；重复组只计一次余量，冲突整组跳过，不改首轮结果。</p></div>
+      <div class="why reveal"><b>为什么保守</b>　数据没有原单关联号，配错会把退款记到错误的销售上、事后难发现，所以首轮宁可留给人核查。代价：all 首轮覆盖 9,714 / 19,164 ≈ 50.69%——是覆盖率，不是准确率。</div>
+    </div>
+    <figure class="fig reveal" data-src="证据原图/1018M-04-候选对比未自动挑选-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/04-候选对比未自动挑选-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:640;--y:20;--w:770;--h:880;--mx:653;--my:282;--mw:729;--mh:78">
+        <img src="证据原图/1018M-04-候选对比未自动挑选-模拟数据.png" alt="候选对比（模拟数据）">
+        <div class="mark below left" style=""><span>3 条合格候选逐字段对比</span></div>
+        <div class="mark" style="--mx:768;--my:690;--mw:614;--mh:48"><span>未派单处理前均不可选，系统不自动挑</span></div>
+        <span class="simtag">网页示意 · 模拟数据</span>
+      </div>
+      <figcaption>04-候选对比未自动挑选 · 10-18网页界面示意（模拟数据） · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">要做什么.md R-02、R-03、R-04、R-07、FR-06、NR-04 及 10-18 批量复核扩展；决定记录.md；TC-10/12/15/21/24、49–53；界面图 10-18 模拟/04；0:1378 实拍 v12中期复核/03</span><span class="pg">04 / 09</span></div>
+  <aside class="notes"><p>关键决定仍然保守：同客户、商品、精确单价和国家地区，销售严格在先且余额足够；首轮只有唯一候选才自动接受。买十退四剩六，不能超退。整单和最近一笔只是人工复核建议。现在资料未解决必须补充重核，不能只写一段结论就结束问题。</p><p class="hint">FR-20扩展旧关闭规则。建议review-1.0.0与首轮conservative-1.0.0分开；重复销售组只计一次容量，冲突组原子跳过。</p></aside>
+</section>
+
+<!-- ============ 第5页 ============ -->
+<section class="slide" data-title="五、共用后端与双端结构" data-sec="35">
+  <div class="head"><h2>五、共用后端与双端结构</h2><div class="no"><b>05</b>输入 → 规则 → 结果</div></div>
+  <div class="main rows" style="grid-template-rows:auto auto auto;align-content:start;gap:30px;padding-top:36px">
+    <div class="arch reveal">
+      <div class="n src"><h3>官方 xlsx</h3><code>项目外只读 · SHA 校验</code><p>两张年度表，八个原始列</p></div><i>→</i>
+      <div class="n"><h3>Python 准备</h3><code>tools/prepare.py</code><p>CR-01–06 清洗、源行号、排除原因与守恒验算</p></div><i>→</i>
+      <div class="n"><h3>Go · Gin 服务</h3><code>backend/internal/<br>reconcile · store · auth</code><p>首轮配对、复核建议与批次、状态工作流、会话权限</p></div><i>→</i>
+      <div class="n"><h3>SQLite</h3><code>运行库在项目外</code><p>交易、差异、分配余量、审计；版本号防并发</p></div><i>→</i>
+      <div class="n"><h3>网页 / WinUI 3</h3><code>frontend / desktop</code><p>网页与Windows原生客户端共用Go API，筛选分页在服务端</p></div>
+    </div>
+    <div class="facts">
+      <div class="box reveal"><h4>输入 / 输出</h4><p>输入：官方 xlsx ＋ 范围 <b>benchmark / year1 / all</b>。<br>输出：差异工单、候选证据、复核批次、操作审计、筛选 CSV。</p></div>
+      <div class="box reveal"><h4>角色 / 安全</h4><p><b>财务</b>看全部并派单，<b>仓库</b>只看本人差异，<b>管理员</b>管全局；先完成强密码＋Passkey/TOTP，Passkey 登录时由所选凭据识别账户。</p></div>
+      <div class="box reveal"><h4>入口 / 复现</h4><p><span class="k">启动Demo.cmd</span> → localhost:8080<br><span class="k">./reproduce.ps1 -Scope year1|all</span> 从空验证库复现；<span class="k">./test.ps1</span> 跑自动测试。</p></div>
+    </div>
+    <div class="layers reveal"><span><b>官方事实</b>交易行、八个原始列、源行号（只读）</span><span><b>规则推断</b>首轮配对与差异原因（conservative-1.0.0）；复核建议（review-1.0.0）</span><span><b>课程模拟</b>派单、确认、结论、批量复核与审计（演示/隔离账户）</span></div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">怎么做.md；运行说明.md；backend/、frontend/、tools/ 目录；决定记录.md D-04；2026-10-18 批量复核实现、Passkey选择登录记录</span><span class="pg">05 / 09</span></div>
+  <aside class="notes"><p>数据由Python准备，Go和Gin负责规则、权限及事务，SQLite保存数据和历史。网页使用React，Windows使用WinUI 3，两端共用同一套API，避免重复实现配对和权限。比较过FastAPI等方案，最终沿用Go架构，没有用缩小数据或降低认证来换速度。</p><p class="hint">API为60路径、64操作、48组件模型。WinUI采用.NET 9；客户端不自行启动Go服务。FastAPI、Rust、Java和C#后端未做同机完整横评。</p></aside>
+</section>
+
+<!-- ============ 第6页 ============ -->
+<section class="slide" data-title="六、全量运行与复核结果" data-sec="35">
+  <div class="head"><h2>六、全量运行与复核结果</h2><div class="no"><b>06</b>首轮结果 → 人工复核批量</div></div>
+  <div class="main cols" style="grid-template-columns:1fr 700px;gap:36px">
+    <div>
+      <ul class="lines sm" style="gap:16px">
+        <li class="reveal"><b>首轮</b>　官方 all · <span class="k">cr-1.0.1 · conservative-1.0.0</span>：接纳取消 19,164 → 自动 <b>9,714</b> / 疑似 6,275 / 无合格原单 3,175，生成初始差异 <b>9,450</b>。</li>
+        <li class="reveal"><b>复核</b>　<span class="k">review-1.0.0</span>，官方 all 隔离副本、合成财务账户（10-18）：选 5,451 条 → 成功 <b>5,237</b> / 跳过 214 / 事务失败 <b>0</b>；分配 9,714 → 14,951，每条成功写 4 条审计，重放无新增。</li>
+        <li class="reveal"><b>边界</b>　这是本人在隔离环境完成的复核成果；首轮分类与 50.69% 不变。成功项按建议分：唯一 8、重复 56、整单 1,601、最近 3,572，都不是准确率。</li>
+      </ul>
+      <p class="cap2 reveal" style="margin:16px 0 0 54px">单条主流程 0:182 是 10-16 旧实例实录，见第 7 页；10-18 起 Demo 换成只含 all 的新实例，台上状态以本人实际操作为准。</p>
+      <button class="demo-btn reveal" data-demo style="margin-left:54px"><span class="dot"></span>实机演示<small>localhost:8080</small></button>
+    </div>
+    <figure class="fig reveal" data-src="证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png" data-orig="每日工作记录/2026-10-18/截图/中期汇报界面-模拟数据/10-批量预览可提交与将跳过-模拟数据.png">
+      <div class="crop" style="--W:1440;--x:220;--y:45;--w:1000;--h:690;--mx:241;--my:146;--mw:943;--mh:67">
+        <img src="证据原图/1018M-10-批量预览可提交与将跳过-模拟数据.png" alt="批量预览（模拟数据）">
+        <div class="mark below"><span>预览：可提交 / 将跳过分开，提交前不占余量</span></div>
+        <span class="simtag">网页示意 · 模拟数据，数字不是左侧运行</span>
+      </div>
+      <figcaption>10-批量预览 · 10-18网页界面示意（模拟数据） · 点击看原图</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">实际运行结果.txt 一、二节；10-18 TC55官方all隔离HTTP-通过.json、TC55官方全量隔离验证说明.md；模拟界面图 10</span><span class="pg">06 / 09</span></div>
+  <aside class="notes"><p>官方全量原始106万7千多行，接纳取消19164条，首轮自动配对9714条，初始差异9450条，覆盖率50.69%。我在隔离全量副本完成批量复核，选择5451条、成功5237条、跳过214条，没有事务失败；复核不改首轮统计。覆盖率没有真实关联标签支持，不能叫准确率。</p><p class="hint">E02/E06：10-18批量分配9714→14951，重放无新增。后续实例9715或14969各按自身快照解释；不把不同运行阶段拼成一组最终数据。右图为模拟界面。</p></aside>
+</section>
+
+<!-- ============ 第7页 ============ -->
+<section class="slide" data-title="七、测试与核验结果" data-sec="40">
+<div class="head"><h2>七、测试与核验结果</h2><div class="no"><b>07</b>输入 · 预期 · 实际</div></div>
+<div class="main rows" style="gap:22px;grid-template-rows:auto auto;align-content:start">
+<table class="mini" style="font-size:24px;width:100%"><thead><tr><th>场景</th><th>输入与预期</th><th>实际结果</th><th>证据</th></tr></thead><tbody>
+<tr><td>主流程</td><td>0:182派单→开始→关闭；版本与审计对应</td><td>旧实例v1→v4，3条审计，无新增配对</td><td>E05</td></tr>
+<tr><td>数量/歧义</td><td>买10退4余6；多候选不默认挑选</td><td>精确数量、超量拒绝及歧义回归通过</td><td>E03</td></tr>
+<tr><td>批量/权限</td><td>冲突组跳过；重放与跨范围写入拒绝</td><td>5237成功/214跳过；事务与范围核验通过</td><td>E06/E08</td></tr>
+<tr><td>补充重核</td><td>修正后重核；原始、初次结果及已有分配保留</td><td>资料版本、关联新问题与守恒验证通过</td><td>E10</td></tr>
+<tr><td>原生联调</td><td>官方all、每页50、深页和筛选CSV一致</td><td>第20000页及1145051字节CSV已核对</td><td>E09</td></tr>
+<tr><td>原生界面</td><td>640/1100宽度、长名称与四个选项卡</td><td>10-25隔离UI 18/18通过</td><td>E11</td></tr></tbody></table>
+<div class="why reveal"><b>10-25回归</b>　209项Go顶层、11项前端、38项客户端通过；另18项隔离UI。Python25项复用既有结果，各批次分别记录。</div></div>
+<div class="foot"><span class="ev">证据</span><span class="src">最终报告第八/十一节；测试记录.md；10-20 FR20、10-23/25 FR21原始输出</span><span class="pg">07 / 09</span></div>
+<aside class="notes"><p>测试覆盖主流程和反例：已有责任人拒绝重复派单，空结论被拒，多候选不自动选，数量和权限边界有检查。补充重核验证历史保留。客户端在官方106万行上核对深页和CSV。最新回归是209项Go、11项前端、38项客户端，另外18项界面场景，分别统计。</p><p class="hint">E编号见最终报告第十一节。0:182为10-16旧版本实录，最新FR-20未解决先补充重核；组件、UI、复用批次不累加成一次总数。</p></aside></section>
+
+<!-- ============ 第8页 ============ -->
+<section class="slide" data-title="八、问题与修正" data-sec="35">
+  <div class="head"><h2>八、问题与修正</h2><div class="no"><b>08</b>首次全量太慢 · 并发查询失败</div></div>
+  <div class="main cols" style="grid-template-columns:560px 1fr">
+    <ul class="lines sm" style="gap:18px">
+      <li class="reveal"><b>发现</b>：10-15 正式测量，全量首次 198.84 s，超 90 s 底线；后台任务中 300 次查询 <b>228 次失败</b>。</li>
+      <li class="reveal"><b>修正</b>：提交 <span class="k">97b790a</span> 改来源索引分页、有界批量事务和首次查询；10-16 同条件三次最慢 72.34 s，10-17 收尾单次 67.34 s。</li>
+      <li class="reveal"><b>代价</b>：导入控制更复杂；45 s / 5 s 优选<b>未达</b>，已停止追优。</li>
+      <li class="reveal"><b>补充重核：</b>初次投影 37.211 s → 稀疏覆盖与双索引；页面三次完成 <b>2.642 / 2.268 / 2.163 s</b>，部分查询仍有慢路径。</li>
+    </ul>
+    <div class="chart reveal">
+      <h3>官方全量 · 首次完整流程（秒）</h3>
+      <p class="cap">准备＋导入＋索引＋计算＋验算＋持久化；10-16 取三次中最慢，10-17 为收尾单次</p>
+      <svg viewBox="0 0 860 250" role="img" aria-label="首次全量耗时：10-15为198.84秒，10-16为72.34秒，10-17为67.34秒；必须底线90秒，优选目标45秒">
+        <g font-size="15" fill="#7b8a8f">
+          <line x1="150" y1="20" x2="150" y2="200" stroke="#d6cfbf"/>
+          <text x="150" y="226" text-anchor="middle">0</text>
+          <line x1="300" y1="20" x2="300" y2="200" stroke="#ece7da"/><text x="300" y="226" text-anchor="middle">50</text>
+          <line x1="450" y1="20" x2="450" y2="200" stroke="#ece7da"/><text x="450" y="226" text-anchor="middle">100</text>
+          <line x1="600" y1="20" x2="600" y2="200" stroke="#ece7da"/><text x="600" y="226" text-anchor="middle">150</text>
+          <line x1="750" y1="20" x2="750" y2="200" stroke="#ece7da"/><text x="750" y="226" text-anchor="middle">200</text>
+        </g>
+        <g font-size="17" fill="#3d5560" text-anchor="end">
+          <text x="138" y="58">10-15 修正前</text>
+          <text x="138" y="118">10-16 修正后</text>
+          <text x="138" y="178">10-17 收尾</text>
+        </g>
+        <rect class="bar" x="150" y="34" width="596.5" height="36" rx="4" fill="#9aa6a8"><title>10-15 首次全量 198.841174 秒（未达 90 秒底线，保留为历史）</title></rect>
+        <text x="756" y="59" font-size="20" font-weight="700" fill="#13303c">198.84</text>
+        <rect class="bar" x="150" y="94" width="217" height="36" rx="4" fill="#1f6f78"><title>10-16 三次：72.3367 / 71.9752 / 71.9158 秒，必须底线 90 秒通过</title></rect>
+        <text x="357" y="119" font-size="20" font-weight="700" fill="#fff" text-anchor="end">72.34</text>
+        <rect class="bar" x="150" y="154" width="202" height="36" rx="4" fill="#17394a"><title>10-17 收尾单次 67.3385582 秒，必须底线 90 秒通过，45 秒优选未达</title></rect>
+        <text x="342" y="179" font-size="20" font-weight="700" fill="#fff" text-anchor="end">67.34</text>
+        <line x1="420" y1="14" x2="420" y2="200" stroke="#2d7a56" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <text x="426" y="28" font-size="15" fill="#2d7a56" font-weight="700">必须 ≤ 90</text>
+        <line x1="285" y1="80" x2="285" y2="200" stroke="#b0532c" stroke-width="2" stroke-dasharray="3 4"/>
+        <text x="291" y="88" font-size="15" fill="#b0532c" font-weight="700">优选 45（未达）</text>
+      </svg>
+      <div class="tiles">
+        <div class="tile"><div class="lab">后台任务中十路查询（300 次）</div><div class="val">0<small>失败</small></div><div class="lim">修正前 228 失败；10-17 P95 149 ms <span class="tag ok">≤ 500</span></div></div>
+        <div class="tile"><div class="lab">全量重算并落库</div><div class="val">5.58<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 15 s</span> <span class="tag todo">优选 5</span></div></div>
+        <div class="tile"><div class="lab">一万行完整流程</div><div class="val">1.74<small>s</small></div><div class="lim"><span class="tag ok">必须 ≤ 5 s</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="ev">证据</span><span class="src">提交 97b790a；10-15 性能核查说明.md（修正前）；10-16 正式NFR01-03、NFR04；10-17 收尾与首次引导.md；10-18 批量复核实现/实现与交接.md</span><span class="pg">08 / 09</span></div>
+  <aside class="notes"><p>真实问题是首次全量过慢和后台查询失败。通过索引分页、有界事务及读写路径调整，首次从198.84秒降到收尾67.34秒，后台查询零失败。补充重核后来又出现全量复制成本，改用稀疏覆盖和双索引，三次页面完成约两秒多。代价是实现更复杂，45秒首次和5秒重算优选仍未达到。</p><p class="hint">历史NFR计时边界与新FR-20页面耗时分开。FR-20最终深页1.544s、国家/地区排序筛选3.207s、推荐9.540s；本轮材料制作未重新跑性能。</p></aside>
+</section>
+
+<!-- ============ 第9页 ============ -->
+<section class="slide" data-title="九、交付与已知限制" data-sec="35">
+<div class="head"><h2>九、交付与已知限制</h2><div class="no"><b>09</b>独立运行 · 证据可查</div></div>
+<div class="main cols" style="grid-template-columns:1fr 1fr">
+<ul class="lines"><li class="reveal"><b>结果边界</b>：没有真实原单关联标签，覆盖率不作准确率；系统不执行退款。</li>
+<li class="reveal"><b>性能限制</b>：首次45秒、重算5秒优选未达，部分筛选和推荐仍较慢。</li>
+<li class="reveal"><b>覆盖补充</b>：原生完整业务、跨入口设备认证、系统缩放/读屏及物理另机测试。</li></ul>
+<div><h3 style="font-size:32px;margin-bottom:26px">从交付目录启动</h3><ul class="lines sm"><li><b>启动Demo.cmd</b>：启动Go后端；首次联网准备官方all数据，预留8GiB。</li><li><b>Windows客户端</b>：打开 dist/windows-x64/Reconciliation.Windows.exe，连接后端。</li><li><b>新账户配置</b>：强密码＋Passkey或TOTP，保存恢复码；停止用停止Demo.cmd。</li></ul></div>
+</div><p style="font-size:21px;color:var(--ink-2);line-height:1.6">提交索引连接报告、规则、测试和源码；项目存档.bundle保存完整历史。<br>Codex / Claude 辅助开发与材料整理，规则与结果已完成本人核验。</p>
+<div class="foot"><span class="ev">证据</span><span class="src">提交索引.md；教师独立运行说明.md；最终项目报告第八至十一节</span><span class="pg">09 / 09</span></div>
+<aside class="notes"><p>交付包包含软件、最终报告、汇报、源码、测试证据及完整历史，从提交索引进入。先启动Go后端，再打开网页或Windows客户端；首次准备要联网，各账户完成强密码和第二因素。限制也保留：没有真实原单标签，部分查询较慢，完整原生业务和设备矩阵还有补充空间。我用Codex和Claude辅助开发与材料制作，并按来源、规则和实际结果完成审核。</p><p class="hint">已完成审核与验证统一计入本人记录。运行目录后端251文件、客户端511文件，另各有清单；不包含作者业务库、认证秘密或官方原件。课堂预演与发送按实际发生后记录。</p></aside></section>
+
+</div></div>
+
+<div id="progress"></div>
+<div id="hud">
+  <button data-act="prev" title="上一页 ←">‹</button>
+  <button data-act="next" title="下一页 →">›</button>
+  <button data-act="overview" title="总览 O">总览</button>
+  <button data-act="presenter" title="讲者视图 P">讲者视图</button>
+  <button data-act="demo" title="实机演示 D">实机演示</button>
+  <button data-act="full" title="全屏 F">全屏</button>
+</div>
+<div id="lightbox" class="overlay"><div><img alt=""><p></p></div></div>
+<div id="overview" class="overlay"><div class="grid"></div></div>
+<div id="demo-panel" class="overlay">
+  <h2>实机演示路线（追问时用）</h2>
+  <p class="lead">系统：<span class="k">http://localhost:8080</span>　状态：<span id="demo-state">检测中…</span>　·　Esc 返回幻灯片</p>
+  <div class="acts">
+    <button data-demo>打开系统（新窗口）</button>
+    <code data-copy="启动Demo.cmd" title="点击复制">未启动？双击项目根目录 启动Demo.cmd</code>
+  </div>
+  <ol>
+    <li><b>选择 Passkey 登录（不填账户）</b><em>本人在台前选 finance 凭据，验证后自动进入对应账户；保持 localhost 地址。前提：本人已在 10-18 新实例完成强密码、Passkey 与恢复码，台上不做首次配置</em></li>
+    <li><b>all 总览与来源守恒</b><em>展开“查看来源、行数守恒与初始配对口径” → 1,067,371 = 1,038,818 + 28,553；初始差异 9,450。各状态数以本人实际操作后的页面为准</em></li>
+    <li><b>按差异原因筛选</b><em>七种原因均为中文；选“多个合格候选”后查询，列表只剩该原因，分页在服务端</em></li>
+    <li><b>打开 0:1378（多候选）</b><em>候选逐字段对比：0:1271 / 0:1368 两条合格（10-16 实拍各余 12）；只看，不确认、不派单</em></li>
+    <li><b>打开批量工作台，只预览</b><em>三类建议快照 → 选几条 → 预览“可提交 / 将跳过” → 点“调整选择”退出。预览和建议不占余量、不写业务表；不点“确认提交”</em></li>
+    <li><b>交易检索</b><em>按客户或商品筛选、换排序、跳页；服务端每页 50 条</em></li>
+  </ol>
+  <p class="warn" style="margin-top:24px">注意：派单、确认、结案和批量提交都会在演示库留下真实记录，台上不做。新实例没有 0:182 结案记录，单条主流程和重复派单、空结论两条边界用第 7 页表格讲（实拍原图在 v12中期复核）。“两个年度全部”数据任务约 70 秒，不在 2 分钟追问里现跑。10-22 当天只做正常登录和预设查看，不修补、不重建。</p>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- 讲者视图 -->
+<div id="pv">
+  <div class="bar">
+    <div class="clock" id="pv-total">0:00<small>/ 5:00</small></div>
+    <div class="meter"><i id="pv-meter" style="width:0"></i></div>
+    <div class="st" id="pv-slide">本页 0s / 10s</div>
+    <button data-pv="prev">‹ 上一页</button><button data-pv="next">下一页 ›</button>
+    <button data-pv="timer" id="pv-timer-btn">开始计时</button><button data-pv="reset">重置</button>
+    <button data-pv="demo" class="hot">实机演示</button>
+  </div>
+  <div class="now"><div class="stage" id="pv-now"></div></div>
+  <div class="plan" id="pv-plan"></div>
+  <div class="side">
+    <div class="next"><div class="stage" id="pv-next"></div></div>
+    <div class="notes" id="pv-notes"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const DEMO_URL = 'http://localhost:8080';
+  const slides = [...document.querySelectorAll('#deck > .slide')];
+  const total = slides.length;
+  const isPresenter = new URLSearchParams(location.search).has('presenter');
+  if (new URLSearchParams(location.search).has('static')) document.documentElement.classList.add('static');
+  let cur = 0, presenterWin = null;
+  const $ = s => document.querySelector(s);
+  const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1800); };
+
+  // ---------- scaling ----------
+  function fit() {
+    const deck = $('#deck');
+    const s = Math.min(innerWidth / 1600, innerHeight / 900);
+    deck.style.transform = `scale(${s})`;
+  }
+  addEventListener('resize', () => { fit(); if (isPresenter) renderPresenter(); });
+
+  // ---------- navigation ----------
+  function go(i, from) {
+    i = Math.max(0, Math.min(total - 1, i));
+    if (i === cur && from !== 'init') return;
+    slides[cur].classList.remove('active');
+    cur = i;
+    slides[cur].classList.add('active');
+    $('#progress').style.width = (cur / (total - 1) * 100) + '%';
+    if (!isPresenter) history.replaceState(null, '', '#' + cur);
+    slideStart = Date.now();
+    if (from !== 'remote') sync();
+    if (isPresenter) renderPresenter();
+  }
+  function sync() {
+    const msg = { type: 'deck-go', i: cur };
+    try { if (presenterWin && !presenterWin.closed) presenterWin.postMessage(msg, '*'); } catch (e) {}
+    try { if (window.opener && !window.opener.closed) window.opener.postMessage(msg, '*'); } catch (e) {}
+  }
+  addEventListener('message', e => {
+    const d = e.data || {};
+    if (d.type === 'deck-go') go(d.i, 'remote');
+    if (d.type === 'deck-hello' && !isPresenter) sync();
+  });
+
+  // ---------- demo ----------
+  function openDemo() {
+    const w = window.open(DEMO_URL, 'recon-demo');
+    if (w) { try { w.focus(); } catch (e) {} } else toast('浏览器拦截了弹窗，请允许本页面打开新窗口');
+  }
+  async function probeDemo() {
+    let up = false;
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 1500);
+      await fetch(DEMO_URL + '/?probe=' + Date.now(), { mode: 'no-cors', cache: 'no-store', signal: ctl.signal });
+      clearTimeout(t); up = true;
+    } catch (e) { up = false; }
+    document.querySelectorAll('.demo-btn .dot').forEach(d => { d.classList.toggle('on', up); d.classList.toggle('off', !up); });
+    const st = $('#demo-state'); if (st) { st.textContent = up ? '● 在线' : '○ 未检测到服务（双击 启动Demo.cmd）'; st.style.color = up ? '#7be3a6' : '#ffd27a'; }
+    return up;
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-demo]'); if (b) { e.stopPropagation(); openDemo(); }
+    const c = e.target.closest('[data-copy]'); if (c) { navigator.clipboard && navigator.clipboard.writeText(c.dataset.copy).then(() => toast('已复制：' + c.dataset.copy)); }
+  });
+
+  // ---------- overlays ----------
+  const overlays = ['#lightbox', '#overview', '#demo-panel'];
+  const closeAll = () => overlays.forEach(s => $(s).classList.remove('open'));
+  const anyOpen = () => overlays.some(s => $(s).classList.contains('open'));
+  function toggle(sel) { const el = $(sel); const was = el.classList.contains('open'); closeAll(); if (!was) { el.classList.add('open'); if (sel === '#overview') buildOverview(); if (sel === '#demo-panel') probeDemo(); } }
+  document.addEventListener('click', e => {
+    const f = e.target.closest('#deck .fig[data-src]');
+    if (f) { const lb = $('#lightbox'); lb.querySelector('img').src = f.dataset.src; lb.querySelector('p').textContent = '原图：' + (f.dataset.orig || decodeURI(f.dataset.src)) + '　（网页版 ' + decodeURI(f.dataset.src) + ' 为逐字节相同副本，未修改）'; closeAll(); lb.classList.add('open'); }
+  });
+  $('#lightbox').addEventListener('click', closeAll);
+  function buildOverview() {
+    const g = $('#overview .grid'); g.innerHTML = '';
+    slides.forEach((s, i) => {
+      const th = document.createElement('div'); th.className = 'th' + (i === cur ? ' cur' : '');
+      const box = document.createElement('div'); box.className = 'box';
+      const c = s.cloneNode(true); c.classList.remove('active'); c.querySelectorAll('.notes').forEach(n => n.remove());
+      box.appendChild(c); th.appendChild(box);
+      const p = document.createElement('p'); p.textContent = `${String(i).padStart(2, '0')}　${s.dataset.title}　·　${s.dataset.sec}s`; th.appendChild(p);
+      th.onclick = () => { closeAll(); go(i); };
+      g.appendChild(th);
+      requestAnimationFrame(() => box.style.setProperty('--s', box.clientWidth / 1600));
+    });
+  }
+
+  // ---------- hud ----------
+  function openPresenter() {
+    const url = location.href.split('#')[0].split('?')[0] + '?presenter#' + cur;
+    presenterWin = window.open(url, 'deck-presenter', 'width=1400,height=860');
+    if (!presenterWin) toast('浏览器拦截了讲者视图弹窗');
+  }
+  function fullscreen() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  document.querySelectorAll('#hud button').forEach(b => b.onclick = () => {
+    ({ prev: () => go(cur - 1), next: () => go(cur + 1), overview: () => toggle('#overview'), presenter: openPresenter, demo: () => toggle('#demo-panel'), full: fullscreen })[b.dataset.act]();
+  });
+
+  // ---------- keys ----------
+  let numBuf = '';
+  addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    if (k === 'Escape') { closeAll(); document.body.classList.remove('blank'); return; }
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) {
+      if (k === 'Enter' && numBuf) { go(parseInt(numBuf, 10)); numBuf = ''; e.preventDefault(); return; }
+      if (anyOpen() && k !== 'Enter') closeAll();
+      go(cur + 1); e.preventDefault(); return;
+    }
+    if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { go(cur - 1); e.preventDefault(); return; }
+    if (k === 'Home') return go(0);
+    if (k === 'End') return go(total - 1);
+    if (/^\d$/.test(k)) { numBuf = (numBuf + k).slice(-2); return; }
+    const lk = k.toLowerCase();
+    if (lk === 'f' && !isPresenter) fullscreen();
+    if (lk === 'o') toggle('#overview');
+    if (lk === 'd') toggle('#demo-panel');
+    if (lk === 'p' && !isPresenter) openPresenter();
+    if (lk === 'b' || k === '.') document.body.classList.toggle('blank');
+    if (lk === 't' && isPresenter) toggleTimer();
+    if (lk === 'r' && isPresenter) resetTimer();
+  });
+  // click right/left third of slide to navigate (not on interactive elements)
+  $('#viewport').addEventListener('click', e => {
+    if (e.target.closest('button,.fig,a,code')) return;
+    (e.clientX > innerWidth * 0.66 ? go(cur + 1) : e.clientX < innerWidth * 0.2 ? go(cur - 1) : null);
+  });
+
+  // ---------- presenter ----------
+  let slideStart = Date.now(), timerOn = false, timerStart = 0, timerAcc = 0, perSlide = {};
+  const budgetTotal = slides.reduce((a, s) => a + +s.dataset.sec, 0);
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  function elapsed() { return (timerAcc + (timerOn ? Date.now() - timerStart : 0)) / 1000; }
+  function toggleTimer() { if (timerOn) { timerAcc += Date.now() - timerStart; timerOn = false; } else { timerStart = Date.now(); timerOn = true; slideStart = Date.now(); } $('#pv-timer-btn').textContent = timerOn ? '暂停计时' : '继续计时'; }
+  function resetTimer() { timerOn = false; timerAcc = 0; slideStart = Date.now(); $('#pv-timer-btn').textContent = '开始计时'; tick(); }
+  function placeStage(holder, idx) {
+    const st = holder; st.innerHTML = '';
+    if (idx >= total) { st.innerHTML = '<div style="color:#7fb7b0;font:28px var(--sans);padding:40px">— 结束，进入 2 分钟追问 —</div>'; st.style.transform = 'none'; return; }
+    const c = slides[idx].cloneNode(true); c.classList.add('active'); c.querySelectorAll('.notes').forEach(n => n.remove());
+    c.querySelectorAll('.reveal').forEach(r => r.style.animation = 'none');
+    st.appendChild(c);
+    const box = st.parentElement; st.style.transform = `scale(${Math.min(box.clientWidth / 1600, box.clientHeight / 900)})`;
+  }
+  function renderPresenter() {
+    placeStage($('#pv-now'), cur); placeStage($('#pv-next'), cur + 1);
+    const s = slides[cur], n = s.querySelector('.notes');
+    $('#pv-plan').innerHTML = slides.map((x, i) => `<span style="--f:${x.dataset.sec}" class="${i < cur ? 'done' : i === cur ? 'cur' : ''}" data-i="${i}">${String(i).padStart(2,'0')} · ${x.dataset.sec}s</span>`).join('');
+    $('#pv-plan').querySelectorAll('span').forEach(sp => sp.onclick = () => go(+sp.dataset.i));
+    $('#pv-notes').innerHTML = `<h4>${String(cur).padStart(2, '0')} · ${s.dataset.title} · 建议 ${s.dataset.sec} 秒</h4>` + (n ? n.innerHTML : '');
+    tick();
+  }
+  function tick() {
+    if (!isPresenter) return;
+    const el = elapsed();
+    const lateTotal = el > budgetTotal;
+    $('#pv-total').innerHTML = `${fmt(el)}<small>/ ${fmt(budgetTotal)}</small>`;
+    $('#pv-total').style.color = lateTotal ? '#f0b694' : '#fff';
+    const m = $('#pv-meter'); m.style.width = Math.min(100, el / budgetTotal * 100) + '%'; m.classList.toggle('late', lateTotal);
+    // planned cumulative time at end of this slide
+    const planEnd = slides.slice(0, cur + 1).reduce((a, x) => a + +x.dataset.sec, 0);
+    const ss = timerOn ? (Date.now() - slideStart) / 1000 : 0, budget = +slides[cur].dataset.sec;
+    const st = $('#pv-slide'); st.textContent = `本页 ${Math.floor(ss)}s / ${budget}s　·　应在 ${fmt(planEnd)} 讲完`;
+    st.classList.toggle('late', ss > budget);
+  }
+  if (isPresenter) {
+    document.body.classList.add('presenter');
+    document.title = '讲者视图 · 最终汇报';
+    document.querySelectorAll('#pv [data-pv]').forEach(b => b.onclick = () => ({ prev: () => go(cur - 1), next: () => go(cur + 1), timer: toggleTimer, reset: resetTimer, demo: openDemo })[b.dataset.pv]());
+    setInterval(tick, 250);
+    try { window.opener && window.opener.postMessage({ type: 'deck-hello' }, '*'); } catch (e) {}
+  }
+
+  // ---------- init ----------
+  fit();
+  const start = parseInt((location.hash || '#0').slice(1), 10) || 0;
+  slides[0].classList.add('active'); cur = 0; go(start, 'init');
+  probeDemo(); setInterval(() => { if (!isPresenter) probeDemo(); }, 15000);
+  const openParam = new URLSearchParams(location.search).get('open');
+  if (openParam === 'demo') toggle('#demo-panel');
+  if (openParam === 'overview') toggle('#overview');
+})();
+</script>
+</body>
+</html>

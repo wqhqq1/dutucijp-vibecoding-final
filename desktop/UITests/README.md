@@ -4,7 +4,7 @@
 
 这是独立测试程序，不打入发布目录，也不是正式后端或认证后门。链接真实客户端界面、ViewModel 和网络实现，使用临时 loopback 合成 HTTP 服务器，通过普通客户端协议取得合成会话，验证页面运行时加载。它不调用 Windows Hello/FIDO2，不读写用户设置、账户、业务数据库或原始数据。
 
-使用 Visual Studio MSBuild 构建本项目，运行 `Reconciliation.UI.Tests.exe`，可传 `cases/transactions/allocations/review/jobs/accounts/requests/audit/security` 页面名。窗口明确标识“隔离合成数据”，不能将这些界面结果当作官方全量或本人操作证据。
+使用 Visual Studio MSBuild 构建本项目，运行 `Reconciliation.UI.Tests.exe`，可传 `cases/transactions/allocations/review/jobs/accounts/requests/audit/security` 页面名。
 
 ## 参数与界面截图（2026-10-23 界面优化补充）
 

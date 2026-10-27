@@ -1,0 +1,261 @@
+{
+  "kind": "final-submission-v1.2-backup",
+  "local_head": "739f2885d5c6af90c08ecc99e31d06b983bfc866",
+  "base_remote_head": "b87a545377368c59e7ee2c2cef4de16096a37903",
+  "native_main_commits": 100,
+  "package": {
+    "zip": "E:\\软件编程大作业\\期末提交包-20261027-最终版\\软件编程-期末-20251101030-王麒皓-20261027-101057.zip",
+    "zip_bytes": 203570893,
+    "zip_sha256": "31e87286670153d79f05ba57a697d228c6d1420fafd1f8d84f4e0dd94d07623f",
+    "stage": "E:\\软件编程大作业\\期末提交包-20261027-最终版\\期末材料",
+    "source_head": "739f2885d5c6af90c08ecc99e31d06b983bfc866",
+    "native_commits_restored": 100,
+    "bundle_sha256": "a1a5a14fee8e776dc479aa39a6ed459db45a013bec89b82007473098b9d331c4",
+    "file_entries": 2391,
+    "runtime_files": {
+      "backend": 251,
+      "client": 511
+    },
+    "zip_crc": "passed",
+    "all_file_hashes": "passed",
+    "runtime_manifest_check": "passed",
+    "history_restore_and_fsck": "passed",
+    "index_links_checked": 15,
+    "course_submission_sent": false
+  },
+  "parts": [
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part001",
+      "filename": "完整期末包.zip.part001",
+      "bytes": 6291456,
+      "sha256": "ed8527aa22ae04caa5314f09d23521709a688d4ff49a3a86f7ab1789627311f0",
+      "git_blob_sha": "34da114b4f0ddb594b113e97dc3d431dcacfdb70"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part002",
+      "filename": "完整期末包.zip.part002",
+      "bytes": 6291456,
+      "sha256": "21bc7b5262b0be2689e6172f0c52ebc4f653dd4d87defec023f49de7ffedbaeb",
+      "git_blob_sha": "2b615803bcf79423d412617996ee6075d30f8ef1"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part003",
+      "filename": "完整期末包.zip.part003",
+      "bytes": 6291456,
+      "sha256": "5edb6a98d9afcaea4b690d4f03774468d174443c871dd50abd19373f2febc9ee",
+      "git_blob_sha": "d727b847cf6e03de223ccb55dfc7753b74be28d9"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part004",
+      "filename": "完整期末包.zip.part004",
+      "bytes": 6291456,
+      "sha256": "3cc3c4f3bbf3f088aadc79c361cde4588cfeb9f88d059f574b861b35962fed95",
+      "git_blob_sha": "53aab37888b149846df2c3c6212a1f4697f93122"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part005",
+      "filename": "完整期末包.zip.part005",
+      "bytes": 6291456,
+      "sha256": "51ce34d734604fe784194ae1d290c3b18e0979a5e80330154e05ce44607e519c",
+      "git_blob_sha": "bf747c6b91dc017ffb745214b736490a0cba2293"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part006",
+      "filename": "完整期末包.zip.part006",
+      "bytes": 6291456,
+      "sha256": "4f9050e91a811df089131f67e2ee27f2ac0b5bc44186dc8b4e4e0f716fbb3b7e",
+      "git_blob_sha": "3c698e3b9e868fef2e35f001d83e787b993665bf"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part007",
+      "filename": "完整期末包.zip.part007",
+      "bytes": 6291456,
+      "sha256": "353ed0e9d44a7450ba73145cfe1f41317105f2d1759d6f3bcf8ec7eabffc377c",
+      "git_blob_sha": "93ea98c8ee521379adde7350316ef98cb35c68ad"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part008",
+      "filename": "完整期末包.zip.part008",
+      "bytes": 6291456,
+      "sha256": "b65fe678f25a40c5397c6f3ac134d7821e1ebde9dbc434c1f72e636d7f8f6a7c",
+      "git_blob_sha": "f51e25c69c3290c0a4901cee10a0a7a6c19bc953"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part009",
+      "filename": "完整期末包.zip.part009",
+      "bytes": 6291456,
+      "sha256": "c0a175f4f3c622c677697b2b4948d8a55b3401e4f36ffc33c76d21ec074caefa",
+      "git_blob_sha": "dafcb0e263b44f75b970bf90b7b51165b7ac169c"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part010",
+      "filename": "完整期末包.zip.part010",
+      "bytes": 6291456,
+      "sha256": "86484abc8b509d1c603276c1553d7ab317dc7c3c520d267a894fc1f8e16a966d",
+      "git_blob_sha": "387397a7dfeff6b7713cb59e37d2e458f3bcb0be"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part011",
+      "filename": "完整期末包.zip.part011",
+      "bytes": 6291456,
+      "sha256": "6efb7993c6989f9b0a17ada99f473424602544445da40309449829823d31e017",
+      "git_blob_sha": "3db2d88b541e807b2511368f5c46c57d8f485c88"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part012",
+      "filename": "完整期末包.zip.part012",
+      "bytes": 6291456,
+      "sha256": "d1f877dbd33d5452fe9552dee0c43867733582cd7fb0a2ce25fdb63b5fdb0694",
+      "git_blob_sha": "edc88e24d325b2c1b2151d400aff049bccebc9f2"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part013",
+      "filename": "完整期末包.zip.part013",
+      "bytes": 6291456,
+      "sha256": "d5a7266f37364e61348e4a8a02db917d1ced0a8bf1db8e72aec50a10fb07a2a5",
+      "git_blob_sha": "23d2270db86cbe2c99d58106cddd3cf7cba9bcbf"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part014",
+      "filename": "完整期末包.zip.part014",
+      "bytes": 6291456,
+      "sha256": "dbef4822aaa9f21f7a2a0615189be90bdc2c5aa2d88be1814dd64e8adc03f5fa",
+      "git_blob_sha": "e21de8314946dd544bbc340179ec95820f665d5b"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part015",
+      "filename": "完整期末包.zip.part015",
+      "bytes": 6291456,
+      "sha256": "750c69edd452e03a894a901f331fccf7546ed0d75bd1295e55003aacd73e57fb",
+      "git_blob_sha": "660b40a5c71e530e6b2409848e3e88aadff14c2f"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part016",
+      "filename": "完整期末包.zip.part016",
+      "bytes": 6291456,
+      "sha256": "364a0d900f48b783258d127f6d0b1102cdd09b364313707d7082986db974cf73",
+      "git_blob_sha": "494913aed0fd498157d6fc4eb8a271dfeb602d24"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part017",
+      "filename": "完整期末包.zip.part017",
+      "bytes": 6291456,
+      "sha256": "a3701ac05a83cce4a5c69d88e85d6973e8e20d263ce0653d64ef7684ba7b771e",
+      "git_blob_sha": "968bb52d9f9b898e8e5625cb3d35658e390be8a6"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part018",
+      "filename": "完整期末包.zip.part018",
+      "bytes": 6291456,
+      "sha256": "554b34730725b482a64b59e2a2a019a2fb83688c09fe7d99fd15a0dd192090d7",
+      "git_blob_sha": "3cb752a111bd8435b58bdae1bf119286eb00e4dd"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part019",
+      "filename": "完整期末包.zip.part019",
+      "bytes": 6291456,
+      "sha256": "39bb865f7d3820297eaa4ffa8aabadec910bccbdeab80927c40d01244c747496",
+      "git_blob_sha": "34b767070e45cf8d6fbd47d6d0f94283126de99e"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part020",
+      "filename": "完整期末包.zip.part020",
+      "bytes": 6291456,
+      "sha256": "88faaba788b247214e399a12b35a92ea2397cd0770653da1035e21e527afc78b",
+      "git_blob_sha": "ae106c6fe04207b9fd4f9ca71aa8d22252961e2e"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part021",
+      "filename": "完整期末包.zip.part021",
+      "bytes": 6291456,
+      "sha256": "942f2115f8dad852e0dcdfa1220c091f2cfde03bdb4d1cc4591e0226d7cf22b8",
+      "git_blob_sha": "dba5f0d0fcbc12e5ce3e47566d4c077964765ae8"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part022",
+      "filename": "完整期末包.zip.part022",
+      "bytes": 6291456,
+      "sha256": "09c1ed32900cb5055820762c0e522d09b55d99ae09d345b025969a8df510bdfe",
+      "git_blob_sha": "abac0d69de0f1cd7b3fcc014ffb3df9d17f93b60"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part023",
+      "filename": "完整期末包.zip.part023",
+      "bytes": 6291456,
+      "sha256": "9ebf61e29e2965971144b0f4e44bd4bdd748ff847607b02c51898fba9f24db7e",
+      "git_blob_sha": "db98b7bab8e5775736c12419c742b3773dce8eb0"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part024",
+      "filename": "完整期末包.zip.part024",
+      "bytes": 6291456,
+      "sha256": "3ab0f060c2b3594c0b9a8ffb8be86e2aafd31b6b68213dd2ed0a60ef69e9812b",
+      "git_blob_sha": "666f24357ef800b7b66744d49133a457ce8857f4"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part025",
+      "filename": "完整期末包.zip.part025",
+      "bytes": 6291456,
+      "sha256": "0b1395f1978d446897aee2d1cab80dd3ffc3e6a9da27db32bdc53aef4c69c279",
+      "git_blob_sha": "a9b2f12ff7b5a81d7c2a98a224a9635bb9fb8fce"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part026",
+      "filename": "完整期末包.zip.part026",
+      "bytes": 6291456,
+      "sha256": "568ed8f842c668d7ac51211862cdb27b6f3d1d1b49fa4824b1f25ca5c7260090",
+      "git_blob_sha": "c43d7466cba782fd7f41080a776d027a065b601f"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part027",
+      "filename": "完整期末包.zip.part027",
+      "bytes": 6291456,
+      "sha256": "2ca05d570978b02a9e3fe808012acba778979b61488e040188866f52f04fff85",
+      "git_blob_sha": "7347b171bfd1b4530fd696b31add902c81d1393b"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part028",
+      "filename": "完整期末包.zip.part028",
+      "bytes": 6291456,
+      "sha256": "926d647ac3cecc532187ad80975e57148a069ce27603bbe654927b1b5adfe0e5",
+      "git_blob_sha": "3142485ba1918097a7ce9d2543b43b44b26781ea"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part029",
+      "filename": "完整期末包.zip.part029",
+      "bytes": 6291456,
+      "sha256": "85a7961ebdba128e8233e6f658920a4f5deedb88404fe10e8335b988f99a0bf1",
+      "git_blob_sha": "4205d336bd92219cbe874ff7c2876876de3ab528"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part030",
+      "filename": "完整期末包.zip.part030",
+      "bytes": 6291456,
+      "sha256": "062fbada9747e82d9a2581729612aae6428c99916338f8dfc2069bbdeb041720",
+      "git_blob_sha": "45cd327ea3147a19aee935ea5a1793a884d1fe0c"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part031",
+      "filename": "完整期末包.zip.part031",
+      "bytes": 6291456,
+      "sha256": "c6a0ecba4ad8fb7e86cdd7033c8049a219a2c482b47c3383f4b13d343fe75828",
+      "git_blob_sha": "2bb4d70badea7da878df1cb58049b1c034d20ed3"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part032",
+      "filename": "完整期末包.zip.part032",
+      "bytes": 6291456,
+      "sha256": "0331242245af41f84f2f40e5241dcbde52a6c1433adc481554764fcc95cde6d4",
+      "git_blob_sha": "11353190c85dbfd59950ae31b0dee69ce92c63ed"
+    },
+    {
+      "path": "_备份/期末完整包-20261027/完整期末包.zip.part033",
+      "filename": "完整期末包.zip.part033",
+      "bytes": 2244301,
+      "sha256": "cadd2f8ab7efaa73b2f93727a0ef9474472001dccb2f4c02013c3e09c1d934b0",
+      "git_blob_sha": "07a009f351a3ee812859599163d37c61ed057bb9"
+    }
+  ],
+  "restore": "Run restore.ps1 after downloading all parts; unzip; git clone 期末材料/项目存档.bundle to restore complete native history.",
+  "course_submission_sent": false
+}

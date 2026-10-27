@@ -1,0 +1,14 @@
+{
+  "kind": "report-layout-only-no-final-zip",
+  "source_head": "1f6de16108cdeed2b0df9136a6b3c9733cfa800f",
+  "base_native_head": "1841607328455f99b464ebe6ab5127988c861bd7",
+  "native_commits": 99,
+  "report_sha256": "ca43c51ba7f048a96e4bb6b9cb0f9476ba47b645daca126dde16afa82e0baccd",
+  "report_pages": 10,
+  "course_headings": 11,
+  "tables": 12,
+  "content_unchanged": true,
+  "history_increment_sha256": "db1334f2f9df2b44c84c1664cd9c1afe8ae5bbcd24eda06863a60b5ecc005922",
+  "history_increment_verify": "passed",
+  "final_zip_created": false
+}
